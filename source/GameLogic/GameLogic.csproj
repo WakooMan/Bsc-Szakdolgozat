@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
@@ -19,7 +19,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Data\AllCards.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Data\AllCards.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Actions\" />
 	</ItemGroup>
 
 </Project>

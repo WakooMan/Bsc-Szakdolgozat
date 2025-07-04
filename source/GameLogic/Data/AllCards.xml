@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CardList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Cards>
+		<Card xsi:type="BrownCard">
+			<GoodCost/>
+			<MoneyCost>0</MoneyCost>
+			<Name>Fakitermelés</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<ProducedResources>
+				<GameResource xsi:type="Wood"/>
+			</ProducedResources>
+		</Card>
+		<Card xsi:type="BrownCard">
+			<GoodCost/>
+			<MoneyCost>1</MoneyCost>
+			<Name>Fatelep</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<ProducedResources>
+				<GameResource xsi:type="Wood"/>
+			</ProducedResources>
+		</Card>
+		<Card xsi:type="BrownCard">
+			<GoodCost/>
+			<MoneyCost>0</MoneyCost>
+			<Name>Agyagbánya</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<ProducedResources>
+				<GameResource xsi:type="Clay"/>
+			</ProducedResources>
+		</Card>
+		<Card xsi:type="BrownCard">
+			<GoodCost/>
+			<MoneyCost>1</MoneyCost>
+			<Name>Agyaglelőhely</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<ProducedResources>
+				<GameResource xsi:type="Clay"/>
+			</ProducedResources>
+		</Card>
+		<Card xsi:type="BrownCard">
+			<GoodCost/>
+			<MoneyCost>0</MoneyCost>
+			<Name>Kőfejtő</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<ProducedResources>
+				<GameResource xsi:type="Stone"/>
+			</ProducedResources>
+		</Card>
+		<Card xsi:type="BrownCard">
+			<GoodCost/>
+			<MoneyCost>1</MoneyCost>
+			<Name>Kőbánya</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<ProducedResources>
+				<GameResource xsi:type="Stone"/>
+			</ProducedResources>
+		</Card>
+		<Card xsi:type="GrayCard">
+			<GoodCost/>
+			<MoneyCost>1</MoneyCost>
+			<Name>Üveggyár</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<CreatedProducts>
+				<Product xsi:type="Glass"/>
+			</CreatedProducts>
+		
+		</Card>
+		<Card xsi:type="GrayCard">
+			<GoodCost/>
+			<MoneyCost>1</MoneyCost>
+			<Name>Prés</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<CreatedProducts>
+				<Product xsi:type="Papirus"/>
+			</CreatedProducts>
+		</Card>
+		<Card xsi:type="RedCard">
+			<GoodCost/>
+			<MoneyCost>0</MoneyCost>
+			<Name>Őrtorony</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<Strength>1</Strength>
+		</Card>
+		<Card xsi:type="GreenCard">
+			<GoodCost>
+				<Good xsi:type="Papirus"/>
+			</GoodCost>
+			<MoneyCost>0</MoneyCost>
+			<Name>Műhely</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+		</Card>
+		<Card xsi:type="GreenCard">
+			<GoodCost>
+				<Good xsi:type="Glass"/>
+			</GoodCost>
+			<MoneyCost>0</MoneyCost>
+			<Name>Patika</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+		</Card>
+		<Card xsi:type="YellowCard">
+			<GoodCost/>
+			<MoneyCost>3</MoneyCost>
+			<Name>Kőraktár</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<Point>0</Point>
+			<CardActions>
+				<CardAction xsi:type="BuyGood">
+					<MoneyCost>1</MoneyCost>
+					<GoodFactory xsi:type="StoneFactory"/>
+				</CardAction>
+			</CardActions>
+		</Card>
+		<Card xsi:type="YellowCard">
+			<GoodCost/>
+			<MoneyCost>3</MoneyCost>
+			<Name>Agyagraktár</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<Point>0</Point>
+			<CardActions>
+				<CardAction xsi:type="BuyGood">
+					<MoneyCost>1</MoneyCost>
+					<GoodFactory xsi:type="ClayFactory"/>
+				</CardAction>
+			</CardActions>
+		</Card>
+		<Card xsi:type="YellowCard">
+			<GoodCost/>
+			<MoneyCost>3</MoneyCost>
+			<Name>Faraktár</Name>
+			<PreviousBuilding/>
+			<Age>I</Age>
+			<Point>0</Point>
+			<CardActions>
+				<CardAction xsi:type="BuyGood">
+					<MoneyCost>1</MoneyCost>
+					<GoodFactory xsi:type="WoodFactory"/>
+				</CardAction>
+			</CardActions>
+		</Card>
+	</Cards>
+</CardList>
