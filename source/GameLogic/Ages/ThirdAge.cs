@@ -8,6 +8,6 @@ namespace GameLogic.Ages
 {
     public class ThirdAge : AgeBase
     {
-        public override AgesEnum Age => AgesEnum.III;
+        public AgesEnum Age => AgesEnum.III;
     }
 }

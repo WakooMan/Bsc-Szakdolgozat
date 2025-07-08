@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Xml.Serialization;
 
 namespace GameLogic.Disciplines
 {
+    [XmlInclude(typeof(Building)),
+     XmlInclude(typeof(Geography)),
+     XmlInclude(typeof(Healing)),
+     XmlInclude(typeof(Mechanics)),
+     XmlInclude(typeof(Physics)),
+     XmlInclude(typeof(Trading)),
+     XmlInclude(typeof(Writing)),]
     public abstract class Discipline
     {
     }

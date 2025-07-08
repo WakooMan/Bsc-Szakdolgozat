@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace GameLogic.CardActions
 {
-    [XmlInclude(typeof(BuyGood)), XmlInclude(typeof(ChooseGood))]
+    [XmlInclude(typeof(BuyGoods)),
+     XmlInclude(typeof(ChooseGood)),
+     XmlInclude(typeof(GetMoney)),
+     XmlInclude(typeof(GetMoneyForCard)),
+     XmlInclude(typeof(GetMoneyForWonders))]
     public abstract class CardAction
     {
     }

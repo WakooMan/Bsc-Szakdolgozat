@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameLogic.Guilds;
 
 namespace GameLogic.GameCards
 {
     public class PurpleCard : Card
     {
+        public Guild GuildObj { get; set; }
         public PurpleCard() : base()
         { }
     }

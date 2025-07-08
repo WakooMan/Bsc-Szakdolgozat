@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLogic.Ages
+namespace GameLogic.CardActions
 {
-    public class SecondAge : AgeBase
+    public class GetMoney : CardAction
     {
-        public AgesEnum Age => AgesEnum.II;
+        public int Money { get; set; }
     }
 }
