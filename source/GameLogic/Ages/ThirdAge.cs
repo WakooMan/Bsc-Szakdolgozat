@@ -6,10 +6,10 @@ namespace GameLogic.Ages
 {
     public class ThirdAge : AgeBase
     {
-        public AgesEnum Age => AgesEnum.III;
+        public override AgesEnum Age => AgesEnum.III;
 
-        public string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(), "Data", "ThirdAgeComposition.csv");
-        public CardComposition Composition { get; }
+        public override string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(), "Data", "ThirdAgeComposition.csv");
+        public override CardComposition Composition { get; }
 
         public ThirdAge(ICardCompositionFileHandlerFactory cardCompositionFileHandlerFactory)
         {

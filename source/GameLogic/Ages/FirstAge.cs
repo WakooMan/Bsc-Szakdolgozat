@@ -6,11 +6,11 @@ namespace GameLogic.Ages
 {
     public class FirstAge : AgeBase
     {
-        public AgesEnum Age => AgesEnum.I;
+        public override AgesEnum Age => AgesEnum.I;
 
-        public string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(),"Data","FirstAgeComposition.csv");
+        public override string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(),"Data","FirstAgeComposition.csv");
 
-        public CardComposition Composition { get; }
+        public override CardComposition Composition { get; }
 
         public FirstAge(ICardCompositionFileHandlerFactory cardCompositionFileHandlerFactory)
         {

@@ -2,10 +2,11 @@
 
 namespace GameLogic.Ages
 {
-    public interface AgeBase
+    public abstract class AgeBase
     {
-        public AgesEnum Age { get; }
-        public string CardCompositionFile { get; }
-        CardComposition Composition { get; }
+        public abstract AgesEnum Age { get; }
+        public abstract string CardCompositionFile { get; }
+        public abstract CardComposition Composition { get; }
+        public bool IsAgeOver => Composition.AvailableCards.Count < 0;
     }
 }
