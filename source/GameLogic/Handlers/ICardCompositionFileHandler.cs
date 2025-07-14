@@ -4,6 +4,6 @@ namespace GameLogic.Handlers
 {
     public interface ICardCompositionFileHandler
     {
-        void SetCompositionForCards(List<CardNode> cardNodes);
+        void SetCompositionForCards(List<ICardNode> cardNodes);
     }
 }

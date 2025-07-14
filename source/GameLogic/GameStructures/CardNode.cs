@@ -1,32 +1,35 @@
 ﻿using GameLogic.Elements.GameCards;
+using SevenWonders.Common;
 
 namespace GameLogic.GameStructures
 {
-    public class CardNode
+    public class CardNode : ICardNode
     {
-        private List<CardNode> coveredBy;
-        public Card CardObj { get; }
+        private List<ICardNode> coveredBy;
+        public ICard CardObj { get; }
         public bool Hidden { get; set; }
 
-        public IReadOnlyList<CardNode> CoveredBy => coveredBy;
+        public IReadOnlyList<ICardNode> CoveredBy => coveredBy;
 
-        public CardNode(Card cardObj)
+        public CardNode(ICard cardObj)
         {
+            ArgumentChecker.CheckNull(cardObj, nameof(cardObj));
+
             CardObj = cardObj;
-            coveredBy = new List<CardNode>();
+            coveredBy = new List<ICardNode>();
         }
 
-        public void AddParent(CardNode cardNode)
+        public void AddParent(ICardNode cardNode)
         {
-            if (coveredBy.Count >= 2)
-            {
-                throw new InvalidOperationException("Cannot add parent, because a card can only have 2 parents!");
-            }
+            ArgumentChecker.CheckNull(cardNode, nameof(cardNode));
+
+            ArgumentChecker.CheckPredicateForArgument(() => cardNode == this, "Cannot add parent itself!");
+            ArgumentChecker.CheckPredicateForOperation(() => coveredBy.Count >= 2, "Cannot add parent, because a card can only have 2 parents!");
 
             coveredBy.Add(cardNode);
         }
 
-        public void RemoveParent(CardNode cardNode)
+        public void RemoveParent(ICardNode cardNode)
         {
             coveredBy.Remove(cardNode);
         }

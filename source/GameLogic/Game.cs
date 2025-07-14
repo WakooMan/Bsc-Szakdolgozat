@@ -1,4 +1,6 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.GameCards;
+using GameLogic.GameStructures.Factories;
 using GameLogic.Handlers;
 using GameLogic.Handlers.Factories;
 using System;
@@ -18,7 +20,7 @@ namespace GameLogic
 
         public Game(string player1, string player2)
         {
-            AgeHandler = new AgeHandler(new CardCompositionFileHandlerFactory());
+            AgeHandler = new AgeHandler(new CardCompositionFactory(new CardCompositionFileHandlerFactory(), new CardNodeFactory()), new CardList());
             TurnHandler = new TurnHandler(new Player[] { new Player(player1), new Player(player2) });
         }
 

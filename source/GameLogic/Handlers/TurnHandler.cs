@@ -1,14 +1,15 @@
 ﻿using GameLogic.Elements;
+using SevenWonders.Common;
+using static GameLogic.Handlers.ITurnHandler;
 
 namespace GameLogic.Handlers
 {
-    public class TurnHandler
+    public class TurnHandler: ITurnHandler
     {
         private List<Player> Players { get; set; }
         private int Index { get; set; }
         public Player CurrentPlayer => Players[Index];
 
-        public delegate void PlayerTurnHandler(Player player);
         public event PlayerTurnHandler OnPlayerTurn;
 
         public void NextPlayer()
@@ -19,6 +20,9 @@ namespace GameLogic.Handlers
 
         public TurnHandler(ICollection<Player> players)
         {
+            ArgumentChecker.CheckNull(players, nameof(players));
+            ArgumentChecker.CheckPredicateForArgument(() => players.Count < 2, "Number of players must be at least 2!");
+
             Players = new List<Player>(players);
             Index = 0;
         }

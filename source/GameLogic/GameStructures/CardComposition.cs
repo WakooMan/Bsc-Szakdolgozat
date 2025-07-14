@@ -1,43 +1,45 @@
 ﻿using GameLogic.Elements.GameCards;
+using GameLogic.GameStructures.Factories;
 using GameLogic.Handlers;
+using SevenWonders.Common;
+using System.Collections.ObjectModel;
 
 namespace GameLogic.GameStructures
 {
-    public class CardComposition
+    public class CardComposition : ICardComposition
     {
-        private List<CardNode> m_cardNodes;
+        private List<ICardNode> m_cardNodes;
         private ICardCompositionFileHandler m_cardCompositionFileHandler;
-        public IReadOnlyList<CardNode> AvailableCards => m_cardNodes.Where(card => card.CoveredBy.Count <= 0).ToList();
+        private ICardNodeFactory m_cardNodeFactory;
+        public IReadOnlyList<ICardNode> AvailableCards => m_cardNodes.Where(card => card.CoveredBy.Count <= 0).ToList();
 
-        public CardComposition(ICardCompositionFileHandler cardCompositionFileHandler, List<Card> cards)
+        public CardComposition(ICardCompositionFileHandler cardCompositionFileHandler, ICardNodeFactory cardNodeFactory, ICollection<ICard> cards)
         {
-            if (cardCompositionFileHandler is null)
-            {
-                throw new ArgumentNullException($"Argument with name {nameof(cardCompositionFileHandler)} is null!");
-            }
-
-            if (cards.Count != 20)
-            {
-                throw new ArgumentException($"Argument with name {nameof(cards)} should contain exactly 20 cards!");
-            }
+            ArgumentChecker.CheckNull(cardCompositionFileHandler, nameof(cardCompositionFileHandler));
+            ArgumentChecker.CheckNull(cardNodeFactory, nameof(cardNodeFactory));
+            ArgumentChecker.CheckNull(cards, nameof(cards));
+            ArgumentChecker.CheckPredicateForArgument(() => cards.Count != 20, $"Argument with name {nameof(cards)} should contain exactly 20 cards!");
 
             m_cardCompositionFileHandler = cardCompositionFileHandler;
-            m_cardNodes = new List<CardNode>();
+            m_cardNodeFactory = cardNodeFactory;
+            m_cardNodes = new List<ICardNode>();
 
-            foreach (Card card in cards)
+            foreach (ICard card in cards)
             {
-                m_cardNodes.Add(new CardNode(card));
+                m_cardNodes.Add(m_cardNodeFactory.Create(card));
             }
 
             m_cardCompositionFileHandler.SetCompositionForCards(m_cardNodes);
         }
 
-        public void RemoveCard(CardNode card)
+        public void RemoveCard(ICardNode card)
         {
+            ArgumentChecker.CheckNull(card, nameof(card));
+
             if (AvailableCards.Contains(card))
             {
                 m_cardNodes.Remove(card);
-                foreach (CardNode c in m_cardNodes)
+                foreach (ICardNode c in m_cardNodes)
                 {
                     c.RemoveParent(card);
                     if (c.CoveredBy.Count <= 0 && c.Hidden)

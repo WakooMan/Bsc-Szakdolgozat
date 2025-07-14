@@ -1,22 +1,27 @@
 ﻿using GameLogic.Ages;
-using GameLogic.Handlers.Factories;
+using GameLogic.Elements.GameCards;
+using GameLogic.GameStructures.Factories;
+using SevenWonders.Common;
+using static GameLogic.Handlers.IAgeHandler;
 
 namespace GameLogic.Handlers
 {
-    public class AgeHandler
+    public class AgeHandler : IAgeHandler
     {
-        private ICardCompositionFileHandlerFactory CardCompositionFileHandlerFactory { get; }
+        private ICardCompositionFactory m_cardCompositionFactory;
+        private ICardList m_cardList;
 
-        public AgeBase CurrentAge { get; private set; }
-
-        public delegate void AgeChangedEventHandler(AgesEnum age);
-
+        public IAgeBase CurrentAge { get; private set; }
         public event AgeChangedEventHandler HandleAgeChanged;
 
-        public AgeHandler(ICardCompositionFileHandlerFactory cardCompositionFileHandlerFactory)
+        public AgeHandler(ICardCompositionFactory cardCompositionFactory, ICardList cardList)
         {
-            CardCompositionFileHandlerFactory = cardCompositionFileHandlerFactory;
-            CurrentAge = new FirstAge(CardCompositionFileHandlerFactory);
+            ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));
+            ArgumentChecker.CheckNull(cardList, nameof(cardList));
+
+            m_cardCompositionFactory = cardCompositionFactory;
+            m_cardList = cardList;
+            CurrentAge = new FirstAge(m_cardCompositionFactory, m_cardList);
         }
 
         public bool NextAge()
@@ -24,10 +29,10 @@ namespace GameLogic.Handlers
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
-                    CurrentAge = new SecondAge(CardCompositionFileHandlerFactory);
+                    CurrentAge = new SecondAge(m_cardCompositionFactory, m_cardList);
                     break;
                 case AgesEnum.II:
-                    CurrentAge = new ThirdAge(CardCompositionFileHandlerFactory);
+                    CurrentAge = new ThirdAge(m_cardCompositionFactory, m_cardList);
                     break;
                 default:
                     return false;

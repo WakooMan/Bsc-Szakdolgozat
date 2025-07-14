@@ -1,4 +1,5 @@
 ﻿using GameLogic.GameStructures;
+using SevenWonders.Common;
 
 namespace GameLogic.Handlers
 {
@@ -7,34 +8,39 @@ namespace GameLogic.Handlers
         private readonly string m_compositionFileName;
         public CardCompositionFileHandler(string compositionFileName)
         {
+            ArgumentChecker.CheckNullOrEmpty(compositionFileName, nameof(compositionFileName));
+
             m_compositionFileName = compositionFileName;
         }
 
-        public void SetCompositionForCards(List<CardNode> cardNodes)
+        public void SetCompositionForCards(List<ICardNode> cardNodes)
         {
             try
             {
+                ArgumentChecker.CheckNull(cardNodes, nameof(cardNodes));
                 string[] lines = File.ReadAllLines(m_compositionFileName);
-                foreach (string line in lines)
+                ArgumentChecker.CheckPredicateForOperation(() => cardNodes.Count != lines.Length, $"File line number is not equal to card number! File number: {lines.Length}, Card number: {cardNodes.Count}");
+                
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    string[] splitted = line.Split(";");
-                    if (splitted.Length != 3)
+                    string[] splitted = lines[i].Split(";");
+                    if (splitted.Length != 2)
                     {
                         throw new InvalidOperationException($"All the lines should contain exactly one semicolon in the file: {m_compositionFileName}");
                     }
-                    int node = int.Parse(splitted[0]);
-                    bool hidden = bool.Parse(splitted[1]);
-                    int[] coveredBy = splitted[2].Split(",").Select(s => int.Parse(s)).ToArray();
-                    cardNodes[node].Hidden = hidden;
+                    bool hidden = bool.Parse(splitted[0]);
+                    List<int> coveredBy = splitted[1].Split(",", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToList();
+                    cardNodes[i].Hidden = hidden;
                     foreach (int n in coveredBy)
                     {
-                        cardNodes[node].AddParent(cardNodes[n]);
+                        cardNodes[i].AddParent(cardNodes[n]);
                     }
                 }
             }
             catch (Exception ex)
             {
                 // TODO: Log and throw
+                throw ex;
             }
         }
     }

@@ -1,12 +1,12 @@
 ﻿namespace GameLogic.Elements.GameCards
 {
-    public class CardList
+    public class CardList: ICardList
     {
-        public List<Card> Cards { get; set; }
+        public List<ICard> Cards { get; set; }
 
         public CardList()
         {
-            Cards = new List<Card>();
+            Cards = new List<ICard>();
         }
     }
 }
