@@ -4,7 +4,7 @@ namespace SevenWonders.Common
 {
     public static class ArgumentChecker
     {
-        public static void CheckNull(object obj, string argumentName, [CallerMemberName] string callerName = "")
+        public static void CheckNull(object? obj, string argumentName, [CallerMemberName] string callerName = "")
         {
             if (obj is null)
             {
@@ -12,7 +12,7 @@ namespace SevenWonders.Common
             }
         }
 
-        public static void CheckNullOrEmpty(string str, string argumentName, [CallerMemberName] string callerName = "")
+        public static void CheckNullOrEmpty(string? str, string argumentName, [CallerMemberName] string callerName = "")
         {
             if (string.IsNullOrEmpty(str))
             {
