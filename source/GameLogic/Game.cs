@@ -1,43 +1,32 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Elements.GameCards;
-using GameLogic.GameStructures.Factories;
+using GameLogic.Elements.Wonders;
+using GameLogic.GameStates;
 using GameLogic.Handlers;
-using GameLogic.Handlers.Factories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using GameLogic.Interfaces;
 
 namespace GameLogic
 {
     public class Game
     {
-        public bool IsGameOver { get; private set; }
-        public AgeHandler AgeHandler { get; }
-        public TurnHandler TurnHandler { get; }
+        private readonly List<Player> m_players;
+        public GameState CurrentState { get; private set; }
+        public IReadOnlyList<Player> Players => m_players;
 
-        public Game(string player1, string player2)
+
+        public Game(string player1, string player2, IPlayerActionReceiver playerActionReceiver, IWonderList wonderList)
         {
-            AgeHandler = new AgeHandler(new CardCompositionFactory(new CardCompositionFileHandlerFactory(), new CardNodeFactory()), new CardList());
-            TurnHandler = new TurnHandler(new Player[] { new Player(player1), new Player(player2) });
+            m_players = new List<Player>();
+            m_players.Add(new Player(player1));
+            m_players.Add(new Player(player2));
+            CurrentState = new ChooseWonderState(new ChooseWonderHandler(playerActionReceiver, wonderList, m_players));
         }
 
         public void GameLoop()
         {
-            while (!IsGameOver)
+            while (CurrentState != null)
             {
-                // DO player turn
-
-                // Check If player won in the turn.
-
-                if (AgeHandler.CurrentAge.IsAgeOver)
-                {
-                    IsGameOver = !AgeHandler.NextAge();
-                }
-
-                TurnHandler.NextPlayer();
+                CurrentState.DoStateAction();
+                CurrentState = CurrentState.GetNextState();
             }
         }
     }
