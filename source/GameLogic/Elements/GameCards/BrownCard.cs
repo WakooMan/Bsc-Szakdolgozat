@@ -15,5 +15,15 @@ namespace GameLogic.Elements.GameCards
         {
             ProducedResources = new List<GameResource>();
         }
+
+        private BrownCard(BrownCard brownCard) : base(brownCard)
+        {
+            ProducedResources = brownCard.ProducedResources.Select(res => res.Clone()).ToList();
+        }
+
+        public override ICard Clone()
+        {
+            return new BrownCard(this);
+        }
     }
 }

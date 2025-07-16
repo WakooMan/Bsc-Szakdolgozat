@@ -16,5 +16,6 @@ namespace GameLogic.Elements.Guilds
      XmlInclude(typeof(ExtortionistGuild))]
     public abstract class Guild
     {
+        public abstract Guild Clone();
     }
 }

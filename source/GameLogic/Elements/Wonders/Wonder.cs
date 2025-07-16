@@ -4,5 +4,9 @@
     {
         public string Name { get; set; }
 
+        public IWonder Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

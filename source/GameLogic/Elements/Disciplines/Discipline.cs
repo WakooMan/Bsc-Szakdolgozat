@@ -11,5 +11,6 @@ namespace GameLogic.Elements.Disciplines
      XmlInclude(typeof(Writing)),]
     public abstract class Discipline
     {
+        public abstract Discipline Clone();
     }
 }

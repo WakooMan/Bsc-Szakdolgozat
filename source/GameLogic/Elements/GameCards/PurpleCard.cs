@@ -7,5 +7,14 @@ namespace GameLogic.Elements.GameCards
         public Guild GuildObj { get; set; }
         public PurpleCard() : base()
         { }
+        private PurpleCard(PurpleCard purpleCard) : base(purpleCard)
+        {
+            GuildObj = purpleCard.GuildObj.Clone();
+        }
+
+        public override ICard Clone()
+        {
+            return new PurpleCard(this);
+        }
     }
 }

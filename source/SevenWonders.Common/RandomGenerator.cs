@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLogic.GameStates
+namespace SevenWonders.Common
 {
-    public interface GameState
+    public class RandomGenerator: IRandomGenerator
     {
-        void DoStateAction();
-        GameState GetNextState();
+
     }
 }

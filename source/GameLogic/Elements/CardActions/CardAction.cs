@@ -9,5 +9,6 @@ namespace GameLogic.Elements.CardActions
      XmlInclude(typeof(GetMoneyForWonders))]
     public abstract class CardAction
     {
+        public abstract CardAction Clone();
     }
 }

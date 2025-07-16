@@ -11,7 +11,7 @@ namespace GameLogic.Elements.GameCards
      XmlInclude(typeof(PurpleCard)),
      XmlInclude(typeof(RedCard)),
      XmlInclude(typeof(YellowCard))]
-    public abstract class Card
+    public abstract class Card: ICard
     {
         public List<Good> GoodCost { get; set; }
         public int MoneyCost { get; set; }
@@ -25,5 +25,16 @@ namespace GameLogic.Elements.GameCards
             Name = string.Empty;
             PreviousBuilding = string.Empty;
         }
+
+        protected Card(Card card)
+        {
+            GoodCost = card.GoodCost.Select(g => g.Clone()).ToList();
+            Name = card.Name;
+            PreviousBuilding = card.PreviousBuilding;
+            Age = card.Age;
+            MoneyCost = card.MoneyCost;
+        }
+
+        public abstract ICard Clone();
     }
 }

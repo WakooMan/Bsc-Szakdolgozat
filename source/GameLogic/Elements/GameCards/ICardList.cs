@@ -3,5 +3,7 @@
     public interface ICardList
     {
         List<ICard> Cards { get; }
+
+        ICardList Clone();
     }
 }

@@ -10,5 +10,7 @@ namespace GameLogic.Elements.GameCards
         string Name { get; set; }
         string PreviousBuilding { get; set; }
         AgesEnum Age { get; set; }
+
+        ICard Clone();
     }
 }

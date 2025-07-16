@@ -9,7 +9,7 @@ namespace GameLogic
     public class Game
     {
         private readonly List<Player> m_players;
-        public GameState CurrentState { get; private set; }
+        public IGameState CurrentState { get; private set; }
         public IReadOnlyList<Player> Players => m_players;
 
 

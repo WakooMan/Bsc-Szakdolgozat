@@ -7,5 +7,7 @@ namespace GameLogic.Elements.Goods
     [XmlInclude(typeof(GameResource)),
      XmlInclude(typeof(Product))]
     public abstract class Good
-    { }
+    {
+        public abstract Good Clone();
+    }
 }

@@ -7,5 +7,7 @@ namespace GameLogic.Elements.Goods.Resources
      XmlInclude(typeof(Stone)),
      XmlInclude(typeof(Wood))]
     public abstract class GameResource : Good
-    { }
+    {
+        public override abstract GameResource Clone();
+    }
 }

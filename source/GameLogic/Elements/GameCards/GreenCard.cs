@@ -13,5 +13,16 @@ namespace GameLogic.Elements.GameCards
         public int Point { get; set; }
         public GreenCard() : base()
         { }
+
+        private GreenCard(GreenCard greenCard) : base(greenCard)
+        {
+            Discipline = greenCard.Discipline.Clone();
+            Point = greenCard.Point;
+        }
+
+        public override ICard Clone()
+        {
+            return new GreenCard(this);
+        }
     }
 }

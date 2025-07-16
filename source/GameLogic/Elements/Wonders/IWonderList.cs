@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLogic.Elements.Wonders
+﻿namespace GameLogic.Elements.Wonders
 {
     public interface IWonderList
     {
-        public List<IWonder> Wonders { get; }
+        List<IWonder> Wonders { get; }
+
+        IWonderList Clone();
     }
 }

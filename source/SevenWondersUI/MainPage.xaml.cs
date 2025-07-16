@@ -1,6 +1,4 @@
-﻿using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Goods.Resources;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace SevenWondersUI
 {

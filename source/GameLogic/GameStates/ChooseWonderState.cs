@@ -2,7 +2,7 @@
 
 namespace GameLogic.GameStates
 {
-    public class ChooseWonderState : GameState
+    public class ChooseWonderState : IGameState
     {
         private readonly IChooseWonderHandler m_chooseWonderHandler;
 
@@ -19,7 +19,7 @@ namespace GameLogic.GameStates
             }
         }
 
-        public GameState GetNextState()
+        public IGameState GetNextState()
         {
             return new PlayingState(m_chooseWonderHandler.Players);
         }

@@ -6,11 +6,11 @@ using GameLogic.Handlers.Factories;
 
 namespace GameLogic.GameStates
 {
-    public class PlayingState : GameState
+    public class PlayingState : IGameState
     {
         public bool IsGameOver { get; private set; }
-        public AgeHandler AgeHandler { get; }
-        public TurnHandler TurnHandler { get; }
+        public IAgeHandler AgeHandler { get; }
+        public ITurnHandler TurnHandler { get; }
 
         public PlayingState(ICollection<Player> players)
         {
@@ -35,7 +35,7 @@ namespace GameLogic.GameStates
             }
         }
 
-        public GameState GetNextState()
+        public IGameState GetNextState()
         {
             return null;
         }
