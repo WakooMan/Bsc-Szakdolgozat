@@ -141,7 +141,9 @@
 			<Name>Őrtorony</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Strength>1</Strength>
+			<Strength>
+				<Points>1</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -151,7 +153,9 @@
 			<Name>Istálló</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Strength>1</Strength>
+			<Strength>
+				<Points>1</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -161,7 +165,9 @@
 			<Name>Helyőrség</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Strength>1</Strength>
+			<Strength>
+				<Points>1</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost/>
@@ -169,7 +175,9 @@
 			<Name>Cölöpkerítés</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Strength>1</Strength>
+			<Strength>
+				<Points>1</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -180,7 +188,9 @@
 			<Name>Falak</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Strength>2</Strength>
+			<Strength>
+				<Points>2</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -191,7 +201,9 @@
 			<Name>Lótenyésztők</Name>
 			<PreviousBuilding>Istálló</PreviousBuilding>
 			<Age>II</Age>
-			<Strength>1</Strength>
+			<Strength>
+				<Points>1</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost/>
@@ -199,7 +211,9 @@
 			<Name>Barakk</Name>
 			<PreviousBuilding>Helyőrség</PreviousBuilding>
 			<Age>II</Age>
-			<Strength>1</Strength>
+			<Strength>
+				<Points>1</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -211,7 +225,9 @@
 			<Name>Íjászterület</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Strength>2</Strength>
+			<Strength>
+				<Points>2</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -223,7 +239,9 @@
 			<Name>Alakulótér</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Strength>2</Strength>
+			<Strength>
+				<Points>2</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -237,7 +255,9 @@
 			<Name>Fegyverarzenál</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Strength>3</Strength>
+			<Strength>
+				<Points>3</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost/>
@@ -245,7 +265,9 @@
 			<Name>Főhadiszállás</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Strength>3</Strength>
+			<Strength>
+				<Points>3</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -258,7 +280,9 @@
 			<Name>Erőd</Name>
 			<PreviousBuilding>Cölöpkerítés</PreviousBuilding>
 			<Age>III</Age>
-			<Strength>2</Strength>
+			<Strength>
+				<Points>2</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -271,7 +295,9 @@
 			<Name>Ostromműhely</Name>
 			<PreviousBuilding>Íjászterület</PreviousBuilding>
 			<Age>III</Age>
-			<Strength>2</Strength>
+			<Strength>
+				<Points>2</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
 			<GoodCost>
@@ -284,7 +310,9 @@
 			<Name>Cirkusz</Name>
 			<PreviousBuilding>Alakulótér</PreviousBuilding>
 			<Age>III</Age>
-			<Strength>2</Strength>
+			<Strength>
+				<Points>2</Points>
+			</Strength>
 		</Card>
 		<Card xsi:type="GreenCard">
 			<GoodCost>
@@ -294,7 +322,9 @@
 			<Name>Műhely</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>1</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>1</Points>
+			</Point>
 			<Discipline xsi:type="Building" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -305,7 +335,9 @@
 			<Name>Patika</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>1</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>1</Points>
+			</Point>
 			<Discipline xsi:type="Mechanics" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -314,7 +346,9 @@
 			<Name>Scriptorium</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>0</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>0</Points>
+			</Point>
 			<Discipline xsi:type="Writing" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -323,7 +357,9 @@
 			<Name>Gyógyszerész</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>0</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>0</Points>
+			</Point>
 			<Discipline xsi:type="Healing" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -336,7 +372,9 @@
 			<Name>Könyvtár</Name>
 			<PreviousBuilding>Scriptorium</PreviousBuilding>
 			<Age>II</Age>
-			<Point>2</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>2</Points>
+			</Point>
 			<Discipline xsi:type="Writing" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -349,7 +387,9 @@
 			<Name>Kórház</Name>
 			<PreviousBuilding>Gyógyszerész</PreviousBuilding>
 			<Age>II</Age>
-			<Point>2</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>2</Points>
+			</Point>
 			<Discipline xsi:type="Healing" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -362,7 +402,9 @@
 			<Name>Iskola</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>1</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>1</Points>
+			</Point>
 			<Discipline xsi:type="Mechanics" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -375,7 +417,9 @@
 			<Name>Laboratórium</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>1</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>1</Points>
+			</Point>
 			<Discipline xsi:type="Building" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -389,7 +433,9 @@
 			<Name>Akadémia</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>3</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>3</Points>
+			</Point>
 			<Discipline xsi:type="Trading" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -403,7 +449,9 @@
 			<Name>Tanterem</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>3</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>3</Points>
+			</Point>
 			<Discipline xsi:type="Trading" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -416,7 +464,9 @@
 			<Name>Egyetem</Name>
 			<PreviousBuilding>Iskola</PreviousBuilding>
 			<Age>III</Age>
-			<Point>2</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>2</Points>
+			</Point>
 			<Discipline xsi:type="Geography" />
 		</Card>
 		<Card xsi:type="GreenCard">
@@ -429,7 +479,9 @@
 			<Name>Csillagvizsgáló</Name>
 			<PreviousBuilding>Laboratórium</PreviousBuilding>
 			<Age>III</Age>
-			<Point>2</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>2</Points>
+			</Point>
 			<Discipline xsi:type="Geography" />
 		</Card>
 		<Card xsi:type="YellowCard">
@@ -438,15 +490,16 @@
 			<Name>Kőraktár</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="BuyGoods">
-				<BuyGoodItems>
-					<BuyGoodItem>
-						<MoneyCost>1</MoneyCost>
-						<GoodFactory xsi:type="StoneFactory"/>
-					</BuyGoodItem>
-				</BuyGoodItems>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="BuyGoods">
+					<BuyGoodItems>
+						<BuyGoodItem>
+							<MoneyCost>1</MoneyCost>
+							<GoodFactory xsi:type="StoneFactory"/>
+						</BuyGoodItem>
+					</BuyGoodItems>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost/>
@@ -454,15 +507,16 @@
 			<Name>Agyagraktár</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="BuyGoods">
-				<BuyGoodItems>
-					<BuyGoodItem>
-						<MoneyCost>1</MoneyCost>
-						<GoodFactory xsi:type="ClayFactory"/>
-					</BuyGoodItem>
-				</BuyGoodItems>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="BuyGoods">
+					<BuyGoodItems>
+						<BuyGoodItem>
+							<MoneyCost>1</MoneyCost>
+							<GoodFactory xsi:type="ClayFactory"/>
+						</BuyGoodItem>
+					</BuyGoodItems>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost/>
@@ -470,15 +524,16 @@
 			<Name>Faraktár</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="BuyGoods">
-				<BuyGoodItems>
-					<BuyGoodItem>
-						<MoneyCost>1</MoneyCost>
-						<GoodFactory xsi:type="WoodFactory"/>
-					</BuyGoodItem>
-				</BuyGoodItems>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="BuyGoods">
+					<BuyGoodItems>
+						<BuyGoodItem>
+							<MoneyCost>1</MoneyCost>
+							<GoodFactory xsi:type="WoodFactory"/>
+						</BuyGoodItem>
+					</BuyGoodItems>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost/>
@@ -486,10 +541,11 @@
 			<Name>Fogadó</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="GetMoney">
-				<Money>4</Money>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>4</Money>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost>
@@ -499,13 +555,14 @@
 			<Name>Fórum</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="ChooseGood">
-				<GoodFactories>
-					<GoodFactory xsi:type="GlassFactory" />
-					<GoodFactory xsi:type="PapirusFactory" />
-				</GoodFactories>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="ChooseGood">
+					<GoodFactories>
+						<GoodFactory xsi:type="GlassFactory" />
+						<GoodFactory xsi:type="PapirusFactory" />
+					</GoodFactories>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost>
@@ -516,14 +573,15 @@
 			<Name>Karavánszeráj</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="ChooseGood">
-				<GoodFactories>
-					<GoodFactory xsi:type="WoodFactory" />
-					<GoodFactory xsi:type="ClayFactory" />
-					<GoodFactory xsi:type="StoneFactory" />
-				</GoodFactories>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="ChooseGood">
+					<GoodFactories>
+						<GoodFactory xsi:type="WoodFactory" />
+						<GoodFactory xsi:type="ClayFactory" />
+						<GoodFactory xsi:type="StoneFactory" />
+					</GoodFactories>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost/>
@@ -531,19 +589,20 @@
 			<Name>Vámház</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="BuyGoods">
-				<BuyGoodItems>
-					<BuyGoodItem>
-						<MoneyCost>1</MoneyCost>
-						<GoodFactory xsi:type="PapirusFactory" />
-					</BuyGoodItem>
-					<BuyGoodItem>
-						<MoneyCost>1</MoneyCost>
-						<GoodFactory xsi:type="GlassFactory" />
-					</BuyGoodItem>
-				</BuyGoodItems>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="BuyGoods">
+					<BuyGoodItems>
+						<BuyGoodItem>
+							<MoneyCost>1</MoneyCost>
+							<GoodFactory xsi:type="PapirusFactory" />
+						</BuyGoodItem>
+						<BuyGoodItem>
+							<MoneyCost>1</MoneyCost>
+							<GoodFactory xsi:type="GlassFactory" />
+						</BuyGoodItem>
+					</BuyGoodItems>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost/>
@@ -551,10 +610,11 @@
 			<Name>Sörfőzde</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>0</Point>
-			<CardActions xsi:type="GetMoney">
-				<Money>6</Money>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>6</Money>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost>
@@ -565,11 +625,15 @@
 			<Name>Kereskedelmi kamara</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>3</Point>
-			<CardActions xsi:type="GetMoneyForCard">
-				<CardType>GrayCard</CardType>
-				<MoneyPerCard>3</MoneyPerCard>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+				<Effect xsi:type="GetMoneyForCard">
+					<CardType>GrayCard</CardType>
+					<MoneyPerCard>3</MoneyPerCard>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost>
@@ -581,11 +645,15 @@
 			<Name>Kikötő</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>3</Point>
-			<CardActions xsi:type="GetMoneyForCard">
-				<CardType>BrownCard</CardType>
-				<MoneyPerCard>2</MoneyPerCard>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+				<Effect xsi:type="GetMoneyForCard">
+					<CardType>BrownCard</CardType>
+					<MoneyPerCard>2</MoneyPerCard>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost>
@@ -597,11 +665,15 @@
 			<Name>Fegyvertár</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>3</Point>
-			<CardActions xsi:type="GetMoneyForCard">
-				<CardType>RedCard</CardType>
-				<MoneyPerCard>1</MoneyPerCard>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+				<Effect xsi:type="GetMoneyForCard">
+					<CardType>RedCard</CardType>
+					<MoneyPerCard>1</MoneyPerCard>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost>
@@ -613,11 +685,15 @@
 			<Name>Világítótorony</Name>
 			<PreviousBuilding>Fogadó</PreviousBuilding>
 			<Age>III</Age>
-			<Point>3</Point>
-			<CardActions xsi:type="GetMoneyForCard">
-				<CardType>YellowCard</CardType>
-				<MoneyPerCard>1</MoneyPerCard>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+				<Effect xsi:type="GetMoneyForCard">
+					<CardType>YellowCard</CardType>
+					<MoneyPerCard>1</MoneyPerCard>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
 			<GoodCost>
@@ -629,10 +705,14 @@
 			<Name>Aréna</Name>
 			<PreviousBuilding>Sörfőzde</PreviousBuilding>
 			<Age>III</Age>
-			<Point>3</Point>
-			<CardActions xsi:type="GetMoneyForWonders">
-				<MoneyPerWonder>2</MoneyPerWonder>
-			</CardActions>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+				<Effect xsi:type="GetMoneyForWonders">
+					<MoneyPerWonder>2</MoneyPerWonder>
+				</Effect>
+			</Effects>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost/>
@@ -640,7 +720,7 @@
 			<Name>Színház</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>3</Point>
+			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost/>
@@ -648,7 +728,7 @@
 			<Name>Oltár</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>3</Point>
+			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -658,7 +738,7 @@
 			<Name>Fürdő</Name>
 			<PreviousBuilding/>
 			<Age>I</Age>
-			<Point>3</Point>
+			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -670,7 +750,7 @@
 			<Name>Bíróság</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>5</Point>
+			<Point xsi:type="VictoryPoints"><Points>5</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -681,7 +761,7 @@
 			<Name>Szobor</Name>
 			<PreviousBuilding>Színház</PreviousBuilding>
 			<Age>II</Age>
-			<Point>4</Point>
+			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -692,7 +772,7 @@
 			<Name>Templom</Name>
 			<PreviousBuilding>Oltár</PreviousBuilding>
 			<Age>II</Age>
-			<Point>4</Point>
+			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -704,7 +784,7 @@
 			<Name>Vízvezeték</Name>
 			<PreviousBuilding>Fürdő</PreviousBuilding>
 			<Age>II</Age>
-			<Point>5</Point>
+			<Point xsi:type="VictoryPoints"><Points>5</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -715,7 +795,7 @@
 			<Name>Szószék</Name>
 			<PreviousBuilding/>
 			<Age>II</Age>
-			<Point>4</Point>
+			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -729,7 +809,9 @@
 			<Name>Palota</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>7</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>7</Points>
+			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -743,7 +825,9 @@
 			<Name>Városháza</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>7</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>7</Points>
+			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -755,7 +839,9 @@
 			<Name>Obeliszk</Name>
 			<PreviousBuilding/>
 			<Age>III</Age>
-			<Point>5</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>5</Points>
+			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -768,7 +854,9 @@
 			<Name>Kertek</Name>
 			<PreviousBuilding>Szobor</PreviousBuilding>
 			<Age>III</Age>
-			<Point>6</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>6</Points>
+			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -781,7 +869,9 @@
 			<Name>Panteon</Name>
 			<PreviousBuilding>Templom</PreviousBuilding>
 			<Age>III</Age>
-			<Point>6</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>6</Points>
+			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
 			<GoodCost>
@@ -794,7 +884,9 @@
 			<Name>Szenátus</Name>
 			<PreviousBuilding>Szószék</PreviousBuilding>
 			<Age>III</Age>
-			<Point>5</Point>
+			<Point xsi:type="VictoryPoints">
+				<Points>5</Points>
+			</Point>
 		</Card>
 		<Card xsi:type="PurpleCard">
 			<GoodCost>

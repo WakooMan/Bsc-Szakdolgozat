@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SevenWonders.Common
+﻿namespace SevenWonders.Common
 {
-    public class RandomGenerator: IRandomGenerator
+    public class RandomGenerator : IRandomGenerator
     {
+        public RandomGenerator()
+        {
+            m_random = new Random();
 
+        }
+        public int Next()
+        {
+            return m_random.Next();
+        }
+
+        private Random m_random;
     }
 }

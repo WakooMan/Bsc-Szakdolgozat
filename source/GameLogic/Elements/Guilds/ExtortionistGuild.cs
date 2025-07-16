@@ -2,5 +2,9 @@
 {
     public class ExtortionistGuild : Guild
     {
+        public override Guild Clone()
+        {
+            return new ExtortionistGuild();
+        }
     }
 }

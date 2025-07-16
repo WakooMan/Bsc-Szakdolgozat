@@ -2,5 +2,9 @@
 {
     public class SailorGuild : Guild
     {
+        public override Guild Clone()
+        {
+            return new SailorGuild();
+        }
     }
 }

@@ -1,14 +1,16 @@
-﻿namespace GameLogic.Elements.GameCards
+﻿using GameLogic.Elements.Effects;
+
+namespace GameLogic.Elements.GameCards
 {
     public class RedCard : Card
     {
-        public int Strength { get; set; }
+        public Strength Strength { get; set; }
         public RedCard() : base()
         { }
 
         private RedCard(RedCard redCard) : base(redCard)
         {
-            Strength = redCard.Strength;
+            Strength = redCard.Strength.Clone();
         }
 
         public override ICard Clone()

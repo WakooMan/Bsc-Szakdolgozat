@@ -1,19 +1,19 @@
-﻿using GameLogic.Elements.CardActions;
+﻿using GameLogic.Elements.Effects;
 
 namespace GameLogic.Elements.GameCards
 {
     public class YellowCard : Card
     {
-        public int Point { get; set; }
-        public CardAction Action { get; set; }
+        public List<Effect> Effects { get; set; }
 
         public YellowCard() : base()
-        { }
+        {
+            Effects = new List<Effect>();
+        }
 
         private YellowCard(YellowCard yellowCard) : base(yellowCard)
         {
-            Point = yellowCard.Point;
-            Action = yellowCard.Action.Clone();
+            Effects = yellowCard.Effects.Select(act => act.Clone()).ToList();
         }
 
         public override ICard Clone()

@@ -8,5 +8,9 @@ namespace GameLogic.Elements.Disciplines
 {
     public class Healing : Discipline
     {
+        public override Discipline Clone()
+        {
+            return new Healing();
+        }
     }
 }

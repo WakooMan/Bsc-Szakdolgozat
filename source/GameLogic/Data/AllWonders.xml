@@ -1,1 +1,140 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WonderList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Wonders>
+		<Wonder>
+			<Name>Via Appia</Name>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>3</Money>
+				</Effect>
+				// need two effects
+
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Circus Maximus</Name>
+			<Effects>
+				// need one effect
+				<Effect xsi:type="Strength">
+					<Points>1</Points>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A kolosszus</Name>
+			<Effects>
+				<Effect xsi:type="Strength">
+					<Points>2</Points>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A nagy Könyvtár</Name>
+			<Effects>
+				// One Effect needed
+				<Effect xsi:type="VictoryPoints">
+					<Points>4</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A nagy világítótorony</Name>
+			<Effects>
+				<Effect xsi:type="ChooseGood">
+					<GoodFactories>
+						<GoodFactory xsi:type="WoodFactory" />
+						<GoodFactory xsi:type="StoneFactory" />
+						<GoodFactory xsi:type="ClayFactory" />
+					</GoodFactories>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>4</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A függőkertek</Name>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>6</Money>
+				</Effect>
+				// need one effect
+
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A mauzóleum</Name>
+			<Effects>
+				// need one effect
+				<Effect xsi:type="VictoryPoints">
+					<Points>2</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Pireusz</Name>
+			<Effects>
+				<Effect xsi:type="ChooseGood">
+					<GoodFactories>
+						<GoodFactory xsi:type="PapirusFactory" />
+						<GoodFactory xsi:type="GlassFactory" />
+					</GoodFactories>
+				</Effect>
+				// need one effect
+				<Effect xsi:type="VictoryPoints">
+					<Points>2</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A Piramisok</Name>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>9</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A Szfinx</Name>
+			<Effects>
+				// need one effect
+				<Effect xsi:type="VictoryPoints">
+					<Points>6</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Zeusz szobra</Name>
+			<Effects>
+				// need one effect
+				<Effect xsi:type="Strength">
+					<Points>1</Points>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Artemisz temploma</Name>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>12</Money>
+				</Effect>
+				// need one effect
+			</Effects>
+		</Wonder>
+	</Wonders>
+</WonderList>

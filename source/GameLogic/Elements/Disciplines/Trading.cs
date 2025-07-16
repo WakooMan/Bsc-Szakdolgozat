@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace GameLogic.Elements.Disciplines
 {
-    public class Trading: Discipline
+    public class Trading : Discipline
     {
+        public override Discipline Clone()
+        {
+            return new Trading();
+        }
     }
 }

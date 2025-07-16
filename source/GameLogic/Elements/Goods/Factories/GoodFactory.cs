@@ -1,5 +1,4 @@
-﻿using GameLogic.Elements.Goods;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Goods.Factories
 {

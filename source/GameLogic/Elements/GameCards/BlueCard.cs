@@ -1,14 +1,16 @@
-﻿namespace GameLogic.Elements.GameCards
+﻿using GameLogic.Elements.Effects;
+
+namespace GameLogic.Elements.GameCards
 {
     public class BlueCard : Card
     {
-        public int Point { get; set; }
+        public VictoryPoints Point { get; set; }
         public BlueCard() : base()
         { }
 
         private BlueCard(BlueCard blueCard) : base(blueCard)
         {
-            Point = blueCard.Point;
+            Point = blueCard.Point.Clone();
         }
 
         public override ICard Clone()

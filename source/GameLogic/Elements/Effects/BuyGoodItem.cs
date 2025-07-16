@@ -1,6 +1,6 @@
 ﻿using GameLogic.Elements.Goods.Factories;
 
-namespace GameLogic.Elements.CardActions
+namespace GameLogic.Elements.Effects
 {
     public class BuyGoodItem
     {
@@ -10,6 +10,12 @@ namespace GameLogic.Elements.CardActions
         public BuyGoodItem()
         {
 
+        }
+
+        public BuyGoodItem(BuyGoodItem buyGoodItem)
+        {
+            MoneyCost = buyGoodItem.MoneyCost;
+            GoodFactory = buyGoodItem.GoodFactory;
         }
     }
 }

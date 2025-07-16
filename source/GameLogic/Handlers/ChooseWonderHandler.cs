@@ -2,6 +2,7 @@
 using GameLogic.Elements.Wonders;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using SevenWonders.Common;
 
 namespace GameLogic.Handlers
 {
@@ -13,14 +14,13 @@ namespace GameLogic.Handlers
         private int m_indexOfPlayer;
         private readonly IPlayerActionReceiver m_playerActionReceiver;
 
-        public ChooseWonderHandler(IPlayerActionReceiver playerActionReceiver, IWonderList wonderList, ICollection<Player> players)
+        public ChooseWonderHandler(IRandomGenerator randomGenerator, IPlayerActionReceiver playerActionReceiver, IWonderList wonderList, ICollection<Player> players)
         {
-            Random random = new Random();
             m_players = new List<Player>(players);
             List<IPlayerAction> playerActions = wonderList.Wonders.Select(w => (IPlayerAction)new ChooseWonderAction(w)).ToList();
-            m_wonderPlayerActions1 = playerActions.OrderBy(x => random.Next()).Take(4).ToList();
+            m_wonderPlayerActions1 = playerActions.OrderBy(x => randomGenerator.Next()).Take(4).ToList();
             m_wonderPlayerActions1.ForEach(action => playerActions.Remove(action));
-            m_wonderPlayerActions2 = playerActions.OrderBy(x => random.Next()).Take(4).ToList();
+            m_wonderPlayerActions2 = playerActions.OrderBy(x => randomGenerator.Next()).Take(4).ToList();
             m_indexOfPlayer = 0;
             m_playerActionReceiver = playerActionReceiver;
         }
