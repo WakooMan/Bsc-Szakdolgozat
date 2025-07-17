@@ -8,14 +8,30 @@
 
   <ItemGroup>
     <None Remove="Data\AllCards.xml" />
+    <None Remove="Data\AllDevelopments.xml" />
     <None Remove="Data\AllWonders.xml" />
+    <None Remove="Data\FirstAgeComposition.csv" />
+    <None Remove="Data\SecondAgeComposition.csv" />
+    <None Remove="Data\ThirdAgeComposition.csv" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Data\AllCards.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\AllDevelopments.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\AllWonders.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\FirstAgeComposition.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SecondAgeComposition.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ThirdAgeComposition.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
