@@ -6,12 +6,12 @@ namespace GameLogic.GameStructures
     public class CardNode : ICardNode
     {
         private List<ICardNode> coveredBy;
-        public ICard CardObj { get; }
+        public Card CardObj { get; }
         public bool Hidden { get; set; }
 
         public IReadOnlyList<ICardNode> CoveredBy => coveredBy;
 
-        public CardNode(ICard cardObj)
+        public CardNode(Card cardObj)
         {
             ArgumentChecker.CheckNull(cardObj, nameof(cardObj));
 

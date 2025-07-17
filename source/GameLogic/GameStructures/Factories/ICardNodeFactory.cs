@@ -9,6 +9,6 @@ namespace GameLogic.GameStructures.Factories
 {
     public interface ICardNodeFactory
     {
-        public ICardNode Create(ICard card);
+        public ICardNode Create(Card card);
     }
 }

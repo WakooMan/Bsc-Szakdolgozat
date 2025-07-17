@@ -4,6 +4,6 @@ namespace GameLogic.GameStructures.Factories
 {
     public interface ICardCompositionFactory
     {
-        public ICardComposition Create(string cardCompositionFile, ICollection<ICard> cards);
+        public ICardComposition Create(string cardCompositionFile, ICollection<Card> cards);
     }
 }

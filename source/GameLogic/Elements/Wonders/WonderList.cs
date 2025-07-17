@@ -2,11 +2,11 @@
 {
     public class WonderList : IWonderList
     {
-        public List<IWonder> Wonders { get; set; }
+        public List<Wonder> Wonders { get; set; }
 
         public WonderList()
         {
-            Wonders = new List<IWonder>();
+            Wonders = new List<Wonder>();
         }
 
         private WonderList(WonderList wonderList)

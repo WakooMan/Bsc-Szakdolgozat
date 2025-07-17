@@ -1,4 +1,8 @@
-﻿using System.Xml.Serialization;
+﻿using GameLogic.Elements;
+using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Wonders;
+using SevenWonders.Common;
+using System.Xml.Serialization;
 
 namespace SevenWondersUI
 {
@@ -9,15 +13,9 @@ namespace SevenWondersUI
         public MainPage()
         {
             InitializeComponent();
-            CardList list = new CardList();
-            XmlSerializer serializer = new XmlSerializer(typeof(CardList));
-
-            string file = Path.Combine(Directory.GetCurrentDirectory(), "Data", "AllCards.xml");
-
-            using (FileStream fs = new FileStream(file, FileMode.Open))
-            {
-                list = (CardList)serializer.Deserialize(fs);
-            }
+            IXmlHandler xmlHandler = new XmlHandler();
+            IGameElements gameElements = new GameElements(new CardListFactory(xmlHandler), new WonderListFactory(xmlHandler));
+            var sm = gameElements.Cards;
         }
 
         private void OnCounterClicked(object sender, EventArgs e)

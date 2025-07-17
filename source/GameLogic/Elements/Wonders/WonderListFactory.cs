@@ -11,7 +11,7 @@ namespace GameLogic.Elements.Wonders
 
         public IWonderList Create()
         {
-            return m_xmlHandler.Deserialize<IWonderList>(CARDLIST_FILE);
+            return m_xmlHandler.Deserialize<WonderList>(CARDLIST_FILE);
         }
 
         private readonly string CARDLIST_FILE = Path.Combine(Directory.GetCurrentDirectory(), "Data", "AllWonders.xml");

@@ -2,7 +2,7 @@
 {
     public interface ICardList
     {
-        List<ICard> Cards { get; }
+        List<Card> Cards { get; }
 
         ICardList Clone();
     }

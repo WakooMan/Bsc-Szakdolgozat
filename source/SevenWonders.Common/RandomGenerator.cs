@@ -1,5 +1,8 @@
-﻿namespace SevenWonders.Common
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace SevenWonders.Common
 {
+    [ExcludeFromCodeCoverage]
     public class RandomGenerator : IRandomGenerator
     {
         public RandomGenerator()

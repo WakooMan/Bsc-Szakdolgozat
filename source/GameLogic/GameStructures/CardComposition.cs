@@ -13,7 +13,7 @@ namespace GameLogic.GameStructures
         private ICardNodeFactory m_cardNodeFactory;
         public IReadOnlyList<ICardNode> AvailableCards => m_cardNodes.Where(card => card.CoveredBy.Count <= 0).ToList();
 
-        public CardComposition(ICardCompositionFileHandler cardCompositionFileHandler, ICardNodeFactory cardNodeFactory, ICollection<ICard> cards)
+        public CardComposition(ICardCompositionFileHandler cardCompositionFileHandler, ICardNodeFactory cardNodeFactory, ICollection<Card> cards)
         {
             ArgumentChecker.CheckNull(cardCompositionFileHandler, nameof(cardCompositionFileHandler));
             ArgumentChecker.CheckNull(cardNodeFactory, nameof(cardNodeFactory));
@@ -24,7 +24,7 @@ namespace GameLogic.GameStructures
             m_cardNodeFactory = cardNodeFactory;
             m_cardNodes = new List<ICardNode>();
 
-            foreach (ICard card in cards)
+            foreach (Card card in cards)
             {
                 m_cardNodes.Add(m_cardNodeFactory.Create(card));
             }

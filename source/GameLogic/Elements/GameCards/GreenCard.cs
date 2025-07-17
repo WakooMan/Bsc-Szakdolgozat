@@ -16,7 +16,7 @@ namespace GameLogic.Elements.GameCards
             Point = greenCard.Point.Clone();
         }
 
-        public override ICard Clone()
+        public override GreenCard Clone()
         {
             return new GreenCard(this);
         }

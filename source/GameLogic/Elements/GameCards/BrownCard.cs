@@ -21,7 +21,7 @@ namespace GameLogic.Elements.GameCards
             ProducedResources = brownCard.ProducedResources.Select(res => res.Clone()).ToList();
         }
 
-        public override ICard Clone()
+        public override BrownCard Clone()
         {
             return new BrownCard(this);
         }

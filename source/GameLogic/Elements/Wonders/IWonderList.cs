@@ -2,7 +2,7 @@
 {
     public interface IWonderList
     {
-        List<IWonder> Wonders { get; }
+        List<Wonder> Wonders { get; }
 
         IWonderList Clone();
     }

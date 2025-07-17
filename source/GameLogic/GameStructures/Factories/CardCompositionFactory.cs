@@ -14,7 +14,7 @@ namespace GameLogic.GameStructures.Factories
             m_cardNodeFactory = cardNodeFactory;
             m_cardCompositionFileHandlerFactory = cardCompositionFileHandlerFactory;
         }
-        public ICardComposition Create(string cardCompositionFile, ICollection<ICard> cards)
+        public ICardComposition Create(string cardCompositionFile, ICollection<Card> cards)
         {
             ArgumentChecker.CheckNullOrEmpty(cardCompositionFile, nameof(cardCompositionFile));
             ArgumentChecker.CheckNull(cards, nameof(cards));

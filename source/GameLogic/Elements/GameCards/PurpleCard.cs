@@ -12,7 +12,7 @@ namespace GameLogic.Elements.GameCards
             GuildObj = purpleCard.GuildObj.Clone();
         }
 
-        public override ICard Clone()
+        public override PurpleCard Clone()
         {
             return new PurpleCard(this);
         }

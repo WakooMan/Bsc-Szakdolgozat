@@ -13,7 +13,7 @@ namespace GameLogic.Elements.GameCards
             Strength = redCard.Strength.Clone();
         }
 
-        public override ICard Clone()
+        public override RedCard Clone()
         {
             return new RedCard(this);
         }

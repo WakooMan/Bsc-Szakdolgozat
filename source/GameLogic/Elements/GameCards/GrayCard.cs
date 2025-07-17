@@ -18,7 +18,7 @@ namespace GameLogic.Elements.GameCards
             CreatedProducts = grayCard.CreatedProducts.Select(prod => prod.Clone()).ToList();
         }
 
-        public override ICard Clone()
+        public override GrayCard Clone()
         {
             return new GrayCard(this);
         }

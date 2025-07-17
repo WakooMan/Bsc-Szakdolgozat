@@ -13,7 +13,7 @@ namespace GameLogic.Elements.Effects
 
         private BuyGoods(BuyGoods buyGoods)
         {
-            BuyGoodItems = BuyGoodItems.Select(b => new BuyGoodItem(b)).ToList();
+            BuyGoodItems = buyGoods.BuyGoodItems.Select(b => new BuyGoodItem(b)).ToList();
         }
 
         public override BuyGoods Clone()

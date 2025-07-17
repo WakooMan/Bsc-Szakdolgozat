@@ -13,7 +13,7 @@ namespace GameLogic.Elements.GameCards
             Point = blueCard.Point.Clone();
         }
 
-        public override ICard Clone()
+        public override BlueCard Clone()
         {
             return new BlueCard(this);
         }

@@ -4,7 +4,7 @@ namespace GameLogic.GameStructures
 {
     public interface ICardNode
     {
-        ICard CardObj { get; }
+        Card CardObj { get; }
         bool Hidden { get; set; }
         IReadOnlyList<ICardNode> CoveredBy { get; }
         void AddParent(ICardNode cardNode);

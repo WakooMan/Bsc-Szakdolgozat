@@ -2,7 +2,7 @@
 
 namespace GameLogic.Elements.Wonders
 {
-    public class Wonder: IWonder
+    public class Wonder
     {
         public string Name { get; set; }
         public List<Effect> Effects { get; set; }
@@ -18,7 +18,7 @@ namespace GameLogic.Elements.Wonders
             Effects = wonder.Effects.Select(effect => effect.Clone()).ToList();
         }
 
-        public IWonder Clone()
+        public Wonder Clone()
         {
             return new Wonder(this);
         }

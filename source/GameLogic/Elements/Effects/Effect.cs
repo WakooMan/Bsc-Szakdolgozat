@@ -6,7 +6,14 @@ namespace GameLogic.Elements.Effects
      XmlInclude(typeof(ChooseGood)),
      XmlInclude(typeof(GetMoney)),
      XmlInclude(typeof(GetMoneyForCard)),
-     XmlInclude(typeof(GetMoneyForWonders))]
+     XmlInclude(typeof(GetMoneyForWonders)),
+     XmlInclude(typeof(EnemyLoseMoney)),
+     XmlInclude(typeof(BuildFreeFromDroppedCards)),
+     XmlInclude(typeof(ChooseDevelopment)),
+     XmlInclude(typeof(DropEnemyCard)),
+     XmlInclude(typeof(NewTurn)),
+     XmlInclude(typeof(VictoryPoints)),
+     XmlInclude(typeof(Strength))]
     public abstract class Effect
     {
         public abstract Effect Clone();

@@ -16,7 +16,7 @@ namespace GameLogic.Elements.GameCards
             Effects = yellowCard.Effects.Select(act => act.Clone()).ToList();
         }
 
-        public override ICard Clone()
+        public override YellowCard Clone()
         {
             return new YellowCard(this);
         }

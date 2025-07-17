@@ -12,7 +12,7 @@ namespace GameLogic.Ages
         public ICardComposition Composition { get; }
         public bool IsAgeOver => Composition.AvailableCards.Count < 0;
 
-        protected AgeBase(ICardCompositionFactory cardCompositionFactory, ICollection<ICard> cards)
+        protected AgeBase(ICardCompositionFactory cardCompositionFactory, ICollection<Card> cards)
         {
             ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));
             ArgumentChecker.CheckNull(cards, nameof(cards));
