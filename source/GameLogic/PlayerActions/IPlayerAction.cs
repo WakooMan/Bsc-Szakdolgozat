@@ -4,6 +4,8 @@ namespace GameLogic.PlayerActions
 {
     public interface IPlayerAction
     {
-        void DoPlayerAction(Player player);
+        void DoPlayerAction();
+
+        bool CanPerform();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.Developments;
 using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
 using SevenWonders.Common;
@@ -14,8 +15,8 @@ namespace SevenWondersUI
         {
             InitializeComponent();
             IXmlHandler xmlHandler = new XmlHandler();
-            IGameElements gameElements = new GameElements(new CardListFactory(xmlHandler), new WonderListFactory(xmlHandler));
-            var sm = gameElements.Cards;
+            IGameElements gameElements = new GameElements(new CardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));
+            var sm = gameElements.Developments;
         }
 
         private void OnCounterClicked(object sender, EventArgs e)

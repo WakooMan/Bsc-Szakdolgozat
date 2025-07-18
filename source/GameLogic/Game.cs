@@ -19,7 +19,7 @@ namespace GameLogic
             m_players = new List<Player>();
             m_players.Add(new Player(player1));
             m_players.Add(new Player(player2));
-            CurrentState = new ChooseWonderState(new ChooseWonderHandler(new RandomGenerator() ,playerActionReceiver, wonderList, m_players));
+            CurrentState = new ChooseWonderState(new ChooseWonderHandler(new RandomGenerator() ,playerActionReceiver, wonderList, m_players), playerActionReceiver);
         }
 
         public void GameLoop()

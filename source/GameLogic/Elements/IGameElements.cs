@@ -1,4 +1,5 @@
-﻿using GameLogic.Elements.GameCards;
+﻿using GameLogic.Elements.Developments;
+using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
 
 namespace GameLogic.Elements
@@ -7,5 +8,6 @@ namespace GameLogic.Elements
     {
         ICardList Cards { get; }
         IWonderList Wonders { get; }
+        IDevelopmentList Developments { get; }
     }
 }

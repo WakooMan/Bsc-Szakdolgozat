@@ -9,7 +9,7 @@ namespace GameLogic_UnitTests.GameStructures
         [SetUp]
         public void Setup()
         {
-            m_card = Substitute.For<ICard>();
+            m_card = Substitute.For<Card>();
             m_cardNode = new CardNode(m_card);
         }
 
@@ -67,7 +67,7 @@ namespace GameLogic_UnitTests.GameStructures
             Assert.DoesNotThrow(() => m_cardNode.RemoveParent(parent));
         }
 
-        private ICard m_card;
+        private Card m_card;
         private CardNode m_cardNode;
     }
 }

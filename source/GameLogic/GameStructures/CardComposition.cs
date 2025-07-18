@@ -2,7 +2,6 @@
 using GameLogic.GameStructures.Factories;
 using GameLogic.Handlers;
 using SevenWonders.Common;
-using System.Collections.ObjectModel;
 
 namespace GameLogic.GameStructures
 {
@@ -12,6 +11,7 @@ namespace GameLogic.GameStructures
         private ICardCompositionFileHandler m_cardCompositionFileHandler;
         private ICardNodeFactory m_cardNodeFactory;
         public IReadOnlyList<ICardNode> AvailableCards => m_cardNodes.Where(card => card.CoveredBy.Count <= 0).ToList();
+        public IReadOnlyList<ICardNode> AllCards => m_cardNodes;
 
         public CardComposition(ICardCompositionFileHandler cardCompositionFileHandler, ICardNodeFactory cardNodeFactory, ICollection<Card> cards)
         {

@@ -13,7 +13,7 @@ namespace GameLogic_UnitTests.Handlers
         {
             m_cardCompositionFactory = Substitute.For<ICardCompositionFactory>();
             m_cardList = Substitute.For<ICardList>();
-            m_cardList.Cards.Returns(new List<ICard>());
+            m_cardList.Cards.Returns(new List<Card>());
             m_ageHandler = new AgeHandler(m_cardCompositionFactory, m_cardList);
             m_NextAgeEventCalled = 0;
             m_ageHandler.HandleAgeChanged += (age) => m_NextAgeEventCalled++;

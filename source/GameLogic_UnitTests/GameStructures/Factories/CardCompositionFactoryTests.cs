@@ -27,18 +27,18 @@ namespace GameLogic_UnitTests.GameStructures.Factories
         [Test]
         public void When_Create_Called_With_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => m_cardCompositionFactory.Create(null, new List<ICard>()));
-            Assert.Throws<ArgumentNullException>(() => m_cardCompositionFactory.Create("", new List<ICard>()));
+            Assert.Throws<ArgumentNullException>(() => m_cardCompositionFactory.Create(null, new List<Card>()));
+            Assert.Throws<ArgumentNullException>(() => m_cardCompositionFactory.Create("", new List<Card>()));
             Assert.Throws<ArgumentNullException>(() => m_cardCompositionFactory.Create("something", null));
         }
 
         [Test]
         public void When_Create_Called_With_Arguments()
         {
-            List<ICard> cards = new List<ICard>();
+            List<Card> cards = new List<Card>();
             for (int i = 0; i < 20; i++)
             {
-                cards.Add(Substitute.For<ICard>());
+                cards.Add(Substitute.For<Card>());
             }
             ICardComposition cardComposition = null;
             m_cardCompositionFileHandlerFactory.CreateCardCompositionFileHandler(Arg.Any<string>()).Returns(Substitute.For<ICardCompositionFileHandler>());

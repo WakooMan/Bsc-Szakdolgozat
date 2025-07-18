@@ -19,15 +19,15 @@ namespace GameLogic_UnitTests.Ages
         {
             m_cardCompositionFactory = Substitute.For<ICardCompositionFactory>();
             m_cardComposition = Substitute.For<ICardComposition>();
-            m_cardCompositionFactory.Create(Arg.Any<string>(), Arg.Any<ICollection<ICard>>()).Returns(m_cardComposition);
+            m_cardCompositionFactory.Create(Arg.Any<string>(), Arg.Any<ICollection<Card>>()).Returns(m_cardComposition);
             m_cardList = Substitute.For<ICardList>();
-            m_card1 = Substitute.For<ICard>();
+            m_card1 = Substitute.For<Card>();
             m_card1.Age.Returns(AgesEnum.I);
-            m_card2 = Substitute.For<ICard>();
+            m_card2 = Substitute.For<Card>();
             m_card2.Age.Returns(AgesEnum.II);
-            m_card3 = Substitute.For<ICard>();
+            m_card3 = Substitute.For<Card>();
             m_card3.Age.Returns(AgesEnum.III);
-            m_cardList.Cards.Returns(new List<ICard>(new ICard[] { m_card1, m_card2, m_card3 }));
+            m_cardList.Cards.Returns(new List<Card>() { m_card1, m_card2, m_card3 });
             m_firstAge = new FirstAge(m_cardCompositionFactory, m_cardList);
         }
 
@@ -41,7 +41,7 @@ namespace GameLogic_UnitTests.Ages
         [Test]
         public void When_Initialized()
         {
-            m_cardCompositionFactory.Received(1).Create(Arg.Any<string>(), Arg.Is<ICollection<ICard>>(coll => coll.SequenceEqual(new ICard[] { m_card1 })));
+            m_cardCompositionFactory.Received(1).Create(Arg.Any<string>(), Arg.Is<ICollection<Card>>(coll => coll.SequenceEqual(new Card[] { m_card1 })));
             Assert.That(m_firstAge.Composition == m_cardComposition, Is.True);
             Assert.That(m_firstAge.Age == AgesEnum.I);
 
@@ -51,8 +51,8 @@ namespace GameLogic_UnitTests.Ages
         private ICardCompositionFactory m_cardCompositionFactory;
         private ICardComposition m_cardComposition;
         private ICardList m_cardList;
-        private ICard m_card1;
-        private ICard m_card2;
-        private ICard m_card3;
+        private Card m_card1;
+        private Card m_card2;
+        private Card m_card3;
     }
 }

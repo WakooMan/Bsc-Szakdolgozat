@@ -13,7 +13,14 @@ namespace GameLogic.Elements.Effects
      XmlInclude(typeof(DropEnemyCard)),
      XmlInclude(typeof(NewTurn)),
      XmlInclude(typeof(VictoryPoints)),
-     XmlInclude(typeof(Strength))]
+     XmlInclude(typeof(Strength)),
+     XmlInclude(typeof(Mathematics)),
+     XmlInclude(typeof(MoneyOnChainBuild)),
+     XmlInclude(typeof(PlusStrengthOnRedCardBuild)),
+     XmlInclude(typeof(CheaperBuilding)),
+     XmlInclude(typeof(Law)),
+     XmlInclude(typeof(Economics)),
+     XmlInclude(typeof(Teology))]
     public abstract class Effect
     {
         public abstract Effect Clone();

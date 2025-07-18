@@ -1,16 +1,16 @@
 ﻿namespace GameLogic.Elements.Effects
 {
-    public class NewTurn : Effect
+    public class Economics : Effect
     {
-        public NewTurn() { }
+        public Economics() { }
         public override void Apply()
         {
             throw new NotImplementedException();
         }
 
-        public override NewTurn Clone()
+        public override Economics Clone()
         {
-            return new NewTurn();
+            return new Economics();
         }
     }
 }

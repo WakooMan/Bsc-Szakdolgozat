@@ -11,14 +11,14 @@ namespace GameLogic_UnitTests.GameStructures
         [SetUp]
         public void Setup()
         {
-            m_cards = new List<ICard>();
+            m_cards = new List<Card>();
             for (int i = 0; i < 20; i++)
             {
-                m_cards.Add(Substitute.For<ICard>());
+                m_cards.Add(Substitute.For<Card>());
             }
 
             m_cardNodeFactory = Substitute.For<ICardNodeFactory>();
-            m_cardNodeFactory.Create(Arg.Any<ICard>()).Returns((info) =>
+            m_cardNodeFactory.Create(Arg.Any<Card>()).Returns((info) =>
             {
                 ICardNode cardNode = Substitute.For<ICardNode>();
                 cardNode.CoveredBy.Returns(new List<ICardNode>());
@@ -48,7 +48,7 @@ namespace GameLogic_UnitTests.GameStructures
         [Test]
         public void When_Constructor_Called_With_Empty_List()
         {
-            List<ICard> cards = new List<ICard>();
+            List<Card> cards = new List<Card>();
             Assert.Throws<ArgumentException>(() => new CardComposition(m_cardCompositionFileHandler, m_cardNodeFactory, cards));
         }
 
@@ -81,7 +81,7 @@ namespace GameLogic_UnitTests.GameStructures
         private CardComposition m_cardComposition;
         private ICardCompositionFileHandler m_cardCompositionFileHandler;
         private ICardNodeFactory m_cardNodeFactory;
-        private List<ICard> m_cards;
+        private List<Card> m_cards;
         private ICardNode m_cardNode1;
         private ICardNode m_cardNode2;
     }

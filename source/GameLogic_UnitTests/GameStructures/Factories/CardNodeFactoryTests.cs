@@ -22,7 +22,7 @@ namespace GameLogic_UnitTests.GameStructures.Factories
         [Test]
         public void When_Create_Called_With_Card()
         {
-            ICard card = Substitute.For<ICard>();
+            Card card = Substitute.For<Card>();
             ICardNode cardNode = null;
             Assert.DoesNotThrow(() => cardNode = m_cardNodeFactory.Create(card));
             Assert.That(cardNode, Is.Not.Null);
