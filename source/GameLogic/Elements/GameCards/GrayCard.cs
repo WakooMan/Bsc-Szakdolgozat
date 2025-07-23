@@ -1,4 +1,5 @@
-﻿using GameLogic.Elements.Goods.Products;
+﻿using GameLogic.Elements.Goods;
+using GameLogic.Elements.Goods.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,11 @@ namespace GameLogic.Elements.GameCards
         public override GrayCard Clone()
         {
             return new GrayCard(this);
+        }
+
+        public override List<Good> GetGoods()
+        {
+            return CreatedProducts.Select(prod => (Good)prod).ToList();
         }
     }
 }

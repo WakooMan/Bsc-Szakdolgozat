@@ -1,4 +1,6 @@
 ﻿using GameLogic.Elements.Goods.Factories;
+using GameLogic.Events;
+using GameLogic.GameStates;
 
 namespace GameLogic.Elements.Effects
 {
@@ -21,9 +23,17 @@ namespace GameLogic.Elements.Effects
             return new ChooseGood(this);
         }
 
-        public override void Apply()
+        public override void Apply(PlayingState game)
         {
-            throw new NotImplementedException();
+            game.EventManager.Subscribe(GameEventType.BuildingCostCalculated, OnBuildingCostCalculated);
+        }
+
+        private void OnBuildingCostCalculated(EventArgs eventArgs)
+        {
+            if (eventArgs is OnBuildingCostCalculated cardEventArgs)
+            {
+                cardEventArgs.AdditionalGoods.Add(this);
+            }
         }
     }
 }

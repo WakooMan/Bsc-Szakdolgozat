@@ -1,4 +1,6 @@
-﻿namespace GameLogic.Elements.Effects
+﻿using GameLogic.GameStates;
+
+namespace GameLogic.Elements.Effects
 {
     public class GetMoneyForWonders : Effect
     {
@@ -16,7 +18,7 @@
             return new GetMoneyForWonders(this);
         }
 
-        public override void Apply()
+        public override void Apply(PlayingState game)
         {
             throw new NotImplementedException();
         }

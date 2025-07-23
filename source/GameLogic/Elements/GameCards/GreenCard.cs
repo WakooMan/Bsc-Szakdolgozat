@@ -20,5 +20,10 @@ namespace GameLogic.Elements.GameCards
         {
             return new GreenCard(this);
         }
+
+        public override int GetVictoryPoints(Player player)
+        {
+            return Point.Points;
+        }
     }
 }

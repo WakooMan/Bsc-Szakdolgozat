@@ -1,5 +1,4 @@
-﻿using GameLogic.Ages;
-using GameLogic.Elements;
+﻿using GameLogic.Elements;
 using GameLogic.Elements.Goods;
 using GameLogic.GameStructures;
 
@@ -7,31 +6,32 @@ namespace GameLogic.PlayerActions
 {
     public class BuildCard : IPlayerAction
     {
-        public BuildCard(ICardNode card, IAgeBase age, Player player)
+        public BuildCard(ICardComposition composition, Player player)
         {
-            m_card = card;
-            m_age = age;
+            m_composition = composition;
             m_player = player;
         }
 
         public void DoPlayerAction()
         {
-            m_age.Composition.RemoveCard(m_card);
-            m_player.Cards.Add(m_card.CardObj);
+            m_composition.RemoveCard(m_player.PickedCard);
+            m_player.Cards.Add(m_player.PickedCard.CardObj);
         }
 
         public bool CanPerform()
         {
-            List<Good> goodsNeeded = m_card.CardObj.GoodCost.Select(good => good.Clone()).ToList();
+            List<Good> goodsNeeded = m_player.PickedCard.CardObj.GoodCost.Select(good => good.Clone()).ToList();
             foreach (Good good in m_player.Goods)
             {
-                goodsNeeded.Remove(goodsNeeded.Where(g => g.GetType() == good.GetType()).FirstOrDefault());
+                if(goodsNeeded.Contains(good))
+                {
+                    goodsNeeded.Remove(good);
+                }
             }
             return goodsNeeded.Count <= 0;
         }
 
-        private ICardNode m_card;
-        private IAgeBase m_age;
-        private Player m_player;
+        private readonly ICardComposition m_composition;
+        private readonly Player m_player;
     }
 }

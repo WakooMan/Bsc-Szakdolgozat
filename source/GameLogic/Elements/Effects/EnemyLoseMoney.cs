@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLogic.GameStates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace GameLogic.Elements.Effects
             Money = enemyLoseMoney.Money;
         }
 
-        public override void Apply()
+        public override void Apply(PlayingState game)
         {
             throw new NotImplementedException();
         }

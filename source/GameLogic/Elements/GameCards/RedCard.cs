@@ -17,5 +17,10 @@ namespace GameLogic.Elements.GameCards
         {
             return new RedCard(this);
         }
+
+        public override int GetStrength()
+        {
+            return Strength.Points;
+        }
     }
 }

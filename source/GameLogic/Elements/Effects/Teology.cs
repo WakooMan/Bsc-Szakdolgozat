@@ -1,4 +1,6 @@
-﻿namespace GameLogic.Elements.Effects
+﻿using GameLogic.GameStates;
+
+namespace GameLogic.Elements.Effects
 {
     public class Teology : Effect
     {
@@ -11,7 +13,7 @@
             NewTurn = teology.NewTurn.Clone();
         }
 
-        public override void Apply()
+        public override void Apply(PlayingState game)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements.Effects;
+using GameLogic.Elements.Goods;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -16,6 +17,11 @@ namespace GameLogic.Elements.GameCards
         public override BlueCard Clone()
         {
             return new BlueCard(this);
+        }
+
+        public override int GetVictoryPoints(Player player)
+        {
+            return Point.Points;
         }
     }
 }

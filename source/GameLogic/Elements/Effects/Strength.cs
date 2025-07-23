@@ -1,4 +1,6 @@
-﻿namespace GameLogic.Elements.Effects
+﻿using GameLogic.GameStates;
+
+namespace GameLogic.Elements.Effects
 {
     public class Strength : Effect
     {
@@ -8,11 +10,6 @@
         private Strength(Strength strength)
         {
             Points = strength.Points;
-        }
-
-        public override void Apply()
-        {
-            throw new NotImplementedException();
         }
 
         public override Strength Clone()

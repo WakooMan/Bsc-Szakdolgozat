@@ -6,5 +6,15 @@
         {
             return new Stone();
         }
+
+        public override bool Equals(Good? other)
+        {
+            if (other is Stone)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace GameLogic.Elements.Effects
+﻿using GameLogic.GameStates;
+
+namespace GameLogic.Elements.Effects
 {
     public class VictoryPoints : Effect
     {
@@ -9,11 +11,6 @@
         private VictoryPoints(VictoryPoints victoryPoints)
         {
             Points = victoryPoints.Points;
-        }
-
-        public override void Apply()
-        {
-            throw new NotImplementedException();
         }
 
         public override VictoryPoints Clone()

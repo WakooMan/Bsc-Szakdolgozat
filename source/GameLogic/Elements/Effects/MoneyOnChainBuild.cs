@@ -1,4 +1,6 @@
-﻿namespace GameLogic.Elements.Effects
+﻿using GameLogic.GameStates;
+
+namespace GameLogic.Elements.Effects
 {
     public class MoneyOnChainBuild : Effect
     {
@@ -10,7 +12,7 @@
             MoneyToGet = moneyOnChainBuild.MoneyToGet.Clone();
         }
 
-        public override void Apply()
+        public override void Apply(PlayingState game)
         {
             throw new NotImplementedException();
         }

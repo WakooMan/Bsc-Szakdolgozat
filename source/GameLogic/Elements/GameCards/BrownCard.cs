@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using GameLogic.Elements.Goods;
 using GameLogic.Elements.Goods.Resources;
 
 namespace GameLogic.Elements.GameCards
@@ -24,6 +19,11 @@ namespace GameLogic.Elements.GameCards
         public override BrownCard Clone()
         {
             return new BrownCard(this);
+        }
+
+        public override List<Good> GetGoods()
+        {
+            return ProducedResources.Select(res => (Good)res).ToList();
         }
     }
 }

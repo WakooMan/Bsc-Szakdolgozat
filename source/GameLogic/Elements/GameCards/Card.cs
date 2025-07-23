@@ -1,6 +1,7 @@
 ﻿using GameLogic.Ages;
 using System.Xml.Serialization;
 using GameLogic.Elements.Goods;
+using GameLogic.GameStates;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -19,6 +20,25 @@ namespace GameLogic.Elements.GameCards
         public string PreviousBuilding { get; set; }
         public AgesEnum Age { get; set; }
 
+        public abstract Card Clone();
+        public virtual int GetStrength()
+        {
+            return 0;
+        }
+        public virtual int GetVictoryPoints(Player player)
+        {
+            return 0;
+        }
+        public virtual List<Good> GetGoods()
+        {
+            return new List<Good>();
+        }
+
+        public virtual void OnCardBuilt(PlayingState game)
+        {
+
+        }
+
         protected Card()
         {
             GoodCost = new List<Good>();
@@ -34,7 +54,5 @@ namespace GameLogic.Elements.GameCards
             Age = card.Age;
             MoneyCost = card.MoneyCost;
         }
-
-        public abstract Card Clone();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements.Goods.Factories;
+using GameLogic.GameStates;
 
 namespace GameLogic.Elements.Effects
 {
@@ -21,7 +22,7 @@ namespace GameLogic.Elements.Effects
             return new BuyGoods(this);
         }
 
-        public override void Apply()
+        public override void Apply(PlayingState game)
         {
             throw new NotImplementedException();
         }

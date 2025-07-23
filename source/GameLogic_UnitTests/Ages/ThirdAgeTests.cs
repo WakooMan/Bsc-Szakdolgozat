@@ -15,12 +15,9 @@ namespace GameLogic_UnitTests.Ages
             m_cardComposition = Substitute.For<ICardComposition>();
             m_cardCompositionFactory.Create(Arg.Any<string>(), Arg.Any<ICollection<Card>>()).Returns(m_cardComposition);
             m_cardList = Substitute.For<ICardList>();
-            m_card1 = Substitute.For<Card>();
-            m_card1.Age.Returns(AgesEnum.I);
-            m_card2 = Substitute.For<Card>();
-            m_card2.Age.Returns(AgesEnum.II);
-            m_card3 = Substitute.For<Card>();
-            m_card3.Age.Returns(AgesEnum.III);
+            m_card1 = new BrownCard() { Age = AgesEnum.I };
+            m_card2 = new BrownCard() { Age = AgesEnum.II };
+            m_card3 = new BrownCard() { Age = AgesEnum.III };
             m_cardList.Cards.Returns(new List<Card>() { m_card1, m_card2, m_card3 });
             m_thirdAge = new ThirdAge(m_cardCompositionFactory, m_cardList);
         }

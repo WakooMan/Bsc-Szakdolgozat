@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using GameLogic.Elements.Goods;
+using GameLogic.GameStates;
+using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Effects
 {
@@ -24,6 +26,6 @@ namespace GameLogic.Elements.Effects
     public abstract class Effect
     {
         public abstract Effect Clone();
-        public abstract void Apply();
+        public virtual void Apply(PlayingState game) { }
     }
 }

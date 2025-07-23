@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements.Disciplines;
+using GameLogic.GameStates;
 
 namespace GameLogic.Elements.Effects
 {
@@ -13,7 +14,7 @@ namespace GameLogic.Elements.Effects
             Discipline = law.Discipline?.Clone() ?? null;
         }
 
-        public override void Apply()
+        public override void Apply(PlayingState game)
         {
             throw new NotImplementedException();
         }

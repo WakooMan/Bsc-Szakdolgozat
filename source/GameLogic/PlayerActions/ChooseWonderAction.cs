@@ -21,7 +21,7 @@ namespace GameLogic.PlayerActions
             m_player.Wonders.Add(m_wonder);
         }
 
-        private Wonder m_wonder;
-        private Player m_player;
+        private readonly Wonder m_wonder;
+        private readonly Player m_player;
     }
 }

@@ -6,5 +6,15 @@
         {
             return new Glass();
         }
+
+        public override bool Equals(Good? other)
+        {
+            if (other is Glass)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
