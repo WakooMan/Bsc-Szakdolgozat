@@ -5,7 +5,9 @@ namespace GameLogic.Elements.Goods.Factories
 {
     public class StoneFactory : GoodFactory
     {
-        public override Good CreateGood()
+        public override Type GoodType => typeof(Stone);
+
+        public override Stone CreateGood()
         {
             return new Stone();
         }

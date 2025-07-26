@@ -16,20 +16,23 @@ namespace GameLogic.GameStates
         public ITurnHandler TurnHandler { get; }
         public IPlayerActionReceiver PlayerActionReceiver { get; }
         public IEventManager EventManager { get; }
+        public ICostCalculator CostCalculator { get; }
 
         public PlayingState(IPlayerActionReceiver playerActionReceiver, ICollection<Player> players)
         {
+            IsGameOver = false;
             PlayerActionReceiver = playerActionReceiver;
             EventManager = new EventManager();
             AgeHandler = new AgeHandler(new CardCompositionFactory(new CardCompositionFileHandlerFactory(), new CardNodeFactory()), new CardList());
-            TurnHandler = new TurnHandler(players);
+            TurnHandler = new TurnHandler(PlayerActionReceiver, EventManager, players);
+            CostCalculator = new CostCalculator(EventManager);
         }
         
         public void DoStateAction()
         {
             while (!IsGameOver)
             {
-                IPlayerTurnState playerTurnState = new PickCardState(PlayerActionReceiver, TurnHandler.CurrentPlayer, AgeHandler.CurrentAge.Composition);
+                IPlayerTurnState playerTurnState = new PickCardState(PlayerActionReceiver, AgeHandler.CurrentAge.Composition, EventManager, CostCalculator, TurnHandler.CurrentPlayer, TurnHandler.OpponentPlayer);
 
                 while (playerTurnState is not EndTurn)
                 {

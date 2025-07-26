@@ -1,4 +1,5 @@
-﻿using GameLogic.Elements.GameCards;
+﻿using GameLogic.Elements.Effects;
+using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Goods;
 using GameLogic.Elements.Modifiers;
 using GameLogic.Elements.Wonders;
@@ -17,7 +18,28 @@ namespace GameLogic.Elements
         [XmlIgnore]
         public ICardNode? PickedCard { get; set; }
         public int Money { get; set; }
-        public List<Good> Goods => Cards.Select(card => card.GetGoods()).Aggregate((a, b) => a.Union(b).ToList());
+        public Dictionary<Type, Good> Goods
+        { 
+            get
+            {
+                Dictionary<Type, Good> result = new Dictionary<Type, Good>();
+                foreach (Card card in Cards)
+                {
+                    foreach (Good good in card.GetGoods())
+                    {
+                        if (result.ContainsKey(good.GetType()))
+                        {
+                            result[good.GetType()].Amount += good.Amount;
+                        }
+                        else
+                        {
+                            result.Add(good.GetType(), good.Clone());
+                        }
+                    }
+                }
+                return result;
+            }
+        }
         public int Strength => Cards.Select(card => card.GetStrength()).Sum();
         public int VictoryPoints => Cards.Select(card => card.GetVictoryPoints(this)).Sum();
 
@@ -37,11 +59,6 @@ namespace GameLogic.Elements
             Cards = new List<Card>();
             Developments = new List<Development>();
             Money = 0;
-        }
-
-        public void AddCard(Card card)
-        {
-            Cards.Add(card);
         }
     }
 }

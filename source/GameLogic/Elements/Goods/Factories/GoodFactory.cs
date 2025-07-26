@@ -9,6 +9,7 @@ namespace GameLogic.Elements.Goods.Factories
      XmlInclude(typeof(WoodFactory))]
     public abstract class GoodFactory
     {
+        public abstract Type GoodType { get; }
         public abstract Good CreateGood();
     }
 }

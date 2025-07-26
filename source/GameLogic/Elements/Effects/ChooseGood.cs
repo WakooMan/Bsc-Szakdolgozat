@@ -1,6 +1,7 @@
-﻿using GameLogic.Elements.Goods.Factories;
+﻿using GameLogic.Elements.Goods;
+using GameLogic.Elements.Goods.Factories;
 using GameLogic.Events;
-using GameLogic.GameStates;
+using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
 {
@@ -23,17 +24,25 @@ namespace GameLogic.Elements.Effects
             return new ChooseGood(this);
         }
 
-        public override void Apply(PlayingState game)
+        public override List<Good> GetGoods()
         {
-            game.EventManager.Subscribe(GameEventType.BuildingCostCalculated, OnBuildingCostCalculated);
+            return new List<Good>() { m_selectedGood };
         }
 
-        private void OnBuildingCostCalculated(EventArgs eventArgs)
+        public override void Apply(Player player, IEventManager eventManager)
         {
-            if (eventArgs is OnBuildingCostCalculated cardEventArgs)
+            eventManager.Subscribe(GameEventType.TurnStarted, (args) => SelectGood(player, args));
+        }
+
+        private void SelectGood(Player player, EventArgs eventArgs)
+        {
+            if (eventArgs is TurnStarted turnStarted && turnStarted.TurnHandler.CurrentPlayer == player)
             {
-                cardEventArgs.AdditionalGoods.Add(this);
+                ChooseGoodAction chooseGoodAction = turnStarted.PlayerActionReceiver.ReceivePlayerAction<ChooseGoodAction>(turnStarted.TurnHandler.CurrentPlayer, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory)).ToArray());
+                m_selectedGood = chooseGoodAction.GoodFactory.CreateGood();
             }
         }
+
+        private Good? m_selectedGood;
     }
 }

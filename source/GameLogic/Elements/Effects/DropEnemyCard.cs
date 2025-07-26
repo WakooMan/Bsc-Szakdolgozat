@@ -16,10 +16,7 @@ namespace GameLogic.Elements.Effects
             CardType = dropEnemyCard.CardType;
         }
 
-        public override void Apply(PlayingState game)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public override Effect Clone()
         {

@@ -1,30 +1,49 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Events;
+using GameLogic.Interfaces;
 using SevenWonders.Common;
-using static GameLogic.Handlers.ITurnHandler;
 
 namespace GameLogic.Handlers
 {
     public class TurnHandler: ITurnHandler
     {
-        private List<Player> Players { get; set; }
-        private int Index { get; set; }
-        public Player CurrentPlayer => Players[Index];
-
-        public event PlayerTurnHandler OnPlayerTurn;
+        public Player CurrentPlayer => m_players[m_index];
+        public Player OpponentPlayer => m_players[(m_index + 1 < m_players.Count) ? m_index + 1 : 0];
 
         public void NextPlayer()
         {
-            Index = (Index + 1 < Players.Count) ? Index + 1 : 0;
-            OnPlayerTurn?.Invoke(CurrentPlayer);
+            m_eventManager.Publish(GameEventType.TurnEnded, new TurnEnded(this));
+            if (!m_newTurnForced)
+            {
+                m_index = (m_index + 1 < m_players.Count) ? m_index + 1 : 0;
+            }
+            m_eventManager.Publish(GameEventType.TurnStarted, new TurnStarted(m_playerActionReceiver, this));
+            m_newTurnForced = false;
         }
 
-        public TurnHandler(ICollection<Player> players)
+        public void ForceNewTurn()
         {
-            ArgumentChecker.CheckNull(players, nameof(players));
-            ArgumentChecker.CheckPredicateForArgument(() => players.Count < 2, "Number of players must be at least 2!");
-
-            Players = new List<Player>(players);
-            Index = 0;
+            m_newTurnForced = true;
         }
+
+        public TurnHandler(IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICollection<Player> players)
+        {
+            ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));
+            ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
+            ArgumentChecker.CheckNull(players, nameof(players));
+            ArgumentChecker.CheckPredicateForArgument(() => players.Count != 2, "Number of players must be exactly 2!");
+
+            m_playerActionReceiver = playerActionReceiver;
+            m_eventManager = eventManager;
+            m_players = new List<Player>(players);
+            m_index = 0;
+            m_newTurnForced = false;
+        }
+
+        private readonly List<Player> m_players;
+        private int m_index;
+        private bool m_newTurnForced;
+        private readonly IEventManager m_eventManager;
+        private readonly IPlayerActionReceiver m_playerActionReceiver;
     }
 }

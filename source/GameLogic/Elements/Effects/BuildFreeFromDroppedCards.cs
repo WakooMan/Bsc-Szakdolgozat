@@ -1,11 +1,12 @@
-﻿using GameLogic.GameStates;
+﻿using GameLogic.Events;
+using GameLogic.GameStates;
 
 namespace GameLogic.Elements.Effects
 {
     public class BuildFreeFromDroppedCards : Effect
     {
         public BuildFreeFromDroppedCards() { }
-        public override void Apply(PlayingState game)
+        public override void Apply(Player player, IEventManager eventManager)
         {
             throw new NotImplementedException();
         }

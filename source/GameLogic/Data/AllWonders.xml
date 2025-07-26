@@ -4,11 +4,15 @@
 		<Wonder>
 			<Name>Via Appia</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Stone" />
-				<Good xsi:type="Stone" />
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>2</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="GetMoney">
@@ -27,10 +31,15 @@
 		<Wonder>
 			<Name>Circus Maximus</Name>
 			<GoodCost>
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Wood" />
-				<Good xsi:type="Stone" />
-				<Good xsi:type="Stone" />
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>2</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="DropEnemyCard">
@@ -47,10 +56,12 @@
 		<Wonder>
 			<Name>A kolosszus</Name>
 			<GoodCost>
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Clay" />
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>3</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="Strength">
@@ -64,11 +75,15 @@
 		<Wonder>
 			<Name>A nagy Könyvtár</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Wood" />
-				<Good xsi:type="Wood" />
-				<Good xsi:type="Wood" />
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>3</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="ChooseDevelopment">
@@ -81,10 +96,15 @@
 		<Wonder>
 			<Name>A nagy világítótorony</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Stone" />
-				<Good xsi:type="Wood" />
+				<Good xsi:type="Papirus">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="ChooseGood">
@@ -102,10 +122,15 @@
 		<Wonder>
 			<Name>A függőkertek</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Wood" />
-				<Good xsi:type="Wood" />
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>2</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="GetMoney">
@@ -121,11 +146,15 @@
 		<Wonder>
 			<Name>A mauzóleum</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Clay" />
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>2</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="BuildFreeFromDroppedCards">
@@ -138,10 +167,15 @@
 		<Wonder>
 			<Name>Pireusz</Name>
 			<GoodCost>
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Stone" />
-				<Good xsi:type="Wood" />
-				<Good xsi:type="Wood" />
+				<Good xsi:type="Clay">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>2</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="ChooseGood">
@@ -160,10 +194,12 @@
 		<Wonder>
 			<Name>A Piramisok</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Stone" />
-				<Good xsi:type="Stone" />
-				<Good xsi:type="Stone" />
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>3</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="VictoryPoints">
@@ -174,10 +210,15 @@
 		<Wonder>
 			<Name>A Szfinx</Name>
 			<GoodCost>
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Stone" />
+				<Good xsi:type="Glass">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="NewTurn">
@@ -190,11 +231,18 @@
 		<Wonder>
 			<Name>Zeusz szobra</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Clay" />
-				<Good xsi:type="Wood" />
-				<Good xsi:type="Stone" />
+				<Good xsi:type="Papirus">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="DropEnemyCard">
@@ -211,10 +259,18 @@
 		<Wonder>
 			<Name>Artemisz temploma</Name>
 			<GoodCost>
-				<Good xsi:type="Papirus" />
-				<Good xsi:type="Glass" />
-				<Good xsi:type="Stone" />
-				<Good xsi:type="Wood" />
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
 			</GoodCost>
 			<Effects>
 				<Effect xsi:type="GetMoney">

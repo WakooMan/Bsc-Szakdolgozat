@@ -18,10 +18,7 @@ namespace GameLogic.Elements.Effects
             Money = enemyLoseMoney.Money;
         }
 
-        public override void Apply(PlayingState game)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public override EnemyLoseMoney Clone()
         {

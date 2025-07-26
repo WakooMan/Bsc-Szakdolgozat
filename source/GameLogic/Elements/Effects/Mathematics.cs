@@ -13,11 +13,6 @@ namespace GameLogic.Elements.Effects
             VictoryPointsPerDevelopment = mathematics.VictoryPointsPerDevelopment.Clone();
         }
 
-        public override void Apply(PlayingState game)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Mathematics Clone()
         {
             return new Mathematics(this);

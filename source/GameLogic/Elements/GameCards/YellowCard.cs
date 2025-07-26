@@ -1,5 +1,5 @@
 ﻿using GameLogic.Elements.Effects;
-using GameLogic.GameStates;
+using GameLogic.Events;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -17,9 +17,9 @@ namespace GameLogic.Elements.GameCards
             Effects = yellowCard.Effects.Select(act => act.Clone()).ToList();
         }
 
-        public override void OnCardBuilt(PlayingState game)
+        public override void OnBuilt(Player player, IEventManager eventManager)
         {
-            Effects.ForEach(effect => effect.Apply(game));
+            Effects.ForEach(effect => effect.Apply(player, eventManager));
         }
 
         public override YellowCard Clone()

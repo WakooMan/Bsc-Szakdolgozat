@@ -1,19 +1,17 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Effects;
-using GameLogic.GameStructures;
 
 namespace GameLogic.Events
 {
     public class OnBuildingCostCalculated: EventArgs
     {
-        public Player Player { get; set; }
+        public List<BuyGoodItem> BuyGoodItems { get; }
+        public Player Buyer { get; }
 
-        public List<ChooseGood> AdditionalGoods { get; set; }
-
-        public OnBuildingCostCalculated(Player player)
+        public OnBuildingCostCalculated(Player buyer)
         {
-            Player = player;
-            AdditionalGoods = new List<ChooseGood>();
+            Buyer = buyer;
+            BuyGoodItems = new List<BuyGoodItem>();
         }
     }
 }

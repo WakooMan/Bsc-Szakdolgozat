@@ -2,6 +2,9 @@
 using System.Xml.Serialization;
 using GameLogic.Elements.Goods;
 using GameLogic.GameStates;
+using GameLogic.Elements.Effects;
+using GameLogic.Events;
+using GameLogic.Handlers;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -12,7 +15,7 @@ namespace GameLogic.Elements.GameCards
      XmlInclude(typeof(PurpleCard)),
      XmlInclude(typeof(RedCard)),
      XmlInclude(typeof(YellowCard))]
-    public abstract class Card
+    public abstract class Card : IBuildable
     {
         public List<Good> GoodCost { get; set; }
         public int MoneyCost { get; set; }
@@ -34,7 +37,12 @@ namespace GameLogic.Elements.GameCards
             return new List<Good>();
         }
 
-        public virtual void OnCardBuilt(PlayingState game)
+        public virtual List<Effect> GetEffects()
+        {
+            return new List<Effect>();
+        }
+
+        public virtual void OnBuilt(Player player, IEventManager eventManager)
         {
 
         }

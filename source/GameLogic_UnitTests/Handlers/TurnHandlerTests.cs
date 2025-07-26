@@ -1,5 +1,8 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Events;
 using GameLogic.Handlers;
+using GameLogic.Interfaces;
+using NSubstitute;
 
 namespace GameLogic_UnitTests.Handlers
 {
@@ -10,22 +13,24 @@ namespace GameLogic_UnitTests.Handlers
         {
             m_player1 = new Player("Test1");
             m_player2 = new Player("Test2");
-            m_turnHandler = new TurnHandler(new Player[] { m_player1, m_player2 });
-            m_OnPlayerTurnEventCalled = 0;
-            m_turnHandler.OnPlayerTurn += (player) => m_OnPlayerTurnEventCalled++;
+            m_eventManager = Substitute.For<IEventManager>();
+            m_playerActionReceiver = Substitute.For<IPlayerActionReceiver>();
+            m_turnHandler = new TurnHandler(m_playerActionReceiver, m_eventManager, [m_player1, m_player2]);
         }
 
         [Test]
         public void When_Constructor_Called_With_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new TurnHandler(null));
+            Assert.Throws<ArgumentNullException>(() => new TurnHandler(null, m_eventManager, [m_player1, m_player2]));
+            Assert.Throws<ArgumentNullException>(() => new TurnHandler(m_playerActionReceiver, null, [m_player1, m_player2]));
+            Assert.Throws<ArgumentNullException>(() => new TurnHandler(m_playerActionReceiver, m_eventManager, null));
         }
 
         [Test]
         public void When_Constructor_Called_With_Less_Than_Two_Players()
         {
-            Assert.Throws<ArgumentException>(() => new TurnHandler(new Player[] { }));
-            Assert.Throws<ArgumentException>(() => new TurnHandler(new Player[] { m_player1 }));
+            Assert.Throws<ArgumentException>(() => new TurnHandler(m_playerActionReceiver, m_eventManager, Array.Empty<Player>()));
+            Assert.Throws<ArgumentException>(() => new TurnHandler(m_playerActionReceiver, m_eventManager, [m_player1]));
         }
 
         [Test]
@@ -39,18 +44,22 @@ namespace GameLogic_UnitTests.Handlers
         {
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player2, Is.True);
-            Assert.That(m_OnPlayerTurnEventCalled == 1, Is.True);
+            m_eventManager.Received(1).Publish(GameEventType.TurnStarted, Arg.Any<TurnStarted>());
+            m_eventManager.Received(1).Publish(GameEventType.TurnEnded, Arg.Any<TurnEnded>());
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player1, Is.True);
-            Assert.That(m_OnPlayerTurnEventCalled == 2, Is.True);
+            m_eventManager.Received(2).Publish(GameEventType.TurnStarted, Arg.Any<TurnStarted>());
+            m_eventManager.Received(2).Publish(GameEventType.TurnEnded, Arg.Any<TurnEnded>());
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player2, Is.True);
-            Assert.That(m_OnPlayerTurnEventCalled == 3, Is.True);
+            m_eventManager.Received(3).Publish(GameEventType.TurnStarted, Arg.Any<TurnStarted>());
+            m_eventManager.Received(3).Publish(GameEventType.TurnEnded, Arg.Any<TurnEnded>());
         }
 
         private TurnHandler m_turnHandler;
-        private int m_OnPlayerTurnEventCalled;
         private Player m_player1;
         private Player m_player2;
+        private IPlayerActionReceiver m_playerActionReceiver;
+        private IEventManager m_eventManager;
     }
 }

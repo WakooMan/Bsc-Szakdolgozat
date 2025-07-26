@@ -8,6 +8,8 @@ namespace GameLogic.Elements.Goods
      XmlInclude(typeof(Product))]
     public abstract class Good : IEquatable<Good>
     {
+        public int Amount { get; set; }
+
         public abstract Good Clone();
         public abstract bool Equals(Good? other);
     }

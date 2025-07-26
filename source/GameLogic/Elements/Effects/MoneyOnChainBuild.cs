@@ -12,11 +12,6 @@ namespace GameLogic.Elements.Effects
             MoneyToGet = moneyOnChainBuild.MoneyToGet.Clone();
         }
 
-        public override void Apply(PlayingState game)
-        {
-            throw new NotImplementedException();
-        }
-
         public override MoneyOnChainBuild Clone()
         {
             return new MoneyOnChainBuild(this);

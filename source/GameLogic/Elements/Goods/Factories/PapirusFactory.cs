@@ -5,7 +5,9 @@ namespace GameLogic.Elements.Goods.Factories
 {
     public class PapirusFactory : GoodFactory
     {
-        public override Good CreateGood()
+        public override Type GoodType => typeof(Papirus);
+
+        public override Papirus CreateGood()
         {
             return new Papirus();
         }

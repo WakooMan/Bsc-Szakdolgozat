@@ -1,5 +1,4 @@
-﻿using GameLogic.Elements.Goods.Factories;
-using GameLogic.GameStates;
+﻿using GameLogic.Events;
 
 namespace GameLogic.Elements.Effects
 {
@@ -22,9 +21,18 @@ namespace GameLogic.Elements.Effects
             return new BuyGoods(this);
         }
 
-        public override void Apply(PlayingState game)
+        public override void Apply(Player player, IEventManager eventManager)
         {
-            throw new NotImplementedException();
+            eventManager.Subscribe(GameEventType.BuildingCostCalculated, (args) => OnBuildingCostCalculated(player, args));
         }
+
+        private void OnBuildingCostCalculated(Player player, EventArgs args)
+        {
+            if (args is OnBuildingCostCalculated eventArgs && player == eventArgs.Buyer)
+            {
+                eventArgs.BuyGoodItems.AddRange(BuyGoodItems);
+            }
+        }
+
     }
 }

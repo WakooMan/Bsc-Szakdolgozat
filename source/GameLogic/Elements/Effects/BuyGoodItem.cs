@@ -1,11 +1,9 @@
-﻿using GameLogic.Elements.Goods.Factories;
-
-namespace GameLogic.Elements.Effects
+﻿namespace GameLogic.Elements.Effects
 {
     public class BuyGoodItem
     {
         public int MoneyCost { get; set; }
-        public GoodFactory? GoodFactory { get; set; }
+        public string GoodType { get; set; }
 
         public BuyGoodItem()
         {
@@ -15,7 +13,7 @@ namespace GameLogic.Elements.Effects
         public BuyGoodItem(BuyGoodItem buyGoodItem)
         {
             MoneyCost = buyGoodItem.MoneyCost;
-            GoodFactory = buyGoodItem.GoodFactory;
+            GoodType = buyGoodItem.GoodType;
         }
     }
 }

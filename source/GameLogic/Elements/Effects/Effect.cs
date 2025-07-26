@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements.Goods;
+using GameLogic.Events;
 using GameLogic.GameStates;
 using System.Xml.Serialization;
 
@@ -26,6 +27,10 @@ namespace GameLogic.Elements.Effects
     public abstract class Effect
     {
         public abstract Effect Clone();
-        public virtual void Apply(PlayingState game) { }
+        public virtual void Apply(Player player, IEventManager eventManager) { }
+        public virtual List<Good> GetGoods()
+        {
+            return new List<Good>();
+        }
     }
 }

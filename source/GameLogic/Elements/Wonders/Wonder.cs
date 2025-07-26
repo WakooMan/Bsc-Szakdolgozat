@@ -1,9 +1,11 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.Goods;
+using GameLogic.Events;
+using GameLogic.Handlers;
 
 namespace GameLogic.Elements.Wonders
 {
-    public class Wonder
+    public class Wonder : IBuildable
     {
         public string Name { get; set; }
         public List<Good> GoodCost { get; set; }
@@ -29,6 +31,11 @@ namespace GameLogic.Elements.Wonders
         public Wonder Clone()
         {
             return new Wonder(this);
+        }
+
+        public void OnBuilt(Player player, IEventManager eventManager)
+        {
+            Effects.ForEach(effect => effect.Apply(player, eventManager));
         }
     }
 }

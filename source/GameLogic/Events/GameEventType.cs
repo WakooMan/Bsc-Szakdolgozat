@@ -8,6 +8,8 @@ namespace GameLogic.Events
 {
     public enum GameEventType
     {
+        BuildingCostCalculated,
+
         CardPicked,
         CardUnpicked,
         CardBuilt,
@@ -29,7 +31,6 @@ namespace GameLogic.Events
         CoinsLost,
         ResourceDiscountApplied,
 
-        BuildingCostCalculated,
         MissingResourcesEvaluated,
 
         TurnStarted,

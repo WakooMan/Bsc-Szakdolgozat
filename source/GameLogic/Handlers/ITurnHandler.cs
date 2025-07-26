@@ -6,7 +6,8 @@ namespace GameLogic.Handlers
     {
         public delegate void PlayerTurnHandler(Player player);
         Player CurrentPlayer { get; }
-        event PlayerTurnHandler OnPlayerTurn;
+        Player OpponentPlayer { get; }
         void NextPlayer();
+        void ForceNewTurn();
     }
 }

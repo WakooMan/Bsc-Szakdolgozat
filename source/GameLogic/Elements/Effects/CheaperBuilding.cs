@@ -15,11 +15,6 @@ namespace GameLogic.Elements.Effects
             BuildingType = cheaperBuilding.BuildingType;
         }
 
-        public override void Apply(PlayingState game)
-        {
-            throw new NotImplementedException();
-        }
-
         public override CheaperBuilding Clone()
         {
             return new CheaperBuilding(this);

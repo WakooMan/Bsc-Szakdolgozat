@@ -19,9 +19,5 @@ namespace GameLogic.Elements.Effects
             return new GetMoneyForCard(this);
         }
 
-        public override void Apply(PlayingState game)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

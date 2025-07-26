@@ -14,11 +14,6 @@ namespace GameLogic.Elements.Effects
             Discipline = law.Discipline?.Clone() ?? null;
         }
 
-        public override void Apply(PlayingState game)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Effect Clone()
         {
             return new Law(this);
