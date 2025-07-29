@@ -8,16 +8,16 @@ namespace GameLogic.Handlers
 {
     public class ChooseWonderHandler: IChooseWonderHandler
     {
-        private List<Player> m_players;
+        private List<Player>? m_players;
         private readonly List<Wonder> m_wonders;
         private readonly Dictionary<Player, List<IPlayerAction>> m_wonderPlayerActions1;
         private readonly Dictionary<Player, List<IPlayerAction>> m_wonderPlayerActions2;
         private int m_indexOfPlayer;
         private readonly IPlayerActionReceiver m_playerActionReceiver;
 
-        public ChooseWonderHandler(IRandomGenerator randomGenerator, IPlayerActionReceiver playerActionReceiver, IWonderList wonderList, ICollection<Player> players)
+        public ChooseWonderHandler(IRandomGenerator randomGenerator, IPlayerActionReceiver playerActionReceiver, IWonderList wonderList)
         {
-            m_players = new List<Player>(players);
+            m_players = null;
             m_wonderPlayerActions1 = new Dictionary<Player, List<IPlayerAction>>();
             m_wonderPlayerActions2 = new Dictionary<Player, List<IPlayerAction>>();
             m_wonders = wonderList.Wonders.OrderBy(x => randomGenerator.Next()).Take(8).ToList();
@@ -34,16 +34,33 @@ namespace GameLogic.Handlers
 
         public bool WondersChosen => WondersChosenNum == 7;
 
-        public ICollection<Player> Players => m_players;
-
         public void ChooseWonder()
         {
+            if (m_players is null)
+            {
+                throw new InvalidOperationException("Wonder cannot be chosen if there are no players set!");
+            }
             Player player = m_players[m_indexOfPlayer];
             m_playerActionReceiver.ReceivePlayerAction(player, WondersChosenNum < 4 ? m_wonderPlayerActions1[player] : m_wonderPlayerActions2[player]).DoPlayerAction();
 
             m_indexOfPlayer = (WondersChosenNum == 4) ? 1 : (m_indexOfPlayer == 0) ? 1 : 0;
         }
 
-        private int WondersChosenNum => Players.Select(player => player.Wonders.Count).Sum();
+        public void SetPlayers(ICollection<Player> players)
+        {
+            m_players = [.. players];
+        }
+
+        private int WondersChosenNum
+        {
+            get
+            {
+                if (m_players is null)
+                {
+                    throw new InvalidOperationException("Wonder chosen number cannot be calculated if there are no players set!");
+                }
+                return m_players.Select(player => player.Wonders.Count).Sum();
+            }
+        }
     }
 }

@@ -5,26 +5,24 @@ namespace GameLogic.GameStates
 {
     public class ChooseWonderState : IGameState
     {
-        private readonly IChooseWonderHandler m_chooseWonderHandler;
-        private readonly IPlayerActionReceiver m_playerActionReceiver;
+        private readonly IGameContext m_gameContext;
 
-        public ChooseWonderState(IChooseWonderHandler chooseWonderHandler, IPlayerActionReceiver playerActionReceiver)
+        public ChooseWonderState(IGameContext gameContext)
         {
-            m_chooseWonderHandler = chooseWonderHandler;
-            m_playerActionReceiver = playerActionReceiver;
+            m_gameContext = gameContext;
         }
 
         public void DoStateAction()
         {
-            while (!m_chooseWonderHandler.WondersChosen)
+            while (!m_gameContext.ChooseWonderHandler.WondersChosen)
             {
-                m_chooseWonderHandler.ChooseWonder();
+                m_gameContext.ChooseWonderHandler.ChooseWonder();
             }
         }
 
         public IGameState GetNextState()
         {
-            return new PlayingState(m_playerActionReceiver, m_chooseWonderHandler.Players);
+            return new PlayingState(m_gameContext);
         }
     }
 }

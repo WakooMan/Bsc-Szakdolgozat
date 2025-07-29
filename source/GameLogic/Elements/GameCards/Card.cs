@@ -1,10 +1,7 @@
 ﻿using GameLogic.Ages;
-using System.Xml.Serialization;
 using GameLogic.Elements.Goods;
-using GameLogic.GameStates;
-using GameLogic.Elements.Effects;
-using GameLogic.Events;
 using GameLogic.Handlers;
+using System.Xml.Serialization;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -23,6 +20,8 @@ namespace GameLogic.Elements.GameCards
         public string PreviousBuilding { get; set; }
         public AgesEnum Age { get; set; }
 
+        public string CardType => GetType().Name;
+
         public abstract Card Clone();
         public virtual int GetStrength()
         {
@@ -32,17 +31,13 @@ namespace GameLogic.Elements.GameCards
         {
             return 0;
         }
+
         public virtual List<Good> GetGoods()
         {
             return new List<Good>();
         }
 
-        public virtual List<Effect> GetEffects()
-        {
-            return new List<Effect>();
-        }
-
-        public virtual void OnBuilt(Player player, IEventManager eventManager)
+        public virtual void OnBuilt(IGameContext gameContext)
         {
 
         }

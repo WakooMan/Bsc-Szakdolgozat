@@ -29,9 +29,10 @@ namespace GameLogic.Elements.Effects
             return new List<Good>() { m_selectedGood };
         }
 
-        public override void Apply(Player player, IEventManager eventManager)
+        public override void Apply(IGameContext gameContext)
         {
-            eventManager.Subscribe(GameEventType.TurnStarted, (args) => SelectGood(player, args));
+            Player player = gameContext.TurnHandler.CurrentPlayer;
+            gameContext.EventManager.Subscribe(GameEventType.TurnStarted, (args) => SelectGood(player, args));
         }
 
         private void SelectGood(Player player, EventArgs eventArgs)

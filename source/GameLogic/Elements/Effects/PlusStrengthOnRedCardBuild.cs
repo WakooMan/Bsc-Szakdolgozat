@@ -14,9 +14,10 @@ namespace GameLogic.Elements.Effects
             return new PlusStrengthOnRedCardBuild(this);
         }
 
-        public override void Apply(Player player, IEventManager eventManager)
+        public override void Apply(IGameContext gameContext)
         {
-            eventManager.Subscribe(GameEventType.CardBuilt, (args) => OnRedCardBuilt(player, args));
+            Player player = gameContext.TurnHandler.CurrentPlayer;
+            gameContext.EventManager.Subscribe(GameEventType.CardBuilt, (args) => OnRedCardBuilt(player, args));
         }
 
         private PlusStrengthOnRedCardBuild(PlusStrengthOnRedCardBuild plusStrengthOnRedCardBuild)
@@ -29,7 +30,7 @@ namespace GameLogic.Elements.Effects
             
             if (args is OnCardBuilt eventArgs && eventArgs.Builder == player && eventArgs.Card is RedCard redCard)
             {
-                redCard.Strength.Points += 1;
+                redCard.Strength.Points += AdditionalStrength.Points;
             }
         }
     }

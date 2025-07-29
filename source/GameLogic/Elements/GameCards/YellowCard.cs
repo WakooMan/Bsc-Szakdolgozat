@@ -17,9 +17,9 @@ namespace GameLogic.Elements.GameCards
             Effects = yellowCard.Effects.Select(act => act.Clone()).ToList();
         }
 
-        public override void OnBuilt(Player player, IEventManager eventManager)
+        public override void OnBuilt(IGameContext gameContext)
         {
-            Effects.ForEach(effect => effect.Apply(player, eventManager));
+            Effects.ForEach(effect => effect.Apply(gameContext));
         }
 
         public override YellowCard Clone()

@@ -4,7 +4,7 @@ namespace GameLogic.PlayerTurnStates
 {
     public class EndTurn : IPlayerTurnState
     {
-        public void ExecuteTurnState(IEventManager eventManager)
+        public void ExecuteTurnState()
         {
         }
 

@@ -7,7 +7,7 @@
 
         public BuyGoodItem()
         {
-
+            GoodType = string.Empty;
         }
 
         public BuyGoodItem(BuyGoodItem buyGoodItem)

@@ -1,8 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events;
 using GameLogic.GameStructures;
-using GameLogic.Handlers;
-using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.PlayerTurnStates
@@ -11,38 +9,34 @@ namespace GameLogic.PlayerTurnStates
     {
         public bool GoToPrevState { get; set; }
 
-        public MakeActionDecision(IEventManager eventManager, ICostCalculator costCalculator, IPlayerActionReceiver playerActionReceiver, ICardComposition composition, Player player, Player opponent)
+        public MakeActionDecision(IGameContext gameContext)
         {
-            m_eventManager = eventManager;
-            m_costCalculator = costCalculator;
-            m_playerActionReceiver = playerActionReceiver;
-            m_composition = composition;
-            m_player = player;
-            m_opponent = opponent;
+            m_gameContext = gameContext;
             GoToPrevState = false;
         }
 
-        public void ExecuteTurnState(IEventManager eventManager)
+        public void ExecuteTurnState()
         {
+            Action<EventArgs> action = (args) => GoToPrevState = true;
+            m_gameContext.EventManager.Subscribe(GameEventType.CardUnpicked, action);
             List<IPlayerAction> playerActions =
             [
-                new UnpickCard(eventManager, this, m_player), new BuildCard(m_eventManager, m_costCalculator, m_composition, m_player, m_opponent), new SellCard(m_composition, m_player),
-                .. m_player.Wonders.Select(wonder => new BuildWonder(m_eventManager, m_costCalculator, m_composition, wonder, m_player, m_opponent)),
+                new UnpickCard(m_gameContext.EventManager, CurrentPlayer), new BuildCard(m_gameContext), new SellCard(Composition, CurrentPlayer),
+                .. CurrentPlayer.Wonders.Select(wonder => new BuildWonder(m_gameContext, wonder)),
             ];
 
-            m_playerActionReceiver.ReceivePlayerAction(m_player, playerActions).DoPlayerAction();
+            m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions).DoPlayerAction();
+            m_gameContext.EventManager.Unsubscribe(GameEventType.CardUnpicked, action);
         }
 
         public IPlayerTurnState GetNextTurnState()
         {
-            return GoToPrevState ? new PickCardState(m_playerActionReceiver, m_composition, m_eventManager, m_costCalculator, m_player, m_opponent) : new EndTurn();
+            return GoToPrevState ? new PickCardState(m_gameContext) : new EndTurn();
         }
 
-        private readonly Player m_player;
-        private readonly Player m_opponent;
-        private readonly ICardComposition m_composition;
-        private readonly IPlayerActionReceiver m_playerActionReceiver;
-        private readonly ICostCalculator m_costCalculator;
-        private readonly IEventManager m_eventManager;
+        private Player CurrentPlayer => m_gameContext.TurnHandler.CurrentPlayer;
+        private ICardComposition Composition => m_gameContext.AgeHandler.CurrentAge.Composition;
+
+        private readonly IGameContext m_gameContext;
     }
 }

@@ -1,4 +1,4 @@
-﻿using GameLogic.GameStates;
+﻿using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
 {
@@ -8,7 +8,7 @@ namespace GameLogic.Elements.Effects
 
         public DropEnemyCard()
         {
-
+            CardType = string.Empty;
         }
 
         private DropEnemyCard(DropEnemyCard dropEnemyCard)
@@ -21,6 +21,14 @@ namespace GameLogic.Elements.Effects
         public override Effect Clone()
         {
             return new DropEnemyCard(this);
+        }
+
+        public override void Apply(IGameContext gameContext)
+        {
+            Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
+            Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
+            IPlayerAction action = gameContext.PlayerActionReceiver.ReceivePlayerAction(currentPlayer, opponentPlayer.Cards.Where(card => card.CardType == CardType).Select(card => (IPlayerAction)new DropCard(gameContext.EventManager, opponentPlayer, card)).ToArray());
+            action.DoPlayerAction();
         }
     }
 }

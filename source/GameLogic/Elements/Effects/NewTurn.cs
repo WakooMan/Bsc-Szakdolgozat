@@ -16,9 +16,10 @@ namespace GameLogic.Elements.Effects
             return new NewTurn(this);
         }
 
-        public override void Apply(Player player, IEventManager eventManager)
+        public override void Apply(IGameContext gameContext)
         {
-            eventManager.Subscribe(GameEventType.TurnEnded, (args) => OnTurnEnded(player, args));
+            Player player = gameContext.TurnHandler.CurrentPlayer;
+            gameContext.EventManager.Subscribe(GameEventType.TurnEnded, (args) => OnTurnEnded(player, args));
         }
 
         private void OnTurnEnded(Player player, EventArgs args)

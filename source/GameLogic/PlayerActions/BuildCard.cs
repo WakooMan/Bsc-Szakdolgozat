@@ -2,63 +2,58 @@
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 using GameLogic.GameStructures;
-using GameLogic.Handlers;
 
 namespace GameLogic.PlayerActions
 {
     public class BuildCard : IPlayerAction
     {
-        public BuildCard(IEventManager eventManager, ICostCalculator costCalculator, ICardComposition composition, Player player, Player opponent)
+        public BuildCard(IGameContext gameContext)
         {
-            m_eventManager = eventManager;
-            m_costCalculator = costCalculator;
-            m_composition = composition;
-            m_player = player;
-            m_opponent = opponent;
+            m_gameContext = gameContext;
         }
 
         public void DoPlayerAction()
         {
-            if (m_player.PickedCard is null)
+            if (Player.PickedCard is null)
             {
-                throw new InvalidOperationException($"{m_player.Name} player's picked card is null, {nameof(BuildCard)} action cannot be performed!");
+                throw new InvalidOperationException($"{Player.Name} player's picked card is null, {nameof(BuildCard)} action cannot be performed!");
             }
 
-            ICardNode card = m_player.PickedCard;
-            m_composition.RemoveCard(card);
-            m_player.Cards.Add(card.CardObj);
+            ICardNode card = Player.PickedCard;
+            Composition.RemoveCard(card);
+            Player.Cards.Add(card.CardObj);
             if (string.IsNullOrEmpty(card.CardObj.PreviousBuilding) ||
-               m_player.Cards.All(c => c.Name != card.CardObj.PreviousBuilding))
+               Player.Cards.All(c => c.Name != card.CardObj.PreviousBuilding))
             {
-                m_player.Money -= m_costCalculator.GetBuildCost(card.CardObj, m_player, m_opponent);
+                Player.Money -= m_gameContext.CostCalculator.GetBuildCost(card.CardObj, Player, Opponent);
             }
 
-            m_eventManager.Publish(GameEventType.CardBuilt, new OnCardBuilt(card.CardObj, m_player));
-            card.CardObj.OnBuilt(m_player, m_eventManager);
+            m_gameContext.EventManager.Publish(GameEventType.CardBuilt, new OnCardBuilt(card.CardObj, Player));
+            card.CardObj.OnBuilt(m_gameContext);
 
         }
 
         public bool CanPerform()
         {
-            if (m_player.PickedCard is null)
+            if (Player.PickedCard is null)
             {
                 return false;
             }
 
-            Card card = m_player.PickedCard.CardObj;
+            Card card = Player.PickedCard.CardObj;
 
             if (!string.IsNullOrEmpty(card.PreviousBuilding) &&
-               m_player.Cards.Any(c => c.Name == card.PreviousBuilding))
+               Player.Cards.Any(c => c.Name == card.PreviousBuilding))
                 return true;
 
 
-            return m_costCalculator.CanAfford(card, m_player, m_opponent);
+            return m_gameContext.CostCalculator.CanAfford(card, Player, Opponent);
         }
 
-        private readonly ICardComposition m_composition;
-        private readonly Player m_player;
-        private readonly Player m_opponent;
-        private readonly ICostCalculator m_costCalculator;
-        private readonly IEventManager m_eventManager;
+        private Player Player => m_gameContext.TurnHandler.CurrentPlayer;
+        private Player Opponent => m_gameContext.TurnHandler.OpponentPlayer;
+
+        private ICardComposition Composition => m_gameContext.AgeHandler.CurrentAge.Composition;
+        private readonly IGameContext m_gameContext;
     }
 }

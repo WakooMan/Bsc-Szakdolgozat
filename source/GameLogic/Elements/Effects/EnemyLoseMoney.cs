@@ -1,11 +1,4 @@
-﻿using GameLogic.GameStates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLogic.Elements.Effects
+﻿namespace GameLogic.Elements.Effects
 {
     public class EnemyLoseMoney : Effect
     {
@@ -18,11 +11,14 @@ namespace GameLogic.Elements.Effects
             Money = enemyLoseMoney.Money;
         }
 
-        
-
         public override EnemyLoseMoney Clone()
         {
             return new EnemyLoseMoney(this);
+        }
+
+        public override void Apply(IGameContext gameContext)
+        {
+            gameContext.TurnHandler.OpponentPlayer.Money -= Money;
         }
     }
 }

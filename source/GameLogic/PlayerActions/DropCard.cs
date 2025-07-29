@@ -1,27 +1,29 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 
 namespace GameLogic.PlayerActions
 {
-    public class UnpickCard : IPlayerAction
+    public class DropCard : IPlayerAction
     {
-        public UnpickCard(IEventManager eventManager, Player player)
+        public DropCard(IEventManager eventManager, Player player, Card card)
         {
             m_eventManager = eventManager;
             m_player = player;
+            m_card = card;
         }
-
         public bool CanPerform()
         {
-            return m_player.PickedCard is not null;
+            return m_player.Cards.Contains(m_card);
         }
 
         public void DoPlayerAction()
         {
-            m_player.PickedCard = null;
-            m_eventManager.Publish(GameEventType.CardUnpicked, new EventArgs());
+            m_player.Cards.Remove(m_card);
+            m_eventManager.Publish(GameEventType.CardDestroyed, new EventArgs());
         }
 
+        private readonly Card m_card;
         private readonly Player m_player;
         private readonly IEventManager m_eventManager;
     }

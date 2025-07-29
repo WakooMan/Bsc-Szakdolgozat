@@ -15,22 +15,22 @@ namespace GameLogic_UnitTests.Handlers
             m_player2 = new Player("Test2");
             m_eventManager = Substitute.For<IEventManager>();
             m_playerActionReceiver = Substitute.For<IPlayerActionReceiver>();
-            m_turnHandler = new TurnHandler(m_playerActionReceiver, m_eventManager, [m_player1, m_player2]);
+            m_turnHandler = new TurnHandler(m_playerActionReceiver, m_eventManager);
+            m_turnHandler.SetPlayers([m_player1, m_player2]);
         }
 
         [Test]
         public void When_Constructor_Called_With_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new TurnHandler(null, m_eventManager, [m_player1, m_player2]));
-            Assert.Throws<ArgumentNullException>(() => new TurnHandler(m_playerActionReceiver, null, [m_player1, m_player2]));
-            Assert.Throws<ArgumentNullException>(() => new TurnHandler(m_playerActionReceiver, m_eventManager, null));
+            Assert.Throws<ArgumentNullException>(() => new TurnHandler(null, m_eventManager));
+            Assert.Throws<ArgumentNullException>(() => new TurnHandler(m_playerActionReceiver, null));
         }
 
         [Test]
-        public void When_Constructor_Called_With_Less_Than_Two_Players()
+        public void When_SetPlayers_Called_With_Less_Than_Two_Players()
         {
-            Assert.Throws<ArgumentException>(() => new TurnHandler(m_playerActionReceiver, m_eventManager, Array.Empty<Player>()));
-            Assert.Throws<ArgumentException>(() => new TurnHandler(m_playerActionReceiver, m_eventManager, [m_player1]));
+            Assert.Throws<ArgumentException>(() => m_turnHandler.SetPlayers(Array.Empty<Player>()));
+            Assert.Throws<ArgumentException>(() => m_turnHandler.SetPlayers([m_player1]));
         }
 
         [Test]

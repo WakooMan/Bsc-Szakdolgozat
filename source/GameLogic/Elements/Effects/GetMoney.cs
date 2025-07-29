@@ -1,4 +1,5 @@
-﻿using GameLogic.GameStates;
+﻿using GameLogic.Events;
+using GameLogic.GameStates;
 
 namespace GameLogic.Elements.Effects
 {
@@ -16,6 +17,11 @@ namespace GameLogic.Elements.Effects
         public override GetMoney Clone()
         {
             return new GetMoney(this);
+        }
+
+        public override void Apply(IGameContext gameContext)
+        {
+            gameContext.TurnHandler.CurrentPlayer.Money += Money;
         }
 
     }

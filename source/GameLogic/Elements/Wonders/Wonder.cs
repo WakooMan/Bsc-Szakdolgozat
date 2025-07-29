@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.Goods;
-using GameLogic.Events;
 using GameLogic.Handlers;
 
 namespace GameLogic.Elements.Wonders
@@ -33,9 +32,9 @@ namespace GameLogic.Elements.Wonders
             return new Wonder(this);
         }
 
-        public void OnBuilt(Player player, IEventManager eventManager)
+        public void OnBuilt(IGameContext gameContext)
         {
-            Effects.ForEach(effect => effect.Apply(player, eventManager));
+            Effects.ForEach(effect => effect.Apply(gameContext));
         }
     }
 }

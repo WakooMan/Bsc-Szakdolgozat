@@ -1,11 +1,4 @@
-﻿using GameLogic.GameStates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLogic.Events
+﻿namespace GameLogic.Events
 {
     public class EventManager : IEventManager
     {
@@ -28,6 +21,16 @@ namespace GameLogic.Events
                 foreach (var listener in list)
                     listener(game);
             }
+        }
+
+        public bool Unsubscribe(GameEventType eventType, Action<EventArgs> listener)
+        {
+            if (!_listeners.ContainsKey(eventType))
+            {
+                return false;
+            }
+
+            return _listeners[eventType].Remove(listener);
         }
     }
 }

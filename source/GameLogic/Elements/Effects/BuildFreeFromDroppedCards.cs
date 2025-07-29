@@ -6,7 +6,7 @@ namespace GameLogic.Elements.Effects
     public class BuildFreeFromDroppedCards : Effect
     {
         public BuildFreeFromDroppedCards() { }
-        public override void Apply(Player player, IEventManager eventManager)
+        public override void Apply(IGameContext gameContext)
         {
             throw new NotImplementedException();
         }

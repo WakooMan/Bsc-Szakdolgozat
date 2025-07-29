@@ -1,4 +1,4 @@
-﻿using GameLogic.GameStates;
+﻿using GameLogic.Events;
 
 namespace GameLogic.Elements.Effects
 {
@@ -17,6 +17,12 @@ namespace GameLogic.Elements.Effects
         public override GetMoneyForCard Clone()
         {
             return new GetMoneyForCard(this);
+        }
+
+        public override void Apply(IGameContext gameContext)
+        {
+            Player player = gameContext.TurnHandler.CurrentPlayer;
+            player.Money += MoneyPerCard * player.Cards.Where(card => card.CardType == CardType).Count();
         }
 
     }
