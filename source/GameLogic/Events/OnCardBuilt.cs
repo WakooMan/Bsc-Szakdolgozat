@@ -7,11 +7,15 @@ namespace GameLogic.Events
     {
         public Card Card { get; }
         public Player Builder { get; }
+        public int BuildCost { get; }
+        public bool ChainBuildUsed { get; }
 
-        public OnCardBuilt(Card card, Player builder)
+        public OnCardBuilt(Card card, Player builder, int buildCost, bool chainBuildUsed)
         {
             Card = card;
             Builder = builder;
+            BuildCost = buildCost;
+            ChainBuildUsed = chainBuildUsed;
         }
     }
 }

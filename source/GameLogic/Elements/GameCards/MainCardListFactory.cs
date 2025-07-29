@@ -2,9 +2,9 @@
 
 namespace GameLogic.Elements.GameCards
 {
-    public class CardListFactory : ICardListFactory
+    public class MainCardListFactory : ICardListFactory
     {
-        public CardListFactory(IXmlHandler xmlHandler)
+        public MainCardListFactory(IXmlHandler xmlHandler)
         {
             m_xmlHandler = xmlHandler;
         }

@@ -12,6 +12,10 @@ namespace GameLogic.Elements.Wonders
 
         public bool HasBeenBuilt { get; set; }
 
+        public string BuildingType => GetType().Name;
+
+        public int MoneyCost => 0;
+
         public Wonder()
         {
             Effects = new List<Effect>();

@@ -7,5 +7,7 @@ namespace GameLogic.Handlers
     {
         List<Good> GoodCost { get; set; }
         void OnBuilt(IGameContext gameContext);
+        string BuildingType { get; }
+        int MoneyCost { get; }
     }
 }

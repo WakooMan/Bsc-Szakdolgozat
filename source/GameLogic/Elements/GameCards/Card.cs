@@ -20,7 +20,7 @@ namespace GameLogic.Elements.GameCards
         public string PreviousBuilding { get; set; }
         public AgesEnum Age { get; set; }
 
-        public string CardType => GetType().Name;
+        public string BuildingType => GetType().Name;
 
         public abstract Card Clone();
         public virtual int GetStrength()

@@ -15,7 +15,7 @@ namespace SevenWondersUI
         {
             InitializeComponent();
             IXmlHandler xmlHandler = new XmlHandler();
-            IGameElements gameElements = new GameElements(new CardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));
+            IGameElements gameElements = new GameElements(new MainCardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));
             var sm = gameElements.Developments;
         }
 

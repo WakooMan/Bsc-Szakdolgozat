@@ -1,5 +1,4 @@
-﻿using GameLogic.Events;
-using GameLogic.GameStates;
+﻿using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
 {
@@ -8,7 +7,8 @@ namespace GameLogic.Elements.Effects
         public BuildFreeFromDroppedCards() { }
         public override void Apply(IGameContext gameContext)
         {
-            throw new NotImplementedException();
+            IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, gameContext.DroppedCardList.Cards.Select(card => (IPlayerAction)new ChooseCardAction(gameContext, card)).ToArray());
+            playerAction.DoPlayerAction();
         }
 
         public override Effect Clone()

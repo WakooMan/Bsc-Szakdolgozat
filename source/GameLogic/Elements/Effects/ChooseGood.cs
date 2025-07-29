@@ -26,6 +26,11 @@ namespace GameLogic.Elements.Effects
 
         public override List<Good> GetGoods()
         {
+            if (m_selectedGood is null)
+            {
+                return base.GetGoods();
+            }
+
             return new List<Good>() { m_selectedGood };
         }
 

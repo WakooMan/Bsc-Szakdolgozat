@@ -14,7 +14,7 @@ namespace GameLogic.Handlers
 
         public bool CanAfford(IBuildable buildable, Player buyer, Player opponent)
         {
-            int cost = GetBuildCost(buildable, buyer, opponent);
+            int cost = GetBuildCost(buildable, buyer, opponent) + buildable.MoneyCost;
             return buyer.Money >= cost;
         }
 
@@ -26,6 +26,20 @@ namespace GameLogic.Handlers
 
             OnBuildingCostCalculated onBuildingCostCalculated = new OnBuildingCostCalculated(buyer);
             m_eventManager.Publish(GameEventType.BuildingCostCalculated, onBuildingCostCalculated);
+
+            foreach (var cheaperBuilding in onBuildingCostCalculated.CheaperBuildings.Where(cb => cb.BuildingType == buildable.BuildingType))
+            {
+                int amount = cheaperBuilding.AmountOfResources;
+
+                foreach (var good in missing)
+                {
+                    int used = Math.Min(amount, good.Amount);
+                    good.Amount -= used;
+                    amount -= used;
+
+                    if (amount == 0) break;
+                }
+            }
 
             foreach (Good good in missing)
             {

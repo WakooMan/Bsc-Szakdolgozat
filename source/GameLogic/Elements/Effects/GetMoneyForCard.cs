@@ -22,7 +22,7 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            player.Money += MoneyPerCard * player.Cards.Where(card => card.CardType == CardType).Count();
+            player.Money += MoneyPerCard * player.Cards.Where(card => card.BuildingType == CardType).Count();
         }
 
     }

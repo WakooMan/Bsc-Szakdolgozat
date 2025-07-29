@@ -1,5 +1,5 @@
 ﻿using GameLogic.Elements.Disciplines;
-using GameLogic.GameStates;
+using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
 {
@@ -17,6 +17,18 @@ namespace GameLogic.Elements.Effects
         public override Effect Clone()
         {
             return new Law(this);
+        }
+
+        public override void Apply(IGameContext gameContext)
+        {
+            Discipline = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, [
+                new ChooseDisciplineAction(new Building()),
+                new ChooseDisciplineAction(new Geography()),
+                new ChooseDisciplineAction(new Healing()),
+                new ChooseDisciplineAction(new Mechanics()),
+                new ChooseDisciplineAction(new Physics()),
+                new ChooseDisciplineAction(new Trading()),
+                new ChooseDisciplineAction(new Writing())]).Discipline;
         }
     }
 }

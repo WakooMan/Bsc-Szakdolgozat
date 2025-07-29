@@ -22,7 +22,7 @@ namespace GameLogic.PlayerActions
             }
 
             Composition.RemoveCard(Player.PickedCard);
-            Player.Money -= m_gameContext.CostCalculator.GetBuildCost(m_wonder, Player, Opponent);
+            Player.Money -= (m_gameContext.CostCalculator.GetBuildCost(m_wonder, Player, Opponent) + m_wonder.MoneyCost);
             m_wonder.HasBeenBuilt = true;
             m_gameContext.EventManager.Publish(GameEventType.WonderBuilt, new OnWonderBuilt(Player, m_wonder));
             m_wonder.OnBuilt(m_gameContext);

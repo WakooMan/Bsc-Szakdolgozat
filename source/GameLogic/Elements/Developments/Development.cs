@@ -19,5 +19,10 @@ namespace GameLogic.Elements.Modifiers
         {
             return new Development(this);
         }
+
+        public void OnDevelopmentEstablished(IGameContext gameContext)
+        {
+            Effects.ForEach(effect => effect.Apply(gameContext));
+        }
     }
 }

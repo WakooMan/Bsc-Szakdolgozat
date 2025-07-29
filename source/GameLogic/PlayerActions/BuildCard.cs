@@ -22,13 +22,17 @@ namespace GameLogic.PlayerActions
             ICardNode card = Player.PickedCard;
             Composition.RemoveCard(card);
             Player.Cards.Add(card.CardObj);
+            int BuildCost = 0;
+            bool chainBuildUsed = true;
             if (string.IsNullOrEmpty(card.CardObj.PreviousBuilding) ||
                Player.Cards.All(c => c.Name != card.CardObj.PreviousBuilding))
             {
-                Player.Money -= m_gameContext.CostCalculator.GetBuildCost(card.CardObj, Player, Opponent);
+                BuildCost = m_gameContext.CostCalculator.GetBuildCost(card.CardObj, Player, Opponent);
+                Player.Money -= BuildCost + card.CardObj.MoneyCost;
+                chainBuildUsed = false;
             }
 
-            m_gameContext.EventManager.Publish(GameEventType.CardBuilt, new OnCardBuilt(card.CardObj, Player));
+            m_gameContext.EventManager.Publish(GameEventType.CardBuilt, new OnCardBuilt(card.CardObj, Player, BuildCost, chainBuildUsed));
             card.CardObj.OnBuilt(m_gameContext);
 
         }
