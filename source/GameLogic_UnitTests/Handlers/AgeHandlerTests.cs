@@ -20,6 +20,7 @@ namespace GameLogic_UnitTests.Handlers
             m_cardList.Cards.Returns(new List<Card>());
             m_gameElements.Cards.Returns(m_cardList);
             m_ageHandler = new AgeHandler(m_cardCompositionFactory, m_gameElements, m_eventManager);
+            m_ageHandler.Initialize();
         }
 
         [Test]
@@ -28,6 +29,14 @@ namespace GameLogic_UnitTests.Handlers
             Assert.Throws<ArgumentNullException>(() => new AgeHandler(null, m_gameElements, m_eventManager));
             Assert.Throws<ArgumentNullException>(() => new AgeHandler(m_cardCompositionFactory, null, m_eventManager));
             Assert.Throws<ArgumentNullException>(() => new AgeHandler(m_cardCompositionFactory, m_gameElements, null));
+        }
+
+        [Test]
+        public void When_Not_Initialized()
+        {
+            m_ageHandler = new AgeHandler(m_cardCompositionFactory, m_gameElements, m_eventManager);
+            Assert.Throws<InvalidOperationException>(() => { IAgeBase age = m_ageHandler.CurrentAge; });
+            Assert.Throws<InvalidOperationException>(() => m_ageHandler.NextAge());
         }
 
         [Test]

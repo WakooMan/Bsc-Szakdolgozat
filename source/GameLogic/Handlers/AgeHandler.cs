@@ -11,7 +11,17 @@ namespace GameLogic.Handlers
     [Export(typeof(IAgeHandler))]
     public class AgeHandler : IAgeHandler
     {
-        public IAgeBase? CurrentAge { get; private set; }
+        public IAgeBase CurrentAge
+        {
+            get
+            {
+                if (m_ageBase is null)
+                {
+                    throw new InvalidOperationException("Cannot get Current Age, because Initialize method is not called yet!");
+                }
+                return m_ageBase;
+            }
+        }
 
         [ImportingConstructor]
         public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager)
@@ -23,12 +33,12 @@ namespace GameLogic.Handlers
             m_cardCompositionFactory = cardCompositionFactory;
             m_cardList = gameElements.Cards;
             m_eventManager = eventManager;
-            CurrentAge = null;
+            m_ageBase = null;
         }
 
         public void Initialize()
         {
-            CurrentAge = new FirstAge(m_cardCompositionFactory, m_cardList);
+            m_ageBase = new FirstAge(m_cardCompositionFactory, m_cardList);
         }
 
         public bool NextAge()
@@ -43,10 +53,10 @@ namespace GameLogic.Handlers
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
-                    CurrentAge = new SecondAge(m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new SecondAge(m_cardCompositionFactory, m_cardList);
                     break;
                 case AgesEnum.II:
-                    CurrentAge = new ThirdAge(m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new ThirdAge(m_cardCompositionFactory, m_cardList);
                     break;
                 default:
                     return false;
@@ -59,5 +69,6 @@ namespace GameLogic.Handlers
         private readonly ICardCompositionFactory m_cardCompositionFactory;
         private readonly ICardList m_cardList;
         private readonly IEventManager m_eventManager;
+        private IAgeBase? m_ageBase;
     }
 }

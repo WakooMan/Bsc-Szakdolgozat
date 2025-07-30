@@ -32,6 +32,16 @@ namespace GameLogic_UnitTests.Handlers
         }
 
         [Test]
+        public void When_Not_Initialized()
+        {
+            m_turnHandler = new TurnHandler(m_eventManager);
+            Assert.Throws<InvalidOperationException>(() => { Player player = m_turnHandler.CurrentPlayer; });
+            Assert.Throws<InvalidOperationException>(() => { Player player = m_turnHandler.OpponentPlayer; });
+            Assert.Throws<InvalidOperationException>(() => m_turnHandler.NextPlayer());
+            Assert.Throws<InvalidOperationException>(() => m_turnHandler.ForceNewTurn());
+        }
+
+        [Test]
         public void When_Initialized()
         {
             Assert.That(m_turnHandler.CurrentPlayer == m_player1, Is.True);
