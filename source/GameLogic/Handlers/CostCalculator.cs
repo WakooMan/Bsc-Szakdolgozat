@@ -2,11 +2,14 @@
 using GameLogic.Elements.Effects;
 using GameLogic.Elements.Goods;
 using GameLogic.Events;
+using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
+    [Export(typeof(ICostCalculator))]
     public class CostCalculator : ICostCalculator
     {
+        [ImportingConstructor]
         public CostCalculator(IEventManager eventManager)
         {
             m_eventManager = eventManager;

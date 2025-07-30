@@ -1,7 +1,9 @@
 ﻿using SevenWonders.Common;
+using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers.Factories
 {
+    [Export(typeof(ICardCompositionFileHandlerFactory))]
     public class CardCompositionFileHandlerFactory : ICardCompositionFileHandlerFactory
     {
         public ICardCompositionFileHandler CreateCardCompositionFileHandler(string compositionFile)

@@ -5,6 +5,8 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseWonderAction : IPlayerAction
     {
+        public Wonder Wonder => m_wonder;
+
         public ChooseWonderAction(Wonder wonder, Player player)
         {
             m_wonder = wonder;

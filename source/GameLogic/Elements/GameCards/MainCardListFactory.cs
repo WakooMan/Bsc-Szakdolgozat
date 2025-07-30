@@ -1,9 +1,12 @@
 ﻿using SevenWonders.Common;
+using System.ComponentModel.Composition;
 
 namespace GameLogic.Elements.GameCards
 {
+    [Export(nameof(MainCardListFactory), typeof(ICardListFactory))]
     public class MainCardListFactory : ICardListFactory
     {
+        [ImportingConstructor]
         public MainCardListFactory(IXmlHandler xmlHandler)
         {
             m_xmlHandler = xmlHandler;

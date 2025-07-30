@@ -2,9 +2,11 @@
 using GameLogic.Events;
 using GameLogic.Interfaces;
 using SevenWonders.Common;
+using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
+    [Export(typeof(ITurnHandler))]
     public class TurnHandler: ITurnHandler
     {
         public Player CurrentPlayer
@@ -30,6 +32,7 @@ namespace GameLogic.Handlers
             }
         }
 
+        [ImportingConstructor]
         public TurnHandler(IPlayerActionReceiver playerActionReceiver, IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));
@@ -40,7 +43,7 @@ namespace GameLogic.Handlers
             m_players = null;
         }
 
-        public void SetPlayers(ICollection<Player> players)
+        public void Initialize(ICollection<Player> players)
         {
             ArgumentChecker.CheckNull(players, nameof(players));
             ArgumentChecker.CheckPredicateForArgument(() => players.Count != 2, "Number of players must be exactly 2!");

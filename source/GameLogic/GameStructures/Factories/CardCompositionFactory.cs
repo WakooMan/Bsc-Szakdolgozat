@@ -1,11 +1,14 @@
 ﻿using GameLogic.Elements.GameCards;
 using GameLogic.Handlers.Factories;
 using SevenWonders.Common;
+using System.ComponentModel.Composition;
 
 namespace GameLogic.GameStructures.Factories
 {
+    [Export(typeof(ICardCompositionFactory))]
     public class CardCompositionFactory : ICardCompositionFactory
     {
+        [ImportingConstructor]
         public CardCompositionFactory(ICardCompositionFileHandlerFactory cardCompositionFileHandlerFactory, ICardNodeFactory cardNodeFactory)
         {
             ArgumentChecker.CheckNull(cardCompositionFileHandlerFactory, nameof(cardCompositionFileHandlerFactory));

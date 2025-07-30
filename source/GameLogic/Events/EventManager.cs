@@ -1,9 +1,13 @@
-﻿namespace GameLogic.Events
+﻿using System.ComponentModel.Composition;
+
+namespace GameLogic.Events
 {
+    [Export(typeof(IEventManager))]
     public class EventManager : IEventManager
     {
         private readonly Dictionary<GameEventType, List<Action<EventArgs>>> _listeners = new();
 
+        [ImportingConstructor]
         public EventManager() { }
 
         public void Subscribe(GameEventType eventType, Action<EventArgs> listener)
@@ -31,6 +35,11 @@
             }
 
             return _listeners[eventType].Remove(listener);
+        }
+
+        public void ClearSubscriptions()
+        {
+            _listeners.Clear();
         }
     }
 }

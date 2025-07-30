@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.Wonders;
 
 namespace GameLogic.Handlers
 {
@@ -6,6 +7,6 @@ namespace GameLogic.Handlers
     {
         void ChooseWonder();
         bool WondersChosen { get; }
-        void SetPlayers(ICollection<Player> players);
+        void Initialize(ICollection<Player> players, ICollection<Wonder> wonders);
     }
 }

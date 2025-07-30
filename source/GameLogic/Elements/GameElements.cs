@@ -1,9 +1,11 @@
 ﻿using GameLogic.Elements.Developments;
 using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
+using System.ComponentModel.Composition;
 
 namespace GameLogic.Elements
 {
+    [Export(typeof(IGameElements))]
     public class GameElements : IGameElements
     {
         public ICardList Cards => m_cardList.Clone();
@@ -11,7 +13,8 @@ namespace GameLogic.Elements
         public IWonderList Wonders => m_wonderList.Clone();
         public IDevelopmentList Developments => m_developmentList.Clone();
 
-        public GameElements(ICardListFactory cardListFactory, IWonderListFactory wonderListFactory, IDevelopmentListFactory developmentListFactory)
+        [ImportingConstructor]
+        public GameElements([Import(nameof(MainCardListFactory), typeof(ICardListFactory))] ICardListFactory cardListFactory, IWonderListFactory wonderListFactory, IDevelopmentListFactory developmentListFactory)
         {
             m_cardList = cardListFactory.Create();
             m_wonderList = wonderListFactory.Create();

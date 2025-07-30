@@ -8,6 +8,6 @@ namespace GameLogic.Handlers
         Player OpponentPlayer { get; }
         void NextPlayer();
         void ForceNewTurn();
-        void SetPlayers(ICollection<Player> players);
+        void Initialize(ICollection<Player> players);
     }
 }

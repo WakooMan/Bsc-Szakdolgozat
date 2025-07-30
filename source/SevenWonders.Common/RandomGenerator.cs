@@ -1,10 +1,13 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SevenWonders.Common
 {
+    [Export(typeof(IRandomGenerator))]
     [ExcludeFromCodeCoverage]
     public class RandomGenerator : IRandomGenerator
     {
+        [ImportingConstructor]
         public RandomGenerator()
         {
             m_random = new Random();

@@ -16,7 +16,7 @@ namespace GameLogic_UnitTests.Handlers
             m_eventManager = Substitute.For<IEventManager>();
             m_playerActionReceiver = Substitute.For<IPlayerActionReceiver>();
             m_turnHandler = new TurnHandler(m_playerActionReceiver, m_eventManager);
-            m_turnHandler.SetPlayers([m_player1, m_player2]);
+            m_turnHandler.Initialize([m_player1, m_player2]);
         }
 
         [Test]
@@ -29,8 +29,8 @@ namespace GameLogic_UnitTests.Handlers
         [Test]
         public void When_SetPlayers_Called_With_Less_Than_Two_Players()
         {
-            Assert.Throws<ArgumentException>(() => m_turnHandler.SetPlayers(Array.Empty<Player>()));
-            Assert.Throws<ArgumentException>(() => m_turnHandler.SetPlayers([m_player1]));
+            Assert.Throws<ArgumentException>(() => m_turnHandler.Initialize(Array.Empty<Player>()));
+            Assert.Throws<ArgumentException>(() => m_turnHandler.Initialize([m_player1]));
         }
 
         [Test]

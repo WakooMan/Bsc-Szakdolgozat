@@ -17,10 +17,11 @@ namespace GameLogic
         public IPlayerActionReceiver PlayerActionReceiver { get; }
         public IEventManager EventManager { get; }
         public ICostCalculator CostCalculator { get; }
-        public ICardList CardList { get; }
-        public ICardList DroppedCardList { get; }
-        public IWonderList WonderList { get; }
-        public IDevelopmentList DevelopmentList { get; }
+        public ICardList? CardList { get; }
+        public ICardList? DroppedCardList { get; }
+        public IWonderList? WonderList { get; }
+        public IDevelopmentList? DevelopmentList { get; }
         public IRandomGenerator RandomGenerator { get; }
+        void Initialize(ICollection<Player> players, ICollection<Wonder> wonders);
     }
 }

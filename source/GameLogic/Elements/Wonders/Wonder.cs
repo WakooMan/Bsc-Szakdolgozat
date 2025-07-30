@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.Goods;
 using GameLogic.Handlers;
+using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Wonders
 {
@@ -9,11 +10,11 @@ namespace GameLogic.Elements.Wonders
         public string Name { get; set; }
         public List<Good> GoodCost { get; set; }
         public List<Effect> Effects { get; set; }
-
         public bool HasBeenBuilt { get; set; }
-
+        [XmlIgnore]
         public string BuildingType => GetType().Name;
 
+        [XmlIgnore]
         public int MoneyCost => 0;
 
         public Wonder()

@@ -1,31 +1,43 @@
 ﻿using GameLogic.Ages;
+using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
+using GameLogic.Events;
 using GameLogic.GameStructures.Factories;
 using SevenWonders.Common;
-using static GameLogic.Handlers.IAgeHandler;
+using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
+    [Export(typeof(IAgeHandler))]
     public class AgeHandler : IAgeHandler
     {
-        private ICardCompositionFactory m_cardCompositionFactory;
-        private ICardList m_cardList;
+        public IAgeBase? CurrentAge { get; private set; }
 
-        public IAgeBase CurrentAge { get; private set; }
-        public event AgeChangedEventHandler HandleAgeChanged;
-
-        public AgeHandler(ICardCompositionFactory cardCompositionFactory, ICardList cardList)
+        [ImportingConstructor]
+        public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));
-            ArgumentChecker.CheckNull(cardList, nameof(cardList));
+            ArgumentChecker.CheckNull(gameElements, nameof(gameElements));
+            ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
 
             m_cardCompositionFactory = cardCompositionFactory;
-            m_cardList = cardList;
+            m_cardList = gameElements.Cards;
+            m_eventManager = eventManager;
+            CurrentAge = null;
+        }
+
+        public void Initialize()
+        {
             CurrentAge = new FirstAge(m_cardCompositionFactory, m_cardList);
         }
 
         public bool NextAge()
         {
+            if (CurrentAge is null)
+            {
+                throw new InvalidOperationException("Initialize method is not called yet!");
+            }
+            m_eventManager.Publish(GameEventType.AgeEnded, new OnAgeEnded(CurrentAge.Age));
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
@@ -38,8 +50,11 @@ namespace GameLogic.Handlers
                     return false;
             }
 
-            HandleAgeChanged?.Invoke(CurrentAge.Age);
             return true;
         }
+
+        private readonly ICardCompositionFactory m_cardCompositionFactory;
+        private readonly ICardList m_cardList;
+        private readonly IEventManager m_eventManager;
     }
 }
