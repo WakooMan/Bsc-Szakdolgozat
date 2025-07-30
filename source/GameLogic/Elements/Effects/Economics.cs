@@ -15,12 +15,12 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.CardBuilt, (args) => OnCardBuilt(player, args));
+            gameContext.EventManager.Subscribe<OnCardBuilt>(GameEventType.CardBuilt, (args) => OnCardBuilt(player, args));
         }
 
-        private void OnCardBuilt(Player player, EventArgs args)
+        private void OnCardBuilt(Player player, OnCardBuilt eventArgs)
         {
-            if (args is OnCardBuilt eventArgs && player != eventArgs.Builder)
+            if (player != eventArgs.Builder)
             {
                 player.Money += eventArgs.BuildCost;
             }

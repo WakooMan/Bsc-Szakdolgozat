@@ -24,12 +24,12 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.BuildingCostCalculated, (args) => OnBuildingCostCalculated(player, args));
+            gameContext.EventManager.Subscribe<OnBuildingCostCalculated>(GameEventType.BuildingCostCalculated, (args) => OnBuildingCostCalculated(player, args));
         }
 
-        private void OnBuildingCostCalculated(Player player, EventArgs args)
+        private void OnBuildingCostCalculated(Player player, OnBuildingCostCalculated eventArgs)
         {
-            if (args is OnBuildingCostCalculated eventArgs && player == eventArgs.Buyer)
+            if (player == eventArgs.Buyer)
             {
                 eventArgs.BuyGoodItems.AddRange(BuyGoodItems);
             }

@@ -17,7 +17,7 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.CardBuilt, (args) => OnRedCardBuilt(player, args));
+            gameContext.EventManager.Subscribe<OnCardBuilt>(GameEventType.CardBuilt, (args) => OnRedCardBuilt(player, args));
         }
 
         private PlusStrengthOnRedCardBuild(PlusStrengthOnRedCardBuild plusStrengthOnRedCardBuild)
@@ -25,9 +25,9 @@ namespace GameLogic.Elements.Effects
             AdditionalStrength = plusStrengthOnRedCardBuild.AdditionalStrength.Clone();
         }
 
-        private void OnRedCardBuilt(Player player, EventArgs args)
+        private void OnRedCardBuilt(Player player, OnCardBuilt eventArgs)
         {
-            if (args is OnCardBuilt eventArgs && eventArgs.Builder == player && eventArgs.Card is RedCard redCard)
+            if (eventArgs.Builder == player && eventArgs.Card is RedCard redCard)
             {
                 redCard.Strength.Points += AdditionalStrength.Points;
             }

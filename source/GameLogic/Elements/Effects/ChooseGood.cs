@@ -38,14 +38,14 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.TurnStarted, (args) => SelectGood(gameContext.PlayerActionReceiver, player, args));
+            gameContext.EventManager.Subscribe<TurnStarted>(GameEventType.TurnStarted, (args) => SelectGood(gameContext.PlayerActionReceiver, player, args));
         }
 
-        private void SelectGood(IPlayerActionReceiver playerActionReceiver, Player player, EventArgs eventArgs)
+        private void SelectGood(IPlayerActionReceiver playerActionReceiver, Player player, TurnStarted eventArgs)
         {
-            if (eventArgs is TurnStarted turnStarted && turnStarted.Player == player)
+            if (eventArgs.Player == player)
             {
-                ChooseGoodAction chooseGoodAction = playerActionReceiver.ReceivePlayerAction<ChooseGoodAction>(turnStarted.Player, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory)).ToArray());
+                ChooseGoodAction chooseGoodAction = playerActionReceiver.ReceivePlayerAction<ChooseGoodAction>(eventArgs.Player, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory)).ToArray());
                 m_selectedGood = chooseGoodAction.GoodFactory.CreateGood();
             }
         }

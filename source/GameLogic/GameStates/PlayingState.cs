@@ -16,9 +16,9 @@ namespace GameLogic.GameStates
         
         public void DoStateAction()
         {
-            GameContext.EventManager.Subscribe(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
-            GameContext.EventManager.Subscribe(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
-            GameContext.EventManager.Subscribe(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
+            GameContext.EventManager.Subscribe<EventArgs>(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Subscribe<EventArgs>(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
 
             while (!IsGameOver)
             {
@@ -42,9 +42,9 @@ namespace GameLogic.GameStates
                 }
             }
 
-            GameContext.EventManager.Unsubscribe(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
-            GameContext.EventManager.Unsubscribe(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
-            GameContext.EventManager.Unsubscribe(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Unsubscribe<OnMilitaryTokenReachedThreshold>(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
+            GameContext.EventManager.Unsubscribe<EventArgs>(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Unsubscribe<EventArgs>(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
             GameContext.EventManager.Publish(GameEventType.GameEnded, new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
 
         }
@@ -54,12 +54,9 @@ namespace GameLogic.GameStates
             return null;
         }
 
-        private void OnMilitaryTokenReachedThreshold(EventArgs args)
+        private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)
         {
-            if (args is OnMilitaryTokenReachedThreshold eventArgs)
-            {
-                eventArgs.MilitaryCards.ForEach(militaryCard => militaryCard.Apply(GameContext));
-            }
+            eventArgs.MilitaryCards.ForEach(militaryCard => militaryCard.Apply(GameContext));
         }
 
         private void OnScientificOrMilitaryVictory(EventArgs args)

@@ -14,14 +14,14 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.WonderBuilt, (args) => OnWonderBuilt(player, args));
+            gameContext.EventManager.Subscribe<OnWonderBuilt>(GameEventType.WonderBuilt, (args) => OnWonderBuilt(player, args));
         }
 
-        private void OnWonderBuilt(Player player, EventArgs args)
+        private void OnWonderBuilt(Player player, OnWonderBuilt args)
         {
-            if (args is OnWonderBuilt wonderBuilt && wonderBuilt.Builder == player && !wonderBuilt.Wonder.Effects.Any(effect => effect is NewTurn))
+            if (args.Builder == player && !args.Wonder.Effects.Any(effect => effect is NewTurn))
             {
-                wonderBuilt.Wonder.Effects.Add(new NewTurn());
+                args.Wonder.Effects.Add(new NewTurn());
             }
         }
     }

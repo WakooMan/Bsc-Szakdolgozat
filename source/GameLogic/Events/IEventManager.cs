@@ -2,9 +2,9 @@
 {
     public interface IEventManager
     {
-        void Subscribe(GameEventType eventType, Action<EventArgs> listener);
-        void Publish(GameEventType eventType, EventArgs game);
-        bool Unsubscribe(GameEventType eventType, Action<EventArgs> listener);
+        void Subscribe<TEventArgs>(GameEventType eventType, Action<TEventArgs> listener) where TEventArgs : EventArgs;
+        void Publish<TEventArgs>(GameEventType eventType, TEventArgs eventArgs) where TEventArgs : EventArgs;
+        bool Unsubscribe<TEventArgs>(GameEventType eventType, Action<TEventArgs> listener) where TEventArgs : EventArgs;
         void ClearSubscriptions();
     }
 }

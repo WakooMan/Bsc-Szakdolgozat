@@ -37,7 +37,9 @@ namespace GameLogic.Handlers
             {
                 throw new InvalidOperationException("Initialize method is not called yet!");
             }
-            m_eventManager.Publish(GameEventType.AgeEnded, new OnAgeEnded(CurrentAge.Age));
+
+            AgesEnum previousAge = CurrentAge.Age;
+
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
@@ -50,6 +52,7 @@ namespace GameLogic.Handlers
                     return false;
             }
 
+            m_eventManager.Publish(GameEventType.AgeEnded, new OnAgeEnded(previousAge));
             return true;
         }
 

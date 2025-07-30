@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements.Modifiers;
 using GameLogic.Events;
-using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Military
@@ -24,69 +23,59 @@ namespace GameLogic.Elements.Military
             m_keyValuePairs.Add(players.First(), PlayerSide.First);
             m_keyValuePairs.Add(players.Last(), PlayerSide.Second);
             Developments.AddRange(developments);
-            eventManager.Subscribe(GameEventType.ScientificProgress, (args) => OnScientificProgress(eventManager, args));
-            eventManager.Subscribe(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
-            eventManager.Subscribe(GameEventType.MilitaryAdvanced, (args) => OnMilitaryAdvanced(eventManager, args));
+            eventManager.Subscribe<OnScientificProgress>(GameEventType.ScientificProgress, (args) => OnScientificProgress(eventManager, args));
+            eventManager.Subscribe<OnMilitaryTokenReachedThreshold>(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
+            eventManager.Subscribe<OnMilitaryAdvanced>(GameEventType.MilitaryAdvanced, (args) => OnMilitaryAdvanced(eventManager, args));
         }
 
-        private void OnMilitaryTokenReachedThreshold(EventArgs args)
+        private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)
         {
-            if (args is OnMilitaryTokenReachedThreshold eventArgs)
+            eventArgs.MilitaryCards.ForEach(card => MilitaryCards.Remove(card));
+        }
+
+        private void OnMilitaryAdvanced(IEventManager eventManager, OnMilitaryAdvanced eventArgs)
+        {
+            int index = Fields.IndexOf(MilitaryField.Shield);
+            PlayerSide playerSide = m_keyValuePairs[eventArgs.Player];
+            int newIdx = Math.Clamp(index + ((int)playerSide * eventArgs.Advancement), 0, Fields.Count - 1);
+            Fields[newIdx] = MilitaryField.Shield;
+            Fields[index] = MilitaryField.None;
+
+            List<MilitaryCard> militaryCards = new List<MilitaryCard>();
+
+            if (playerSide == PlayerSide.First && newIdx > 10)
             {
-                eventArgs.MilitaryCards.ForEach(card => MilitaryCards.Remove(card));
+                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexStart > 10 &&
+                    ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexEnd < newIdx))).ToList();
+            }
+            else if (playerSide == PlayerSide.Second && newIdx < 10)
+            {
+                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexEnd < 10 &&
+                    ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexStart > newIdx))).ToList();
+            }
+
+            if (militaryCards.Any())
+            {
+                eventManager.Publish(GameEventType.MilitaryTokenReachedThreshold, new OnMilitaryTokenReachedThreshold(militaryCards));
+            }
+
+            if (newIdx == 0 || newIdx == Fields.Count - 1)
+            {
+                eventManager.Publish(GameEventType.MilitaryVictory, new EventArgs());
             }
         }
 
-        private void OnMilitaryAdvanced(IEventManager eventManager, EventArgs args)
+        private void OnScientificProgress(IEventManager eventManager, OnScientificProgress eventArgs)
         {
-            if (args is OnMilitaryAdvanced onMilitaryAdvanced)
+            var disciplines = eventArgs.Player.Disciplines;
+            if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
-                int index = Fields.IndexOf(MilitaryField.Shield);
-                PlayerSide playerSide = m_keyValuePairs[onMilitaryAdvanced.Player];
-                int newIdx = Math.Clamp(index + ((int)playerSide * onMilitaryAdvanced.Advancement), 0, Fields.Count - 1);
-                Fields[newIdx] = MilitaryField.Shield;
-                Fields[index] = MilitaryField.None;
-
-                List<MilitaryCard> militaryCards = new List<MilitaryCard>();
-
-                if (playerSide == PlayerSide.First && newIdx > 10)
-                {
-                    militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexStart > 10 &&
-                        ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexEnd < newIdx))).ToList();
-                }
-                else if (playerSide == PlayerSide.Second && newIdx < 10)
-                {
-                    militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexEnd < 10 &&
-                        ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexStart > newIdx))).ToList();
-                }
-
-                if (militaryCards.Any())
-                {
-                    eventManager.Publish(GameEventType.MilitaryTokenReachedThreshold, new OnMilitaryTokenReachedThreshold(militaryCards));
-                }
-
-                if (newIdx == 0 || newIdx == Fields.Count - 1)
-                {
-                    eventManager.Publish(GameEventType.MilitaryVictory, new EventArgs());
-                }
+                eventArgs.Player.Developments.Add(eventArgs.PlayerActionReceiver.ReceivePlayerAction<ChooseDevelopmentAction>(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(dev)).ToArray()).Development);
             }
-        }
 
-        private void OnScientificProgress(IEventManager eventManager, EventArgs args)
-        {
-            if (args is OnScientificProgress eventArgs)
+            if (disciplines.Count >= 6)
             {
-                var disciplines = eventArgs.Player.Disciplines;
-                if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
-                {
-                    eventArgs.Player.Developments.Add(eventArgs.PlayerActionReceiver.ReceivePlayerAction<ChooseDevelopmentAction>(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(dev)).ToArray()).Development);
-                }
-
-                if (disciplines.Count >= 6)
-                {
-                    eventManager.Publish(GameEventType.ScientificVictory, new EventArgs());
-                }
-
+                eventManager.Publish(GameEventType.ScientificVictory, new EventArgs());
             }
         }
 

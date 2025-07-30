@@ -5,36 +5,42 @@ namespace GameLogic.Events
     [Export(typeof(IEventManager))]
     public class EventManager : IEventManager
     {
-        private readonly Dictionary<GameEventType, List<Action<EventArgs>>> _listeners = new();
+        private readonly Dictionary<GameEventType, List<Delegate>> _listeners = new();
 
         [ImportingConstructor]
         public EventManager() { }
 
-        public void Subscribe(GameEventType eventType, Action<EventArgs> listener)
+        public void Subscribe<TEventArgs>(GameEventType eventType, Action<TEventArgs> listener) where TEventArgs : EventArgs
         {
-            if (!_listeners.ContainsKey(eventType))
-                _listeners[eventType] = new List<Action<EventArgs>>();
+            if (!_listeners.TryGetValue(eventType, out var list))
+            {
+                list = new List<Delegate>();
+                _listeners[eventType] = list;
+            }
 
-            _listeners[eventType].Add(listener);
+            list.Add(listener);
         }
 
-        public void Publish(GameEventType eventType, EventArgs game)
+        public void Publish<TEventArgs>(GameEventType eventType, TEventArgs eventArgs) where TEventArgs : EventArgs
         {
             if (_listeners.TryGetValue(eventType, out var list))
             {
-                foreach (var listener in list)
-                    listener(game);
+                foreach (var del in list)
+                {
+                    if (del is Action<TEventArgs> action)
+                    {
+                        action(eventArgs);
+                    }
+                }
             }
         }
 
-        public bool Unsubscribe(GameEventType eventType, Action<EventArgs> listener)
+        public bool Unsubscribe<TEventArgs>(GameEventType eventType, Action<TEventArgs> listener) where TEventArgs : EventArgs
         {
-            if (!_listeners.ContainsKey(eventType))
-            {
+            if (!_listeners.TryGetValue(eventType, out var list))
                 return false;
-            }
 
-            return _listeners[eventType].Remove(listener);
+            return list.Remove(listener);
         }
 
         public void ClearSubscriptions()

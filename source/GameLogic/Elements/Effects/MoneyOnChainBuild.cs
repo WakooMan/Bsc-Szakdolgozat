@@ -20,12 +20,12 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.CardBuilt, (args) => GetMoneyOnChainBuild(player, args));
+            gameContext.EventManager.Subscribe<OnCardBuilt>(GameEventType.CardBuilt, (args) => GetMoneyOnChainBuild(player, args));
         }
 
-        private void GetMoneyOnChainBuild(Player player, EventArgs args)
+        private void GetMoneyOnChainBuild(Player player, OnCardBuilt args)
         {
-            if (args is OnCardBuilt onCardBuilt && player == onCardBuilt.Builder && onCardBuilt.ChainBuildUsed)
+            if (player == args.Builder && args.ChainBuildUsed)
             {
                 player.Money += MoneyToGet.Money;
             }
