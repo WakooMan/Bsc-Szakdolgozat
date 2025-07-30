@@ -1,5 +1,4 @@
 ﻿using GameLogic.Events;
-using GameLogic.Handlers;
 using GameLogic.PlayerTurnStates;
 
 namespace GameLogic.GameStates
@@ -17,6 +16,10 @@ namespace GameLogic.GameStates
         
         public void DoStateAction()
         {
+            GameContext.EventManager.Subscribe(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
+            GameContext.EventManager.Subscribe(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Subscribe(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
+
             while (!IsGameOver)
             {
                 IPlayerTurnState playerTurnState = new PickCardState(GameContext);
@@ -27,20 +30,41 @@ namespace GameLogic.GameStates
                     playerTurnState = playerTurnState.GetNextTurnState();
                 }
 
-                // Check If player won in the turn.
-
-                if (GameContext.AgeHandler.CurrentAge.IsAgeOver)
+                if (!IsGameOver)
                 {
-                    IsGameOver = !GameContext.AgeHandler.NextAge();
-                }
 
-                GameContext.TurnHandler.NextPlayer();
+                    if (GameContext.AgeHandler.CurrentAge.IsAgeOver)
+                    {
+                        IsGameOver = !GameContext.AgeHandler.NextAge();
+                    }
+
+                    GameContext.TurnHandler.NextPlayer();
+                }
             }
+
+            GameContext.EventManager.Unsubscribe(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
+            GameContext.EventManager.Unsubscribe(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Unsubscribe(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Publish(GameEventType.GameEnded, new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
+
         }
 
         public IGameState GetNextState()
         {
             return null;
+        }
+
+        private void OnMilitaryTokenReachedThreshold(EventArgs args)
+        {
+            if (args is OnMilitaryTokenReachedThreshold eventArgs)
+            {
+                eventArgs.MilitaryCards.ForEach(militaryCard => militaryCard.Apply(GameContext));
+            }
+        }
+
+        private void OnScientificOrMilitaryVictory(EventArgs args)
+        {
+            IsGameOver = true;
         }
     }
 }

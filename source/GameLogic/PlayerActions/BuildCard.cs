@@ -32,6 +32,7 @@ namespace GameLogic.PlayerActions
                 chainBuildUsed = false;
             }
 
+            Player.PickedCard = null;
             m_gameContext.EventManager.Publish(GameEventType.CardBuilt, new OnCardBuilt(card.CardObj, Player, BuildCost, chainBuildUsed));
             card.CardObj.OnBuilt(m_gameContext);
 

@@ -3,11 +3,15 @@ using GameLogic.Elements.GameCards;
 
 namespace GameLogic.Events
 {
-    public class OnCardPicked : EventArgs
+    public class OnCardUnpicked: EventArgs
     {
         public Player Player { get; set; }
         public Card Card { get; set; }
 
-        public OnCardPicked(Player player, Card card) { Player = player; Card = card; }
+        public OnCardUnpicked(Player player, Card card)
+        {
+            Player = player;
+            Card = card;
+        }
     }
 }

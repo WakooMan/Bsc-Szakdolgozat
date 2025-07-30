@@ -1,17 +1,13 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Handlers;
-using GameLogic.Interfaces;
 
 namespace GameLogic.Events
 {
     public class TurnStarted : EventArgs
     {
-        public IPlayerActionReceiver PlayerActionReceiver { get; }
-        public ITurnHandler TurnHandler { get; }
-        public TurnStarted(IPlayerActionReceiver playerActionReceiver, ITurnHandler turnHandler)
+        public Player Player { get; }
+        public TurnStarted(Player player)
         {
-            PlayerActionReceiver = playerActionReceiver;
-            TurnHandler = turnHandler;
+            Player = player;
         }
     }
 }

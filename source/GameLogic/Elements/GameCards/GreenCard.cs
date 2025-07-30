@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements.Disciplines;
 using GameLogic.Elements.Effects;
+using GameLogic.Events;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -24,6 +25,12 @@ namespace GameLogic.Elements.GameCards
         public override int GetVictoryPoints(Player player)
         {
             return Point.Points;
+        }
+
+        public override void OnBuilt(IGameContext gameContext)
+        {
+            gameContext.EventManager.Publish(GameEventType.ScientificProgress, new OnScientificProgress(gameContext.TurnHandler.CurrentPlayer, Discipline, gameContext.PlayerActionReceiver));
+            Point.Apply(gameContext);
         }
     }
 }

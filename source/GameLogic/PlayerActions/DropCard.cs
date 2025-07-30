@@ -20,7 +20,7 @@ namespace GameLogic.PlayerActions
         public void DoPlayerAction()
         {
             m_player.Cards.Remove(m_card);
-            m_eventManager.Publish(GameEventType.CardDestroyed, new EventArgs());
+            m_eventManager.Publish(GameEventType.CardDestroyed, new OnCardDestroyed(m_player, m_card));
         }
 
         private readonly Card m_card;

@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements.Goods;
 using GameLogic.Elements.Goods.Factories;
 using GameLogic.Events;
+using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
@@ -37,14 +38,14 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.TurnStarted, (args) => SelectGood(player, args));
+            gameContext.EventManager.Subscribe(GameEventType.TurnStarted, (args) => SelectGood(gameContext.PlayerActionReceiver, player, args));
         }
 
-        private void SelectGood(Player player, EventArgs eventArgs)
+        private void SelectGood(IPlayerActionReceiver playerActionReceiver, Player player, EventArgs eventArgs)
         {
-            if (eventArgs is TurnStarted turnStarted && turnStarted.TurnHandler.CurrentPlayer == player)
+            if (eventArgs is TurnStarted turnStarted && turnStarted.Player == player)
             {
-                ChooseGoodAction chooseGoodAction = turnStarted.PlayerActionReceiver.ReceivePlayerAction<ChooseGoodAction>(turnStarted.TurnHandler.CurrentPlayer, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory)).ToArray());
+                ChooseGoodAction chooseGoodAction = playerActionReceiver.ReceivePlayerAction<ChooseGoodAction>(turnStarted.Player, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory)).ToArray());
                 m_selectedGood = chooseGoodAction.GoodFactory.CreateGood();
             }
         }

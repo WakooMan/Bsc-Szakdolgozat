@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLogic.Events
+﻿namespace GameLogic.Events
 {
     public enum GameEventType
     {
@@ -16,32 +10,20 @@ namespace GameLogic.Events
         CardSold,
 
         WonderBuilt,
-        WonderEffectTriggered,
-        WonderUsedToDestroyCard,
 
         MilitaryAdvanced,
         MilitaryTokenReachedThreshold,
         MilitaryVictory,
 
-        ScienceSymbolAcquired,
-        ScientificProgressChosen,
+        ScientificProgress,
         ScientificVictory,
-
-        CoinsGained,
-        CoinsLost,
-        ResourceDiscountApplied,
-
-        MissingResourcesEvaluated,
 
         TurnStarted,
         TurnEnded,
         AgeEnded,
         GameEnded,
-        VictoryChecked,
 
-        GuildCardRevealed,
         CardDestroyed,
         ExtraTurnGranted,
-        OpponentPlayedCardRemoved
     }
 }

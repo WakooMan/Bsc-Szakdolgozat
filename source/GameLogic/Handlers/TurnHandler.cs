@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events;
-using GameLogic.Interfaces;
 using SevenWonders.Common;
 using System.ComponentModel.Composition;
 
@@ -33,12 +32,10 @@ namespace GameLogic.Handlers
         }
 
         [ImportingConstructor]
-        public TurnHandler(IPlayerActionReceiver playerActionReceiver, IEventManager eventManager)
+        public TurnHandler(IEventManager eventManager)
         {
-            ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
 
-            m_playerActionReceiver = playerActionReceiver;
             m_eventManager = eventManager;
             m_players = null;
         }
@@ -60,12 +57,12 @@ namespace GameLogic.Handlers
                 throw new InvalidOperationException("Cannot execute NextPlayer method until SetPlayers method is not called!");
             }
 
-            m_eventManager.Publish(GameEventType.TurnEnded, new TurnEnded(this));
+            m_eventManager.Publish(GameEventType.TurnEnded, new TurnEnded(CurrentPlayer));
             if (!m_newTurnForced)
             {
                 m_index = (m_index + 1 < m_players.Count) ? m_index + 1 : 0;
             }
-            m_eventManager.Publish(GameEventType.TurnStarted, new TurnStarted(m_playerActionReceiver, this));
+            m_eventManager.Publish(GameEventType.TurnStarted, new TurnStarted(CurrentPlayer));
             m_newTurnForced = false;
         }
 
@@ -77,12 +74,12 @@ namespace GameLogic.Handlers
             }
 
             m_newTurnForced = true;
+            m_eventManager.Publish(GameEventType.ExtraTurnGranted, new EventArgs());
         }
 
         private List<Player>? m_players;
         private int m_index;
         private bool m_newTurnForced;
         private readonly IEventManager m_eventManager;
-        private readonly IPlayerActionReceiver m_playerActionReceiver;
     }
 }

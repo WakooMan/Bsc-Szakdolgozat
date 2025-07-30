@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
 using GameLogic.Events;
 using GameLogic.GameStructures;
@@ -24,7 +25,9 @@ namespace GameLogic.PlayerActions
             Composition.RemoveCard(Player.PickedCard);
             Player.Money -= (m_gameContext.CostCalculator.GetBuildCost(m_wonder, Player, Opponent) + m_wonder.MoneyCost);
             m_wonder.HasBeenBuilt = true;
-            m_gameContext.EventManager.Publish(GameEventType.WonderBuilt, new OnWonderBuilt(Player, m_wonder));
+            Card card = Player.PickedCard.CardObj;
+            Player.PickedCard = null;
+            m_gameContext.EventManager.Publish(GameEventType.WonderBuilt, new OnWonderBuilt(Player, card, m_wonder));
             m_wonder.OnBuilt(m_gameContext);
         }
 

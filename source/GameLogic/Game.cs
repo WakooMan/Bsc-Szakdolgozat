@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.Modifiers;
 using GameLogic.Elements.Wonders;
 using GameLogic.GameStates;
 using System.ComponentModel.Composition;
@@ -39,12 +40,12 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public void Initialize(string player1, string player2, ICollection<Wonder> wonders)
+        public void Initialize(string player1, string player2, ICollection<Wonder> wonders, ICollection<Development> developments)
         {
             if (!m_isInitialized)
             {
                 m_players = [new Player(player1), new Player(player2)];
-                m_gameContext.Initialize(m_players, wonders);
+                m_gameContext.Initialize(m_players, wonders, developments);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;
             }

@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Developments;
 using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Military;
 using GameLogic.Elements.Wonders;
 using SevenWonders.Common;
 using System.Xml.Serialization;
@@ -15,6 +16,7 @@ namespace SevenWondersUI
         {
             InitializeComponent();
             IXmlHandler xmlHandler = new XmlHandler();
+            IMilitaryBoard militaryBoard = new MilitaryBoardFactory(xmlHandler).Create();
             IGameElements gameElements = new GameElements(new MainCardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));
             var sm = gameElements.Developments;
         }

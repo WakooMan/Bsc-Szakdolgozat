@@ -1,4 +1,4 @@
-﻿using GameLogic.GameStates;
+﻿using GameLogic.Events;
 
 namespace GameLogic.Elements.Effects
 {
@@ -15,6 +15,11 @@ namespace GameLogic.Elements.Effects
         public override Strength Clone()
         {
             return new Strength(this);
+        }
+
+        public override void Apply(IGameContext gameContext)
+        {
+            gameContext.EventManager.Publish(GameEventType.MilitaryAdvanced, new OnMilitaryAdvanced(gameContext.TurnHandler.CurrentPlayer, Points));
         }
     }
 }

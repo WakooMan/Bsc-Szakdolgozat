@@ -22,7 +22,7 @@ namespace GameLogic.PlayerActions
         public void DoPlayerAction()
         {
             m_player.PickedCard = m_cardNode;
-            m_eventManager.Publish(GameEventType.CardPicked, new OnCardPicked(m_cardNode.CardObj));
+            m_eventManager.Publish(GameEventType.CardPicked, new OnCardPicked(m_player, m_cardNode.CardObj));
         }
 
         private readonly ICardNode m_cardNode;

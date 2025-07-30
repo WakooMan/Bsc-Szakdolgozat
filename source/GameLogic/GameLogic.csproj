@@ -11,6 +11,7 @@
     <None Remove="Data\AllDevelopments.xml" />
     <None Remove="Data\AllWonders.xml" />
     <None Remove="Data\FirstAgeComposition.csv" />
+    <None Remove="Data\MilitaryBoard.xml" />
     <None Remove="Data\SecondAgeComposition.csv" />
     <None Remove="Data\ThirdAgeComposition.csv" />
   </ItemGroup>
@@ -26,6 +27,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\FirstAgeComposition.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MilitaryBoard.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\SecondAgeComposition.csv">

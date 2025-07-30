@@ -21,7 +21,7 @@ namespace GameLogic.PlayerTurnStates
             m_gameContext.EventManager.Subscribe(GameEventType.CardUnpicked, action);
             List<IPlayerAction> playerActions =
             [
-                new UnpickCard(m_gameContext.EventManager, CurrentPlayer), new BuildCard(m_gameContext), new SellCard(Composition, CurrentPlayer),
+                new UnpickCard(m_gameContext.EventManager, CurrentPlayer), new BuildCard(m_gameContext), new SellCard(m_gameContext.EventManager, Composition, CurrentPlayer),
                 .. CurrentPlayer.Wonders.Select(wonder => new BuildWonder(m_gameContext, wonder)),
             ];
 

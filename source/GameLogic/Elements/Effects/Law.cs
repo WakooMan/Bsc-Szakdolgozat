@@ -5,7 +5,7 @@ namespace GameLogic.Elements.Effects
 {
     public class Law : Effect
     {
-        Discipline? Discipline { get; set; }
+        public Discipline? Discipline { get; set; }
 
         public Law() { }
 

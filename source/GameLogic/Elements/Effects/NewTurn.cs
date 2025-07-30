@@ -18,18 +18,14 @@ namespace GameLogic.Elements.Effects
 
         public override void Apply(IGameContext gameContext)
         {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe(GameEventType.TurnEnded, (args) => OnTurnEnded(player, args));
-        }
-
-        private void OnTurnEnded(Player player, EventArgs args)
-        {
-            if (!AlreadyApplied && args is TurnEnded turnEnded && turnEnded.TurnHandler.CurrentPlayer == player)
+            if (!AlreadyApplied)
             {
-                turnEnded.TurnHandler.ForceNewTurn();
+                gameContext.TurnHandler.ForceNewTurn();
                 AlreadyApplied = true;
             }
         }
+
+       
 
         private NewTurn(NewTurn newTurn)
         {

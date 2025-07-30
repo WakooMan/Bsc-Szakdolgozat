@@ -19,7 +19,7 @@ namespace GameLogic.Handlers
         private readonly IRandomGenerator m_randomGenerator;
 
         [ImportingConstructor]
-        public ChooseWonderHandler(IRandomGenerator randomGenerator, IPlayerActionReceiver playerActionReceiver, )
+        public ChooseWonderHandler(IRandomGenerator randomGenerator, IPlayerActionReceiver playerActionReceiver)
         {
             ArgumentChecker.CheckNull(randomGenerator, nameof(randomGenerator));
             ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));

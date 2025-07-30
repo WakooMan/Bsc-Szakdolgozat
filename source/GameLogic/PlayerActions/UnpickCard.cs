@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 
 namespace GameLogic.PlayerActions
@@ -18,8 +19,9 @@ namespace GameLogic.PlayerActions
 
         public void DoPlayerAction()
         {
+            Card card = m_player.PickedCard.CardObj;
             m_player.PickedCard = null;
-            m_eventManager.Publish(GameEventType.CardUnpicked, new EventArgs());
+            m_eventManager.Publish(GameEventType.CardUnpicked, new OnCardUnpicked(m_player, card));
         }
 
         private readonly Player m_player;

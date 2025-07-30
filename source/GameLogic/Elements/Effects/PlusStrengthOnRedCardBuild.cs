@@ -27,7 +27,6 @@ namespace GameLogic.Elements.Effects
 
         private void OnRedCardBuilt(Player player, EventArgs args)
         {
-            
             if (args is OnCardBuilt eventArgs && eventArgs.Builder == player && eventArgs.Card is RedCard redCard)
             {
                 redCard.Strength.Points += AdditionalStrength.Points;
