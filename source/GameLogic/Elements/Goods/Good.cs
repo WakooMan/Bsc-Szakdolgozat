@@ -10,6 +10,16 @@ namespace GameLogic.Elements.Goods
     {
         public int Amount { get; set; }
 
+        protected Good(Good good)
+        {
+            Amount = good.Amount;
+        }
+
+        protected Good()
+        {
+            Amount = 0;
+        }
+
         public abstract Good Clone();
         public abstract bool Equals(Good? other);
     }

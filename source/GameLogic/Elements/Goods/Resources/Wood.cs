@@ -2,7 +2,7 @@
 {
     public class Wood : GameResource
     {
-        public override GameResource Clone()
+        public override Wood Clone()
         {
             return new Wood();
         }

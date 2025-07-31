@@ -2,9 +2,13 @@
 {
     public class Clay : GameResource
     {
-        public override GameResource Clone()
+        public Clay() { }
+
+        private Clay(Clay clay):base(clay) { }
+
+        public override Clay Clone()
         {
-            return new Clay();
+            return new Clay(this);
         }
 
         public override bool Equals(Good? other)

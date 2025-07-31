@@ -2,6 +2,7 @@
 using GameLogic.Elements.Effects;
 using GameLogic.Elements.Goods;
 using GameLogic.Events;
+using SevenWonders.Common;
 using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
@@ -12,6 +13,8 @@ namespace GameLogic.Handlers
         [ImportingConstructor]
         public CostCalculator(IEventManager eventManager)
         {
+            ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
+
             m_eventManager = eventManager;
         }
 

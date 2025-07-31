@@ -2,9 +2,12 @@
 {
     public class Stone : GameResource
     {
-        public override GameResource Clone()
+        public Stone() { }
+
+        private Stone(Stone stone):base(stone){}
+        public override Stone Clone()
         {
-            return new Stone();
+            return new Stone(this);
         }
 
         public override bool Equals(Good? other)

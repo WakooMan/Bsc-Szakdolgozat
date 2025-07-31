@@ -2,9 +2,15 @@
 {
     public class Papirus : Product
     {
-        public override Product Clone()
+        public Papirus() :base() { }
+
+        private Papirus(Papirus papirus) : base(papirus)
         {
-            return new Papirus();
+        }
+
+        public override Papirus Clone()
+        {
+            return new Papirus(this);
         }
 
         public override bool Equals(Good? other)

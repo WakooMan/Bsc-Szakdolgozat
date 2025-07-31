@@ -2,14 +2,19 @@
 {
     public class Glass : Product
     {
-        public override Product Clone()
+        private Glass(Glass glass) : base(glass)
         {
-            return new Glass();
+        }
+        public Glass() : base() { }
+
+        public override Glass Clone()
+        {
+            return new Glass(this);
         }
 
         public override bool Equals(Good? other)
         {
-            if (other is Glass)
+            if (other is Glass && Amount == other.Amount)
             {
                 return true;
             }
