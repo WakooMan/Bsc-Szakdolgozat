@@ -1,19 +1,17 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnCardSold : EventArgs
+    public class OnCardDestroyed: GameEvent
     {
         public Player Player { get; set; }
         public Card Card { get; set; }
-        public int Money { get; set; }
 
-        public OnCardSold(Player player, Card card, int money)
+        public OnCardDestroyed(Player player, Card card)
         {
             Player = player;
             Card = card;
-            Money = money;
         }
     }
 }

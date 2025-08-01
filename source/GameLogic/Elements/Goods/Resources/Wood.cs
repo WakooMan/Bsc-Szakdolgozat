@@ -2,9 +2,13 @@
 {
     public class Wood : GameResource
     {
+        public Wood(): base() { }
+
+        private Wood(Wood wood) : base(wood) { }
+
         public override Wood Clone()
         {
-            return new Wood();
+            return new Wood(this);
         }
 
         public override bool Equals(Good? other)

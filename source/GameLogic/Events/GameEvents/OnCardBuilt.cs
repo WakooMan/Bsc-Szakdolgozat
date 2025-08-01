@@ -1,9 +1,9 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnCardBuilt: EventArgs
+    public class OnCardBuilt: GameEvent
     {
         public Card Card { get; }
         public Player Builder { get; }

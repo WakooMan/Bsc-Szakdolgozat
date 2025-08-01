@@ -1,10 +1,12 @@
-﻿namespace GameLogic.Events
+﻿using GameLogic.Events.GameEvents;
+
+namespace GameLogic.Events
 {
     public interface IEventManager
     {
-        void Subscribe<TEventArgs>(GameEventType eventType, Action<TEventArgs> listener) where TEventArgs : EventArgs;
-        void Publish<TEventArgs>(GameEventType eventType, TEventArgs eventArgs) where TEventArgs : EventArgs;
-        bool Unsubscribe<TEventArgs>(GameEventType eventType, Action<TEventArgs> listener) where TEventArgs : EventArgs;
+        void Subscribe<TGameEvent>(Action<TGameEvent> listener) where TGameEvent : GameEvent;
+        void Publish<TGameEvent>(TGameEvent eventArgs) where TGameEvent : GameEvent;
+        bool Unsubscribe<TGameEvent>(Action<TGameEvent> listener) where TGameEvent : GameEvent;
         void ClearSubscriptions();
     }
 }

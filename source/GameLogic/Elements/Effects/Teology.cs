@@ -1,4 +1,4 @@
-﻿using GameLogic.Events;
+﻿using GameLogic.Events.GameEvents;
 
 namespace GameLogic.Elements.Effects
 {
@@ -14,7 +14,7 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnWonderBuilt>(GameEventType.WonderBuilt, (args) => OnWonderBuilt(player, args));
+            gameContext.EventManager.Subscribe<OnWonderBuilt>((args) => OnWonderBuilt(player, args));
         }
 
         private void OnWonderBuilt(Player player, OnWonderBuilt args)

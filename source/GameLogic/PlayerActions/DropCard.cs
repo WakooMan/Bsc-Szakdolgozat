@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 
 namespace GameLogic.PlayerActions
 {
@@ -20,7 +21,7 @@ namespace GameLogic.PlayerActions
         public void DoPlayerAction()
         {
             m_player.Cards.Remove(m_card);
-            m_eventManager.Publish(GameEventType.CardDestroyed, new OnCardDestroyed(m_player, m_card));
+            m_eventManager.Publish(new OnCardDestroyed(m_player, m_card));
         }
 
         private readonly Card m_card;

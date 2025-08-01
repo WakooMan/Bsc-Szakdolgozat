@@ -1,8 +1,8 @@
 ﻿using GameLogic.Elements;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnMilitaryAdvanced: EventArgs
+    public class OnMilitaryAdvanced: GameEvent
     {
         public Player Player { get; set; }
         public int Advancement { get; set; }

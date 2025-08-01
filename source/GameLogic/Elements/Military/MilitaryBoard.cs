@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements.Modifiers;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Military
@@ -23,9 +24,9 @@ namespace GameLogic.Elements.Military
             m_keyValuePairs.Add(players.First(), PlayerSide.First);
             m_keyValuePairs.Add(players.Last(), PlayerSide.Second);
             Developments.AddRange(developments);
-            eventManager.Subscribe<OnScientificProgress>(GameEventType.ScientificProgress, (args) => OnScientificProgress(eventManager, args));
-            eventManager.Subscribe<OnMilitaryTokenReachedThreshold>(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
-            eventManager.Subscribe<OnMilitaryAdvanced>(GameEventType.MilitaryAdvanced, (args) => OnMilitaryAdvanced(eventManager, args));
+            eventManager.Subscribe<OnScientificProgress>((args) => OnScientificProgress(eventManager, args));
+            eventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
+            eventManager.Subscribe<OnMilitaryAdvanced>((args) => OnMilitaryAdvanced(eventManager, args));
         }
 
         private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)
@@ -56,12 +57,12 @@ namespace GameLogic.Elements.Military
 
             if (militaryCards.Any())
             {
-                eventManager.Publish(GameEventType.MilitaryTokenReachedThreshold, new OnMilitaryTokenReachedThreshold(militaryCards));
+                eventManager.Publish(new OnMilitaryTokenReachedThreshold(militaryCards));
             }
 
             if (newIdx == 0 || newIdx == Fields.Count - 1)
             {
-                eventManager.Publish(GameEventType.MilitaryVictory, new EventArgs());
+                eventManager.Publish(new MilitaryVictory());
             }
         }
 
@@ -75,7 +76,7 @@ namespace GameLogic.Elements.Military
 
             if (disciplines.Count >= 6)
             {
-                eventManager.Publish(GameEventType.ScientificVictory, new EventArgs());
+                eventManager.Publish(new ScientificVictory());
             }
         }
 

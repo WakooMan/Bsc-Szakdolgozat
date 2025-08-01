@@ -1,5 +1,4 @@
-﻿using GameLogic.Elements;
-using GameLogic.Elements.Wonders;
+﻿using GameLogic.Elements.Wonders;
 
 namespace GameLogic.PlayerActions
 {
@@ -7,10 +6,9 @@ namespace GameLogic.PlayerActions
     {
         public Wonder Wonder => m_wonder;
 
-        public ChooseWonderAction(Wonder wonder, Player player)
+        public ChooseWonderAction(Wonder wonder)
         {
             m_wonder = wonder;
-            m_player = player;
         }
 
         public bool CanPerform()
@@ -20,10 +18,9 @@ namespace GameLogic.PlayerActions
 
         public void DoPlayerAction()
         {
-            m_player.Wonders.Add(m_wonder);
+            throw new NotImplementedException();
         }
 
         private readonly Wonder m_wonder;
-        private readonly Player m_player;
     }
 }

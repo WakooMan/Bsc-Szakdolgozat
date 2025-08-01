@@ -1,8 +1,8 @@
 ﻿using GameLogic.Elements.Military;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnMilitaryTokenReachedThreshold : EventArgs
+    public class OnMilitaryTokenReachedThreshold : GameEvent
     {
         public List<MilitaryCard> MilitaryCards { get; set; }
 

@@ -2,9 +2,9 @@
 using GameLogic.Elements.Disciplines;
 using GameLogic.Interfaces;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnScientificProgress: EventArgs
+    public class OnScientificProgress: GameEvent
     {
         public Player Player { get; set; }
         public Discipline Discipline { get; set; }

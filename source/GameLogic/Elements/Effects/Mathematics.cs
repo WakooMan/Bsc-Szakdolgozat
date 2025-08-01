@@ -1,4 +1,4 @@
-﻿using GameLogic.Events;
+﻿using GameLogic.Events.GameEvents;
 
 namespace GameLogic.Elements.Effects
 {
@@ -21,7 +21,7 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnGameEnded>(GameEventType.GameEnded, (args) => OnGameEnded(player, args));
+            gameContext.EventManager.Subscribe<OnGameEnded>((args) => OnGameEnded(player, args));
         }
 
         private void OnGameEnded(Player player, OnGameEnded args)

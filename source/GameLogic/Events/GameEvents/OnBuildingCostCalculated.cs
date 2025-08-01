@@ -1,9 +1,9 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Effects;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnBuildingCostCalculated: EventArgs
+    public class OnBuildingCostCalculated: GameEvent
     {
         public List<BuyGoodItem> BuyGoodItems { get; }
         public List<CheaperBuilding> CheaperBuildings { get; }

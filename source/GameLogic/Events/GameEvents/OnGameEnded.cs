@@ -1,8 +1,8 @@
 ﻿using GameLogic.Elements;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnGameEnded: EventArgs
+    public class OnGameEnded: GameEvent
     {
         public Dictionary<Player, int> VictoryPoints { get; }
 

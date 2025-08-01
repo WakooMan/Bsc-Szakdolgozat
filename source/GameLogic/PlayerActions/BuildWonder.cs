@@ -2,6 +2,7 @@
 using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 
 namespace GameLogic.PlayerActions
@@ -27,7 +28,7 @@ namespace GameLogic.PlayerActions
             m_wonder.HasBeenBuilt = true;
             Card card = Player.PickedCard.CardObj;
             Player.PickedCard = null;
-            m_gameContext.EventManager.Publish(GameEventType.WonderBuilt, new OnWonderBuilt(Player, card, m_wonder));
+            m_gameContext.EventManager.Publish(new OnWonderBuilt(Player, card, m_wonder));
             m_wonder.OnBuilt(m_gameContext);
         }
 

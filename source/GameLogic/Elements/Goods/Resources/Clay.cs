@@ -2,7 +2,7 @@
 {
     public class Clay : GameResource
     {
-        public Clay() { }
+        public Clay(): base() { }
 
         private Clay(Clay clay):base(clay) { }
 

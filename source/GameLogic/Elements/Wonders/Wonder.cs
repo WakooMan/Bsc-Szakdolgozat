@@ -19,6 +19,7 @@ namespace GameLogic.Elements.Wonders
 
         public Wonder()
         {
+            Name = string.Empty;
             Effects = new List<Effect>();
             GoodCost = new List<Good>();
             HasBeenBuilt = false;

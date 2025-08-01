@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
 using System.ComponentModel.Composition;
 
@@ -57,12 +58,12 @@ namespace GameLogic.Handlers
                 throw new InvalidOperationException("Cannot execute NextPlayer method until SetPlayers method is not called!");
             }
 
-            m_eventManager.Publish(GameEventType.TurnEnded, new TurnEnded(CurrentPlayer));
+            m_eventManager.Publish(new TurnEnded(CurrentPlayer));
             if (!m_newTurnForced)
             {
                 m_index = (m_index + 1 < m_players.Count) ? m_index + 1 : 0;
             }
-            m_eventManager.Publish(GameEventType.TurnStarted, new TurnStarted(CurrentPlayer));
+            m_eventManager.Publish(new TurnStarted(CurrentPlayer));
             m_newTurnForced = false;
         }
 
@@ -74,7 +75,7 @@ namespace GameLogic.Handlers
             }
 
             m_newTurnForced = true;
-            m_eventManager.Publish(GameEventType.ExtraTurnGranted, new EventArgs());
+            m_eventManager.Publish(new ExtraTurnGranted());
         }
 
         private List<Player>? m_players;

@@ -1,13 +1,15 @@
 ﻿using GameLogic.Elements;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class TurnStarted : EventArgs
+    public class TurnEnded: GameEvent
     {
         public Player Player { get; }
-        public TurnStarted(Player player)
+
+        public TurnEnded(Player player)
         {
             Player = player;
         }
+
     }
 }

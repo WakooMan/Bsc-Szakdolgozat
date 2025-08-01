@@ -1,5 +1,5 @@
 ﻿using GameLogic.Elements.GameCards;
-using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 
 namespace GameLogic.Elements.Effects
 {
@@ -17,7 +17,7 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnCardBuilt>(GameEventType.CardBuilt, (args) => OnRedCardBuilt(player, args));
+            gameContext.EventManager.Subscribe<OnCardBuilt>((args) => OnRedCardBuilt(player, args));
         }
 
         private PlusStrengthOnRedCardBuild(PlusStrengthOnRedCardBuild plusStrengthOnRedCardBuild)

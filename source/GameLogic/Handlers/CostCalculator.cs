@@ -2,6 +2,7 @@
 using GameLogic.Elements.Effects;
 using GameLogic.Elements.Goods;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
 using System.ComponentModel.Composition;
 
@@ -20,7 +21,7 @@ namespace GameLogic.Handlers
 
         public bool CanAfford(IBuildable buildable, Player buyer, Player opponent)
         {
-            int cost = GetBuildCost(buildable, buyer, opponent) + buildable.MoneyCost;
+            int cost = GetBuildCost(buildable, buyer, opponent);
             return buyer.Money >= cost;
         }
 
@@ -31,7 +32,7 @@ namespace GameLogic.Handlers
             Dictionary<Type, Good> opponentGoods = opponent.Goods;
 
             OnBuildingCostCalculated onBuildingCostCalculated = new OnBuildingCostCalculated(buyer);
-            m_eventManager.Publish(GameEventType.BuildingCostCalculated, onBuildingCostCalculated);
+            m_eventManager.Publish(onBuildingCostCalculated);
 
             foreach (var cheaperBuilding in onBuildingCostCalculated.CheaperBuildings.Where(cb => cb.BuildingType == buildable.BuildingType))
             {
@@ -49,11 +50,12 @@ namespace GameLogic.Handlers
 
             foreach (Good good in missing)
             {
-                int price = onBuildingCostCalculated.BuyGoodItems.Any() ? GetDiscount(onBuildingCostCalculated.BuyGoodItems) : 2 + opponentGoods[good.GetType()].Amount;
+                List<BuyGoodItem> items = onBuildingCostCalculated.BuyGoodItems.Where(item => good.GetType().Name == item.GoodType).ToList();
+                int price = items.Any() ? GetDiscount(items) : 2 + (opponentGoods.ContainsKey(good.GetType()) ? opponentGoods[good.GetType()].Amount : 0);
                 totalCost += price * good.Amount;
             }
 
-            return totalCost;
+            return totalCost + buildable.MoneyCost;
         }
 
         public List<Good> GetMissingGoods(IBuildable buildable, Player buyer)

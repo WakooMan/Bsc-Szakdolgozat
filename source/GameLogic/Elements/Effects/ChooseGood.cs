@@ -1,6 +1,6 @@
 ﻿using GameLogic.Elements.Goods;
 using GameLogic.Elements.Goods.Factories;
-using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
@@ -38,7 +38,7 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<TurnStarted>(GameEventType.TurnStarted, (args) => SelectGood(gameContext.PlayerActionReceiver, player, args));
+            gameContext.EventManager.Subscribe<TurnStarted>((args) => SelectGood(gameContext.PlayerActionReceiver, player, args));
         }
 
         private void SelectGood(IPlayerActionReceiver playerActionReceiver, Player player, TurnStarted eventArgs)

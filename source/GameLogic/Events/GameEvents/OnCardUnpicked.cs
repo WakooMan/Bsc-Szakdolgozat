@@ -1,14 +1,14 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnCardDestroyed: EventArgs
+    public class OnCardUnpicked: GameEvent
     {
         public Player Player { get; set; }
         public Card Card { get; set; }
 
-        public OnCardDestroyed(Player player, Card card)
+        public OnCardUnpicked(Player player, Card card)
         {
             Player = player;
             Card = card;

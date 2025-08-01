@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.Handlers;
 using GameLogic.Interfaces;
 using NSubstitute;
@@ -52,16 +53,16 @@ namespace GameLogic_UnitTests.Handlers
         {
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player2, Is.True);
-            m_eventManager.Received(1).Publish(GameEventType.TurnStarted, Arg.Any<TurnStarted>());
-            m_eventManager.Received(1).Publish(GameEventType.TurnEnded, Arg.Any<TurnEnded>());
+            m_eventManager.Received(1).Publish(GameEvent.TurnStarted, Arg.Any<TurnStarted>());
+            m_eventManager.Received(1).Publish(GameEvent.TurnEnded, Arg.Any<TurnEnded>());
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player1, Is.True);
-            m_eventManager.Received(2).Publish(GameEventType.TurnStarted, Arg.Any<TurnStarted>());
-            m_eventManager.Received(2).Publish(GameEventType.TurnEnded, Arg.Any<TurnEnded>());
+            m_eventManager.Received(2).Publish(GameEvent.TurnStarted, Arg.Any<TurnStarted>());
+            m_eventManager.Received(2).Publish(GameEvent.TurnEnded, Arg.Any<TurnEnded>());
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player2, Is.True);
-            m_eventManager.Received(3).Publish(GameEventType.TurnStarted, Arg.Any<TurnStarted>());
-            m_eventManager.Received(3).Publish(GameEventType.TurnEnded, Arg.Any<TurnEnded>());
+            m_eventManager.Received(3).Publish(GameEvent.TurnStarted, Arg.Any<TurnStarted>());
+            m_eventManager.Received(3).Publish(GameEvent.TurnEnded, Arg.Any<TurnEnded>());
         }
 
         private TurnHandler m_turnHandler;

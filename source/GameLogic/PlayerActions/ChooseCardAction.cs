@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 
 namespace GameLogic.PlayerActions
 {
@@ -20,7 +21,7 @@ namespace GameLogic.PlayerActions
         public void DoPlayerAction()
         {
             Player player = m_gameContext.TurnHandler.CurrentPlayer;
-            m_gameContext.EventManager.Publish(GameEventType.CardBuilt, new OnCardBuilt(m_card, player, 0, false));
+            m_gameContext.EventManager.Publish(new OnCardBuilt(m_card, player, 0, false));
             m_card.OnBuilt(m_gameContext);
         }
 

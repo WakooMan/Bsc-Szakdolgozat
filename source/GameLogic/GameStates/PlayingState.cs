@@ -1,4 +1,4 @@
-﻿using GameLogic.Events;
+﻿using GameLogic.Events.GameEvents;
 using GameLogic.PlayerTurnStates;
 
 namespace GameLogic.GameStates
@@ -16,9 +16,9 @@ namespace GameLogic.GameStates
         
         public void DoStateAction()
         {
-            GameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
-            GameContext.EventManager.Subscribe<EventArgs>(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
-            GameContext.EventManager.Subscribe<EventArgs>(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
+            GameContext.EventManager.Subscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Subscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
 
             while (!IsGameOver)
             {
@@ -42,10 +42,10 @@ namespace GameLogic.GameStates
                 }
             }
 
-            GameContext.EventManager.Unsubscribe<OnMilitaryTokenReachedThreshold>(GameEventType.MilitaryTokenReachedThreshold, OnMilitaryTokenReachedThreshold);
-            GameContext.EventManager.Unsubscribe<EventArgs>(GameEventType.MilitaryVictory, OnScientificOrMilitaryVictory);
-            GameContext.EventManager.Unsubscribe<EventArgs>(GameEventType.ScientificVictory, OnScientificOrMilitaryVictory);
-            GameContext.EventManager.Publish(GameEventType.GameEnded, new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
+            GameContext.EventManager.Unsubscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
+            GameContext.EventManager.Unsubscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Unsubscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
+            GameContext.EventManager.Publish(new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
 
         }
 
@@ -59,7 +59,7 @@ namespace GameLogic.GameStates
             eventArgs.MilitaryCards.ForEach(militaryCard => militaryCard.Apply(GameContext));
         }
 
-        private void OnScientificOrMilitaryVictory(EventArgs args)
+        private void OnScientificOrMilitaryVictory(GameEvent args)
         {
             IsGameOver = true;
         }

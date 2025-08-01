@@ -1,8 +1,8 @@
 ﻿using GameLogic.Ages;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnAgeEnded: EventArgs
+    public class OnAgeEnded: GameEvent
     {
         public AgesEnum EndedAge { get; }
         public OnAgeEnded(AgesEnum endedAge)

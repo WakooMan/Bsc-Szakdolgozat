@@ -1,9 +1,9 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 
-namespace GameLogic.Events
+namespace GameLogic.Events.GameEvents
 {
-    public class OnCardPicked : EventArgs
+    public class OnCardPicked : GameEvent
     {
         public Player Player { get; set; }
         public Card Card { get; set; }

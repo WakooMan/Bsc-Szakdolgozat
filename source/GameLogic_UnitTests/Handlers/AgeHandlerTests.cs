@@ -2,6 +2,7 @@
 using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures.Factories;
 using GameLogic.Handlers;
 using NSubstitute;
@@ -53,7 +54,7 @@ namespace GameLogic_UnitTests.Handlers
             Assert.That(result, Is.True);
             Assert.That(m_ageHandler.CurrentAge is SecondAge, Is.True);
             Assert.That(m_ageHandler.CurrentAge.Age == AgesEnum.II, Is.True);
-            m_eventManager.Received(1).Publish(GameEventType.AgeEnded, Arg.Any<OnAgeEnded>());
+            m_eventManager.Received(1).Publish(GameEvent.AgeEnded, Arg.Any<OnAgeEnded>());
         }
 
         [Test]
@@ -65,7 +66,7 @@ namespace GameLogic_UnitTests.Handlers
             Assert.That(result1, Is.True);
             Assert.That(m_ageHandler.CurrentAge is ThirdAge, Is.True);
             Assert.That(m_ageHandler.CurrentAge.Age == AgesEnum.III, Is.True);
-            m_eventManager.Received(2).Publish(GameEventType.AgeEnded, Arg.Any<OnAgeEnded>());
+            m_eventManager.Received(2).Publish(GameEvent.AgeEnded, Arg.Any<OnAgeEnded>());
         }
 
         [Test]
@@ -79,7 +80,7 @@ namespace GameLogic_UnitTests.Handlers
             Assert.That(result2, Is.False);
             Assert.That(m_ageHandler.CurrentAge is ThirdAge, Is.True);
             Assert.That(m_ageHandler.CurrentAge.Age == AgesEnum.III, Is.True);
-            m_eventManager.Received(2).Publish(GameEventType.AgeEnded, Arg.Any<OnAgeEnded>());
+            m_eventManager.Received(2).Publish(GameEvent.AgeEnded, Arg.Any<OnAgeEnded>());
         }
 
         private AgeHandler m_ageHandler;

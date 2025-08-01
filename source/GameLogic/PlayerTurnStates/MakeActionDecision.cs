@@ -1,5 +1,5 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 using GameLogic.PlayerActions;
 
@@ -17,8 +17,8 @@ namespace GameLogic.PlayerTurnStates
 
         public void ExecuteTurnState()
         {
-            Action<EventArgs> action = (args) => GoToPrevState = true;
-            m_gameContext.EventManager.Subscribe(GameEventType.CardUnpicked, action);
+            Action<OnCardUnpicked> action = (args) => GoToPrevState = true;
+            m_gameContext.EventManager.Subscribe(action);
             List<IPlayerAction> playerActions =
             [
                 new UnpickCard(m_gameContext.EventManager, CurrentPlayer), new BuildCard(m_gameContext), new SellCard(m_gameContext.EventManager, Composition, CurrentPlayer),
@@ -26,7 +26,7 @@ namespace GameLogic.PlayerTurnStates
             ];
 
             m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions).DoPlayerAction();
-            m_gameContext.EventManager.Unsubscribe(GameEventType.CardUnpicked, action);
+            m_gameContext.EventManager.Unsubscribe(action);
         }
 
         public IPlayerTurnState GetNextTurnState()

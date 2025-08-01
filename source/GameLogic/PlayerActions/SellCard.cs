@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 
 namespace GameLogic.PlayerActions
@@ -25,7 +26,7 @@ namespace GameLogic.PlayerActions
             m_player.Money += money;
             Card card = m_player.PickedCard.CardObj;
             m_player.PickedCard = null;
-            m_eventManager.Publish(GameEventType.CardSold, new OnCardSold(m_player, card, money));
+            m_eventManager.Publish(new OnCardSold(m_player, card, money));
         }
 
         public bool CanPerform()

@@ -2,7 +2,7 @@
 {
     public class Stone : GameResource
     {
-        public Stone() { }
+        public Stone(): base() { }
 
         private Stone(Stone stone):base(stone){}
         public override Stone Clone()

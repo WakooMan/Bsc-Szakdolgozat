@@ -2,6 +2,7 @@
 using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures.Factories;
 using SevenWonders.Common;
 using System.ComponentModel.Composition;
@@ -62,7 +63,7 @@ namespace GameLogic.Handlers
                     return false;
             }
 
-            m_eventManager.Publish(GameEventType.AgeEnded, new OnAgeEnded(previousAge));
+            m_eventManager.Publish(new OnAgeEnded(previousAge));
             return true;
         }
 

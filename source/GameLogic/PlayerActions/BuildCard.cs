@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 
 namespace GameLogic.PlayerActions
@@ -33,7 +34,7 @@ namespace GameLogic.PlayerActions
             }
 
             Player.PickedCard = null;
-            m_gameContext.EventManager.Publish(GameEventType.CardBuilt, new OnCardBuilt(card.CardObj, Player, BuildCost, chainBuildUsed));
+            m_gameContext.EventManager.Publish(new OnCardBuilt(card.CardObj, Player, BuildCost, chainBuildUsed));
             card.CardObj.OnBuilt(m_gameContext);
 
         }

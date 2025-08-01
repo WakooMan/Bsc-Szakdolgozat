@@ -1,4 +1,5 @@
 ﻿using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 
 namespace GameLogic.Elements.Effects
 {
@@ -19,7 +20,7 @@ namespace GameLogic.Elements.Effects
 
         public override void Apply(IGameContext gameContext)
         {
-            gameContext.EventManager.Publish(GameEventType.MilitaryAdvanced, new OnMilitaryAdvanced(gameContext.TurnHandler.CurrentPlayer, Points));
+            gameContext.EventManager.Publish(new OnMilitaryAdvanced(gameContext.TurnHandler.CurrentPlayer, Points));
         }
     }
 }
