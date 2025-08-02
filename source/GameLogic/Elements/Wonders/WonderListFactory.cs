@@ -9,6 +9,8 @@ namespace GameLogic.Elements.Wonders
         [ImportingConstructor]
         public WonderListFactory(IXmlHandler xmlHandler)
         {
+            ArgumentChecker.CheckNull(xmlHandler, nameof(xmlHandler));
+
             m_xmlHandler = xmlHandler;
         }
 

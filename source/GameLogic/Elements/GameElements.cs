@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements.Developments;
 using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
+using SevenWonders.Common;
 using System.ComponentModel.Composition;
 
 namespace GameLogic.Elements
@@ -16,6 +17,10 @@ namespace GameLogic.Elements
         [ImportingConstructor]
         public GameElements([Import(nameof(MainCardListFactory), typeof(ICardListFactory))] ICardListFactory cardListFactory, IWonderListFactory wonderListFactory, IDevelopmentListFactory developmentListFactory)
         {
+            ArgumentChecker.CheckNull(cardListFactory, nameof(cardListFactory));
+            ArgumentChecker.CheckNull(wonderListFactory, nameof(wonderListFactory));
+            ArgumentChecker.CheckNull(developmentListFactory, nameof(developmentListFactory));
+
             m_cardList = cardListFactory.Create();
             m_wonderList = wonderListFactory.Create();
             m_developmentList = developmentListFactory.Create();

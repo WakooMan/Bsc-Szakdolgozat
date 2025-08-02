@@ -26,9 +26,9 @@ namespace GameLogic_UnitTests.Handlers
         [Test]
         public void When_GetBuildCost_Called_With_Discount_And_Without_Discount()
         {
-            m_eventManager.When((evt) => evt.Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>())).Do((cb) =>
+            m_eventManager.When((evt) => evt.Publish(Arg.Any<OnBuildingCostCalculated>())).Do((cb) =>
             {
-                OnBuildingCostCalculated arg = (OnBuildingCostCalculated)cb.Args()[1];
+                OnBuildingCostCalculated arg = (OnBuildingCostCalculated)cb[0];
                 arg.BuyGoodItems.AddRange([new BuyGoodItem() { MoneyCost = 1, GoodType = nameof(Clay) }]);
             });
             IBuildable buildable = Substitute.For<IBuildable>();
@@ -41,16 +41,16 @@ namespace GameLogic_UnitTests.Handlers
             opponent.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 2 }, new Stone() { Amount = 2 }] }]);
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(cost, Is.EqualTo(7));
         }
 
         [Test]
         public void When_GetBuildCost_Called_With_Cheaper_Building_And_Building_Type_Is_Same()
         {
-            m_eventManager.When((evt) => evt.Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>())).Do((cb) =>
+            m_eventManager.When((evt) => evt.Publish(Arg.Any<OnBuildingCostCalculated>())).Do((cb) =>
             {
-                OnBuildingCostCalculated arg = (OnBuildingCostCalculated)cb.Args()[1];
+                OnBuildingCostCalculated arg = (OnBuildingCostCalculated)cb[0];
                 arg.CheaperBuildings.Add(new CheaperBuilding() { AmountOfResources = 2, BuildingType = nameof(RedCard) });
             });
             IBuildable buildable = Substitute.For<IBuildable>();
@@ -62,16 +62,16 @@ namespace GameLogic_UnitTests.Handlers
             Player opponent = new Player("test2");
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(cost, Is.EqualTo(2));
         }
 
         [Test]
         public void When_GetBuildCost_Called_With_Cheaper_Building_And_Building_Type_Is_Not_Same()
         {
-            m_eventManager.When((evt) => evt.Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>())).Do((cb) =>
+            m_eventManager.When((evt) => evt.Publish(Arg.Any<OnBuildingCostCalculated>())).Do((cb) =>
             {
-                OnBuildingCostCalculated arg = (OnBuildingCostCalculated)cb.Args()[1];
+                OnBuildingCostCalculated arg = (OnBuildingCostCalculated)cb[0];
                 arg.CheaperBuildings.Add(new CheaperBuilding() { AmountOfResources = 2, BuildingType = nameof(YellowCard) });
             });
             IBuildable buildable = Substitute.For<IBuildable>();
@@ -83,7 +83,7 @@ namespace GameLogic_UnitTests.Handlers
             Player opponent = new Player("test2");
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(cost, Is.EqualTo(6));
         }
 
@@ -99,7 +99,7 @@ namespace GameLogic_UnitTests.Handlers
             Player opponent = new Player("test2");
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(cost, Is.EqualTo(0));
         }
 
@@ -115,7 +115,7 @@ namespace GameLogic_UnitTests.Handlers
             Player opponent = new Player("test2");
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(cost, Is.EqualTo(5));
         }
 
@@ -131,7 +131,7 @@ namespace GameLogic_UnitTests.Handlers
             Player opponent = new Player("test2");
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(cost, Is.EqualTo(0));
         }
 
@@ -148,7 +148,7 @@ namespace GameLogic_UnitTests.Handlers
             Player opponent = new Player("test2");
             bool result = m_costCalculator.CanAfford(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(result, Is.True);
         }
 
@@ -165,7 +165,7 @@ namespace GameLogic_UnitTests.Handlers
             Player opponent = new Player("test2");
             bool result = m_costCalculator.CanAfford(buildable, player, opponent);
 
-            m_eventManager.Received(1).Publish(GameEvent.BuildingCostCalculated, Arg.Any<OnBuildingCostCalculated>());
+            m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
             Assert.That(result, Is.False);
         }
 
