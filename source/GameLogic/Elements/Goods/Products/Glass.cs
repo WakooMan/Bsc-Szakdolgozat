@@ -11,15 +11,5 @@
         {
             return new Glass(this);
         }
-
-        public override bool Equals(Good? other)
-        {
-            if (other is Glass && Amount == other.Amount)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

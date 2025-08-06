@@ -10,15 +10,5 @@
         {
             return new Wood(this);
         }
-
-        public override bool Equals(Good? other)
-        {
-            if (other is Wood)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

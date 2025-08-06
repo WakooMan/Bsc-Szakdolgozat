@@ -12,15 +12,5 @@
         {
             return new Papirus(this);
         }
-
-        public override bool Equals(Good? other)
-        {
-            if (other is Papirus)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

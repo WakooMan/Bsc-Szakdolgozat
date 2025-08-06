@@ -10,15 +10,5 @@
         {
             return new Clay(this);
         }
-
-        public override bool Equals(Good? other)
-        {
-            if (other is Clay)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }
