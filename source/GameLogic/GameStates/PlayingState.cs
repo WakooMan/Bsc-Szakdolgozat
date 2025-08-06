@@ -51,7 +51,7 @@ namespace GameLogic.GameStates
 
         public IGameState GetNextState()
         {
-            return null;
+            return new EndGameState();
         }
 
         private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)

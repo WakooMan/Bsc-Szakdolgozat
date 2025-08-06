@@ -7,7 +7,11 @@ namespace GameLogic.Elements.Effects
         public int AmountOfResources { get; set; }
         public string BuildingType { get; set; }
 
-        public CheaperBuilding() { }
+        public CheaperBuilding()
+        {
+            AmountOfResources = 0;
+            BuildingType = string.Empty;
+        }
 
         private CheaperBuilding(CheaperBuilding cheaperBuilding)
         {

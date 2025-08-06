@@ -4,10 +4,14 @@ namespace GameLogic.Elements.Effects
 {
     public class GetMoneyForCard : Effect
     {
-        public string? CardType { get; set; }
+        public string CardType { get; set; }
         public int MoneyPerCard { get; set; }
 
-        public GetMoneyForCard() { }
+        public GetMoneyForCard()
+        {
+            CardType = string.Empty;
+            MoneyPerCard = 0;
+        }
         private GetMoneyForCard(GetMoneyForCard getMoneyForCard)
         {
             CardType = getMoneyForCard.CardType;
@@ -22,7 +26,7 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            player.Money += MoneyPerCard * player.Cards.Where(card => card.BuildingType == CardType).Count();
+            player.Money += MoneyPerCard * player.Cards.Count(card => card.BuildingType == CardType);
         }
 
     }

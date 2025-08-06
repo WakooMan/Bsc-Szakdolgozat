@@ -22,7 +22,7 @@ namespace GameLogic.PlayerActions
                 throw new InvalidOperationException("Cannot execute action if player did not pick a card to sell.");
             }
             m_composition.RemoveCard(m_player.PickedCard);
-            int money = 2 + m_player.Cards.Where(card => card is YellowCard).Count();
+            int money = 2 + m_player.Cards.OfType<YellowCard>().Count();
             m_player.Money += money;
             Card card = m_player.PickedCard.CardObj;
             m_player.PickedCard = null;

@@ -9,7 +9,11 @@ namespace GameLogic.Elements.Military
         public int IndexStart { get; set; }
         public int IndexEnd { get; set; }
 
-        public MilitaryCard() { }
+        public MilitaryCard()
+        {
+            EnemyLoseMoney = new EnemyLoseMoney();
+            VictoryPoints = new VictoryPoints();
+        }
 
         public void Apply(IGameContext gameContext)
         {

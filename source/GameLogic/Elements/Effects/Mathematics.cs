@@ -6,7 +6,10 @@ namespace GameLogic.Elements.Effects
     {
         public VictoryPoints VictoryPointsPerDevelopment { get; set; }
 
-        public Mathematics() { }
+        public Mathematics()
+        {
+            VictoryPointsPerDevelopment = new VictoryPoints();
+        }
 
         private Mathematics(Mathematics mathematics)
         {

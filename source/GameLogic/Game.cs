@@ -2,6 +2,7 @@
 using GameLogic.Elements.Modifiers;
 using GameLogic.Elements.Wonders;
 using GameLogic.GameStates;
+using SevenWonders.Common;
 using System.ComponentModel.Composition;
 
 namespace GameLogic
@@ -12,7 +13,7 @@ namespace GameLogic
         private List<Player> m_players;
         private readonly IGameContext m_gameContext;
         private bool m_isInitialized = false;
-        public IGameState? CurrentState { get; private set; }
+        public IGameState CurrentState { get; private set; }
         public IReadOnlyList<Player> Players => m_players;
 
         [ImportingConstructor]
@@ -20,18 +21,15 @@ namespace GameLogic
         {
             m_gameContext = gameContext;
             m_players = new List<Player>();
-            CurrentState = null;
+            CurrentState = new EndGameState();
             m_isInitialized = false;
         }
 
         public void GameLoop()
         {
-            if (!m_isInitialized)
-            {
-                throw new InvalidOperationException("Cannot start an uninitialized game!");
-            }
+            ArgumentChecker.CheckPredicateForOperation(() => !m_isInitialized, "Cannot start an uninitialized game!");
 
-            while (CurrentState != null)
+            while (CurrentState is not EndGameState)
             {
                 CurrentState.DoStateAction();
                 CurrentState = CurrentState.GetNextState();

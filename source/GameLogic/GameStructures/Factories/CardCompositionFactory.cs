@@ -25,7 +25,7 @@ namespace GameLogic.GameStructures.Factories
             return new CardComposition(m_cardCompositionFileHandlerFactory.CreateCardCompositionFileHandler(cardCompositionFile), m_cardNodeFactory, cards);
         }
 
-        private ICardNodeFactory m_cardNodeFactory;
-        private ICardCompositionFileHandlerFactory m_cardCompositionFileHandlerFactory;
+        private readonly ICardNodeFactory m_cardNodeFactory;
+        private readonly ICardCompositionFileHandlerFactory m_cardCompositionFileHandlerFactory;
     }
 }

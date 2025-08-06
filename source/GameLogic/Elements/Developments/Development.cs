@@ -7,7 +7,11 @@ namespace GameLogic.Elements.Modifiers
         public string Name { get; set; }
         public List<Effect> Effects { get; set; }
 
-        public Development() { }
+        public Development()
+        {
+            Name = string.Empty;
+            Effects = new List<Effect>();
+        }
 
         private Development(Development development)
         {

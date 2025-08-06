@@ -9,7 +9,7 @@ namespace GameLogic.Ages
 
         public override string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(), "Data", "ThirdAgeComposition.csv");
 
-        public ThirdAge(ICardCompositionFactory cardCompositionFactory, ICardList cardList) : base(cardCompositionFactory, cardList?.Cards.Where(card => card.Age == AgesEnum.III).ToList() ?? null)
+        public ThirdAge(ICardCompositionFactory cardCompositionFactory, ICardList cardList) : base(cardCompositionFactory, cardList?.Cards.Where(card => card.Age == AgesEnum.III).ToList() ?? [])
         { }
     }
 }

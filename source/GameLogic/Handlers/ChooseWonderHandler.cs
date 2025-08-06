@@ -40,7 +40,8 @@ namespace GameLogic.Handlers
             player.Wonders.Add(action.Wonder);
             m_wonders.Remove(action.Wonder);
             actions.Remove(action);
-            m_indexOfPlayer = (WondersChosenNum == 4) ? 1 : (m_indexOfPlayer == 0) ? 1 : 0;
+            int nextPlayer = (m_indexOfPlayer == 0) ? 1 : 0;
+            m_indexOfPlayer = (WondersChosenNum == 4) ? 1 : nextPlayer;
         }
 
         public void Initialize(ICollection<Player> players, ICollection<Wonder> wonders)

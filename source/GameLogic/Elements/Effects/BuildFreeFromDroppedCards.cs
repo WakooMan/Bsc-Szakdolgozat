@@ -7,7 +7,7 @@ namespace GameLogic.Elements.Effects
         public BuildFreeFromDroppedCards() { }
         public override void Apply(IGameContext gameContext)
         {
-            IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, gameContext.DroppedCardList.Cards.Select(card => (IPlayerAction)new ChooseCardAction(gameContext, card)).ToArray());
+            IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, gameContext.DroppedCardList?.Cards.Select(card => (IPlayerAction)new ChooseCardAction(gameContext, card)).ToArray() ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!"););
             playerAction.DoPlayerAction();
         }
 

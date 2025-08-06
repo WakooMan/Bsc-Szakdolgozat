@@ -7,9 +7,6 @@ namespace GameLogic.GameStructures
 {
     public class CardComposition : ICardComposition
     {
-        private List<ICardNode> m_cardNodes;
-        private ICardCompositionFileHandler m_cardCompositionFileHandler;
-        private ICardNodeFactory m_cardNodeFactory;
         public IReadOnlyList<ICardNode> AvailableCards => m_cardNodes.Where(card => card.CoveredBy.Count <= 0).ToList();
         public IReadOnlyList<ICardNode> AllCards => m_cardNodes;
 
@@ -49,5 +46,9 @@ namespace GameLogic.GameStructures
                 }
             }
         }
+
+        private readonly List<ICardNode> m_cardNodes;
+        private readonly ICardCompositionFileHandler m_cardCompositionFileHandler;
+        private readonly ICardNodeFactory m_cardNodeFactory;
     }
 }

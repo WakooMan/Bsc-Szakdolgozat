@@ -20,9 +20,9 @@ namespace GameLogic.Elements
             get
             {
                 Dictionary<Type, int> result = new Dictionary<Type, int>();
-                Wonders.ForEach(wonder => wonder.Effects.Where(effect => effect is Law).Select(effect => (Law)effect).ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
-                Cards.Where(card => card is GreenCard).Select(card => (GreenCard)card).ToList().ForEach(card => { if (result.ContainsKey(card.Discipline.GetType())) { result[card.Discipline.GetType()] += 1; } else { result[card.Discipline.GetType()] = 1; } });
-                Developments.ForEach(dev => dev.Effects.Where(effect => effect is Law).Select(effect => (Law)effect).ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
+                Wonders.ForEach(wonder => wonder.Effects.OfType<Law>().ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
+                Cards.OfType<GreenCard>().ToList().ForEach(card => { if (result.ContainsKey(card.Discipline.GetType())) { result[card.Discipline.GetType()] += 1; } else { result[card.Discipline.GetType()] = 1; } });
+                Developments.ForEach(dev => dev.Effects.OfType<Law>().ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
                 return result;
             }
         }

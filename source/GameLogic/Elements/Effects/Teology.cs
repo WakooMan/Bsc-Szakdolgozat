@@ -17,7 +17,7 @@ namespace GameLogic.Elements.Effects
             gameContext.EventManager.Subscribe<OnWonderBuilt>((args) => OnWonderBuilt(player, args));
         }
 
-        private void OnWonderBuilt(Player player, OnWonderBuilt args)
+        private static void OnWonderBuilt(Player player, OnWonderBuilt args)
         {
             if (args.Builder == player && !args.Wonder.Effects.Any(effect => effect is NewTurn))
             {

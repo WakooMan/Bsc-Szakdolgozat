@@ -5,18 +5,17 @@ namespace GameLogic.GameStructures
 {
     public class CardNode : ICardNode
     {
-        private List<ICardNode> coveredBy;
         public Card CardObj { get; }
         public bool Hidden { get; set; }
 
-        public IReadOnlyList<ICardNode> CoveredBy => coveredBy;
+        public IReadOnlyList<ICardNode> CoveredBy => m_coveredBy;
 
         public CardNode(Card cardObj)
         {
             ArgumentChecker.CheckNull(cardObj, nameof(cardObj));
 
             CardObj = cardObj;
-            coveredBy = new List<ICardNode>();
+            m_coveredBy = new List<ICardNode>();
         }
 
         public void AddParent(ICardNode cardNode)
@@ -24,14 +23,16 @@ namespace GameLogic.GameStructures
             ArgumentChecker.CheckNull(cardNode, nameof(cardNode));
 
             ArgumentChecker.CheckPredicateForArgument(() => cardNode == this, "Cannot add parent itself!");
-            ArgumentChecker.CheckPredicateForOperation(() => coveredBy.Count >= 2, "Cannot add parent, because a card can only have 2 parents!");
+            ArgumentChecker.CheckPredicateForOperation(() => m_coveredBy.Count >= 2, "Cannot add parent, because a card can only have 2 parents!");
 
-            coveredBy.Add(cardNode);
+            m_coveredBy.Add(cardNode);
         }
 
         public void RemoveParent(ICardNode cardNode)
         {
-            coveredBy.Remove(cardNode);
+            m_coveredBy.Remove(cardNode);
         }
+
+        private readonly List<ICardNode> m_coveredBy;
     }
 }

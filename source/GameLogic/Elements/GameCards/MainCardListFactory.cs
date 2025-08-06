@@ -18,6 +18,6 @@ namespace GameLogic.Elements.GameCards
         }
 
         private readonly string CARDLIST_FILE = Path.Combine(Directory.GetCurrentDirectory(), "Data", "AllCards.xml");
-        private IXmlHandler m_xmlHandler;
+        private readonly IXmlHandler m_xmlHandler;
     }
 }

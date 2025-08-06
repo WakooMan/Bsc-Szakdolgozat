@@ -40,7 +40,7 @@ namespace GameLogic.Handlers
             catch (Exception ex)
             {
                 // TODO: Log and throw
-                throw ex;
+                throw;
             }
         }
     }

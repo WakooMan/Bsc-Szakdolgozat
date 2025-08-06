@@ -18,7 +18,7 @@ namespace GameLogic.Elements.Effects
             gameContext.EventManager.Subscribe<OnCardBuilt>((args) => OnCardBuilt(player, args));
         }
 
-        private void OnCardBuilt(Player player, OnCardBuilt eventArgs)
+        private static void OnCardBuilt(Player player, OnCardBuilt eventArgs)
         {
             if (player != eventArgs.Builder)
             {

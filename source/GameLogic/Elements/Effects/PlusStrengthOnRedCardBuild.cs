@@ -7,7 +7,10 @@ namespace GameLogic.Elements.Effects
     {
         public Strength AdditionalStrength { get; set; }
 
-        public PlusStrengthOnRedCardBuild() { }
+        public PlusStrengthOnRedCardBuild()
+        {
+            AdditionalStrength = new Strength();
+        }
 
         public override PlusStrengthOnRedCardBuild Clone()
         {

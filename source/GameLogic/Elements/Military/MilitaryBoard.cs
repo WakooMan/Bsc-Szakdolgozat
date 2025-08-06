@@ -55,7 +55,7 @@ namespace GameLogic.Elements.Military
                     ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexStart > newIdx))).ToList();
             }
 
-            if (militaryCards.Any())
+            if (militaryCards.Count > 0)
             {
                 eventManager.Publish(new OnMilitaryTokenReachedThreshold(militaryCards));
             }

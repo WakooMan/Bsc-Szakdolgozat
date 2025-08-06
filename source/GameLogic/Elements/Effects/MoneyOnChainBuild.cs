@@ -6,7 +6,10 @@ namespace GameLogic.Elements.Effects
     {
         public GetMoney MoneyToGet { get; set; }
 
-        public MoneyOnChainBuild() { }
+        public MoneyOnChainBuild()
+        {
+            MoneyToGet = new GetMoney();
+        }
         private MoneyOnChainBuild(MoneyOnChainBuild moneyOnChainBuild)
         {
             MoneyToGet = moneyOnChainBuild.MoneyToGet.Clone();

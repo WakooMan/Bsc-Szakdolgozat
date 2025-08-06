@@ -5,13 +5,16 @@ namespace GameLogic.Elements.Effects
 {
     public class Law : Effect
     {
-        public Discipline? Discipline { get; set; }
+        public Discipline Discipline { get; set; }
 
-        public Law() { }
+        public Law()
+        {
+            Discipline = new DefaultDiscipline();
+        }
 
         private Law(Law law)
         {
-            Discipline = law.Discipline?.Clone() ?? null;
+            Discipline = law.Discipline.Clone();
         }
 
         public override Effect Clone()

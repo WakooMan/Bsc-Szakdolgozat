@@ -20,6 +20,6 @@ namespace GameLogic.Elements.Wonders
         }
 
         private readonly string CARDLIST_FILE = Path.Combine(Directory.GetCurrentDirectory(), "Data", "AllWonders.xml");
-        private IXmlHandler m_xmlHandler;
+        private readonly IXmlHandler m_xmlHandler;
     }
 }

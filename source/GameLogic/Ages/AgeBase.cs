@@ -10,7 +10,7 @@ namespace GameLogic.Ages
         public abstract AgesEnum Age { get; }
         public abstract string CardCompositionFile { get; }
         public ICardComposition Composition { get; }
-        public bool IsAgeOver => Composition.AvailableCards.Count < 0;
+        public bool IsAgeOver => Composition.AvailableCards.Count <= 0;
 
         protected AgeBase(ICardCompositionFactory cardCompositionFactory, ICollection<Card> cards)
         {
