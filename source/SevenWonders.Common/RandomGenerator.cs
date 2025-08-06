@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 
 namespace SevenWonders.Common
 {
@@ -8,16 +9,10 @@ namespace SevenWonders.Common
     public class RandomGenerator : IRandomGenerator
     {
         [ImportingConstructor]
-        public RandomGenerator()
-        {
-            m_random = new Random();
-
-        }
+        public RandomGenerator() { }
         public int Next()
         {
-            return m_random.Next();
+            return RandomNumberGenerator.GetInt32(int.MaxValue);
         }
-
-        private Random m_random;
     }
 }
