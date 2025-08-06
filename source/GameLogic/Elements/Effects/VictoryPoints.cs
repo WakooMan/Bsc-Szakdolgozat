@@ -6,7 +6,10 @@ namespace GameLogic.Elements.Effects
     {
         public int Points { get; set; }
 
-        public VictoryPoints() { }
+        public VictoryPoints()
+        {
+            Points = 0;
+        }
 
         private VictoryPoints(VictoryPoints victoryPoints)
         {

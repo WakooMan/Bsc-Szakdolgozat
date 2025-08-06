@@ -6,7 +6,9 @@ namespace GameLogic.Elements.GameCards
     {
         public Strength Strength { get; set; }
         public RedCard() : base()
-        { }
+        {
+            Strength = new Strength();
+        }
 
         private RedCard(RedCard redCard) : base(redCard)
         {

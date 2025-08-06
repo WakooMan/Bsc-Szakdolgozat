@@ -47,6 +47,7 @@ namespace GameLogic.Elements.GameCards
             GoodCost = new List<Good>();
             Name = string.Empty;
             PreviousBuilding = string.Empty;
+            Age = AgesEnum.None;
         }
 
         protected Card(Card card)

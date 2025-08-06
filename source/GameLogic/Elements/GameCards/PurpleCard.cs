@@ -6,7 +6,9 @@ namespace GameLogic.Elements.GameCards
     {
         public Guild GuildObj { get; set; }
         public PurpleCard() : base()
-        { }
+        {
+            GuildObj = new DefaultGuild();
+        }
         private PurpleCard(PurpleCard purpleCard) : base(purpleCard)
         {
             GuildObj = purpleCard.GuildObj.Clone();

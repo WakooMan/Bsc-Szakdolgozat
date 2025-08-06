@@ -7,7 +7,9 @@ namespace GameLogic.Elements.GameCards
     {
         public VictoryPoints Point { get; set; }
         public BlueCard() : base()
-        { }
+        {
+            Point = new VictoryPoints();
+        }
 
         private BlueCard(BlueCard blueCard) : base(blueCard)
         {

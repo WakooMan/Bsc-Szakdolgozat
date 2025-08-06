@@ -10,7 +10,10 @@ namespace GameLogic.Elements.GameCards
         public Discipline Discipline { get; set; }
         public VictoryPoints Point { get; set; }
         public GreenCard() : base()
-        { }
+        {
+            Discipline = new DefaultDiscipline();
+            Point = new VictoryPoints();
+        }
 
         private GreenCard(GreenCard greenCard) : base(greenCard)
         {

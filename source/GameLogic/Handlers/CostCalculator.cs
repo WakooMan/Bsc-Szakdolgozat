@@ -85,11 +85,6 @@ namespace GameLogic.Handlers
 
         private int GetDiscount(List<BuyGoodItem> buyGoodItems)
         {
-            if (buyGoodItems.Count <= 0)
-            {
-                throw new InvalidOperationException("There is no discount for the player, that can be applied!");
-            }
-
             int discount = buyGoodItems[0].MoneyCost;
             for (int i = 1; i < buyGoodItems.Count; i++)
             {

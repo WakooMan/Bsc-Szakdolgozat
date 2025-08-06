@@ -7,7 +7,10 @@ namespace GameLogic.Elements.Effects
     {
         public int Points { get; set; }
 
-        public Strength() { }
+        public Strength()
+        {
+            Points = 0;
+        }
         private Strength(Strength strength)
         {
             Points = strength.Points;

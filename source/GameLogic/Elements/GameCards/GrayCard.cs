@@ -1,10 +1,5 @@
 ﻿using GameLogic.Elements.Goods;
 using GameLogic.Elements.Goods.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -12,7 +7,9 @@ namespace GameLogic.Elements.GameCards
     {
         public List<Product> CreatedProducts { get; set; }
         public GrayCard() : base()
-        { }
+        {
+            CreatedProducts = new List<Product>();
+        }
 
         private GrayCard(GrayCard grayCard) : base(grayCard)
         {
