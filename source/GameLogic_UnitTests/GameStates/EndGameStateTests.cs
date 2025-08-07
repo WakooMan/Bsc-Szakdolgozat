@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameLogic.GameStates;
 
 namespace GameLogic_UnitTests.GameStates
 {
-    internal class EndGameStateTests
+    public class EndGameStateTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            m_endGameState = new EndGameState();
+        }
+
+        [Test]
+        public void When_DoStateAction_Called()
+        {
+            Assert.Throws<NotImplementedException>(m_endGameState.DoStateAction);
+        }
+
+        [Test]
+        public void When_GetNextState_Called()
+        {
+            var turnState = m_endGameState.GetNextState();
+            Assert.That(m_endGameState, Is.EqualTo(turnState));
+        }
+
+
+        private EndGameState m_endGameState;
     }
 }
