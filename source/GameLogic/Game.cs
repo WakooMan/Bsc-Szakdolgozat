@@ -15,10 +15,13 @@ namespace GameLogic
         private bool m_isInitialized = false;
         public IGameState CurrentState { get; private set; }
         public IReadOnlyList<Player> Players => m_players;
+        public bool IsInitialized => m_isInitialized;
 
         [ImportingConstructor]
         public Game(IGameContext gameContext)
         {
+            ArgumentChecker.CheckNull(gameContext, nameof(gameContext));
+
             m_gameContext = gameContext;
             m_players = new List<Player>();
             CurrentState = new EndGameState();

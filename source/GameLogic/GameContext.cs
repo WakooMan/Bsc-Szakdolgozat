@@ -39,6 +39,17 @@ namespace GameLogic
         [ImportingConstructor]
         public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [Import(nameof(EmptyCardListFactory), typeof(ICardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory)
         {
+            ArgumentChecker.CheckNull(ageHandler, nameof(ageHandler));
+            ArgumentChecker.CheckNull(turnHandler, nameof(turnHandler));
+            ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));
+            ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
+            ArgumentChecker.CheckNull(costCalculator, nameof(costCalculator));
+            ArgumentChecker.CheckNull(chooseWonderHandler, nameof(chooseWonderHandler));
+            ArgumentChecker.CheckNull(gameElements, nameof(gameElements));
+            ArgumentChecker.CheckNull(randomGenerator, nameof(randomGenerator));
+            ArgumentChecker.CheckNull(droppedCardListFactory, nameof(droppedCardListFactory));
+            ArgumentChecker.CheckNull(militaryBoardFactory, nameof(militaryBoardFactory));
+
             AgeHandler = ageHandler;
             TurnHandler = turnHandler;
             PlayerActionReceiver = playerActionReceiver;
