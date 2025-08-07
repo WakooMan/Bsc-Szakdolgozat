@@ -1,24 +1,27 @@
-﻿using GameLogic.Elements.Goods.Factories;
+﻿using GameLogic.Elements.Goods;
+using GameLogic.Elements.Goods.Factories;
 
 namespace GameLogic.PlayerActions
 {
     public class ChooseGoodAction : IPlayerAction
     {
-        public GoodFactory GoodFactory { get; private set; }
-
-        public ChooseGoodAction(GoodFactory goodFactory)
+        public ChooseGoodAction(GoodFactory goodFactory, Action<Good> setter)
         {
-            GoodFactory = goodFactory;
+            m_goodFactory = goodFactory;
+            m_setter = setter;
         }
 
-        public bool CanPerform()
+        public bool CanPerform(IGameContext gameContext)
         {
-            return true;
+            return m_goodFactory is not null && m_setter is not null;
         }
 
-        public void DoPlayerAction()
+        public void DoPlayerAction(IGameContext gameContext)
         {
-            throw new NotImplementedException("This action does not need implementation, because only the containing data is needed!");
+            m_setter(m_goodFactory.CreateGood());
         }
+
+        private readonly GoodFactory m_goodFactory;
+        private readonly Action<Good> m_setter;
     }
 }

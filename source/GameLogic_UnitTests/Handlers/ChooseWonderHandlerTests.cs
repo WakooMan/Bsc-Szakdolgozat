@@ -1,4 +1,5 @@
-﻿using GameLogic.Elements;
+﻿using GameLogic;
+using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
 using GameLogic.Handlers;
 using GameLogic.Interfaces;
@@ -13,8 +14,10 @@ namespace GameLogic_UnitTests.Handlers
         [SetUp]
         public void Setup()
         {
+            m_gameContext = Substitute.For<IGameContext>();
             m_playerActionReceiver = Substitute.For<IPlayerActionReceiver>();
-            m_chooseWonderHandler = new ChooseWonderHandler(m_playerActionReceiver);
+            m_gameContext.PlayerActionReceiver.Returns(m_playerActionReceiver);
+            m_chooseWonderHandler = new ChooseWonderHandler(m_gameContext);
             m_player1 = new Player("test1");
             m_player2 = new Player("test2");
             List<Wonder> wonders = new List<Wonder>();
@@ -46,9 +49,9 @@ namespace GameLogic_UnitTests.Handlers
         [Test]
         public void When_ChooseWonder_Called_Once()
         {
-            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>()).Returns((args) =>
+            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>()).Returns((args) =>
             {
-                return ((ICollection<ChooseWonderAction>)args[1]).First();
+                return ((ICollection<IPlayerAction>)args[1]).First();
             });
 
             for (int i = 0; i < 1; i++)
@@ -56,7 +59,7 @@ namespace GameLogic_UnitTests.Handlers
                 m_chooseWonderHandler.ChooseWonder();
             }
 
-            m_playerActionReceiver.Received(1).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>());
+            m_playerActionReceiver.Received(1).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>());
             Assert.That(m_player1.Wonders.Count, Is.EqualTo(1));
             Assert.That(m_player2.Wonders.Count, Is.EqualTo(0));
 
@@ -65,9 +68,9 @@ namespace GameLogic_UnitTests.Handlers
         [Test]
         public void When_ChooseWonder_Called_Twice()
         {
-            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>()).Returns((args) =>
+            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>()).Returns((args) =>
             {
-                return ((ICollection<ChooseWonderAction>)args[1]).First();
+                return ((ICollection<IPlayerAction>)args[1]).First();
             });
 
             for (int i = 0; i < 2; i++)
@@ -75,7 +78,7 @@ namespace GameLogic_UnitTests.Handlers
                 m_chooseWonderHandler.ChooseWonder();
             }
 
-            m_playerActionReceiver.Received(2).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>());
+            m_playerActionReceiver.Received(2).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>());
             Assert.That(m_player1.Wonders.Count, Is.EqualTo(1));
             Assert.That(m_player2.Wonders.Count, Is.EqualTo(1));
         }
@@ -83,9 +86,9 @@ namespace GameLogic_UnitTests.Handlers
         [Test]
         public void When_ChooseWonder_Called_Eight_Times()
         {
-            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>()).Returns((args) =>
+            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>()).Returns((args) =>
             {
-                return ((ICollection<ChooseWonderAction>)args[1]).First();
+                return ((ICollection<IPlayerAction>)args[1]).First();
             });
 
             for (int i = 0; i < 8; i++)
@@ -93,7 +96,7 @@ namespace GameLogic_UnitTests.Handlers
                 m_chooseWonderHandler.ChooseWonder();
             }
 
-            m_playerActionReceiver.Received(8).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>());
+            m_playerActionReceiver.Received(8).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>());
             Assert.That(m_player1.Wonders.Count, Is.EqualTo(4));
             Assert.That(m_player2.Wonders.Count, Is.EqualTo(4));
         }
@@ -101,9 +104,9 @@ namespace GameLogic_UnitTests.Handlers
         [Test]
         public void When_ChooseWonder_Called_Nine_Times()
         {
-            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>()).Returns((args) =>
+            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>()).Returns((args) =>
             {
-                return ((ICollection<ChooseWonderAction>)args[1]).First();
+                return ((ICollection<IPlayerAction>)args[1]).First();
             });
 
             for (int i = 0; i < 8; i++)
@@ -111,7 +114,7 @@ namespace GameLogic_UnitTests.Handlers
                 m_chooseWonderHandler.ChooseWonder();
             }
 
-            m_playerActionReceiver.Received(8).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseWonderAction>>());
+            m_playerActionReceiver.Received(8).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>());
             Assert.That(m_player1.Wonders.Count, Is.EqualTo(4));
             Assert.That(m_player2.Wonders.Count, Is.EqualTo(4));
 
@@ -121,6 +124,7 @@ namespace GameLogic_UnitTests.Handlers
 
 
         private ChooseWonderHandler m_chooseWonderHandler;
+        private IGameContext m_gameContext;
         private IPlayerActionReceiver m_playerActionReceiver;
         private Player m_player1;
         private Player m_player2;

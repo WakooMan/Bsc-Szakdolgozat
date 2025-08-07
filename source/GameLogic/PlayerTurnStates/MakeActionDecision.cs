@@ -21,11 +21,16 @@ namespace GameLogic.PlayerTurnStates
             m_gameContext.EventManager.Subscribe(action);
             List<IPlayerAction> playerActions =
             [
-                new UnpickCard(m_gameContext.EventManager, CurrentPlayer), new BuildCard(m_gameContext), new SellCard(m_gameContext.EventManager, Composition, CurrentPlayer),
-                .. CurrentPlayer.Wonders.Select(wonder => new BuildWonder(m_gameContext, wonder)),
+                new UnpickCard(CurrentPlayer), new BuildCard(), new SellCard(CurrentPlayer),
+                .. CurrentPlayer.Wonders.Select(wonder => new BuildWonder(wonder)),
             ];
 
-            m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions).DoPlayerAction();
+            IPlayerAction playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions);
+            if (playerAction.CanPerform(m_gameContext))
+            {
+                playerAction.DoPlayerAction(m_gameContext);
+            }
+
             m_gameContext.EventManager.Unsubscribe(action);
         }
 
@@ -35,7 +40,6 @@ namespace GameLogic.PlayerTurnStates
         }
 
         private Player CurrentPlayer => m_gameContext.TurnHandler.CurrentPlayer;
-        private ICardComposition Composition => m_gameContext.AgeHandler.CurrentAge.Composition;
 
         private readonly IGameContext m_gameContext;
     }

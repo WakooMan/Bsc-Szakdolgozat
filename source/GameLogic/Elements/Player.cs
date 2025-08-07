@@ -29,7 +29,17 @@ namespace GameLogic.Elements
 
         [XmlIgnore]
         public ICardNode? PickedCard { get; set; }
-        public int Money { get; set; }
+        public int Money
+        {
+            get
+            {
+                return m_money;
+            }
+            set
+            {
+                m_money = (value < 0) ? 0 : value;
+            }
+        }
         public Dictionary<Type, Good> Goods
         { 
             get
@@ -72,5 +82,7 @@ namespace GameLogic.Elements
             Developments = new List<Development>();
             Money = 0;
         }
+
+        private int m_money;
     }
 }

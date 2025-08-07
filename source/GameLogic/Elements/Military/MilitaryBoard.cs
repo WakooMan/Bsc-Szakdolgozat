@@ -18,15 +18,15 @@ namespace GameLogic.Elements.Military
             m_keyValuePairs = new Dictionary<Player, PlayerSide>();
         }
 
-        public void Initialize(ICollection<Player> players, ICollection<Development> developments, IEventManager eventManager)
+        public void Initialize(ICollection<Player> players, ICollection<Development> developments, IGameContext gameContext)
         {
             m_keyValuePairs.Clear();
             m_keyValuePairs.Add(players.First(), PlayerSide.First);
             m_keyValuePairs.Add(players.Last(), PlayerSide.Second);
             Developments.AddRange(developments);
-            eventManager.Subscribe<OnScientificProgress>((args) => OnScientificProgress(eventManager, args));
-            eventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
-            eventManager.Subscribe<OnMilitaryAdvanced>((args) => OnMilitaryAdvanced(eventManager, args));
+            gameContext.EventManager.Subscribe<OnScientificProgress>((args) => OnScientificProgress(gameContext, args));
+            gameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
+            gameContext.EventManager.Subscribe<OnMilitaryAdvanced>((args) => OnMilitaryAdvanced(gameContext.EventManager, args));
         }
 
         private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)
@@ -66,17 +66,21 @@ namespace GameLogic.Elements.Military
             }
         }
 
-        private void OnScientificProgress(IEventManager eventManager, OnScientificProgress eventArgs)
+        private void OnScientificProgress(IGameContext gameContext, OnScientificProgress eventArgs)
         {
             var disciplines = eventArgs.Player.Disciplines;
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
-                eventArgs.Player.Developments.Add(eventArgs.PlayerActionReceiver.ReceivePlayerAction<ChooseDevelopmentAction>(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(dev)).ToArray()).Development);
+                IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(eventArgs.Player, dev)).ToArray());
+                if (playerAction.CanPerform(gameContext))
+                {
+                    playerAction.DoPlayerAction(gameContext);
+                }
             }
 
             if (disciplines.Count >= 6)
             {
-                eventManager.Publish(new ScientificVictory());
+                gameContext.EventManager.Publish(new ScientificVictory());
             }
         }
 

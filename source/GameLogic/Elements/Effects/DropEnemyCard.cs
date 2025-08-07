@@ -27,8 +27,11 @@ namespace GameLogic.Elements.Effects
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
-            IPlayerAction action = gameContext.PlayerActionReceiver.ReceivePlayerAction(currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => (IPlayerAction)new DropCard(gameContext.EventManager, opponentPlayer, card)).ToArray());
-            action.DoPlayerAction();
+            IPlayerAction action = gameContext.PlayerActionReceiver.ReceivePlayerAction(currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => (IPlayerAction)new DropCard(opponentPlayer, card)).ToArray());
+            if (action.CanPerform(gameContext))
+            {
+                action.DoPlayerAction(gameContext);
+            }
         }
     }
 }

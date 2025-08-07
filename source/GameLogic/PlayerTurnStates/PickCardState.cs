@@ -15,7 +15,11 @@ namespace GameLogic.PlayerTurnStates
 
         public void ExecuteTurnState()
         {
-            m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, Composition.AvailableCards.Select(card => (IPlayerAction)new PickCard(m_gameContext.EventManager, CurrentPlayer, card, Composition)).ToList()).DoPlayerAction();
+            IPlayerAction playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, Composition.AvailableCards.Select(card => (IPlayerAction)new PickCard(CurrentPlayer, card)).ToList());
+            if (playerAction.CanPerform(m_gameContext))
+            {
+                playerAction.DoPlayerAction(m_gameContext);
+            }
         }
 
         public IPlayerTurnState GetNextTurnState()

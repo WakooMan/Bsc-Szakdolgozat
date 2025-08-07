@@ -1,28 +1,26 @@
 ﻿using GameLogic.Elements.Disciplines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLogic.PlayerActions
 {
     public class ChooseDisciplineAction: IPlayerAction
     {
-        public Discipline Discipline { get; }
-
-        public ChooseDisciplineAction(Discipline discipline)
+        public ChooseDisciplineAction(Discipline discipline, Action<Discipline> setter)
         {
-            Discipline = discipline;
+            m_discipline = discipline;
+            m_setter = setter;
         }
 
-        public void DoPlayerAction()
+        public void DoPlayerAction(IGameContext gameContext)
         {
+            m_setter(m_discipline);
         }
 
-        public bool CanPerform()
+        public bool CanPerform(IGameContext gameContext)
         {
-            return true;
+            return m_discipline is not null && m_setter is not null;
         }
+
+        private readonly Discipline m_discipline;
+        private readonly Action<Discipline> m_setter;
     }
 }

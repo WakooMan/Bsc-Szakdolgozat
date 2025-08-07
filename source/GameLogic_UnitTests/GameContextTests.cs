@@ -69,7 +69,7 @@ namespace GameLogic_UnitTests
             m_turnHandler.Received(1).Initialize(Arg.Any<ICollection<Player>>());
             m_eventManager.Received(1).ClearSubscriptions();
             m_ageHandler.Received(1).Initialize();
-            militaryBoard.Received(1).Initialize(Arg.Any<ICollection<Player>>(), Arg.Any<ICollection<Development>>(), m_eventManager);
+            militaryBoard.Received(1).Initialize(Arg.Any<ICollection<Player>>(), Arg.Any<ICollection<Development>>(), m_gameContext);
             Assert.That(m_gameContext.AgeHandler, Is.EqualTo(m_ageHandler));
             Assert.That(m_gameContext.TurnHandler, Is.EqualTo(m_turnHandler));
             Assert.That(m_gameContext.PlayerActionReceiver, Is.EqualTo(m_playerActionReceiver));

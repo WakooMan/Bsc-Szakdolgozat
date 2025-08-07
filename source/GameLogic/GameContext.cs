@@ -73,7 +73,7 @@ namespace GameLogic
             TurnHandler.Initialize(players);
             EventManager.ClearSubscriptions();
             AgeHandler.Initialize();
-            MilitaryBoard.Initialize(players, developments, EventManager);
+            MilitaryBoard.Initialize(players, developments, this);
         }
 
         private readonly IGameElements m_gameElements;

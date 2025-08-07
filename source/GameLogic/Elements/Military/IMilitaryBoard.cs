@@ -8,6 +8,6 @@ namespace GameLogic.Elements.Military
         List<MilitaryField> Fields { get; }
         List<MilitaryCard> MilitaryCards { get; }
         List<Development> Developments { get; }
-        void Initialize(ICollection<Player> players, ICollection<Development> developments, IEventManager eventManager);
+        void Initialize(ICollection<Player> players, ICollection<Development> developments, IGameContext gameContext);
     }
 }

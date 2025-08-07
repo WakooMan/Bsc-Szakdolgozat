@@ -7,25 +7,23 @@ namespace GameLogic.PlayerActions
 {
     public class DropCard : IPlayerAction
     {
-        public DropCard(IEventManager eventManager, Player player, Card card)
+        public DropCard(Player player, Card card)
         {
-            m_eventManager = eventManager;
             m_player = player;
             m_card = card;
         }
-        public bool CanPerform()
+        public bool CanPerform(IGameContext gameContext)
         {
             return m_player.Cards.Contains(m_card);
         }
 
-        public void DoPlayerAction()
+        public void DoPlayerAction(IGameContext gameContext)
         {
             m_player.Cards.Remove(m_card);
-            m_eventManager.Publish(new OnCardDestroyed(m_player, m_card));
+            gameContext.EventManager.Publish(new OnCardDestroyed(m_player, m_card));
         }
 
         private readonly Card m_card;
         private readonly Player m_player;
-        private readonly IEventManager m_eventManager;
     }
 }
