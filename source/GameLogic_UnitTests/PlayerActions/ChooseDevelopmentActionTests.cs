@@ -40,14 +40,16 @@ namespace GameLogic_UnitTests.PlayerActions
             m_gameContext.EventManager.Returns(m_eventManager);
             m_ageHandler.CurrentAge.Returns(m_age);
             m_age.Composition.Returns(m_cardComposition);
-            m_chooseDevelopmentAction = new ChooseDevelopmentAction(m_current, m_development);
+            m_developments = new List<Development>();
+            m_chooseDevelopmentAction = new ChooseDevelopmentAction(m_current, m_development, m_developments);
         }
 
         [Test]
         public void When_Constructor_Called_With_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(null, m_development));
-            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, null));
+            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(null, m_development, []));
+            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, null, []));
+            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, m_development, null));
         }
 
         [Test]
@@ -61,8 +63,18 @@ namespace GameLogic_UnitTests.PlayerActions
         }
 
         [Test]
+        public void When_CanPerform_Called_DevelopmentList_Does_Not_Have_Development()
+        {
+
+            bool result = m_chooseDevelopmentAction.CanPerform(m_gameContext);
+
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
         public void When_CanPerform_Called_Returns_True()
         {
+            m_developments.Add(m_development);
 
             bool result = m_chooseDevelopmentAction.CanPerform(m_gameContext);
 
@@ -78,14 +90,24 @@ namespace GameLogic_UnitTests.PlayerActions
         }
 
         [Test]
+        public void When_DoPlayerAction_Called_And_DevelopmentList_Does_Not_Have_Development()
+        {
+            Assert.Throws<InvalidOperationException>(() => m_chooseDevelopmentAction.DoPlayerAction(m_gameContext));
+        }
+
+        [Test]
         public void When_DoPlayerAction_Called_Successful()
         {
+            m_developments.Add(m_development);
+
             m_chooseDevelopmentAction.DoPlayerAction(m_gameContext);
 
             Assert.That(m_current.Developments.Contains(m_development), Is.True);
             m_development.Received(1).OnDevelopmentEstablished(m_gameContext);
+            Assert.That(m_developments.Contains(m_development), Is.False);
         }
 
+        private List<Development> m_developments;
         private ChooseDevelopmentAction m_chooseDevelopmentAction;
         private Development m_development;
         private Player m_current;

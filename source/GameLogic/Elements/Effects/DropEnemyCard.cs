@@ -18,7 +18,7 @@ namespace GameLogic.Elements.Effects
 
        
 
-        public override Effect Clone()
+        public override DropEnemyCard Clone()
         {
             return new DropEnemyCard(this);
         }

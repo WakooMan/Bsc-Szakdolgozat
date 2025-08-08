@@ -22,7 +22,7 @@ namespace GameLogic.Elements.Effects
         {
             if (player != eventArgs.Builder)
             {
-                player.Money += eventArgs.BuildCost;
+                player.Money += (eventArgs.BuildCost - eventArgs.Card.MoneyCost);
             }
         }
     }

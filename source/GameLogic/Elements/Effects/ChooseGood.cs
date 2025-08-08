@@ -15,7 +15,7 @@ namespace GameLogic.Elements.Effects
             GoodFactories = new List<GoodFactory>();
         }
 
-        public ChooseGood(ChooseGood chooseGood)
+        private ChooseGood(ChooseGood chooseGood)
         {
             GoodFactories = chooseGood.GoodFactories;
         }

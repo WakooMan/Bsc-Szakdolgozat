@@ -14,7 +14,7 @@ namespace GameLogic.Elements.Effects
             }
         }
 
-        public override Effect Clone()
+        public override BuildFreeFromDroppedCards Clone()
         {
             return new BuildFreeFromDroppedCards();
         }

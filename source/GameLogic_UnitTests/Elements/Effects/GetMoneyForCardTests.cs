@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLogic_UnitTests.Elements.Effects
 {
-    internal class GetMoneyForCardTests
+    public class GetMoneyForCardTests
     {
     }
 }
