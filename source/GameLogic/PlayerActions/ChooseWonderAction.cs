@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
+using SevenWonders.Common;
 using System;
 
 namespace GameLogic.PlayerActions
@@ -10,6 +11,10 @@ namespace GameLogic.PlayerActions
 
         public ChooseWonderAction(Wonder wonder, List<Wonder> wonders, Func<Player> player)
         {
+            ArgumentChecker.CheckNull(wonder, nameof(wonder));
+            ArgumentChecker.CheckNull(wonders, nameof(wonders));
+            ArgumentChecker.CheckNull(player, nameof(player));
+
             m_wonder = wonder;
             m_wonders = wonders;
             m_player = player;
@@ -17,11 +22,13 @@ namespace GameLogic.PlayerActions
 
         public bool CanPerform(IGameContext gameContext)
         {
-            return m_wonder is not null && m_wonders is not null && m_player is not null && m_wonders.Contains(m_wonder);
+            return m_wonders.Contains(m_wonder);
         }
 
         public void DoPlayerAction(IGameContext gameContext)
         {
+            ArgumentChecker.CheckPredicateForOperation(() => !m_wonders.Contains(m_wonder), "Wonder list does not contain the wonder! Action cannot be performed!");
+
             m_player().Wonders.Add(m_wonder);
             m_wonders.Remove(m_wonder);
         }

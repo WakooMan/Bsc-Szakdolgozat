@@ -3,6 +3,7 @@ using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
+using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
 {
@@ -10,6 +11,8 @@ namespace GameLogic.PlayerActions
     {
         public SellCard(Player player)
         {
+            ArgumentChecker.CheckNull(player, nameof(player));
+
             m_player = player;
         }
 
@@ -19,6 +22,7 @@ namespace GameLogic.PlayerActions
             {
                 throw new InvalidOperationException("Cannot execute action if player did not pick a card to sell.");
             }
+
             gameContext.AgeHandler.CurrentAge.Composition.RemoveCard(m_player.PickedCard);
             int money = 2 + m_player.Cards.OfType<YellowCard>().Count();
             m_player.Money += money;
@@ -29,7 +33,7 @@ namespace GameLogic.PlayerActions
 
         public bool CanPerform(IGameContext gameContext)
         {
-            return true;
+            return m_player.PickedCard is not null;
         }
 
         private readonly Player m_player;

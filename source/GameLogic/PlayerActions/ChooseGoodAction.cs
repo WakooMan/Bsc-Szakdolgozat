@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements.Goods;
 using GameLogic.Elements.Goods.Factories;
+using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
 {
@@ -7,13 +8,16 @@ namespace GameLogic.PlayerActions
     {
         public ChooseGoodAction(GoodFactory goodFactory, Action<Good> setter)
         {
+            ArgumentChecker.CheckNull(goodFactory, nameof(goodFactory));
+            ArgumentChecker.CheckNull(setter, nameof(setter));
+
             m_goodFactory = goodFactory;
             m_setter = setter;
         }
 
         public bool CanPerform(IGameContext gameContext)
         {
-            return m_goodFactory is not null && m_setter is not null;
+            return true;
         }
 
         public void DoPlayerAction(IGameContext gameContext)

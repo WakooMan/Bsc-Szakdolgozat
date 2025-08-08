@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Modifiers;
+using SevenWonders.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +14,22 @@ namespace GameLogic.PlayerActions
 
         public ChooseDevelopmentAction(Player player, Development development)
         {
+            ArgumentChecker.CheckNull(player, nameof(player));
+            ArgumentChecker.CheckNull(development, nameof(development));
+
             m_player = player;
             m_development = development;
         }
 
         public bool CanPerform(IGameContext gameContext)
         {
-            return m_development is not null && m_player is not null && !m_player.Developments.Contains(m_development);
+            return !m_player.Developments.Contains(m_development);
         }
 
         public void DoPlayerAction(IGameContext gameContext)
         {
+            ArgumentChecker.CheckPredicateForOperation(() => m_player.Developments.Contains(m_development), "Cannot perform action, because player already has the development!");
+
            m_player.Developments.Add(m_development);
            m_development.OnDevelopmentEstablished(gameContext);
         }

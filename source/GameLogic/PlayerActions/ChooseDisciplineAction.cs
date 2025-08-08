@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements.Disciplines;
+using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
 {
@@ -6,6 +7,9 @@ namespace GameLogic.PlayerActions
     {
         public ChooseDisciplineAction(Discipline discipline, Action<Discipline> setter)
         {
+            ArgumentChecker.CheckNull(discipline, nameof(discipline));
+            ArgumentChecker.CheckNull(setter, nameof(setter));
+
             m_discipline = discipline;
             m_setter = setter;
         }
@@ -17,7 +21,7 @@ namespace GameLogic.PlayerActions
 
         public bool CanPerform(IGameContext gameContext)
         {
-            return m_discipline is not null && m_setter is not null;
+            return true;
         }
 
         private readonly Discipline m_discipline;

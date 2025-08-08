@@ -2,6 +2,7 @@
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
+using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
 {
@@ -9,6 +10,8 @@ namespace GameLogic.PlayerActions
     {
         public UnpickCard(Player player)
         {
+            ArgumentChecker.CheckNull(player, nameof(player));
+
             m_player = player;
         }
 
