@@ -17,7 +17,7 @@ namespace GameLogic.Elements.Effects
             m_discipline = law.m_discipline.Clone();
         }
 
-        public override Effect Clone()
+        public override Law Clone()
         {
             return new Law(this);
         }
