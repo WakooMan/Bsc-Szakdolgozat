@@ -2,6 +2,6 @@
 {
     public enum AgesEnum
     {
-        I,II,III
+        I,II,III,None
     }
 }

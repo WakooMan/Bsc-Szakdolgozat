@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WonderList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Wonders>
+		<Wonder>
+			<Name>Via Appia</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>2</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>3</Money>
+				</Effect>
+				<Effect xsi:type="EnemyLoseMoney">
+					<Money>3</Money>
+				</Effect>
+				<Effect xsi:type="NewTurn">
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Circus Maximus</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>2</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="DropEnemyCard">
+					<CardType>GrayCard</CardType>
+				</Effect>
+				<Effect xsi:type="Strength">
+					<Points>1</Points>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A kolosszus</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>3</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="Strength">
+					<Points>2</Points>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A nagy Könyvtár</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>3</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="ChooseDevelopment">
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>4</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A nagy világítótorony</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="ChooseGood">
+					<GoodFactories>
+						<GoodFactory xsi:type="WoodFactory" />
+						<GoodFactory xsi:type="StoneFactory" />
+						<GoodFactory xsi:type="ClayFactory" />
+					</GoodFactories>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>4</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A függőkertek</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>2</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>6</Money>
+				</Effect>
+				<Effect xsi:type="NewTurn">
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A mauzóleum</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>2</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="BuildFreeFromDroppedCards">
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>2</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Pireusz</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Clay">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>2</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="ChooseGood">
+					<GoodFactories>
+						<GoodFactory xsi:type="PapirusFactory" />
+						<GoodFactory xsi:type="GlassFactory" />
+					</GoodFactories>
+				</Effect>
+				<Effect xsi:type="NewTurn">
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>2</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A Piramisok</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>3</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>9</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>A Szfinx</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Glass">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="NewTurn">
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>6</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Zeusz szobra</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>2</Amount>
+				</Good>
+				<Good xsi:type="Clay">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="DropEnemyCard">
+					<CardType>BrownCard</CardType>
+				</Effect>
+				<Effect xsi:type="Strength">
+					<Points>1</Points>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>3</Points>
+				</Effect>
+			</Effects>
+		</Wonder>
+		<Wonder>
+			<Name>Artemisz temploma</Name>
+			<HasBeenBuilt>false</HasBeenBuilt>
+			<GoodCost>
+				<Good xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Glass">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Stone">
+					<Amount>1</Amount>
+				</Good>
+				<Good xsi:type="Wood">
+					<Amount>1</Amount>
+				</Good>
+			</GoodCost>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>12</Money>
+				</Effect>
+				<Effect xsi:type="NewTurn">
+				</Effect>
+			</Effects>
+		</Wonder>
+	</Wonders>
+</WonderList>

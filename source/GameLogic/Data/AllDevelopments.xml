@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DevelopmentList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Developments>
+		<Development>
+			<Name>Mezőgazdaság</Name>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>6</Money>
+				</Effect>
+				<Effect xsi:type="VictoryPoints">
+					<Points>4</Points>
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Építészet</Name>
+			<Effects>
+				<Effect xsi:type="CheaperBuilding">
+					<AmountOfResources>2</AmountOfResources>
+					<BuildingType>Wonder</BuildingType>
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Gazdaság</Name>
+			<Effects>
+				<Effect xsi:type="Economics">
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Törvény</Name>
+			<Effects>
+				<Effect xsi:type="Law">
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Kőművesség</Name>
+			<Effects>
+				<Effect xsi:type="CheaperBuilding">
+					<AmountOfResources>2</AmountOfResources>
+					<BuildingType>BlueCard</BuildingType>
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Matematika</Name>
+			<Effects>
+				<Effect xsi:type="Mathematics">
+					<VictoryPointsPerDevelopment xsi:type="VictoryPoints">
+						<Points>3</Points>
+					</VictoryPointsPerDevelopment>
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Filozófia</Name>
+			<Effects>
+				<Effect xsi:type="VictoryPoints">
+					<Points>7</Points>
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Stratégia</Name>
+			<Effects>
+				<Effect xsi:type="PlusStrengthOnRedCardBuild">
+					<AdditionalStrength xsi:type="Strength">
+						<Points>1</Points>
+					</AdditionalStrength>
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Teológia</Name>
+			<Effects>
+				<Effect xsi:type="Teology">
+					<NewTurn xsi:type="NewTurn"></NewTurn>
+				</Effect>
+			</Effects>
+		</Development>
+		<Development>
+			<Name>Urbanizmus</Name>
+			<Effects>
+				<Effect xsi:type="GetMoney">
+					<Money>6</Money>
+				</Effect>
+				<Effect xsi:type="MoneyOnChainBuild">
+					<MoneyToGet xsi:type="GetMoney">
+						<Money>4</Money>
+					</MoneyToGet>
+				</Effect>
+			</Effects>
+		</Development>
+	</Developments>
+</DevelopmentList>

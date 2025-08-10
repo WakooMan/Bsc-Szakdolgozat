@@ -1,5 +1,9 @@
-﻿using GameLogic.GameCards;
-using GameLogic.Goods.Resources;
+﻿using GameLogic.Elements;
+using GameLogic.Elements.Developments;
+using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Military;
+using GameLogic.Elements.Wonders;
+using SevenWonders.Common;
 using System.Xml.Serialization;
 
 namespace SevenWondersUI
@@ -11,15 +15,10 @@ namespace SevenWondersUI
         public MainPage()
         {
             InitializeComponent();
-            CardList list = new CardList();
-            XmlSerializer serializer = new XmlSerializer(typeof(CardList));
-
-            string file = Path.Combine(Directory.GetCurrentDirectory(), "Data", "AllCards.xml");
-
-            using (FileStream fs = new FileStream(file, FileMode.Open))
-            {
-                list = (CardList)serializer.Deserialize(fs);
-            }
+            IXmlHandler xmlHandler = new XmlHandler();
+            IMilitaryBoard militaryBoard = new MilitaryBoardFactory(xmlHandler).Create();
+            IGameElements gameElements = new GameElements(new MainCardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));
+            var sm = gameElements.Developments;
         }
 
         private void OnCounterClicked(object sender, EventArgs e)

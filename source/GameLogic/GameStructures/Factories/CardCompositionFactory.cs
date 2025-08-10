@@ -1,0 +1,31 @@
+﻿using GameLogic.Elements.GameCards;
+using GameLogic.Handlers.Factories;
+using SevenWonders.Common;
+using System.ComponentModel.Composition;
+
+namespace GameLogic.GameStructures.Factories
+{
+    [Export(typeof(ICardCompositionFactory))]
+    public class CardCompositionFactory : ICardCompositionFactory
+    {
+        [ImportingConstructor]
+        public CardCompositionFactory(ICardCompositionFileHandlerFactory cardCompositionFileHandlerFactory, ICardNodeFactory cardNodeFactory)
+        {
+            ArgumentChecker.CheckNull(cardCompositionFileHandlerFactory, nameof(cardCompositionFileHandlerFactory));
+            ArgumentChecker.CheckNull(cardNodeFactory, nameof(cardNodeFactory));
+
+            m_cardNodeFactory = cardNodeFactory;
+            m_cardCompositionFileHandlerFactory = cardCompositionFileHandlerFactory;
+        }
+        public ICardComposition Create(string cardCompositionFile, ICollection<Card> cards)
+        {
+            ArgumentChecker.CheckNullOrEmpty(cardCompositionFile, nameof(cardCompositionFile));
+            ArgumentChecker.CheckNull(cards, nameof(cards));
+
+            return new CardComposition(m_cardCompositionFileHandlerFactory.CreateCardCompositionFileHandler(cardCompositionFile), m_cardNodeFactory, cards);
+        }
+
+        private readonly ICardNodeFactory m_cardNodeFactory;
+        private readonly ICardCompositionFileHandlerFactory m_cardCompositionFileHandlerFactory;
+    }
+}
