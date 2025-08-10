@@ -2,6 +2,7 @@
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.PlayerActions;
+using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Military
 {
@@ -43,15 +44,16 @@ namespace GameLogic.Elements.Military
             Fields[index] = MilitaryField.None;
 
             List<MilitaryCard> militaryCards = new List<MilitaryCard>();
+            int halfOfFieldCount = Fields.Count / 2;
 
-            if (playerSide == PlayerSide.First && newIdx > 10)
+            if (playerSide == PlayerSide.First && newIdx > halfOfFieldCount)
             {
-                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexStart > 10 &&
+                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexStart > halfOfFieldCount &&
                     ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexEnd < newIdx))).ToList();
             }
-            else if (playerSide == PlayerSide.Second && newIdx < 10)
+            else if (playerSide == PlayerSide.Second && newIdx < halfOfFieldCount)
             {
-                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexEnd < 10 &&
+                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexEnd < halfOfFieldCount &&
                     ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexStart > newIdx))).ToList();
             }
 
@@ -84,6 +86,7 @@ namespace GameLogic.Elements.Military
             }
         }
 
+        [XmlIgnore]
         private readonly Dictionary<Player, PlayerSide> m_keyValuePairs;
     }
 }
