@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "source\GameLog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Common", "source\SevenWonders.Common\SevenWonders.Common.csproj", "{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.GameEngine", "SevenWonders.GameEngine\SevenWonders.GameEngine.csproj", "{0917F7EF-6AB5-4525-A988-945E8E799F79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0917F7EF-6AB5-4525-A988-945E8E799F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0917F7EF-6AB5-4525-A988-945E8E799F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0917F7EF-6AB5-4525-A988-945E8E799F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0917F7EF-6AB5-4525-A988-945E8E799F79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
