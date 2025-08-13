@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SevenWonders.SceneEditor.MainPage"
+             xmlns:local="clr-namespace:SevenWonders.SceneEditor"
+             x:DataType="local:MainPageViewModel"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="8*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="Gray">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0">
+                    <StackLayout Orientation="Horizontal">
+                        <Label>Name:</Label>
+                        <Label Text="{Binding Name, Mode=TwoWay}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label>Id:</Label>
+                        <Label Text="{Binding Id, Mode=TwoWay}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="IsVisible:"/>
+                        <Label Text="{Binding IsVisible, Mode=TwoWay}"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Row="1">
+                    <Label Text="Layers"/>
+                    <Button Text="Add Layer" Background="Black" Command="{Binding OnAddLayer}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Label Text="GameObjects"/>
+                    <Button Text="Add GameObject" Background="Black" Command="{Binding OnAddGameObject}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="3">
+                    <Label Text="Textures"/>
+                    <Button Text="Add Texture" Background="Black" Command="{Binding OnAddTexture}"/>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Column="1" Background="Black">
+                <Grid HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding ButtonsAreVisible, Mode=TwoWay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Choose Scene" Grid.Column="0" Margin="5" Background="Gray"/>
+                    <Button Text="Add New Scene" Grid.Column="1" Margin="5" Background="Gray" Command="{Binding OnAddSceneCommand}"/>
+                </Grid>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding AddSceneVisible, Mode=TwoWay}">
+                    <Label Text="Scene name:"/>
+                    <Entry MaxLength="10" Text="{Binding AddSceneViewModel.SceneName, Mode=TwoWay}" TextColor="White" Background="Gray"/>
+                    <Label Text="Scene id:"/>
+                    <Entry MaxLength="10" Keyboard="Numeric" Text="{Binding AddSceneViewModel.SceneId, Mode=TwoWay}" TextColor="White" Background="Gray"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Add" Grid.Column="0" Margin="5" Background="Gray" Command="{Binding OnAddCommand}"/>
+                        <Button Text="Back" Grid.Column="1" Margin="5" Background="Gray" Command="{Binding OnBackCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+                <skia:SKCanvasView x:Name="canvas"
+                   PaintSurface="OnCanvasViewPaintSurface"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"
+                   IsVisible="{Binding CanvasIsVisible, Mode=TwoWay}"/>
+            </Grid>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
