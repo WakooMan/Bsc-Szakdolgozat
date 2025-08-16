@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using SkiaSharp.Views.Maui;
+using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
@@ -66,6 +67,19 @@ namespace SevenWonders.GameEngine
                    Visible.GetHashCode() +
                    EnableCollision.GetHashCode() +
                    ParentScene.GetHashCode();
+        }
+
+        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        {
+            foreach (var gameObject in ObjectList)
+            {
+                gameObject.Draw(eventArgs);
+            }
+
+            foreach (var texture in Textures)
+            {
+                texture.Draw(eventArgs);
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System.Numerics;
+﻿using Microsoft.Maui.Storage;
+using SkiaSharp;
+using SkiaSharp.Views.Maui;
+using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
@@ -98,5 +101,12 @@ namespace SevenWonders.GameEngine
                    Speed.GetHashCode() +
                    Animations.Select(anim => anim.GetHashCode()).Sum();
         }
+
+        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        {
+           
+        }
+
+        private SKBitmap m_bitmap;
     }
 }

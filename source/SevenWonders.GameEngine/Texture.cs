@@ -92,9 +92,38 @@ namespace SevenWonders.GameEngine
                    Visible.GetHashCode();
         }
 
+        public void LoadTexture()
+        {
+            using var stream = File.OpenRead(FileName);
+            m_bitmap = SKBitmap.Decode(stream);
+            OriginalWidth = m_bitmap.Width;
+            OriginalHeight = m_bitmap.Height;
+            if (Width == 0) Width = OriginalWidth;
+            if (Height == 0) Height = OriginalHeight;
+        }
+
         public void Draw(SKPaintSurfaceEventArgs eventArgs)
         {
+            if (!Visible || m_bitmap == null)
+                return;
 
+            var canvas = eventArgs.Surface.Canvas;
+
+            using var paint = new SKPaint
+            {
+                IsAntialias = true,
+                ColorFilter = SKColorFilter.CreateBlendMode(Color, SKBlendMode.Modulate)
+            };
+
+            canvas.Save();
+            canvas.Translate(Position.X, Position.Y);
+            canvas.RotateDegrees(Rotation.X, Width / 2f, Height / 2f);
+            canvas.Scale(Scale.X, Scale.Y);
+            var destRect = new SKRect(0, 0, Width, Height);
+            canvas.DrawBitmap(m_bitmap, destRect);
+            canvas.Restore();
         }
+
+        private SKBitmap m_bitmap;
     }
 }
