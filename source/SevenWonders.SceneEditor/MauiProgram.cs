@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+using SevenWonders.SceneEditor.ViewModels;
+using SevenWonders.SceneEditor.Views;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace SevenWonders.SceneEditor
@@ -10,6 +13,7 @@ namespace SevenWonders.SceneEditor
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {

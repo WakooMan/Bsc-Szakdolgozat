@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SevenWonders.SceneEditor.MainPage"
-             xmlns:local="clr-namespace:SevenWonders.SceneEditor"
+             x:Class="SevenWonders.SceneEditor.Views.MainPage"
+             xmlns:local="clr-namespace:SevenWonders.SceneEditor.ViewModels"
              x:DataType="local:MainPageViewModel"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls">
     <ScrollView>
@@ -41,15 +41,15 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button Text="Add Layer" Background="Black" Command="{Binding OnAddLayer}"/>
+                    <Button Text="Add Layer" Background="Black" Clicked="Add_New_Layer_Clicked"/>
                 </StackLayout>
                 <StackLayout Grid.Row="2">
                     <Label Text="GameObjects"/>
-                    <Button Text="Add GameObject" Background="Black" Command="{Binding OnAddGameObject}"/>
+                    <Button Text="Add GameObject" Background="Black" Clicked="Add_New_GameObject_Clicked"/>
                 </StackLayout>
                 <StackLayout Grid.Row="3">
                     <Label Text="Textures"/>
-                    <Button Text="Add Texture" Background="Black" Clicked="Button_Clicked"/>
+                    <Button Text="Add Texture" Background="Black" Clicked="Add_New_Texture_Clicked"/>
                 </StackLayout>
             </Grid>
             <Grid Grid.Column="1" Background="Black">
@@ -59,28 +59,8 @@
                         <ColumnDefinition Width="5*" />
                     </Grid.ColumnDefinitions>
                     <Button Text="Choose Scene" Grid.Column="0" Margin="5" Background="Gray"/>
-                    <Button Text="Add New Scene" Grid.Column="1" Margin="5" Background="Gray" Command="{Binding OnAddSceneCommand}"/>
+                    <Button Text="Add New Scene" Grid.Column="1" Margin="5" Background="Gray" Clicked="Add_New_Scene_Clicked"/>
                 </Grid>
-                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding AddSceneVisible, Mode=TwoWay}">
-                    <Label Text="Scene name:"/>
-                    <Entry MaxLength="10" Text="{Binding AddSceneViewModel.SceneName, Mode=TwoWay}" TextColor="White" Background="Gray"/>
-                    <Label Text="Scene id:"/>
-                    <Entry MaxLength="10" Keyboard="Numeric" Text="{Binding AddSceneViewModel.SceneId, Mode=TwoWay}" TextColor="White" Background="Gray"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Button Text="Add" Grid.Column="0" Margin="5" Background="Gray" Command="{Binding OnAddCommand}"/>
-                        <Button Text="Back" Grid.Column="1" Margin="5" Background="Gray" Command="{Binding OnBackCommand}"/>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding AddLayerVisible, Mode=TwoWay}">
-                    <Label Text="Layer name:"/>
-                    <Entry MaxLength="10" Text="{Binding AddLayerViewModel.LayerName, Mode=TwoWay}" TextColor="White" Background="Gray"/>
-                    <Label Text="Layer id:"/>
-                    <Entry MaxLength="10" Keyboard="Numeric" Text="{Binding AddLayerViewModel.LayerId, Mode=TwoWay}" TextColor="White" Background="Gray"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Button Text="Add" Grid.Column="0" Margin="5" Background="Gray" Command="{Binding OnLayerAddCommand}"/>
-                        <Button Text="Back" Grid.Column="1" Margin="5" Background="Gray" Command="{Binding OnLayerBackCommand}"/>
-                    </StackLayout>
-                </StackLayout>
                 <skia:SKCanvasView x:Name="canvas"
                    PaintSurface="OnCanvasViewPaintSurface"
                    HorizontalOptions="Fill"

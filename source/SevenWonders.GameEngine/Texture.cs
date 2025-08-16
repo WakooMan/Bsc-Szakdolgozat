@@ -13,7 +13,7 @@ namespace SevenWonders.GameEngine
         public float OriginalWidth { get; set; }
         public float OriginalHeight { get; set; }
         public SKColor Color { get; set; }
-        public string FileName { get; set; }
+        public string FilePath { get; set; }
         public string Name { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
@@ -23,13 +23,13 @@ namespace SevenWonders.GameEngine
         public Texture()
         {
             Name = string.Empty;
-            FileName = string.Empty;
+            FilePath = string.Empty;
         }
 
         public Texture(Texture texture)
         {
             Name = texture.Name;
-            FileName = texture.FileName;
+            FilePath = texture.FilePath;
             Width = texture.Width;
             Height = texture.Height;
             OriginalWidth = texture.OriginalWidth;
@@ -51,7 +51,7 @@ namespace SevenWonders.GameEngine
             }
 
             return Name.Equals(other.Name) &&
-                   FileName.Equals(other.FileName) &&
+                   FilePath.Equals(other.FilePath) &&
                    Width.Equals(other.Width) &&
                    Height.Equals(other.Height) &&
                    OriginalHeight.Equals(other.OriginalHeight) &&
@@ -78,7 +78,7 @@ namespace SevenWonders.GameEngine
         public override int GetHashCode()
         {
             return Name.GetHashCode() +
-                   FileName.GetHashCode() +
+                   FilePath.GetHashCode() +
                    Width.GetHashCode() +
                    Height.GetHashCode() +
                    OriginalHeight.GetHashCode() +
@@ -94,7 +94,7 @@ namespace SevenWonders.GameEngine
 
         public void LoadTexture()
         {
-            using var stream = File.OpenRead(FileName);
+            using var stream = File.OpenRead(FilePath);
             m_bitmap = SKBitmap.Decode(stream);
             OriginalWidth = m_bitmap.Width;
             OriginalHeight = m_bitmap.Height;

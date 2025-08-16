@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace SevenWonders.SceneEditor
+namespace SevenWonders.SceneEditor.ViewModels
 {
     public class LayerViewModel: INotifyPropertyChanged
     {

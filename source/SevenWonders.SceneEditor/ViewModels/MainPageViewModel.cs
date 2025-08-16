@@ -7,13 +7,11 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace SevenWonders.SceneEditor
+namespace SevenWonders.SceneEditor.ViewModels
 {
     public enum MainWindowState
     {
         ButtonsWindow,
-        AddSceneWindow,
-        AddLayerWindow,
         CanvasWindow,
     }
 
@@ -23,29 +21,12 @@ namespace SevenWonders.SceneEditor
 
         public MainPageViewModel()
         {
-            AddSceneViewModel = new AddSceneViewModel();
-            AddLayerViewModel = new AddLayerViewModel();
             CurrentScene = null;
             SetState(MainWindowState.ButtonsWindow);
-            OnAddSceneCommand = new Command(OnAddSceneCommandExecute);
-            OnAddCommand = new Command(OnAddCommandExecute);
-            OnBackCommand = new Command(OnBackCommandExecute);
-            OnAddLayer = new Command(OnAddLayerExecute);
-            OnLayerAddCommand = new Command(OnLayerAddCommandExecute);
-            OnLayerBackCommand = new Command(OnLayerBackCommandExecute);
             LayerViews = new ObservableCollection<LayerViewModel>();
         }
-
-        public AddSceneViewModel AddSceneViewModel { get; set; }
-        public AddLayerViewModel AddLayerViewModel { get; set; }
-        public ICommand OnAddSceneCommand { get; set; }
-        public ICommand OnAddCommand { get; set; }
-        public ICommand OnBackCommand { get; set; }
-        public ICommand OnAddLayer { get; set; }
         public ICommand OnAddGameObject { get; set; }
         public ICommand OnAddTexture { get; set; }
-        public ICommand OnLayerAddCommand { get; set; }
-        public ICommand OnLayerBackCommand { get; set; }
 
         public ObservableCollection<LayerViewModel> LayerViews { get; set; }
 
@@ -107,7 +88,7 @@ namespace SevenWonders.SceneEditor
             {
                 return m_currentScene;
             }
-            set
+            private set
             {
                 m_currentScene = value;
                 OnPropertyChanged(nameof(Id));
@@ -143,31 +124,43 @@ namespace SevenWonders.SceneEditor
             }
         }
 
-        public bool AddSceneVisible
+        public void SetCurrentScene(string name, int id, bool visible)
         {
-            get
+            if (CurrentScene is not null)
             {
-                return m_addSceneVisible;
+                return;
             }
-            set
+
+            Scene scene = new Scene()
             {
-                m_addSceneVisible = value;
-                OnPropertyChanged();
-            }
+                Name = name,
+                Id = id,
+                Visible = visible
+            };
+            CurrentScene = scene;
+            SetState(MainWindowState.CanvasWindow);
         }
 
-        public bool AddLayerVisible
+        public void AddLayer(string name, int id, bool visible)
         {
-            get
+            if (CurrentScene is null)
             {
-                return m_addLayerVisible;
+                return;
             }
-            set
+
+            GraphicsLayer graphicsLayer = new GraphicsLayer()
             {
-                m_addLayerVisible = value;
-                OnPropertyChanged();
-            }
+                Name = name,
+                ID = id,
+                Visible = visible,
+                EnableCollision = true,
+                ParentScene = CurrentScene,
+            };
+            CurrentScene.Layers.Add(graphicsLayer);
+            LayerViews.Add(new LayerViewModel(graphicsLayer));
+            m_selectedLayer = graphicsLayer;
         }
+
 
         public void SetSelectedLayer(LayerViewModel? layerViewModel)
         {
@@ -179,7 +172,7 @@ namespace SevenWonders.SceneEditor
             m_selectedLayer = m_currentScene.Layers.FirstOrDefault(layer => layer.ID == layerViewModel.Id);
         }
 
-        public void AddTextureToLayer(string fullPath, string fileName)
+        public void AddTextureToLayer(string name, int id, bool visible, int textureId, int width, int height, string fullPath)
         {
             if (m_selectedLayer is null)
             {
@@ -187,15 +180,15 @@ namespace SevenWonders.SceneEditor
             }
             Texture texture = new Texture()
             {
-                Name = fileName,
-                Id = 0,
+                Name = name,
+                Id = id,
                 Position = new Vector2(0, 0),
                 Color = SKColor.Empty,
-                TextureId = 0,
-                FileName = fullPath,
-                Visible = true,
-                Width = 1600,
-                Height = 900,
+                TextureId = textureId,
+                FilePath = fullPath,
+                Visible = visible,
+                Width = width,
+                Height = height,
                 Scale = new Vector2(1, 1)
             };
             texture.LoadTexture();
@@ -221,71 +214,6 @@ namespace SevenWonders.SceneEditor
             m_state = mainWindowState;
             CanvasIsVisible = m_state == MainWindowState.CanvasWindow ? true : false;
             ButtonsAreVisible = m_state == MainWindowState.ButtonsWindow ? true : false;
-            AddSceneVisible = m_state == MainWindowState.AddSceneWindow ? true : false;
-            AddLayerVisible = m_state == MainWindowState.AddLayerWindow ? true : false;
-        }
-
-        private void OnAddSceneCommandExecute()
-        {
-            SetState(MainWindowState.AddSceneWindow);
-        }
-
-        private void OnBackCommandExecute()
-        {
-            AddSceneViewModel.SceneName = string.Empty;
-            AddSceneViewModel.SceneId = 0;
-            SetState(MainWindowState.ButtonsWindow);
-        }
-
-        private void OnAddCommandExecute()
-        {
-            CurrentScene = new Scene()
-            {
-                Name = AddSceneViewModel.SceneName,
-                Id = AddSceneViewModel.SceneId,
-                Visible = true
-            };
-            AddSceneViewModel.SceneName = string.Empty;
-            AddSceneViewModel.SceneId = 0;
-            SetState(MainWindowState.CanvasWindow);
-        }
-
-        private void OnAddLayerExecute()
-        {
-            if (CurrentScene is null)
-            {
-                return;
-            }
-
-            SetState(MainWindowState.AddLayerWindow);
-        }
-
-        private void OnLayerAddCommandExecute()
-        {
-            if (CurrentScene is null)
-            {
-                return;
-            }
-
-            GraphicsLayer graphicsLayer = new GraphicsLayer()
-            {
-                Name = AddLayerViewModel.LayerName,
-                ID = AddLayerViewModel.LayerId,
-                Visible = true,
-                EnableCollision = true,
-                ParentScene = CurrentScene,
-            };
-            CurrentScene.Layers.Add(graphicsLayer);
-            LayerViews.Add(new LayerViewModel(graphicsLayer));
-            m_selectedLayer = graphicsLayer;
-            SetState(MainWindowState.CanvasWindow);
-        }
-
-        private void OnLayerBackCommandExecute()
-        {
-            AddLayerViewModel.LayerName = string.Empty;
-            AddLayerViewModel.LayerId = 0;
-            SetState(MainWindowState.CanvasWindow);
         }
 
         private GraphicsLayer? m_selectedLayer;
