@@ -14,6 +14,11 @@ public partial class AddTexturePopupWindow : Popup
         BindingContext = m_viewModel;
     }
 
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        Close();
+    }
+
     private async void FilePicker_Clicked(object sender, EventArgs e)
     {
         var customFileType = new FilePickerFileType(

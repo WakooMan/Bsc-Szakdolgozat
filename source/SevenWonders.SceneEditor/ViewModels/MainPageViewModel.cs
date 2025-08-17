@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 
 namespace SevenWonders.SceneEditor.ViewModels
 {
@@ -19,16 +18,10 @@ namespace SevenWonders.SceneEditor.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public MainPageViewModel()
-        {
-            CurrentScene = null;
-            SetState(MainWindowState.ButtonsWindow);
-            LayerViews = new ObservableCollection<LayerViewModel>();
-        }
-        public ICommand OnAddGameObject { get; set; }
-        public ICommand OnAddTexture { get; set; }
 
-        public ObservableCollection<LayerViewModel> LayerViews { get; set; }
+        public ObservableCollection<LayerListViewModel> LayerViews { get; set; }
+        public ObservableCollection<TextureListViewModel> TextureViews { get; set; }
+        public ObservableCollection<GameObjectListViewModel> GameObjectViews { get; set; }
 
         public string Name
         {
@@ -124,6 +117,28 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public bool IsLeftPanelVisible
+        {
+            get
+            {
+                return m_isLeftPanelVisible;
+            }
+            set
+            {
+                m_isLeftPanelVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public MainPageViewModel()
+        {
+            CurrentScene = null;
+            SetState(MainWindowState.ButtonsWindow);
+            LayerViews = new ObservableCollection<LayerListViewModel>();
+            TextureViews = new ObservableCollection<TextureListViewModel>();
+            GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
+        }
+
         public void SetCurrentScene(string name, int id, bool visible)
         {
             if (CurrentScene is not null)
@@ -157,12 +172,12 @@ namespace SevenWonders.SceneEditor.ViewModels
                 ParentScene = CurrentScene,
             };
             CurrentScene.Layers.Add(graphicsLayer);
-            LayerViews.Add(new LayerViewModel(graphicsLayer));
+            LayerViews.Add(new LayerListViewModel(graphicsLayer));
             m_selectedLayer = graphicsLayer;
         }
 
 
-        public void SetSelectedLayer(LayerViewModel? layerViewModel)
+        public void SetSelectedLayer(LayerListViewModel? layerViewModel)
         {
             if (m_currentScene is null || layerViewModel is null)
             {
@@ -178,6 +193,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             {
                 return;
             }
+
             Texture texture = new Texture()
             {
                 Name = name,
@@ -194,6 +210,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             texture.LoadTexture();
 
             m_selectedLayer.Textures.Add(texture);
+            TextureViews.Add(new TextureListViewModel(texture));
         }
 
         public void DrawSelectedLayer(SKPaintSurfaceEventArgs eventArgs)
@@ -213,15 +230,15 @@ namespace SevenWonders.SceneEditor.ViewModels
         {
             m_state = mainWindowState;
             CanvasIsVisible = m_state == MainWindowState.CanvasWindow ? true : false;
+            IsLeftPanelVisible = CanvasIsVisible;
             ButtonsAreVisible = m_state == MainWindowState.ButtonsWindow ? true : false;
         }
 
         private GraphicsLayer? m_selectedLayer;
         private Scene? m_currentScene;
         private bool m_canvasIsVisible;
+        private bool m_isLeftPanelVisible;
         private bool m_buttonsAreVisible;
-        private bool m_addSceneVisible;
-        private bool m_addLayerVisible;
         private MainWindowState m_state;
     }
 }

@@ -3,7 +3,8 @@
     x:Class="SevenWonders.SceneEditor.Views.AddTexturePopupWindow"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    CanBeDismissedByTappingOutsideOfPopup="False">
     <Border Stroke="Black"
      StrokeThickness="4"
      Background="White"
@@ -66,14 +67,14 @@
                         Grid.Column="0" 
                         Margin="5" 
                         Background="Gray" 
-                        Command="{Binding OnAddCommand}" 
-                        Clicked="FilePicker_Clicked"/>
+                        Command="{Binding OnAddCommand}"
+                        Clicked="Button_Clicked"/>
                 <Button Text="Back" 
                         Grid.Column="1" 
                         Margin="5" 
                         Background="Gray" 
-                        Command="{Binding OnBackCommand}" 
-                        Clicked="FilePicker_Clicked"/>
+                        Command="{Binding OnBackCommand}"
+                        Clicked="Button_Clicked"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Border>

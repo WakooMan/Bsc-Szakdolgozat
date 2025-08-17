@@ -19,7 +19,7 @@ namespace SevenWonders.GameEngine
         public bool InFrustum { get; set; }
         public uint CurrentAnim { get; set; }
         public uint NumberOfFrames { get; set; }
-        public uint ID { get; set; }
+        public int Id { get; set; }
         public int Zindex { get; set; }
         public GraphicsLayer ParentLayer { get; set; }
 
@@ -44,7 +44,7 @@ namespace SevenWonders.GameEngine
             ParentLayer = new GraphicsLayer(gameObject.ParentLayer);
             CurrentAnim = gameObject.CurrentAnim;
             NumberOfFrames = gameObject.NumberOfFrames;
-            ID = gameObject.ID;
+            Id = gameObject.Id;
             Zindex = gameObject.Zindex;
             Speed = gameObject.Speed;
         }
@@ -68,7 +68,7 @@ namespace SevenWonders.GameEngine
                    ParentLayer.Equals(other.ParentLayer) && 
                    CurrentAnim.Equals(other.CurrentAnim) &&
                    NumberOfFrames.Equals(other.NumberOfFrames) &&
-                   ID.Equals(other.ID) &&
+                   Id.Equals(other.Id) &&
                    Zindex.Equals(other.Zindex) &&
                    Speed.Equals(other.Speed);
         }
@@ -96,7 +96,7 @@ namespace SevenWonders.GameEngine
                    ParentLayer.GetHashCode() +
                    CurrentAnim.GetHashCode() +
                    NumberOfFrames.GetHashCode() +
-                   ID.GetHashCode() +
+                   Id.GetHashCode() +
                    Zindex.GetHashCode() +
                    Speed.GetHashCode() +
                    Animations.Select(anim => anim.GetHashCode()).Sum();

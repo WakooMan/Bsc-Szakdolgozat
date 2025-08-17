@@ -28,9 +28,17 @@ namespace SevenWonders.SceneEditor.Views
             m_mainPageViewModel.DrawSelectedLayer(e);
         }
 
-        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void Layer_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            m_mainPageViewModel.SetSelectedLayer(e.SelectedItem as LayerViewModel);
+            m_mainPageViewModel.SetSelectedLayer(e.SelectedItem as LayerListViewModel);
+        }
+
+        private void Texture_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+        }
+
+        private void GameObject_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
         }
 
         private async void Add_New_Texture_Clicked(object sender, EventArgs e)
@@ -46,7 +54,7 @@ namespace SevenWonders.SceneEditor.Views
                                                       addTexturePopupWindow.ViewModel.Width,
                                                       addTexturePopupWindow.ViewModel.Height,
                                                       addTexturePopupWindow.ViewModel.SelectedFilePath);
-                addTexturePopupWindow.ViewModel.AddActivated = false;
+                addTexturePopupWindow.ViewModel.Clear();
             }
         }
 
@@ -72,9 +80,27 @@ namespace SevenWonders.SceneEditor.Views
             if (addLayerPopupWindow.ViewModel.AddActivated)
             {
                 m_mainPageViewModel.AddLayer(addLayerPopupWindow.ViewModel.Name, addLayerPopupWindow.ViewModel.Id, addLayerPopupWindow.ViewModel.Visible);
-                addLayerPopupWindow.ViewModel.AddActivated = false;
+                addLayerPopupWindow.ViewModel.Clear();
             }
         }
+
+        private void ShowTab(int tabIndex)
+        {
+            LayersContent.IsVisible = false;
+            TexturesContent.IsVisible = false;
+            GameObjectsContent.IsVisible = false;
+
+            switch (tabIndex)
+            {
+                case 1: LayersContent.IsVisible = true; break;
+                case 2: TexturesContent.IsVisible = true; break;
+                case 3: GameObjectsContent.IsVisible = true; break;
+            }
+        }
+
+        private void OnLayersClicked(object sender, EventArgs e) => ShowTab(1);
+        private void OnTexturesClicked(object sender, EventArgs e) => ShowTab(2);
+        private void OnGameObjectsClicked(object sender, EventArgs e) => ShowTab(3);
 
         private readonly MainPageViewModel m_mainPageViewModel;
     }
