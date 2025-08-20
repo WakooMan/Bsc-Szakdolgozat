@@ -13,69 +13,78 @@
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="40,40,40,40" />
         </Border.StrokeShape>
-        <VerticalStackLayout HorizontalOptions="Center" 
+        <Grid HorizontalOptions="Fill" 
+       VerticalOptions="Center" 
+       Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="35*"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout HorizontalOptions="Center" 
                              VerticalOptions="Center" 
-                             Margin="10">  
-            <Label Text="Texture name:"/>
-            <Entry MaxLength="10" 
+                             Margin="10">
+                    <Label Text="Texture name:"/>
+                    <Entry MaxLength="10" 
                    Text="{Binding Name, Mode=TwoWay}" 
                    TextColor="White" 
                    Background="Gray" 
                    HorizontalTextAlignment="Center"/>
-            <Label Text="Texture id:"/>
-            <Entry MaxLength="10" 
+                    <Label Text="Texture id:"/>
+                    <Entry MaxLength="10" 
                    Keyboard="Numeric" 
                    Text="{Binding Id, Mode=TwoWay}" 
                    TextColor="White" 
                    Background="Gray" 
                    HorizontalTextAlignment="Center"/>
-            <Label Text="Texture type id:"/>
-            <Entry MaxLength="10" 
+                    <Label Text="Texture type id:"/>
+                    <Entry MaxLength="10" 
                    Keyboard="Numeric" 
                    Text="{Binding TextureId, Mode=TwoWay}" 
                    TextColor="White" 
                    Background="Gray" 
                    HorizontalTextAlignment="Center"/>
-            <Label Text="Width:"/>
-            <Entry MaxLength="10" 
+                    <Label Text="Width:"/>
+                    <Entry MaxLength="10" 
                    Keyboard="Numeric" 
                    Text="{Binding Width, Mode=TwoWay}" 
                    TextColor="White" 
                    Background="Gray" 
                    HorizontalTextAlignment="Center"/>
 
-            <Label Text="Height:"/>
-            <Entry MaxLength="10" 
+                    <Label Text="Height:"/>
+                    <Entry MaxLength="10" 
                    Keyboard="Numeric" 
                    Text="{Binding Height, Mode=TwoWay}" 
                    TextColor="White" 
                    Background="Gray" 
                    HorizontalTextAlignment="Center"/>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Label Text="Is Visible: "
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Label Text="Is Visible: "
                        HorizontalOptions="Center"/>
-                <CheckBox IsChecked="{Binding Visible}" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button Text="Choose file"
+                        <CheckBox IsChecked="{Binding Visible}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Button Text="Choose file"
                         Clicked="FilePicker_Clicked" />
-                <Label Text="{Binding SelectedFileName}" 
+                        <Label Text="{Binding SelectedFileName}" 
                        HorizontalOptions="Center" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout HorizontalOptions="Center">
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+            <HorizontalStackLayout HorizontalOptions="Center"
+                             Grid.Row="1">
                 <Button Text="Add" 
-                        Grid.Column="0" 
                         Margin="5" 
                         Background="Gray" 
-                        Command="{Binding OnAddCommand}"
+                        Command="{Binding OnAddCommand}" 
                         Clicked="Button_Clicked"/>
-                <Button Text="Back" 
-                        Grid.Column="1" 
+                <Button Text="Back"  
                         Margin="5" 
                         Background="Gray" 
-                        Command="{Binding OnBackCommand}"
+                        Command="{Binding OnBackCommand}" 
                         Clicked="Button_Clicked"/>
             </HorizontalStackLayout>
-        </VerticalStackLayout>
+        </Grid>
     </Border>
 </toolkit:Popup>

@@ -12,6 +12,8 @@ namespace SevenWonders.SceneEditor.Views
         {
             InitializeComponent();
             m_mainPageViewModel = mainPageViewModel;
+            m_currentPopup = null;
+            SizeChanged += MainPage_SizeChanged;
             BindingContext = m_mainPageViewModel;
             new Thread(() =>
             {
@@ -21,6 +23,16 @@ namespace SevenWonders.SceneEditor.Views
                     Thread.Sleep(500);
                 }
             }).Start();
+        }
+
+        private void MainPage_SizeChanged(object? sender, EventArgs e)
+        {
+            m_currentPopupSize = new Size(Width * 0.2, Height * 0.4);
+
+            if (m_currentPopup is not null)
+            {
+                m_currentPopup.Size = m_currentPopupSize;
+            }
         }
 
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -44,6 +56,8 @@ namespace SevenWonders.SceneEditor.Views
         private async void Add_New_Texture_Clicked(object sender, EventArgs e)
         {
             AddTexturePopupWindow addTexturePopupWindow = new AddTexturePopupWindow(new AddTexturePopupWindowViewModel());
+            m_currentPopup = addTexturePopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
             await this.ShowPopupAsync(addTexturePopupWindow);
             if (addTexturePopupWindow.ViewModel.AddActivated)
             {
@@ -56,6 +70,7 @@ namespace SevenWonders.SceneEditor.Views
                                                       addTexturePopupWindow.ViewModel.SelectedFilePath);
                 addTexturePopupWindow.ViewModel.Clear();
             }
+            m_currentPopup = null;
         }
 
         private void Add_New_GameObject_Clicked(object sender, EventArgs e)
@@ -65,23 +80,29 @@ namespace SevenWonders.SceneEditor.Views
         private async void Add_New_Scene_Clicked(object sender, EventArgs e)
         {
             AddScenePopupWindow addScenePopupWindow = new AddScenePopupWindow(new AddPopupWindowViewModel());
+            m_currentPopup = addScenePopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
             await this.ShowPopupAsync(addScenePopupWindow);
             if (addScenePopupWindow.ViewModel.AddActivated)
             {
                 m_mainPageViewModel.SetCurrentScene(addScenePopupWindow.ViewModel.Name, addScenePopupWindow.ViewModel.Id, addScenePopupWindow.ViewModel.Visible);
                 addScenePopupWindow.ViewModel.Clear();
             }
+            m_currentPopup = null;
         }
 
         private async void Add_New_Layer_Clicked(object sender, EventArgs e)
         {
             AddLayerPopupWindow addLayerPopupWindow = new AddLayerPopupWindow(new AddPopupWindowViewModel());
+            m_currentPopup = addLayerPopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
             await this.ShowPopupAsync(addLayerPopupWindow);
             if (addLayerPopupWindow.ViewModel.AddActivated)
             {
                 m_mainPageViewModel.AddLayer(addLayerPopupWindow.ViewModel.Name, addLayerPopupWindow.ViewModel.Id, addLayerPopupWindow.ViewModel.Visible);
                 addLayerPopupWindow.ViewModel.Clear();
             }
+            m_currentPopup = null;
         }
 
         private void ShowTab(int tabIndex)
@@ -103,5 +124,7 @@ namespace SevenWonders.SceneEditor.Views
         private void OnGameObjectsClicked(object sender, EventArgs e) => ShowTab(3);
 
         private readonly MainPageViewModel m_mainPageViewModel;
+        private Popup? m_currentPopup;
+        private Size m_currentPopupSize;
     }
 }

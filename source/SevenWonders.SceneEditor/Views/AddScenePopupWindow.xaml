@@ -13,43 +13,42 @@
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="40,40,40,40" />
         </Border.StrokeShape>
-        <Grid HorizontalOptions="Center" 
+        <Grid HorizontalOptions="Fill" 
               VerticalOptions="Center" 
               Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="35*"/>
             </Grid.RowDefinitions>
-            <Label Text="Scene name:"
-                   Grid.Row="0"/>
-            <Entry MaxLength="10" 
-                   Text="{Binding Name, Mode=TwoWay}" 
-                   TextColor="White" 
-                   Background="Gray" 
-                   HorizontalTextAlignment="Center"
-                   Grid.Row="1"/>
-            <Label Text="Scene id:"
-                   Grid.Row="2"/>
-            <Entry MaxLength="10" 
-                   Keyboard="Numeric" 
-                   Text="{Binding Id, Mode=TwoWay}" 
-                   TextColor="White" 
-                   Background="Gray" 
-                   HorizontalTextAlignment="Center"
-                   Grid.Row="3"/>
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout>
+                    <Label Text="Scene name:"
+                            Grid.Row="0"/>
+                    <Entry MaxLength="10" 
+                            Text="{Binding Name, Mode=TwoWay}" 
+                            TextColor="White" 
+                            Background="Gray" 
+                            HorizontalTextAlignment="Center"
+                            Grid.Row="1"/>
+                    <Label Text="Scene id:"
+                            Grid.Row="2"/>
+                    <Entry MaxLength="10" 
+                            Keyboard="Numeric" 
+                            Text="{Binding Id, Mode=TwoWay}" 
+                            TextColor="White" 
+                            Background="Gray" 
+                            HorizontalTextAlignment="Center"
+                            Grid.Row="3"/>
+                </VerticalStackLayout>
+            </ScrollView>
             <HorizontalStackLayout HorizontalOptions="Center"
-                                   Grid.Row="4">
+                                    Grid.Row="1">
                 <Button Text="Add" 
-                        Grid.Column="0" 
                         Margin="5" 
                         Background="Gray" 
                         Command="{Binding OnAddCommand}" 
                         Clicked="Button_Clicked"/>
                 <Button Text="Back" 
-                        Grid.Column="1" 
                         Margin="5" 
                         Background="Gray" 
                         Command="{Binding OnBackCommand}" 
