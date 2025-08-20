@@ -37,16 +37,18 @@ namespace SevenWonders.SceneEditor.Views
 
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            m_mainPageViewModel.DrawSelectedLayer(e);
+            e.Surface.Canvas.Clear();
+            m_mainPageViewModel.TextureContentsViewModel.DrawSelectedLayer(e);
         }
 
         private void Layer_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            m_mainPageViewModel.SetSelectedLayer(e.SelectedItem as LayerListViewModel);
+            m_mainPageViewModel.LayerContentsViewModel.SetSelectedLayer(e.SelectedItem as LayerListViewModel);
         }
 
         private void Texture_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            m_mainPageViewModel.TextureContentsViewModel.SetSelectedTexture(e.SelectedItem as TextureListViewModel);
         }
 
         private void GameObject_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -61,7 +63,7 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(addTexturePopupWindow);
             if (addTexturePopupWindow.ViewModel.AddActivated)
             {
-                m_mainPageViewModel.AddTextureToLayer(addTexturePopupWindow.ViewModel.Name,
+                m_mainPageViewModel.TextureContentsViewModel.AddTextureToLayer(addTexturePopupWindow.ViewModel.Name,
                                                       addTexturePopupWindow.ViewModel.Id,
                                                       addTexturePopupWindow.ViewModel.Visible,
                                                       addTexturePopupWindow.ViewModel.TextureId,
@@ -99,7 +101,7 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(addLayerPopupWindow);
             if (addLayerPopupWindow.ViewModel.AddActivated)
             {
-                m_mainPageViewModel.AddLayer(addLayerPopupWindow.ViewModel.Name, addLayerPopupWindow.ViewModel.Id, addLayerPopupWindow.ViewModel.Visible);
+                m_mainPageViewModel.LayerContentsViewModel.AddLayer(addLayerPopupWindow.ViewModel.Name, addLayerPopupWindow.ViewModel.Id, addLayerPopupWindow.ViewModel.Visible);
                 addLayerPopupWindow.ViewModel.Clear();
             }
             m_currentPopup = null;
@@ -126,5 +128,15 @@ namespace SevenWonders.SceneEditor.Views
         private readonly MainPageViewModel m_mainPageViewModel;
         private Popup? m_currentPopup;
         private Size m_currentPopupSize;
+
+        private void Delete_Selected_Layer_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.LayerContentsViewModel.DeleteSelectedLayer();
+        }
+
+        private void Delete_Selected_Texture_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.TextureContentsViewModel.DeleteSelectedTexture();
+        }
     }
 }

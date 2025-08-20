@@ -45,7 +45,7 @@ namespace SevenWonders.GameEngine
                    ID.Equals(other.ID) &&
                    Visible.Equals(other.Visible) &&
                    EnableCollision.Equals(other.EnableCollision) &&
-                   ParentScene.Equals(other.ParentScene);
+                   object.ReferenceEquals(ParentScene, other.ParentScene);
         }
 
         public override bool Equals(object? obj)
