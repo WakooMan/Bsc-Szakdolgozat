@@ -56,12 +56,12 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Minpoint.GetHashCode() +
-                   Maxpoint.GetHashCode() +
-                   BoxPoints.Select(boxPoint => boxPoint.GetHashCode()).Sum() +
-                   BoxHalfHeight.GetHashCode() +
-                   BoxHalfWidth.GetHashCode() +
-                   Matrix.GetHashCode() +
+            return Minpoint.GetHashCode() ^
+                   Maxpoint.GetHashCode() ^
+                   BoxPoints.Select(boxPoint => boxPoint.GetHashCode()).Sum() ^
+                   BoxHalfHeight.GetHashCode() ^
+                   BoxHalfWidth.GetHashCode() ^
+                   Matrix.GetHashCode() ^
                    Enabled.GetHashCode();
         }
     }

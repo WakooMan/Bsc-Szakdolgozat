@@ -1,7 +1,11 @@
 ﻿using CommunityToolkit.Maui.Views;
+using SevenWonders.GameEngine;
+using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System.IO.Compression;
+using System.Xml.Linq;
 
 namespace SevenWonders.SceneEditor.Views
 {
@@ -128,10 +132,82 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(addScenePopupWindow);
             if (addScenePopupWindow.ViewModel.AddActivated)
             {
-                m_mainPageViewModel.SetCurrentScene(addScenePopupWindow.ViewModel.Name, addScenePopupWindow.ViewModel.Id, addScenePopupWindow.ViewModel.Visible);
+                if (Directory.Exists(FileHelper.TempPath))
+                {
+                    Directory.Delete(FileHelper.TempPath, true);
+                }
+                Directory.CreateDirectory(FileHelper.TempPath);
+
+                Scene scene = new Scene()
+                {
+                    Name = addScenePopupWindow.ViewModel.Name,
+                    Id = addScenePopupWindow.ViewModel.Id,
+                    Visible = addScenePopupWindow.ViewModel.Visible
+                };
+                m_mainPageViewModel.SetCurrentScene(scene);
                 addScenePopupWindow.ViewModel.Clear();
             }
             m_currentPopup = null;
+        }
+
+        private async void Choose_Scene_Clicked(object sender, EventArgs e)
+        {
+            var customFileType = new FilePickerFileType(
+                    new Dictionary<DevicePlatform, IEnumerable<string>>
+                    {
+                    { DevicePlatform.WinUI, new[] { ".zip" } }, // file extension
+                    });
+
+            PickOptions options = new()
+            {
+                PickerTitle = "Please select the scene file.",
+                FileTypes = customFileType,
+            };
+            var result = await PickAndShow(options);
+            if (result is null)
+            {
+                return;
+            }
+
+            if (Directory.Exists(FileHelper.TempPath))
+            {
+                Directory.Delete(FileHelper.TempPath, true);
+            }
+            Directory.CreateDirectory(FileHelper.TempPath);
+
+            ZipFile.ExtractToDirectory(result.FullPath, FileHelper.TempPath);
+            Scene? scene = FileHelper.Deserialize<Scene>(Path.Combine(FileHelper.TempPath, "scene.xml"));
+            if (scene is not null)
+            {
+                scene.LoadTextures(FileHelper.TempPath);
+                m_mainPageViewModel.SetCurrentScene(scene);
+            }
+        }
+
+
+        private async Task<FileResult?> PickAndShow(PickOptions options)
+        {
+            try
+            {
+                var result = await FilePicker.Default.PickAsync(options);
+                if (result != null)
+                {
+                    if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
+                        result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
+                    {
+                        using var stream = await result.OpenReadAsync();
+                        var image = ImageSource.FromStream(() => stream);
+                    }
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // The user canceled or something went wrong
+            }
+
+            return null;
         }
 
         private async void Add_New_Layer_Clicked(object sender, EventArgs e)

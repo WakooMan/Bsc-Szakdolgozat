@@ -1,4 +1,5 @@
 ﻿using SevenWonders.GameEngine;
+using SevenWonders.SceneEditor.Helpers;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
@@ -220,6 +221,13 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
+            string fileName = Path.GetFileName(fullPath);
+            string destinationFileName = Path.Combine(FileHelper.TempPath, fileName);
+            if (!File.Exists(destinationFileName))
+            {
+                File.Copy(fullPath, destinationFileName);
+            }
+
             Texture texture = new Texture()
             {
                 Name = name,
@@ -227,13 +235,13 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Position = new Vector2(0, 0),
                 Color = SKColor.Empty,
                 TextureId = textureId,
-                FilePath = fullPath,
+                FileName = fileName,
                 Visible = visible,
                 Width = width,
                 Height = height,
                 Scale = new Vector2(1, 1)
             };
-            texture.LoadTexture();
+            texture.LoadTexture(FileHelper.TempPath);
 
             SelectedLayer.Textures.Add(texture);
             TextureViews.Add(new TextureListViewModel(texture));

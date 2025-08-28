@@ -62,14 +62,15 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return NumFrames.GetHashCode() +
-                   ActualFrame.GetHashCode() +
-                   LastUpdate.GetHashCode() +
-                   Fps.GetHashCode() +
-                   RotationZ.GetHashCode() +
-                   Name.GetHashCode() +
-                   LoopAnimation.GetHashCode() +
-                   Frames.Select(frame => frame.GetHashCode()).Sum();
+            int hashCode = NumFrames.GetHashCode() ^
+                   ActualFrame.GetHashCode() ^
+                   LastUpdate.GetHashCode() ^
+                   Fps.GetHashCode() ^
+                   RotationZ.GetHashCode() ^
+                   Name.GetHashCode() ^
+                   LoopAnimation.GetHashCode();
+            Frames.ForEach(frame => hashCode = hashCode ^frame.GetHashCode());
+            return hashCode;
                     
         }
 
@@ -88,11 +89,11 @@ namespace SevenWonders.GameEngine
             }
         }
 
-        public void LoadTextures()
+        public void LoadTextures(string sceneFolder)
         {
             foreach (SpriteFrame frame in Frames)
             {
-                frame.LoadTexture();
+                frame.LoadTexture(sceneFolder);
             }
         }
     }

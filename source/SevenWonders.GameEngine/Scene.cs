@@ -49,10 +49,11 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Layers.Select(layer => layer.GetHashCode()).Sum() +
-                   Name.GetHashCode() +
-                   Visible.GetHashCode() +
+            int hashCode = Name.GetHashCode() ^
+                   Visible.GetHashCode() ^
                    Id.GetHashCode();
+            Layers.ForEach(layer => hashCode = hashCode ^ layer.GetHashCode());
+            return hashCode;
         }
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs)
@@ -62,6 +63,22 @@ namespace SevenWonders.GameEngine
             foreach (GraphicsLayer layer in Layers)
             {
                 layer.Draw(eventArgs);
+            }
+        }
+
+        public void LoadTextures(string sceneFolder)
+        {
+            foreach (GraphicsLayer layer in Layers)
+            {
+                foreach (Texture texture in layer.Textures)
+                {
+                    texture.LoadTexture(sceneFolder);
+                }
+
+                foreach (GameObject gameObject in layer.ObjectList)
+                {
+                    gameObject.LoadTextures(sceneFolder);
+                }
             }
         }
     }

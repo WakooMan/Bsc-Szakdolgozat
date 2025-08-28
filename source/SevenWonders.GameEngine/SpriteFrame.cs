@@ -56,9 +56,9 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() +
-                   Frame.GetHashCode() +
-                   BBoxOriginal.GetHashCode() +
+            return Name.GetHashCode() ^
+                   Frame.GetHashCode() ^
+                   BBoxOriginal.GetHashCode() ^
                    BBoxTransformed.GetHashCode();
         }
 
@@ -70,9 +70,9 @@ namespace SevenWonders.GameEngine
             Frame.DrawPart(eventArgs, position, scale, rotation, Left, Top, Right, Bottom);
         }
 
-        public void LoadTexture()
+        public void LoadTexture(string sceneFolder)
         {
-            Frame.LoadTexture();
+            Frame.LoadTexture(sceneFolder);
         }
 
     }

@@ -256,7 +256,7 @@
                         <ColumnDefinition Width="5*" />
                         <ColumnDefinition Width="5*" />
                     </Grid.ColumnDefinitions>
-                    <Button Text="Choose Scene" Grid.Column="0" Margin="5" Background="Gray"/>
+                <Button Text="Choose Scene" Grid.Column="0" Margin="5" Background="Gray" Clicked="Choose_Scene_Clicked"/>
                     <Button Text="Add New Scene" Grid.Column="1" Margin="5" Background="Gray" Clicked="Add_New_Scene_Clicked"/>
                 </Grid>
                 <skia:SKCanvasView x:Name="canvas"

@@ -1,4 +1,5 @@
 ﻿using SevenWonders.GameEngine;
+using SevenWonders.SceneEditor.Helpers;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System;
@@ -90,6 +91,12 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(Name));
                 OnPropertyChanged(nameof(IsVisible));
                 LayerContentsViewModel.CurrentScene = m_currentScene;
+                string tempPath = Path.Combine(Directory.GetCurrentDirectory(), "temp");
+                if (Directory.Exists(tempPath))
+                {
+                    Directory.Delete(tempPath, true);
+                }
+                Directory.CreateDirectory(tempPath);
             }
         }
 
@@ -182,19 +189,13 @@ namespace SevenWonders.SceneEditor.ViewModels
             m_onSceneSaveCommand = new Command(OnSceneSaveCommandExecute, () => CurrentScene is not null);
         }
 
-        public void SetCurrentScene(string name, int id, bool visible)
+        public void SetCurrentScene(Scene scene)
         {
             if (CurrentScene is not null)
             {
                 return;
             }
 
-            Scene scene = new Scene()
-            {
-                Name = name,
-                Id = id,
-                Visible = visible
-            };
             CurrentScene = scene;
             m_onSceneSaveCommand.ChangeCanExecute();
             SetState(MainWindowState.CanvasWindow);
@@ -215,64 +216,30 @@ namespace SevenWonders.SceneEditor.ViewModels
         {
             if(m_currentScene is null)
                 return;
-            List<string> images = new List<string>();
-            foreach (GraphicsLayer graphicsLayer in m_currentScene.Layers)
-            {
-                foreach (Texture texture in graphicsLayer.Textures)
-                {
-                    if (!images.Contains(texture.FilePath))
-                    {
-                        images.Add(texture.FilePath);
-                    }
-                    texture.FilePath = Path.GetFileName(texture.FilePath);
-                }
-                foreach (GameObject gameObject in graphicsLayer.ObjectList)
-                {
-                    gameObject.Animations.ForEach(animation => {
-                        animation.Frames.ForEach(frame => {
-                            if (!images.Contains(frame.Frame.FilePath))
-                            {
-                                images.Add(frame.Frame.FilePath);
-                            }
-                            frame.Frame.FilePath = Path.GetFileName(frame.Frame.FilePath);
-                        });                    
-                    });
-                }
-            }
 
-            string scenesPath = Path.Combine(Directory.GetCurrentDirectory(), "SavedScenes");
-            string tempPath = Path.Combine(Directory.GetCurrentDirectory(), "temp");
+            string scenesPath = FileHelper.ScenesPath;
             if (!Directory.Exists(scenesPath))
             {
                 Directory.CreateDirectory(scenesPath);
             }
-            if (Directory.Exists(tempPath))
-            {
-                Directory.Delete(tempPath, true);
-            }
-            Directory.CreateDirectory(tempPath);
 
-            foreach (string file in images)
-            {
-                string destinationFileName = Path.Combine(tempPath, Path.GetFileName(file));
-                File.Copy(file, destinationFileName);
-            }
-
-            string scenePath = Path.Combine(tempPath, "scene.xml");
-            var serializer = new XmlSerializer(typeof(Scene));
-
-            using (var writer = new StreamWriter(scenePath))
-            {
-                serializer.Serialize(writer, m_currentScene);
-            }
+            string scenePath = Path.Combine(FileHelper.TempPath, "scene.xml");
+            FileHelper.Serialize(m_currentScene, scenePath);
 
             string zipPath = Path.Combine(scenesPath, $"{m_currentScene.Name}.zip");
 
+            if (File.Exists(zipPath))
+            {
+                File.Delete(zipPath);
+            }
+
             ZipFile.CreateFromDirectory(
-               tempPath,
+               FileHelper.TempPath,
                zipPath,
                CompressionLevel.Optimal,
                includeBaseDirectory: false);
+
+            CurrentScene = null;
         }
 
         private Command m_onSceneSaveCommand;

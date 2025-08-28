@@ -80,27 +80,28 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() +
-                   Position.GetHashCode() +
-                   Direction.GetHashCode() +
-                   Scale.GetHashCode() +
-                   Rotation.GetHashCode() +
-                   Visible.GetHashCode() +
-                   Collidable.GetHashCode() +
-                   InFrustum.GetHashCode() +
-                   CurrentAnim.GetHashCode() +
-                   NumberOfFrames.GetHashCode() +
-                   Id.GetHashCode() +
-                   Zindex.GetHashCode() +
-                   Speed.GetHashCode() +
-                   Animations.Select(anim => anim.GetHashCode()).Sum();
+            int hashCode = Name.GetHashCode() ^
+                   Position.GetHashCode() ^
+                   Direction.GetHashCode() ^
+                   Scale.GetHashCode() ^
+                   Rotation.GetHashCode() ^
+                   Visible.GetHashCode() ^
+                   Collidable.GetHashCode() ^
+                   InFrustum.GetHashCode() ^
+                   CurrentAnim.GetHashCode() ^
+                   NumberOfFrames.GetHashCode() ^
+                   Id.GetHashCode() ^
+                   Zindex.GetHashCode() ^
+                   Speed.GetHashCode();
+            Animations.ForEach(anim => hashCode = hashCode ^ anim.GetHashCode());
+            return hashCode;
         }
 
-        public void LoadTextures()
+        public void LoadTextures(string sceneFolder)
         {
             foreach (Sprite sprite in Animations)
             {
-                sprite.LoadTextures();
+                sprite.LoadTextures(sceneFolder);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using SkiaSharp.Views.Maui;
+using System;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -56,12 +57,13 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return ObjectList.Select(obj => obj.GetHashCode()).Sum() +
-                   Textures.Select(texture => texture.GetHashCode()).Sum() +
-                   Name.GetHashCode() +
-                   ID.GetHashCode() +
-                   Visible.GetHashCode() +
-                   EnableCollision.GetHashCode();
+            int hashCode = Name.GetHashCode() ^
+            ID.GetHashCode() ^
+            Visible.GetHashCode() ^
+            EnableCollision.GetHashCode();
+            ObjectList.ForEach(obj => hashCode = hashCode ^ obj.GetHashCode());
+            Textures.ForEach(texture => hashCode = hashCode ^ texture.GetHashCode());
+            return hashCode;
         }
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs)

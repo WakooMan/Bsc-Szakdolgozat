@@ -1,4 +1,5 @@
 ﻿using SevenWonders.GameEngine;
+using SevenWonders.SceneEditor.Helpers;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -205,7 +206,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Visible = visible,
                 Scale = new Vector2(1, 1)
             };
-            gameObject.LoadTextures();
+            gameObject.LoadTextures(FileHelper.TempPath);
 
             SelectedLayer.ObjectList.Add(gameObject);
             GameObjectViews.Add(new GameObjectListViewModel(gameObject));
@@ -261,11 +262,18 @@ namespace SevenWonders.SceneEditor.ViewModels
             m_selectedGameObject.CurrentAnim = 0;
         }
 
-        public void AddSpriteToGameObject(string name, string textureName, int idOfTexture, bool visible, int textureId, int width, int height, string fileName, int frameHeight, int frameWidth, int rows, int columns)
+        public void AddSpriteToGameObject(string name, string textureName, int idOfTexture, bool visible, int textureId, int width, int height, string fullPath, int frameHeight, int frameWidth, int rows, int columns)
         {
             if (m_selectedGameObject is null)
             {
                 return;
+            }
+
+            string fileName = Path.GetFileName(fullPath);
+            string destinationFileName = Path.Combine(FileHelper.TempPath, fileName);
+            if (!File.Exists(destinationFileName))
+            {
+                File.Copy(fullPath, destinationFileName);
             }
 
             Texture texture = new Texture()
@@ -275,12 +283,13 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Position = new Vector2(0, 0),
                 Color = SKColor.Empty,
                 TextureId = textureId,
-                FilePath = fileName,
+                FileName = fileName,
                 Visible = visible,
                 Width = width,
                 Height = height,
                 Scale = new Vector2(1, 1)
             };
+            texture.LoadTexture(FileHelper.TempPath);
 
             List<SpriteFrame> frames = new List<SpriteFrame>();
             for (int i = 0; i < rows; i++)
