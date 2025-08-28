@@ -1,12 +1,12 @@
-﻿using System.Numerics;
+﻿using SkiaSharp;
+using SkiaSharp.Views.Maui;
+using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
     public class Sprite: IEquatable<Sprite>
     {
         public List<SpriteFrame> Frames { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Scale { get; set; }
         public int NumFrames { get; set; }
         public int ActualFrame { get; set; }
         public uint LastUpdate { get; set; }
@@ -23,8 +23,6 @@ namespace SevenWonders.GameEngine
 
         public Sprite(Sprite sprite)
         {
-            Position = sprite.Position;
-            Scale = sprite.Scale;
             NumFrames = sprite.NumFrames;
             ActualFrame = sprite.ActualFrame;
             LastUpdate = sprite.LastUpdate;
@@ -42,9 +40,7 @@ namespace SevenWonders.GameEngine
                 return false;
             }
 
-            return Position.Equals(other.Position) &&
-                   Scale.Equals(other.Scale) &&
-                   NumFrames.Equals(other.NumFrames) &&
+            return NumFrames.Equals(other.NumFrames) &&
                    ActualFrame.Equals(other.ActualFrame) &&
                    LastUpdate.Equals(other.LastUpdate) &&
                    Fps.Equals(other.Fps) &&
@@ -66,9 +62,7 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Position.GetHashCode() +
-                   Scale.GetHashCode() +
-                   NumFrames.GetHashCode() +
+            return NumFrames.GetHashCode() +
                    ActualFrame.GetHashCode() +
                    LastUpdate.GetHashCode() +
                    Fps.GetHashCode() +
@@ -77,6 +71,29 @@ namespace SevenWonders.GameEngine
                    LoopAnimation.GetHashCode() +
                    Frames.Select(frame => frame.GetHashCode()).Sum();
                     
+        }
+
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation)
+        {
+            if (Frames.Count <= 0)
+            {
+                return;
+            }
+
+            Frames[ActualFrame].Draw(eventArgs, position, scale, rotation);
+            LastUpdate++;
+            if (Fps < LastUpdate)
+            {
+                ActualFrame = (Frames.Count > ActualFrame) ? ActualFrame++ : LoopAnimation ? 0 : ActualFrame;
+            }
+        }
+
+        public void LoadTextures()
+        {
+            foreach (SpriteFrame frame in Frames)
+            {
+                frame.LoadTexture();
+            }
         }
     }
 }

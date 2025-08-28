@@ -1,9 +1,17 @@
-﻿namespace SevenWonders.GameEngine
+﻿using SkiaSharp;
+using SkiaSharp.Views.Maui;
+using System.Numerics;
+
+namespace SevenWonders.GameEngine
 {
     public class SpriteFrame: IEquatable<SpriteFrame>
     {
         public Texture Frame { get; set; }
         public string Name { get; set; }
+        public int Left { get; set; }
+        public int Top { get; set; }
+        public int Right { get; set; }
+        public int Bottom { get; set; }
         public BoundingBox BBoxOriginal { get; set; }
         public BoundingBox BBoxTransformed { get; set; }
 
@@ -53,5 +61,19 @@
                    BBoxOriginal.GetHashCode() +
                    BBoxTransformed.GetHashCode();
         }
+
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation)
+        {
+            if(!Frame.Visible)
+                return;
+
+            Frame.DrawPart(eventArgs, position, scale, rotation, Left, Top, Right, Bottom);
+        }
+
+        public void LoadTexture()
+        {
+            Frame.LoadTexture();
+        }
+
     }
 }

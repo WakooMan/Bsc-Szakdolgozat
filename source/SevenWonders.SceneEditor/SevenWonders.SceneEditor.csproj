@@ -81,6 +81,9 @@
 	  <MauiXaml Update="Views\AddScenePopupWindow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\AddSpritePopupWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\AddTexturePopupWindow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

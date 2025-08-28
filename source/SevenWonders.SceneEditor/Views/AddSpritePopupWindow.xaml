@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="SevenWonders.SceneEditor.Views.AddSpritePopupWindow"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    CanBeDismissedByTappingOutsideOfPopup="False">
+    <Border Stroke="Black"
+     StrokeThickness="4"
+     Background="White"
+     HorizontalOptions="Center"
+     VerticalOptions="Center">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40,40,40,40" />
+        </Border.StrokeShape>
+        <Grid HorizontalOptions="Fill" 
+       VerticalOptions="Center" 
+       Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="35*"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout HorizontalOptions="Center" 
+                             VerticalOptions="Center" 
+                             Margin="10">
+                    <Label Text="Sprite name:"/>
+                    <Entry MaxLength="10" 
+Text="{Binding Name, Mode=TwoWay}" 
+TextColor="White" 
+Background="Gray" 
+HorizontalTextAlignment="Center"/>
+                    <Label Text="Texture name:"/>
+                    <Entry MaxLength="10" 
+                   Text="{Binding TextureName, Mode=TwoWay}" 
+                   TextColor="White" 
+                   Background="Gray" 
+                   HorizontalTextAlignment="Center"/>
+                    <Label Text="Texture id:"/>
+                    <Entry MaxLength="10" 
+                   Keyboard="Numeric" 
+                   Text="{Binding Id, Mode=TwoWay}" 
+                   TextColor="White" 
+                   Background="Gray" 
+                   HorizontalTextAlignment="Center"/>
+                    <Label Text="Texture type id:"/>
+                    <Entry MaxLength="10" 
+                   Keyboard="Numeric" 
+                   Text="{Binding TextureId, Mode=TwoWay}" 
+                   TextColor="White" 
+                   Background="Gray" 
+                   HorizontalTextAlignment="Center"/>
+                    <Label Text="Width:"/>
+                    <Entry MaxLength="10" 
+                   Keyboard="Numeric" 
+                   Text="{Binding Width, Mode=TwoWay}" 
+                   TextColor="White" 
+                   Background="Gray" 
+                   HorizontalTextAlignment="Center"/>
+
+                    <Label Text="Height:"/>
+                    <Entry MaxLength="10" 
+                   Keyboard="Numeric" 
+                   Text="{Binding Height, Mode=TwoWay}" 
+                   TextColor="White" 
+                   Background="Gray" 
+                   HorizontalTextAlignment="Center"/>
+                    <Label Text="Frame width:"/>
+                    <Entry MaxLength="10" 
+Keyboard="Numeric" 
+Text="{Binding FrameWidth, Mode=TwoWay}" 
+TextColor="White" 
+Background="Gray" 
+HorizontalTextAlignment="Center"/>
+                    <Label Text="Frame height:"/>
+                    <Entry MaxLength="10" 
+Keyboard="Numeric" 
+Text="{Binding FrameHeight, Mode=TwoWay}" 
+TextColor="White" 
+Background="Gray" 
+HorizontalTextAlignment="Center"/>
+                    <Label Text="Rows:"/>
+                    <Entry MaxLength="10" 
+Keyboard="Numeric" 
+Text="{Binding Rows, Mode=TwoWay}" 
+TextColor="White" 
+Background="Gray" 
+HorizontalTextAlignment="Center"/>
+                    <Label Text="Columns:"/>
+                    <Entry MaxLength="10" 
+Keyboard="Numeric" 
+Text="{Binding Columns, Mode=TwoWay}" 
+TextColor="White" 
+Background="Gray" 
+HorizontalTextAlignment="Center"/>
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Label Text="Is Texture Visible: "
+                       HorizontalOptions="Center"/>
+                        <CheckBox IsChecked="{Binding Visible}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Button Text="Choose file"
+                        Clicked="FilePicker_Clicked" />
+                        <Label Text="{Binding SelectedFileName}" 
+                       HorizontalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+            <HorizontalStackLayout HorizontalOptions="Center"
+                             Grid.Row="1">
+                <Button Text="Add" 
+                        Margin="5" 
+                        Background="Gray" 
+                        Command="{Binding OnAddCommand}" 
+                        Clicked="Button_Clicked"/>
+                <Button Text="Back"  
+                        Margin="5" 
+                        Background="Gray" 
+                        Command="{Binding OnBackCommand}" 
+                        Clicked="Button_Clicked"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+</toolkit:Popup>

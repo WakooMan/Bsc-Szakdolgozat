@@ -1,4 +1,5 @@
 ﻿using SevenWonders.GameEngine;
+using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -49,6 +50,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedLayerVisible));
                 OnPropertyChanged(nameof(SelectedLayerEnableCollision));
                 m_textureContentsViewModel.SelectedLayer = m_selectedLayer;
+                m_gameObjectContentsViewModel.SelectedLayer = m_selectedLayer;
             }
         }
 
@@ -103,9 +105,10 @@ namespace SevenWonders.SceneEditor.ViewModels
         }
 
 
-        public LayerContentsViewModel(TextureContentsViewModel textureContentsViewModel)
+        public LayerContentsViewModel(TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsView)
         {
             m_textureContentsViewModel = textureContentsViewModel;
+            m_gameObjectContentsViewModel = gameObjectContentsView;
             LayerViews = new ObservableCollection<LayerListViewModel>();
             CurrentScene = null;
             SelectedLayer = null;
@@ -124,7 +127,6 @@ namespace SevenWonders.SceneEditor.ViewModels
                 ID = id,
                 Visible = visible,
                 EnableCollision = true,
-                ParentScene = CurrentScene,
             };
             CurrentScene.Layers.Add(graphicsLayer);
             LayerViews.Add(new LayerListViewModel(graphicsLayer));
@@ -143,6 +145,16 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        public void DrawSelectedLayer(SKPaintSurfaceEventArgs eventArgs)
+        {
+            if (SelectedLayer is null)
+            {
+                return;
+            }
+
+            SelectedLayer.Draw(eventArgs);
+        }
 
         public void DeleteSelectedLayer()
         {
@@ -163,5 +175,6 @@ namespace SevenWonders.SceneEditor.ViewModels
         private GraphicsLayer? m_selectedLayer;
         private Scene? m_currentScene;
         private readonly TextureContentsViewModel m_textureContentsViewModel;
+        private readonly GameObjectContentsViewModel m_gameObjectContentsViewModel;
     }
 }

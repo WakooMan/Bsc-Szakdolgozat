@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Storage;
-using SkiaSharp;
-using SkiaSharp.Views.Maui;
+﻿using SkiaSharp.Views.Maui;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -17,17 +15,16 @@ namespace SevenWonders.GameEngine
         public bool Visible { get; set; }
         public bool Collidable { get; set; }
         public bool InFrustum { get; set; }
-        public uint CurrentAnim { get; set; }
-        public uint NumberOfFrames { get; set; }
+        public int CurrentAnim { get; set; }
+        public int NumberOfFrames { get; set; }
         public int Id { get; set; }
         public int Zindex { get; set; }
-        public GraphicsLayer ParentLayer { get; set; }
 
         public GameObject()
         {
             Name = string.Empty;
             Animations = new List<Sprite>();
-            ParentLayer = new GraphicsLayer();
+            CurrentAnim = 0;
         }
 
         public GameObject(GameObject gameObject)
@@ -41,7 +38,6 @@ namespace SevenWonders.GameEngine
             Collidable = gameObject.Collidable;
             InFrustum = gameObject.InFrustum;
             Animations = gameObject.Animations.Select(sprite => new Sprite(sprite)).ToList();
-            ParentLayer = new GraphicsLayer(gameObject.ParentLayer);
             CurrentAnim = gameObject.CurrentAnim;
             NumberOfFrames = gameObject.NumberOfFrames;
             Id = gameObject.Id;
@@ -64,8 +60,7 @@ namespace SevenWonders.GameEngine
                    Visible.Equals(other.Visible) &&
                    Collidable.Equals(other.Collidable) &&
                    InFrustum.Equals(other.InFrustum) &&
-                   Animations.SequenceEqual(other.Animations) &&
-                   ParentLayer.Equals(other.ParentLayer) && 
+                   Animations.SequenceEqual(other.Animations) && 
                    CurrentAnim.Equals(other.CurrentAnim) &&
                    NumberOfFrames.Equals(other.NumberOfFrames) &&
                    Id.Equals(other.Id) &&
@@ -93,7 +88,6 @@ namespace SevenWonders.GameEngine
                    Visible.GetHashCode() +
                    Collidable.GetHashCode() +
                    InFrustum.GetHashCode() +
-                   ParentLayer.GetHashCode() +
                    CurrentAnim.GetHashCode() +
                    NumberOfFrames.GetHashCode() +
                    Id.GetHashCode() +
@@ -102,11 +96,20 @@ namespace SevenWonders.GameEngine
                    Animations.Select(anim => anim.GetHashCode()).Sum();
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        public void LoadTextures()
         {
-           
+            foreach (Sprite sprite in Animations)
+            {
+                sprite.LoadTextures();
+            }
         }
 
-        private SKBitmap m_bitmap;
+        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        {
+            if (!Visible || Animations.Count <= 0)
+                return;
+
+            Animations[CurrentAnim].Draw(eventArgs, Position, Scale, Rotation);
+        }
     }
 }

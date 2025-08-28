@@ -11,14 +11,12 @@ namespace SevenWonders.GameEngine
         public bool EnableCollision { get; set; }
         public string Name { get; set; }
         public int ID { get; set; }
-        public Scene ParentScene { get; set; }
 
         public GraphicsLayer()
         {
             ObjectList = new List<GameObject>();
             Textures = new List<Texture>();
             Name = string.Empty;
-            ParentScene = new Scene();
         }
 
         public GraphicsLayer(GraphicsLayer graphicsLayer)
@@ -29,7 +27,6 @@ namespace SevenWonders.GameEngine
             EnableCollision = graphicsLayer.EnableCollision;
             Name = graphicsLayer.Name;
             ID = graphicsLayer.ID;
-            ParentScene = graphicsLayer.ParentScene;
         }
 
         public bool Equals(GraphicsLayer? other)
@@ -44,8 +41,7 @@ namespace SevenWonders.GameEngine
                    Name.Equals(other.Name) &&
                    ID.Equals(other.ID) &&
                    Visible.Equals(other.Visible) &&
-                   EnableCollision.Equals(other.EnableCollision) &&
-                   object.ReferenceEquals(ParentScene, other.ParentScene);
+                   EnableCollision.Equals(other.EnableCollision);
         }
 
         public override bool Equals(object? obj)
@@ -65,8 +61,7 @@ namespace SevenWonders.GameEngine
                    Name.GetHashCode() +
                    ID.GetHashCode() +
                    Visible.GetHashCode() +
-                   EnableCollision.GetHashCode() +
-                   ParentScene.GetHashCode();
+                   EnableCollision.GetHashCode();
         }
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs)

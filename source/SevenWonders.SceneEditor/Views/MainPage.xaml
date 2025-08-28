@@ -15,7 +15,8 @@
             <Grid Background="Gray">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
-                    <RowDefinition Height="9*" />
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="0" IsVisible="{Binding IsLeftPanelVisible}">
                     <StackLayout Orientation="Horizontal">
@@ -119,24 +120,12 @@
                                            HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
                                 <Label Text="Rotation:"/>
-                                <HorizontalStackLayout>
-                                    <Label Text="X: "/>
-                                    <Entry MaxLength="10" 
-                                           Keyboard="Numeric" 
-                                           Text="{Binding TextureContentsViewModel.SelectedTextureRotationX, Mode=TwoWay}" 
-                                           TextColor="White" 
-                                           Background="Gray" 
-                                           HorizontalTextAlignment="Center"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label Text="Y: "/>
-                                    <Entry MaxLength="10" 
-                                           Keyboard="Numeric" 
-                                           Text="{Binding TextureContentsViewModel.SelectedTextureRotationY, Mode=TwoWay}" 
-                                           TextColor="White" 
-                                           Background="Gray" 
-                                           HorizontalTextAlignment="Center"/>
-                                </HorizontalStackLayout>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding TextureContentsViewModel.SelectedTextureRotation, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
                                 <Label Text="Scale:"/>
                                 <HorizontalStackLayout>
                                     <Label Text="X: "/>
@@ -173,19 +162,92 @@
                                 <Button Text="Delete" Background="Black" Clicked="Delete_Selected_Texture_Clicked"/>
                             </VerticalStackLayout>
                         </Grid>
-                        <VerticalStackLayout x:Name="GameObjectsContent" IsVisible="False">
-                            <ListView ItemsSource="{Binding GameObjectViews}" ItemSelected="GameObject_ItemSelected">
+                        <Grid x:Name="GameObjectsContent" IsVisible="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <ListView ItemsSource="{Binding GameObjectViews}" ItemSelected="GameObject_ItemSelected" Grid.Row="0">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="local:GameObjectListViewModel">
                                         <TextCell Text="{Binding Name}" Detail="{Binding Id}"/>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
-                            <Button Text="Add GameObject" Background="Black" Clicked="Add_New_GameObject_Clicked"/>
-                        </VerticalStackLayout>
-
+                            <Button Text="Add GameObject" Background="Black" Clicked="Add_New_GameObject_Clicked"  Grid.Row="1"/>
+                            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding TextureContentsViewModel.IsSelectedTextureAvailable}">
+                                <Label Text="Selected GameObject name:" />
+                                <Entry MaxLength="10" 
+                                       Text="{Binding GameObjectContentsViewModel.SelectedGameObjectName, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <HorizontalStackLayout HorizontalOptions="Center">
+                                    <Label Text="Is Visible: " HorizontalOptions="Center"/>
+                                    <CheckBox IsChecked="{Binding GameObjectContentsViewModel.SelectedGameObjectVisible, Mode=TwoWay}" />
+                                </HorizontalStackLayout>
+                                <Label Text="Position:"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="X: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectPositionX, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="Y: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectPositionY, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <Label Text="Rotation:"/>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding GameObjectContentsViewModel.SelectedGameObjectRotation, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Scale:"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="X: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectScaleX, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="Y: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectScaleY, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <Label Text="Animations: "/>
+                                <ListView ItemsSource="{Binding GameObjectContentsViewModel.SpriteViews}" ItemSelected="Sprite_ItemSelected" Grid.Row="0">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="local:SpriteListViewModel">
+                                            <TextCell Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <Button Text="Add Sprite" Background="Black" Clicked="Add_New_Sprite_Clicked"/>
+                                <Button Text="Delete Sprite" Background="Black" Clicked="Delete_Selected_Sprite_Clicked"/>
+                                <Button Text="Delete GameObject" Background="Black" Clicked="Delete_Selected_GameObject_Clicked"/>
+                            </VerticalStackLayout>
+                        </Grid>
                     </Grid>
                 </VerticalStackLayout>
+                <Button Text="Save Scene" Background="Black" Grid.Row="2" Command="{Binding OnSceneSaveCommand}" />
             </Grid>
         </ScrollView>
         <Grid Grid.Column="1" Background="Black">

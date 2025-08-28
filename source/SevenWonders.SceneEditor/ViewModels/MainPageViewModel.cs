@@ -1,10 +1,15 @@
 ﻿using SevenWonders.GameEngine;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO.Compression;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace SevenWonders.SceneEditor.ViewModels
 {
@@ -18,6 +23,7 @@ namespace SevenWonders.SceneEditor.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<GameObjectListViewModel> GameObjectViews { get; set; }
+        public ICommand OnSceneSaveCommand => m_onSceneSaveCommand;
 
         public string Name
         {
@@ -113,6 +119,19 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public GameObjectContentsViewModel GameObjectContentsViewModel
+        {
+            get
+            {
+                return m_gameObjectContentsViewModel;
+            }
+            private set
+            {
+                m_gameObjectContentsViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         public bool CanvasIsVisible
         {
             get
@@ -155,10 +174,12 @@ namespace SevenWonders.SceneEditor.ViewModels
         public MainPageViewModel()
         {
             m_textureContentsViewModel = new TextureContentsViewModel();
-            m_layerContentsViewModel = new LayerContentsViewModel(m_textureContentsViewModel);
+            m_gameObjectContentsViewModel = new GameObjectContentsViewModel();
+            m_layerContentsViewModel = new LayerContentsViewModel(m_textureContentsViewModel, m_gameObjectContentsViewModel);
             CurrentScene = null;
             SetState(MainWindowState.ButtonsWindow);
             GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
+            m_onSceneSaveCommand = new Command(OnSceneSaveCommandExecute, () => CurrentScene is not null);
         }
 
         public void SetCurrentScene(string name, int id, bool visible)
@@ -175,6 +196,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Visible = visible
             };
             CurrentScene = scene;
+            m_onSceneSaveCommand.ChangeCanExecute();
             SetState(MainWindowState.CanvasWindow);
         }
 
@@ -189,8 +211,74 @@ namespace SevenWonders.SceneEditor.ViewModels
             ButtonsAreVisible = m_state == MainWindowState.ButtonsWindow ? true : false;
         }
 
+        private void OnSceneSaveCommandExecute()
+        {
+            if(m_currentScene is null)
+                return;
+            List<string> images = new List<string>();
+            foreach (GraphicsLayer graphicsLayer in m_currentScene.Layers)
+            {
+                foreach (Texture texture in graphicsLayer.Textures)
+                {
+                    if (!images.Contains(texture.FilePath))
+                    {
+                        images.Add(texture.FilePath);
+                    }
+                    texture.FilePath = Path.GetFileName(texture.FilePath);
+                }
+                foreach (GameObject gameObject in graphicsLayer.ObjectList)
+                {
+                    gameObject.Animations.ForEach(animation => {
+                        animation.Frames.ForEach(frame => {
+                            if (!images.Contains(frame.Frame.FilePath))
+                            {
+                                images.Add(frame.Frame.FilePath);
+                            }
+                            frame.Frame.FilePath = Path.GetFileName(frame.Frame.FilePath);
+                        });                    
+                    });
+                }
+            }
+
+            string scenesPath = Path.Combine(Directory.GetCurrentDirectory(), "SavedScenes");
+            string tempPath = Path.Combine(Directory.GetCurrentDirectory(), "temp");
+            if (!Directory.Exists(scenesPath))
+            {
+                Directory.CreateDirectory(scenesPath);
+            }
+            if (Directory.Exists(tempPath))
+            {
+                Directory.Delete(tempPath, true);
+            }
+            Directory.CreateDirectory(tempPath);
+
+            foreach (string file in images)
+            {
+                string destinationFileName = Path.Combine(tempPath, Path.GetFileName(file));
+                File.Copy(file, destinationFileName);
+            }
+
+            string scenePath = Path.Combine(tempPath, "scene.xml");
+            var serializer = new XmlSerializer(typeof(Scene));
+
+            using (var writer = new StreamWriter(scenePath))
+            {
+                serializer.Serialize(writer, m_currentScene);
+            }
+
+            string zipPath = Path.Combine(scenesPath, $"{m_currentScene.Name}.zip");
+
+            ZipFile.CreateFromDirectory(
+               tempPath,
+               zipPath,
+               CompressionLevel.Optimal,
+               includeBaseDirectory: false);
+        }
+
+        private Command m_onSceneSaveCommand;
         private LayerContentsViewModel m_layerContentsViewModel;
         private TextureContentsViewModel m_textureContentsViewModel;
+        private GameObjectContentsViewModel m_gameObjectContentsViewModel;
         private Scene? m_currentScene;
         private bool m_canvasIsVisible;
         private bool m_isLeftPanelVisible;

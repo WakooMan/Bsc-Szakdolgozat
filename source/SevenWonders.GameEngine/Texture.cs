@@ -7,7 +7,7 @@ namespace SevenWonders.GameEngine
     public class Texture : IEquatable<Texture>
     {
         public Vector2 Position { get; set; }
-        public Vector2 Rotation { get; set; }
+        public float Rotation { get; set; }
         public Vector2 Scale { get; set; }
         public bool Visible { get; set; }
         public float OriginalWidth { get; set; }
@@ -117,13 +117,36 @@ namespace SevenWonders.GameEngine
 
             canvas.Save();
             canvas.Translate(Position.X, Position.Y);
-            canvas.RotateDegrees(Rotation.X, Width / 2f, Height / 2f);
+            canvas.RotateDegrees(Rotation, Width / 2f, Height / 2f);
             canvas.Scale(Scale.X, Scale.Y);
             var destRect = new SKRect(0, 0, Width, Height);
             canvas.DrawBitmap(m_bitmap, destRect);
             canvas.Restore();
         }
 
-        private SKBitmap m_bitmap;
+        public void DrawPart(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, int left, int top, int right, int bottom)
+        {
+            if (!Visible || m_bitmap == null)
+                return;
+
+            var canvas = eventArgs.Surface.Canvas;
+
+            using var paint = new SKPaint
+            {
+                IsAntialias = true,
+                ColorFilter = SKColorFilter.CreateBlendMode(Color, SKBlendMode.Modulate)
+            };
+
+            canvas.Save();
+            canvas.Translate(position.X, position.Y);
+            canvas.RotateDegrees(rotation, Width / 2f, Height / 2f);
+            canvas.Scale(scale.X, scale.Y);
+            var srcRect = new SKRectI(left, top, right, bottom);
+            var destRect = new SKRect(0, 0, Width, Height);
+            canvas.DrawBitmap(m_bitmap, srcRect, destRect);
+            canvas.Restore();
+        }
+
+        private SKBitmap? m_bitmap;
     }
 }

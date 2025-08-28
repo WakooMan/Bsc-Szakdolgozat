@@ -38,7 +38,7 @@ namespace SevenWonders.SceneEditor.Views
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             e.Surface.Canvas.Clear();
-            m_mainPageViewModel.TextureContentsViewModel.DrawSelectedLayer(e);
+            m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e);
         }
 
         private void Layer_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -53,6 +53,12 @@ namespace SevenWonders.SceneEditor.Views
 
         private void GameObject_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            m_mainPageViewModel.GameObjectContentsViewModel.SetSelectedGameObject(e.SelectedItem as GameObjectListViewModel);
+        }
+
+        private void Sprite_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            m_mainPageViewModel.GameObjectContentsViewModel.SetSelectedSprite(e.SelectedItem as SpriteListViewModel);
         }
 
         private async void Add_New_Texture_Clicked(object sender, EventArgs e)
@@ -75,8 +81,43 @@ namespace SevenWonders.SceneEditor.Views
             m_currentPopup = null;
         }
 
-        private void Add_New_GameObject_Clicked(object sender, EventArgs e)
+        private async void Add_New_GameObject_Clicked(object sender, EventArgs e)
         {
+            AddGameObjectPopupWindow addGameObjectPopupWindow = new AddGameObjectPopupWindow(new AddPopupWindowViewModel());
+            m_currentPopup = addGameObjectPopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
+            await this.ShowPopupAsync(addGameObjectPopupWindow);
+            if (addGameObjectPopupWindow.ViewModel.AddActivated)
+            {
+                m_mainPageViewModel.GameObjectContentsViewModel.AddGameObjectToLayer(addGameObjectPopupWindow.ViewModel.Name, addGameObjectPopupWindow.ViewModel.Id, addGameObjectPopupWindow.ViewModel.Visible);
+                addGameObjectPopupWindow.ViewModel.Clear();
+            }
+            m_currentPopup = null;
+        }
+
+        private async void Add_New_Sprite_Clicked(object sender, EventArgs e)
+        {
+            AddSpritePopupWindow addSpritePopupWindow = new AddSpritePopupWindow(new AddSpritePopupWindowViewModel());
+            m_currentPopup = addSpritePopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
+            await this.ShowPopupAsync(addSpritePopupWindow);
+            if (addSpritePopupWindow.ViewModel.AddActivated)
+            {
+                m_mainPageViewModel.GameObjectContentsViewModel.AddSpriteToGameObject(addSpritePopupWindow.ViewModel.Name, 
+                                                                                      addSpritePopupWindow.ViewModel.TextureName, 
+                                                                                      addSpritePopupWindow.ViewModel.Id, 
+                                                                                      addSpritePopupWindow.ViewModel.Visible,
+                                                                                      addSpritePopupWindow.ViewModel.TextureId,
+                                                                                      addSpritePopupWindow.ViewModel.Width,
+                                                                                      addSpritePopupWindow.ViewModel.Height,
+                                                                                      addSpritePopupWindow.ViewModel.SelectedFilePath,
+                                                                                      addSpritePopupWindow.ViewModel.FrameHeight,
+                                                                                      addSpritePopupWindow.ViewModel.FrameWidth,
+                                                                                      addSpritePopupWindow.ViewModel.Rows,
+                                                                                      addSpritePopupWindow.ViewModel.Columns);
+                addSpritePopupWindow.ViewModel.Clear();
+            }
+            m_currentPopup = null;
         }
 
         private async void Add_New_Scene_Clicked(object sender, EventArgs e)
@@ -137,6 +178,16 @@ namespace SevenWonders.SceneEditor.Views
         private void Delete_Selected_Texture_Clicked(object sender, EventArgs e)
         {
             m_mainPageViewModel.TextureContentsViewModel.DeleteSelectedTexture();
+        }
+
+        private void Delete_Selected_GameObject_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.GameObjectContentsViewModel.DeleteSelectedGameObject();
+        }
+
+        private void Delete_Selected_Sprite_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.GameObjectContentsViewModel.DeleteSelectedSprite();
         }
     }
 }

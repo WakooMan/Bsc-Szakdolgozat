@@ -51,8 +51,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedTextureName));
                 OnPropertyChanged(nameof(SelectedTexturePositionX));
                 OnPropertyChanged(nameof(SelectedTexturePositionY));
-                OnPropertyChanged(nameof(SelectedTextureRotationX));
-                OnPropertyChanged(nameof(SelectedTextureRotationY));
+                OnPropertyChanged(nameof(SelectedTextureRotation));
                 OnPropertyChanged(nameof(SelectedTextureScaleX));
                 OnPropertyChanged(nameof(SelectedTextureScaleY));
                 OnPropertyChanged(nameof(SelectedTextureWidth));
@@ -126,33 +125,17 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
-        public float SelectedTextureRotationX
+        public float SelectedTextureRotation
         {
             get
             {
-                return SelectedTexture?.Rotation.X ?? -1;
+                return SelectedTexture?.Rotation ?? -1;
             }
             set
             {
                 if (SelectedTexture is not null)
                 {
-                    SelectedTexture.Rotation = new Vector2(value, SelectedTexture.Rotation.Y);
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public float SelectedTextureRotationY
-        {
-            get
-            {
-                return SelectedTexture?.Rotation.Y ?? -1;
-            }
-            set
-            {
-                if (SelectedTexture is not null)
-                {
-                    SelectedTexture.Rotation = new Vector2(SelectedTexture.Rotation.X, value);
+                    SelectedTexture.Rotation = value;
                     OnPropertyChanged();
                 }
             }
@@ -257,15 +240,6 @@ namespace SevenWonders.SceneEditor.ViewModels
             SelectedTexture = texture;
         }
 
-        public void DrawSelectedLayer(SKPaintSurfaceEventArgs eventArgs)
-        {
-            if (SelectedLayer is null)
-            {
-                return;
-            }
-
-            SelectedLayer.Draw(eventArgs);
-        }
         public void SetSelectedTexture(TextureListViewModel? textureListViewModel)
         {
             if (m_selectedLayer is null || textureListViewModel is null)
