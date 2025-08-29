@@ -91,12 +91,6 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(Name));
                 OnPropertyChanged(nameof(IsVisible));
                 LayerContentsViewModel.CurrentScene = m_currentScene;
-                string tempPath = Path.Combine(Directory.GetCurrentDirectory(), "temp");
-                if (Directory.Exists(tempPath))
-                {
-                    Directory.Delete(tempPath, true);
-                }
-                Directory.CreateDirectory(tempPath);
             }
         }
 
@@ -189,16 +183,16 @@ namespace SevenWonders.SceneEditor.ViewModels
             m_onSceneSaveCommand = new Command(OnSceneSaveCommandExecute, () => CurrentScene is not null);
         }
 
-        public void SetCurrentScene(Scene scene)
+        public void SetCurrentScene(Scene? scene)
         {
-            if (CurrentScene is not null)
+            if (CurrentScene == scene)
             {
                 return;
             }
 
             CurrentScene = scene;
             m_onSceneSaveCommand.ChangeCanExecute();
-            SetState(MainWindowState.CanvasWindow);
+            SetState(scene is null ? MainWindowState.ButtonsWindow : MainWindowState.CanvasWindow);
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
@@ -239,7 +233,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                CompressionLevel.Optimal,
                includeBaseDirectory: false);
 
-            CurrentScene = null;
+            SetCurrentScene(null);
         }
 
         private Command m_onSceneSaveCommand;
