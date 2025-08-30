@@ -29,7 +29,7 @@ namespace SevenWonders.GameEngine
 
         public GameObject(GameObject gameObject)
         {
-            Name = gameObject.Name;
+            Name = new string(gameObject.Name);
             Position = gameObject.Position;
             Direction = gameObject.Direction;
             Scale = gameObject.Scale;

@@ -86,6 +86,33 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public string CopyName
+        {
+            get
+            {
+                return m_copyName;
+            }
+            set
+            {
+                m_copyName = value;
+                OnPropertyChanged();
+                IsCopyEnabled = !string.IsNullOrEmpty(m_copyName) && SelectedGameObjectName != m_copyName;
+            }
+        }
+
+        public bool IsCopyEnabled
+        {
+            get
+            {
+                return m_isCopyEnabled;
+            }
+            set
+            {
+                m_isCopyEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
         public bool SelectedGameObjectVisible
         {
             get
@@ -252,6 +279,23 @@ namespace SevenWonders.SceneEditor.ViewModels
             SelectedGameObject = null;
         }
 
+        public void CopySelectedGameObject()
+        {
+            if (SelectedLayer is null || m_selectedGameObject is null)
+            {
+                return;
+            }
+
+            GameObject gameObject = new GameObject(m_selectedGameObject);
+            gameObject.Name = new string(CopyName);
+            gameObject.Id = m_selectedGameObject.Id + 1;
+            gameObject.LoadTextures(FileHelper.TempPath);
+
+            SelectedLayer.ObjectList.Add(gameObject);
+            GameObjectViews.Add(new GameObjectListViewModel(gameObject));
+            SelectedGameObject = gameObject;
+        }
+
         public void DeleteSelectedSprite()
         {
             if (m_selectedGameObject is null)
@@ -259,6 +303,12 @@ namespace SevenWonders.SceneEditor.ViewModels
 
             Sprite sprite = m_selectedGameObject.Animations[m_selectedGameObject.CurrentAnim];
             m_selectedGameObject.Animations.Remove(sprite);
+            SpriteListViewModel? spriteListViewModel = SpriteViews.FirstOrDefault(sprite => sprite.Name == sprite.Name);
+            if (spriteListViewModel is not null)
+            {
+                SpriteViews.Remove(spriteListViewModel);
+            }
+
             m_selectedGameObject.CurrentAnim = 0;
         }
 
@@ -300,10 +350,10 @@ namespace SevenWonders.SceneEditor.ViewModels
                     {
                         Frame = texture,
                         Name = name,
-                        Left = columns * frameWidth,
-                        Right = (columns + 1) * frameWidth,
-                        Top = rows * frameHeight,
-                        Bottom = (rows + 1) * frameHeight,
+                        Left = j * frameWidth,
+                        Right = (j + 1) * frameWidth,
+                        Top = i * frameHeight,
+                        Bottom = (i + 1) * frameHeight,
                     });
                 }
             }
@@ -325,5 +375,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         private GameObject? m_selectedGameObject;
         private GraphicsLayer? m_selectedLayer;
+        private string m_copyName;
+        private bool m_isCopyEnabled;
     }
 }

@@ -68,14 +68,14 @@ namespace SevenWonders.GameEngine
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs)
         {
-            foreach (var gameObject in ObjectList)
-            {
-                gameObject.Draw(eventArgs);
-            }
-
             foreach (var texture in Textures)
             {
                 texture.Draw(eventArgs);
+            }
+
+            foreach (var gameObject in ObjectList)
+            {
+                gameObject.Draw(eventArgs);
             }
         }
     }

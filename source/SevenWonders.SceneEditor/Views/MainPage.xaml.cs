@@ -261,6 +261,11 @@ namespace SevenWonders.SceneEditor.Views
             m_mainPageViewModel.GameObjectContentsViewModel.DeleteSelectedGameObject();
         }
 
+        private void Copy_Selected_GameObject_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.GameObjectContentsViewModel.CopySelectedGameObject();
+        }
+
         private void Delete_Selected_Sprite_Clicked(object sender, EventArgs e)
         {
             m_mainPageViewModel.GameObjectContentsViewModel.DeleteSelectedSprite();

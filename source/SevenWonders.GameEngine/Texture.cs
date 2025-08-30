@@ -28,8 +28,8 @@ namespace SevenWonders.GameEngine
 
         public Texture(Texture texture)
         {
-            Name = texture.Name;
-            FileName = texture.FileName;
+            Name = new string(texture.Name);
+            FileName = new string(texture.FileName);
             Width = texture.Width;
             Height = texture.Height;
             OriginalWidth = texture.OriginalWidth;

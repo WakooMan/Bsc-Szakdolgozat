@@ -168,7 +168,7 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="4*"/>
                             </Grid.RowDefinitions>
-                            <ListView ItemsSource="{Binding GameObjectViews}" ItemSelected="GameObject_ItemSelected" Grid.Row="0">
+                            <ListView ItemsSource="{Binding GameObjectContentsViewModel.GameObjectViews}" ItemSelected="GameObject_ItemSelected" Grid.Row="0">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="local:GameObjectListViewModel">
                                         <TextCell Text="{Binding Name}" Detail="{Binding Id}"/>
@@ -176,7 +176,7 @@
                                 </ListView.ItemTemplate>
                             </ListView>
                             <Button Text="Add GameObject" Background="Black" Clicked="Add_New_GameObject_Clicked"  Grid.Row="1"/>
-                            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding TextureContentsViewModel.IsSelectedTextureAvailable}">
+                            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding GameObjectContentsViewModel.IsSelectedGameObjectAvailable}">
                                 <Label Text="Selected GameObject name:" />
                                 <Entry MaxLength="10" 
                                        Text="{Binding GameObjectContentsViewModel.SelectedGameObjectName, Mode=TwoWay}" 
@@ -242,6 +242,12 @@
                                 </ListView>
                                 <Button Text="Add Sprite" Background="Black" Clicked="Add_New_Sprite_Clicked"/>
                                 <Button Text="Delete Sprite" Background="Black" Clicked="Delete_Selected_Sprite_Clicked"/>
+                                <Entry MaxLength="10"  
+                                       Text="{Binding GameObjectContentsViewModel.CopyName, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Button Text="Copy GameObject" Background="Black" Clicked="Copy_Selected_GameObject_Clicked" IsEnabled="{Binding GameObjectContentsViewModel.IsCopyEnabled}"/>
                                 <Button Text="Delete GameObject" Background="Black" Clicked="Delete_Selected_GameObject_Clicked"/>
                             </VerticalStackLayout>
                         </Grid>

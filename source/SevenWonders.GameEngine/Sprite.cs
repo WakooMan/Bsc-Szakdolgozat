@@ -28,7 +28,7 @@ namespace SevenWonders.GameEngine
             LastUpdate = sprite.LastUpdate;
             Fps = sprite.Fps;
             RotationZ = sprite.RotationZ;
-            Name = sprite.Name;
+            Name = new string(sprite.Name);
             LoopAnimation = sprite.LoopAnimation;
             Frames = sprite.Frames.Select(spriteFrame => new SpriteFrame(spriteFrame)).ToList();
         }

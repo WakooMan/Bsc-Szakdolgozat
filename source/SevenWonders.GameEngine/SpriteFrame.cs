@@ -25,10 +25,14 @@ namespace SevenWonders.GameEngine
 
         public SpriteFrame(SpriteFrame spriteFrame)
         {
-            Name = spriteFrame.Name;
+            Name = new string(spriteFrame.Name);
             Frame = new Texture(spriteFrame.Frame);
             BBoxOriginal = new BoundingBox(spriteFrame.BBoxOriginal);
             BBoxTransformed = new BoundingBox(spriteFrame.BBoxTransformed);
+            Left = spriteFrame.Left;
+            Top = spriteFrame.Top;
+            Right = spriteFrame.Right;
+            Bottom = spriteFrame.Bottom;
         }
 
         public bool Equals(SpriteFrame? other)
@@ -41,7 +45,11 @@ namespace SevenWonders.GameEngine
             return Name.Equals(other.Name) &&
                    Frame.Equals(other.Frame) &&
                    BBoxOriginal.Equals(other.BBoxOriginal) &&
-                   BBoxTransformed.Equals(other.BBoxTransformed);
+                   BBoxTransformed.Equals(other.BBoxTransformed) &&
+                   Left.Equals(other.Left) &&
+                   Top.Equals(other.Top) &&
+                   Right.Equals(other.Right) &&
+                   Bottom.Equals(other.Bottom);
         }
 
         public override bool Equals(object? obj)
@@ -59,7 +67,11 @@ namespace SevenWonders.GameEngine
             return Name.GetHashCode() ^
                    Frame.GetHashCode() ^
                    BBoxOriginal.GetHashCode() ^
-                   BBoxTransformed.GetHashCode();
+                   BBoxTransformed.GetHashCode() ^
+                   Top.GetHashCode() ^
+                   Left.GetHashCode() ^
+                   Right.GetHashCode() ^
+                   Bottom.GetHashCode();
         }
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation)

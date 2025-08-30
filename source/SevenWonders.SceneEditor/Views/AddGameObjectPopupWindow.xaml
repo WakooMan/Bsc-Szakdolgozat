@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
             <ScrollView Grid.Row="0">
                 <VerticalStackLayout>
-                    <Label Text="Scene name:"
+                    <Label Text="GameObject name:"
                         Grid.Row="0"/>
                     <Entry MaxLength="10" 
                         Text="{Binding Name, Mode=TwoWay}" 
@@ -30,7 +30,7 @@
                         Background="Gray" 
                         HorizontalTextAlignment="Center"
                         Grid.Row="1"/>
-                    <Label Text="Scene id:"
+                    <Label Text="GameObject id:"
                         Grid.Row="2"/>
                     <Entry MaxLength="10" 
                         Keyboard="Numeric" 
