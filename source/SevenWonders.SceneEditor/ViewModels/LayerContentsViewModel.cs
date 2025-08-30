@@ -1,4 +1,5 @@
 ﻿using SevenWonders.GameEngine;
+using SevenWonders.SceneEditor.Helpers;
 using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -51,6 +52,33 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedLayerEnableCollision));
                 m_textureContentsViewModel.SelectedLayer = m_selectedLayer;
                 m_gameObjectContentsViewModel.SelectedLayer = m_selectedLayer;
+            }
+        }
+
+        public string CopyName
+        {
+            get
+            {
+                return m_copyName;
+            }
+            set
+            {
+                m_copyName = value;
+                OnPropertyChanged();
+                IsCopyEnabled = !string.IsNullOrEmpty(m_copyName) && SelectedLayerName != m_copyName;
+            }
+        }
+
+        public bool IsCopyEnabled
+        {
+            get
+            {
+                return m_isCopyEnabled;
+            }
+            set
+            {
+                m_isCopyEnabled = value;
+                OnPropertyChanged();
             }
         }
 
@@ -172,9 +200,25 @@ namespace SevenWonders.SceneEditor.ViewModels
             SelectedLayer = null;
         }
 
+        public void CopySelectedLayer()
+        {
+            if (m_selectedLayer is null || m_currentScene is null)
+            {
+                return;
+            }
+
+            GraphicsLayer layer = CopyHelper.CopyLayer(m_selectedLayer, CopyName);
+
+            m_currentScene.Layers.Add(layer);
+            LayerViews.Add(new LayerListViewModel(layer));
+            SelectedLayer = layer;
+        }
+
         private GraphicsLayer? m_selectedLayer;
         private Scene? m_currentScene;
         private readonly TextureContentsViewModel m_textureContentsViewModel;
         private readonly GameObjectContentsViewModel m_gameObjectContentsViewModel;
+        private string m_copyName;
+        private bool m_isCopyEnabled;
     }
 }

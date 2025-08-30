@@ -214,6 +214,7 @@ namespace SevenWonders.SceneEditor.ViewModels
         {
             GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
             SpriteViews = new ObservableCollection<SpriteListViewModel>();
+            m_copyName = string.Empty;
             SelectedLayer = null;
             SelectedGameObject = null;
         }
@@ -286,10 +287,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            GameObject gameObject = new GameObject(m_selectedGameObject);
-            gameObject.Name = new string(CopyName);
-            gameObject.Id = m_selectedGameObject.Id + 1;
-            gameObject.LoadTextures(FileHelper.TempPath);
+            GameObject gameObject = CopyHelper.CopyGameObject(m_selectedGameObject, CopyName);
 
             SelectedLayer.ObjectList.Add(gameObject);
             GameObjectViews.Add(new GameObjectListViewModel(gameObject));

@@ -78,5 +78,18 @@ namespace SevenWonders.GameEngine
                 gameObject.Draw(eventArgs);
             }
         }
+
+        public void LoadTextures(string tempPath)
+        {
+            foreach (var texture in Textures)
+            {
+                texture.LoadTexture(tempPath);
+            }
+
+            foreach (var gameObject in ObjectList)
+            {
+                gameObject.LoadTextures(tempPath);
+            }
+        }
     }
 }

@@ -72,6 +72,13 @@
                                     <Label Text="Enables Collision: " HorizontalOptions="Center"/>
                                     <CheckBox IsChecked="{Binding LayerContentsViewModel.SelectedLayerEnableCollision, Mode=TwoWay}" />
                                 </HorizontalStackLayout>
+                                <Label Text="Copied Layer name:"/>
+                                <Entry MaxLength="10"  
+                                       Text="{Binding LayerContentsViewModel.CopyName, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Button Text="Copy Layer" Background="Black" Clicked="Copy_Selected_Layer_Clicked" IsEnabled="{Binding LayerContentsViewModel.IsCopyEnabled}"/>
                                 <Button Text="Delete" Background="Black" Clicked="Delete_Selected_Layer_Clicked"/>
                             </VerticalStackLayout>
                         </Grid>
@@ -168,7 +175,7 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="4*"/>
                             </Grid.RowDefinitions>
-                            <ListView ItemsSource="{Binding GameObjectContentsViewModel.GameObjectViews}" ItemSelected="GameObject_ItemSelected" Grid.Row="0">
+                            <ListView ItemsSource="{Binding GameObjectContentsViewModel.GameObjectViews}" ItemSelected="GameObject_ItemSelected" Grid.Row="0" MinimumHeightRequest="100">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="local:GameObjectListViewModel">
                                         <TextCell Text="{Binding Name}" Detail="{Binding Id}"/>
@@ -233,7 +240,7 @@
                                            HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
                                 <Label Text="Animations: "/>
-                                <ListView ItemsSource="{Binding GameObjectContentsViewModel.SpriteViews}" ItemSelected="Sprite_ItemSelected" Grid.Row="0">
+                                <ListView ItemsSource="{Binding GameObjectContentsViewModel.SpriteViews}" ItemSelected="Sprite_ItemSelected" Grid.Row="0" MinimumHeightRequest="50">
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="local:SpriteListViewModel">
                                             <TextCell Text="{Binding Name}"/>
@@ -242,6 +249,7 @@
                                 </ListView>
                                 <Button Text="Add Sprite" Background="Black" Clicked="Add_New_Sprite_Clicked"/>
                                 <Button Text="Delete Sprite" Background="Black" Clicked="Delete_Selected_Sprite_Clicked"/>
+                                <Label Text="Copied GameObject name:"/>
                                 <Entry MaxLength="10"  
                                        Text="{Binding GameObjectContentsViewModel.CopyName, Mode=TwoWay}" 
                                        TextColor="White" 

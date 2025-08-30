@@ -87,10 +87,12 @@ namespace SevenWonders.SceneEditor.ViewModels
             private set
             {
                 m_currentScene = value;
+                CopyHelper.OnSceneChanged(m_currentScene);
                 OnPropertyChanged(nameof(Id));
                 OnPropertyChanged(nameof(Name));
                 OnPropertyChanged(nameof(IsVisible));
                 LayerContentsViewModel.CurrentScene = m_currentScene;
+
             }
         }
 
