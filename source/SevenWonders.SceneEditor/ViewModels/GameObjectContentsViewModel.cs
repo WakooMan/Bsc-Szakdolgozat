@@ -61,6 +61,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedGameObjectRotation));
                 OnPropertyChanged(nameof(SelectedGameObjectScaleX));
                 OnPropertyChanged(nameof(SelectedGameObjectScaleY));
+                OnPropertyChanged(nameof(SelectedGameObjectZIndex));
                 if (m_selectedGameObject is not null)
                 {
                     m_selectedGameObject.Animations.ForEach(animation => SpriteViews.Add(new SpriteListViewModel(animation)));
@@ -210,6 +211,22 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public int SelectedGameObjectZIndex
+        {
+            get
+            {
+                return SelectedGameObject?.Zindex ?? 0;
+            }
+            set
+            {
+                if (SelectedGameObject is not null)
+                {
+                    SelectedGameObject.Zindex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public GameObjectContentsViewModel()
         {
             GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
@@ -232,7 +249,8 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Id = id,
                 Position = new Vector2(0, 0),
                 Visible = visible,
-                Scale = new Vector2(1, 1)
+                Scale = new Vector2(1, 1),
+                Zindex = 0
             };
             gameObject.LoadTextures(FileHelper.TempPath);
 

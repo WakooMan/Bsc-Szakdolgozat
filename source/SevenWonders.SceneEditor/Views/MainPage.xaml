@@ -239,6 +239,15 @@
                                            Background="Gray" 
                                            HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="ZIndex: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectZIndex, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
                                 <Label Text="Animations: "/>
                                 <ListView ItemsSource="{Binding GameObjectContentsViewModel.SpriteViews}" ItemSelected="Sprite_ItemSelected" Grid.Row="0" MinimumHeightRequest="50">
                                     <ListView.ItemTemplate>
