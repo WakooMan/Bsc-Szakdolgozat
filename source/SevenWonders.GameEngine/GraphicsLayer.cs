@@ -12,6 +12,7 @@ namespace SevenWonders.GameEngine
         public bool EnableCollision { get; set; }
         public string Name { get; set; }
         public int ID { get; set; }
+        public int ZIndex { get; set; }
 
         public GraphicsLayer()
         {
@@ -28,6 +29,7 @@ namespace SevenWonders.GameEngine
             EnableCollision = graphicsLayer.EnableCollision;
             Name = graphicsLayer.Name;
             ID = graphicsLayer.ID;
+            ZIndex = graphicsLayer.ZIndex;
         }
 
         public bool Equals(GraphicsLayer? other)
@@ -42,7 +44,8 @@ namespace SevenWonders.GameEngine
                    Name.Equals(other.Name) &&
                    ID.Equals(other.ID) &&
                    Visible.Equals(other.Visible) &&
-                   EnableCollision.Equals(other.EnableCollision);
+                   EnableCollision.Equals(other.EnableCollision) &&
+                   ZIndex.Equals(other.ZIndex);
         }
 
         public override bool Equals(object? obj)
@@ -60,7 +63,8 @@ namespace SevenWonders.GameEngine
             int hashCode = Name.GetHashCode() ^
             ID.GetHashCode() ^
             Visible.GetHashCode() ^
-            EnableCollision.GetHashCode();
+            EnableCollision.GetHashCode() ^
+            ZIndex.GetHashCode();
             ObjectList.ForEach(obj => hashCode = hashCode ^ obj.GetHashCode());
             Textures.ForEach(texture => hashCode = hashCode ^ texture.GetHashCode());
             return hashCode;

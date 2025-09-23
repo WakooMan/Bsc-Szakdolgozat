@@ -11,11 +11,13 @@ namespace SevenWonders.GameEngine
         private readonly List<IComponent> m_components;
 
         public ISceneManager SceneManager { get; private set; }
+        public IInputManager InputManager { get; private set; }
 
-        public Engine(ISceneManager sceneManager)
+        public Engine(ISceneManager sceneManager, IInputManager inputManager)
         {
             m_components = new List<IComponent>();
             SceneManager = sceneManager;
+            InputManager = inputManager;
         }
 
         public void Shutdown()

@@ -18,7 +18,7 @@ namespace SevenWonders.GameEngine
         public int CurrentAnim { get; set; }
         public int NumberOfFrames { get; set; }
         public int Id { get; set; }
-        public int Zindex { get; set; }
+        public int ZIndex { get; set; }
 
         public GameObject()
         {
@@ -41,7 +41,7 @@ namespace SevenWonders.GameEngine
             CurrentAnim = gameObject.CurrentAnim;
             NumberOfFrames = gameObject.NumberOfFrames;
             Id = gameObject.Id;
-            Zindex = gameObject.Zindex;
+            ZIndex = gameObject.ZIndex;
             Speed = gameObject.Speed;
         }
 
@@ -64,7 +64,7 @@ namespace SevenWonders.GameEngine
                    CurrentAnim.Equals(other.CurrentAnim) &&
                    NumberOfFrames.Equals(other.NumberOfFrames) &&
                    Id.Equals(other.Id) &&
-                   Zindex.Equals(other.Zindex) &&
+                   ZIndex.Equals(other.ZIndex) &&
                    Speed.Equals(other.Speed);
         }
 
@@ -91,7 +91,7 @@ namespace SevenWonders.GameEngine
                    CurrentAnim.GetHashCode() ^
                    NumberOfFrames.GetHashCode() ^
                    Id.GetHashCode() ^
-                   Zindex.GetHashCode() ^
+                   ZIndex.GetHashCode() ^
                    Speed.GetHashCode();
             Animations.ForEach(anim => hashCode = hashCode ^ anim.GetHashCode());
             return hashCode;

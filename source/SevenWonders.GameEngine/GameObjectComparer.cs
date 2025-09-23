@@ -9,7 +9,7 @@
                 throw new ArgumentNullException("One of the argument is a null reference!");
             }
 
-            return x.Zindex.CompareTo(y.Zindex);
+            return x.ZIndex.CompareTo(y.ZIndex);
         }
     }
 }

@@ -60,7 +60,11 @@ namespace SevenWonders.GameEngine
         {
             if(!Visible)
                 return;
-            foreach (GraphicsLayer layer in Layers)
+
+            List<GraphicsLayer> objects = [.. Layers];
+            objects.Sort(new GraphicsLayerComparer());
+
+            foreach (GraphicsLayer layer in objects)
             {
                 layer.Draw(eventArgs);
             }
