@@ -42,7 +42,14 @@ namespace SevenWonders.SceneEditor.Views
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             e.Surface.Canvas.Clear();
-            m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e);
+            if (m_mainPageViewModel.LayerContentsViewModel.SelectedLayer is not null)
+            {
+                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e);
+            }
+            else if (m_mainPageViewModel.CurrentScene is not null)
+            {
+                m_mainPageViewModel.CurrentScene.Draw(e);
+            }
         }
 
         private void Layer_ItemSelected(object sender, SelectedItemChangedEventArgs e)

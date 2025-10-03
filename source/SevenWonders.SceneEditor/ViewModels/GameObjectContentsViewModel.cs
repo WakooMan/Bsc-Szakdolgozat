@@ -215,13 +215,13 @@ namespace SevenWonders.SceneEditor.ViewModels
         {
             get
             {
-                return SelectedGameObject?.Zindex ?? 0;
+                return SelectedGameObject?.ZIndex ?? 0;
             }
             set
             {
                 if (SelectedGameObject is not null)
                 {
-                    SelectedGameObject.Zindex = value;
+                    SelectedGameObject.ZIndex = value;
                     OnPropertyChanged();
                 }
             }
@@ -250,7 +250,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Position = new Vector2(0, 0),
                 Visible = visible,
                 Scale = new Vector2(1, 1),
-                Zindex = 0
+                ZIndex = 0
             };
             gameObject.LoadTextures(FileHelper.TempPath);
 

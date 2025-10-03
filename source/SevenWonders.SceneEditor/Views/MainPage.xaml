@@ -46,7 +46,8 @@
                         <Grid x:Name="LayersContent" VerticalOptions="Fill">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="4*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
                                 <RowDefinition Height="4*"/>
                             </Grid.RowDefinitions>
                             <ListView ItemsSource="{Binding LayerContentsViewModel.LayerViews}" ItemSelected="Layer_ItemSelected" Grid.Row="0" MinimumHeightRequest="100">
@@ -57,7 +58,8 @@
                                 </ListView.ItemTemplate>
                             </ListView>
                             <Button Text="Add Layer" Background="Black" Clicked="Add_New_Layer_Clicked" Grid.Row="1"/>
-                            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding LayerContentsViewModel.IsSelectedLayerAvailable}">
+                            <Button Text="Unselect Layers" Background="Black" Command="{Binding LayerContentsViewModel.OnUnselectLayerCommand}" Grid.Row="2"/>
+                            <VerticalStackLayout Grid.Row="3" IsVisible="{Binding LayerContentsViewModel.IsSelectedLayerAvailable}">
                                 <Label Text="Selected Layer name:" />
                                 <Entry MaxLength="10" 
                                            Text="{Binding LayerContentsViewModel.SelectedLayerName, Mode=TwoWay}" 
@@ -71,6 +73,15 @@
                                 <HorizontalStackLayout HorizontalOptions="Center">
                                     <Label Text="Enables Collision: " HorizontalOptions="Center"/>
                                     <CheckBox IsChecked="{Binding LayerContentsViewModel.SelectedLayerEnableCollision, Mode=TwoWay}" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="ZIndex: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding LayerContentsViewModel.SelectedLayerZIndex, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
                                 <Label Text="Copied Layer name:"/>
                                 <Entry MaxLength="10"  

@@ -4,6 +4,7 @@ using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace SevenWonders.SceneEditor.ViewModels
 {
@@ -12,6 +13,7 @@ namespace SevenWonders.SceneEditor.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public ObservableCollection<LayerListViewModel> LayerViews { get; set; }
+        public ICommand OnUnselectLayerCommand => m_onUnselectLayerCommand;
 
         public Scene? CurrentScene
         {
@@ -33,6 +35,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                             LayerViews.Add(layerListViewModel);
                         }
                     }
+                    m_onUnselectLayerCommand.ChangeCanExecute();
                 }
             }
         }
@@ -50,8 +53,10 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedLayerName));
                 OnPropertyChanged(nameof(SelectedLayerVisible));
                 OnPropertyChanged(nameof(SelectedLayerEnableCollision));
+                OnPropertyChanged(nameof(SelectedLayerZIndex));
                 m_textureContentsViewModel.SelectedLayer = m_selectedLayer;
                 m_gameObjectContentsViewModel.SelectedLayer = m_selectedLayer;
+                m_onUnselectLayerCommand.ChangeCanExecute();
             }
         }
 
@@ -132,12 +137,29 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public int SelectedLayerZIndex
+        {
+            get
+            {
+                return SelectedLayer?.ZIndex ?? 0;
+            }
+            set
+            {
+                if (SelectedLayer is not null)
+                {
+                    SelectedLayer.ZIndex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public LayerContentsViewModel(TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsView)
         {
             m_textureContentsViewModel = textureContentsViewModel;
             m_gameObjectContentsViewModel = gameObjectContentsView;
             LayerViews = new ObservableCollection<LayerListViewModel>();
+            m_onUnselectLayerCommand = new Command(OnUnselectLayer, () => CurrentScene is not null && SelectedLayer is not null);
             CurrentScene = null;
             SelectedLayer = null;
         }
@@ -214,6 +236,12 @@ namespace SevenWonders.SceneEditor.ViewModels
             SelectedLayer = layer;
         }
 
+        private void OnUnselectLayer()
+        {
+            SelectedLayer = null;
+        }
+
+        private Command m_onUnselectLayerCommand;
         private GraphicsLayer? m_selectedLayer;
         private Scene? m_currentScene;
         private readonly TextureContentsViewModel m_textureContentsViewModel;

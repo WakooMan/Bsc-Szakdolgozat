@@ -72,6 +72,11 @@ namespace SevenWonders.GameEngine
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs)
         {
+            if (!Visible)
+            {
+                return;
+            }
+
             foreach (var texture in Textures)
             {
                 texture.Draw(eventArgs);
