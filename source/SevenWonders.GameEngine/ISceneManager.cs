@@ -1,10 +1,14 @@
-﻿namespace SevenWonders.GameEngine
+﻿using SkiaSharp.Views.Maui;
+
+namespace SevenWonders.GameEngine
 {
     public interface ISceneManager
     {
-        Scene LoadSceneXML(string sceneFilename);
+        Scene? CurrentScene { get; }
+        IReadOnlyList<Scene> Scenes { get; }
+        void SetCurrentScene(Scene scene);
         void RegisterScene(Scene scene);
-        void Render();
+        void Render(SKPaintSurfaceEventArgs eventArgs);
         GameObject GetObjectByName(string name);
         Scene GetScene(uint sceneID);
         Scene GetSceneByName(string name);

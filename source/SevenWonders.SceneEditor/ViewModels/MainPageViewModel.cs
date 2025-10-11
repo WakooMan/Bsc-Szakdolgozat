@@ -213,28 +213,6 @@ namespace SevenWonders.SceneEditor.ViewModels
             if(m_currentScene is null)
                 return;
 
-            string scenesPath = FileHelper.ScenesPath;
-            if (!Directory.Exists(scenesPath))
-            {
-                Directory.CreateDirectory(scenesPath);
-            }
-
-            string scenePath = Path.Combine(FileHelper.TempPath, "scene.xml");
-            FileHelper.Serialize(m_currentScene, scenePath);
-
-            string zipPath = Path.Combine(scenesPath, $"{m_currentScene.Name}.zip");
-
-            if (File.Exists(zipPath))
-            {
-                File.Delete(zipPath);
-            }
-
-            ZipFile.CreateFromDirectory(
-               FileHelper.TempPath,
-               zipPath,
-               CompressionLevel.Optimal,
-               includeBaseDirectory: false);
-
             SetCurrentScene(null);
         }
 

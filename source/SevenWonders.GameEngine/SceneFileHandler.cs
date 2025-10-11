@@ -1,0 +1,87 @@
+﻿using SevenWonders.Common;
+using System.IO.Compression;
+
+namespace SevenWonders.GameEngine
+{
+    public class SceneFileHandler : ISceneFileHandler
+    {
+        public string TempPath => Path.Combine(Directory.GetCurrentDirectory(), "ScenesTemp");
+        public string ScenesPath => Path.Combine(Directory.GetCurrentDirectory(), "Scenes");
+
+        public SceneFileHandler(IXmlHandler xmlHandler)
+        {
+            ArgumentChecker.CheckNull(xmlHandler, nameof(xmlHandler));
+
+            m_xmlHandler = xmlHandler;
+        }
+
+        public List<Scene> LoadScenes()
+        {
+            List<Scene> result = new List<Scene>();
+            if (!Directory.Exists(TempPath))
+            {
+                Directory.CreateDirectory(TempPath);
+            }
+
+            foreach (string sceneFile in Directory.GetFiles(ScenesPath).Where(file => file.EndsWith(".zip")))
+            {
+                result.Add(LoadScene(sceneFile));
+            }
+
+            return result;
+        }
+
+        private Scene LoadScene(string sceneFile)
+        {
+            string sceneFileName = Path.GetFileNameWithoutExtension(sceneFile);
+            string extractedSceneLocation = Path.Combine(TempPath, sceneFileName);
+
+            if (Directory.Exists(extractedSceneLocation))
+            {
+                Directory.Delete(extractedSceneLocation, true);
+            }
+
+            ZipFile.ExtractToDirectory(sceneFile, extractedSceneLocation);
+            Scene? scene = m_xmlHandler.Deserialize<Scene>(Path.Combine(extractedSceneLocation, "scene.xml"));
+            ArgumentChecker.CheckPredicateForOperation(() => scene is null, $"The scene xml file could not be loaded correctly! Check the format of scene.xml in \"{sceneFile}\" zip file.");
+            scene.LoadTextures(extractedSceneLocation);
+            return scene;
+        }
+
+        public void SaveScene(Scene? scene, bool checkForSceneFolder = true)
+        {
+            ArgumentChecker.CheckNull(scene, nameof(scene));
+
+            string savingScenePath = Path.Combine(TempPath, scene?.Name ?? string.Empty);
+            ArgumentChecker.CheckPredicateForOperation(() => !Directory.Exists(savingScenePath) && checkForSceneFolder, $"Cannot save scene, because the \"{scene.Name}\" folder does not exist");
+
+            if (!Directory.Exists(savingScenePath))
+            {
+                Directory.CreateDirectory(savingScenePath);
+            }
+
+            if (!Directory.Exists(ScenesPath))
+            {
+                Directory.CreateDirectory(ScenesPath);
+            }
+
+            string sceneXmlPath = Path.Combine(savingScenePath, "scene.xml");
+            m_xmlHandler.Serialize(sceneXmlPath, scene);
+
+            string zipPath = Path.Combine(ScenesPath, $"{scene.Name}.zip");
+
+            if (File.Exists(zipPath))
+            {
+                File.Delete(zipPath);
+            }
+
+            ZipFile.CreateFromDirectory(
+               savingScenePath,
+               zipPath,
+               CompressionLevel.Optimal,
+               includeBaseDirectory: false);
+        }
+
+        private readonly IXmlHandler m_xmlHandler;
+    }
+}

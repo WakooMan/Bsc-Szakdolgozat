@@ -281,7 +281,7 @@
                         </Grid>
                     </Grid>
                 </VerticalStackLayout>
-                <Button Text="Save Scene" Background="Black" Grid.Row="2" Command="{Binding OnSceneSaveCommand}" />
+                <Button Text="Save Scene" Background="Black" Grid.Row="2" Command="{Binding OnSceneSaveCommand}" Clicked="Save_Scene_Clicked" />
             </Grid>
         </ScrollView>
         <Grid Grid.Column="1" Background="Black">

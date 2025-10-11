@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Views;
+using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
@@ -15,6 +16,17 @@ namespace SevenWonders.SceneEditor.Views
         public MainPage(MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
+            m_sceneFileHandler = new SceneFileHandler(new XmlHandler());
+            m_sceneManager = new SceneManager();
+            if (!Directory.Exists(m_sceneFileHandler.ScenesPath))
+            {
+                Directory.CreateDirectory(m_sceneFileHandler.ScenesPath);
+            }
+
+            foreach (Scene scene in m_sceneFileHandler.LoadScenes())
+            {
+                m_sceneManager.RegisterScene(scene);
+            }
             m_mainPageViewModel = mainPageViewModel;
             m_currentPopup = null;
             SizeChanged += MainPage_SizeChanged;
@@ -139,18 +151,16 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(addScenePopupWindow);
             if (addScenePopupWindow.ViewModel.AddActivated)
             {
-                if (Directory.Exists(FileHelper.TempPath))
-                {
-                    Directory.Delete(FileHelper.TempPath, true);
-                }
-                Directory.CreateDirectory(FileHelper.TempPath);
-
                 Scene scene = new Scene()
                 {
                     Name = addScenePopupWindow.ViewModel.Name,
                     Id = addScenePopupWindow.ViewModel.Id,
                     Visible = addScenePopupWindow.ViewModel.Visible
                 };
+                m_sceneManager.RegisterScene(scene);
+                m_sceneFileHandler.SaveScene(scene, false);
+                m_sceneFileHandler.LoadScenes();
+                m_sceneManager.SetCurrentScene(scene);
                 m_mainPageViewModel.SetCurrentScene(scene);
                 addScenePopupWindow.ViewModel.Clear();
             }
@@ -159,62 +169,23 @@ namespace SevenWonders.SceneEditor.Views
 
         private async void Choose_Scene_Clicked(object sender, EventArgs e)
         {
-            var customFileType = new FilePickerFileType(
-                    new Dictionary<DevicePlatform, IEnumerable<string>>
-                    {
-                    { DevicePlatform.WinUI, new[] { ".zip" } }, // file extension
-                    });
-
-            PickOptions options = new()
-            {
-                PickerTitle = "Please select the scene file.",
-                FileTypes = customFileType,
-            };
-            var result = await PickAndShow(options);
-            if (result is null)
+            if (m_sceneManager.Scenes.Count <= 0)
             {
                 return;
             }
 
-            if (Directory.Exists(FileHelper.TempPath))
+            ChooseScenePopupWindow chooseScenePopupWindow = new ChooseScenePopupWindow(new ChooseScenePopupWindowViewModel(m_sceneManager.Scenes));
+            m_currentPopup = chooseScenePopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
+            await this.ShowPopupAsync(chooseScenePopupWindow);
+            if (chooseScenePopupWindow.ViewModel.ChooseActivated && chooseScenePopupWindow.ViewModel.SelectedScene is not null)
             {
-                Directory.Delete(FileHelper.TempPath, true);
+                m_sceneManager.SetCurrentScene(chooseScenePopupWindow.ViewModel.SelectedScene);
+                m_mainPageViewModel.SetCurrentScene(chooseScenePopupWindow.ViewModel.SelectedScene);
+                chooseScenePopupWindow.ViewModel.Clear();
             }
-            Directory.CreateDirectory(FileHelper.TempPath);
+            m_currentPopup = null;
 
-            ZipFile.ExtractToDirectory(result.FullPath, FileHelper.TempPath);
-            Scene? scene = FileHelper.Deserialize<Scene>(Path.Combine(FileHelper.TempPath, "scene.xml"));
-            if (scene is not null)
-            {
-                scene.LoadTextures(FileHelper.TempPath);
-                m_mainPageViewModel.SetCurrentScene(scene);
-            }
-        }
-
-
-        private async Task<FileResult?> PickAndShow(PickOptions options)
-        {
-            try
-            {
-                var result = await FilePicker.Default.PickAsync(options);
-                if (result != null)
-                {
-                    if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
-                        result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
-                    {
-                        using var stream = await result.OpenReadAsync();
-                        var image = ImageSource.FromStream(() => stream);
-                    }
-                }
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                // The user canceled or something went wrong
-            }
-
-            return null;
         }
 
         private async void Add_New_Layer_Clicked(object sender, EventArgs e)
@@ -248,11 +219,6 @@ namespace SevenWonders.SceneEditor.Views
         private void OnLayersClicked(object sender, EventArgs e) => ShowTab(1);
         private void OnTexturesClicked(object sender, EventArgs e) => ShowTab(2);
         private void OnGameObjectsClicked(object sender, EventArgs e) => ShowTab(3);
-
-        private readonly MainPageViewModel m_mainPageViewModel;
-        private Popup? m_currentPopup;
-        private Size m_currentPopupSize;
-
         private void Delete_Selected_Layer_Clicked(object sender, EventArgs e)
         {
             m_mainPageViewModel.LayerContentsViewModel.DeleteSelectedLayer();
@@ -282,5 +248,17 @@ namespace SevenWonders.SceneEditor.Views
         {
             m_mainPageViewModel.GameObjectContentsViewModel.DeleteSelectedSprite();
         }
+
+        private void Save_Scene_Clicked(object sender, EventArgs e)
+        {
+            m_sceneFileHandler.SaveScene(m_sceneManager.CurrentScene);
+        }
+
+        private readonly MainPageViewModel m_mainPageViewModel;
+        private Popup? m_currentPopup;
+        private Size m_currentPopupSize;
+
+        private readonly ISceneFileHandler m_sceneFileHandler;
+        private readonly ISceneManager m_sceneManager;
     }
 }
