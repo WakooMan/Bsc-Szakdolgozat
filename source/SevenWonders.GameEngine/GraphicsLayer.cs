@@ -103,5 +103,11 @@ namespace SevenWonders.GameEngine
                 gameObject.LoadTextures(tempPath);
             }
         }
+
+        public void Resize(Vector2 oldResolution, Vector2 newResolution)
+        {
+            Textures.ForEach(texture => texture.Resize(oldResolution, newResolution));
+            ObjectList.ForEach(gameObject => gameObject.Resize(oldResolution, newResolution));
+        }
     }
 }

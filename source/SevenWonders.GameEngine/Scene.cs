@@ -9,10 +9,12 @@ namespace SevenWonders.GameEngine
         public string Name { get; set; }
         public bool Visible { get; set; }
         public int Id { get; set; }
+        public Vector2 Resolution { get; set; }
 
         public Scene()
         {
             Layers = new List<GraphicsLayer>();
+            Resolution = new Vector2(3840, 2160);
             Name = string.Empty;
         }
 
@@ -84,6 +86,12 @@ namespace SevenWonders.GameEngine
                     gameObject.LoadTextures(sceneFolder);
                 }
             }
+        }
+
+        public void Resize(Vector2 newResolution)
+        {
+            Layers.ForEach(layer => layer.Resize(Resolution, newResolution));
+            Resolution = newResolution;
         }
     }
 }

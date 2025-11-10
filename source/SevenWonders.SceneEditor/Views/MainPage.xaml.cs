@@ -6,6 +6,7 @@ using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.IO.Compression;
+using System.Numerics;
 using System.Xml.Linq;
 
 namespace SevenWonders.SceneEditor.Views
@@ -157,6 +158,7 @@ namespace SevenWonders.SceneEditor.Views
                     Id = addScenePopupWindow.ViewModel.Id,
                     Visible = addScenePopupWindow.ViewModel.Visible
                 };
+                scene.Resize(new Vector2(m_width, m_height));
                 m_sceneManager.RegisterScene(scene);
                 m_sceneFileHandler.SaveScene(scene, false);
                 m_sceneFileHandler.LoadScenes();
@@ -180,6 +182,7 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(chooseScenePopupWindow);
             if (chooseScenePopupWindow.ViewModel.ChooseActivated && chooseScenePopupWindow.ViewModel.SelectedScene is not null)
             {
+                chooseScenePopupWindow.ViewModel.SelectedScene.Resize(new Vector2(m_width, m_height));
                 m_sceneManager.SetCurrentScene(chooseScenePopupWindow.ViewModel.SelectedScene);
                 m_mainPageViewModel.SetCurrentScene(chooseScenePopupWindow.ViewModel.SelectedScene);
                 chooseScenePopupWindow.ViewModel.Clear();
@@ -251,12 +254,35 @@ namespace SevenWonders.SceneEditor.Views
 
         private void Save_Scene_Clicked(object sender, EventArgs e)
         {
-            m_sceneFileHandler.SaveScene(m_sceneManager.CurrentScene);
+            if (m_sceneManager.CurrentScene is not null)
+            {
+                m_sceneManager.CurrentScene.Resize(new Vector2(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+                m_sceneFileHandler.SaveScene(m_sceneManager.CurrentScene);
+            }
+        }
+
+        private void OnCanvasSizeChanged(object sender, EventArgs e)
+        {
+            Grid? grid = sender as Grid;
+            if (grid != null)
+            {
+                m_width = (float)grid.Width;
+                m_height = (float)grid.Height;
+                if (m_mainPageViewModel.CurrentScene is not null)
+                {
+                    m_mainPageViewModel.CurrentScene.Resize(new Vector2(m_width, m_height));
+                    m_mainPageViewModel.UpdateCanvasSize();
+                }
+            }
         }
 
         private readonly MainPageViewModel m_mainPageViewModel;
         private Popup? m_currentPopup;
         private Size m_currentPopupSize;
+        private float m_width = 1600;
+        private float m_height = 900;
+        private const float DEFAULT_WIDTH = 3840;
+        private const float DEFAULT_HEIGHT = 2160;
 
         private readonly ISceneFileHandler m_sceneFileHandler;
         private readonly ISceneManager m_sceneManager;

@@ -112,5 +112,13 @@ namespace SevenWonders.GameEngine
 
             Animations[CurrentAnim].Draw(eventArgs, Position, Scale, Rotation);
         }
+
+        public void Resize(Vector2 oldResolution, Vector2 newResolution)
+        {
+            float XRatio = newResolution.X / oldResolution.X;
+            float YRatio = newResolution.Y / oldResolution.Y;
+            Position = new Vector2(Position.X * XRatio, Position.Y * YRatio);
+            Scale = new Vector2(Scale.X * XRatio, Scale.Y * YRatio);
+        }
     }
 }

@@ -60,6 +60,22 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public float CanvasWidth
+        {
+            get
+            {
+                return m_currentScene?.Resolution.X ?? 1600;
+            }
+        }
+
+        public float CanvasHeight
+        {
+            get
+            {
+                return m_currentScene?.Resolution.Y ?? 900;
+            }
+        }
         public int Id
         {
             get
@@ -91,6 +107,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(Id));
                 OnPropertyChanged(nameof(Name));
                 OnPropertyChanged(nameof(IsVisible));
+                UpdateCanvasSize();
                 LayerContentsViewModel.CurrentScene = m_currentScene;
 
             }
@@ -183,6 +200,12 @@ namespace SevenWonders.SceneEditor.ViewModels
             SetState(MainWindowState.ButtonsWindow);
             GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
             m_onSceneSaveCommand = new Command(OnSceneSaveCommandExecute, () => CurrentScene is not null);
+        }
+
+        public void UpdateCanvasSize()
+        {
+            OnPropertyChanged(nameof(CanvasWidth));
+            OnPropertyChanged(nameof(CanvasHeight));
         }
 
         public void SetCurrentScene(Scene? scene)

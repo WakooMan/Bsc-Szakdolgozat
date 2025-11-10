@@ -147,6 +147,15 @@ namespace SevenWonders.GameEngine
             canvas.Restore();
         }
 
+        public void Resize(Vector2 oldResolution, Vector2 newResolution)
+        {
+            float XRatio = newResolution.X / oldResolution.X;
+            float YRatio = newResolution.Y / oldResolution.Y;
+            Position = new Vector2(Position.X * XRatio, Position.Y * YRatio);
+            Width = Width * XRatio;
+            Height = Height * YRatio;
+        }
+
         private SKBitmap? m_bitmap;
     }
 }

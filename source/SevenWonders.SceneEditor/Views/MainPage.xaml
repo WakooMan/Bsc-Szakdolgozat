@@ -31,6 +31,14 @@
                         <Label Text="IsVisible:"/>
                         <Label Text="{Binding IsVisible, Mode=TwoWay}"/>
                     </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Canvas Width:"/>
+                        <Label Text="{Binding CanvasWidth, Mode=TwoWay}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Canvas Height:"/>
+                        <Label Text="{Binding CanvasHeight, Mode=TwoWay}"/>
+                    </StackLayout>
                 </StackLayout>
                 <VerticalStackLayout Grid.Row="1" IsVisible="{Binding IsLeftPanelVisible}">
                     <HorizontalStackLayout HorizontalOptions="Center">
@@ -284,7 +292,7 @@
                 <Button Text="Save Scene" Background="Black" Grid.Row="2" Command="{Binding OnSceneSaveCommand}" Clicked="Save_Scene_Clicked" />
             </Grid>
         </ScrollView>
-        <Grid Grid.Column="1" Background="Black">
+        <Grid Grid.Column="1" Background="Black" SizeChanged="OnCanvasSizeChanged">
                 <Grid HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding ButtonsAreVisible, Mode=TwoWay}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*" />
