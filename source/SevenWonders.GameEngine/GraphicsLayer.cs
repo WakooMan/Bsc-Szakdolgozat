@@ -7,7 +7,7 @@ namespace SevenWonders.GameEngine
     public class GraphicsLayer:IEquatable<GraphicsLayer>
     {
         public List<GameObject> ObjectList { get; set; }
-        public List<Texture> Textures { get; set; }
+        public List<TextureObject> Textures { get; set; }
         public  bool Visible { get; set; }
         public bool EnableCollision { get; set; }
         public string Name { get; set; }
@@ -17,17 +17,17 @@ namespace SevenWonders.GameEngine
         public GraphicsLayer()
         {
             ObjectList = new List<GameObject>();
-            Textures = new List<Texture>();
+            Textures = new List<TextureObject>();
             Name = string.Empty;
         }
 
         public GraphicsLayer(GraphicsLayer graphicsLayer)
         {
             ObjectList = graphicsLayer.ObjectList.Select(obj => new GameObject(obj)).ToList();
-            Textures = graphicsLayer.Textures.Select(texture => new Texture(texture)).ToList();
+            Textures = graphicsLayer.Textures.Select(texture => new TextureObject(texture)).ToList();
             Visible = graphicsLayer.Visible;
             EnableCollision = graphicsLayer.EnableCollision;
-            Name = graphicsLayer.Name;
+            Name = new string(graphicsLayer.Name);
             ID = graphicsLayer.ID;
             ZIndex = graphicsLayer.ZIndex;
         }

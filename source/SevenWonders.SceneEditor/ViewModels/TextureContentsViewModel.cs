@@ -1,7 +1,5 @@
 ﻿using SevenWonders.GameEngine;
-using SevenWonders.SceneEditor.Helpers;
 using SkiaSharp;
-using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
@@ -39,7 +37,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
-        public Texture? SelectedTexture
+        public TextureObject? SelectedTexture
         {
             get
             {
@@ -207,43 +205,44 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
-        public TextureContentsViewModel()
+        public TextureContentsViewModel(IEngine engine)
         {
+            m_engine = engine;
             TextureViews = new ObservableCollection<TextureListViewModel>();
             SelectedLayer = null;
             SelectedTexture = null;
         }
 
-        public void AddTextureToLayer(string name, int id, bool visible, int textureId, int width, int height, string fullPath)
+        public void AddTextureToLayer(string name, bool visible, int textureId, int width, int height, string fullPath)
         {
-            if (SelectedLayer is null)
+            if (m_engine.SceneManager.CurrentScene is null || SelectedLayer is null)
             {
                 return;
             }
 
             string fileName = Path.GetFileName(fullPath);
-            string destinationFileName = Path.Combine(FileHelper.TempPath, fileName);
+            string destinationFileName = Path.Combine(m_engine.SceneFileHandler.ReceiveSceneFolder(m_engine.SceneManager.CurrentScene), fileName);
             if (!File.Exists(destinationFileName))
             {
                 File.Copy(fullPath, destinationFileName);
             }
 
-            Texture texture = new Texture()
+            TextureObject texture = new TextureObject()
             {
                 Name = name,
-                Id = id,
                 Position = new Vector2(0, 0),
-                Color = SKColor.Empty,
-                TextureId = textureId,
-                FileName = fileName,
+                Texture = new Texture()
+                {
+                    Color = SKColor.Empty,
+                    FileName = fileName,
+                },
                 Visible = visible,
                 Width = width,
                 Height = height,
                 Scale = new Vector2(1, 1)
             };
-            texture.LoadTexture(FileHelper.TempPath);
 
-            SelectedLayer.Textures.Add(texture);
+            m_engine.ObjectManager.AddTexture(m_engine.SceneManager.CurrentScene, SelectedLayer, texture);
             TextureViews.Add(new TextureListViewModel(texture));
             SelectedTexture = texture;
         }
@@ -277,7 +276,8 @@ namespace SevenWonders.SceneEditor.ViewModels
             SelectedTexture = null;
         }
 
-        private Texture? m_selectedTexture;
+        private TextureObject? m_selectedTexture;
         private GraphicsLayer? m_selectedLayer;
+        private readonly IEngine m_engine;
     }
 }

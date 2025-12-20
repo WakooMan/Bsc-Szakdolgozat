@@ -50,7 +50,7 @@ namespace SevenWonders.GameEngine
         {
             return new GameObject();
         }
-        public Scene GetScene(uint sceneID)
+        public Scene GetScene(Guid sceneID)
         {
             return m_scenes.First(scene => scene.Id == sceneID);
         }
@@ -74,7 +74,7 @@ namespace SevenWonders.GameEngine
         {
             m_scenes.Remove(m_scenes.First(scene => scene.Name == name));
         }
-        public void FreeASceneByID(uint sceneID)
+        public void FreeASceneByID(Guid sceneID)
         {
             m_scenes.Remove(m_scenes.First(scene => scene.Id == sceneID));
         }

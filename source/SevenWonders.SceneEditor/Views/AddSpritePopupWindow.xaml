@@ -36,20 +36,6 @@ HorizontalTextAlignment="Center"/>
                    TextColor="White" 
                    Background="Gray" 
                    HorizontalTextAlignment="Center"/>
-                    <Label Text="Texture id:"/>
-                    <Entry MaxLength="10" 
-                   Keyboard="Numeric" 
-                   Text="{Binding Id, Mode=TwoWay}" 
-                   TextColor="White" 
-                   Background="Gray" 
-                   HorizontalTextAlignment="Center"/>
-                    <Label Text="Texture type id:"/>
-                    <Entry MaxLength="10" 
-                   Keyboard="Numeric" 
-                   Text="{Binding TextureId, Mode=TwoWay}" 
-                   TextColor="White" 
-                   Background="Gray" 
-                   HorizontalTextAlignment="Center"/>
                     <Label Text="Width:"/>
                     <Entry MaxLength="10" 
                    Keyboard="Numeric" 

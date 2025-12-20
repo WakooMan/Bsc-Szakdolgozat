@@ -82,6 +82,11 @@ namespace SevenWonders.GameEngine
                includeBaseDirectory: false);
         }
 
+        public string ReceiveSceneFolder(Scene scene)
+        {
+            return Path.Combine(TempPath, scene.Name);
+        }
+
         private readonly IXmlHandler m_xmlHandler;
     }
 }

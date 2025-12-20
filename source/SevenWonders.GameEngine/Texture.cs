@@ -6,41 +6,22 @@ namespace SevenWonders.GameEngine
 {
     public class Texture : IEquatable<Texture>
     {
-        public Vector2 Position { get; set; }
-        public float Rotation { get; set; }
-        public Vector2 Scale { get; set; }
-        public bool Visible { get; set; }
         public float OriginalWidth { get; set; }
         public float OriginalHeight { get; set; }
         public SKColor Color { get; set; }
         public string FileName { get; set; }
-        public string Name { get; set; }
-        public float Width { get; set; }
-        public float Height { get; set; }
-        public int TextureId { get; set; }
-        public int Id { get; set; }
 
         public Texture()
         {
-            Name = string.Empty;
             FileName = string.Empty;
         }
 
         public Texture(Texture texture)
         {
-            Name = new string(texture.Name);
             FileName = new string(texture.FileName);
-            Width = texture.Width;
-            Height = texture.Height;
             OriginalWidth = texture.OriginalWidth;
             OriginalHeight = texture.OriginalHeight;
             Color = texture.Color;
-            TextureId = texture.TextureId;
-            Id = texture.Id;
-            Position = texture.Position;
-            Rotation = texture.Rotation;
-            Scale = texture.Scale;
-            Visible = texture.Visible;
         }
 
         public bool Equals(Texture? other)
@@ -50,19 +31,10 @@ namespace SevenWonders.GameEngine
                 return false;
             }
 
-            return Name.Equals(other.Name) &&
-                   FileName.Equals(other.FileName) &&
-                   Width.Equals(other.Width) &&
-                   Height.Equals(other.Height) &&
+            return FileName.Equals(other.FileName) &&
                    OriginalHeight.Equals(other.OriginalHeight) &&
                    OriginalWidth.Equals(other.OriginalWidth) &&
-                   Color.Equals(other.Color) &&
-                   TextureId.Equals(other.TextureId) &&
-                   Id.Equals(other.Id) &&
-                   Position.Equals(other.Position) &&
-                   Rotation.Equals(other.Rotation) &&
-                   Scale.Equals(other.Scale) &&
-                   Visible.Equals(other.Visible);
+                   Color.Equals(other.Color);
         }
 
         public override bool Equals(object? obj)
@@ -77,19 +49,10 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() ^
-                   FileName.GetHashCode() ^
-                   Width.GetHashCode() ^
-                   Height.GetHashCode() ^
+            return FileName.GetHashCode() ^
                    OriginalHeight.GetHashCode() ^
                    OriginalWidth.GetHashCode() ^
-                   Color.GetHashCode() ^
-                   TextureId.GetHashCode() ^
-                   Id.GetHashCode() ^
-                   Position.GetHashCode() ^
-                   Rotation.GetHashCode() ^
-                   Scale.GetHashCode() ^
-                   Visible.GetHashCode();
+                   Color.GetHashCode();
         }
 
         public void LoadTexture(string sceneFolder)
@@ -98,35 +61,11 @@ namespace SevenWonders.GameEngine
             m_bitmap = SKBitmap.Decode(stream);
             OriginalWidth = m_bitmap.Width;
             OriginalHeight = m_bitmap.Height;
-            if (Width == 0) Width = OriginalWidth;
-            if (Height == 0) Height = OriginalHeight;
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height)
         {
-            if (!Visible || m_bitmap == null)
-                return;
-
-            var canvas = eventArgs.Surface.Canvas;
-
-            using var paint = new SKPaint
-            {
-                IsAntialias = true,
-                ColorFilter = SKColorFilter.CreateBlendMode(Color, SKBlendMode.Modulate)
-            };
-
-            canvas.Save();
-            canvas.Translate(Position.X, Position.Y);
-            canvas.RotateDegrees(Rotation, Width / 2f, Height / 2f);
-            canvas.Scale(Scale.X, Scale.Y);
-            var destRect = new SKRect(0, 0, Width, Height);
-            canvas.DrawBitmap(m_bitmap, destRect);
-            canvas.Restore();
-        }
-
-        public void DrawPart(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, int left, int top, int right, int bottom)
-        {
-            if (!Visible || m_bitmap == null)
+            if (m_bitmap == null)
                 return;
 
             var canvas = eventArgs.Surface.Canvas;
@@ -139,21 +78,34 @@ namespace SevenWonders.GameEngine
 
             canvas.Save();
             canvas.Translate(position.X, position.Y);
-            canvas.RotateDegrees(rotation, Width / 2f, Height / 2f);
+            canvas.RotateDegrees(rotation, width / 2f, height / 2f);
             canvas.Scale(scale.X, scale.Y);
-            var srcRect = new SKRectI(left, top, right, bottom);
-            var destRect = new SKRect(0, 0, Width, Height);
-            canvas.DrawBitmap(m_bitmap, srcRect, destRect);
+            var destRect = new SKRect(0, 0, width, height);
+            canvas.DrawBitmap(m_bitmap, destRect);
             canvas.Restore();
         }
 
-        public void Resize(Vector2 oldResolution, Vector2 newResolution)
+        public void DrawPart(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, int left, int top, int right, int bottom, float width, float height)
         {
-            float XRatio = newResolution.X / oldResolution.X;
-            float YRatio = newResolution.Y / oldResolution.Y;
-            Position = new Vector2(Position.X * XRatio, Position.Y * YRatio);
-            Width = Width * XRatio;
-            Height = Height * YRatio;
+            if (m_bitmap == null)
+                return;
+
+            var canvas = eventArgs.Surface.Canvas;
+
+            using var paint = new SKPaint
+            {
+                IsAntialias = true,
+                ColorFilter = SKColorFilter.CreateBlendMode(Color, SKBlendMode.Modulate)
+            };
+
+            canvas.Save();
+            canvas.Translate(position.X, position.Y);
+            canvas.RotateDegrees(rotation, width / 2f, height / 2f);
+            canvas.Scale(scale.X, scale.Y);
+            var srcRect = new SKRectI(left, top, right, bottom);
+            var destRect = new SKRect(0, 0, width, height);
+            canvas.DrawBitmap(m_bitmap, srcRect, destRect);
+            canvas.Restore();
         }
 
         private SKBitmap? m_bitmap;

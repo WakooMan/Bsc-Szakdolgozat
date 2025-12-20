@@ -17,6 +17,7 @@ namespace SevenWonders.GameEngine
     {
         MouseUp,
         MouseDown,
-        MouseMove
+        MouseMove,
+        MouseClicked
     }
 }

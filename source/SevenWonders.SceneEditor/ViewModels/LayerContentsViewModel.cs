@@ -1,5 +1,4 @@
 ﻿using SevenWonders.GameEngine;
-using SevenWonders.SceneEditor.Helpers;
 using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -154,17 +153,19 @@ namespace SevenWonders.SceneEditor.ViewModels
         }
 
 
-        public LayerContentsViewModel(TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsView)
+        public LayerContentsViewModel(IEngine engine, TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsView)
         {
+            m_engine = engine;
             m_textureContentsViewModel = textureContentsViewModel;
             m_gameObjectContentsViewModel = gameObjectContentsView;
             LayerViews = new ObservableCollection<LayerListViewModel>();
             m_onUnselectLayerCommand = new Command(OnUnselectLayer, () => CurrentScene is not null && SelectedLayer is not null);
             CurrentScene = null;
             SelectedLayer = null;
+            m_copyName = string.Empty;
         }
 
-        public void AddLayer(string name, int id, bool visible)
+        public void AddLayer(string name, bool visible)
         {
             if (CurrentScene is null)
             {
@@ -174,11 +175,11 @@ namespace SevenWonders.SceneEditor.ViewModels
             GraphicsLayer graphicsLayer = new GraphicsLayer()
             {
                 Name = name,
-                ID = id,
                 Visible = visible,
                 EnableCollision = true,
             };
-            CurrentScene.Layers.Add(graphicsLayer);
+
+            m_engine.ObjectManager.AddGraphicsLayer(CurrentScene, graphicsLayer);
             LayerViews.Add(new LayerListViewModel(graphicsLayer));
             SelectedLayer = graphicsLayer;
         }
@@ -229,9 +230,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            GraphicsLayer layer = CopyHelper.CopyLayer(m_selectedLayer, CopyName);
-
-            m_currentScene.Layers.Add(layer);
+            GraphicsLayer layer = m_engine.ObjectManager.CopyGraphicsLayer(m_currentScene, m_selectedLayer, CopyName);
             LayerViews.Add(new LayerListViewModel(layer));
             SelectedLayer = layer;
         }
@@ -246,6 +245,7 @@ namespace SevenWonders.SceneEditor.ViewModels
         private Scene? m_currentScene;
         private readonly TextureContentsViewModel m_textureContentsViewModel;
         private readonly GameObjectContentsViewModel m_gameObjectContentsViewModel;
+        private readonly IEngine m_engine;
         private string m_copyName;
         private bool m_isCopyEnabled;
     }

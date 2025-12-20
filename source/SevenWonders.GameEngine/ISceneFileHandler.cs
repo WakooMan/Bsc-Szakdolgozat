@@ -6,6 +6,7 @@
         string ScenesPath { get; }
         List<Scene> LoadScenes();
         void SaveScene(Scene? scene, bool checkForSceneFolder = true);
+        string ReceiveSceneFolder(Scene scene);
 
     }
 }

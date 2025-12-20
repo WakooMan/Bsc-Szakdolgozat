@@ -1,24 +1,21 @@
 ﻿using CommunityToolkit.Maui.Views;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
-using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
-using SkiaSharp;
 using SkiaSharp.Views.Maui;
-using System.IO.Compression;
 using System.Numerics;
-using System.Xml.Linq;
 
 namespace SevenWonders.SceneEditor.Views
 {
     public partial class MainPage : ContentPage
     {
 
-        public MainPage(MainPageViewModel mainPageViewModel)
+        public MainPage()
         {
             InitializeComponent();
-            m_sceneFileHandler = new SceneFileHandler(new XmlHandler());
-            m_sceneManager = new SceneManager();
+            IInputManager inputManager = new InputManager();
+            ISceneFileHandler sceneFileHandler = new SceneFileHandler(new XmlHandler());
+            m_engine = new Engine(new SceneManager(), inputManager, new ObjectManager(inputManager, sceneFileHandler), sceneFileHandler);
             if (!Directory.Exists(m_sceneFileHandler.ScenesPath))
             {
                 Directory.CreateDirectory(m_sceneFileHandler.ScenesPath);
@@ -26,9 +23,9 @@ namespace SevenWonders.SceneEditor.Views
 
             foreach (Scene scene in m_sceneFileHandler.LoadScenes())
             {
-                m_sceneManager.RegisterScene(scene);
+                m_engine.SceneManager.RegisterScene(scene);
             }
-            m_mainPageViewModel = mainPageViewModel;
+            m_mainPageViewModel = new MainPageViewModel(m_engine);
             m_currentPopup = null;
             SizeChanged += MainPage_SizeChanged;
             BindingContext = m_mainPageViewModel;
@@ -94,7 +91,6 @@ namespace SevenWonders.SceneEditor.Views
             if (addTexturePopupWindow.ViewModel.AddActivated)
             {
                 m_mainPageViewModel.TextureContentsViewModel.AddTextureToLayer(addTexturePopupWindow.ViewModel.Name,
-                                                      addTexturePopupWindow.ViewModel.Id,
                                                       addTexturePopupWindow.ViewModel.Visible,
                                                       addTexturePopupWindow.ViewModel.TextureId,
                                                       addTexturePopupWindow.ViewModel.Width,
@@ -113,7 +109,7 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(addGameObjectPopupWindow);
             if (addGameObjectPopupWindow.ViewModel.AddActivated)
             {
-                m_mainPageViewModel.GameObjectContentsViewModel.AddGameObjectToLayer(addGameObjectPopupWindow.ViewModel.Name, addGameObjectPopupWindow.ViewModel.Id, addGameObjectPopupWindow.ViewModel.Visible);
+                m_mainPageViewModel.GameObjectContentsViewModel.AddGameObjectToLayer(addGameObjectPopupWindow.ViewModel.Name, addGameObjectPopupWindow.ViewModel.Visible);
                 addGameObjectPopupWindow.ViewModel.Clear();
             }
             m_currentPopup = null;
@@ -128,10 +124,8 @@ namespace SevenWonders.SceneEditor.Views
             if (addSpritePopupWindow.ViewModel.AddActivated)
             {
                 m_mainPageViewModel.GameObjectContentsViewModel.AddSpriteToGameObject(addSpritePopupWindow.ViewModel.Name, 
-                                                                                      addSpritePopupWindow.ViewModel.TextureName, 
-                                                                                      addSpritePopupWindow.ViewModel.Id, 
+                                                                                      addSpritePopupWindow.ViewModel.TextureName,
                                                                                       addSpritePopupWindow.ViewModel.Visible,
-                                                                                      addSpritePopupWindow.ViewModel.TextureId,
                                                                                       addSpritePopupWindow.ViewModel.Width,
                                                                                       addSpritePopupWindow.ViewModel.Height,
                                                                                       addSpritePopupWindow.ViewModel.SelectedFilePath,
@@ -155,14 +149,13 @@ namespace SevenWonders.SceneEditor.Views
                 Scene scene = new Scene()
                 {
                     Name = addScenePopupWindow.ViewModel.Name,
-                    Id = addScenePopupWindow.ViewModel.Id,
                     Visible = addScenePopupWindow.ViewModel.Visible
                 };
                 scene.Resize(new Vector2(m_width, m_height));
-                m_sceneManager.RegisterScene(scene);
+                m_engine.SceneManager.RegisterScene(scene);
                 m_sceneFileHandler.SaveScene(scene, false);
                 m_sceneFileHandler.LoadScenes();
-                m_sceneManager.SetCurrentScene(scene);
+                m_engine.SceneManager.SetCurrentScene(scene);
                 m_mainPageViewModel.SetCurrentScene(scene);
                 addScenePopupWindow.ViewModel.Clear();
             }
@@ -171,19 +164,19 @@ namespace SevenWonders.SceneEditor.Views
 
         private async void Choose_Scene_Clicked(object sender, EventArgs e)
         {
-            if (m_sceneManager.Scenes.Count <= 0)
+            if (m_engine.SceneManager.Scenes.Count <= 0)
             {
                 return;
             }
 
-            ChooseScenePopupWindow chooseScenePopupWindow = new ChooseScenePopupWindow(new ChooseScenePopupWindowViewModel(m_sceneManager.Scenes));
+            ChooseScenePopupWindow chooseScenePopupWindow = new ChooseScenePopupWindow(new ChooseScenePopupWindowViewModel(m_engine.SceneManager.Scenes));
             m_currentPopup = chooseScenePopupWindow;
             m_currentPopup.Size = m_currentPopupSize;
             await this.ShowPopupAsync(chooseScenePopupWindow);
             if (chooseScenePopupWindow.ViewModel.ChooseActivated && chooseScenePopupWindow.ViewModel.SelectedScene is not null)
             {
                 chooseScenePopupWindow.ViewModel.SelectedScene.Resize(new Vector2(m_width, m_height));
-                m_sceneManager.SetCurrentScene(chooseScenePopupWindow.ViewModel.SelectedScene);
+                m_engine.SceneManager.SetCurrentScene(chooseScenePopupWindow.ViewModel.SelectedScene);
                 m_mainPageViewModel.SetCurrentScene(chooseScenePopupWindow.ViewModel.SelectedScene);
                 chooseScenePopupWindow.ViewModel.Clear();
             }
@@ -199,7 +192,7 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(addLayerPopupWindow);
             if (addLayerPopupWindow.ViewModel.AddActivated)
             {
-                m_mainPageViewModel.LayerContentsViewModel.AddLayer(addLayerPopupWindow.ViewModel.Name, addLayerPopupWindow.ViewModel.Id, addLayerPopupWindow.ViewModel.Visible);
+                m_mainPageViewModel.LayerContentsViewModel.AddLayer(addLayerPopupWindow.ViewModel.Name, addLayerPopupWindow.ViewModel.Visible);
                 addLayerPopupWindow.ViewModel.Clear();
             }
             m_currentPopup = null;
@@ -254,10 +247,10 @@ namespace SevenWonders.SceneEditor.Views
 
         private void Save_Scene_Clicked(object sender, EventArgs e)
         {
-            if (m_sceneManager.CurrentScene is not null)
+            if (m_engine.SceneManager.CurrentScene is not null)
             {
-                m_sceneManager.CurrentScene.Resize(new Vector2(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-                m_sceneFileHandler.SaveScene(m_sceneManager.CurrentScene);
+                m_engine.SceneManager.CurrentScene.Resize(new Vector2(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+                m_sceneFileHandler.SaveScene(m_engine.SceneManager.CurrentScene);
             }
         }
 
@@ -285,6 +278,6 @@ namespace SevenWonders.SceneEditor.Views
         private const float DEFAULT_HEIGHT = 2160;
 
         private readonly ISceneFileHandler m_sceneFileHandler;
-        private readonly ISceneManager m_sceneManager;
+        private readonly IEngine m_engine;
     }
 }

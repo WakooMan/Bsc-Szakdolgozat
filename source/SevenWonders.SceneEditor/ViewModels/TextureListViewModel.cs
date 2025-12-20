@@ -4,7 +4,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 {
     public class TextureListViewModel : BaseListViewModel
     {
-        public TextureListViewModel(Texture texture)
+        public TextureListViewModel(TextureObject texture)
         {
             m_texture = texture;
             OnPropertyChanged(nameof(Name));
@@ -14,6 +14,6 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public override int Id => m_texture.Id;
 
-        private readonly Texture m_texture;
+        private readonly TextureObject m_texture;
     }
 }

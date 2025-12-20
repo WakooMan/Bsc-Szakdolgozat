@@ -30,15 +30,6 @@
                             Background="Gray" 
                             HorizontalTextAlignment="Center"
                             Grid.Row="1"/>
-                    <Label Text="Scene id:"
-                            Grid.Row="2"/>
-                    <Entry MaxLength="10" 
-                            Keyboard="Numeric" 
-                            Text="{Binding Id, Mode=TwoWay}" 
-                            TextColor="White" 
-                            Background="Gray" 
-                            HorizontalTextAlignment="Center"
-                            Grid.Row="3"/>
                 </VerticalStackLayout>
             </ScrollView>
             <HorizontalStackLayout HorizontalOptions="Center"

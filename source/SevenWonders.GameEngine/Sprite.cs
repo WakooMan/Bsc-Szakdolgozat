@@ -74,14 +74,14 @@ namespace SevenWonders.GameEngine
                     
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation)
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height)
         {
             if (Frames.Count <= 0)
             {
                 return;
             }
 
-            Frames[ActualFrame].Draw(eventArgs, position, scale, rotation);
+            Frames[ActualFrame].Draw(eventArgs, position, scale, rotation, width, height);
             LastUpdate++;
             if (Fps < LastUpdate)
             {

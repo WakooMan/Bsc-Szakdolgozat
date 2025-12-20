@@ -1,16 +1,8 @@
 ﻿using SevenWonders.GameEngine;
-using SevenWonders.SceneEditor.Helpers;
-using SkiaSharp;
-using SkiaSharp.Views.Maui;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO.Compression;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System.Xml.Serialization;
 
 namespace SevenWonders.SceneEditor.ViewModels
 {
@@ -76,11 +68,11 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return m_currentScene?.Resolution.Y ?? 900;
             }
         }
-        public int Id
+        public string Id
         {
             get
             {
-                return m_currentScene?.Id ?? -1;
+                return m_currentScene?.Id.ToString() ?? string.Empty;
             }
             set
             {
@@ -89,7 +81,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                     return;
                 }
 
-                m_currentScene.Id = value;
+                m_currentScene.Id = Guid.Parse(value);
                 OnPropertyChanged();
             }
         }
@@ -103,7 +95,6 @@ namespace SevenWonders.SceneEditor.ViewModels
             private set
             {
                 m_currentScene = value;
-                CopyHelper.OnSceneChanged(m_currentScene);
                 OnPropertyChanged(nameof(Id));
                 OnPropertyChanged(nameof(Name));
                 OnPropertyChanged(nameof(IsVisible));
@@ -191,11 +182,12 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
-        public MainPageViewModel()
+        public MainPageViewModel(IEngine engine)
         {
-            m_textureContentsViewModel = new TextureContentsViewModel();
-            m_gameObjectContentsViewModel = new GameObjectContentsViewModel();
-            m_layerContentsViewModel = new LayerContentsViewModel(m_textureContentsViewModel, m_gameObjectContentsViewModel);
+            m_engine = engine;
+            m_textureContentsViewModel = new TextureContentsViewModel(m_engine);
+            m_gameObjectContentsViewModel = new GameObjectContentsViewModel(m_engine);
+            m_layerContentsViewModel = new LayerContentsViewModel(m_engine, m_textureContentsViewModel, m_gameObjectContentsViewModel);
             CurrentScene = null;
             SetState(MainWindowState.ButtonsWindow);
             GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
@@ -248,5 +240,6 @@ namespace SevenWonders.SceneEditor.ViewModels
         private bool m_isLeftPanelVisible;
         private bool m_buttonsAreVisible;
         private MainWindowState m_state;
+        private readonly IEngine m_engine;
     }
 }

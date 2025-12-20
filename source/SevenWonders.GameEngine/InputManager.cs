@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
-
-namespace SevenWonders.GameEngine
+﻿namespace SevenWonders.GameEngine
 {
     public class InputManager : IInputManager
     {
@@ -77,6 +70,18 @@ namespace SevenWonders.GameEngine
             }
         }
 
+        public void MouseClicked(MouseButton mouseButton, int x, int y)
+        {
+            InputEventArgs inputEventArgs = new InputEventArgs();
+            inputEventArgs.AddArgument(nameof(x), x);
+            inputEventArgs.AddArgument(nameof(y), y);
+
+            if (m_mouseEvents.TryGetValue(MouseEvent.MouseClicked, out var mouseButtonDictionary) && mouseButtonDictionary.TryGetValue(mouseButton, out var actions))
+            {
+                actions.ForEach(action => action(inputEventArgs));
+            }
+        }
+
         public void SubscribeKeyEvent(KeyEvent keyEvent, long keyCode, Action action)
         {
             if (!m_keyEvents.ContainsKey(keyEvent))
@@ -103,6 +108,20 @@ namespace SevenWonders.GameEngine
             }
 
             m_mouseEvents[mouseEvent][mouseButton].Add(action);
+        }
+
+        public void UnsubscribeMouseEvent(MouseEvent mouseEvent, MouseButton mouseButton, Action<InputEventArgs> action)
+        {
+            if (!m_mouseEvents.ContainsKey(mouseEvent))
+            {
+                return;
+            }
+            if (!m_mouseEvents[mouseEvent].ContainsKey(mouseButton))
+            {
+                return;
+            }
+
+            m_mouseEvents[mouseEvent][mouseButton].Remove(action);
         }
 
         private readonly Dictionary<KeyEvent, Dictionary<long, List<Action>>> m_keyEvents;

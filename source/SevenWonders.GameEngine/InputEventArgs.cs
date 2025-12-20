@@ -7,18 +7,27 @@
             arguments = new Dictionary<string, object>();
         }
 
-        public void AddArgument(string name, object obj)
+        public void AddArgument<T>(string name, T obj)
         {
+            if (obj is null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
             arguments[name] = obj;
         }
 
-        public T? GetArgument<T>(string name) where T : class
+        public T? GetArgument<T>(string name)
         {
-            if (arguments.ContainsKey(name))
+            if (arguments.TryGetValue(name, out object? obj) && obj is not null)
             {
-                return arguments[name] as T;
+                if (obj is T value)
+                {
+                    return value;
+                }
             }
-            return null as T;
+
+            return default;
         }
 
         private readonly Dictionary<string, object> arguments;

@@ -12,12 +12,16 @@ namespace SevenWonders.GameEngine
 
         public ISceneManager SceneManager { get; private set; }
         public IInputManager InputManager { get; private set; }
+        public IObjectManager ObjectManager { get; private set; }
+        public ISceneFileHandler SceneFileHandler { get; private set; }
 
-        public Engine(ISceneManager sceneManager, IInputManager inputManager)
+        public Engine(ISceneManager sceneManager, IInputManager inputManager, IObjectManager objectManager, ISceneFileHandler sceneFileHandler)
         {
             m_components = new List<IComponent>();
             SceneManager = sceneManager;
             InputManager = inputManager;
+            ObjectManager = objectManager;
+            SceneFileHandler = sceneFileHandler;
         }
 
         public void Shutdown()

@@ -1,13 +1,26 @@
 ﻿using SkiaSharp.Views.Maui;
+using System.ComponentModel;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
     public class GameObject : IEquatable<GameObject>
     {
+        public delegate void MouseEvent(InputEventArgs eventArgs);
+
+        public event MouseEvent RightMouseClickedEvent;
+        public event MouseEvent RightMouseUpEvent;
+        public event MouseEvent RightMouseDownEvent;
+        public event MouseEvent LeftMouseClickedEvent;
+        public event MouseEvent LeftMouseUpEvent;
+        public event MouseEvent LeftMouseDownEvent;
+        public event MouseEvent MouseMoveEvent;
+
         public string Name { get; set; }
         public Vector2 Position { get; set; }
-        public Vector2 Direction { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        public Vector2 Direction { get; set;}
         public Vector2 Scale { get; set; }
         public List<Sprite> Animations { get; set; }
         public float Speed { get; set; }
@@ -110,7 +123,7 @@ namespace SevenWonders.GameEngine
             if (!Visible || Animations.Count <= 0)
                 return;
 
-            Animations[CurrentAnim].Draw(eventArgs, Position, Scale, Rotation);
+            Animations[CurrentAnim].Draw(eventArgs, Position, Scale, Rotation, Width, Height);
         }
 
         public void Resize(Vector2 oldResolution, Vector2 newResolution)
@@ -119,6 +132,70 @@ namespace SevenWonders.GameEngine
             float YRatio = newResolution.Y / oldResolution.Y;
             Position = new Vector2(Position.X * XRatio, Position.Y * YRatio);
             Scale = new Vector2(Scale.X * XRatio, Scale.Y * YRatio);
+        }
+
+        public void OnRightMouseClicked(InputEventArgs eventArgs)
+        {
+            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            {
+                RightMouseClickedEvent(eventArgs);
+            }
+        }
+
+        public void OnRightMouseUp(InputEventArgs eventArgs)
+        {
+            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            {
+                RightMouseUpEvent(eventArgs);
+            }
+        }
+
+        public void OnRightMouseDown(InputEventArgs eventArgs)
+        {
+            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            {
+                RightMouseDownEvent(eventArgs);
+            }
+        }
+
+        public void OnLeftMouseClicked(InputEventArgs eventArgs)
+        {
+            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            {
+                LeftMouseClickedEvent(eventArgs);
+            }
+        }
+
+        public void OnLeftMouseUp(InputEventArgs eventArgs)
+        {
+            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            {
+                LeftMouseUpEvent(eventArgs);
+            }
+        }
+
+        public void OnLeftMouseDown(InputEventArgs eventArgs)
+        {
+            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            {
+                LeftMouseDownEvent(eventArgs);
+            }
+        }
+
+        public void OnMouseMove(InputEventArgs eventArgs)
+        {
+            if (IsMouseInGameObject(eventArgs.GetArgument<int>("newX"), eventArgs.GetArgument<int>("newY")))
+            {
+                MouseMoveEvent(eventArgs);
+            }
+        }
+
+        private bool IsMouseInGameObject(int x, int y)
+        {
+           return x >= Position.X &&
+           x <= Position.X + Width &&
+           y >= Position.Y &&
+           y <= Position.Y + Height;
         }
     }
 }

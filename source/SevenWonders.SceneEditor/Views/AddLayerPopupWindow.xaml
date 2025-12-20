@@ -30,13 +30,6 @@
                            TextColor="White" 
                            Background="Gray" 
                            HorizontalTextAlignment="Center"/>
-                    <Label Text="Layer id:" />
-                    <Entry MaxLength="10" 
-                           Keyboard="Numeric" 
-                           Text="{Binding Id, Mode=TwoWay}" 
-                           TextColor="White" 
-                           Background="Gray" 
-                           HorizontalTextAlignment="Center"/>
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <Label Text="Is Visible: " HorizontalOptions="Center"/>
                         <CheckBox IsChecked="{Binding Visible}" />

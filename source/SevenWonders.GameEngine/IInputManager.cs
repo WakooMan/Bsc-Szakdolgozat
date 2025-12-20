@@ -17,5 +17,6 @@ namespace SevenWonders.GameEngine
 
         void SubscribeKeyEvent(KeyEvent keyEvent, long keyCode, Action action);
         void SubscribeMouseEvent(MouseEvent mouseEvent, MouseButton mouseButton, Action<InputEventArgs> action);
+        void UnsubscribeMouseEvent(MouseEvent mouseEvent, MouseButton mouseButton, Action<InputEventArgs> action);
     }
 }

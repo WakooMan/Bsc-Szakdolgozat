@@ -74,12 +74,9 @@ namespace SevenWonders.GameEngine
                    Bottom.GetHashCode();
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation)
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height)
         {
-            if(!Frame.Visible)
-                return;
-
-            Frame.DrawPart(eventArgs, position, scale, rotation, Left, Top, Right, Bottom);
+            Frame.DrawPart(eventArgs, position, scale, rotation, Left, Top, Right, Bottom, width, height);
         }
 
         public void LoadTexture(string sceneFolder)

@@ -27,20 +27,6 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
-        public int Id
-        {
-            get
-            {
-                return m_Id;
-            }
-            set
-            {
-                m_Id = value;
-                OnPropertyChanged();
-                m_onAddCommand.ChangeCanExecute();
-            }
-        }
-
         public bool Visible
         {
             get
@@ -67,7 +53,6 @@ namespace SevenWonders.SceneEditor.ViewModels
         public virtual void Clear()
         {
             Name = string.Empty;
-            Id = 0;
             m_visible = true;
             AddActivated = false;
         }
@@ -77,7 +62,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         protected virtual bool CanExecuteAdd()
         {
-            return !string.IsNullOrEmpty(m_Name) && m_Id >= 0;
+            return !string.IsNullOrEmpty(m_Name);
         }
 
         private void OnAddCommandExecute()
@@ -87,7 +72,6 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         protected Command m_onAddCommand;
         private string m_Name;
-        private int m_Id;
         private bool m_visible;
     }
 }
