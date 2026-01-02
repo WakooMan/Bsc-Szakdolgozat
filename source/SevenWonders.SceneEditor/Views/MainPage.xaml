@@ -303,6 +303,8 @@
                 </Grid>
                 <skia:SKCanvasView x:Name="canvas"
                    PaintSurface="OnCanvasViewPaintSurface"
+                   Touch="OnTouchEffectAction"
+                   EnableTouchEvents="True"
                    HorizontalOptions="Fill"
                    VerticalOptions="Fill"
                    IsVisible="{Binding CanvasIsVisible, Mode=TwoWay}"/>

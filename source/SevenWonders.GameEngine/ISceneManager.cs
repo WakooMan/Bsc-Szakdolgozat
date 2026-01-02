@@ -4,6 +4,11 @@ namespace SevenWonders.GameEngine
 {
     public interface ISceneManager
     {
+        delegate void SceneEvent(Scene scene);
+
+        event SceneEvent SceneRegistered;
+        event SceneEvent SceneRemoved;
+
         Scene? CurrentScene { get; }
         IReadOnlyList<Scene> Scenes { get; }
         void SetCurrentScene(Scene scene);
@@ -12,7 +17,7 @@ namespace SevenWonders.GameEngine
         GameObject GetObjectByName(string name);
         Scene GetScene(Guid sceneID);
         Scene GetSceneByName(string name);
-        void FreeObject(uint id);
+        void FreeObject(int id);
         void FreeObjects();
         void Clear();
         void FreeAScene(string name);

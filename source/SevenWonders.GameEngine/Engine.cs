@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SevenWonders.GameEngine
+﻿namespace SevenWonders.GameEngine
 {
     public class Engine: IEngine
     {
@@ -22,6 +16,8 @@ namespace SevenWonders.GameEngine
             InputManager = inputManager;
             ObjectManager = objectManager;
             SceneFileHandler = sceneFileHandler;
+            SceneManager.SceneRegistered += SceneRegistered;
+            SceneManager.SceneRemoved += SceneRemoved;
         }
 
         public void Shutdown()
@@ -38,6 +34,28 @@ namespace SevenWonders.GameEngine
         public void RegisterSubSystem(IComponent component)
         {
             m_components.Add(component);
+        }
+
+        private void SceneRegistered(Scene scene)
+        {
+            scene.Layers.ForEach(layer =>
+            {
+                layer.ObjectList.ForEach(obj =>
+                {
+                    ObjectManager.SubscribeGameObjectToTouchEvents(obj, layer);
+                });
+            });
+        }
+
+        private void SceneRemoved(Scene scene)
+        {
+            scene.Layers.ForEach(layer =>
+            {
+                layer.ObjectList.ForEach(obj =>
+                {
+                    ObjectManager.UnsubscribeGameObjectToTouchEvents(obj);
+                });
+            });
         }
     }
 }

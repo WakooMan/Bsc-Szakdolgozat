@@ -1,17 +1,15 @@
 ﻿using SevenWonders.Common;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+using static SevenWonders.GameEngine.ISceneManager;
 
 namespace SevenWonders.GameEngine
 {
     public class SceneManager: ISceneManager
     {
+        public event SceneEvent SceneRegistered = delegate { };
+        public event SceneEvent SceneRemoved = delegate { };
+
         public bool DrawBoundingBox;
         public SKColor BoundingShapeColor;
         public Scene? CurrentScene { get; private set; }
@@ -34,6 +32,7 @@ namespace SevenWonders.GameEngine
             if (!m_scenes.Contains(scene) && m_scenes.All(sc => sc.Name != scene.Name && sc.Id != scene.Id))
             {
                 m_scenes.Add(scene);
+                SceneRegistered(scene);
             }
         }
 
@@ -58,7 +57,7 @@ namespace SevenWonders.GameEngine
         {
             return m_scenes.First(scene => scene.Name == name);
         }
-        public void FreeObject(uint id)
+        public void FreeObject(int id)
         {
 
         }
@@ -68,15 +67,26 @@ namespace SevenWonders.GameEngine
         }
         public void Clear()
         {
+            m_scenes.ForEach(scene => SceneRemoved(scene));
             m_scenes.Clear();
         }
         public void FreeAScene(string name)
         {
-            m_scenes.Remove(m_scenes.First(scene => scene.Name == name));
+            Scene? scene = m_scenes.FirstOrDefault(scene => scene.Name == name);
+            if (scene != null)
+            {
+                m_scenes.Remove(scene);
+                SceneRemoved(scene);
+            }
         }
         public void FreeASceneByID(Guid sceneID)
         {
-            m_scenes.Remove(m_scenes.First(scene => scene.Id == sceneID));
+            Scene? scene = m_scenes.FirstOrDefault(scene => scene.Id == sceneID);
+            if (scene != null)
+            {
+                m_scenes.Remove(scene);
+                SceneRemoved(scene);
+            }
         }
 
         private readonly List<Scene> m_scenes;

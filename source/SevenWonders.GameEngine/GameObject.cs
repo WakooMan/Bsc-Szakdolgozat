@@ -1,20 +1,17 @@
-﻿using SkiaSharp.Views.Maui;
-using System.ComponentModel;
+﻿using SevenWonders.Common;
+using SkiaSharp.Views.Maui;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
     public class GameObject : IEquatable<GameObject>
     {
-        public delegate void MouseEvent(InputEventArgs eventArgs);
+        public delegate void TouchEvent(SKTouchEventArgs eventArgs);
 
-        public event MouseEvent RightMouseClickedEvent;
-        public event MouseEvent RightMouseUpEvent;
-        public event MouseEvent RightMouseDownEvent;
-        public event MouseEvent LeftMouseClickedEvent;
-        public event MouseEvent LeftMouseUpEvent;
-        public event MouseEvent LeftMouseDownEvent;
-        public event MouseEvent MouseMoveEvent;
+        public event TouchEvent ReleasedEvent = delegate { };
+        public event TouchEvent PressedEvent = delegate { };
+        public event TouchEvent MoveEvent = delegate { };
+        public event TouchEvent ClickedEvent = delegate { };
 
         public string Name { get; set; }
         public Vector2 Position { get; set; }
@@ -134,68 +131,47 @@ namespace SevenWonders.GameEngine
             Scale = new Vector2(Scale.X * XRatio, Scale.Y * YRatio);
         }
 
-        public void OnRightMouseClicked(InputEventArgs eventArgs)
+        public void OnTouchReleased(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer)
         {
-            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
-                RightMouseClickedEvent(eventArgs);
+                GameLog.Info($"GameObject released with ID: {Id} and name: {Name}");
+                ReleasedEvent(eventArgs);
             }
         }
 
-        public void OnRightMouseUp(InputEventArgs eventArgs)
+        public void OnTouchPressed(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer)
         {
-            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
-                RightMouseUpEvent(eventArgs);
+                GameLog.Info($"GameObject pressed with ID: {Id} and name: {Name}");
+                PressedEvent(eventArgs);
             }
         }
 
-        public void OnRightMouseDown(InputEventArgs eventArgs)
+        public void OnTouchMoved(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer)
         {
-            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
-                RightMouseDownEvent(eventArgs);
+                MoveEvent(eventArgs);
             }
         }
 
-        public void OnLeftMouseClicked(InputEventArgs eventArgs)
+        public void OnTouchClicked(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer)
         {
-            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
+            if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
-                LeftMouseClickedEvent(eventArgs);
+                GameLog.Info($"GameObject clicked with ID: {Id} and name: {Name}");
+                ClickedEvent(eventArgs);
             }
         }
 
-        public void OnLeftMouseUp(InputEventArgs eventArgs)
-        {
-            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
-            {
-                LeftMouseUpEvent(eventArgs);
-            }
-        }
-
-        public void OnLeftMouseDown(InputEventArgs eventArgs)
-        {
-            if (IsMouseInGameObject(eventArgs.GetArgument<int>("x"), eventArgs.GetArgument<int>("y")))
-            {
-                LeftMouseDownEvent(eventArgs);
-            }
-        }
-
-        public void OnMouseMove(InputEventArgs eventArgs)
-        {
-            if (IsMouseInGameObject(eventArgs.GetArgument<int>("newX"), eventArgs.GetArgument<int>("newY")))
-            {
-                MouseMoveEvent(eventArgs);
-            }
-        }
-
-        private bool IsMouseInGameObject(int x, int y)
+        private bool IsTouchInGameObject(float x, float y)
         {
            return x >= Position.X &&
-           x <= Position.X + Width &&
+           x <= Position.X + (Width * Scale.X) &&
            y >= Position.Y &&
-           y <= Position.Y + Height;
+           y <= Position.Y + (Height* Scale.Y);
         }
     }
 }

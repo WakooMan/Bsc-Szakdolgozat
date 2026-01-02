@@ -1,5 +1,4 @@
-﻿using SkiaSharp;
-using SkiaSharp.Views.Maui;
+﻿using SkiaSharp.Views.Maui;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -12,23 +11,17 @@ namespace SevenWonders.GameEngine
         public int Top { get; set; }
         public int Right { get; set; }
         public int Bottom { get; set; }
-        public BoundingBox BBoxOriginal { get; set; }
-        public BoundingBox BBoxTransformed { get; set; }
 
         public SpriteFrame()
         {
             Name = string.Empty;
             Frame = new Texture();
-            BBoxOriginal = new BoundingBox();
-            BBoxTransformed = new BoundingBox();
         }
 
         public SpriteFrame(SpriteFrame spriteFrame)
         {
             Name = new string(spriteFrame.Name);
             Frame = new Texture(spriteFrame.Frame);
-            BBoxOriginal = new BoundingBox(spriteFrame.BBoxOriginal);
-            BBoxTransformed = new BoundingBox(spriteFrame.BBoxTransformed);
             Left = spriteFrame.Left;
             Top = spriteFrame.Top;
             Right = spriteFrame.Right;
@@ -44,8 +37,6 @@ namespace SevenWonders.GameEngine
 
             return Name.Equals(other.Name) &&
                    Frame.Equals(other.Frame) &&
-                   BBoxOriginal.Equals(other.BBoxOriginal) &&
-                   BBoxTransformed.Equals(other.BBoxTransformed) &&
                    Left.Equals(other.Left) &&
                    Top.Equals(other.Top) &&
                    Right.Equals(other.Right) &&
@@ -66,8 +57,6 @@ namespace SevenWonders.GameEngine
         {
             return Name.GetHashCode() ^
                    Frame.GetHashCode() ^
-                   BBoxOriginal.GetHashCode() ^
-                   BBoxTransformed.GetHashCode() ^
                    Top.GetHashCode() ^
                    Left.GetHashCode() ^
                    Right.GetHashCode() ^

@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Maui.Views;
+using Serilog;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
 using System.Numerics;
 
 namespace SevenWonders.SceneEditor.Views
@@ -14,8 +16,8 @@ namespace SevenWonders.SceneEditor.Views
         {
             InitializeComponent();
             IInputManager inputManager = new InputManager();
-            ISceneFileHandler sceneFileHandler = new SceneFileHandler(new XmlHandler());
-            m_engine = new Engine(new SceneManager(), inputManager, new ObjectManager(inputManager, sceneFileHandler), sceneFileHandler);
+            m_sceneFileHandler = new SceneFileHandler(new XmlHandler());
+            m_engine = new Engine(new SceneManager(), inputManager, new ObjectManager(inputManager, m_sceneFileHandler), m_sceneFileHandler);
             if (!Directory.Exists(m_sceneFileHandler.ScenesPath))
             {
                 Directory.CreateDirectory(m_sceneFileHandler.ScenesPath);
@@ -267,6 +269,11 @@ namespace SevenWonders.SceneEditor.Views
                     m_mainPageViewModel.UpdateCanvasSize();
                 }
             }
+        }
+
+        private void OnTouchEffectAction(object sender, SKTouchEventArgs e)
+        {
+            m_engine.InputManager.OnTouchEvent(e);
         }
 
         private readonly MainPageViewModel m_mainPageViewModel;
