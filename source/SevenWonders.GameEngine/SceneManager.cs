@@ -45,9 +45,25 @@ namespace SevenWonders.GameEngine
 
             CurrentScene.Draw(eventArgs);
         }
-        public GameObject GetObjectByName(string name)
+        public GameObject? GetObjectByName(string name)
         {
-            return new GameObject();
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                foreach (GameObject gameObject in graphicsLayer.ObjectList)
+                {
+                    if (gameObject.Name == name)
+                    {
+                        return gameObject;
+                    }
+                }
+            }
+
+            return null;
         }
         public Scene GetScene(Guid sceneID)
         {

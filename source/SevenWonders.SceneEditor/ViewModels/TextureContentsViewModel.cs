@@ -53,6 +53,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedTextureRotation));
                 OnPropertyChanged(nameof(SelectedTextureScaleX));
                 OnPropertyChanged(nameof(SelectedTextureScaleY));
+                OnPropertyChanged(nameof(SelectedTextureZIndex));
                 OnPropertyChanged(nameof(SelectedTextureWidth));
                 OnPropertyChanged(nameof(SelectedTextureHeight));
             }
@@ -173,6 +174,22 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public int SelectedTextureZIndex
+        {
+            get
+            {
+                return SelectedTexture?.ZIndex ?? -1;
+            }
+            set
+            {
+                if (SelectedTexture is not null)
+                {
+                    SelectedTexture.ZIndex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public float SelectedTextureWidth
         {
             get
@@ -213,7 +230,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             SelectedTexture = null;
         }
 
-        public void AddTextureToLayer(string name, bool visible, int textureId, int width, int height, string fullPath)
+        public void AddTextureToLayer(string name, bool visible, int width, int height, string fullPath)
         {
             if (m_engine.SceneManager.CurrentScene is null || SelectedLayer is null)
             {

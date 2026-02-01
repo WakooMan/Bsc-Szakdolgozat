@@ -14,7 +14,7 @@ namespace SevenWonders.GameEngine
         void SetCurrentScene(Scene scene);
         void RegisterScene(Scene scene);
         void Render(SKPaintSurfaceEventArgs eventArgs);
-        GameObject GetObjectByName(string name);
+        GameObject? GetObjectByName(string name);
         Scene GetScene(Guid sceneID);
         Scene GetSceneByName(string name);
         void FreeObject(int id);

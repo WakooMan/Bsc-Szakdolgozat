@@ -171,6 +171,15 @@
                                            Background="Gray" 
                                            HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="ZIndex: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding TextureContentsViewModel.SelectedTextureZIndex, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
                                 <Label Text="Width:"/>
                                 <Entry MaxLength="10" 
                                        Keyboard="Numeric" 
@@ -258,6 +267,20 @@
                                            Background="Gray" 
                                            HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
+                                <Label Text="Width:"/>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding GameObjectContentsViewModel.SelectedGameObjectWidth, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>   
+                                <Label Text="Height:"/>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding GameObjectContentsViewModel.SelectedGameObjectHeight, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
                                 <HorizontalStackLayout>
                                     <Label Text="ZIndex: "/>
                                     <Entry MaxLength="10" 

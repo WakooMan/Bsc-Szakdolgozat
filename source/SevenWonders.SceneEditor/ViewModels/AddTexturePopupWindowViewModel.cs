@@ -4,21 +4,7 @@
     {
         protected override bool CanExecuteAdd()
         {
-            return base.CanExecuteAdd() && m_textureId > 0 && m_width > 0 && m_height > 0 && !string.IsNullOrEmpty(m_selectedFilePath);
-        }
-
-        public int TextureId
-        {
-            get
-            {
-                return m_textureId;
-            }
-            set
-            {
-                m_textureId = value;
-                OnPropertyChanged();
-                m_onAddCommand.ChangeCanExecute();
-            }
+            return base.CanExecuteAdd() && m_width > 0 && m_height > 0 && !string.IsNullOrEmpty(m_selectedFilePath);
         }
 
         public int Width
@@ -85,14 +71,12 @@
         public override void Clear()
         {
             base.Clear();
-            m_textureId = 0;
             m_width = 0;
             m_height = 0;
             m_selectedFileName = string.Empty;
             m_selectedFilePath = string.Empty;
         }
 
-        private int m_textureId;
         private int m_width;
         private int m_height;
         private string m_selectedFileName;

@@ -77,15 +77,17 @@ namespace SevenWonders.GameEngine
                 return;
             }
 
-            foreach (var texture in Textures)
+            List<TextureObject> textures = [.. Textures];
+            textures.Sort(new TextureObjectComparer());
+            foreach (var texture in textures)
             {
                 texture.Draw(eventArgs);
             }
 
-            List<GameObject> objects = [.. ObjectList];
-            objects.Sort(new GameObjectComparer());
+            List<GameObject> gameObjects = [.. ObjectList];
+            gameObjects.Sort(new GameObjectComparer());
 
-            foreach (var gameObject in objects)
+            foreach (var gameObject in gameObjects)
             {
                 gameObject.Draw(eventArgs);
             }

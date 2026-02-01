@@ -2,6 +2,7 @@
 using Serilog;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
+using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
@@ -16,14 +17,15 @@ namespace SevenWonders.SceneEditor.Views
         {
             InitializeComponent();
             IInputManager inputManager = new InputManager();
-            m_sceneFileHandler = new SceneFileHandler(new XmlHandler());
-            m_engine = new Engine(new SceneManager(), inputManager, new ObjectManager(inputManager, m_sceneFileHandler), m_sceneFileHandler);
-            if (!Directory.Exists(m_sceneFileHandler.ScenesPath))
+            NormalZipFileReceiver normalZipFileReceiver = new NormalZipFileReceiver();
+            m_sceneLoader = new SceneLoader(new XmlHandler(), normalZipFileReceiver);
+            m_engine = new Engine(new SceneManager(), inputManager, new ObjectManager(inputManager, m_sceneLoader), m_sceneLoader, Dispatcher.CreateTimer(), canvas);
+            if (!Directory.Exists(normalZipFileReceiver.ScenesPath))
             {
-                Directory.CreateDirectory(m_sceneFileHandler.ScenesPath);
+                Directory.CreateDirectory(normalZipFileReceiver.ScenesPath);
             }
 
-            foreach (Scene scene in m_sceneFileHandler.LoadScenes())
+            foreach (Scene scene in m_sceneLoader.LoadScenes().GetAwaiter().GetResult())
             {
                 m_engine.SceneManager.RegisterScene(scene);
             }
@@ -31,14 +33,7 @@ namespace SevenWonders.SceneEditor.Views
             m_currentPopup = null;
             SizeChanged += MainPage_SizeChanged;
             BindingContext = m_mainPageViewModel;
-            new Thread(() =>
-            {
-                while (canvas is not null)
-                {
-                    canvas?.InvalidateSurface();
-                    Thread.Sleep(500);
-                }
-            }).Start();
+            m_engine.Startup();
         }
 
         private void MainPage_SizeChanged(object? sender, EventArgs e)
@@ -94,7 +89,6 @@ namespace SevenWonders.SceneEditor.Views
             {
                 m_mainPageViewModel.TextureContentsViewModel.AddTextureToLayer(addTexturePopupWindow.ViewModel.Name,
                                                       addTexturePopupWindow.ViewModel.Visible,
-                                                      addTexturePopupWindow.ViewModel.TextureId,
                                                       addTexturePopupWindow.ViewModel.Width,
                                                       addTexturePopupWindow.ViewModel.Height,
                                                       addTexturePopupWindow.ViewModel.SelectedFilePath);
@@ -155,8 +149,8 @@ namespace SevenWonders.SceneEditor.Views
                 };
                 scene.Resize(new Vector2(m_width, m_height));
                 m_engine.SceneManager.RegisterScene(scene);
-                m_sceneFileHandler.SaveScene(scene, false);
-                m_sceneFileHandler.LoadScenes();
+                m_sceneLoader.SaveScene(scene, false);
+                await m_sceneLoader.LoadScenes();
                 m_engine.SceneManager.SetCurrentScene(scene);
                 m_mainPageViewModel.SetCurrentScene(scene);
                 addScenePopupWindow.ViewModel.Clear();
@@ -252,7 +246,7 @@ namespace SevenWonders.SceneEditor.Views
             if (m_engine.SceneManager.CurrentScene is not null)
             {
                 m_engine.SceneManager.CurrentScene.Resize(new Vector2(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-                m_sceneFileHandler.SaveScene(m_engine.SceneManager.CurrentScene);
+                m_sceneLoader.SaveScene(m_engine.SceneManager.CurrentScene);
             }
         }
 
@@ -284,7 +278,7 @@ namespace SevenWonders.SceneEditor.Views
         private const float DEFAULT_WIDTH = 3840;
         private const float DEFAULT_HEIGHT = 2160;
 
-        private readonly ISceneFileHandler m_sceneFileHandler;
+        private readonly ISceneLoader m_sceneLoader;
         private readonly IEngine m_engine;
     }
 }

@@ -1,13 +1,17 @@
-﻿namespace SevenWonders.GameEngine
+﻿using SkiaSharp.Views.Maui.Controls;
+
+namespace SevenWonders.GameEngine
 {
     public interface IEngine
     {
         ISceneManager SceneManager { get; }
-        public IInputManager InputManager { get; }
-        public IObjectManager ObjectManager { get; }
-        public ISceneFileHandler SceneFileHandler { get; }
+        IInputManager InputManager { get; }
+        IObjectManager ObjectManager { get; }
+        ISceneLoader SceneFileHandler { get; }
+        GameEngineConfiguration Configuration { get; }
+
+        void Startup();
         void Shutdown();
-        void MainLoop();
         void RegisterSubSystem(IComponent component);
     }
 }

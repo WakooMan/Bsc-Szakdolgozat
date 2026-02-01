@@ -205,6 +205,38 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public float SelectedGameObjectWidth
+        {
+            get
+            {
+                return SelectedGameObject?.Width ?? 0;
+            }
+            set
+            {
+                if (SelectedGameObject is not null)
+                {
+                    SelectedGameObject.Width = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public float SelectedGameObjectHeight
+        {
+            get
+            {
+                return SelectedGameObject?.Height ?? 0;
+            }
+            set
+            {
+                if (SelectedGameObject is not null)
+                {
+                    SelectedGameObject.Height = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public int SelectedGameObjectZIndex
         {
             get

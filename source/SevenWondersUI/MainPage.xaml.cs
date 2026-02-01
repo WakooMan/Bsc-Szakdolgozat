@@ -4,94 +4,87 @@ using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Military;
 using GameLogic.Elements.Wonders;
 using SevenWonders.Common;
-using SkiaSharp;
+using SevenWonders.GameEngine;
 using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
-using System.Diagnostics;
-using System.Xml.Serialization;
+using System.Numerics;
 
 namespace SevenWondersUI
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-        float animationProgress = 0; // 0.0 → 1.0
-        Stopwatch stopwatch = new();
-        bool animationStarted = false;
 
-        [Obsolete]
-        public MainPage()
+        protected override async void OnAppearing()
         {
+            base.OnAppearing();
+
             InitializeComponent();
             IXmlHandler xmlHandler = new XmlHandler();
             IMilitaryBoard militaryBoard = new MilitaryBoardFactory(xmlHandler).Create();
             IGameElements gameElements = new GameElements(new MainCardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));
             var sm = gameElements.Developments;
-            Task.Delay(2000).ContinueWith(_ =>
+
+            IInputManager inputManager = new InputManager();
+            m_sceneLoader = new SceneLoader(new XmlHandler(), new MauiZipFileReceiver());
+            IObjectManager objectManager = new ObjectManager(inputManager, m_sceneLoader);
+            m_engine = new Engine(new SceneManager(), inputManager, objectManager, m_sceneLoader, Dispatcher.CreateTimer(), canvas);
+            MoverComponent moverComponent = new MoverComponent();
+            CardFlipComponent cardFlipComponent = new CardFlipComponent();
+            m_engine.RegisterSubSystem(moverComponent);
+            m_engine.RegisterSubSystem(cardFlipComponent);
+
+            foreach (Scene scene in await m_sceneLoader.LoadScenes())
             {
-                animationStarted = true;
-                stopwatch.Restart();
-                Device.StartTimer(TimeSpan.FromMilliseconds(16), () =>
+                m_engine.SceneManager.RegisterScene(scene);
+            }
+
+            Scene? firstScene = m_engine.SceneManager.Scenes.FirstOrDefault();
+
+            if (firstScene != null)
+            {
+                m_engine.SceneManager.SetCurrentScene(firstScene);
+            }
+
+            GameObject gameObject =  m_engine.SceneManager.GetObjectByName("Sphinx");
+            GameObject wonder1 = m_engine.SceneManager.GetObjectByName("Wonder1");
+
+            m_engine.Startup();
+            moverComponent.MoveTo(gameObject, wonder1, 210, 30);
+            cardFlipComponent.Flip(gameObject, 0, 0.6f);
+        }
+
+        private void OnCanvasSizeChanged(object sender, EventArgs e)
+        {
+            Grid? grid = sender as Grid;
+            if (grid != null)
+            {
+                m_width = (float)grid.Width;
+                m_height = (float)grid.Height;
+                if (m_engine.SceneManager.CurrentScene is not null)
                 {
-                    // 0.5 másodperc alatt fusson le az animáció
-                    animationProgress = Math.Min(1f, (float)(stopwatch.Elapsed.TotalSeconds / 0.5));
-                    canvas.InvalidateSurface();
-                    return animationProgress < 1f;
-                });
-            });
+                    m_engine.SceneManager.CurrentScene.Resize(new Vector2(m_width, m_height));
+                }
+            }
         }
 
 
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            var canvas = e.Surface.Canvas;
-            canvas.Clear(SKColors.DarkGreen);
-
-            float cardWidth = 100;
-            float cardHeight = 150;
-            var center = new SKPoint(e.Info.Width / 2, e.Info.Height / 2);
-
-            // Az animáció paraméterei
-            float scale = Lerp(1.0f, 1.2f, animationProgress); // nagyítás
-            float lift = Lerp(0, -50, animationProgress);      // felemelés
-            float skewX = Lerp(0, -0.05f, animationProgress);  // enyhe döntés
-            float shadowOffset = Lerp(5, 15, animationProgress);
-            float shadowBlur = Lerp(5, 15, animationProgress);
-
-            canvas.Save();
-
-            // Transzformációk
-            var matrix = SKMatrix.CreateIdentity();
-            matrix = matrix.PostConcat(SKMatrix.CreateScale(scale, scale, center.X, center.Y));
-            matrix = matrix.PostConcat(SKMatrix.CreateTranslation(0, lift));
-            matrix = matrix.PostConcat(SKMatrix.CreateSkew(skewX, 0));
-            canvas.SetMatrix(matrix);
-
-            // Árnyék
-            using (var shadowPaint = new SKPaint
+            e.Surface.Canvas.Clear();
+            if (m_engine.SceneManager.CurrentScene is not null)
             {
-                Color = SKColors.Black.WithAlpha(80),
-                ImageFilter = SKImageFilter.CreateBlur(shadowBlur, shadowBlur)
-            })
-            {
-                canvas.DrawRoundRect(center.X - cardWidth / 2 + shadowOffset,
-                                     center.Y - cardHeight / 2 + shadowOffset,
-                                     cardWidth, cardHeight, 10, 10, shadowPaint);
+                m_engine.SceneManager.CurrentScene.Draw(e);
             }
-
-            // Kártya
-            using (var paint = new SKPaint { Color = SKColors.White, IsAntialias = true })
-            {
-                canvas.DrawRoundRect(center.X - cardWidth / 2,
-                                     center.Y - cardHeight / 2,
-                                     cardWidth, cardHeight, 10, 10, paint);
-            }
-
-            canvas.Restore();
         }
 
-        // Segédfüggvény lineáris interpolációhoz
-        private float Lerp(float start, float end, float t) => start + (end - start) * t;
+        private void OnTouchEffectAction(object sender, SKTouchEventArgs e)
+        {
+            m_engine.InputManager.OnTouchEvent(e);
+        }
+
+        private float m_width = 1600;
+        private float m_height = 900;
+        private ISceneLoader m_sceneLoader;
+        private IEngine m_engine;
 
     }
 

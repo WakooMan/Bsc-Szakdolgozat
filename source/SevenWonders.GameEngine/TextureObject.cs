@@ -11,6 +11,7 @@ namespace SevenWonders.GameEngine
         public float Width { get; set; }
         public float Height { get; set; }
         public int Id { get; set; }
+        public int ZIndex { get; set; }
         public bool Visible { get; set; }
         public Vector2 Position { get; set; }
         public float Rotation { get; set; }
@@ -29,6 +30,7 @@ namespace SevenWonders.GameEngine
             Width = textureObj.Width;
             Height = textureObj.Height;
             Id = textureObj.Id;
+            ZIndex = textureObj.ZIndex;
             Position = textureObj.Position;
             Rotation = textureObj.Rotation;
             Scale = textureObj.Scale;
@@ -47,6 +49,7 @@ namespace SevenWonders.GameEngine
                    Width.Equals(other.Width) &&
                    Height.Equals(other.Height) &&
                    Id.Equals(other.Id) &&
+                   ZIndex.Equals(other.ZIndex) &&
                    Position.Equals(other.Position) &&
                    Rotation.Equals(other.Rotation) &&
                    Scale.Equals(other.Scale) &&
@@ -69,6 +72,7 @@ namespace SevenWonders.GameEngine
                    Width.GetHashCode() ^
                    Height.GetHashCode() ^
                    Id.GetHashCode() ^
+                   ZIndex.GetHashCode() ^
                    Position.GetHashCode() ^
                    Rotation.GetHashCode() ^
                    Scale.GetHashCode() ^

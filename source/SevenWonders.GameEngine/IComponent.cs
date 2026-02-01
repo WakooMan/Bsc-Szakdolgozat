@@ -12,7 +12,7 @@ namespace SevenWonders.GameEngine
         int Id { get; set; }
         string Name { get; set; }
         void Startup();
-        void Update();
+        void Update(float deltaTime);
         void Shutdown();
         void HandleMessage();
     }
