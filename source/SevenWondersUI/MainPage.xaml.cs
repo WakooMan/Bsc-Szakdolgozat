@@ -18,6 +18,7 @@ namespace SevenWondersUI
             base.OnAppearing();
 
             InitializeComponent();
+            GameLog.InitializeFileLogger();
             IXmlHandler xmlHandler = new XmlHandler();
             IMilitaryBoard militaryBoard = new MilitaryBoardFactory(xmlHandler).Create();
             IGameElements gameElements = new GameElements(new MainCardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));

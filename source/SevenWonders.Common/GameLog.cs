@@ -1,4 +1,5 @@
 ﻿using Serilog;
+using Serilog.Core;
 using System.Configuration;
 using System.Runtime.CompilerServices;
 
@@ -8,19 +9,7 @@ namespace SevenWonders.Common
     {
         static GameLog()
         {
-            var logFileName = ConfigurationManager.AppSettings["logFileName"];
-
-            if (logFileName is null || string.IsNullOrWhiteSpace(logFileName))
-            {
-                throw new InvalidOperationException("Log file name is null!");
-            }
-
-            var logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", logFileName);
-
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 50, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-                .CreateLogger();
+            Log.Logger = Logger.None;
         }
 
         public static void Info(string message, [CallerMemberName]string methodName = "")
@@ -51,6 +40,23 @@ namespace SevenWonders.Common
         public static void Verbose(string message, [CallerMemberName] string methodName = "")
         {
             Log.Verbose($"[{methodName}] {message}");
+        }
+
+        public static void InitializeFileLogger()
+        {
+            var logFileName = ConfigurationManager.AppSettings["logFileName"];
+
+            if (logFileName is null || string.IsNullOrWhiteSpace(logFileName))
+            {
+                throw new InvalidOperationException("Log file name is null!");
+            }
+
+            var logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", logFileName);
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 50, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+                .CreateLogger();
         }
     }
 }

@@ -1,0 +1,133 @@
+﻿using NUnit.Framework;
+using System.Numerics;
+using System.Collections.Generic;
+using SevenWonders.GameEngine;
+using System.Linq;
+
+namespace SevenWonders.GameEngine_UnitTests
+{
+    [TestFixture]
+    public class GraphicsLayerTests
+    {
+        private GraphicsLayer _originalLayer;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _originalLayer = new GraphicsLayer
+            {
+                ID = 1,
+                Name = "BackgroundLayer",
+                Visible = true,
+                ZIndex = 5,
+                ObjectList = new List<GameObject>
+                {
+                    new GameObject { Id = 101, Name = "Player" }
+                },
+                Textures = new List<TextureObject>
+                {
+                    new TextureObject { Id = 201, Name = "Grass" }
+                }
+            };
+        }
+
+        [Test]
+        public void Constructor_ShouldInitializeEmptyLists()
+        {
+            // Act
+            var layer = new GraphicsLayer();
+
+            // Assert
+            Assert.That(layer.ObjectList, Is.Not.Null);
+            Assert.That(layer.Textures, Is.Not.Null);
+            Assert.That(layer.Name, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
+        public void CopyConstructor_ShouldCreateDeepCopy()
+        {
+            // Act
+            var copy = new GraphicsLayer(_originalLayer);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(_originalLayer.ID, Is.EqualTo(copy.ID));
+                Assert.That(_originalLayer.Name, Is.EqualTo(copy.Name));
+
+                // Referencia ellenőrzés: nem ugyanaz az objektum
+                Assert.That(_originalLayer, Is.Not.EqualTo(copy));
+
+                // Lista tartalom ellenőrzés
+                Assert.That(_originalLayer.ObjectList.Count, Is.EqualTo(copy.ObjectList.Count));
+                Assert.That(_originalLayer.Textures.Count, Is.EqualTo(copy.Textures.Count));
+
+                // Mély másolás ellenőrzése: a listában lévő objektumoknak is új példányoknak kell lenniük
+                Assert.That(_originalLayer.ObjectList[0], Is.Not.EqualTo(copy.ObjectList[0]));
+                Assert.That(_originalLayer.Textures[0], Is.Not.EqualTo(copy.Textures[0]));
+            });
+        }
+
+        [Test]
+        public void Equals_WhenIdenticalData_ShouldReturnTrue()
+        {
+            // Arrange
+            var sameLayer = new GraphicsLayer(_originalLayer);
+
+            // Act & Assert
+            // A SequenceEqual miatt True-nak kell lennie, ha a belső listák elemei is egyenlőek
+            Assert.That(_originalLayer, Is.EqualTo(sameLayer));
+            Assert.That(_originalLayer.GetHashCode(), Is.EqualTo(sameLayer.GetHashCode()));
+        }
+
+        [Test]
+        public void Equals_WhenListContentDiffers_ShouldReturnFalse()
+        {
+            // Arrange
+            var differentLayer = new GraphicsLayer(_originalLayer);
+            differentLayer.ObjectList.Add(new GameObject { Id = 999 });
+
+            // Act & Assert
+            Assert.That(_originalLayer, Is.EqualTo(differentLayer));
+        }
+
+        [Test]
+        public void Resize_ShouldPropagateToAllContainedObjects()
+        {
+            // Arrange
+            var oldRes = new Vector2(800, 600);
+            var newRes = new Vector2(1600, 1200); // 2x skálázás
+
+            var gameObject = new GameObject { Position = new Vector2(10, 10), Scale = new Vector2(1, 1) };
+            var texture = new TextureObject { Position = new Vector2(20, 20), Width = 100 };
+
+            _originalLayer.ObjectList = new List<GameObject> { gameObject };
+            _originalLayer.Textures = new List<TextureObject> { texture };
+
+            // Act
+            _originalLayer.Resize(oldRes, newRes);
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                // GameObject ellenőrzés
+                Assert.That(gameObject.Position.X, Is.EqualTo(20f));
+                // TextureObject ellenőrzés
+                Assert.That(texture.Position.X, Is.EqualTo(40f));
+                Assert.That(texture.Width, Is.EqualTo(200f));
+            });
+        }
+
+        [Test]
+        public void Draw_WhenVisibleIsFalse_ShouldNotThrowExceptionWithNullArgs()
+        {
+            // Arrange
+            _originalLayer.Visible = false;
+
+            // Act & Assert
+            // Ha a Visible false, a kódnak azonnal vissza kell térnie, 
+            // így a null eventArgs nem okozhat NullReferenceException-t.
+            Assert.DoesNotThrow(() => _originalLayer.Draw(null!));
+        }
+    }
+}
