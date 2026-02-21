@@ -37,9 +37,9 @@ namespace SevenWonders.GameEngine_UnitTests
             var scene = new Scene();
 
             // Assert
-            Assert.AreEqual(new Vector2(3840, 2160), scene.Resolution);
-            Assert.IsEmpty(scene.Layers);
-            Assert.AreEqual(Guid.Empty, scene.Id);
+            Assert.That(scene.Resolution, Is.EqualTo(new Vector2(3840, 2160)));
+            Assert.That(scene.Layers, Is.Empty);
+            Assert.That(scene.Id, Is.EqualTo(Guid.Empty));
         }
 
         [Test]
@@ -51,13 +51,13 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.AreNotEqual(_originalScene.Id, copy.Id, "A másolatnak új Guid-ot kell kapnia.");
-                Assert.AreEqual(_originalScene.Name, copy.Name);
-                Assert.AreEqual(_originalScene.BiggestId, copy.BiggestId);
+                Assert.That(_originalScene.Id, Is.Not.EqualTo(copy.Id));
+                Assert.That(copy.Name, Is.EqualTo(_originalScene.Name));
+                Assert.That(copy.BiggestId, Is.EqualTo(_originalScene.BiggestId));
 
                 // Rétegek ellenőrzése
-                Assert.AreEqual(_originalScene.Layers.Count, copy.Layers.Count);
-                Assert.AreNotSame(_originalScene.Layers[0], copy.Layers[0], "A rétegeket is klónozni kell (Deep Copy).");
+                Assert.That(copy.Layers.Count, Is.EqualTo(_originalScene.Layers.Count));
+                Assert.That(_originalScene.Layers[0], Is.Not.EqualTo(copy.Layers[0]));
             });
         }
 
@@ -69,8 +69,8 @@ namespace SevenWonders.GameEngine_UnitTests
             var scene2 = new Scene { Id = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "Menu" };
 
             // Act & Assert
-            Assert.IsTrue(scene1.Equals(scene2));
-            Assert.AreEqual(scene1.GetHashCode(), scene2.GetHashCode());
+            Assert.That(scene1, Is.EqualTo(scene2));
+            Assert.That(scene2.GetHashCode(), Is.EqualTo(scene1.GetHashCode()));
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace SevenWonders.GameEngine_UnitTests
             _originalScene.Resize(newRes);
 
             // Assert
-            Assert.AreEqual(newRes, _originalScene.Resolution);
+            Assert.That(_originalScene.Resolution, Is.EqualTo(newRes));
             // Itt a layer.Resize belső állapotát ellenőrizhetnénk, ha a layernek lennének objektumai
         }
 

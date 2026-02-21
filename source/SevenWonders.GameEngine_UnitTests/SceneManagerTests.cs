@@ -30,8 +30,8 @@ namespace SevenWonders.GameEngine_UnitTests
             _sceneManager.RegisterScene(_testScene);
 
             // Assert
-            Assert.AreEqual(1, _sceneManager.Scenes.Count);
-            Assert.IsTrue(eventFired, "A SceneRegistered eseménynek le kell futnia regisztrációkor.");
+            Assert.That(_sceneManager.Scenes.Count, Is.EqualTo(1));
+            Assert.That(eventFired, Is.True);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace SevenWonders.GameEngine_UnitTests
             _sceneManager.RegisterScene(_testScene); // Duplikált próbálkozás
 
             // Assert
-            Assert.AreEqual(1, _sceneManager.Scenes.Count, "A jelenetet nem szabad kétszer hozzáadni.");
+            Assert.That(_sceneManager.Scenes.Count, Is.EqualTo(1));
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace SevenWonders.GameEngine_UnitTests
             _sceneManager.SetCurrentScene(_testScene);
 
             // Assert
-            Assert.AreEqual(_testScene, _sceneManager.CurrentScene);
+            Assert.That(_testScene, Is.EqualTo(_sceneManager.CurrentScene));
         }
 
         [Test]
@@ -81,8 +81,8 @@ namespace SevenWonders.GameEngine_UnitTests
             var result = _sceneManager.GetObjectByName("FindMe");
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual("FindMe", result.Name);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo("FindMe"));
         }
 
         [Test]
@@ -97,8 +97,8 @@ namespace SevenWonders.GameEngine_UnitTests
             _sceneManager.FreeAScene("MenuScene");
 
             // Assert
-            Assert.IsEmpty(_sceneManager.Scenes);
-            Assert.IsTrue(removedEventFired);
+            Assert.That(_sceneManager.Scenes, Is.Empty);
+            Assert.That(removedEventFired, Is.True);
         }
 
         [Test]
@@ -114,8 +114,8 @@ namespace SevenWonders.GameEngine_UnitTests
             _sceneManager.Clear();
 
             // Assert
-            Assert.IsEmpty(_sceneManager.Scenes);
-            Assert.AreEqual(2, removedCount);
+            Assert.That(_sceneManager.Scenes, Is.Empty);
+            Assert.That(removedCount, Is.EqualTo(2));
         }
     }
 }

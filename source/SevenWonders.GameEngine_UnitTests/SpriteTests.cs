@@ -27,10 +27,10 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(original.Name, copy.Name);
-                Assert.AreEqual(original.Frames.Count, copy.Frames.Count);
-                Assert.AreNotSame(original.Frames, copy.Frames);
-                Assert.AreNotSame(original.Frames[0], copy.Frames[0]); // Mély másolás check
+                Assert.That(copy.Name, Is.EqualTo(original.Name));
+                Assert.That(original.Frames.Count, Is.EqualTo(copy.Frames.Count));
+                Assert.That(copy.Frames, Is.Not.EqualTo(original.Frames));
+                Assert.That(original.Frames[0], Is.Not.EqualTo(copy.Frames[0]));
             });
         }
 
@@ -42,8 +42,8 @@ namespace SevenWonders.GameEngine_UnitTests
             var s2 = new Sprite { Name = "Idle", Fps = 10 };
 
             // Assert
-            Assert.IsTrue(s1.Equals(s2));
-            Assert.AreEqual(s1.GetHashCode(), s2.GetHashCode());
+            Assert.That(s1, Is.EqualTo(s2));
+            Assert.That(s1.GetHashCode(), Is.EqualTo(s2.GetHashCode()));
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace SevenWonders.GameEngine_UnitTests
             sprite.Draw(null!, Vector2.Zero, Vector2.One, 0, 10, 10);
 
             // Assert
-            Assert.AreEqual(1, sprite.LastUpdate);
+            Assert.That(sprite.LastUpdate, Is.EqualTo(1));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace SevenWonders.GameEngine_UnitTests
 
             // Assert
             // A kódod alapján: LastUpdate++ -> 3. Mivel 2 < 3, lefut a frame váltás.
-            Assert.IsTrue(sprite.ActualFrame > 0 || sprite.LastUpdate > 2);
+            Assert.That(sprite.ActualFrame > 0 || sprite.LastUpdate > 2, Is.True);
         }
     }
 }

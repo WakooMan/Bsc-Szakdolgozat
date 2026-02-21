@@ -38,7 +38,7 @@ namespace SevenWonders.GameEngine_UnitTests
         public void Constructor_ShouldInitializeCorrectly()
         {
             var texture = new Texture();
-            Assert.AreEqual(string.Empty, texture.FileName);
+            Assert.That(string.Empty, Is.EqualTo(texture.FileName));
         }
 
         [Test]
@@ -59,11 +59,11 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(original.FileName, copy.FileName);
-                Assert.AreEqual(original.Color, copy.Color);
-                Assert.AreEqual(original.OriginalWidth, copy.OriginalWidth);
+                Assert.That(original.FileName, Is.EqualTo(copy.FileName));
+                Assert.That(original.Color, Is.EqualTo(copy.Color));
+                Assert.That(original.OriginalWidth, Is.EqualTo(copy.OriginalWidth));
                 // String referencia ellenőrzés (bár a string immutábilis)
-                Assert.AreNotSame(original.FileName, copy.FileName);
+                Assert.That(original.FileName, Is.Not.EqualTo(copy.FileName));
             });
         }
 
@@ -78,8 +78,8 @@ namespace SevenWonders.GameEngine_UnitTests
             texture.LoadTexture(folder);
 
             // Assert
-            Assert.AreEqual(100, texture.OriginalWidth);
-            Assert.AreEqual(200, texture.OriginalHeight);
+            Assert.That(100, Is.EqualTo(texture.OriginalWidth));
+            Assert.That(200, Is.EqualTo(texture.OriginalHeight));
         }
 
         [Test]
@@ -90,8 +90,8 @@ namespace SevenWonders.GameEngine_UnitTests
             var t2 = new Texture { FileName = "a.png", Color = SKColors.Blue };
 
             // Assert
-            Assert.IsTrue(t1.Equals(t2));
-            Assert.AreEqual(t1.GetHashCode(), t2.GetHashCode());
+            Assert.That(t1, Is.EqualTo(t2));
+            Assert.That(t1.GetHashCode(), Is.EqualTo(t2.GetHashCode()));
         }
 
         [Test]

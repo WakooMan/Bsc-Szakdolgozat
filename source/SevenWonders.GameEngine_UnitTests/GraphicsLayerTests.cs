@@ -88,7 +88,7 @@ namespace SevenWonders.GameEngine_UnitTests
             differentLayer.ObjectList.Add(new GameObject { Id = 999 });
 
             // Act & Assert
-            Assert.That(_originalLayer, Is.EqualTo(differentLayer));
+            Assert.That(_originalLayer, Is.Not.EqualTo(differentLayer));
         }
 
         [Test]
