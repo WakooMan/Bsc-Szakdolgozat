@@ -65,8 +65,8 @@ namespace GameLogic_UnitTests
             m_ageHandler.CurrentAge.Returns(currentAge);
             m_chooseWonderHandler.WondersChosen.Returns(true);
             m_ageHandler.NextAge().Returns(false);
-            m_game.Initialize("player1", "player2", [], []);
-            m_gameContext.Received(1).Initialize(Arg.Any<ICollection<Player>>(), Arg.Any<ICollection<Wonder>>(), Arg.Any<ICollection<Development>>());
+            m_game.Initialize("player1", "player2");
+            m_gameContext.Received(1).Initialize(Arg.Any<ICollection<Player>>());
             Assert.That(m_game.CurrentState is ChooseWonderState, Is.True);
             Assert.That(m_game.IsInitialized, Is.True);
             Assert.That(m_game.Players.Count, Is.EqualTo(2));

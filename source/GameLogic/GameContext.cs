@@ -37,7 +37,7 @@ namespace GameLogic
         public IMilitaryBoard? MilitaryBoard { get; private set; }
 
         [ImportingConstructor]
-        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [Import(nameof(EmptyCardListFactory), typeof(ICardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory)
+        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [Import(nameof(EmptyCardListFactory), typeof(ICardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory, IRandomElementReceiver randomElementReceiver)
         {
             ArgumentChecker.CheckNull(ageHandler, nameof(ageHandler));
             ArgumentChecker.CheckNull(turnHandler, nameof(turnHandler));
@@ -49,6 +49,7 @@ namespace GameLogic
             ArgumentChecker.CheckNull(randomGenerator, nameof(randomGenerator));
             ArgumentChecker.CheckNull(droppedCardListFactory, nameof(droppedCardListFactory));
             ArgumentChecker.CheckNull(militaryBoardFactory, nameof(militaryBoardFactory));
+            ArgumentChecker.CheckNull(randomElementReceiver, nameof(randomElementReceiver));
 
             AgeHandler = ageHandler;
             TurnHandler = turnHandler;
@@ -60,24 +61,30 @@ namespace GameLogic
             m_droppedCardListFactory = droppedCardListFactory;
             RandomGenerator = randomGenerator;
             m_militaryBoardFactory = militaryBoardFactory;
+            m_randomElementReceiver = randomElementReceiver;
         }
 
-        public void Initialize(ICollection<Player> players, ICollection<Wonder> wonders, ICollection<Development> developments)
+        public void Initialize(ICollection<Player> players)
         {
             CardList = m_gameElements.Cards;
             WonderList = m_gameElements.Wonders;
             DevelopmentList = m_gameElements.Developments;
             DroppedCardList = m_droppedCardListFactory.Create();
             MilitaryBoard = m_militaryBoardFactory.Create();
+            ICollection<Wonder> wonders = m_randomElementReceiver.ReceiveRandomElements(WonderList.Wonders, 8);
+            WonderList.Wonders.RemoveAll(wonders.Contains);
             ChooseWonderHandler.Initialize(players, wonders);
             TurnHandler.Initialize(players);
             EventManager.ClearSubscriptions();
             AgeHandler.Initialize();
+            ICollection<Development> developments = m_randomElementReceiver.ReceiveRandomElements(DevelopmentList.Developments, 3);
+            DevelopmentList.Developments.RemoveAll(developments.Contains);
             MilitaryBoard.Initialize(players, developments, this);
         }
 
         private readonly IGameElements m_gameElements;
         private readonly ICardListFactory m_droppedCardListFactory;
         private readonly IMilitaryBoardFactory m_militaryBoardFactory;
+        private readonly IRandomElementReceiver m_randomElementReceiver;
     }
 }
