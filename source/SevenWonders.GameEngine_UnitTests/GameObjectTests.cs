@@ -1,5 +1,7 @@
 ﻿
 using SevenWonders.GameEngine;
+using SkiaSharp;
+using SkiaSharp.Views.Maui;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine_UnitTests
@@ -54,27 +56,191 @@ namespace SevenWonders.GameEngine_UnitTests
             Assert.That(obj1.GetHashCode(), Is.EqualTo(obj2.GetHashCode()));
         }
 
-        [TestCase(10, 10, true)]
-        [TestCase(5, 5, false)]
-        [TestCase(25, 25, true)]
-        [TestCase(30, 30, true)]
-        [TestCase(31, 31, false)]
-        public void IsTouchInGameObject_ShouldDetectBoundsCorrectly(float touchX, float touchY, bool expectedResult)
+        [Test]
+        public void Equals_GameObject_Null_ShouldReturnFalse()
         {
             // Arrange
+            var obj1 = new GameObject { Id = 1, Name = "Player" };
+            GameObject? obj2 = null;
+
+            // Assert
+            Assert.That(obj1.Equals(obj2), Is.False);
+        }
+
+        [Test]
+        public void Equals_Object_Not_GameObject_ShouldReturnFalse()
+        {
+            // Arrange
+            var obj1 = new GameObject { Id = 1, Name = "Player" };
+           object? obj2 = new object();
+
+            // Assert
+            Assert.That(obj1.Equals(obj2), Is.False);
+        }
+
+        [TestCase(10, 10, true, true, true)]
+        [TestCase(5, 5, true, true, false)]
+        [TestCase(25, 25, true, true, true)]
+        [TestCase(30, 30, true, true, true)]
+        [TestCase(31, 31, true, true, false)]
+        [TestCase(10, 10, false, true, false)]
+        [TestCase(5, 5, false, true, false)]
+        [TestCase(25, 25, false, true, false)]
+        [TestCase(30, 30, false, true, false)]
+        [TestCase(31, 31, false, true, false)]
+        [TestCase(10, 10, true, false, false)]
+        [TestCase(5, 5, true, false, false)]
+        [TestCase(25, 25, true, false, false)]
+        [TestCase(30, 30, true, false, false)]
+        [TestCase(31, 31, true, false, false)]
+        public void When_OnTouchPressed_Called(float touchX, float touchY, bool graphicsLayerVisible, bool gameObjectVisible, bool expectedResult)
+        {
+            // Arrange
+            bool result = false;
+            GraphicsLayer graphicsLayer = new GraphicsLayer()
+            {
+                Visible = graphicsLayerVisible
+            };
+            SKTouchEventArgs sKTouchEventArgs = new SKTouchEventArgs(1, SKTouchAction.Pressed, new SKPoint(touchX, touchY), true);
             var obj = new GameObject
             {
                 Position = new Vector2(10, 10),
                 Width = 20,
                 Height = 20,
-                Scale = new Vector2(1, 1)
+                Scale = new Vector2(1, 1),
+                Visible = gameObjectVisible
             };
+            obj.PressedEvent += (args) => result = true;
 
             // Act
-            var method = typeof(GameObject).GetMethod("IsTouchInGameObject",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
-            var result = (bool)method.Invoke(obj, new object[] { touchX, touchY });
+            obj.OnTouchPressed(sKTouchEventArgs, graphicsLayer);
+
+            // Assert
+            Assert.That(expectedResult, Is.EqualTo(result));
+        }
+
+        [TestCase(10, 10, true, true, true)]
+        [TestCase(5, 5, true, true, false)]
+        [TestCase(25, 25, true, true, true)]
+        [TestCase(30, 30, true, true, true)]
+        [TestCase(31, 31, true, true, false)]
+        [TestCase(10, 10, false, true, false)]
+        [TestCase(5, 5, false, true, false)]
+        [TestCase(25, 25, false, true, false)]
+        [TestCase(30, 30, false, true, false)]
+        [TestCase(31, 31, false, true, false)]
+        [TestCase(10, 10, true, false, false)]
+        [TestCase(5, 5, true, false, false)]
+        [TestCase(25, 25, true, false, false)]
+        [TestCase(30, 30, true, false, false)]
+        [TestCase(31, 31, true, false, false)]
+        public void When_OnTouchMoved_Called(float touchX, float touchY, bool graphicsLayerVisible, bool gameObjectVisible, bool expectedResult)
+        {
+            // Arrange
+            bool result = false;
+            GraphicsLayer graphicsLayer = new GraphicsLayer()
+            {
+                Visible = graphicsLayerVisible
+            };
+            SKTouchEventArgs sKTouchEventArgs = new SKTouchEventArgs(1, SKTouchAction.Moved, new SKPoint(touchX, touchY), true);
+            var obj = new GameObject
+            {
+                Position = new Vector2(10, 10),
+                Width = 20,
+                Height = 20,
+                Scale = new Vector2(1, 1),
+                Visible = gameObjectVisible
+            };
+            obj.MoveEvent += (args) => result = true;
+
+            // Act
+
+            obj.OnTouchMoved(sKTouchEventArgs, graphicsLayer);
+
+            // Assert
+            Assert.That(expectedResult, Is.EqualTo(result));
+        }
+
+        [TestCase(10, 10, true, true, true)]
+        [TestCase(5, 5, true, true, false)]
+        [TestCase(25, 25, true, true, true)]
+        [TestCase(30, 30, true, true, true)]
+        [TestCase(31, 31, true, true, false)]
+        [TestCase(10, 10, false, true, false)]
+        [TestCase(5, 5, false, true, false)]
+        [TestCase(25, 25, false, true, false)]
+        [TestCase(30, 30, false, true, false)]
+        [TestCase(31, 31, false, true, false)]
+        [TestCase(10, 10, true, false, false)]
+        [TestCase(5, 5, true, false, false)]
+        [TestCase(25, 25, true, false, false)]
+        [TestCase(30, 30, true, false, false)]
+        [TestCase(31, 31, true, false, false)]
+        public void When_OnTouchClicked_Called(float touchX, float touchY, bool graphicsLayerVisible, bool gameObjectVisible, bool expectedResult)
+        {
+            // Arrange
+            bool result = false;
+            GraphicsLayer graphicsLayer = new GraphicsLayer()
+            {
+                Visible = graphicsLayerVisible
+            };
+            SKTouchEventArgs sKTouchEventArgs = new SKTouchEventArgs(1, SKTouchAction.Released, new SKPoint(touchX, touchY), true);
+            var obj = new GameObject
+            {
+                Position = new Vector2(10, 10),
+                Width = 20,
+                Height = 20,
+                Scale = new Vector2(1, 1),
+                Visible = gameObjectVisible
+            };
+            obj.ClickedEvent += (args) => result = true;
+
+            // Act
+
+            obj.OnTouchClicked(sKTouchEventArgs, graphicsLayer);
+
+            // Assert
+            Assert.That(expectedResult, Is.EqualTo(result));
+        }
+
+        [TestCase(10, 10, true, true, true)]
+        [TestCase(5, 5, true, true, false)]
+        [TestCase(25, 25, true, true, true)]
+        [TestCase(30, 30, true, true, true)]
+        [TestCase(31, 31, true, true, false)]
+        [TestCase(10, 10, false, true, false)]
+        [TestCase(5, 5, false, true, false)]
+        [TestCase(25, 25, false, true, false)]
+        [TestCase(30, 30, false, true, false)]
+        [TestCase(31, 31, false, true, false)]
+        [TestCase(10, 10, true, false, false)]
+        [TestCase(5, 5, true, false, false)]
+        [TestCase(25, 25, true, false, false)]
+        [TestCase(30, 30, true, false, false)]
+        [TestCase(31, 31, true, false, false)]
+        public void When_OnTouchReleased_Called(float touchX, float touchY, bool graphicsLayerVisible, bool gameObjectVisible, bool expectedResult)
+        {
+            // Arrange
+            bool result = false;
+            GraphicsLayer graphicsLayer = new GraphicsLayer()
+            {
+                Visible = graphicsLayerVisible
+            };
+            SKTouchEventArgs sKTouchEventArgs = new SKTouchEventArgs(1, SKTouchAction.Released, new SKPoint(touchX, touchY), true);
+            var obj = new GameObject
+            {
+                Position = new Vector2(10, 10),
+                Width = 20,
+                Height = 20,
+                Scale = new Vector2(1, 1),
+                Visible = gameObjectVisible
+            };
+            obj.ReleasedEvent += (args) => result = true;
+
+            // Act
+
+            obj.OnTouchReleased(sKTouchEventArgs, graphicsLayer);
 
             // Assert
             Assert.That(expectedResult, Is.EqualTo(result));

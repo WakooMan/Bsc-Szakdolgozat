@@ -1,10 +1,12 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Maui.Dispatching;
 using NSubstitute;
-using Microsoft.Maui.Dispatching;
+using NUnit.Framework;
+using SevenWonders.Common;
+using SevenWonders.GameEngine;
 using SkiaSharp.Views.Maui.Controls;
 using System.Diagnostics;
-using SevenWonders.GameEngine;
-using SevenWonders.Common;
+using System.Runtime.Serialization;
+using static SevenWonders.GameEngine.ISceneManager;
 
 namespace SevenWonders.GameEngine_UnitTests
 {
@@ -70,34 +72,34 @@ namespace SevenWonders.GameEngine_UnitTests
             component.Received(1).Shutdown();
         }
 
-        //[Test]
-        //public void SceneRegistered_ShouldSubscribeObjectsToTouchEvents()
-        //{
-        //    // Arrange
-        //    var gameObject = new GameObject { Id = 1 };
-        //    var layer = new GraphicsLayer { ObjectList = new List<GameObject> { gameObject } };
-        //    var scene = new Scene { Layers = new List<GraphicsLayer> { layer } };
+        [Test]
+        public void SceneRegistered_ShouldSubscribeObjectsToTouchEvents()
+        {
+            // Arrange
+            var gameObject = new GameObject { Id = 1 };
+            var layer = new GraphicsLayer { ObjectList = new List<GameObject> { gameObject } };
+            var scene = new Scene { Layers = new List<GraphicsLayer> { layer } };
 
-        //    // Act - Szimuláljuk az esemény kiváltását a SceneManageren keresztül
-        //    _sceneManager.SceneRegistered += Raise.Event<Action<Scene>>(scene);
+            // Act
+            _sceneManager.SceneRegistered += Raise.Event<SceneEvent>(scene);
 
-        //    // Assert
-        //    _objectManager.Received(1).SubscribeGameObjectToTouchEvents(gameObject, layer);
-        //}
+            // Assert
+            _objectManager.Received(1).SubscribeGameObjectToTouchEvents(gameObject, layer);
+        }
 
-        //[Test]
-        //public void SceneRemoved_ShouldUnsubscribeObjects()
-        //{
-        //    // Arrange
-        //    var gameObject = new GameObject { Id = 1 };
-        //    var layer = new GraphicsLayer { ObjectList = new List<GameObject> { gameObject } };
-        //    var scene = new Scene { Layers = new List<GraphicsLayer> { layer } };
+        [Test]
+        public void SceneRemoved_ShouldUnsubscribeObjects()
+        {
+            // Arrange
+            var gameObject = new GameObject { Id = 1 };
+            var layer = new GraphicsLayer { ObjectList = new List<GameObject> { gameObject } };
+            var scene = new Scene { Layers = new List<GraphicsLayer> { layer } };
 
-        //    // Act
-        //    _sceneManager.SceneRemoved += Raise.Event<Action<Scene>>(scene);
+            // Act
+            _sceneManager.SceneRemoved += Raise.Event<SceneEvent>(scene);
 
-        //    // Assert
-        //    _objectManager.Received(1).UnsubscribeGameObjectToTouchEvents(gameObject);
-        //}
+            // Assert
+            _objectManager.Received(1).UnsubscribeGameObjectToTouchEvents(gameObject);
+        }
     }
 }

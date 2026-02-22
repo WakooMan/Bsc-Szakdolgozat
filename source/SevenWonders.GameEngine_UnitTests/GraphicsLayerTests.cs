@@ -92,6 +92,28 @@ namespace SevenWonders.GameEngine_UnitTests
         }
 
         [Test]
+        public void Equals_GraphicsLayer_Null_ShouldReturnFalse()
+        {
+            // Arrange
+            var obj1 = new GraphicsLayer { ID = 1, Name = "Layer" };
+            GraphicsLayer? obj2 = null;
+
+            // Assert
+            Assert.That(obj1.Equals(obj2), Is.False);
+        }
+
+        [Test]
+        public void Equals_Object_Not_GraphicsLayer_ShouldReturnFalse()
+        {
+            // Arrange
+            var obj1 = new GraphicsLayer { ID = 1, Name = "Layer" };
+            object? obj2 = new object();
+
+            // Assert
+            Assert.That(obj1.Equals(obj2), Is.False);
+        }
+
+        [Test]
         public void Resize_ShouldPropagateToAllContainedObjects()
         {
             // Arrange
