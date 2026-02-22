@@ -56,15 +56,15 @@ namespace SevenWonders.GameEngine_UnitTests
                 Assert.That(_originalLayer.Name, Is.EqualTo(copy.Name));
 
                 // Referencia ellenőrzés: nem ugyanaz az objektum
-                Assert.That(_originalLayer, Is.Not.EqualTo(copy));
+                Assert.That(ReferenceEquals(_originalLayer, copy), Is.False);
 
                 // Lista tartalom ellenőrzés
                 Assert.That(_originalLayer.ObjectList.Count, Is.EqualTo(copy.ObjectList.Count));
                 Assert.That(_originalLayer.Textures.Count, Is.EqualTo(copy.Textures.Count));
 
                 // Mély másolás ellenőrzése: a listában lévő objektumoknak is új példányoknak kell lenniük
-                Assert.That(_originalLayer.ObjectList[0], Is.Not.EqualTo(copy.ObjectList[0]));
-                Assert.That(_originalLayer.Textures[0], Is.Not.EqualTo(copy.Textures[0]));
+                Assert.That(ReferenceEquals(_originalLayer.ObjectList[0], copy.ObjectList[0]), Is.False);
+                Assert.That(ReferenceEquals(_originalLayer.Textures[0], copy.Textures[0]), Is.False);
             });
         }
 

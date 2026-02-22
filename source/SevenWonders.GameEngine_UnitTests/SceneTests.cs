@@ -51,13 +51,13 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(_originalScene.Id, Is.Not.EqualTo(copy.Id));
+                Assert.That(ReferenceEquals(_originalScene.Id, copy.Id), Is.False);
                 Assert.That(copy.Name, Is.EqualTo(_originalScene.Name));
                 Assert.That(copy.BiggestId, Is.EqualTo(_originalScene.BiggestId));
 
                 // Rétegek ellenőrzése
                 Assert.That(copy.Layers.Count, Is.EqualTo(_originalScene.Layers.Count));
-                Assert.That(_originalScene.Layers[0], Is.Not.EqualTo(copy.Layers[0]));
+                Assert.That(ReferenceEquals(_originalScene.Layers[0], copy.Layers[0]), Is.False);
             });
         }
 

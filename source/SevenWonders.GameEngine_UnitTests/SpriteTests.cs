@@ -29,8 +29,8 @@ namespace SevenWonders.GameEngine_UnitTests
             {
                 Assert.That(copy.Name, Is.EqualTo(original.Name));
                 Assert.That(original.Frames.Count, Is.EqualTo(copy.Frames.Count));
-                Assert.That(copy.Frames, Is.Not.EqualTo(original.Frames));
-                Assert.That(original.Frames[0], Is.Not.EqualTo(copy.Frames[0]));
+                Assert.That(ReferenceEquals(copy.Frames, original.Frames), Is.False);
+                Assert.That(ReferenceEquals(original.Frames[0], copy.Frames[0]), Is.False);
             });
         }
 

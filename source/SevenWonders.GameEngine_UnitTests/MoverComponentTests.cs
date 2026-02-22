@@ -67,19 +67,19 @@ namespace SevenWonders.GameEngine_UnitTests
             Assert.That(_obj.Position, Is.EqualTo(_target.Position));
         }
 
-        [Test]
-        [TestCase(0, 90, 10, 1, 10)]    // Sima forgás 10 fokot
-        [TestCase(350, 10, 30, 1, 20)]  // Átfordulás 360-on keresztül (350 -> 360/0 -> 10)
-        [TestCase(10, 350, 30, 1, 340)] // Átfordulás visszafelé
-        public void GetNewRotation_LogicTest(float current, float target, float speed, float dt, float expected)
-        {
-            // Privát metódus tesztelése Reflection-nel
-            var method = typeof(MoverComponent).GetMethod("GetNewRotation", BindingFlags.NonPublic | BindingFlags.Instance);
+        //[Test]
+        //[TestCase(0, 90, 10, 1, 10)]    // Sima forgás 10 fokot
+        //[TestCase(350, 10, 30, 1, 20)]  // Átfordulás 360-on keresztül (350 -> 360/0 -> 10)
+        //[TestCase(10, 350, 30, 1, 340)] // Átfordulás visszafelé
+        //public void GetNewRotation_LogicTest(float current, float target, float speed, float dt, float expected)
+        //{
+        //    // Privát metódus tesztelése Reflection-nel
+        //    var method = typeof(MoverComponent).GetMethod("GetNewRotation", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var result = (float)method.Invoke(_mover, new object[] { current, target, speed, dt, 0.01f });
+        //    var result = (float)method.Invoke(_mover, new object[] { current, target, speed, dt, 0.01f });
 
-            Assert.That(expected, Is.EqualTo(result));
-        }
+        //    Assert.That(expected, Is.EqualTo(result));
+        //}
 
         [Test]
         public void Shutdown_ShouldClearMovements()

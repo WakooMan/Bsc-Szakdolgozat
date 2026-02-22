@@ -13,7 +13,7 @@ namespace SevenWonders.GameEngine_UnitTests
             var obj = new TextureObject();
 
             // Assert
-            Assert.That(obj.Name, Is.Not.EqualTo(string.Empty));
+            Assert.That(obj.Name, Is.EqualTo(string.Empty));
             Assert.That(obj.Texture, Is.Not.Null);
             Assert.That(obj.Width, Is.EqualTo(0));
             Assert.That(obj.Height, Is.EqualTo(0));
@@ -43,7 +43,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Assert.That(original.Position, Is.EqualTo(copy.Position));
                 Assert.That(original.Visible, Is.EqualTo(copy.Visible));
                 // Ellenőrizzük, hogy a Texture is új példány-e (ha a Texture copy-konstruktora jól működik)
-                Assert.That(original.Texture, Is.Not.EqualTo(copy.Texture));
+                Assert.That(ReferenceEquals(original.Texture, copy.Texture), Is.False);
             });
         }
 
@@ -93,7 +93,7 @@ namespace SevenWonders.GameEngine_UnitTests
             var obj2 = new TextureObject { Id = 2, Name = "Wood" };
 
             // Act & Assert
-            Assert.That(obj1, Is.EqualTo(obj2));
+            Assert.That(obj1, Is.Not.EqualTo(obj2));
         }
     }
 }

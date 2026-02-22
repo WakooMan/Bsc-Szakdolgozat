@@ -63,7 +63,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Assert.That(original.Color, Is.EqualTo(copy.Color));
                 Assert.That(original.OriginalWidth, Is.EqualTo(copy.OriginalWidth));
                 // String referencia ellenőrzés (bár a string immutábilis)
-                Assert.That(original.FileName, Is.Not.EqualTo(copy.FileName));
+                Assert.That(ReferenceEquals(original.FileName, copy.FileName), Is.False);
             });
         }
 

@@ -45,7 +45,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Assert.That(copy.Right, Is.EqualTo(original.Right));
 
                 // Deep copy ellenőrzése a Texture objektumra
-                Assert.That(copy.Frame, Is.Not.EqualTo(original.Frame));
+                Assert.That(ReferenceEquals(copy.Frame, original.Frame), Is.False);
                 Assert.That(original.Frame.FileName, Is.EqualTo(copy.Frame.FileName));
             });
         }
