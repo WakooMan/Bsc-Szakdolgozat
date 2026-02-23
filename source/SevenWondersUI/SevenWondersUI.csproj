@@ -60,16 +60,64 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-		<PackageReference Include="System.ComponentModel" Version="4.3.0" />
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="System.ComponentModel.Composition" Version="9.0.7" />
-		<PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
+	  <MauiImage Remove="Resources\Images\background_full.png" />
+	  <MauiImage Remove="Resources\Images\board.png" />
+	  <MauiImage Remove="Resources\Images\cardbackfirstage.png" />
+	  <MauiImage Remove="Resources\Images\cardbacksecondage.png" />
+	  <MauiImage Remove="Resources\Images\cardbackthirdage.png" />
+	  <MauiImage Remove="Resources\Images\clay.png" />
+	  <MauiImage Remove="Resources\Images\coin3.png" />
+	  <MauiImage Remove="Resources\Images\coin6.png" />
+	  <MauiImage Remove="Resources\Images\developmentbase.png" />
+	  <MauiImage Remove="Resources\Images\glass.png" />
+	  <MauiImage Remove="Resources\Images\milboardbackground.png" />
+	  <MauiImage Remove="Resources\Images\military.png" />
+	  <MauiImage Remove="Resources\Images\militaryboard.png" />
+	  <MauiImage Remove="Resources\Images\papirus.png" />
+	  <MauiImage Remove="Resources\Images\stone.png" />
+	  <MauiImage Remove="Resources\Images\wood.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Resources\Images\background_full.png" />
+	  <Content Include="Resources\Images\board.png" />
+	  <Content Include="Resources\Images\cardbackfirstage.png" />
+	  <Content Include="Resources\Images\cardbacksecondage.png" />
+	  <Content Include="Resources\Images\cardbackthirdage.png" />
+	  <Content Include="Resources\Images\clay.png" />
+	  <Content Include="Resources\Images\coin3.png" />
+	  <Content Include="Resources\Images\coin6.png" />
+	  <Content Include="Resources\Images\developmentbase.png" />
+	  <Content Include="Resources\Images\glass.png" />
+	  <Content Include="Resources\Images\milboardbackground.png" />
+	  <Content Include="Resources\Images\military.png" />
+	  <Content Include="Resources\Images\militaryboard.png" />
+	  <Content Include="Resources\Images\papirus.png" />
+	  <Content Include="Resources\Images\stone.png" />
+	  <Content Include="Resources\Images\wood.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.0" />
+		<PackageReference Include="System.ComponentModel" Version="4.3.0" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.ComponentModel.Composition" Version="10.0.1" />
+		<PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
+		<PackageReference Include="System.Private.Uri" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\SevenWonders.Presenter\SevenWonders.Presenter.csproj" />
 	  <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
+	  <ProjectReference Include="..\SevenWonders.GameEngine\SevenWonders.GameEngine.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Update="Resources\Raw\scene.zip">
+	    <CopyToOutputDirectory></CopyToOutputDirectory>
+	  </MauiAsset>
 	</ItemGroup>
 
 </Project>

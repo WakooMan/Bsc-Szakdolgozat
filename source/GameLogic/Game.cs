@@ -41,12 +41,12 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public void Initialize(string player1, string player2, ICollection<Wonder> wonders, ICollection<Development> developments)
+        public void Initialize(string player1, string player2)
         {
             if (!m_isInitialized)
             {
                 m_players = [new Player(player1), new Player(player2)];
-                m_gameContext.Initialize(m_players, wonders, developments);
+                m_gameContext.Initialize(m_players);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;
             }

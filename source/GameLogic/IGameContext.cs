@@ -25,6 +25,6 @@ namespace GameLogic
         public IWonderList? WonderList { get; }
         public IDevelopmentList? DevelopmentList { get; }
         public IMilitaryBoard? MilitaryBoard { get; }
-        void Initialize(ICollection<Player> players, ICollection<Wonder> wonders, ICollection<Development> developments);
+        void Initialize(ICollection<Player> players);
     }
 }

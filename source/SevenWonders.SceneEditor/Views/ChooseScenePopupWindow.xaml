@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="SevenWonders.SceneEditor.Views.ChooseScenePopupWindow"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    CanBeDismissedByTappingOutsideOfPopup="False">
+    <Border Stroke="Black"
+        StrokeThickness="4"
+        Background="White"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40,40,40,40" />
+        </Border.StrokeShape>
+        <Grid HorizontalOptions="Fill" 
+          VerticalOptions="Center" 
+          Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="35*"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0">
+                <Picker Title="Select a scene"
+                        ItemsSource="{Binding Scenes}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedScene, Mode=TwoWay}"/>  
+            </ScrollView>
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                Grid.Row="1">
+                <Button Text="Choose" 
+                    Margin="5" 
+                    Background="Gray" 
+                    Command="{Binding OnChooseCommand}" 
+                    Clicked="Button_Clicked"/>
+                <Button Text="Back" 
+                    Margin="5" 
+                    Background="Gray" 
+                    Command="{Binding OnBackCommand}" 
+                    Clicked="Button_Clicked"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+</toolkit:Popup>

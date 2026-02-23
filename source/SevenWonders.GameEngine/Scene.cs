@@ -1,0 +1,105 @@
+﻿using SkiaSharp.Views.Maui;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
+
+namespace SevenWonders.GameEngine
+{
+    public class Scene: IEquatable<Scene>
+    {
+        public Guid Id { get; set; }
+        public int BiggestId { get; set; }
+        public List<GraphicsLayer> Layers { get; set; }
+        public string Name { get; set; }
+        public bool Visible { get; set; }
+        public Vector2 Resolution { get; set; }
+
+        public Scene()
+        {
+            Id = Guid.Empty;
+            BiggestId = 0;
+            Layers = new List<GraphicsLayer>();
+            Resolution = new Vector2(3840, 2160);
+            Name = string.Empty;
+        }
+
+        public Scene(Scene scene)
+        {
+            Id = Guid.NewGuid();
+            BiggestId = scene.BiggestId;
+            Layers = scene.Layers.Select(layer => new GraphicsLayer(layer)).ToList();
+            Name = scene.Name;
+            Visible = scene.Visible;
+        }
+
+        public bool Equals(Scene? other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            return Layers.SequenceEqual(other.Layers) &&
+                   Name.Equals(other.Name) &&
+                   Id.Equals(other.Id) &&
+                   Visible.Equals(other.Visible) &&
+                   BiggestId.Equals(other.BiggestId);  
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Scene scene)
+            {
+                return Equals(scene);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = Name.GetHashCode() ^
+                   Visible.GetHashCode() ^
+                   Id.GetHashCode() ^
+                   BiggestId.GetHashCode();
+            Layers.ForEach(layer => hashCode = hashCode ^ layer.GetHashCode());
+            return hashCode;
+        }
+
+        [ExcludeFromCodeCoverage]
+        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        {
+            if(!Visible)
+                return;
+
+            List<GraphicsLayer> objects = [.. Layers];
+            objects.Sort(new GraphicsLayerComparer());
+
+            foreach (GraphicsLayer layer in objects)
+            {
+                layer.Draw(eventArgs);
+            }
+        }
+
+        public void LoadTextures(string sceneFolder)
+        {
+            foreach (GraphicsLayer layer in Layers)
+            {
+                foreach (TextureObject texture in layer.Textures)
+                {
+                    texture.LoadTexture(sceneFolder);
+                }
+
+                foreach (GameObject gameObject in layer.ObjectList)
+                {
+                    gameObject.LoadTextures(sceneFolder);
+                }
+            }
+        }
+
+        public void Resize(Vector2 newResolution)
+        {
+            Layers.ForEach(layer => layer.Resize(Resolution, newResolution));
+            Resolution = newResolution;
+        }
+    }
+}

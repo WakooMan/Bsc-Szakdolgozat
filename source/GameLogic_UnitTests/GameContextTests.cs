@@ -34,22 +34,26 @@ namespace GameLogic_UnitTests
             m_randomGenerator = Substitute.For<IRandomGenerator>();
             m_droppedCardListFactory = Substitute.For<ICardListFactory>();
             m_militaryBoardFactory = Substitute.For<IMilitaryBoardFactory>();
-            m_gameContext = new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory);
+            m_randomElementReceiver = Substitute.For<IRandomElementReceiver>();
+            m_wonderList = Substitute.For<IWonderList>();
+            m_developmentList = Substitute.For<IDevelopmentList>();
+            m_gameContext = new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver);
         }
 
         [Test]
         public void When_Constructor_Called_With_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new GameContext(null, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, null, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, null, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, null, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, null, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, null, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, null, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, null, m_droppedCardListFactory, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, null, m_militaryBoardFactory));
-            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, null));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(null, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, null, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, null, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, null, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, null, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, null, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, null, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, null, m_droppedCardListFactory, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, null, m_militaryBoardFactory, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, null, m_randomElementReceiver));
+            Assert.Throws<ArgumentNullException>(() => new GameContext(m_ageHandler, m_turnHandler, m_playerActionReceiver, m_eventManager, m_costCalculator, m_chooseWonderHandler, m_gameElements, m_randomGenerator, m_droppedCardListFactory, m_militaryBoardFactory, null));
         }
 
         [Test]
@@ -57,18 +61,28 @@ namespace GameLogic_UnitTests
         {
             IMilitaryBoard militaryBoard = Substitute.For<IMilitaryBoard>();
             m_militaryBoardFactory.Create().Returns(militaryBoard);
+            m_randomElementReceiver.ReceiveRandomElements(Arg.Any<ICollection<Wonder>>(), Arg.Any<int>()).Returns([]);
+            m_randomElementReceiver.ReceiveRandomElements(Arg.Any<ICollection<Development>>(), Arg.Any<int>()).Returns([]);
+            m_wonderList.Wonders.Returns([]);
+            m_developmentList.Developments.Returns([]);
+            m_gameElements.Developments.Returns(m_developmentList);
+            m_gameElements.Wonders.Returns(m_wonderList);
 
-            m_gameContext.Initialize([], [], []);
+            m_gameContext.Initialize([]);
 
             m_militaryBoardFactory.Received(1).Create();
             m_droppedCardListFactory.Received(1).Create();
             _ = m_gameElements.Received(1).Cards;
             _ = m_gameElements.Received(1).Wonders;
             _ = m_gameElements.Received(1).Developments;
+            _ = m_wonderList.Received(2).Wonders;
+            _ = m_developmentList.Received(2).Developments;
             m_chooseWonderHandler.Received(1).Initialize(Arg.Any<ICollection<Player>>(), Arg.Any<ICollection<Wonder>>());
             m_turnHandler.Received(1).Initialize(Arg.Any<ICollection<Player>>());
             m_eventManager.Received(1).ClearSubscriptions();
             m_ageHandler.Received(1).Initialize();
+            m_randomElementReceiver.Received(1).ReceiveRandomElements(Arg.Any<ICollection<Wonder>>(), Arg.Any<int>());
+            m_randomElementReceiver.Received(1).ReceiveRandomElements(Arg.Any<ICollection<Development>>(), Arg.Any<int>());
             militaryBoard.Received(1).Initialize(Arg.Any<ICollection<Player>>(), Arg.Any<ICollection<Development>>(), m_gameContext);
             Assert.That(m_gameContext.AgeHandler, Is.EqualTo(m_ageHandler));
             Assert.That(m_gameContext.TurnHandler, Is.EqualTo(m_turnHandler));
@@ -99,6 +113,9 @@ namespace GameLogic_UnitTests
         private IRandomGenerator m_randomGenerator;
         private ICardListFactory m_droppedCardListFactory;
         private IMilitaryBoardFactory m_militaryBoardFactory;
+        private IRandomElementReceiver m_randomElementReceiver;
+        private IWonderList m_wonderList;
+        private IDevelopmentList m_developmentList;
         private GameContext m_gameContext;
     }
 }
