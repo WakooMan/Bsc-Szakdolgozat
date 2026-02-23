@@ -1,10 +1,12 @@
 ﻿using Serilog;
 using Serilog.Core;
 using System.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace SevenWonders.Common
 {
+    [ExcludeFromCodeCoverage]
     public static class GameLog
     {
         static GameLog()

@@ -40,12 +40,14 @@ namespace SevenWonders.GameEngine
                         movement.GameObject.Position = GetNewPositionForGameObject(movement.GameObject.Position, movement.Target.Position, movement.MovementSpeed, deltaTime);
                     }
 
-                    if (movement.GameObject.Rotation != movement.Target.Rotation)
+                    float absoluteValue = MathF.Abs(movement.GameObject.Rotation - movement.Target.Rotation);
+
+                    if (absoluteValue < 1e-6f)
                     {
                         movement.GameObject.Rotation = GetNewRotation(movement.GameObject.Rotation, movement.Target.Rotation, movement.RotationSpeed, deltaTime, 0.01f);
                     }
 
-                    if (movement.GameObject.Position == movement.Target.Position && movement.GameObject.Rotation == movement.Target.Rotation)
+                    if (movement.GameObject.Position == movement.Target.Position && absoluteValue < 1e-6f)
                     {
                         movementsToRemove.Add(movement);
                     }

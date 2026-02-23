@@ -1,4 +1,6 @@
-﻿namespace SevenWonders.GameEngine
+﻿using SevenWonders.Common;
+
+namespace SevenWonders.GameEngine
 {
     public class InputEventArgs: EventArgs
     {
@@ -9,10 +11,8 @@
 
         public void AddArgument<T>(string name, T obj)
         {
-            if (obj is null)
-            {
-                throw new ArgumentNullException(nameof(obj));
-            }
+            ArgumentChecker.CheckNull(name, nameof(name));
+            ArgumentChecker.CheckNull(obj, nameof(obj));
 
             arguments[name] = obj;
         }

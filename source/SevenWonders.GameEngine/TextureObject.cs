@@ -91,8 +91,10 @@ namespace SevenWonders.GameEngine
         public void LoadTexture(string sceneFolder)
         {
             Texture.LoadTexture(sceneFolder);
-            if (Width == 0) Width = Texture.OriginalWidth;
-            if (Height == 0) Height = Texture.OriginalHeight;
+            float absoluteWidth = MathF.Abs(Width);
+            float absoluteHeight = MathF.Abs(Height);
+            if (Width < 1e-6f) Width = Texture.OriginalWidth;
+            if (Height < 1e-6f) Height = Texture.OriginalHeight;
         }
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs)
