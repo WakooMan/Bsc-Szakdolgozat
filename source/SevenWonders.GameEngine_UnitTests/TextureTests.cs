@@ -117,6 +117,40 @@ namespace SevenWonders.GameEngine_UnitTests
         }
 
         [Test]
+        public void Equals_Object_Texture_ShouldReturnTrue()
+        {
+            // Arrange
+            var obj1 = new Texture()
+            {
+                FileName = "Test1"
+            };
+            object? obj2 = new Texture()
+            {
+                FileName = "Test1"
+            };
+
+            // Assert
+            Assert.That(obj1.Equals(obj2), Is.True);
+        }
+
+        [Test]
+        public void Equals_Object_Texture_ShouldReturnFalse()
+        {
+            // Arrange
+            var obj1 = new Texture()
+            {
+                FileName = "Test1"
+            };
+            object? obj2 = new Texture()
+            {
+                FileName = "Test2"
+            };
+
+            // Assert
+            Assert.That(obj1.Equals(obj2), Is.False);
+        }
+
+        [Test]
         public void Draw_ShouldNotThrow_WhenBitmapNotLoaded()
         {
             // Arrange

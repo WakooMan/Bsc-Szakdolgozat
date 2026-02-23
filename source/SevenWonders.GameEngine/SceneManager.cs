@@ -1,6 +1,7 @@
 ﻿using SevenWonders.Common;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System.Diagnostics.CodeAnalysis;
 using static SevenWonders.GameEngine.ISceneManager;
 
 namespace SevenWonders.GameEngine
@@ -36,6 +37,7 @@ namespace SevenWonders.GameEngine
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void Render(SKPaintSurfaceEventArgs eventArgs)
         {
             if (CurrentScene is null)

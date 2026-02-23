@@ -1,5 +1,6 @@
 ﻿using SkiaSharp.Views.Maui;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -70,6 +71,7 @@ namespace SevenWonders.GameEngine
             return hashCode;
         }
 
+        [ExcludeFromCodeCoverage]
         public void Draw(SKPaintSurfaceEventArgs eventArgs)
         {
             if (!Visible)

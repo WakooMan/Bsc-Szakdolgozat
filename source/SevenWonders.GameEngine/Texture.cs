@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -63,6 +64,7 @@ namespace SevenWonders.GameEngine
             OriginalHeight = m_bitmap.Height;
         }
 
+        [ExcludeFromCodeCoverage]
         public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height)
         {
             if (m_bitmap == null)
@@ -85,6 +87,7 @@ namespace SevenWonders.GameEngine
             canvas.Restore();
         }
 
+        [ExcludeFromCodeCoverage]
         public void DrawPart(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, int left, int top, int right, int bottom, float width, float height)
         {
             if (m_bitmap == null)

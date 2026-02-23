@@ -1,5 +1,6 @@
 ﻿using SevenWonders.Common;
 using SkiaSharp.Views.Maui;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -115,6 +116,7 @@ namespace SevenWonders.GameEngine
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public void Draw(SKPaintSurfaceEventArgs eventArgs)
         {
             if (!Visible || Animations.Count <= 0)
