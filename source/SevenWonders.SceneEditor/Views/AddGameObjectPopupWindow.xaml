@@ -24,7 +24,7 @@
                 <VerticalStackLayout>
                     <Label Text="GameObject name:"
                         Grid.Row="0"/>
-                    <Entry MaxLength="10" 
+                    <Entry MaxLength="40" 
                         Text="{Binding Name, Mode=TwoWay}" 
                         TextColor="White" 
                         Background="Gray" 

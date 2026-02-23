@@ -5,7 +5,6 @@ namespace SevenWonders.GameEngine
 {
     public class ObjectManager : IObjectManager
     {
-
         public ObjectManager(IInputManager inputManager, ISceneLoader sceneFileHandler)
         {
             m_subscribedGameObjects = new Dictionary<GameObject, GameObjectEvents>();

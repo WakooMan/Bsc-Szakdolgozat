@@ -1,11 +1,8 @@
 ﻿using CommunityToolkit.Maui.Views;
-using Serilog;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
-using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
 using System.Numerics;
 
 namespace SevenWonders.SceneEditor.Views
@@ -13,26 +10,28 @@ namespace SevenWonders.SceneEditor.Views
     public partial class MainPage : ContentPage
     {
 
-        public MainPage()
+        public MainPage(MainPageViewModel mainPageViewModel, IEngine engine, ISceneLoader sceneLoader)
         {
+            m_engine = engine;
+            m_sceneLoader = sceneLoader;
+            m_mainPageViewModel = mainPageViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
             InitializeComponent();
-            IInputManager inputManager = new InputManager();
-            NormalZipFileReceiver normalZipFileReceiver = new NormalZipFileReceiver();
-            m_sceneLoader = new SceneLoader(new XmlHandler(), normalZipFileReceiver);
-            m_engine = new Engine(new SceneManager(), inputManager, new ObjectManager(inputManager, m_sceneLoader), m_sceneLoader, Dispatcher.CreateTimer(), canvas);
-            if (!Directory.Exists(normalZipFileReceiver.ScenesPath))
-            {
-                Directory.CreateDirectory(normalZipFileReceiver.ScenesPath);
-            }
+            GameLog.InitializeFileLogger();
 
             foreach (Scene scene in m_sceneLoader.LoadScenes().GetAwaiter().GetResult())
             {
                 m_engine.SceneManager.RegisterScene(scene);
             }
-            m_mainPageViewModel = new MainPageViewModel(m_engine);
             m_currentPopup = null;
             SizeChanged += MainPage_SizeChanged;
             BindingContext = m_mainPageViewModel;
+            m_engine.RedrawRequested += (e, args) => canvas?.InvalidateSurface();
             m_engine.Startup();
         }
 

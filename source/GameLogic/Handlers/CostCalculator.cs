@@ -4,14 +4,11 @@ using GameLogic.Elements.Goods;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
-    [Export(typeof(ICostCalculator))]
     public class CostCalculator : ICostCalculator
     {
-        [ImportingConstructor]
         public CostCalculator(IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));

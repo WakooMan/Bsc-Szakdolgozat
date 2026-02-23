@@ -2,11 +2,9 @@
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
-    [Export(typeof(ITurnHandler))]
     public class TurnHandler: ITurnHandler
     {
         public Player CurrentPlayer
@@ -32,7 +30,6 @@ namespace GameLogic.Handlers
             }
         }
 
-        [ImportingConstructor]
         public TurnHandler(IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));

@@ -1,5 +1,4 @@
-﻿using GameLogic.Handlers;
-using GameLogic.Interfaces;
+﻿using GameLogic.Events.GameEvents;
 
 namespace GameLogic.GameStates
 {
@@ -14,6 +13,7 @@ namespace GameLogic.GameStates
 
         public void DoStateAction()
         {
+            m_gameContext.EventManager.Publish(new OnChooseWonderStateStart());
             while (!m_gameContext.ChooseWonderHandler.WondersChosen)
             {
                 m_gameContext.ChooseWonderHandler.ChooseWonder();

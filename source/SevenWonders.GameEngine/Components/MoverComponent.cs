@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace SevenWonders.GameEngine
+namespace SevenWonders.GameEngine.Components
 {
-    public class MoverComponent : IComponent
+    public class MoverComponent : IMoverComponent
     {
         public MoverComponent()
         {
@@ -13,10 +13,6 @@ namespace SevenWonders.GameEngine
 
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public void HandleMessage()
-        {
-        }
 
         public void Shutdown()
         {

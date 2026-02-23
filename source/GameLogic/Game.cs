@@ -1,13 +1,9 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Elements.Modifiers;
-using GameLogic.Elements.Wonders;
 using GameLogic.GameStates;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic
 {
-    [Export(typeof(IGame))]
     public class Game: IGame
     {
         private List<Player> m_players;
@@ -17,7 +13,8 @@ namespace GameLogic
         public IReadOnlyList<Player> Players => m_players;
         public bool IsInitialized => m_isInitialized;
 
-        [ImportingConstructor]
+        public IGameContext Context => m_gameContext;
+
         public Game(IGameContext gameContext)
         {
             ArgumentChecker.CheckNull(gameContext, nameof(gameContext));

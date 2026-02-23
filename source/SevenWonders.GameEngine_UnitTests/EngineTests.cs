@@ -3,6 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
+using SevenWonders.GameEngine.Components;
 using SkiaSharp.Views.Maui.Controls;
 using System.Diagnostics;
 using System.Runtime.Serialization;
@@ -36,8 +37,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 _inputManager,
                 _objectManager,
                 _sceneLoader,
-                _dispatcherTimer,
-                _canvasView);
+                Substitute.For<IGameEngineTicker>());
         }
 
         [Test]

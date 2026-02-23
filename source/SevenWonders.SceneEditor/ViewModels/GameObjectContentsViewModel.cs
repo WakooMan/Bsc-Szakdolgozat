@@ -56,6 +56,9 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedGameObjectScaleX));
                 OnPropertyChanged(nameof(SelectedGameObjectScaleY));
                 OnPropertyChanged(nameof(SelectedGameObjectZIndex));
+                OnPropertyChanged(nameof(SelectedGameObjectHeight));
+                OnPropertyChanged(nameof(SelectedGameObjectWidth));
+                OnPropertyChanged(nameof(SelectedGameObjectVisible));
                 if (m_selectedGameObject is not null)
                 {
                     m_selectedGameObject.Animations.ForEach(animation => SpriteViews.Add(new SpriteListViewModel(animation)));

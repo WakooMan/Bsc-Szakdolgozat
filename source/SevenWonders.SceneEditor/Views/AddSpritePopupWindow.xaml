@@ -25,13 +25,13 @@
                              VerticalOptions="Center" 
                              Margin="10">
                     <Label Text="Sprite name:"/>
-                    <Entry MaxLength="10" 
+                    <Entry MaxLength="40" 
 Text="{Binding Name, Mode=TwoWay}" 
 TextColor="White" 
 Background="Gray" 
 HorizontalTextAlignment="Center"/>
                     <Label Text="Texture name:"/>
-                    <Entry MaxLength="10" 
+                    <Entry MaxLength="40" 
                    Text="{Binding TextureName, Mode=TwoWay}" 
                    TextColor="White" 
                    Background="Gray" 

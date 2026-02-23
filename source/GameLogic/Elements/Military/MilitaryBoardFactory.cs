@@ -1,12 +1,9 @@
 ﻿using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Elements.Military
 {
-    [Export(typeof(IMilitaryBoardFactory))]
     public class MilitaryBoardFactory : IMilitaryBoardFactory
     {
-        [ImportingConstructor]
         public MilitaryBoardFactory(IXmlHandler xmlHandler)
         {
             m_xmlHandler = xmlHandler;

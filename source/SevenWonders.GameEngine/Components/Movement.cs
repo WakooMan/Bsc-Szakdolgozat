@@ -1,4 +1,4 @@
-﻿namespace SevenWonders.GameEngine
+﻿namespace SevenWonders.GameEngine.Components
 {
     public struct Movement
     {

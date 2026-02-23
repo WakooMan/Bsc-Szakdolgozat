@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Dispatching;
-using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
+﻿using SevenWonders.GameEngine.Components;
 using System.Diagnostics;
 
 namespace SevenWonders.GameEngine
@@ -9,6 +7,8 @@ namespace SevenWonders.GameEngine
     {
         private readonly List<IComponent> m_components;
 
+        public event EventHandler? RedrawRequested;
+
         public ISceneManager SceneManager { get; private set; }
         public IInputManager InputManager { get; private set; }
         public IObjectManager ObjectManager { get; private set; }
@@ -16,15 +16,14 @@ namespace SevenWonders.GameEngine
 
         public GameEngineConfiguration Configuration { get; }
 
-        public Engine(ISceneManager sceneManager, IInputManager inputManager, IObjectManager objectManager, ISceneLoader sceneFileHandler, IDispatcherTimer dispatcherTimer, SKCanvasView canvasView)
+        public Engine(ISceneManager sceneManager, IInputManager inputManager, IObjectManager objectManager, ISceneLoader sceneFileHandler, IGameEngineTicker gameEngineTicker)
         {
             m_components = new List<IComponent>();
             SceneManager = sceneManager;
             InputManager = inputManager;
             ObjectManager = objectManager;
             SceneFileHandler = sceneFileHandler;
-            m_dispatcherTimer = dispatcherTimer;
-            m_canvasView = canvasView;
+            m_gameEngineTicker = gameEngineTicker;
             SceneManager.SceneRegistered += SceneRegistered;
             SceneManager.SceneRemoved += SceneRemoved;
             Configuration = new GameEngineConfiguration(60);
@@ -38,19 +37,19 @@ namespace SevenWonders.GameEngine
             m_components.ForEach(component => component.Startup());
             m_renderTimer = 0;
 
-            m_dispatcherTimer.Interval = TimeSpan.FromMilliseconds(Configuration.TargetFrameTime);
-            m_dispatcherTimer.Tick += (s, e) =>
+            m_gameEngineTicker.Interval = TimeSpan.FromMilliseconds(Configuration.TargetFrameTime);
+            m_gameEngineTicker.Tick += (s, e) =>
             {
                 Update();
             };
             m_stopwatch.Start();
-            m_dispatcherTimer.Start();
+            m_gameEngineTicker.Start();
             m_running = true;
         }
 
         public void Shutdown()
         {
-            m_dispatcherTimer.Stop();
+            m_gameEngineTicker.Stop();
             m_stopwatch.Stop();
             m_running = false;
             m_renderTimer = 0;
@@ -93,14 +92,13 @@ namespace SevenWonders.GameEngine
                 m_renderTimer = currentTimestamp;
 
                 m_components.ForEach(c => c.Update((float)deltaTime));
-                m_canvasView.InvalidateSurface();
+                RedrawRequested?.Invoke(this, EventArgs.Empty);
             }
         }
 
         private bool m_running;
         private double m_renderTimer;
-        private readonly IDispatcherTimer m_dispatcherTimer;
-        private readonly SKCanvasView m_canvasView;
+        private readonly IGameEngineTicker m_gameEngineTicker;
         private readonly Stopwatch m_stopwatch;
     }
 }

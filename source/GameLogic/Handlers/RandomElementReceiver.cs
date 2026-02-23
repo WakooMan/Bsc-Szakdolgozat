@@ -1,12 +1,9 @@
 ﻿using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
-    [Export(typeof(IRandomElementReceiver))]
     public class RandomElementReceiver : IRandomElementReceiver
     {
-        [ImportingConstructor]
         public RandomElementReceiver(IRandomGenerator randomGenerator)
         {
             ArgumentChecker.CheckNull(randomGenerator, nameof(randomGenerator));

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWonders.GameEngine
+namespace SevenWonders.GameEngine.Components
 {
     public interface IComponent
     {
@@ -14,6 +14,5 @@ namespace SevenWonders.GameEngine
         void Startup();
         void Update(float deltaTime);
         void Shutdown();
-        void HandleMessage();
     }
 }

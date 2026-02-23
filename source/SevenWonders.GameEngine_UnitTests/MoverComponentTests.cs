@@ -2,6 +2,7 @@
 using System.Numerics;
 using SevenWonders.GameEngine;
 using System.Reflection;
+using SevenWonders.GameEngine.Components;
 
 namespace SevenWonders.GameEngine_UnitTests
 {

@@ -69,7 +69,7 @@
                             <Button Text="Unselect Layers" Background="Black" Command="{Binding LayerContentsViewModel.OnUnselectLayerCommand}" Grid.Row="2"/>
                             <VerticalStackLayout Grid.Row="3" IsVisible="{Binding LayerContentsViewModel.IsSelectedLayerAvailable}">
                                 <Label Text="Selected Layer name:" />
-                                <Entry MaxLength="10" 
+                                <Entry MaxLength="40" 
                                            Text="{Binding LayerContentsViewModel.SelectedLayerName, Mode=TwoWay}" 
                                            TextColor="White" 
                                            Background="Gray" 
@@ -92,7 +92,7 @@
                                            HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
                                 <Label Text="Copied Layer name:"/>
-                                <Entry MaxLength="10"  
+                                <Entry MaxLength="40"  
                                        Text="{Binding LayerContentsViewModel.CopyName, Mode=TwoWay}" 
                                        TextColor="White" 
                                        Background="Gray" 
@@ -117,7 +117,7 @@
                             <Button Text="Add Texture" Background="Black" Clicked="Add_New_Texture_Clicked" Grid.Row="1"/>
                             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding TextureContentsViewModel.IsSelectedTextureAvailable}">
                                 <Label Text="Selected Texture name:" />
-                                <Entry MaxLength="10" 
+                                <Entry MaxLength="40" 
                                        Text="{Binding TextureContentsViewModel.SelectedTextureName, Mode=TwoWay}" 
                                        TextColor="White" 
                                        Background="Gray" 
@@ -213,7 +213,7 @@
                             <Button Text="Add GameObject" Background="Black" Clicked="Add_New_GameObject_Clicked"  Grid.Row="1"/>
                             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding GameObjectContentsViewModel.IsSelectedGameObjectAvailable}">
                                 <Label Text="Selected GameObject name:" />
-                                <Entry MaxLength="10" 
+                                <Entry MaxLength="40" 
                                        Text="{Binding GameObjectContentsViewModel.SelectedGameObjectName, Mode=TwoWay}" 
                                        TextColor="White" 
                                        Background="Gray" 
@@ -301,7 +301,7 @@
                                 <Button Text="Add Sprite" Background="Black" Clicked="Add_New_Sprite_Clicked"/>
                                 <Button Text="Delete Sprite" Background="Black" Clicked="Delete_Selected_Sprite_Clicked"/>
                                 <Label Text="Copied GameObject name:"/>
-                                <Entry MaxLength="10"  
+                                <Entry MaxLength="40"  
                                        Text="{Binding GameObjectContentsViewModel.CopyName, Mode=TwoWay}" 
                                        TextColor="White" 
                                        Background="Gray" 

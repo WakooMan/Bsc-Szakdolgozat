@@ -1,10 +1,10 @@
-﻿using GameLogic.Elements;
-using GameLogic.Elements.Developments;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Military;
+﻿using GameLogic;
 using GameLogic.Elements.Wonders;
+using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
+using SevenWonders.GameEngine.Components;
+using SevenWonders.Presenter.Presenters;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
 
@@ -12,26 +12,24 @@ namespace SevenWondersUI
 {
     public partial class MainPage : ContentPage
     {
-
+        public MainPage(IGame game, IEngine engine, ISceneLoader sceneLoader, IMoverComponent moverComponent, ICardFlipComponent cardFlipComponent, IWonderPresenter wonderPresenter)
+        {
+            m_wonderPresenter = wonderPresenter;
+            m_moverComponent = moverComponent;
+            m_cardFlipComponent = cardFlipComponent;
+            m_sceneLoader = sceneLoader;
+            m_game = game;
+            m_engine = engine;
+            m_engine.RedrawRequested += (e, args) => canvas?.InvalidateSurface();
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             InitializeComponent();
             GameLog.InitializeFileLogger();
-            IXmlHandler xmlHandler = new XmlHandler();
-            IMilitaryBoard militaryBoard = new MilitaryBoardFactory(xmlHandler).Create();
-            IGameElements gameElements = new GameElements(new MainCardListFactory(xmlHandler), new WonderListFactory(xmlHandler), new DevelopmentListFactory(xmlHandler));
-            var sm = gameElements.Developments;
-
-            IInputManager inputManager = new InputManager();
-            m_sceneLoader = new SceneLoader(new XmlHandler(), new MauiZipFileReceiver());
-            IObjectManager objectManager = new ObjectManager(inputManager, m_sceneLoader);
-            m_engine = new Engine(new SceneManager(), inputManager, objectManager, m_sceneLoader, Dispatcher.CreateTimer(), canvas);
-            MoverComponent moverComponent = new MoverComponent();
-            CardFlipComponent cardFlipComponent = new CardFlipComponent();
-            m_engine.RegisterSubSystem(moverComponent);
-            m_engine.RegisterSubSystem(cardFlipComponent);
+            m_engine.RegisterSubSystem(m_moverComponent);
+            m_engine.RegisterSubSystem(m_cardFlipComponent);
 
             foreach (Scene scene in await m_sceneLoader.LoadScenes())
             {
@@ -45,12 +43,16 @@ namespace SevenWondersUI
                 m_engine.SceneManager.SetCurrentScene(firstScene);
             }
 
-            GameObject gameObject =  m_engine.SceneManager.GetObjectByName("Sphinx");
-            GameObject wonder1 = m_engine.SceneManager.GetObjectByName("Wonder1");
-
+            m_wonderPresenter.Initialize();
+            m_game.Initialize("Player1", "Player2");
+            m_game.Context.EventManager.Subscribe<OnChooseWonderStateStart>(state => {
+                foreach (Wonder wonder in m_game.Context.ChooseWonderHandler.FirstChoosableWonders)
+                {
+                    m_wonderPresenter.MoveToCenter(wonder);
+                }
+            });
             m_engine.Startup();
-            moverComponent.MoveTo(gameObject, wonder1, 210, 30);
-            cardFlipComponent.Flip(gameObject, 0, 0.6f);
+            m_game.Context.EventManager.Publish(new OnChooseWonderStateStart());
         }
 
         private void OnCanvasSizeChanged(object sender, EventArgs e)
@@ -84,8 +86,12 @@ namespace SevenWondersUI
 
         private float m_width = 1600;
         private float m_height = 900;
-        private ISceneLoader m_sceneLoader;
-        private IEngine m_engine;
+        private readonly ISceneLoader m_sceneLoader;
+        private readonly IEngine m_engine;
+        private readonly IGame m_game;
+        private readonly ICardFlipComponent m_cardFlipComponent;
+        private readonly IMoverComponent m_moverComponent;
+        private readonly IWonderPresenter m_wonderPresenter;
 
     }
 

@@ -105,8 +105,8 @@ namespace SevenWonders.GameEngine
         private void UnzipFile(SceneFile sceneFile, string extractedSceneLocation)
         {
             const int THRESHOLD_ENTRIES = 10000;
-            const long THRESHOLD_SIZE = 1000000000; // 1 GB
-            const double THRESHOLD_RATIO = 10;
+            const long THRESHOLD_SIZE = 1000000000;
+            const double THRESHOLD_RATIO = 100;
 
             long totalSizeArchive = 0;
             int totalEntryArchive = 0;

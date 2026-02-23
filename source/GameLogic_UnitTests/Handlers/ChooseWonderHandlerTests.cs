@@ -17,7 +17,7 @@ namespace GameLogic_UnitTests.Handlers
             m_gameContext = Substitute.For<IGameContext>();
             m_playerActionReceiver = Substitute.For<IPlayerActionReceiver>();
             m_gameContext.PlayerActionReceiver.Returns(m_playerActionReceiver);
-            m_chooseWonderHandler = new ChooseWonderHandler(m_gameContext);
+            m_chooseWonderHandler = new ChooseWonderHandler(m_playerActionReceiver);
             m_player1 = new Player("test1");
             m_player2 = new Player("test2");
             List<Wonder> wonders = new List<Wonder>();
@@ -25,7 +25,7 @@ namespace GameLogic_UnitTests.Handlers
             {
                 wonders.Add(new Wonder() { Name = $"testWonder{i}"});
             }
-            m_chooseWonderHandler.Initialize([m_player1, m_player2], wonders);
+            m_chooseWonderHandler.Initialize([m_player1, m_player2], wonders, m_gameContext);
         }
 
         [Test]
@@ -37,13 +37,13 @@ namespace GameLogic_UnitTests.Handlers
         [Test]
         public void When_Initialize_Called_With_Not_Exactly_8_Wonders_Or_Not_Exactly_2_Players()
         {
-            Assert.Throws<InvalidOperationException>(() => m_chooseWonderHandler.Initialize([new Player(), new Player()], []));
+            Assert.Throws<InvalidOperationException>(() => m_chooseWonderHandler.Initialize([new Player(), new Player()], [], m_gameContext));
             List<Wonder> wonders = new List<Wonder>();
             for (int i = 0; i < 8; i++)
             {
                 wonders.Add(new Wonder() { Name = $"testWonder{i}" });
             }
-            Assert.Throws<InvalidOperationException>(() => m_chooseWonderHandler.Initialize([new Player()], wonders));
+            Assert.Throws<InvalidOperationException>(() => m_chooseWonderHandler.Initialize([new Player()], wonders, m_gameContext));
         }
 
         [Test]

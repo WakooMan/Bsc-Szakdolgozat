@@ -7,12 +7,11 @@ using GameLogic.Elements.Wonders;
 using GameLogic.Events;
 using GameLogic.Handlers;
 using GameLogic.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic
 {
-    [Export(typeof(IGameContext))]
     public class GameContext : IGameContext
     {
         public IAgeHandler AgeHandler { get; }
@@ -36,8 +35,7 @@ namespace GameLogic
         public IDevelopmentList? DevelopmentList { get; private set; }
         public IMilitaryBoard? MilitaryBoard { get; private set; }
 
-        [ImportingConstructor]
-        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [Import(nameof(EmptyCardListFactory), typeof(ICardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory, IRandomElementReceiver randomElementReceiver)
+        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [FromKeyedServices(nameof(EmptyCardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory, IRandomElementReceiver randomElementReceiver)
         {
             ArgumentChecker.CheckNull(ageHandler, nameof(ageHandler));
             ArgumentChecker.CheckNull(turnHandler, nameof(turnHandler));
@@ -73,7 +71,7 @@ namespace GameLogic
             MilitaryBoard = m_militaryBoardFactory.Create();
             ICollection<Wonder> wonders = m_randomElementReceiver.ReceiveRandomElements(WonderList.Wonders, 8);
             WonderList.Wonders.RemoveAll(wonders.Contains);
-            ChooseWonderHandler.Initialize(players, wonders);
+            ChooseWonderHandler.Initialize(players, wonders, this);
             TurnHandler.Initialize(players);
             EventManager.ClearSubscriptions();
             AgeHandler.Initialize();

@@ -58,7 +58,7 @@ namespace SevenWonders.GameEngine
             {
                 foreach (GameObject gameObject in graphicsLayer.ObjectList)
                 {
-                    if (gameObject.Name == name)
+                    if (gameObject.Name.ToLower() == name.ToLower())
                     {
                         return gameObject;
                     }

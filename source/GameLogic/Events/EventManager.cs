@@ -1,14 +1,11 @@
 ﻿using GameLogic.Events.GameEvents;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Events
 {
-    [Export(typeof(IEventManager))]
     public class EventManager : IEventManager
     {
         private readonly Dictionary<Type, List<Delegate>> _listeners = new();
 
-        [ImportingConstructor]
         public EventManager() { }
 
         public void Subscribe<TGameEvent>(Action<TGameEvent> listener) where TGameEvent : GameEvent

@@ -1,12 +1,9 @@
 ﻿using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Elements.Developments
 {
-    [Export(typeof(IDevelopmentListFactory))]
     public class DevelopmentListFactory : IDevelopmentListFactory
     {
-        [ImportingConstructor]
         public DevelopmentListFactory(IXmlHandler xmlHandler)
         {
             m_xmlHandler = xmlHandler;

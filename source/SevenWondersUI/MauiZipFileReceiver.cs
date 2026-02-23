@@ -4,6 +4,8 @@ namespace SevenWondersUI
 {
     public class MauiZipFileReceiver : IZipFileReceiver
     {
+        public MauiZipFileReceiver() { }
+
         public async Task<ICollection<SceneFile>> ReceiveZipFiles()
         {
             List<SceneFile> result = new List<SceneFile>();

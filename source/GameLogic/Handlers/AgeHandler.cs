@@ -5,11 +5,9 @@ using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures.Factories;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
-    [Export(typeof(IAgeHandler))]
     public class AgeHandler : IAgeHandler
     {
         public IAgeBase CurrentAge
@@ -24,7 +22,6 @@ namespace GameLogic.Handlers
             }
         }
 
-        [ImportingConstructor]
         public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));

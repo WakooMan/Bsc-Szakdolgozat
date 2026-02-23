@@ -1,5 +1,10 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui;
+using SevenWonders.Common;
+using SevenWonders.GameEngine;
+using SevenWonders.GameEngine.Components;
+using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
 using SevenWonders.SceneEditor.Views;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -20,6 +25,7 @@ namespace SevenWonders.SceneEditor
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 }).
+                RegisterGameEngine().
                 RegisterViewModels().
                 RegisterViews();
 
@@ -30,16 +36,33 @@ namespace SevenWonders.SceneEditor
             return builder.Build();
         }
 
-        public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+        private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddSingleton<MainPageViewModel>();
 
             return mauiAppBuilder;
         }
 
-        public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
+        private static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
         {
-            mauiAppBuilder.Services.AddSingleton<MainPage>();
+            mauiAppBuilder.Services.AddTransient<MainPage>();
+
+            return mauiAppBuilder;
+        }
+
+        private static MauiAppBuilder RegisterGameEngine(this MauiAppBuilder mauiAppBuilder)
+        {
+            mauiAppBuilder.Services.AddSingleton(typeof(IXmlHandler), typeof(XmlHandler));
+            mauiAppBuilder.Services.AddSingleton(typeof(IRandomGenerator), typeof(RandomGenerator));
+            mauiAppBuilder.Services.AddSingleton(typeof(ICardFlipComponent), typeof(CardFlipComponent));
+            mauiAppBuilder.Services.AddSingleton(typeof(IMoverComponent), typeof(MoverComponent));
+            mauiAppBuilder.Services.AddSingleton(typeof(IGameEngineTicker), typeof(GameEngineTicker));
+            mauiAppBuilder.Services.AddSingleton(typeof(ISceneLoader), typeof(SceneLoader));
+            mauiAppBuilder.Services.AddSingleton(typeof(IObjectManager), typeof(ObjectManager));
+            mauiAppBuilder.Services.AddSingleton(typeof(ISceneManager), typeof(SceneManager));
+            mauiAppBuilder.Services.AddSingleton(typeof(IInputManager), typeof(InputManager));
+            mauiAppBuilder.Services.AddSingleton(typeof(IZipFileReceiver), typeof(NormalZipFileReceiver));
+            mauiAppBuilder.Services.AddSingleton(typeof(IEngine), typeof(Engine));
 
             return mauiAppBuilder;
         }

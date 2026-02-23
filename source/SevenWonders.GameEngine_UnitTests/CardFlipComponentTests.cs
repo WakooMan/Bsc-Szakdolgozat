@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Collections.Generic;
 using SevenWonders.GameEngine;
 using System.Reflection;
+using SevenWonders.GameEngine.Components;
 
 namespace SevenWonders.GameEngine_UnitTests
 {
