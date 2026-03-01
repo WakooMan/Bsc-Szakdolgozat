@@ -53,8 +53,8 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedGameObjectPositionX));
                 OnPropertyChanged(nameof(SelectedGameObjectPositionY));
                 OnPropertyChanged(nameof(SelectedGameObjectRotation));
-                OnPropertyChanged(nameof(SelectedGameObjectScaleX));
-                OnPropertyChanged(nameof(SelectedGameObjectScaleY));
+                OnPropertyChanged(nameof(SelectedGameObjectVisualSizeX));
+                OnPropertyChanged(nameof(SelectedGameObjectVisualSizeY));
                 OnPropertyChanged(nameof(SelectedGameObjectZIndex));
                 OnPropertyChanged(nameof(SelectedGameObjectHeight));
                 OnPropertyChanged(nameof(SelectedGameObjectWidth));
@@ -176,33 +176,33 @@ namespace SevenWonders.SceneEditor.ViewModels
         }
 
 
-        public float SelectedGameObjectScaleX
+        public float SelectedGameObjectVisualSizeX
         {
             get
             {
-                return SelectedGameObject?.Scale.X ?? -1;
+                return SelectedGameObject?.VisualSize.X ?? -1;
             }
             set
             {
                 if (SelectedGameObject is not null)
                 {
-                    SelectedGameObject.Scale = new Vector2(value, SelectedGameObject.Scale.Y);
+                    SelectedGameObject.VisualSize = new Vector2(value, SelectedGameObject.VisualSize.Y);
                     OnPropertyChanged();
                 }
             }
         }
 
-        public float SelectedGameObjectScaleY
+        public float SelectedGameObjectVisualSizeY
         {
             get
             {
-                return SelectedGameObject?.Scale.Y ?? -1;
+                return SelectedGameObject?.VisualSize.Y ?? -1;
             }
             set
             {
                 if (SelectedGameObject is not null)
                 {
-                    SelectedGameObject.Scale = new Vector2(SelectedGameObject.Scale.X, value);
+                    SelectedGameObject.VisualSize = new Vector2(SelectedGameObject.VisualSize.X, value);
                     OnPropertyChanged();
                 }
             }
@@ -278,7 +278,8 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Name = name,
                 Position = new Vector2(0, 0),
                 Visible = visible,
-                Scale = new Vector2(1, 1),
+                VisualSize = new Vector2(1, 1),
+                FlipMultiplier = new Vector2(1, 1),
                 ZIndex = 0
             };
             m_engine.ObjectManager.AddGameObject(m_engine.SceneManager.CurrentScene, SelectedLayer, gameObject);

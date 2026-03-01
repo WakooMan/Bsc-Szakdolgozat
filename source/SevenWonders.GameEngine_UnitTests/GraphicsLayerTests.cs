@@ -120,7 +120,7 @@ namespace SevenWonders.GameEngine_UnitTests
             var oldRes = new Vector2(800, 600);
             var newRes = new Vector2(1600, 1200); // 2x skálázás
 
-            var gameObject = new GameObject { Position = new Vector2(10, 10), Scale = new Vector2(1, 1) };
+            var gameObject = new GameObject { Position = new Vector2(10, 10), VisualSize = new Vector2(1, 1) };
             var texture = new TextureObject { Position = new Vector2(20, 20), Width = 100 };
 
             _originalLayer.ObjectList = new List<GameObject> { gameObject };

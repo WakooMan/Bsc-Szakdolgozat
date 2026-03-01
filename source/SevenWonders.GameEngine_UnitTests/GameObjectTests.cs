@@ -29,7 +29,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Name = "TestObj",
                 Id = 1,
                 Position = new Vector2(10, 20),
-                Scale = new Vector2(1, 1),
+                VisualSize = new Vector2(1, 1),
                 Width = 100,
                 Height = 100
             };
@@ -107,7 +107,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Position = new Vector2(10, 10),
                 Width = 20,
                 Height = 20,
-                Scale = new Vector2(1, 1),
+                VisualSize = new Vector2(1, 1),
                 Visible = gameObjectVisible
             };
             obj.PressedEvent += (args) => result = true;
@@ -149,7 +149,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Position = new Vector2(10, 10),
                 Width = 20,
                 Height = 20,
-                Scale = new Vector2(1, 1),
+                VisualSize = new Vector2(1, 1),
                 Visible = gameObjectVisible
             };
             obj.MoveEvent += (args) => result = true;
@@ -191,7 +191,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Position = new Vector2(10, 10),
                 Width = 20,
                 Height = 20,
-                Scale = new Vector2(1, 1),
+                VisualSize = new Vector2(1, 1),
                 Visible = gameObjectVisible
             };
             obj.ClickedEvent += (args) => result = true;
@@ -233,7 +233,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Position = new Vector2(10, 10),
                 Width = 20,
                 Height = 20,
-                Scale = new Vector2(1, 1),
+                VisualSize = new Vector2(1, 1),
                 Visible = gameObjectVisible
             };
             obj.ReleasedEvent += (args) => result = true;
@@ -253,7 +253,7 @@ namespace SevenWonders.GameEngine_UnitTests
             var obj = new GameObject
             {
                 Position = new Vector2(100, 100),
-                Scale = new Vector2(1, 1)
+                VisualSize = new Vector2(1, 1)
             };
             var oldRes = new Vector2(800, 600);
             var newRes = new Vector2(1600, 1200);
@@ -263,7 +263,7 @@ namespace SevenWonders.GameEngine_UnitTests
 
             // Assert
             Assert.That(new Vector2(200, 200), Is.EqualTo(obj.Position));
-            Assert.That(new Vector2(2, 2), Is.EqualTo(obj.Scale));
+            Assert.That(new Vector2(2, 2), Is.EqualTo(obj.VisualSize));
         }
 
         [Test]

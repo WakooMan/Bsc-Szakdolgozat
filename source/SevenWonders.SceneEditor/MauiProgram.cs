@@ -54,8 +54,7 @@ namespace SevenWonders.SceneEditor
         {
             mauiAppBuilder.Services.AddSingleton(typeof(IXmlHandler), typeof(XmlHandler));
             mauiAppBuilder.Services.AddSingleton(typeof(IRandomGenerator), typeof(RandomGenerator));
-            mauiAppBuilder.Services.AddSingleton(typeof(ICardFlipComponent), typeof(CardFlipComponent));
-            mauiAppBuilder.Services.AddSingleton(typeof(IMoverComponent), typeof(MoverComponent));
+            mauiAppBuilder.Services.AddSingleton(typeof(IAnimationManager), typeof(AnimationManager));
             mauiAppBuilder.Services.AddSingleton(typeof(IGameEngineTicker), typeof(GameEngineTicker));
             mauiAppBuilder.Services.AddSingleton(typeof(ISceneLoader), typeof(SceneLoader));
             mauiAppBuilder.Services.AddSingleton(typeof(IObjectManager), typeof(ObjectManager));

@@ -44,6 +44,7 @@ namespace SevenWonders.Presenter.Presenters
             if (m_player1Targets.Count > 0)
             {
                 m_wonders[wonder].MoveTo(m_player1Targets.Pop());
+                m_wonders[wonder].Unhighlight();
             }
         }
 
@@ -52,6 +53,7 @@ namespace SevenWonders.Presenter.Presenters
             if (m_player2Targets.Count > 0)
             {
                 m_wonders[wonder].MoveTo(m_player2Targets.Pop());
+                m_wonders[wonder].Unhighlight();
             }
         }
 
@@ -60,6 +62,7 @@ namespace SevenWonders.Presenter.Presenters
             if (m_centerTargets.Count > 0)
             {
                 m_wonders[wonder].MoveTo(m_centerTargets.Pop());
+                m_wonders[wonder].Highlight();
             }
         }
 

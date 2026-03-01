@@ -248,12 +248,12 @@
                                        TextColor="White" 
                                        Background="Gray" 
                                        HorizontalTextAlignment="Center"/>
-                                <Label Text="Scale:"/>
+                                <Label Text="Visual Size:"/>
                                 <HorizontalStackLayout>
                                     <Label Text="X: "/>
                                     <Entry MaxLength="10" 
                                            Keyboard="Numeric" 
-                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectScaleX, Mode=TwoWay}" 
+                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectVisualSizeX, Mode=TwoWay}" 
                                            TextColor="White" 
                                            Background="Gray" 
                                            HorizontalTextAlignment="Center"/>
@@ -262,7 +262,7 @@
                                     <Label Text="Y: "/>
                                     <Entry MaxLength="10" 
                                            Keyboard="Numeric" 
-                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectScaleY, Mode=TwoWay}" 
+                                           Text="{Binding GameObjectContentsViewModel.SelectedGameObjectVisualSizeY, Mode=TwoWay}" 
                                            TextColor="White" 
                                            Background="Gray" 
                                            HorizontalTextAlignment="Center"/>

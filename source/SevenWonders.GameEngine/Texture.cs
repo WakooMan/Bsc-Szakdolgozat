@@ -82,7 +82,7 @@ namespace SevenWonders.GameEngine
             canvas.Translate(position.X, position.Y);
             canvas.RotateDegrees(rotation, width / 2f, height / 2f);
             canvas.Scale(scale.X, scale.Y);
-            var destRect = new SKRect(0, 0, width, height);
+            var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
             canvas.DrawBitmap(m_bitmap, destRect);
             canvas.Restore();
         }
@@ -106,7 +106,7 @@ namespace SevenWonders.GameEngine
             canvas.RotateDegrees(rotation, width / 2f, height / 2f);
             canvas.Scale(scale.X, scale.Y);
             var srcRect = new SKRectI(left, top, right, bottom);
-            var destRect = new SKRect(0, 0, width, height);
+            var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
             canvas.DrawBitmap(m_bitmap, srcRect, destRect);
             canvas.Restore();
         }

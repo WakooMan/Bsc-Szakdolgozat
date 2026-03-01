@@ -7,11 +7,10 @@ namespace SevenWondersUI.Views.Factories
 {
     public class WonderViewFactory : IWonderViewFactory
     {
-        public WonderViewFactory(ISceneManager sceneManager, ICardFlipComponent cardFlipComponent, IMoverComponent moverComponent)
+        public WonderViewFactory(ISceneManager sceneManager, IAnimationManager animationManager)
         {
             m_sceneManager = sceneManager;
-            m_cardFlipComponent = cardFlipComponent;
-            m_moverComponent = moverComponent;
+            m_animationManager = animationManager;
         }
 
         public IWonderView CreateView(string wonderName)
@@ -21,11 +20,10 @@ namespace SevenWondersUI.Views.Factories
             {
                 throw new InvalidOperationException($"Did not find the game object with name: {wonderName}");
             }
-            return new WonderView(gameObject, m_cardFlipComponent, m_moverComponent);
+            return new WonderView(gameObject, m_animationManager);
         }
 
         private readonly ISceneManager m_sceneManager;
-        private readonly ICardFlipComponent m_cardFlipComponent;
-        private readonly IMoverComponent m_moverComponent;
+        private readonly IAnimationManager m_animationManager;
     }
 }

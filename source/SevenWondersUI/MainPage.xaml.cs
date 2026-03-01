@@ -12,11 +12,10 @@ namespace SevenWondersUI
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(IGame game, IEngine engine, ISceneLoader sceneLoader, IMoverComponent moverComponent, ICardFlipComponent cardFlipComponent, IWonderPresenter wonderPresenter)
+        public MainPage(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IWonderPresenter wonderPresenter)
         {
             m_wonderPresenter = wonderPresenter;
-            m_moverComponent = moverComponent;
-            m_cardFlipComponent = cardFlipComponent;
+            m_animationManager = animationManager;
             m_sceneLoader = sceneLoader;
             m_game = game;
             m_engine = engine;
@@ -28,8 +27,7 @@ namespace SevenWondersUI
 
             InitializeComponent();
             GameLog.InitializeFileLogger();
-            m_engine.RegisterSubSystem(m_moverComponent);
-            m_engine.RegisterSubSystem(m_cardFlipComponent);
+            m_engine.RegisterSubSystem(m_animationManager);
 
             foreach (Scene scene in await m_sceneLoader.LoadScenes())
             {
@@ -89,8 +87,7 @@ namespace SevenWondersUI
         private readonly ISceneLoader m_sceneLoader;
         private readonly IEngine m_engine;
         private readonly IGame m_game;
-        private readonly ICardFlipComponent m_cardFlipComponent;
-        private readonly IMoverComponent m_moverComponent;
+        private readonly IAnimationManager m_animationManager;
         private readonly IWonderPresenter m_wonderPresenter;
 
     }

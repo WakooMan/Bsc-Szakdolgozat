@@ -1,36 +1,35 @@
 ﻿using SevenWonders.GameEngine;
+using SevenWonders.GameEngine.Animations;
 using SevenWonders.GameEngine.Components;
 using SevenWonders.Presenter.Views;
+using System.Numerics;
 
 namespace SevenWondersUI.Views
 {
     public class WonderView : IWonderView
     {
-        public WonderView(GameObject wonder, ICardFlipComponent cardFlipComponent, IMoverComponent moverComponent)
+        public WonderView(GameObject wonder, IAnimationManager animationManager)
         {
             m_wonder = wonder;
-            m_flipComponent = cardFlipComponent;
-            m_moverComponent = moverComponent;
+            m_animationManager = animationManager;
         }
 
         public void MoveTo(GameObject target)
         {
-            m_moverComponent.MoveTo(m_wonder, target, 210, 30);
-            m_flipComponent.Flip(m_wonder, 0, 0.6f);
+            m_animationManager.Enqueue(new Movement(m_wonder, target, 1.5f), new CardFlip(m_wonder, 0, 1.5f));
         }
 
         public void Highlight()
         {
-            throw new NotImplementedException();
+            m_animationManager.Enqueue(new AdjustHighlight(m_wonder, new Vector2(1.5f, 1.5f), true, 0.5f));
         }
 
-        public void Lift()
+        public void Unhighlight()
         {
-            throw new NotImplementedException();
+            m_animationManager.Enqueue(new AdjustHighlight(m_wonder, new Vector2(1.0f, 1.0f), false, 0.5f));
         }
 
-        private readonly ICardFlipComponent m_flipComponent;
-        private readonly IMoverComponent m_moverComponent;
+        private readonly IAnimationManager m_animationManager;
         private readonly GameObject m_wonder;
     }
 }

@@ -9,7 +9,7 @@ namespace SevenWonders.Presenter.Views
 
         void Highlight();
 
-        void Lift();
+        void Unhighlight();
 
     }
 }
