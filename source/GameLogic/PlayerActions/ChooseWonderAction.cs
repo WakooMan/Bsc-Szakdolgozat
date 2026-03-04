@@ -8,7 +8,9 @@ namespace GameLogic.PlayerActions
     public class ChooseWonderAction : IPlayerAction
     {
         public Wonder Wonder => m_wonder;
+        public Player Player => m_player();
 
+        public ChooseWonderAction() { }
         public ChooseWonderAction(Wonder wonder, List<Wonder> wonders, Func<Player> player)
         {
             ArgumentChecker.CheckNull(wonder, nameof(wonder));

@@ -42,7 +42,7 @@ namespace GameLogic
         {
             if (!m_isInitialized)
             {
-                m_players = [new Player(player1), new Player(player2)];
+                m_players = [new Player(player1, 1), new Player(player2, 2)];
                 m_gameContext.Initialize(m_players);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;

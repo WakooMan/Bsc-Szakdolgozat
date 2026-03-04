@@ -19,13 +19,13 @@ namespace GameLogic.PlayerTurnStates
         {
             Action<OnCardUnpicked> action = (args) => GoToPrevState = true;
             m_gameContext.EventManager.Subscribe(action);
-            List<IPlayerAction> playerActions =
+            List<TurnDecision> playerActions =
             [
-                new UnpickCard(CurrentPlayer), new BuildCard(), new SellCard(CurrentPlayer),
-                .. CurrentPlayer.Wonders.Select(wonder => new BuildWonder(wonder)),
+                new TurnDecision(new UnpickCard(CurrentPlayer)), new TurnDecision(new BuildCard()), new TurnDecision(new SellCard(CurrentPlayer)),
+                .. CurrentPlayer.Wonders.Select(wonder => new TurnDecision(new BuildWonder(wonder))),
             ];
 
-            IPlayerAction playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions);
+            var playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions);
             if (playerAction.CanPerform(m_gameContext))
             {
                 playerAction.DoPlayerAction(m_gameContext);

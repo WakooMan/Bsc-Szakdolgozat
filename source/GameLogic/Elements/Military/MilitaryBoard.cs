@@ -73,7 +73,7 @@ namespace GameLogic.Elements.Military
             var disciplines = eventArgs.Player.Disciplines;
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
-                IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(eventArgs.Player, dev, Developments)).ToArray());
+                var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(eventArgs.Player, dev, Developments)).ToArray());
                 if (playerAction.CanPerform(gameContext))
                 {
                     playerAction.DoPlayerAction(gameContext);

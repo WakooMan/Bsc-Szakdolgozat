@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
 {
     public class PickCard : IPlayerAction
     {
+        public PickCard() { }
         public PickCard(Player player, ICardNode cardNode)
         {
             ArgumentChecker.CheckNull(player, nameof(player));

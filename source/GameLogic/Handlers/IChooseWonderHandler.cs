@@ -7,9 +7,6 @@ namespace GameLogic.Handlers
     {
         void ChooseWonder();
         bool WondersChosen { get; }
-
-        IEnumerable<Wonder> FirstChoosableWonders { get; }
-        IEnumerable<Wonder> SecondChoosableWonders { get; }
         void Initialize(ICollection<Player> players, ICollection<Wonder> wonders, IGameContext gameContext);
     }
 }

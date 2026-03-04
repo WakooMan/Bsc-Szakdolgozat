@@ -5,6 +5,7 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseDisciplineAction: IPlayerAction
     {
+        public ChooseDisciplineAction() { }
         public ChooseDisciplineAction(Discipline discipline, Action<Discipline> setter)
         {
             ArgumentChecker.CheckNull(discipline, nameof(discipline));

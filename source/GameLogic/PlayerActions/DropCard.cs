@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
 {
     public class DropCard : IPlayerAction
     {
+        public DropCard() { }
         public DropCard(Player player, Card card)
         {
             ArgumentChecker.CheckNull(player, nameof(player));

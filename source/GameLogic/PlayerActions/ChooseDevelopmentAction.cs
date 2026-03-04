@@ -11,7 +11,7 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseDevelopmentAction : IPlayerAction
     {
-
+        public ChooseDevelopmentAction() { }
         public ChooseDevelopmentAction(Player player, Development development, List<Development> developments)
         {
             ArgumentChecker.CheckNull(player, nameof(player));

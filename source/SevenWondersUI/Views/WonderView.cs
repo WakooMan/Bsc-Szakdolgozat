@@ -29,7 +29,27 @@ namespace SevenWondersUI.Views
             m_animationManager.Enqueue(new AdjustHighlight(m_wonder, new Vector2(1.0f, 1.0f), false, 0.5f));
         }
 
+        public void SubscribeClickAtAnimationEnd(Action action)
+        {
+            if (m_touchEvent is null)
+            {
+                // Wait for animation to end
+                m_touchEvent = (args) => action();
+                m_wonder.ClickedEvent += m_touchEvent;
+            }
+        }
+
+        public void UnsubscribeClick()
+        {
+            if (m_touchEvent is not null)
+            {
+                m_wonder.ClickedEvent -= m_touchEvent;
+                m_touchEvent = null;
+            }
+        }
+
         private readonly IAnimationManager m_animationManager;
         private readonly GameObject m_wonder;
+        private GameObject.TouchEvent? m_touchEvent;
     }
 }

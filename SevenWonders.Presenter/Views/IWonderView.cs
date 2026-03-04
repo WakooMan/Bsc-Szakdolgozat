@@ -10,6 +10,7 @@ namespace SevenWonders.Presenter.Views
         void Highlight();
 
         void Unhighlight();
-
+        void SubscribeClickAtAnimationEnd(Action action);
+        void UnsubscribeClick();
     }
 }

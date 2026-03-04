@@ -1,12 +1,16 @@
-﻿using GameLogic.Elements.Wonders;
+﻿using GameLogic.Elements;
+using GameLogic.Elements.Wonders;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Views;
+using static SevenWonders.Presenter.Presenters.IWonderPresenter;
 
 namespace SevenWonders.Presenter.Presenters
 {
     public class WonderPresenter : IWonderPresenter
     {
+        public event WonderPresenterDelegate? WonderChosen;
+
         public WonderPresenter(IWonderConnector wonderConnector)
         {
             m_wonderConnector = wonderConnector;
@@ -39,21 +43,15 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        public void MoveToPlayer1(Wonder wonder)
+        public void MoveToPlayer(Player player, Wonder wonder)
         {
-            if (m_player1Targets.Count > 0)
+            if (player.Id == 1)
             {
-                m_wonders[wonder].MoveTo(m_player1Targets.Pop());
-                m_wonders[wonder].Unhighlight();
+                MoveToPlayer1(wonder);
             }
-        }
-
-        public void MoveToPlayer2(Wonder wonder)
-        {
-            if (m_player2Targets.Count > 0)
+            if (player.Id == 2)
             {
-                m_wonders[wonder].MoveTo(m_player2Targets.Pop());
-                m_wonders[wonder].Unhighlight();
+                MoveToPlayer2(wonder);
             }
         }
 
@@ -63,6 +61,26 @@ namespace SevenWonders.Presenter.Presenters
             {
                 m_wonders[wonder].MoveTo(m_centerTargets.Pop());
                 m_wonders[wonder].Highlight();
+                m_wonders[wonder].SubscribeClickAtAnimationEnd(() => WonderChosen?.Invoke(wonder));
+            }
+        }
+
+        private void MoveToPlayer1(Wonder wonder)
+        {
+            if (m_player1Targets.Count > 0)
+            {
+                m_wonders[wonder].UnsubscribeClick();
+                m_wonders[wonder].Unhighlight();
+                m_wonders[wonder].MoveTo(m_player1Targets.Pop());
+            }
+        }
+
+        private void MoveToPlayer2(Wonder wonder)
+        {
+            if (m_player2Targets.Count > 0)
+            {
+                m_wonders[wonder].MoveTo(m_player2Targets.Pop());
+                m_wonders[wonder].Unhighlight();
             }
         }
 

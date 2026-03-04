@@ -5,6 +5,6 @@ namespace GameLogic.Interfaces
 {
     public interface IPlayerActionReceiver
     {
-        IPlayerAction ReceivePlayerAction(Player player, ICollection<IPlayerAction> playerActions);
+        TPlayerAction ReceivePlayerAction<TPlayerAction>(Player player, ICollection<TPlayerAction> playerActions) where TPlayerAction : class, IPlayerAction, new();
     }
 }

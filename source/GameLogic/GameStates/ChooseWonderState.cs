@@ -13,7 +13,6 @@ namespace GameLogic.GameStates
 
         public void DoStateAction()
         {
-            m_gameContext.EventManager.Publish(new OnChooseWonderStateStart());
             while (!m_gameContext.ChooseWonderHandler.WondersChosen)
             {
                 m_gameContext.ChooseWonderHandler.ChooseWonder();

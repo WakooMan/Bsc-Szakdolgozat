@@ -17,7 +17,7 @@ namespace SevenWonders.Presenter.Connectors
 
         public ICollection<GameObject> CreateCenterTargetList()
         {
-            return CreateTargetList("centerWonder", 4);
+            return CreateTargetList("centerWonder", 8);
         }
 
         public ICollection<GameObject> CreatePlayer1TargetList()

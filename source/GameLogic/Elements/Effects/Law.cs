@@ -24,7 +24,7 @@ namespace GameLogic.Elements.Effects
 
         public override void Apply(IGameContext gameContext)
         {
-            IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, [
+            var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, [
                 new ChooseDisciplineAction(new Building(), SetDiscipline),
                 new ChooseDisciplineAction(new Geography(), SetDiscipline),
                 new ChooseDisciplineAction(new Healing(), SetDiscipline),

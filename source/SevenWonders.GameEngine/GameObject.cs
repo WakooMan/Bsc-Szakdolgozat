@@ -214,10 +214,12 @@ namespace SevenWonders.GameEngine
 
         private bool IsTouchInGameObject(float x, float y)
         {
-           return x >= Position.X &&
-           x <= Position.X + (Width * VisualSize.X) &&
-           y >= Position.Y &&
-           y <= Position.Y + (Height* VisualSize.Y);
+            float actualHalfWidth = Math.Abs(Width * VisualSize.X * FlipMultiplier.X / 2);
+            float actualHalfHeight = Math.Abs(Height * VisualSize.Y * FlipMultiplier.Y / 2);
+           return x >= Position.X - actualHalfWidth &&
+           x <= Position.X + actualHalfWidth &&
+           y >= Position.Y - actualHalfHeight &&
+           y <= Position.Y + actualHalfHeight;
         }
     }
 }

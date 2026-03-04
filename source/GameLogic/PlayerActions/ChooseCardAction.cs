@@ -8,6 +8,11 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseCardAction : IPlayerAction
     {
+        public ChooseCardAction()
+        {
+            m_card = new RedCard();
+        }
+
         public ChooseCardAction(Card card)
         {
             m_card = card;

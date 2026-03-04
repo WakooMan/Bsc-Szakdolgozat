@@ -12,6 +12,7 @@ namespace GameLogic.Elements
     public class Player
     {
         public string Name { get; set; }
+        public int Id { get; set; }
         public List<Wonder> Wonders { get; set; }
         public List<Card> Cards { get; set; }
         public List<Development> Developments { get; set; }
@@ -68,15 +69,17 @@ namespace GameLogic.Elements
         public Player()
         {
             Name = "";
+            Id = 0;
             Wonders = new List<Wonder>();
             Cards = new List<Card>();
             Developments = new List<Development>();
             Money = 0;
         }
 
-        public Player(string name)
+        public Player(string name, int id)
         {
             Name = name;
+            Id = id;
             Wonders = new List<Wonder>();
             Cards = new List<Card>();
             Developments = new List<Development>();

@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
+using GameLogic.Events.GameEvents;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 using SevenWonders.Common;
@@ -14,12 +15,8 @@ namespace GameLogic.Handlers
         private readonly List<ChooseWonderAction> m_wonderPlayerActions1;
         private readonly List<ChooseWonderAction> m_wonderPlayerActions2;
         private int m_indexOfPlayer;
-        private IGameContext m_gameContext;
+        private IGameContext? m_gameContext;
         private readonly IPlayerActionReceiver m_playerActionReceiver;
-
-        public IEnumerable<Wonder> FirstChoosableWonders => m_wonderPlayerActions1.Select(action => action.Wonder);
-
-        public IEnumerable<Wonder> SecondChoosableWonders => m_wonderPlayerActions2.Select(action => action.Wonder);
 
         public ChooseWonderHandler(IPlayerActionReceiver playerActionReceiver)
         {
@@ -36,10 +33,18 @@ namespace GameLogic.Handlers
         public void ChooseWonder()
         {
             ArgumentChecker.CheckPredicateForOperation(() => m_players.Count == 0 || m_wonders.Count == 0, "Wonder cannot be chosen if initialize is not called or all the wonders are chosen!");
+            if (WondersChosenNum == 0)
+            {
+                m_gameContext.EventManager.Publish(new OnChooseWonderStateStart(m_wonderPlayerActions1.Select(action => action.Wonder).ToList()));
+            }
+            if (WondersChosenNum == 4)
+            {
+                m_gameContext.EventManager.Publish(new OnFourWondersChosen(m_wonderPlayerActions2.Select(action => action.Wonder).ToList()));
+            }
 
             Player player = m_players[m_indexOfPlayer];
             List<ChooseWonderAction> actions = WondersChosenNum < 4 ? m_wonderPlayerActions1 : m_wonderPlayerActions2;
-            IPlayerAction playerAction = m_playerActionReceiver.ReceivePlayerAction(player, actions.Select(action => (IPlayerAction)action).ToList());
+            var playerAction = m_playerActionReceiver.ReceivePlayerAction(player, actions.Select(action => action).ToList());
 
             if (playerAction.CanPerform(m_gameContext))
             {

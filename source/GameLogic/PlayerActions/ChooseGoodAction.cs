@@ -6,6 +6,7 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseGoodAction : IPlayerAction
     {
+        public ChooseGoodAction() { }
         public ChooseGoodAction(GoodFactory goodFactory, Action<Good> setter)
         {
             ArgumentChecker.CheckNull(goodFactory, nameof(goodFactory));

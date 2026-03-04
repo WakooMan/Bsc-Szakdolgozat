@@ -44,13 +44,20 @@ namespace SevenWondersUI
             m_wonderPresenter.Initialize();
             m_game.Initialize("Player1", "Player2");
             m_game.Context.EventManager.Subscribe<OnChooseWonderStateStart>(state => {
-                foreach (Wonder wonder in m_game.Context.ChooseWonderHandler.FirstChoosableWonders)
+                foreach (Wonder wonder in state.Wonders)
+                {
+                    m_wonderPresenter.MoveToCenter(wonder);
+                }
+            });
+            m_game.Context.EventManager.Subscribe<OnFourWondersChosen>(state => {
+                foreach (Wonder wonder in state.Wonders)
                 {
                     m_wonderPresenter.MoveToCenter(wonder);
                 }
             });
             m_engine.Startup();
-            m_game.Context.EventManager.Publish(new OnChooseWonderStateStart());
+            _ = Task.Run(m_game.GameLoop);
+
         }
 
         private void OnCanvasSizeChanged(object sender, EventArgs e)
