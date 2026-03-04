@@ -12,8 +12,8 @@ namespace GameLogic_UnitTests.Handlers
         [SetUp]
         public void Setup()
         {
-            m_player1 = new Player("Test1");
-            m_player2 = new Player("Test2");
+            m_player1 = new Player("Test1", 1);
+            m_player2 = new Player("Test2", 1);
             m_eventManager = Substitute.For<IEventManager>();
             m_turnHandler = new TurnHandler(m_eventManager);
             m_turnHandler.Initialize([m_player1, m_player2]);

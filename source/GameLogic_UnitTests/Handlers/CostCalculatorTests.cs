@@ -35,9 +35,9 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(0);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3}, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 2 }, new Stone() { Amount = 2 }, new Wood() { Amount = 2 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             opponent.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 2 }, new Stone() { Amount = 2 }] }]);
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
@@ -57,9 +57,9 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(0);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 2 }, new Stone() { Amount = 2 }, new Wood() { Amount = 2 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
             m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
@@ -78,9 +78,9 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(0);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 2 }, new Stone() { Amount = 2 }, new Wood() { Amount = 2 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
             m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
@@ -94,9 +94,9 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(0);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
             m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
@@ -110,9 +110,9 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(5);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
             m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
@@ -126,9 +126,9 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(0);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 4 }, new Stone() { Amount = 4 }, new Wood() { Amount = 4 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             int cost = m_costCalculator.GetBuildCost(buildable, player, opponent);
 
             m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
@@ -142,10 +142,10 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(0);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Money = 6;
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 2 }, new Stone() { Amount = 2 }, new Wood() { Amount = 2 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             bool result = m_costCalculator.CanAfford(buildable, player, opponent);
 
             m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
@@ -159,10 +159,10 @@ namespace GameLogic_UnitTests.Handlers
             buildable.BuildingType.Returns(nameof(RedCard));
             buildable.MoneyCost.Returns(0);
             buildable.GoodCost.Returns([new Clay() { Amount = 3 }, new Stone() { Amount = 3 }, new Wood() { Amount = 3 }]);
-            Player player = new Player("test");
+            Player player = new Player("test", 1);
             player.Money = 5;
             player.Cards.AddRange([new BrownCard() { ProducedResources = [new Clay() { Amount = 2 }, new Stone() { Amount = 2 }, new Wood() { Amount = 2 }] }]);
-            Player opponent = new Player("test2");
+            Player opponent = new Player("test2", 1);
             bool result = m_costCalculator.CanAfford(buildable, player, opponent);
 
             m_eventManager.Received(1).Publish(Arg.Any<OnBuildingCostCalculated>());
