@@ -12,9 +12,10 @@ namespace SevenWondersUI
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IWonderPresenter wonderPresenter)
+        public MainPage(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IWonderPresenter wonderPresenter, ICardPresenter cardPresenter)
         {
             m_wonderPresenter = wonderPresenter;
+            m_cardPresenter = cardPresenter;
             m_animationManager = animationManager;
             m_sceneLoader = sceneLoader;
             m_game = game;
@@ -42,6 +43,7 @@ namespace SevenWondersUI
             }
 
             m_wonderPresenter.Initialize();
+            m_cardPresenter.Initialize();
             m_game.Initialize("Player1", "Player2");
             m_game.Context.EventManager.Subscribe<OnChooseWonderStateStart>(state => {
                 foreach (Wonder wonder in state.Wonders)
@@ -53,6 +55,12 @@ namespace SevenWondersUI
                 foreach (Wonder wonder in state.Wonders)
                 {
                     m_wonderPresenter.MoveToCenter(wonder);
+                }
+            });
+            m_game.Context.EventManager.Subscribe<OnChooseWonderStateEnd>(state => {
+                foreach (Wonder wonder in state.Wonders)
+                {
+                    m_wonderPresenter.MoveToDeck(wonder);
                 }
             });
             m_engine.Startup();
@@ -96,6 +104,7 @@ namespace SevenWondersUI
         private readonly IGame m_game;
         private readonly IAnimationManager m_animationManager;
         private readonly IWonderPresenter m_wonderPresenter;
+        private readonly ICardPresenter m_cardPresenter;
 
     }
 

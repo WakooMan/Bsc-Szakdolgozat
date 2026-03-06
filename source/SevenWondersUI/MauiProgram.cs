@@ -64,6 +64,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IMilitaryBoardFactory), typeof(MilitaryBoardFactory));
         builder.Services.AddSingleton(typeof(IPlayerActionReceiver), typeof(PlayerActionReceiver));
         builder.Services.AddSingleton(typeof(IPlayerActionWaiter<ChooseWonderAction>), typeof(ChooseWonderActionWaiter));
+        builder.Services.AddSingleton(typeof(IPlayerActionWaiter<PickCard>), typeof(PickCardActionWaiter));
         builder.Services.AddSingleton(typeof(IGameContext), typeof(GameContext));
         builder.Services.AddSingleton(typeof(IGame), typeof(Game));
         builder.Services.AddSingleton(typeof(IAnimationManager), typeof(AnimationManager));
@@ -74,11 +75,13 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IInputManager), typeof(InputManager));
         builder.Services.AddSingleton(typeof(IZipFileReceiver), typeof(MauiZipFileReceiver));
         builder.Services.AddSingleton(typeof(IEngine), typeof(Engine));
-        builder.Services.AddSingleton(typeof(IWonderViewFactory), typeof(WonderViewFactory));
-        builder.Services.AddSingleton(typeof(IWonderView), typeof(WonderView));
+        builder.Services.AddSingleton(typeof(IGameObjectViewFactory), typeof(GameObjectViewFactory));
+        builder.Services.AddSingleton(typeof(IGameObjectReceiver), typeof(GameObjectReceiver));
 
         builder.Services.AddSingleton(typeof(IWonderConnector), typeof(WonderConnector));
         builder.Services.AddSingleton(typeof(IWonderPresenter), typeof(WonderPresenter));
+        builder.Services.AddSingleton(typeof(ICardConnector), typeof(CardConnector));
+        builder.Services.AddSingleton(typeof(ICardPresenter), typeof(CardPresenter));
 
         builder.Services.AddTransient<MainPage>();
 

@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
-using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Views;
 using SevenWonders.Presenter.Views.Factories;
 
@@ -8,58 +7,26 @@ namespace SevenWonders.Presenter.Connectors
 {
     public class WonderConnector : IWonderConnector
     {
-        public WonderConnector(ISceneManager sceneManager, IGameElements gameElements, IWonderViewFactory wonderViewFactory)
+        public WonderConnector(IGameElements gameElements, IGameObjectViewFactory gameObjectViewFactory)
         {
-            m_sceneManager = sceneManager;
             m_wonderList = gameElements.Wonders;
-            m_wonderViewFactory = wonderViewFactory;
+            m_gameObjectViewFactory = gameObjectViewFactory;
         }
 
-        public ICollection<GameObject> CreateCenterTargetList()
-        {
-            return CreateTargetList("centerWonder", 8);
-        }
+        
 
-        public ICollection<GameObject> CreatePlayer1TargetList()
+        public IDictionary<Wonder, IGameObjectView> ReceiveWonderConnection()
         {
-            return CreateTargetList("player1Wonder", 4);
-        }
-
-        public ICollection<GameObject> CreatePlayer2TargetList()
-        {
-            return CreateTargetList("player2Wonder", 4);
-        }
-
-        public IDictionary<Wonder, IWonderView> CreateWonderConnection()
-        {
-            Dictionary<Wonder, IWonderView> result = new Dictionary<Wonder, IWonderView>();
+            Dictionary<Wonder, IGameObjectView> result = new Dictionary<Wonder, IGameObjectView>();
             foreach (Wonder wonder in m_wonderList.Wonders)
             {
-                result.Add(wonder, m_wonderViewFactory.CreateView(wonder.Name));
+                result.Add(wonder, m_gameObjectViewFactory.CreateView(wonder.Name));
             }
 
             return result;
         }
 
-        private ICollection<GameObject> CreateTargetList(string name, int number)
-        {
-            List<GameObject> result = new List<GameObject>();
-            for (int i = 1; i <= number; i++)
-            {
-                string targetName = $"{name}{i}";
-                GameObject? gameObject = m_sceneManager.GetObjectByName(targetName);
-                if (gameObject is null)
-                {
-                    throw new InvalidOperationException($"GameObject with name {targetName}, does not exist.");
-                }
-                result.Add(gameObject);
-            }
-
-            return result;
-        }
-
-        private readonly ISceneManager m_sceneManager;
-        private readonly IWonderViewFactory m_wonderViewFactory;
+        private readonly IGameObjectViewFactory m_gameObjectViewFactory;
         private readonly IWonderList m_wonderList;
     }
 }
