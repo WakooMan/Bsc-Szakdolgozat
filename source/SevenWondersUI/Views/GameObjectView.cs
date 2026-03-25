@@ -2,31 +2,18 @@
 using SevenWonders.GameEngine.Animations;
 using SevenWonders.GameEngine.Components;
 using SevenWonders.Presenter.Views;
+using SevenWonders.Presenter.Views.Factories;
 using System.Numerics;
 
 namespace SevenWondersUI.Views
 {
     public class GameObjectView : IGameObjectView
     {
-        public GameObjectView(GameObject wonder, IAnimationManager animationManager)
+        public GameObjectView(GameObject wonder, IAnimationManager animationManager, IAnimationGroupBuilderFactory animationGroupBuilderFactory)
         {
             m_gameObject = wonder;
             m_animationManager = animationManager;
-        }
-
-        public void MoveTo(GameObject target)
-        {
-            m_animationManager.Enqueue(new Movement(m_gameObject, target, 1.5f), new CardFlip(m_gameObject, 0, 1.5f));
-        }
-
-        public void Highlight()
-        {
-            m_animationManager.Enqueue(new AdjustHighlight(m_gameObject, new Vector2(1.5f, 1.5f), true, 0.5f));
-        }
-
-        public void Unhighlight()
-        {
-            m_animationManager.Enqueue(new AdjustHighlight(m_gameObject, new Vector2(1.0f, 1.0f), false, 0.5f));
+            m_groupBuilder = animationGroupBuilderFactory.Create(wonder);
         }
 
         public void SubscribeClickAtAnimationEnd(Action action)
@@ -48,7 +35,29 @@ namespace SevenWondersUI.Views
             }
         }
 
+        public IAnimationGroupBuilder GetAnimationGroupBuilder()
+        {
+            return m_groupBuilder;
+        }
+
+        public void Execute()
+        {
+            m_animationManager.Enqueue(m_groupBuilder.GetAnimations());
+            m_groupBuilder.Clear();
+        }
+
+        public void IncreaseZIndex()
+        {
+            m_gameObject.ZIndex++;
+        }
+
+        public void DecreaseZIndex()
+        {
+            m_gameObject.ZIndex--;
+        }
+
         private readonly IAnimationManager m_animationManager;
+        private readonly IAnimationGroupBuilder m_groupBuilder;
         private readonly GameObject m_gameObject;
         private GameObject.TouchEvent? m_touchEvent;
     }

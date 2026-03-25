@@ -88,10 +88,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public Scene? CurrentScene
         {
-            get
-            {
-                return m_currentScene;
-            }
+            get => m_currentScene;
             private set
             {
                 m_currentScene = value;
@@ -100,7 +97,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(IsVisible));
                 UpdateCanvasSize();
                 LayerContentsViewModel.CurrentScene = m_currentScene;
-
+                SceneTextureContentsViewModel.CurrentScene = m_currentScene;
             }
         }
 
@@ -113,6 +110,16 @@ namespace SevenWonders.SceneEditor.ViewModels
             private set
             {
                 m_layerContentsViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SceneTextureContentsViewModel SceneTextureContentsViewModel
+        {
+            get => m_sceneTextureContentsViewModel;
+            private set
+            {
+                m_sceneTextureContentsViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -139,6 +146,19 @@ namespace SevenWonders.SceneEditor.ViewModels
             private set
             {
                 m_gameObjectContentsViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ButtonContentsViewModel ButtonContentsViewModel
+        {
+            get
+            {
+                return m_buttonContentsViewModel;
+            }
+            private set
+            {
+                m_buttonContentsViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -185,9 +205,11 @@ namespace SevenWonders.SceneEditor.ViewModels
         public MainPageViewModel(IEngine engine)
         {
             m_engine = engine;
+            m_sceneTextureContentsViewModel = new SceneTextureContentsViewModel(m_engine);
             m_textureContentsViewModel = new TextureContentsViewModel(m_engine);
             m_gameObjectContentsViewModel = new GameObjectContentsViewModel(m_engine);
-            m_layerContentsViewModel = new LayerContentsViewModel(m_engine, m_textureContentsViewModel, m_gameObjectContentsViewModel);
+            m_buttonContentsViewModel = new ButtonContentsViewModel(m_engine);
+            m_layerContentsViewModel = new LayerContentsViewModel(m_engine, m_textureContentsViewModel, m_gameObjectContentsViewModel, m_buttonContentsViewModel);
             CurrentScene = null;
             SetState(MainWindowState.ButtonsWindow);
             GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
@@ -233,8 +255,10 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         private Command m_onSceneSaveCommand;
         private LayerContentsViewModel m_layerContentsViewModel;
+        private SceneTextureContentsViewModel m_sceneTextureContentsViewModel;
         private TextureContentsViewModel m_textureContentsViewModel;
         private GameObjectContentsViewModel m_gameObjectContentsViewModel;
+        private ButtonContentsViewModel m_buttonContentsViewModel;
         private Scene? m_currentScene;
         private bool m_canvasIsVisible;
         private bool m_isLeftPanelVisible;

@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace SevenWonders.SceneEditor.ViewModels
 {
-    public class TextureContentsViewModel: INotifyPropertyChanged
+    public class TextureContentsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -28,7 +28,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                     if (m_selectedLayer is not null)
                     {
                         TextureViews.Clear();
-                        foreach (TextureListViewModel textureListViewModel in m_selectedLayer.Textures.Select(texture => new TextureListViewModel(texture)))
+                        foreach (TextureListViewModel textureListViewModel in m_selectedLayer.TextureObjects.Select(texture => new TextureListViewModel(texture)))
                         {
                             TextureViews.Add(textureListViewModel);
                         }
@@ -56,6 +56,20 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedTextureZIndex));
                 OnPropertyChanged(nameof(SelectedTextureWidth));
                 OnPropertyChanged(nameof(SelectedTextureHeight));
+                OnPropertyChanged(nameof(SelectedTextureView));
+            }
+        }
+
+        public TextureListViewModel? SelectedTextureView
+        {
+            get
+            {
+                if (m_selectedTexture is null) return null;
+                return TextureViews.FirstOrDefault(t => t.Id == m_selectedTexture.Id);
+            }
+            set
+            {
+                SetSelectedTexture(value);
             }
         }
 
@@ -63,10 +77,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public string SelectedTextureName
         {
-            get
-            {
-                return SelectedTexture?.Name ?? string.Empty;
-            }
+            get => SelectedTexture?.Name ?? string.Empty;
             set
             {
                 if (SelectedTexture is not null && !string.IsNullOrWhiteSpace(value))
@@ -79,10 +90,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public bool SelectedTextureVisible
         {
-            get
-            {
-                return SelectedTexture?.Visible ?? false;
-            }
+            get => SelectedTexture?.Visible ?? false;
             set
             {
                 if (SelectedTexture is not null)
@@ -95,10 +103,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public float SelectedTexturePositionX
         {
-            get
-            {
-                return SelectedTexture?.Position.X ?? -1;
-            }
+            get => SelectedTexture?.Position.X ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -111,10 +116,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public float SelectedTexturePositionY
         {
-            get
-            {
-                return SelectedTexture?.Position.Y ?? -1;
-            }
+            get => SelectedTexture?.Position.Y ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -127,10 +129,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public float SelectedTextureRotation
         {
-            get
-            {
-                return SelectedTexture?.Rotation ?? -1;
-            }
+            get => SelectedTexture?.Rotation ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -141,13 +140,9 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
-
         public float SelectedTextureScaleX
         {
-            get
-            {
-                return SelectedTexture?.Scale.X ?? -1;
-            }
+            get => SelectedTexture?.Scale.X ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -160,10 +155,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public float SelectedTextureScaleY
         {
-            get
-            {
-                return SelectedTexture?.Scale.Y ?? -1;
-            }
+            get => SelectedTexture?.Scale.Y ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -176,10 +168,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public int SelectedTextureZIndex
         {
-            get
-            {
-                return SelectedTexture?.ZIndex ?? -1;
-            }
+            get => SelectedTexture?.ZIndex ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -192,10 +181,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public float SelectedTextureWidth
         {
-            get
-            {
-                return SelectedTexture?.Width ?? -1;
-            }
+            get => SelectedTexture?.Width ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -208,10 +194,7 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public float SelectedTextureHeight
         {
-            get
-            {
-                return SelectedTexture?.Height ?? -1;
-            }
+            get => SelectedTexture?.Height ?? -1;
             set
             {
                 if (SelectedTexture is not null)
@@ -230,38 +213,31 @@ namespace SevenWonders.SceneEditor.ViewModels
             SelectedTexture = null;
         }
 
-        public void AddTextureToLayer(string name, bool visible, int width, int height, string fullPath)
+        /// <summary>
+        /// Adds a <see cref="TextureObject"/> to the selected layer, referencing a scene-level
+        /// <see cref="Texture"/> by <paramref name="textureId"/>.
+        /// </summary>
+        public void AddTextureObjectToLayer(string name, bool visible, int width, int height, int textureId)
         {
             if (m_engine.SceneManager.CurrentScene is null || SelectedLayer is null)
             {
                 return;
             }
 
-            string fileName = Path.GetFileName(fullPath);
-            string destinationFileName = Path.Combine(m_engine.SceneFileHandler.ReceiveSceneFolder(m_engine.SceneManager.CurrentScene), fileName);
-            if (!File.Exists(destinationFileName))
-            {
-                File.Copy(fullPath, destinationFileName);
-            }
-
-            TextureObject texture = new TextureObject()
+            TextureObject textureObject = new TextureObject()
             {
                 Name = name,
                 Position = new Vector2(0, 0),
-                Texture = new Texture()
-                {
-                    Color = SKColor.Empty,
-                    FileName = fileName,
-                },
+                TextureId = textureId,
                 Visible = visible,
                 Width = width,
                 Height = height,
                 Scale = new Vector2(1, 1)
             };
 
-            m_engine.ObjectManager.AddTexture(m_engine.SceneManager.CurrentScene, SelectedLayer, texture);
-            TextureViews.Add(new TextureListViewModel(texture));
-            SelectedTexture = texture;
+            m_engine.ObjectManager.AddTextureObject(m_engine.SceneManager.CurrentScene, SelectedLayer, textureObject);
+            TextureViews.Add(new TextureListViewModel(textureObject));
+            SelectedTexture = textureObject;
         }
 
         public void SetSelectedTexture(TextureListViewModel? textureListViewModel)
@@ -271,7 +247,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            SelectedTexture = m_selectedLayer.Textures.FirstOrDefault(texture => texture.Id == textureListViewModel.Id);
+            SelectedTexture = m_selectedLayer.TextureObjects.FirstOrDefault(texture => texture.Id == textureListViewModel.Id);
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
@@ -289,7 +265,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 TextureViews.Remove(textureListViewModel);
             }
 
-            m_selectedLayer.Textures.Remove(SelectedTexture);
+            m_selectedLayer.TextureObjects.Remove(SelectedTexture);
             SelectedTexture = null;
         }
 

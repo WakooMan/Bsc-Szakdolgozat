@@ -1,4 +1,5 @@
 ﻿using GameLogic.Events.GameEvents;
+using GameLogic.Handlers;
 using GameLogic.PlayerTurnStates;
 
 namespace GameLogic.GameStates
@@ -19,6 +20,7 @@ namespace GameLogic.GameStates
             GameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             GameContext.EventManager.Subscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Subscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
+            GameContext.AgeHandler.Initialize();
 
             while (!IsGameOver)
             {

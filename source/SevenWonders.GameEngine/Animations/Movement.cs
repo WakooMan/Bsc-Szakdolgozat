@@ -18,6 +18,7 @@ namespace SevenWonders.GameEngine.Animations
         public void Start()
         {
             IsPlaying = true;
+            m_gameObject.ZIndex = m_target.ZIndex;
         }
 
         public void OnUpdate(float deltaTime)

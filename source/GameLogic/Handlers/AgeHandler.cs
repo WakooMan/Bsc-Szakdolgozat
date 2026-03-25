@@ -36,7 +36,7 @@ namespace GameLogic.Handlers
 
         public void Initialize()
         {
-            m_ageBase = new FirstAge(m_cardCompositionFactory, m_cardList);
+            m_ageBase = new FirstAge(m_eventManager, m_cardCompositionFactory, m_cardList);
         }
 
         public bool NextAge()
@@ -46,15 +46,15 @@ namespace GameLogic.Handlers
                 throw new InvalidOperationException("Initialize method is not called yet!");
             }
 
-            AgesEnum previousAge = CurrentAge.Age;
+            IAgeBase previousAge = CurrentAge;
 
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
-                    m_ageBase = new SecondAge(m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new SecondAge(m_eventManager, m_cardCompositionFactory, m_cardList);
                     break;
                 case AgesEnum.II:
-                    m_ageBase = new ThirdAge(m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new ThirdAge(m_eventManager, m_cardCompositionFactory, m_cardList);
                     break;
                 default:
                     return false;

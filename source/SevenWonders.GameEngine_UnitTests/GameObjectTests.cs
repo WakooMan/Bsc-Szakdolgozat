@@ -1,5 +1,4 @@
-﻿
-using SevenWonders.GameEngine;
+﻿using SevenWonders.GameEngine;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Numerics;

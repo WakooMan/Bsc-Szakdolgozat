@@ -1,6 +1,8 @@
 ﻿using GameLogic;
+using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
 using GameLogic.Events.GameEvents;
+using GameLogic.GameStructures;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
@@ -42,6 +44,7 @@ namespace SevenWondersUI
                 m_engine.SceneManager.SetCurrentScene(firstScene);
             }
 
+            m_engine.Startup();
             m_wonderPresenter.Initialize();
             m_cardPresenter.Initialize();
             m_game.Initialize("Player1", "Player2");
@@ -63,7 +66,19 @@ namespace SevenWondersUI
                     m_wonderPresenter.MoveToDeck(wonder);
                 }
             });
-            m_engine.Startup();
+            m_game.Context.EventManager.Subscribe<OnAgeStarted>(state => {
+                foreach (ICardNode cardNode in state.Age.Composition.AllCards)
+                {
+                    m_cardPresenter.MoveToCenter(cardNode.CardObj, cardNode.Hidden, cardNode.NodeName);
+                }
+            });
+
+            m_game.Context.EventManager.Subscribe<OnCardPicked>(eventObj => {
+                m_cardPresenter.MoveToActionLocation(eventObj.Card);
+            });
+            m_game.Context.EventManager.Subscribe<OnCardUnpicked>(eventObj => {
+                m_cardPresenter.MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName);
+            });
             _ = Task.Run(m_game.GameLoop);
 
         }

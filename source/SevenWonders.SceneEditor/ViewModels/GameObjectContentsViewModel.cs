@@ -59,9 +59,40 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedGameObjectHeight));
                 OnPropertyChanged(nameof(SelectedGameObjectWidth));
                 OnPropertyChanged(nameof(SelectedGameObjectVisible));
+                OnPropertyChanged(nameof(SelectedGameObjectView));
                 if (m_selectedGameObject is not null)
                 {
                     m_selectedGameObject.Animations.ForEach(animation => SpriteViews.Add(new SpriteListViewModel(animation)));
+                }
+            }
+        }
+
+        public GameObjectListViewModel? SelectedGameObjectView
+        {
+            get
+            {
+                if (m_selectedGameObject is null) return null;
+                return GameObjectViews.FirstOrDefault(g => g.Id == m_selectedGameObject.Id);
+            }
+            set
+            {
+                SetSelectedGameObject(value);
+            }
+        }
+
+        public SpriteListViewModel? SelectedSpriteView
+        {
+            get
+            {
+                return m_selectedSpriteView;
+            }
+            set
+            {
+                m_selectedSpriteView = value;
+                OnPropertyChanged();
+                if (value is not null)
+                {
+                    SetSelectedSprite(value);
                 }
             }
         }
@@ -354,28 +385,12 @@ namespace SevenWonders.SceneEditor.ViewModels
             m_selectedGameObject.CurrentAnim = 0;
         }
 
-        public void AddSpriteToGameObject(string name, string textureName, bool visible, int width, int height, string fullPath, int frameHeight, int frameWidth, int rows, int columns)
+        public void AddSpriteToGameObject(string name, int textureId, bool visible, int frameHeight, int frameWidth, int rows, int columns)
         {
             if (m_engine.SceneManager.CurrentScene is null || m_selectedGameObject is null)
             {
                 return;
             }
-
-            string fileName = Path.GetFileName(fullPath);
-            string sceneFolderPath = m_engine.SceneFileHandler.ReceiveSceneFolder(m_engine.SceneManager.CurrentScene);
-            string destinationFileName = Path.Combine(sceneFolderPath, fileName);
-            if (!File.Exists(destinationFileName))
-            {
-                File.Copy(fullPath, destinationFileName);
-            }
-
-            Texture texture = new Texture()
-            {
-                Color = SKColor.Empty,
-                FileName = fileName,
-            };
-
-            texture.LoadTexture(sceneFolderPath);
 
             List<SpriteFrame> frames = new List<SpriteFrame>();
             for (int i = 0; i < rows; i++)
@@ -384,7 +399,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 {
                     frames.Add(new SpriteFrame()
                     {
-                        Frame = texture,
+                        TextureId = textureId,
                         Name = name,
                         Left = j * frameWidth,
                         Right = (j + 1) * frameWidth,
@@ -414,5 +429,6 @@ namespace SevenWonders.SceneEditor.ViewModels
         private GraphicsLayer? m_selectedLayer;
         private string m_copyName;
         private bool m_isCopyEnabled;
+        private SpriteListViewModel? m_selectedSpriteView;
     }
 }

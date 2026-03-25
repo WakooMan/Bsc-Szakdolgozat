@@ -11,6 +11,7 @@ namespace SevenWonders.GameEngine
         public float OriginalHeight { get; set; }
         public SKColor Color { get; set; }
         public string FileName { get; set; }
+        public int Id { get; set; }
 
         public Texture()
         {
@@ -23,6 +24,7 @@ namespace SevenWonders.GameEngine
             OriginalWidth = texture.OriginalWidth;
             OriginalHeight = texture.OriginalHeight;
             Color = texture.Color;
+            Id = texture.Id;
         }
 
         public bool Equals(Texture? other)
@@ -35,7 +37,8 @@ namespace SevenWonders.GameEngine
             return FileName.Equals(other.FileName) &&
                    OriginalHeight.Equals(other.OriginalHeight) &&
                    OriginalWidth.Equals(other.OriginalWidth) &&
-                   Color.Equals(other.Color);
+                   Color.Equals(other.Color) &&
+                   Id.Equals(other.Id);
         }
 
         public override bool Equals(object? obj)
@@ -53,7 +56,8 @@ namespace SevenWonders.GameEngine
             return FileName.GetHashCode() ^
                    OriginalHeight.GetHashCode() ^
                    OriginalWidth.GetHashCode() ^
-                   Color.GetHashCode();
+                   Color.GetHashCode() ^
+                   Id.GetHashCode();
         }
 
         public void LoadTexture(string sceneFolder)
@@ -80,7 +84,7 @@ namespace SevenWonders.GameEngine
 
             canvas.Save();
             canvas.Translate(position.X, position.Y);
-            canvas.RotateDegrees(rotation, width / 2f, height / 2f);
+            canvas.RotateDegrees(rotation);
             canvas.Scale(scale.X, scale.Y);
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
             canvas.DrawBitmap(m_bitmap, destRect);
@@ -103,7 +107,7 @@ namespace SevenWonders.GameEngine
 
             canvas.Save();
             canvas.Translate(position.X, position.Y);
-            canvas.RotateDegrees(rotation, width / 2f, height / 2f);
+            canvas.RotateDegrees(rotation);
             canvas.Scale(scale.X, scale.Y);
             var srcRect = new SKRectI(left, top, right, bottom);
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);

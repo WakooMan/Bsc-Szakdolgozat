@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements.GameCards;
+using GameLogic.Events;
 using GameLogic.GameStructures.Factories;
 
 namespace GameLogic.Ages
@@ -9,7 +10,7 @@ namespace GameLogic.Ages
 
         public override string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(),"Data","FirstAgeComposition.csv");
 
-        public FirstAge(ICardCompositionFactory cardCompositionFactory, ICardList cardList) : base(cardCompositionFactory, cardList?.Cards.Where(card => card.Age == AgesEnum.I).Take(20).ToList() ?? null)
+        public FirstAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList) : base(eventManager, cardCompositionFactory, cardList?.Cards.Where(card => card.Age == AgesEnum.I).Take(20).ToList() ?? null)
         { }
     }
 }

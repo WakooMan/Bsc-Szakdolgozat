@@ -8,7 +8,9 @@ namespace SevenWonders.GameEngine
     public class GraphicsLayer:IEquatable<GraphicsLayer>
     {
         public List<GameObject> ObjectList { get; set; }
-        public List<TextureObject> Textures { get; set; }
+        public List<TextureObject> TextureObjects { get; set; }
+        public List<ButtonObject> Buttons { get; set; }
+        public List<TextLabel> TextLabels { get; set; }
         public  bool Visible { get; set; }
         public bool EnableCollision { get; set; }
         public string Name { get; set; }
@@ -18,14 +20,18 @@ namespace SevenWonders.GameEngine
         public GraphicsLayer()
         {
             ObjectList = new List<GameObject>();
-            Textures = new List<TextureObject>();
+            TextureObjects = new List<TextureObject>();
+            Buttons = new List<ButtonObject>();
+            TextLabels = new List<TextLabel>();
             Name = string.Empty;
         }
 
         public GraphicsLayer(GraphicsLayer graphicsLayer)
         {
             ObjectList = graphicsLayer.ObjectList.Select(obj => new GameObject(obj)).ToList();
-            Textures = graphicsLayer.Textures.Select(texture => new TextureObject(texture)).ToList();
+            TextureObjects = graphicsLayer.TextureObjects.Select(texture => new TextureObject(texture)).ToList();
+            Buttons = graphicsLayer.Buttons.Select(button => new ButtonObject(button)).ToList();
+            TextLabels = graphicsLayer.TextLabels.Select(label => new TextLabel(label)).ToList();
             Visible = graphicsLayer.Visible;
             EnableCollision = graphicsLayer.EnableCollision;
             Name = new string(graphicsLayer.Name);
@@ -41,7 +47,9 @@ namespace SevenWonders.GameEngine
             }
 
             return ObjectList.SequenceEqual(other.ObjectList) &&
-                   Textures.SequenceEqual(other.Textures) &&
+                   TextureObjects.SequenceEqual(other.TextureObjects) &&
+                   Buttons.SequenceEqual(other.Buttons) &&
+                   TextLabels.SequenceEqual(other.TextLabels) &&
                    Name.Equals(other.Name) &&
                    ID.Equals(other.ID) &&
                    Visible.Equals(other.Visible) &&
@@ -67,23 +75,25 @@ namespace SevenWonders.GameEngine
             EnableCollision.GetHashCode() ^
             ZIndex.GetHashCode();
             ObjectList.ForEach(obj => hashCode = hashCode ^ obj.GetHashCode());
-            Textures.ForEach(texture => hashCode = hashCode ^ texture.GetHashCode());
+            TextureObjects.ForEach(texture => hashCode = hashCode ^ texture.GetHashCode());
+            Buttons.ForEach(button => hashCode = hashCode ^ button.GetHashCode());
+            TextLabels.ForEach(label => hashCode = hashCode ^ label.GetHashCode());
             return hashCode;
         }
 
         [ExcludeFromCodeCoverage]
-        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
         {
             if (!Visible)
             {
                 return;
             }
 
-            List<TextureObject> textures = [.. Textures];
+            List<TextureObject> textures = [.. TextureObjects];
             textures.Sort(new TextureObjectComparer());
             foreach (var texture in textures)
             {
-                texture.Draw(eventArgs);
+                texture.Draw(eventArgs, textureRegistry);
             }
 
             List<GameObject> gameObjects = [.. ObjectList];
@@ -91,27 +101,30 @@ namespace SevenWonders.GameEngine
 
             foreach (var gameObject in gameObjects)
             {
-                gameObject.Draw(eventArgs);
-            }
-        }
-
-        public void LoadTextures(string tempPath)
-        {
-            foreach (var texture in Textures)
-            {
-                texture.LoadTexture(tempPath);
+                gameObject.Draw(eventArgs, textureRegistry);
             }
 
-            foreach (var gameObject in ObjectList)
+            List<ButtonObject> buttons = [.. Buttons];
+            buttons.Sort((a, b) => a.ZIndex.CompareTo(b.ZIndex));
+            foreach (var button in buttons)
             {
-                gameObject.LoadTextures(tempPath);
+                button.Draw(eventArgs, textureRegistry);
+            }
+
+            List<TextLabel> textLabels = [.. TextLabels];
+            textLabels.Sort((a, b) => a.ZIndex.CompareTo(b.ZIndex));
+            foreach (var label in textLabels)
+            {
+                label.Draw(eventArgs, textureRegistry);
             }
         }
 
         public void Resize(Vector2 oldResolution, Vector2 newResolution)
         {
-            Textures.ForEach(texture => texture.Resize(oldResolution, newResolution));
+            TextureObjects.ForEach(texture => texture.Resize(oldResolution, newResolution));
             ObjectList.ForEach(gameObject => gameObject.Resize(oldResolution, newResolution));
+            Buttons.ForEach(button => button.Resize(oldResolution, newResolution));
+            TextLabels.ForEach(label => label.Resize(oldResolution, newResolution));
         }
     }
 }

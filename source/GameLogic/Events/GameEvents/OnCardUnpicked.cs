@@ -1,17 +1,17 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Elements.GameCards;
+using GameLogic.GameStructures;
 
 namespace GameLogic.Events.GameEvents
 {
     public class OnCardUnpicked: GameEvent
     {
         public Player Player { get; set; }
-        public Card Card { get; set; }
+        public ICardNode CardNode { get; set; }
 
-        public OnCardUnpicked(Player player, Card card)
+        public OnCardUnpicked(Player player, ICardNode cardNode)
         {
             Player = player;
-            Card = card;
+            CardNode = cardNode;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace GameLogic.PlayerActions
 {
     public class PickCard : IPlayerAction
     {
+        public ICardNode CardNode => m_cardNode;
+        public Player Player => m_player;
         public PickCard() { }
         public PickCard(Player player, ICardNode cardNode)
         {

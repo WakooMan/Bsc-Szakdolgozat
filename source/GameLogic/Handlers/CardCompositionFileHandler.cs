@@ -24,13 +24,15 @@ namespace GameLogic.Handlers
                 for (int i = 0; i < lines.Length; i++)
                 {
                     string[] splitted = lines[i].Split(";");
-                    if (splitted.Length != 2)
+                    if (splitted.Length != 3)
                     {
                         throw new InvalidOperationException($"All the lines should contain exactly one semicolon in the file: {m_compositionFileName}");
                     }
                     bool hidden = bool.Parse(splitted[0]);
                     List<int> coveredBy = splitted[1].Split(",", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToList();
+                    string nodeName = splitted[2];
                     cardNodes[i].Hidden = hidden;
+                    cardNodes[i].NodeName = nodeName;
                     foreach (int n in coveredBy)
                     {
                         cardNodes[i].AddParent(cardNodes[n]);

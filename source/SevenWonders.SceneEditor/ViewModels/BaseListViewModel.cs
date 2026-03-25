@@ -16,6 +16,8 @@ namespace SevenWonders.SceneEditor.ViewModels
         public abstract string Name { get; }
         public abstract int Id { get; }
 
+        public override string ToString() => $"{Name} (Id: {Id})";
+
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }

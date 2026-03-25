@@ -16,6 +16,8 @@ using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Animations;
 using SevenWonders.GameEngine.Components;
 using SevenWonders.Presenter.Connectors;
+using SevenWonders.Presenter.Connectors.Cards;
+using SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers;
 using SevenWonders.Presenter.PlayerActionHandler;
 using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.PlayerActionWaiters;
@@ -65,6 +67,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IPlayerActionReceiver), typeof(PlayerActionReceiver));
         builder.Services.AddSingleton(typeof(IPlayerActionWaiter<ChooseWonderAction>), typeof(ChooseWonderActionWaiter));
         builder.Services.AddSingleton(typeof(IPlayerActionWaiter<PickCard>), typeof(PickCardActionWaiter));
+        builder.Services.AddSingleton(typeof(IPlayerActionWaiter<TurnDecision>), typeof(TurnDecisionActionWaiter));
         builder.Services.AddSingleton(typeof(IGameContext), typeof(GameContext));
         builder.Services.AddSingleton(typeof(IGame), typeof(Game));
         builder.Services.AddSingleton(typeof(IAnimationManager), typeof(AnimationManager));
@@ -76,7 +79,9 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IZipFileReceiver), typeof(MauiZipFileReceiver));
         builder.Services.AddSingleton(typeof(IEngine), typeof(Engine));
         builder.Services.AddSingleton(typeof(IGameObjectViewFactory), typeof(GameObjectViewFactory));
-        builder.Services.AddSingleton(typeof(IGameObjectReceiver), typeof(GameObjectReceiver));
+        builder.Services.AddSingleton(typeof(IAnimationGroupBuilderFactory), typeof(AnimationGroupBuilderFactory));
+        builder.Services.AddSingleton(typeof(IGameEngineReceiver), typeof(GameEngineReceiver));
+        builder.Services.AddSingleton(typeof(ICardChildTextureHandler), typeof(CardChildTextureHandler));
 
         builder.Services.AddSingleton(typeof(IWonderConnector), typeof(WonderConnector));
         builder.Services.AddSingleton(typeof(IWonderPresenter), typeof(WonderPresenter));

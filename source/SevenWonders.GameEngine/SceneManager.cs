@@ -67,6 +67,46 @@ namespace SevenWonders.GameEngine
 
             return null;
         }
+
+        public ButtonObject? GetButtonByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                foreach (ButtonObject button in graphicsLayer.Buttons)
+                {
+                    if (button.Name.ToLower() == name.ToLower())
+                    {
+                        return button;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public GraphicsLayer? GetLayerByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                if (graphicsLayer.Name.ToLower() == name.ToLower())
+                {
+                    return graphicsLayer;
+                }
+            }
+
+            return null;
+        }
+
         public Scene GetScene(Guid sceneID)
         {
             return m_scenes.First(scene => scene.Id == sceneID);

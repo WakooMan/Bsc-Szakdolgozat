@@ -1,11 +1,12 @@
 ﻿using SkiaSharp.Views.Maui;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
     public class SpriteFrame: IEquatable<SpriteFrame>
     {
-        public Texture Frame { get; set; }
+        public int TextureId { get; set; }
         public string Name { get; set; }
         public int Left { get; set; }
         public int Top { get; set; }
@@ -15,13 +16,12 @@ namespace SevenWonders.GameEngine
         public SpriteFrame()
         {
             Name = string.Empty;
-            Frame = new Texture();
         }
 
         public SpriteFrame(SpriteFrame spriteFrame)
         {
             Name = new string(spriteFrame.Name);
-            Frame = new Texture(spriteFrame.Frame);
+            TextureId = spriteFrame.TextureId;
             Left = spriteFrame.Left;
             Top = spriteFrame.Top;
             Right = spriteFrame.Right;
@@ -36,7 +36,7 @@ namespace SevenWonders.GameEngine
             }
 
             return Name.Equals(other.Name) &&
-                   Frame.Equals(other.Frame) &&
+                   TextureId.Equals(other.TextureId) &&
                    Left.Equals(other.Left) &&
                    Top.Equals(other.Top) &&
                    Right.Equals(other.Right) &&
@@ -55,23 +55,19 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() ^
-                   Frame.GetHashCode() ^
+            int hashCode = Name.GetHashCode() ^
+                   TextureId.GetHashCode() ^
                    Top.GetHashCode() ^
                    Left.GetHashCode() ^
                    Right.GetHashCode() ^
                    Bottom.GetHashCode();
+            return hashCode;
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height)
+        [ExcludeFromCodeCoverage]
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height, TextureRegistry textureRegistry)
         {
-            Frame.DrawPart(eventArgs, position, scale, rotation, Left, Top, Right, Bottom, width, height);
+            textureRegistry.Get(TextureId).DrawPart(eventArgs, position, scale, rotation, Left, Top, Right, Bottom, width, height);
         }
-
-        public void LoadTexture(string sceneFolder)
-        {
-            Frame.LoadTexture(sceneFolder);
-        }
-
     }
 }

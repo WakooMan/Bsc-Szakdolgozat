@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace SevenWonders.SceneEditor.ViewModels
+﻿namespace SevenWonders.SceneEditor.ViewModels
 {
-    public class AddSpritePopupWindowViewModel: AddTexturePopupWindowViewModel
+    public class AddSpritePopupWindowViewModel: AddPopupWindowViewModel
     {
         public int FrameWidth
         {
@@ -65,15 +58,15 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
-        public string TextureName
+        public int TextureId
         {
             get
             {
-                return m_textureName;
+                return m_textureId;
             }
             set
             {
-                m_textureName = value;
+                m_textureId = value;
                 OnPropertyChanged();
                 m_onAddCommand.ChangeCanExecute();
             }
@@ -81,14 +74,19 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public AddSpritePopupWindowViewModel() : base()
         {
-            m_textureName = string.Empty;
+            m_textureId = -1;
+        }
+
+        protected override bool CanExecuteAdd()
+        {
+            return base.CanExecuteAdd() && m_textureId > 0; // TODO: Check if it is a valid texture ID
         }
 
         private int m_frameWidth;
         private int m_frameHeight;
         private int m_rows;
         private int m_columns;
-        private string m_textureName;
+        private int m_textureId;
         
     }
 }

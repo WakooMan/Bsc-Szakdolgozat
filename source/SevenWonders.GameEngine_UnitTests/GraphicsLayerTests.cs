@@ -24,7 +24,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 {
                     new GameObject { Id = 101, Name = "Player" }
                 },
-                Textures = new List<TextureObject>
+                TextureObjects = new List<TextureObject>
                 {
                     new TextureObject { Id = 201, Name = "Grass" }
                 }
@@ -39,7 +39,7 @@ namespace SevenWonders.GameEngine_UnitTests
 
             // Assert
             Assert.That(layer.ObjectList, Is.Not.Null);
-            Assert.That(layer.Textures, Is.Not.Null);
+            Assert.That(layer.TextureObjects, Is.Not.Null);
             Assert.That(layer.Name, Is.EqualTo(string.Empty));
         }
 
@@ -60,11 +60,11 @@ namespace SevenWonders.GameEngine_UnitTests
 
                 // Lista tartalom ellenőrzés
                 Assert.That(_originalLayer.ObjectList.Count, Is.EqualTo(copy.ObjectList.Count));
-                Assert.That(_originalLayer.Textures.Count, Is.EqualTo(copy.Textures.Count));
+                Assert.That(_originalLayer.TextureObjects.Count, Is.EqualTo(copy.TextureObjects.Count));
 
                 // Mély másolás ellenőrzése: a listában lévő objektumoknak is új példányoknak kell lenniük
                 Assert.That(ReferenceEquals(_originalLayer.ObjectList[0], copy.ObjectList[0]), Is.False);
-                Assert.That(ReferenceEquals(_originalLayer.Textures[0], copy.Textures[0]), Is.False);
+                Assert.That(ReferenceEquals(_originalLayer.TextureObjects[0], copy.TextureObjects[0]), Is.False);
             });
         }
 
@@ -124,7 +124,7 @@ namespace SevenWonders.GameEngine_UnitTests
             var texture = new TextureObject { Position = new Vector2(20, 20), Width = 100 };
 
             _originalLayer.ObjectList = new List<GameObject> { gameObject };
-            _originalLayer.Textures = new List<TextureObject> { texture };
+            _originalLayer.TextureObjects = new List<TextureObject> { texture };
 
             // Act
             _originalLayer.Resize(oldRes, newRes);

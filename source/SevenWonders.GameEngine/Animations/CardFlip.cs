@@ -30,7 +30,8 @@ namespace SevenWonders.GameEngine.Animations
 
             m_elapsedTime += deltaTime;
             float t = Math.Clamp(m_elapsedTime / m_playingDuration, 0f, 1f);
-            float newScaleX = 1.0f - (2.0f * t);
+
+            float newScaleX = t < 0.5f ? 1.0f - (2.0f * t) : (2.0f * t) - 1.0f;
             m_gameObject.FlipMultiplier = new Vector2(newScaleX, m_gameObject.FlipMultiplier.Y);
 
             if (!m_spriteSwapped && t >= 0.5f)
@@ -41,7 +42,7 @@ namespace SevenWonders.GameEngine.Animations
 
             if (t >= 1.0f)
             {
-                m_gameObject.FlipMultiplier = new Vector2(-1f, m_gameObject.FlipMultiplier.Y);
+                m_gameObject.FlipMultiplier = new Vector2(1f, m_gameObject.FlipMultiplier.Y);
                 IsPlaying = false;
             }
         }

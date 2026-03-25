@@ -1,15 +1,14 @@
-﻿using SevenWonders.GameEngine;
-
-namespace SevenWonders.Presenter.Views
+﻿namespace SevenWonders.Presenter.Views
 {
     public interface IGameObjectView
     {
-        void MoveTo(GameObject target);
+        IAnimationGroupBuilder GetAnimationGroupBuilder();
 
-        void Highlight();
-
-        void Unhighlight();
         void SubscribeClickAtAnimationEnd(Action action);
         void UnsubscribeClick();
+
+        void Execute();
+        void IncreaseZIndex();
+        void DecreaseZIndex();
     }
 }

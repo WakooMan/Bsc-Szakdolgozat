@@ -2,6 +2,7 @@
 using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
+using GameLogic.GameStructures;
 using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
@@ -27,9 +28,9 @@ namespace GameLogic.PlayerActions
                 throw new InvalidOperationException("Cannot perform action if picked card is null!");
             }
 
-            Card card = m_player.PickedCard.CardObj;
+            ICardNode cardNode = m_player.PickedCard;
             m_player.PickedCard = null;
-            gameContext.EventManager.Publish(new OnCardUnpicked(m_player, card));
+            gameContext.EventManager.Publish(new OnCardUnpicked(m_player, cardNode));
         }
 
         private readonly Player m_player;

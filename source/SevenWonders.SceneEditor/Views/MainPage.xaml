@@ -8,8 +8,8 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
     <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="7*" />
             </Grid.ColumnDefinitions>
         <ScrollView Grid.Column="0">
             <Grid Background="Gray">
@@ -46,25 +46,26 @@
                     Clicked="OnLayersClicked" />
                         <Button Text="Textures"
                     Clicked="OnTexturesClicked" />
+                        <Button Text="TextureObjects"
+                    Clicked="OnTextureObjectsClicked" />
                         <Button Text="GameObjects"
                     Clicked="OnGameObjectsClicked" />
+                        <Button Text="Buttons"
+                    Clicked="OnButtonsClicked" />
                     </HorizontalStackLayout>
 
                     <Grid x:Name="TabContentArea">
                         <Grid x:Name="LayersContent" VerticalOptions="Fill">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <ListView ItemsSource="{Binding LayerContentsViewModel.LayerViews}" ItemSelected="Layer_ItemSelected" Grid.Row="0" MinimumHeightRequest="100">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="local:LayerListViewModel">
-                                        <TextCell Text="{Binding Name}" Detail="{Binding Id}"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                            <Picker Title="Select a Layer"
+                                    ItemsSource="{Binding LayerContentsViewModel.LayerViews}"
+                                    SelectedItem="{Binding LayerContentsViewModel.SelectedLayerView, Mode=TwoWay}"
+                                    Grid.Row="0"/>
                             <Button Text="Add Layer" Background="Black" Clicked="Add_New_Layer_Clicked" Grid.Row="1"/>
                             <Button Text="Unselect Layers" Background="Black" Command="{Binding LayerContentsViewModel.OnUnselectLayerCommand}" Grid.Row="2"/>
                             <VerticalStackLayout Grid.Row="3" IsVisible="{Binding LayerContentsViewModel.IsSelectedLayerAvailable}">
@@ -103,20 +104,41 @@
                         </Grid>
                         <Grid x:Name="TexturesContent" IsVisible="False" VerticalOptions="Fill">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <ListView ItemsSource="{Binding TextureContentsViewModel.TextureViews}" ItemSelected="Texture_ItemSelected" Grid.Row="0" MinimumHeightRequest="100">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="local:TextureListViewModel">
-                                        <TextCell Text="{Binding Name}" Detail="{Binding Id}"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                            <Button Text="Add Texture" Background="Black" Clicked="Add_New_Texture_Clicked" Grid.Row="1"/>
+                            <Picker Title="Select a Texture"
+                                    ItemsSource="{Binding SceneTextureContentsViewModel.SceneTextureViews}"
+                                    SelectedItem="{Binding SceneTextureContentsViewModel.SelectedSceneTextureView, Mode=TwoWay}"
+                                    Grid.Row="0"/>
+                            <Button Text="Add Texture" Background="Black" Clicked="Add_New_Scene_Texture_Clicked" Grid.Row="1"/>
+                            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding SceneTextureContentsViewModel.IsSelectedSceneTextureAvailable}">
+                                <Label Text="Selected Texture file:" />
+                                <Label Text="{Binding SceneTextureContentsViewModel.SelectedSceneTextureFileName}"
+                                       TextColor="White"
+                                       HorizontalTextAlignment="Center"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="Id: "/>
+                                    <Label Text="{Binding SceneTextureContentsViewModel.SelectedSceneTextureId}"
+                                           TextColor="White"/>
+                                </HorizontalStackLayout>
+                                <Button Text="Delete" Background="Black" Clicked="Delete_Selected_Scene_Texture_Clicked"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Grid x:Name="TextureObjectsContent" IsVisible="False" VerticalOptions="Fill">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Picker Title="Select a TextureObject"
+                                    ItemsSource="{Binding TextureContentsViewModel.TextureViews}"
+                                    SelectedItem="{Binding TextureContentsViewModel.SelectedTextureView, Mode=TwoWay}"
+                                    Grid.Row="0"/>
+                            <Button Text="Add TextureObject" Background="Black" Clicked="Add_New_Texture_Clicked" Grid.Row="1"/>
                             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding TextureContentsViewModel.IsSelectedTextureAvailable}">
-                                <Label Text="Selected Texture name:" />
+                                <Label Text="Selected TextureObject name:" />
                                 <Entry MaxLength="40" 
                                        Text="{Binding TextureContentsViewModel.SelectedTextureName, Mode=TwoWay}" 
                                        TextColor="White" 
@@ -199,17 +221,14 @@
                         </Grid>
                         <Grid x:Name="GameObjectsContent" IsVisible="False">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <ListView ItemsSource="{Binding GameObjectContentsViewModel.GameObjectViews}" ItemSelected="GameObject_ItemSelected" Grid.Row="0" MinimumHeightRequest="100">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="local:GameObjectListViewModel">
-                                        <TextCell Text="{Binding Name}" Detail="{Binding Id}"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                            <Picker Title="Select a GameObject"
+                                    ItemsSource="{Binding GameObjectContentsViewModel.GameObjectViews}"
+                                    SelectedItem="{Binding GameObjectContentsViewModel.SelectedGameObjectView, Mode=TwoWay}"
+                                    Grid.Row="0"/>
                             <Button Text="Add GameObject" Background="Black" Clicked="Add_New_GameObject_Clicked"  Grid.Row="1"/>
                             <VerticalStackLayout Grid.Row="2" IsVisible="{Binding GameObjectContentsViewModel.IsSelectedGameObjectAvailable}">
                                 <Label Text="Selected GameObject name:" />
@@ -291,13 +310,9 @@
                                            HorizontalTextAlignment="Center"/>
                                 </HorizontalStackLayout>
                                 <Label Text="Animations: "/>
-                                <ListView ItemsSource="{Binding GameObjectContentsViewModel.SpriteViews}" ItemSelected="Sprite_ItemSelected" Grid.Row="0" MinimumHeightRequest="50">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate x:DataType="local:SpriteListViewModel">
-                                            <TextCell Text="{Binding Name}"/>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+                                <Picker Title="Select a Sprite"
+                                        ItemsSource="{Binding GameObjectContentsViewModel.SpriteViews}"
+                                        SelectedItem="{Binding GameObjectContentsViewModel.SelectedSpriteView, Mode=TwoWay}"/>
                                 <Button Text="Add Sprite" Background="Black" Clicked="Add_New_Sprite_Clicked"/>
                                 <Button Text="Delete Sprite" Background="Black" Clicked="Delete_Selected_Sprite_Clicked"/>
                                 <Label Text="Copied GameObject name:"/>
@@ -308,6 +323,125 @@
                                        HorizontalTextAlignment="Center"/>
                                 <Button Text="Copy GameObject" Background="Black" Clicked="Copy_Selected_GameObject_Clicked" IsEnabled="{Binding GameObjectContentsViewModel.IsCopyEnabled}"/>
                                 <Button Text="Delete GameObject" Background="Black" Clicked="Delete_Selected_GameObject_Clicked"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Grid x:Name="ButtonsContent" IsVisible="False" VerticalOptions="Fill">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Picker Title="Select a Button"
+                                    ItemsSource="{Binding ButtonContentsViewModel.ButtonViews}"
+                                    SelectedItem="{Binding ButtonContentsViewModel.SelectedButtonView, Mode=TwoWay}"
+                                    Grid.Row="0"/>
+                            <Button Text="Add Button" Background="Black" Clicked="Add_New_Button_Clicked" Grid.Row="1"/>
+                            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding ButtonContentsViewModel.IsSelectedButtonAvailable}">
+                                <Label Text="Selected Button name:" />
+                                <Entry MaxLength="40" 
+                                       Text="{Binding ButtonContentsViewModel.SelectedButtonName, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <HorizontalStackLayout HorizontalOptions="Center">
+                                    <Label Text="Is Visible: " HorizontalOptions="Center"/>
+                                    <CheckBox IsChecked="{Binding ButtonContentsViewModel.SelectedButtonVisible, Mode=TwoWay}" />
+                                </HorizontalStackLayout>
+                                <Label Text="Button Text:"/>
+                                <Entry MaxLength="100" 
+                                       Text="{Binding ButtonContentsViewModel.SelectedButtonText, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Font Size:"/>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding ButtonContentsViewModel.SelectedButtonFontSize, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Text Color (hex):"/>
+                                <Entry MaxLength="9" 
+                                       Text="{Binding ButtonContentsViewModel.SelectedButtonTextColorHex, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Position:"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="X: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding ButtonContentsViewModel.SelectedButtonPositionX, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="Y: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding ButtonContentsViewModel.SelectedButtonPositionY, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <Label Text="Rotation:"/>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding ButtonContentsViewModel.SelectedButtonRotation, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Scale:"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="X: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding ButtonContentsViewModel.SelectedButtonScaleX, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="Y: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding ButtonContentsViewModel.SelectedButtonScaleY, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="ZIndex: "/>
+                                    <Entry MaxLength="10" 
+                                           Keyboard="Numeric" 
+                                           Text="{Binding ButtonContentsViewModel.SelectedButtonZIndex, Mode=TwoWay}" 
+                                           TextColor="White" 
+                                           Background="Gray" 
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <Label Text="Width:"/>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding ButtonContentsViewModel.SelectedButtonWidth, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Height:"/>
+                                <Entry MaxLength="10" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding ButtonContentsViewModel.SelectedButtonHeight, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Copied Button name:"/>
+                                <Entry MaxLength="40"  
+                                       Text="{Binding ButtonContentsViewModel.CopyName, Mode=TwoWay}" 
+                                       TextColor="White" 
+                                       Background="Gray" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Button Text="Copy Button" Background="Black" Clicked="Copy_Selected_Button_Clicked" IsEnabled="{Binding ButtonContentsViewModel.IsCopyEnabled}"/>
+                                <Button Text="Delete" Background="Black" Clicked="Delete_Selected_Button_Clicked"/>
                             </VerticalStackLayout>
                         </Grid>
                     </Grid>

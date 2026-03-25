@@ -69,6 +69,10 @@ namespace SevenWonders.GameEngine
                 {
                     ObjectManager.SubscribeGameObjectToTouchEvents(obj, layer);
                 });
+                layer.Buttons.ForEach(button =>
+                {
+                    ObjectManager.SubscribeButtonToTouchEvents(button, layer);
+                });
             });
         }
 
