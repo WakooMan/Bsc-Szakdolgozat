@@ -25,8 +25,8 @@ namespace SevenWonders.Presenter.Presenters
             m_gameEngineReceiver = gameEngineReceiver;
             m_cards = new Dictionary<Card, IGameObjectView>();
             m_ageCardDecks = new Dictionary<AgesEnum, GameObject>();
-            m_player1Targets = new List<GameObject>();
-            m_player2Targets = new List<GameObject>();
+            m_player1Targets = new Dictionary<Type, GameObject>();
+            m_player2Targets = new Dictionary<Type, GameObject>();
             m_centerTargets = new Dictionary<string, GameObject>();
         }
 
@@ -68,15 +68,22 @@ namespace SevenWonders.Presenter.Presenters
                 m_centerTargets[thirdAgeCenterTarget.Name] = thirdAgeCenterTarget;
             }
 
-            foreach (var player1CardTarget in m_gameEngineReceiver.ReceiveGameObjects("player1Card", 1))
-            {
-                m_player1Targets.Add(player1CardTarget);
-            }
+            m_player1Targets.Add(typeof(RedCard), m_gameEngineReceiver.ReceiveGameObject("player1RedCard"));
+            m_player1Targets.Add(typeof(GreenCard), m_gameEngineReceiver.ReceiveGameObject("player1GreenCard"));
+            m_player1Targets.Add(typeof(GrayCard), m_gameEngineReceiver.ReceiveGameObject("player1GrayCard"));
+            m_player1Targets.Add(typeof(BrownCard), m_gameEngineReceiver.ReceiveGameObject("player1BrownCard"));
+            m_player1Targets.Add(typeof(PurpleCard), m_gameEngineReceiver.ReceiveGameObject("player1PurpleCard"));
+            m_player1Targets.Add(typeof(YellowCard), m_gameEngineReceiver.ReceiveGameObject("player1YellowCard"));
+            m_player1Targets.Add(typeof(BlueCard), m_gameEngineReceiver.ReceiveGameObject("player1BlueCard"));
 
-            foreach (var player2CardTarget in m_gameEngineReceiver.ReceiveGameObjects("player2Card", 1))
-            {
-                m_player2Targets.Add(player2CardTarget);
-            }
+
+            m_player2Targets.Add(typeof(RedCard), m_gameEngineReceiver.ReceiveGameObject("player2RedCard"));
+            m_player2Targets.Add(typeof(GreenCard), m_gameEngineReceiver.ReceiveGameObject("player2GreenCard"));
+            m_player2Targets.Add(typeof(GrayCard), m_gameEngineReceiver.ReceiveGameObject("player2GrayCard"));
+            m_player2Targets.Add(typeof(BrownCard), m_gameEngineReceiver.ReceiveGameObject("player2BrownCard"));
+            m_player2Targets.Add(typeof(PurpleCard), m_gameEngineReceiver.ReceiveGameObject("player2PurpleCard"));
+            m_player2Targets.Add(typeof(YellowCard), m_gameEngineReceiver.ReceiveGameObject("player2YellowCard"));
+            m_player2Targets.Add(typeof(BlueCard), m_gameEngineReceiver.ReceiveGameObject("player2BlueCard"));
 
             m_firstAgeLayer.Visible = true;
             m_secondAgeLayer.Visible = true;
@@ -190,25 +197,33 @@ namespace SevenWonders.Presenter.Presenters
 
         private void MoveToPlayer1(Card card)
         {
-            //if (m_player1Targets.ContainsKey(card.GetType()))
-            //{
-            //    m_cards[card].MoveTo(m_player1Targets[card.GetType()]);
-            //}
+            if (m_player1Targets.ContainsKey(card.GetType()))
+            {
+                var view = m_cards[card];
+                var group = view.GetAnimationGroupBuilder();
+                group.MoveTo(m_player1Targets[card.GetType()], 1.5f).
+                Unhighlight(false, 1.5f);
+                view.Execute();
+            }
         }
 
         private void MoveToPlayer2(Card card)
         {
-            //if (m_player2Targets.ContainsKey(card.GetType()))
-            //{
-            //    m_cards[card].MoveTo(m_player2Targets[card.GetType()]);
-            //}
+            if (m_player2Targets.ContainsKey(card.GetType()))
+            {
+                var view = m_cards[card];
+                var group = view.GetAnimationGroupBuilder();
+                group.MoveTo(m_player2Targets[card.GetType()], 1.5f)
+                .Unhighlight(false, 1.5f);
+                view.Execute();
+            }
         }
 
         private readonly IDictionary<Card, IGameObjectView> m_cards;
         private readonly ICardConnector m_cardConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
-        private readonly List<GameObject> m_player1Targets;
-        private readonly List<GameObject> m_player2Targets;
+        private readonly Dictionary<Type, GameObject> m_player1Targets;
+        private readonly Dictionary<Type, GameObject> m_player2Targets;
         private GraphicsLayer? m_pickCardLayer;
         private GraphicsLayer? m_firstAgeLayer;
         private GraphicsLayer? m_secondAgeLayer;

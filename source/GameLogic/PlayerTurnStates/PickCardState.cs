@@ -15,11 +15,13 @@ namespace GameLogic.PlayerTurnStates
 
         public void ExecuteTurnState()
         {
-            var playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, Composition.AvailableCards.Select(card => new PickCard(CurrentPlayer, card)).ToList());
-            if (playerAction.CanPerform(m_gameContext))
+            IPlayerAction playerAction;
+            do
             {
-                playerAction.DoPlayerAction(m_gameContext);
-            }
+                playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, Composition.AvailableCards.Select(card => new PickCard(CurrentPlayer, card)).ToList());
+            } while (!playerAction.CanPerform(m_gameContext));
+
+            playerAction.DoPlayerAction(m_gameContext);
         }
 
         public IPlayerTurnState GetNextTurnState()

@@ -1,4 +1,7 @@
-﻿using GameLogic.Elements.Goods.Products;
+﻿using GameLogic.Elements.Disciplines;
+using GameLogic.Elements.Effects;
+using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Goods.Products;
 using GameLogic.Elements.Goods.Resources;
 using System;
 using System.Collections.Generic;
@@ -38,7 +41,24 @@ namespace SevenWonders.Presenter
             { nameof(Papirus), 1106 },
             { nameof(Stone), 1107 },
             { "CardNameBackground", 1108 },
-            { "Coin", 1109 }
+            { "Coin", 1109 },
+            { nameof(Building), 284 },
+            { nameof(Geography), 285 },
+            { nameof(Healing), 286 },
+            { nameof(Mechanics), 287 },
+            { nameof(Physics), 288 },
+            { nameof(Trading), 289 },
+            { nameof(Writing), 290 },
+            { nameof(VictoryPoints), 291 },
+            { "Slash", 292 },
+            { nameof(GrayCard), 1098},
+            { nameof(BrownCard), 1097},
+            { nameof(BlueCard), 1096},
+            { nameof(GreenCard), 1099},
+            { nameof(RedCard), 1101},
+            { nameof(PurpleCard), 1100},
+            { nameof(YellowCard), 1102}
+
         };
     }
 }

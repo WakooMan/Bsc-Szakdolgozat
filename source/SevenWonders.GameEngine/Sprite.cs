@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
+using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
@@ -9,6 +10,7 @@ namespace SevenWonders.GameEngine
         public List<SpriteFrame> Frames { get; set; }
         public int NumFrames { get; set; }
         public int ActualFrame { get; set; }
+        [XmlIgnore]
         public uint LastUpdate { get; set; }
         public uint Fps { get; set; }
         public float RotationZ { get; set; }

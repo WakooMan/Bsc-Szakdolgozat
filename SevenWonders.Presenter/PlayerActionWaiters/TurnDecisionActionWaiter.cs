@@ -14,16 +14,24 @@ namespace SevenWonders.Presenter.PlayerActionWaiters
         public TurnDecision WaitForPlayerAction(ICollection<TurnDecision> playerActions)
         {
             Type? chosenActionType = null;
+            using var signal = new ManualResetEventSlim(false);
 
-            m_cardPresenter.BuildCardChosen += () => chosenActionType = typeof(BuildCard);
-            m_cardPresenter.SellCardChosen += () => chosenActionType = typeof(SellCard);
-            m_cardPresenter.UnpickCardChosen += () => chosenActionType = typeof(UnpickCard);
-            m_cardPresenter.BuildWonderChosen += () => chosenActionType = typeof(BuildWonder);
+            void OnBuildCard() { chosenActionType = typeof(BuildCard); signal.Set(); }
+            void OnSellCard() { chosenActionType = typeof(SellCard); signal.Set(); }
+            void OnUnpickCard() { chosenActionType = typeof(UnpickCard); signal.Set(); }
+            void OnBuildWonder() { chosenActionType = typeof(BuildWonder); signal.Set(); }
 
-            while (chosenActionType is null)
-            {
-                Thread.Sleep(100);
-            }
+            m_cardPresenter.BuildCardChosen += OnBuildCard;
+            m_cardPresenter.SellCardChosen += OnSellCard;
+            m_cardPresenter.UnpickCardChosen += OnUnpickCard;
+            m_cardPresenter.BuildWonderChosen += OnBuildWonder;
+
+            signal.Wait();
+
+            m_cardPresenter.BuildCardChosen -= OnBuildCard;
+            m_cardPresenter.SellCardChosen -= OnSellCard;
+            m_cardPresenter.UnpickCardChosen -= OnUnpickCard;
+            m_cardPresenter.BuildWonderChosen -= OnBuildWonder;
 
             foreach (TurnDecision decision in playerActions)
             {
@@ -33,7 +41,7 @@ namespace SevenWonders.Presenter.PlayerActionWaiters
                 }
             }
 
-            throw new InvalidOperationException($"No matching turn decision found for action type {chosenActionType.Name}.");
+            throw new InvalidOperationException($"No matching turn decision found for action type {chosenActionType?.Name}.");
         }
 
         private readonly ICardPresenter m_cardPresenter;

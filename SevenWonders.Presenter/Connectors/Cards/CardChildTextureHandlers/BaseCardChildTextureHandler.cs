@@ -64,7 +64,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                             Visible = true,
                             Text = card.MoneyCost.ToString(),
                             TextColor = SKColors.Gold,
-                            FontSize = 3,
+                            FontSize = 6,
                             BackgroundTextureId = TextureIdDictionary.GetTextureId("Coin")
                         },
                         WidthPercent = sizePercent,
@@ -80,13 +80,13 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                     {
                         Text = card.Name,
                         TextColor = SKColors.Wheat,
-                        FontSize = 3,
+                        FontSize = 8,
                         BackgroundTextureId = TextureIdDictionary.GetTextureId("CardNameBackground"),
                         Visible = true
                     },
-                    WidthPercent = 0.4f,
-                    HeightPercent = 0.05f,
-                    PositionPercent = new Vector2(0.3f, 0.8f)
+                    WidthPercent = 0.6f,
+                    HeightPercent = 0.1f,
+                    PositionPercent = new Vector2(0.2f, 0.8f)
                 };
 
                 frontSprite.AddChildObject(childTextLabel);

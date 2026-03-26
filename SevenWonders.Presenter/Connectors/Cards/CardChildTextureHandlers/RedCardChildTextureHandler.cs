@@ -26,16 +26,8 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 
             int strengthTextureId = TextureIdDictionary.GetTextureId("Strength");
 
-            const float iconWidthPercent = 0.15f;
-            const float iconHeightPercent = 0.15f;
-
-            // Center the group vertically, and start X so the whole group is centered horizontally.
-            // PositionPercent (0,0) maps to the top-left of the parent frame (child drawn at top-left corner).
-            // Formula to center a child: posX = (1 - iconWidth) / 2, posY = (1 - iconHeight) / 2.
-            // For a group of n icons laid out horizontally:
-            //   groupWidth = n * iconWidth
-            //   groupStartX = (1 - groupWidth) / 2
-            //   icon[i].X   = groupStartX + i * iconWidth
+            float iconWidthPercent = 0.15f;
+            float iconHeightPercent = 0.15f;
 
             float groupStartX = (1f - strengthCount * iconWidthPercent) / 2f;
             float centeredY = (0.2f - iconHeightPercent);

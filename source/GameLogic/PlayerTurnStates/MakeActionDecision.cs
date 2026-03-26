@@ -25,8 +25,13 @@ namespace GameLogic.PlayerTurnStates
                 .. CurrentPlayer.Wonders.Select(wonder => new TurnDecision(new BuildWonder(wonder))),
             ];
 
-            var playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions);
-            if (playerAction.CanPerform(m_gameContext))
+            IPlayerAction playerAction;
+            do
+            {
+                playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions);
+            } while (!GoToPrevState && !playerAction.CanPerform(m_gameContext));
+
+            if (!GoToPrevState)
             {
                 playerAction.DoPlayerAction(m_gameContext);
             }

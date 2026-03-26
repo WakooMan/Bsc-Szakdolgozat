@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Scene xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Id>591940ea-94f7-4bab-9f99-e2f153941722</Id>
-  <BiggestId>284</BiggestId>
+  <BiggestId>304</BiggestId>
   <Layers>
     <GraphicsLayer>
       <ObjectList>
@@ -14,8 +14,8 @@
             <X>3490.8713</X>
             <Y>948.74304</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>270</Rotation>
           <Scale>
             <X>1</X>
@@ -47,7 +47,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>19059</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -68,8 +67,8 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>3159.5713</X>
-            <Y>833.4058</Y>
+            <X>3159.571</X>
+            <Y>833.4059</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -104,7 +103,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>14594</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -125,7 +123,7 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>215.73035</X>
+            <X>215.73036</X>
             <Y>881.64984</Y>
           </Position>
           <Width>224.99998</Width>
@@ -161,7 +159,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>234053</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>Basic</Name>
@@ -182,8 +179,8 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>215.73035</X>
-            <Y>1082.9545</Y>
+            <X>215.73036</X>
+            <Y>1082.9546</Y>
           </Position>
           <Width>224.99998</Width>
           <Height>204.20164</Height>
@@ -218,7 +215,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>234051</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>Basic</Name>
@@ -240,7 +236,7 @@
           <Visible>true</Visible>
           <Position>
             <X>216.99437</X>
-            <Y>1281.0505</Y>
+            <Y>1281.0507</Y>
           </Position>
           <Width>224.99998</Width>
           <Height>204.20164</Height>
@@ -275,7 +271,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>234051</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>Basic</Name>
@@ -332,7 +327,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>232566</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>baseMil</Name>
@@ -354,10 +348,10 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>876.99255</Y>
+            <Y>876.9927</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -389,7 +383,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>68020</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -410,11 +403,11 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2359.5505</X>
-            <Y>876.99255</Y>
+            <X>2359.5508</X>
+            <Y>876.9927</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -446,7 +439,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>45230</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -470,8 +462,8 @@
             <X>1562.4999</X>
             <Y>1274.4326</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -503,7 +495,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>43296</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -524,11 +515,11 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2359.5505</X>
+            <X>2359.5508</X>
             <Y>1274.4326</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -560,7 +551,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>42152</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -582,7 +572,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>876.99255</Y>
+            <Y>876.9927</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -617,8 +607,8 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2359.5505</X>
-            <Y>876.99255</Y>
+            <X>2359.5508</X>
+            <Y>876.9927</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -689,7 +679,7 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2359.5505</X>
+            <X>2359.5508</X>
             <Y>1274.4326</Y>
           </Position>
           <Width>0</Width>
@@ -725,11 +715,11 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>936.1156</X>
+            <X>936.11566</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -761,7 +751,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>62711</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -782,11 +771,11 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1591.0114</X>
+            <X>1591.0115</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -818,7 +807,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>56560</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -842,8 +830,8 @@
             <X>2245.907</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -875,7 +863,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53230</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -899,8 +886,8 @@
             <X>2900.8027</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -932,7 +919,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>51079</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -953,11 +939,11 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>936.1156</X>
+            <X>936.11566</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
@@ -989,7 +975,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>41828</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -1010,11 +995,11 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1591.0114</X>
+            <X>1591.0115</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
@@ -1046,7 +1031,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>39103</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -1070,8 +1054,8 @@
             <X>2245.907</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
@@ -1103,7 +1087,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>37485</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -1127,8 +1110,8 @@
             <X>2900.8027</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
@@ -1160,7 +1143,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>35674</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -1176,16 +1158,16 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player1Card1</Name>
+          <Name>player1BrownCard</Name>
           <Id>229</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
-            <X>1685.3933</X>
-            <Y>162.40602</Y>
+            <X>1348.3147</X>
+            <Y>1633.8881</Y>
           </Position>
-          <Width>0</Width>
-          <Height>0</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -1203,7 +1185,27 @@
             <X>1</X>
             <Y>1</Y>
           </FlipMultiplier>
-          <Animations />
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
           <Speed>0</Speed>
           <Collidable>false</Collidable>
           <InFrustum>false</InFrustum>
@@ -1218,7 +1220,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1685.3933</X>
-            <Y>1997.5939</Y>
+            <Y>1997.594</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -1254,7 +1256,7 @@
           <Visible>false</Visible>
           <Position>
             <X>3236.6177</X>
-            <Y>1339.911</Y>
+            <Y>1339.9111</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1289,7 +1291,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>14221</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -1311,7 +1312,7 @@
           <Visible>false</Visible>
           <Position>
             <X>3429.2341</X>
-            <Y>1339.911</Y>
+            <Y>1339.9111</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1346,7 +1347,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>14303</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -1368,7 +1368,7 @@
           <Visible>false</Visible>
           <Position>
             <X>3621.8506</X>
-            <Y>1339.911</Y>
+            <Y>1339.9111</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1403,7 +1403,734 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>14391</LastUpdate>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player1BlueCard</Name>
+          <Id>291</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>2504.013</X>
+            <Y>1633.8881</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player1GrayCard</Name>
+          <Id>292</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1540.931</X>
+            <Y>1633.8881</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player1GreenCard</Name>
+          <Id>293</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>2118.7803</X>
+            <Y>1633.8881</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player1RedCard</Name>
+          <Id>294</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1733.5474</X>
+            <Y>1633.8881</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player1PurpleCard</Name>
+          <Id>295</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>2311.3965</X>
+            <Y>1633.8881</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player1YellowCard</Name>
+          <Id>296</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1926.1638</X>
+            <Y>1633.8881</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player2BlueCard</Name>
+          <Id>297</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>2504.013</X>
+            <Y>526.11194</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>180</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player2GrayCard</Name>
+          <Id>298</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1540.931</X>
+            <Y>526.11194</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>180</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player2GreenCard</Name>
+          <Id>299</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>2118.7803</X>
+            <Y>526.11194</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>180</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player2RedCard</Name>
+          <Id>300</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1733.5474</X>
+            <Y>526.11194</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>180</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player2PurpleCard</Name>
+          <Id>301</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>2311.3965</X>
+            <Y>526.11194</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>180</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player2YellowCard</Name>
+          <Id>302</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1926.1638</X>
+            <Y>526.11194</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>180</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Fps>60</Fps>
+              <RotationZ>0</RotationZ>
+              <Name>placeholder</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
+        </GameObject>
+        <GameObject>
+          <Name>player2BrownCard</Name>
+          <Id>303</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1348.3147</X>
+            <Y>526.11194</Y>
+          </Position>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
+          <Rotation>180</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>1003</TextureId>
+                  <Name>placeholder</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>700</Right>
+                  <Bottom>1000</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>placeholder</Name>
@@ -1426,10 +2153,10 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1919.9996</X>
+            <X>1919.9998</X>
             <Y>1080.0002</Y>
           </Position>
-          <Width>3839.9993</Width>
+          <Width>3839.9995</Width>
           <Height>2160.0005</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -1448,7 +2175,7 @@
             <Y>1833.2223</Y>
           </Position>
           <Width>3081.862</Width>
-          <Height>653.5552</Height>
+          <Height>653.55524</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -1462,11 +2189,11 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1918.4591</X>
-            <Y>326.7776</Y>
+            <X>1918.4592</X>
+            <Y>326.77762</Y>
           </Position>
           <Width>3081.862</Width>
-          <Height>653.5552</Height>
+          <Height>653.55524</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
@@ -1484,7 +2211,7 @@
             <Y>1079.9998</Y>
           </Position>
           <Width>720</Width>
-          <Height>829.2888</Height>
+          <Height>829.28894</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -1502,7 +2229,7 @@
             <Y>1079.9998</Y>
           </Position>
           <Width>3839.326</Width>
-          <Height>829.2888</Height>
+          <Height>829.28894</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -1528,7 +2255,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
-            <Y>800.6051</Y>
+            <Y>800.60516</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1563,7 +2290,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76496</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -1583,7 +2309,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>20</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -1604,8 +2329,8 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1926.1638</X>
-            <Y>800.6051</Y>
+            <X>1926.164</X>
+            <Y>800.60516</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1640,7 +2365,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76134</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -1660,7 +2384,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -1681,8 +2404,8 @@
           <ZIndex>1</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1637.2393</X>
-            <Y>931.31616</Y>
+            <X>1637.2394</X>
+            <Y>931.3163</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1717,7 +2440,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>866</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -1737,7 +2459,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>75359</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -1758,8 +2479,8 @@
           <ZIndex>1</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1829.8556</X>
-            <Y>931.31616</Y>
+            <X>1829.8557</X>
+            <Y>931.3163</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1794,7 +2515,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>866</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -1814,7 +2534,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>75462</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -1836,7 +2555,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2022.4719</X>
-            <Y>931.31616</Y>
+            <Y>931.3163</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1871,7 +2590,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>866</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -1891,7 +2609,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>75561</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -1948,7 +2665,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76193</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -1968,7 +2684,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>321</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2025,7 +2740,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>75962</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2045,7 +2759,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>671</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2066,7 +2779,7 @@
           <ZIndex>2</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1926.1638</X>
+            <X>1926.164</X>
             <Y>1094.705</Y>
           </Position>
           <Width>144.46228</Width>
@@ -2102,7 +2815,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76429</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2122,7 +2834,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>321</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2179,7 +2890,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76178</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2199,7 +2909,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>686</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2256,7 +2965,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2285</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2276,7 +2984,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>74672</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2297,7 +3004,7 @@
           <ZIndex>3</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1637.2393</X>
+            <X>1637.2394</X>
             <Y>1225.416</Y>
           </Position>
           <Width>144.46228</Width>
@@ -2333,7 +3040,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2285</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2353,7 +3059,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>74750</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2374,7 +3079,7 @@
           <ZIndex>3</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1829.8556</X>
+            <X>1829.8557</X>
             <Y>1225.416</Y>
           </Position>
           <Width>144.46228</Width>
@@ -2410,7 +3115,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2285</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2430,7 +3134,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>74862</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2487,7 +3190,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2285</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2507,7 +3209,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>74969</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2564,7 +3265,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2285</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2584,7 +3284,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>75085</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2606,7 +3305,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1348.3147</X>
-            <Y>1356.1272</Y>
+            <Y>1356.1273</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2641,7 +3340,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76524</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2661,7 +3359,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>945</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2683,7 +3380,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1540.931</X>
-            <Y>1356.1272</Y>
+            <Y>1356.1273</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2718,7 +3415,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76635</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2738,7 +3434,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>945</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2760,7 +3455,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
-            <Y>1356.1272</Y>
+            <Y>1356.1273</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2795,7 +3490,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76825</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2815,7 +3509,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>945</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2836,8 +3529,8 @@
           <ZIndex>4</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1926.1638</X>
-            <Y>1356.1272</Y>
+            <X>1926.164</X>
+            <Y>1356.1273</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2872,7 +3565,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76717</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2892,7 +3584,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>945</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2914,7 +3605,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2118.7803</X>
-            <Y>1356.1272</Y>
+            <Y>1356.1273</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2949,7 +3640,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>76927</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -2969,7 +3659,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>945</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -2991,7 +3680,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2311.3965</X>
-            <Y>1356.1272</Y>
+            <Y>1356.1273</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -3026,7 +3715,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>77051</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3046,7 +3734,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>945</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3103,7 +3790,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3123,7 +3809,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3180,7 +3865,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3200,7 +3884,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3257,7 +3940,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3277,7 +3959,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3334,7 +4015,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3354,7 +4034,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3411,7 +4090,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3431,7 +4109,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3488,7 +4165,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3508,7 +4184,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3565,7 +4240,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3585,7 +4259,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3642,7 +4315,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3662,7 +4334,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3719,7 +4390,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3739,7 +4409,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3796,7 +4465,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3816,7 +4484,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3873,7 +4540,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3893,7 +4559,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -3950,7 +4615,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -3970,7 +4634,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4027,7 +4690,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4047,7 +4709,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4104,7 +4765,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4124,7 +4784,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4181,7 +4840,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4201,7 +4859,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4258,7 +4915,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4278,7 +4934,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4335,7 +4990,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4355,7 +5009,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4379,8 +5032,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4412,7 +5065,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4432,7 +5084,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4456,8 +5107,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4489,7 +5140,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4509,7 +5159,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4533,8 +5182,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4566,7 +5215,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4586,7 +5234,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4610,8 +5257,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4643,7 +5290,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4663,7 +5309,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4687,8 +5332,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4720,7 +5365,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4740,7 +5384,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4764,8 +5407,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4797,7 +5440,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>110932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4817,7 +5459,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4848,13 +5489,13 @@
           <Name>secondAgeCenter1</Name>
           <Id>67</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>1826.9998</X>
             <Y>869.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4886,7 +5527,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>10146</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4906,7 +5546,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>8</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -4925,13 +5564,13 @@
           <Name>secondAgeCenter2</Name>
           <Id>70</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>1971</X>
             <Y>869.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -4963,7 +5602,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9634</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -4983,7 +5621,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5002,13 +5639,13 @@
           <Name>secondAgeCenter3</Name>
           <Id>73</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
             <Y>869.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5040,7 +5677,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3381</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5060,7 +5696,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6253</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5079,13 +5714,13 @@
           <Name>secondAgeCenter4</Name>
           <Id>76</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
             <Y>869.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5117,7 +5752,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3163</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5137,7 +5771,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6473</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5156,13 +5789,13 @@
           <Name>secondAgeCenter5</Name>
           <Id>79</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
             <Y>869.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5194,7 +5827,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3189</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5214,7 +5846,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6447</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5233,13 +5864,13 @@
           <Name>secondAgeCenter6</Name>
           <Id>82</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
-            <X>2546.9998</X>
+            <X>2547</X>
             <Y>869.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5271,7 +5902,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9209</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5291,7 +5921,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>427</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5310,13 +5939,13 @@
           <Name>secondAgeCenter9</Name>
           <Id>85</Id>
           <ZIndex>1</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>1899.0001</X>
-            <Y>1013.99976</Y>
+            <Y>1013.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5348,7 +5977,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7154</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5368,7 +5996,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2482</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5387,13 +6014,13 @@
           <Name>secondAgeCenter8</Name>
           <Id>88</Id>
           <ZIndex>1</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2043.0002</X>
-            <Y>1013.99976</Y>
+            <Y>1013.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5425,7 +6052,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7835</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5445,7 +6071,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>1801</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5464,13 +6089,13 @@
           <Name>secondAgeCenter7</Name>
           <Id>91</Id>
           <ZIndex>1</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2187</X>
-            <Y>1013.99976</Y>
+            <Y>1013.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5502,7 +6127,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7490</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5522,7 +6146,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2146</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5541,13 +6164,13 @@
           <Name>secondAgeCenter10</Name>
           <Id>94</Id>
           <ZIndex>1</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
-            <Y>1013.99976</Y>
+            <Y>1013.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5579,7 +6202,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2472</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5599,7 +6221,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7164</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5618,13 +6239,13 @@
           <Name>secondAgeCenter11</Name>
           <Id>97</Id>
           <ZIndex>1</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
-            <X>2474.9998</X>
-            <Y>1013.99976</Y>
+            <X>2475</X>
+            <Y>1013.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5656,7 +6277,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2508</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5676,7 +6296,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7128</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5695,13 +6314,13 @@
           <Name>secondAgeCenter12</Name>
           <Id>100</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>1971</X>
             <Y>1109.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5733,7 +6352,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3643</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5753,7 +6371,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>5993</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5772,13 +6389,13 @@
           <Name>secondAgeCenter13</Name>
           <Id>103</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
             <Y>1109.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5810,7 +6427,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3624</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5830,7 +6446,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6012</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5849,13 +6464,13 @@
           <Name>secondAgeCenter14</Name>
           <Id>106</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
             <Y>1109.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5887,7 +6502,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3610</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5907,7 +6521,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6026</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -5926,13 +6539,13 @@
           <Name>secondAgeCenter15</Name>
           <Id>109</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
             <Y>1109.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -5964,7 +6577,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>8317</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -5984,7 +6596,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>1319</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6003,13 +6614,13 @@
           <Name>secondAgeCenter16</Name>
           <Id>112</Id>
           <ZIndex>3</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2043.0002</X>
-            <Y>1253.9995</Y>
+            <Y>1253.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6041,7 +6652,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6087</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6061,7 +6671,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3549</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6080,13 +6689,13 @@
           <Name>secondAgeCenter17</Name>
           <Id>115</Id>
           <ZIndex>3</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2187</X>
-            <Y>1253.9995</Y>
+            <Y>1253.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6118,7 +6727,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>5987</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6138,7 +6746,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3649</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6157,13 +6764,13 @@
           <Name>secondAgeCenter18</Name>
           <Id>118</Id>
           <ZIndex>3</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
-            <Y>1253.9995</Y>
+            <Y>1253.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6195,7 +6802,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>5846</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6215,7 +6821,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>3790</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6234,13 +6839,13 @@
           <Name>secondAgeCenter19</Name>
           <Id>121</Id>
           <ZIndex>4</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1349.9998</Y>
+            <Y>1349.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6272,7 +6877,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>8335</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6292,7 +6896,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>1301</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6311,13 +6914,13 @@
           <Name>secondAgeCenter20</Name>
           <Id>124</Id>
           <ZIndex>4</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1349.9998</Y>
+            <Y>1349.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6349,7 +6952,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>8335</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6369,7 +6971,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>1301</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6393,8 +6994,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6416,7 +7017,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6426,7 +7027,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6446,7 +7046,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6470,8 +7069,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6493,7 +7092,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6503,7 +7102,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6523,7 +7121,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6547,8 +7144,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6570,7 +7167,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6580,7 +7177,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6600,7 +7196,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6624,8 +7219,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6647,7 +7242,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6657,7 +7252,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6677,7 +7271,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6701,8 +7294,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6724,7 +7317,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6734,7 +7327,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6754,7 +7346,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6778,8 +7369,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6801,7 +7392,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6811,7 +7402,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6831,7 +7421,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6855,8 +7444,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6878,7 +7467,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6888,7 +7477,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6908,7 +7496,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -6932,8 +7519,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -6955,7 +7542,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -6965,7 +7552,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -6985,7 +7571,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7009,8 +7594,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7032,7 +7617,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7042,7 +7627,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7062,7 +7646,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7086,8 +7669,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7109,7 +7692,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7119,7 +7702,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7139,7 +7721,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7163,8 +7744,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7186,7 +7767,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7196,7 +7777,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7216,7 +7796,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7240,8 +7819,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7263,7 +7842,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7273,7 +7852,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7293,7 +7871,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7317,8 +7894,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7340,7 +7917,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7350,7 +7927,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7370,7 +7946,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7394,8 +7969,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7417,7 +7992,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7427,7 +8002,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7447,7 +8021,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7471,8 +8044,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7494,7 +8067,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7504,7 +8077,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7524,7 +8096,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7548,8 +8119,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7571,7 +8142,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7581,7 +8152,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7601,7 +8171,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7625,8 +8194,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7648,7 +8217,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7658,7 +8227,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7678,7 +8246,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7702,8 +8269,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7725,7 +8292,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7735,7 +8302,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7755,7 +8321,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7779,8 +8344,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7802,7 +8367,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7812,7 +8377,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7832,7 +8396,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7856,8 +8419,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7879,7 +8442,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7889,7 +8452,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7909,7 +8471,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -7933,8 +8494,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -7956,7 +8517,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -7966,7 +8527,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -7986,7 +8546,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8010,8 +8569,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8033,7 +8592,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -8043,7 +8602,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8063,7 +8621,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8087,8 +8644,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8110,7 +8667,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1005</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -8120,7 +8677,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8140,7 +8696,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8156,26 +8711,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
       </ObjectList>
-      <TextureObjects>
-        <TextureObject>
-          <Name>cardboard</Name>
-          <Id>66</Id>
-          <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
-          <Position>
-            <X>1919.9996</X>
-            <Y>1079.9998</Y>
-          </Position>
-          <Width>3839.9993</Width>
-          <Height>959.9999</Height>
-          <Rotation>0</Rotation>
-          <Scale>
-            <X>1</X>
-            <Y>1</Y>
-          </Scale>
-          <TextureId>1001</TextureId>
-        </TextureObject>
-      </TextureObjects>
+      <TextureObjects />
       <Buttons />
       <TextLabels />
       <Visible>false</Visible>
@@ -8190,13 +8726,13 @@
           <Name>thirdAgeCenter1</Name>
           <Id>129</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
             <Y>762.00006</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8228,7 +8764,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>10942</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8248,7 +8783,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>8</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8267,13 +8801,13 @@
           <Name>thirdAgeCenter2</Name>
           <Id>132</Id>
           <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
             <Y>762.00006</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8305,7 +8839,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>10430</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8325,7 +8858,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8344,13 +8876,13 @@
           <Name>thirdAgeCenter3</Name>
           <Id>135</Id>
           <ZIndex>1</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2043.0002</X>
             <Y>858</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8382,7 +8914,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>866</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8402,7 +8933,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9566</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8421,13 +8951,13 @@
           <Name>thirdAgeCenter4</Name>
           <Id>138</Id>
           <ZIndex>1</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2187</X>
             <Y>858</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8459,7 +8989,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>866</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8479,7 +9008,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9566</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8498,13 +9026,13 @@
           <Name>thirdAgeCenter5</Name>
           <Id>141</Id>
           <ZIndex>10</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
             <Y>858</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8536,7 +9064,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>884</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8556,7 +9083,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9548</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8575,13 +9101,13 @@
           <Name>thirdAgeCenter6</Name>
           <Id>144</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>1971</X>
-            <Y>1001.9997</Y>
+            <Y>1001.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8613,7 +9139,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>10005</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8633,7 +9158,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>427</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8652,13 +9176,13 @@
           <Name>thirdAgeCenter9</Name>
           <Id>147</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1001.9997</Y>
+            <Y>1001.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8690,7 +9214,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9635</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8710,7 +9233,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>797</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8729,13 +9251,13 @@
           <Name>thirdAgeCenter8</Name>
           <Id>150</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1001.9997</Y>
+            <Y>1001.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8767,7 +9289,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9969</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8787,7 +9308,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>463</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8806,13 +9326,13 @@
           <Name>thirdAgeCenter7</Name>
           <Id>153</Id>
           <ZIndex>2</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
-            <Y>1001.9997</Y>
+            <Y>1001.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8844,7 +9364,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9586</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8864,7 +9383,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>846</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8883,13 +9401,13 @@
           <Name>thirdAgeCenter10</Name>
           <Id>156</Id>
           <ZIndex>3</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2043.0002</X>
             <Y>1097.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8921,7 +9439,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2501</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -8941,7 +9458,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7931</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -8960,13 +9476,13 @@
           <Name>thirdAgeCenter11</Name>
           <Id>159</Id>
           <ZIndex>3</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
             <Y>1097.9999</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -8998,7 +9514,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2508</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9018,7 +9533,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7924</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9037,13 +9551,13 @@
           <Name>thirdAgeCenter12</Name>
           <Id>162</Id>
           <ZIndex>4</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>1971</X>
             <Y>1241.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9075,7 +9589,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>4106</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9095,7 +9608,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6326</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9114,13 +9626,13 @@
           <Name>thirdAgeCenter13</Name>
           <Id>165</Id>
           <ZIndex>4</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
             <Y>1241.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9152,7 +9664,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>4080</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9172,7 +9683,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6352</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9191,13 +9701,13 @@
           <Name>thirdAgeCenter14</Name>
           <Id>168</Id>
           <ZIndex>4</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
             <Y>1241.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9229,7 +9739,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>4071</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9249,7 +9758,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>6361</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9268,13 +9776,13 @@
           <Name>thirdAgeCenter15</Name>
           <Id>171</Id>
           <ZIndex>4</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
             <Y>1241.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9306,7 +9814,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9134</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9326,7 +9833,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>1298</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9345,13 +9851,13 @@
           <Name>thirdAgeCenter16</Name>
           <Id>174</Id>
           <ZIndex>5</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2043.0002</X>
             <Y>1337.9995</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9383,7 +9889,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7735</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9403,7 +9908,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2697</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9422,13 +9926,13 @@
           <Name>thirdAgeCenter17</Name>
           <Id>177</Id>
           <ZIndex>5</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2187</X>
             <Y>1337.9995</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9460,7 +9964,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7761</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9480,7 +9983,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2671</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9499,13 +10001,13 @@
           <Name>thirdAgeCenter18</Name>
           <Id>180</Id>
           <ZIndex>5</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
             <Y>1337.9995</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9537,7 +10039,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>7788</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9557,7 +10058,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>2644</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9576,13 +10076,13 @@
           <Name>thirdAgeCenter19</Name>
           <Id>183</Id>
           <ZIndex>6</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
             <Y>1481.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9614,7 +10114,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9131</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9634,7 +10133,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>1301</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9653,13 +10151,13 @@
           <Name>thirdAgeCenter20</Name>
           <Id>186</Id>
           <ZIndex>6</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
             <Y>1481.9998</Y>
           </Position>
-          <Width>99.99999</Width>
-          <Height>199.99997</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9691,7 +10189,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>9131</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9711,7 +10208,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>1301</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9735,8 +10231,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9758,7 +10254,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -9768,7 +10264,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9788,7 +10283,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9812,8 +10306,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9835,7 +10329,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -9845,7 +10339,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9865,7 +10358,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9889,8 +10381,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9912,7 +10404,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -9922,7 +10414,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -9942,7 +10433,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -9966,8 +10456,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -9989,7 +10479,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -9999,7 +10489,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10019,7 +10508,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10043,8 +10531,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10066,7 +10554,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10076,7 +10564,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10096,7 +10583,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10120,8 +10606,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10143,7 +10629,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10153,7 +10639,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10173,7 +10658,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10197,8 +10681,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10220,7 +10704,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10230,7 +10714,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10250,7 +10733,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10274,8 +10756,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10297,7 +10779,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10307,7 +10789,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10327,7 +10808,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10351,8 +10831,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10374,7 +10854,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10384,7 +10864,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10404,7 +10883,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10428,8 +10906,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10451,7 +10929,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10461,7 +10939,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10481,7 +10958,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10505,8 +10981,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10528,7 +11004,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10538,7 +11014,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10558,7 +11033,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10582,8 +11056,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10605,7 +11079,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10615,7 +11089,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10635,7 +11108,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10659,8 +11131,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10682,7 +11154,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10692,7 +11164,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10712,7 +11183,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10736,8 +11206,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10759,7 +11229,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10769,7 +11239,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10789,7 +11258,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10813,8 +11281,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10836,7 +11304,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10846,7 +11314,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10866,7 +11333,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10890,8 +11356,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10913,7 +11379,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -10923,7 +11389,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -10943,7 +11408,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -10967,8 +11431,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -10990,7 +11454,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11000,7 +11464,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11020,7 +11483,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11044,8 +11506,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11067,7 +11529,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11077,7 +11539,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11097,7 +11558,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11121,8 +11581,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11144,7 +11604,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11154,7 +11614,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11174,7 +11633,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11198,8 +11656,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11221,7 +11679,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11231,7 +11689,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11251,7 +11708,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11275,8 +11731,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11298,7 +11754,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11308,7 +11764,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11328,7 +11783,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11352,8 +11806,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11375,7 +11829,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11385,7 +11839,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11405,7 +11858,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11429,8 +11881,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11452,7 +11904,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11462,7 +11914,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11482,7 +11933,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11506,8 +11956,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11529,7 +11979,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11539,7 +11989,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11559,7 +12008,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11583,8 +12031,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11606,7 +12054,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11616,7 +12064,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11636,7 +12083,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11660,8 +12106,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11683,7 +12129,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11693,7 +12139,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11713,7 +12158,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11737,8 +12181,8 @@
             <X>3505.6177</X>
             <Y>714.5865</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11760,7 +12204,7 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>1004</TextureId>
+                  <TextureId>1006</TextureId>
                   <Name>back</Name>
                   <Left>0</Left>
                   <Top>0</Top>
@@ -11770,7 +12214,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>53278</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11790,7 +12233,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11806,26 +12248,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
       </ObjectList>
-      <TextureObjects>
-        <TextureObject>
-          <Name>cardboard</Name>
-          <Id>128</Id>
-          <ZIndex>0</ZIndex>
-          <Visible>true</Visible>
-          <Position>
-            <X>1919.9996</X>
-            <Y>1079.9998</Y>
-          </Position>
-          <Width>3839.9993</Width>
-          <Height>959.9999</Height>
-          <Rotation>0</Rotation>
-          <Scale>
-            <X>1</X>
-            <Y>1</Y>
-          </Scale>
-          <TextureId>1001</TextureId>
-        </TextureObject>
-      </TextureObjects>
+      <TextureObjects />
       <Buttons />
       <TextLabels />
       <Visible>false</Visible>
@@ -11845,8 +12268,8 @@
             <X>385.23276</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11878,7 +12301,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>22243</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11898,7 +12320,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>203717</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11922,8 +12343,8 @@
             <X>1040.1284</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -11955,7 +12376,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>20182</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -11975,7 +12395,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>204932</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -11996,11 +12415,11 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1695.0242</X>
+            <X>1695.024</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12032,7 +12451,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>18555</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12052,7 +12470,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>206157</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12076,8 +12493,8 @@
             <X>2349.92</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12109,7 +12526,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>17918</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12129,7 +12545,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>206415</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12150,11 +12565,11 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>3004.8154</X>
+            <X>3004.8157</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12186,7 +12601,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>17391</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12206,7 +12620,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>206722</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12228,10 +12641,10 @@
           <Visible>true</Visible>
           <Position>
             <X>385.23276</X>
-            <Y>653.5552</Y>
+            <Y>653.55524</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12263,7 +12676,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>16869</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12283,7 +12695,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>207052</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12305,10 +12716,10 @@
           <Visible>true</Visible>
           <Position>
             <X>1040.1284</X>
-            <Y>653.5552</Y>
+            <Y>653.55524</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12340,7 +12751,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>16076</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12360,7 +12770,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>207635</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12381,11 +12790,11 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1695.0242</X>
-            <Y>653.5552</Y>
+            <X>1695.024</X>
+            <Y>653.55524</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12417,7 +12826,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>15144</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12437,7 +12845,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>208370</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12459,10 +12866,10 @@
           <Visible>true</Visible>
           <Position>
             <X>2349.92</X>
-            <Y>653.5552</Y>
+            <Y>653.55524</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12494,7 +12901,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>14691</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12514,7 +12920,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>208631</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12535,11 +12940,11 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>3004.8154</X>
-            <Y>653.5552</Y>
+            <X>3004.8157</X>
+            <Y>653.55524</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12571,7 +12976,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>14228</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12591,7 +12995,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>208921</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12615,8 +13018,8 @@
             <X>385.23276</X>
             <Y>1062.0272</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12648,7 +13051,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>13720</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12668,7 +13070,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>209241</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12692,8 +13093,8 @@
             <X>1040.1284</X>
             <Y>1062.0272</Y>
           </Position>
-          <Width>577.8491</Width>
-          <Height>343.1165</Height>
+          <Width>462.2793</Width>
+          <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12725,7 +13126,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>98034</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12745,7 +13145,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>0</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>back</Name>
@@ -12775,14 +13174,14 @@
         <GameObject>
           <Name>CardActionLocation</Name>
           <Id>273</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>10</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1921.3484</X>
-            <Y>1080.0001</Y>
+            <Y>1112.678</Y>
           </Position>
-          <Width>101.12358</Width>
-          <Height>162.40602</Height>
+          <Width>144.46228</Width>
+          <Height>245.0832</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -12793,8 +13192,8 @@
             <Y>0</Y>
           </Direction>
           <VisualSize>
-            <X>4</X>
-            <Y>4</Y>
+            <X>3</X>
+            <Y>3</Y>
           </VisualSize>
           <FlipMultiplier>
             <X>1</X>
@@ -12814,7 +13213,6 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <LastUpdate>13783</LastUpdate>
               <Fps>60</Fps>
               <RotationZ>0</RotationZ>
               <Name>front</Name>
@@ -12835,13 +13233,13 @@
         <ButtonObject>
           <Name>BuildWonder</Name>
           <Id>272</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>5</ZIndex>
           <Visible>true</Visible>
           <Position>
             <X>1309.7914</X>
-            <Y>1080.0001</Y>
+            <Y>1080.0002</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12850,19 +13248,19 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Wonder</Text>
-          <FontSize>1.3121492</FontSize>
+          <FontSize>32.91838</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
           <Name>BuildCard</Name>
           <Id>274</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>5</ZIndex>
           <Visible>true</Visible>
           <Position>
             <X>2542.5361</X>
-            <Y>1080.0001</Y>
+            <Y>1080.0002</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12871,19 +13269,19 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Card</Text>
-          <FontSize>1.3121492</FontSize>
+          <FontSize>32.91838</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
           <Name>SellCard</Name>
           <Id>275</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>5</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1926.1638</X>
+            <X>1926.164</X>
             <Y>1668.1998</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12892,19 +13290,19 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Sell Card</Text>
-          <FontSize>1.3121492</FontSize>
+          <FontSize>32.91838</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
           <Name>UnpickCard</Name>
           <Id>276</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>5</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1926.1638</X>
+            <X>1926.164</X>
             <Y>589.83356</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12913,7 +13311,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Unpick Card</Text>
-          <FontSize>1.3121492</FontSize>
+          <FontSize>32.91838</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
       </Buttons>
@@ -13709,6 +14107,69 @@
       <Color />
       <FileName>WonderPlace.png</FileName>
       <Id>278</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1408</OriginalWidth>
+      <OriginalHeight>768</OriginalHeight>
+      <Color />
+      <FileName>building.png</FileName>
+      <Id>284</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1408</OriginalWidth>
+      <OriginalHeight>768</OriginalHeight>
+      <Color />
+      <FileName>geography.png</FileName>
+      <Id>285</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1408</OriginalWidth>
+      <OriginalHeight>768</OriginalHeight>
+      <Color />
+      <FileName>healing.png</FileName>
+      <Id>286</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1408</OriginalWidth>
+      <OriginalHeight>768</OriginalHeight>
+      <Color />
+      <FileName>mechanics.png</FileName>
+      <Id>287</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1408</OriginalWidth>
+      <OriginalHeight>768</OriginalHeight>
+      <Color />
+      <FileName>physics.png</FileName>
+      <Id>288</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1408</OriginalWidth>
+      <OriginalHeight>768</OriginalHeight>
+      <Color />
+      <FileName>trading.png</FileName>
+      <Id>289</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1408</OriginalWidth>
+      <OriginalHeight>768</OriginalHeight>
+      <Color />
+      <FileName>writing.png</FileName>
+      <Id>290</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <Color />
+      <FileName>VictoryPoints.png</FileName>
+      <Id>291</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>Slash.png</FileName>
+      <Id>292</Id>
     </Texture>
   </Textures>
   <Name>scene</Name>

@@ -79,6 +79,9 @@ namespace SevenWondersUI
             m_game.Context.EventManager.Subscribe<OnCardUnpicked>(eventObj => {
                 m_cardPresenter.MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName);
             });
+            m_game.Context.EventManager.Subscribe<OnCardBuilt>(eventObj => {
+                m_cardPresenter.MoveToPlayer(eventObj.Builder, eventObj.Card);
+            });
             _ = Task.Run(m_game.GameLoop);
 
         }
