@@ -14,29 +14,30 @@ namespace SevenWonders.Presenter.PlayerActionWaiters
         }
         public PickCard WaitForPlayerAction(ICollection<PickCard> playerActions)
         {
-            PickCard? result = null;
-            while(result is null)
-            {
-                Card? card = null;
-                m_cardPresenter.CardChosen += (c) => {
-                    card = c;
-                };
-                while (card is null)
-                {
-                    Thread.Sleep(100);
-                }
+            Card? card = null;
+            using var signal = new ManualResetEventSlim(false);
+            m_cardPresenter.CardChosen += (c) => {
+                card = c; signal.Set();
+            };
 
-                foreach (PickCard action in playerActions)
+            while (card is null)
+            {
+                signal.Wait();
+
+                if (card is not null)
                 {
-                    if (action.CardNode.CardObj.Name == card.Name)
+                    foreach (PickCard action in playerActions)
                     {
-                        m_cardPresenter.MoveToPlayer(action.Player, card);
-                        result = action;
+                        if (action.CardNode.CardObj.Name == card.Name)
+                        {
+                            return action;
+                        }
                     }
+                    card = null;
                 }
             }
 
-            return result;
+            throw new InvalidOperationException($"No matching pick card action.");
         }
 
         private readonly ICardPresenter m_cardPresenter;

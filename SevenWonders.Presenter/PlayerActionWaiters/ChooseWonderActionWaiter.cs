@@ -15,23 +15,30 @@ namespace SevenWonders.Presenter.PlayerActionWaiters
         public ChooseWonderAction WaitForPlayerAction(ICollection<ChooseWonderAction> playerActions)
         {
             Wonder? wonder = null;
+            using var signal = new ManualResetEventSlim(false);
             m_wonderPresenter.WonderChosen += (w) => {
-                wonder = w;
+                wonder = w; signal.Set();
             };
-            while (wonder is null) {
-                Thread.Sleep(100);
-            }
 
-            foreach (ChooseWonderAction action in playerActions)
+            while (wonder is null)
             {
-                if (action.Wonder.Name == wonder.Name)
+                signal.Wait();
+
+                if (wonder is not null)
                 {
-                    m_wonderPresenter.MoveToPlayer(action.Player, wonder);
-                    return action;
+                    foreach (ChooseWonderAction action in playerActions)
+                    {
+                        if (action.Wonder.Name == wonder.Name)
+                        {
+                            m_wonderPresenter.MoveToPlayer(action.Player, wonder);
+                            return action;
+                        }
+                    }
+                    wonder = null;
                 }
             }
 
-            throw new InvalidOperationException("Chosen wonder is not among the choosable wonders!");
+            throw new InvalidOperationException($"No matching wonder action.");
         }
 
         private readonly IWonderPresenter m_wonderPresenter;
