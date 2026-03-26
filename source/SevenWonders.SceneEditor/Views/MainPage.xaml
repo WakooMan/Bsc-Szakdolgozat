@@ -52,6 +52,8 @@
                     Clicked="OnGameObjectsClicked" />
                         <Button Text="Buttons"
                     Clicked="OnButtonsClicked" />
+                        <Button Text="TextLabels"
+                    Clicked="OnTextLabelsClicked" />
                     </HorizontalStackLayout>
 
                     <Grid x:Name="TabContentArea">
@@ -442,6 +444,125 @@
                                        HorizontalTextAlignment="Center"/>
                                 <Button Text="Copy Button" Background="Black" Clicked="Copy_Selected_Button_Clicked" IsEnabled="{Binding ButtonContentsViewModel.IsCopyEnabled}"/>
                                 <Button Text="Delete" Background="Black" Clicked="Delete_Selected_Button_Clicked"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Grid x:Name="TextLabelsContent" IsVisible="False" VerticalOptions="Fill">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Picker Title="Select a TextLabel"
+                                    ItemsSource="{Binding TextLabelContentsViewModel.TextLabelViews}"
+                                    SelectedItem="{Binding TextLabelContentsViewModel.SelectedTextLabelView, Mode=TwoWay}"
+                                    Grid.Row="0"/>
+                            <Button Text="Add TextLabel" Background="Black" Clicked="Add_New_TextLabel_Clicked" Grid.Row="1"/>
+                            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding TextLabelContentsViewModel.IsSelectedTextLabelAvailable}">
+                                <Label Text="Selected TextLabel name:"/>
+                                <Entry MaxLength="40"
+                                       Text="{Binding TextLabelContentsViewModel.SelectedTextLabelName, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <HorizontalStackLayout HorizontalOptions="Center">
+                                    <Label Text="Is Visible: " HorizontalOptions="Center"/>
+                                    <CheckBox IsChecked="{Binding TextLabelContentsViewModel.SelectedTextLabelVisible, Mode=TwoWay}" />
+                                </HorizontalStackLayout>
+                                <Label Text="Text:"/>
+                                <Entry MaxLength="100"
+                                       Text="{Binding TextLabelContentsViewModel.SelectedTextLabelText, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Font Size:"/>
+                                <Entry MaxLength="10"
+                                       Keyboard="Numeric"
+                                       Text="{Binding TextLabelContentsViewModel.SelectedTextLabelFontSize, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Text Color (hex):"/>
+                                <Entry MaxLength="9"
+                                       Text="{Binding TextLabelContentsViewModel.SelectedTextLabelTextColorHex, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Position:"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="X: "/>
+                                    <Entry MaxLength="10"
+                                           Keyboard="Numeric"
+                                           Text="{Binding TextLabelContentsViewModel.SelectedTextLabelPositionX, Mode=TwoWay}"
+                                           TextColor="White"
+                                           Background="Gray"
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="Y: "/>
+                                    <Entry MaxLength="10"
+                                           Keyboard="Numeric"
+                                           Text="{Binding TextLabelContentsViewModel.SelectedTextLabelPositionY, Mode=TwoWay}"
+                                           TextColor="White"
+                                           Background="Gray"
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <Label Text="Rotation:"/>
+                                <Entry MaxLength="10"
+                                       Keyboard="Numeric"
+                                       Text="{Binding TextLabelContentsViewModel.SelectedTextLabelRotation, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Scale:"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="X: "/>
+                                    <Entry MaxLength="10"
+                                           Keyboard="Numeric"
+                                           Text="{Binding TextLabelContentsViewModel.SelectedTextLabelScaleX, Mode=TwoWay}"
+                                           TextColor="White"
+                                           Background="Gray"
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="Y: "/>
+                                    <Entry MaxLength="10"
+                                           Keyboard="Numeric"
+                                           Text="{Binding TextLabelContentsViewModel.SelectedTextLabelScaleY, Mode=TwoWay}"
+                                           TextColor="White"
+                                           Background="Gray"
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="ZIndex: "/>
+                                    <Entry MaxLength="10"
+                                           Keyboard="Numeric"
+                                           Text="{Binding TextLabelContentsViewModel.SelectedTextLabelZIndex, Mode=TwoWay}"
+                                           TextColor="White"
+                                           Background="Gray"
+                                           HorizontalTextAlignment="Center"/>
+                                </HorizontalStackLayout>
+                                <Label Text="Width:"/>
+                                <Entry MaxLength="10"
+                                       Keyboard="Numeric"
+                                       Text="{Binding TextLabelContentsViewModel.SelectedTextLabelWidth, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Height:"/>
+                                <Entry MaxLength="10"
+                                       Keyboard="Numeric"
+                                       Text="{Binding TextLabelContentsViewModel.SelectedTextLabelHeight, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Copied TextLabel name:"/>
+                                <Entry MaxLength="40"
+                                       Text="{Binding TextLabelContentsViewModel.CopyName, Mode=TwoWay}"
+                                       TextColor="White"
+                                       Background="Gray"
+                                       HorizontalTextAlignment="Center"/>
+                                <Button Text="Copy TextLabel" Background="Black" Clicked="Copy_Selected_TextLabel_Clicked" IsEnabled="{Binding TextLabelContentsViewModel.IsCopyEnabled}"/>
+                                <Button Text="Delete" Background="Black" Clicked="Delete_Selected_TextLabel_Clicked"/>
                             </VerticalStackLayout>
                         </Grid>
                     </Grid>

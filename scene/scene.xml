@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Scene xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Id>591940ea-94f7-4bab-9f99-e2f153941722</Id>
-  <BiggestId>304</BiggestId>
+  <BiggestId>308</BiggestId>
   <Layers>
     <GraphicsLayer>
       <ObjectList>
@@ -12,9 +12,9 @@
           <Visible>false</Visible>
           <Position>
             <X>3490.8713</X>
-            <Y>948.74304</Y>
+            <Y>948.7431</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>270</Rotation>
           <Scale>
@@ -68,7 +68,7 @@
           <Visible>false</Visible>
           <Position>
             <X>3159.571</X>
-            <Y>833.4059</Y>
+            <Y>833.40594</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -127,7 +127,7 @@
             <Y>881.64984</Y>
           </Position>
           <Width>224.99998</Width>
-          <Height>204.20164</Height>
+          <Height>204.20166</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -180,10 +180,10 @@
           <Visible>true</Visible>
           <Position>
             <X>215.73036</X>
-            <Y>1082.9546</Y>
+            <Y>1082.9547</Y>
           </Position>
           <Width>224.99998</Width>
-          <Height>204.20164</Height>
+          <Height>204.20166</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -236,10 +236,10 @@
           <Visible>true</Visible>
           <Position>
             <X>216.99437</X>
-            <Y>1281.0507</Y>
+            <Y>1281.0508</Y>
           </Position>
           <Width>224.99998</Width>
-          <Height>204.20164</Height>
+          <Height>204.20166</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -295,7 +295,7 @@
             <Y>1066.3866</Y>
           </Position>
           <Width>45</Width>
-          <Height>40.840343</Height>
+          <Height>40.840347</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -348,9 +348,9 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>876.9927</Y>
+            <Y>876.99274</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -404,9 +404,9 @@
           <Visible>false</Visible>
           <Position>
             <X>2359.5508</X>
-            <Y>876.9927</Y>
+            <Y>876.99274</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -460,9 +460,9 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>1274.4326</Y>
+            <Y>1274.4327</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -516,9 +516,9 @@
           <Visible>false</Visible>
           <Position>
             <X>2359.5508</X>
-            <Y>1274.4326</Y>
+            <Y>1274.4327</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -572,7 +572,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>876.9927</Y>
+            <Y>876.99274</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -608,7 +608,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2359.5508</X>
-            <Y>876.9927</Y>
+            <Y>876.99274</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -644,7 +644,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>1274.4326</Y>
+            <Y>1274.4327</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -680,7 +680,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2359.5508</X>
-            <Y>1274.4326</Y>
+            <Y>1274.4327</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -718,7 +718,7 @@
             <X>936.11566</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -774,7 +774,7 @@
             <X>1591.0115</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -830,7 +830,7 @@
             <X>2245.907</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -886,7 +886,7 @@
             <X>2900.8027</X>
             <Y>1927.9878</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -942,7 +942,7 @@
             <X>936.11566</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
@@ -998,7 +998,7 @@
             <X>1591.0115</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
@@ -1054,7 +1054,7 @@
             <X>2245.907</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
@@ -1110,7 +1110,7 @@
             <X>2900.8027</X>
             <Y>228.74432</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>180</Rotation>
           <Scale>
@@ -1164,7 +1164,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1348.3147</X>
-            <Y>1633.8881</Y>
+            <Y>1633.8882</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1220,7 +1220,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1685.3933</X>
-            <Y>1997.594</Y>
+            <Y>1997.5941</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -1424,7 +1424,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2504.013</X>
-            <Y>1633.8881</Y>
+            <Y>1633.8882</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1480,7 +1480,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1540.931</X>
-            <Y>1633.8881</Y>
+            <Y>1633.8882</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1536,7 +1536,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2118.7803</X>
-            <Y>1633.8881</Y>
+            <Y>1633.8882</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1592,7 +1592,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
-            <Y>1633.8881</Y>
+            <Y>1633.8882</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1648,7 +1648,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2311.3965</X>
-            <Y>1633.8881</Y>
+            <Y>1633.8882</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1703,8 +1703,8 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1926.1638</X>
-            <Y>1633.8881</Y>
+            <X>1926.164</X>
+            <Y>1633.8882</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1760,7 +1760,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2504.013</X>
-            <Y>526.11194</Y>
+            <Y>526.112</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1816,7 +1816,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1540.931</X>
-            <Y>526.11194</Y>
+            <Y>526.112</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1872,7 +1872,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2118.7803</X>
-            <Y>526.11194</Y>
+            <Y>526.112</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1928,7 +1928,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
-            <Y>526.11194</Y>
+            <Y>526.112</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -1984,7 +1984,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2311.3965</X>
-            <Y>526.11194</Y>
+            <Y>526.112</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2039,8 +2039,8 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1926.1638</X>
-            <Y>526.11194</Y>
+            <X>1926.164</X>
+            <Y>526.112</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2096,7 +2096,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1348.3147</X>
-            <Y>526.11194</Y>
+            <Y>526.112</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2153,10 +2153,10 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1919.9998</X>
+            <X>1919.9999</X>
             <Y>1080.0002</Y>
           </Position>
-          <Width>3839.9995</Width>
+          <Width>3839.9998</Width>
           <Height>2160.0005</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -2172,10 +2172,10 @@
           <Visible>true</Visible>
           <Position>
             <X>1920</X>
-            <Y>1833.2223</Y>
+            <Y>1833.2224</Y>
           </Position>
           <Width>3081.862</Width>
-          <Height>653.55524</Height>
+          <Height>653.5553</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -2189,11 +2189,11 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>1918.4592</X>
-            <Y>326.77762</Y>
+            <X>1918.4594</X>
+            <Y>326.77765</Y>
           </Position>
           <Width>3081.862</Width>
-          <Height>653.55524</Height>
+          <Height>653.5553</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
@@ -2211,7 +2211,7 @@
             <Y>1079.9998</Y>
           </Position>
           <Width>720</Width>
-          <Height>829.28894</Height>
+          <Height>829.28906</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -2229,7 +2229,7 @@
             <Y>1079.9998</Y>
           </Position>
           <Width>3839.326</Width>
-          <Height>829.28894</Height>
+          <Height>829.28906</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
@@ -2239,7 +2239,92 @@
         </TextureObject>
       </TextureObjects>
       <Buttons />
-      <TextLabels />
+      <TextLabels>
+        <TextLabel>
+          <Name>player1Money</Name>
+          <Id>304</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>228.57144</X>
+            <Y>1692.5374</Y>
+          </Position>
+          <Width>285.7143</Width>
+          <Height>201.49255</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <BackgroundTextureId>1109</BackgroundTextureId>
+          <Text>0</Text>
+          <FontSize>108.80598</FontSize>
+          <TextColorHex>#ffffffff</TextColorHex>
+        </TextLabel>
+        <TextLabel>
+          <Name>player1Points</Name>
+          <Id>305</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>228.57144</X>
+            <Y>1894.0299</Y>
+          </Position>
+          <Width>285.7143</Width>
+          <Height>201.49255</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <BackgroundTextureId>291</BackgroundTextureId>
+          <Text>0</Text>
+          <FontSize>108.80598</FontSize>
+          <TextColorHex>#ffffffff</TextColorHex>
+        </TextLabel>
+        <TextLabel>
+          <Name>player2Points</Name>
+          <Id>306</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>3611.4287</X>
+            <Y>265.97015</Y>
+          </Position>
+          <Width>285.7143</Width>
+          <Height>201.49255</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <BackgroundTextureId>291</BackgroundTextureId>
+          <Text>0</Text>
+          <FontSize>108.80598</FontSize>
+          <TextColorHex>#ffffffff</TextColorHex>
+        </TextLabel>
+        <TextLabel>
+          <Name>player2Money</Name>
+          <Id>307</Id>
+          <ZIndex>0</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>3611.4287</X>
+            <Y>467.4627</Y>
+          </Position>
+          <Width>285.7143</Width>
+          <Height>201.49255</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <BackgroundTextureId>1109</BackgroundTextureId>
+          <Text>0</Text>
+          <FontSize>108.80598</FontSize>
+          <TextColorHex>#ffffffff</TextColorHex>
+        </TextLabel>
+      </TextLabels>
       <Visible>true</Visible>
       <EnableCollision>true</EnableCollision>
       <Name>background</Name>
@@ -2255,7 +2340,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
-            <Y>800.60516</Y>
+            <Y>800.6052</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2330,7 +2415,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1926.164</X>
-            <Y>800.60516</Y>
+            <Y>800.6052</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2405,7 +2490,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1637.2394</X>
-            <Y>931.3163</Y>
+            <Y>931.31635</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2479,8 +2564,8 @@
           <ZIndex>1</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1829.8557</X>
-            <Y>931.3163</Y>
+            <X>1829.8558</X>
+            <Y>931.31635</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2555,7 +2640,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2022.4719</X>
-            <Y>931.3163</Y>
+            <Y>931.31635</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -2930,7 +3015,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1444.6228</X>
-            <Y>1225.416</Y>
+            <Y>1225.4161</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -3005,7 +3090,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1637.2394</X>
-            <Y>1225.416</Y>
+            <Y>1225.4161</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -3079,8 +3164,8 @@
           <ZIndex>3</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>1829.8557</X>
-            <Y>1225.416</Y>
+            <X>1829.8558</X>
+            <Y>1225.4161</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -3155,7 +3240,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2022.4719</X>
-            <Y>1225.416</Y>
+            <Y>1225.4161</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -3230,7 +3315,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2215.0884</X>
-            <Y>1225.416</Y>
+            <Y>1225.4161</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -5492,7 +5577,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1826.9998</X>
-            <Y>869.9998</Y>
+            <Y>869.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -5567,7 +5652,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1971</X>
-            <Y>869.9998</Y>
+            <Y>869.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -5642,7 +5727,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>869.9998</Y>
+            <Y>869.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -5717,7 +5802,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>869.9998</Y>
+            <Y>869.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -5792,7 +5877,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
-            <Y>869.9998</Y>
+            <Y>869.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -5867,7 +5952,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2547</X>
-            <Y>869.9998</Y>
+            <Y>869.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -5942,7 +6027,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1899.0001</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99994</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -6016,8 +6101,8 @@
           <ZIndex>1</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2043.0002</X>
-            <Y>1013.9998</Y>
+            <X>2043.0004</X>
+            <Y>1013.99994</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -6092,7 +6177,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2187</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99994</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -6167,7 +6252,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99994</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -6242,7 +6327,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2475</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99994</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -6616,7 +6701,7 @@
           <ZIndex>3</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2043.0002</X>
+            <X>2043.0004</X>
             <Y>1253.9998</Y>
           </Position>
           <Width>144.46228</Width>
@@ -6842,7 +6927,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1349.9999</Y>
+            <Y>1350</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -6917,7 +7002,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1349.9999</Y>
+            <Y>1350</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -8729,7 +8814,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>762.00006</Y>
+            <Y>762.0001</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -8804,7 +8889,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>762.00006</Y>
+            <Y>762.0001</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -8878,7 +8963,7 @@
           <ZIndex>1</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2043.0002</X>
+            <X>2043.0004</X>
             <Y>858</Y>
           </Position>
           <Width>144.46228</Width>
@@ -9104,7 +9189,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1971</X>
-            <Y>1001.9999</Y>
+            <Y>1002</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9179,7 +9264,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1001.9999</Y>
+            <Y>1002</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9254,7 +9339,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1001.9999</Y>
+            <Y>1002</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9329,7 +9414,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
-            <Y>1001.9999</Y>
+            <Y>1002</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9403,8 +9488,8 @@
           <ZIndex>3</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2043.0002</X>
-            <Y>1097.9999</Y>
+            <X>2043.0004</X>
+            <Y>1098</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9479,7 +9564,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
-            <Y>1097.9999</Y>
+            <Y>1098</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9554,7 +9639,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1971</X>
-            <Y>1241.9998</Y>
+            <Y>1241.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9629,7 +9714,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1241.9998</Y>
+            <Y>1241.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9704,7 +9789,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1241.9998</Y>
+            <Y>1241.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9779,7 +9864,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
-            <Y>1241.9998</Y>
+            <Y>1241.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -9853,7 +9938,7 @@
           <ZIndex>5</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>2043.0002</X>
+            <X>2043.0004</X>
             <Y>1337.9995</Y>
           </Position>
           <Width>144.46228</Width>
@@ -10079,7 +10164,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1481.9998</Y>
+            <Y>1481.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -10154,7 +10239,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1481.9998</Y>
+            <Y>1481.9999</Y>
           </Position>
           <Width>144.46228</Width>
           <Height>245.0832</Height>
@@ -12268,7 +12353,7 @@
             <X>385.23276</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12343,7 +12428,7 @@
             <X>1040.1284</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12418,7 +12503,7 @@
             <X>1695.024</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12493,7 +12578,7 @@
             <X>2349.92</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12565,10 +12650,10 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>3004.8157</X>
+            <X>3004.816</X>
             <Y>245.0832</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12641,9 +12726,9 @@
           <Visible>true</Visible>
           <Position>
             <X>385.23276</X>
-            <Y>653.55524</Y>
+            <Y>653.5553</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12716,9 +12801,9 @@
           <Visible>true</Visible>
           <Position>
             <X>1040.1284</X>
-            <Y>653.55524</Y>
+            <Y>653.5553</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12791,9 +12876,9 @@
           <Visible>true</Visible>
           <Position>
             <X>1695.024</X>
-            <Y>653.55524</Y>
+            <Y>653.5553</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12866,9 +12951,9 @@
           <Visible>true</Visible>
           <Position>
             <X>2349.92</X>
-            <Y>653.55524</Y>
+            <Y>653.5553</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -12940,10 +13025,10 @@
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
-            <X>3004.8157</X>
-            <Y>653.55524</Y>
+            <X>3004.816</X>
+            <Y>653.5553</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -13016,9 +13101,9 @@
           <Visible>true</Visible>
           <Position>
             <X>385.23276</X>
-            <Y>1062.0272</Y>
+            <Y>1062.0273</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -13091,9 +13176,9 @@
           <Visible>true</Visible>
           <Position>
             <X>1040.1284</X>
-            <Y>1062.0272</Y>
+            <Y>1062.0273</Y>
           </Position>
-          <Width>462.2793</Width>
+          <Width>462.27933</Width>
           <Height>261.4221</Height>
           <Rotation>0</Rotation>
           <Scale>
@@ -13248,7 +13333,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Wonder</Text>
-          <FontSize>32.91838</FontSize>
+          <FontSize>23.21483</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13269,7 +13354,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Card</Text>
-          <FontSize>32.91838</FontSize>
+          <FontSize>23.21483</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13279,7 +13364,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1926.164</X>
-            <Y>1668.1998</Y>
+            <Y>1668.2001</Y>
           </Position>
           <Width>462.27933</Width>
           <Height>261.4221</Height>
@@ -13290,7 +13375,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Sell Card</Text>
-          <FontSize>32.91838</FontSize>
+          <FontSize>23.21483</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13311,7 +13396,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Unpick Card</Text>
-          <FontSize>32.91838</FontSize>
+          <FontSize>23.21483</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
       </Buttons>

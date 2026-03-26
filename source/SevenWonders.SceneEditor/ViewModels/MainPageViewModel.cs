@@ -163,6 +163,16 @@ namespace SevenWonders.SceneEditor.ViewModels
             }
         }
 
+        public TextLabelContentsViewModel TextLabelContentsViewModel
+        {
+            get => m_textLabelContentsViewModel;
+            private set
+            {
+                m_textLabelContentsViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         public bool CanvasIsVisible
         {
             get
@@ -209,7 +219,8 @@ namespace SevenWonders.SceneEditor.ViewModels
             m_textureContentsViewModel = new TextureContentsViewModel(m_engine);
             m_gameObjectContentsViewModel = new GameObjectContentsViewModel(m_engine);
             m_buttonContentsViewModel = new ButtonContentsViewModel(m_engine);
-            m_layerContentsViewModel = new LayerContentsViewModel(m_engine, m_textureContentsViewModel, m_gameObjectContentsViewModel, m_buttonContentsViewModel);
+            m_textLabelContentsViewModel = new TextLabelContentsViewModel(m_engine);
+            m_layerContentsViewModel = new LayerContentsViewModel(m_engine, m_textureContentsViewModel, m_gameObjectContentsViewModel, m_buttonContentsViewModel, m_textLabelContentsViewModel);
             CurrentScene = null;
             SetState(MainWindowState.ButtonsWindow);
             GameObjectViews = new ObservableCollection<GameObjectListViewModel>();
@@ -259,6 +270,7 @@ namespace SevenWonders.SceneEditor.ViewModels
         private TextureContentsViewModel m_textureContentsViewModel;
         private GameObjectContentsViewModel m_gameObjectContentsViewModel;
         private ButtonContentsViewModel m_buttonContentsViewModel;
+        private TextLabelContentsViewModel m_textLabelContentsViewModel;
         private Scene? m_currentScene;
         private bool m_canvasIsVisible;
         private bool m_isLeftPanelVisible;

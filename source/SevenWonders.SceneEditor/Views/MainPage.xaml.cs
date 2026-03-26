@@ -205,6 +205,7 @@ namespace SevenWonders.SceneEditor.Views
             TextureObjectsContent.IsVisible = false;
             GameObjectsContent.IsVisible = false;
             ButtonsContent.IsVisible = false;
+            TextLabelsContent.IsVisible = false;
 
             switch (tabIndex)
             {
@@ -213,6 +214,7 @@ namespace SevenWonders.SceneEditor.Views
                 case 3: TextureObjectsContent.IsVisible = true; break;
                 case 4: GameObjectsContent.IsVisible = true; break;
                 case 5: ButtonsContent.IsVisible = true; break;
+                case 6: TextLabelsContent.IsVisible = true; break;
             }
         }
 
@@ -221,6 +223,39 @@ namespace SevenWonders.SceneEditor.Views
         private void OnTextureObjectsClicked(object sender, EventArgs e) => ShowTab(3);
         private void OnGameObjectsClicked(object sender, EventArgs e) => ShowTab(4);
         private void OnButtonsClicked(object sender, EventArgs e) => ShowTab(5);
+        private void OnTextLabelsClicked(object sender, EventArgs e) => ShowTab(6);
+
+        private async void Add_New_TextLabel_Clicked(object sender, EventArgs e)
+        {
+            AddTextLabelPopupWindow addTextLabelPopupWindow = new AddTextLabelPopupWindow(new AddTextLabelPopupWindowViewModel());
+            m_currentPopup = addTextLabelPopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
+            await this.ShowPopupAsync(addTextLabelPopupWindow);
+            if (addTextLabelPopupWindow.ViewModel.AddActivated)
+            {
+                m_mainPageViewModel.TextLabelContentsViewModel.AddTextLabelToLayer(
+                    addTextLabelPopupWindow.ViewModel.Name,
+                    addTextLabelPopupWindow.ViewModel.LabelText,
+                    addTextLabelPopupWindow.ViewModel.FontSize,
+                    addTextLabelPopupWindow.ViewModel.Visible,
+                    addTextLabelPopupWindow.ViewModel.Width,
+                    addTextLabelPopupWindow.ViewModel.Height,
+                    addTextLabelPopupWindow.ViewModel.BackgroundTextureId);
+                addTextLabelPopupWindow.ViewModel.Clear();
+            }
+            m_currentPopup = null;
+        }
+
+        private void Delete_Selected_TextLabel_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.TextLabelContentsViewModel.DeleteSelectedTextLabel();
+        }
+
+        private void Copy_Selected_TextLabel_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.TextLabelContentsViewModel.CopySelectedTextLabel();
+        }
+
         private void Delete_Selected_Layer_Clicked(object sender, EventArgs e)
         {
             m_mainPageViewModel.LayerContentsViewModel.DeleteSelectedLayer();

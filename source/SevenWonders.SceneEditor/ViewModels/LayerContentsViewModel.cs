@@ -57,6 +57,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 m_textureContentsViewModel.SelectedLayer = m_selectedLayer;
                 m_gameObjectContentsViewModel.SelectedLayer = m_selectedLayer;
                 m_buttonContentsViewModel.SelectedLayer = m_selectedLayer;
+                m_textLabelContentsViewModel.SelectedLayer = m_selectedLayer;
                 m_onUnselectLayerCommand.ChangeCanExecute();
             }
         }
@@ -168,12 +169,13 @@ namespace SevenWonders.SceneEditor.ViewModels
         }
 
 
-        public LayerContentsViewModel(IEngine engine, TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsViewModel, ButtonContentsViewModel buttonContentsViewModel)
+        public LayerContentsViewModel(IEngine engine, TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsViewModel, ButtonContentsViewModel buttonContentsViewModel, TextLabelContentsViewModel textLabelContentsViewModel)
         {
             m_engine = engine;
             m_textureContentsViewModel = textureContentsViewModel;
             m_gameObjectContentsViewModel = gameObjectContentsViewModel;
             m_buttonContentsViewModel = buttonContentsViewModel;
+            m_textLabelContentsViewModel = textLabelContentsViewModel;
             LayerViews = new ObservableCollection<LayerListViewModel>();
             m_onUnselectLayerCommand = new Command(OnUnselectLayer, () => CurrentScene is not null && SelectedLayer is not null);
             CurrentScene = null;
@@ -262,6 +264,7 @@ namespace SevenWonders.SceneEditor.ViewModels
         private readonly TextureContentsViewModel m_textureContentsViewModel;
         private readonly GameObjectContentsViewModel m_gameObjectContentsViewModel;
         private readonly ButtonContentsViewModel m_buttonContentsViewModel;
+        private readonly TextLabelContentsViewModel m_textLabelContentsViewModel;
         private readonly IEngine m_engine;
         private string m_copyName;
         private bool m_isCopyEnabled;
