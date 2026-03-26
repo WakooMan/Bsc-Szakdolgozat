@@ -47,7 +47,7 @@ namespace SevenWonders.GameEngine
             }
 
             UnzipFile(sceneFile, extractedSceneLocation);
-            Scene? scene = m_xmlHandler.Deserialize<Scene>(Path.Combine(extractedSceneLocation, "scene.xml"));
+            Scene? scene = m_xmlHandler.DeserializeFile<Scene>(Path.Combine(extractedSceneLocation, "scene.xml"));
             ArgumentChecker.CheckPredicateForOperation(() => scene is null, $"The scene xml file could not be loaded correctly! Check the format of scene.xml in \"{sceneFile.Name}\" zip file.");
             scene.LoadTextures(extractedSceneLocation);
             GameLog.Info($"Scene loaded: \"{scene.Id} - {scene.Name}\"");
@@ -78,7 +78,7 @@ namespace SevenWonders.GameEngine
 
             string sceneXmlPath = Path.Combine(savingScenePath, "scene.xml");
             GameLog.Info("Saving scene.xml file...");
-            m_xmlHandler.Serialize(sceneXmlPath, scene);
+            m_xmlHandler.SerializeFile(sceneXmlPath, scene);
             GameLog.Info("Done");
 
             string zipPath = Path.Combine(ScenesPath, $"{scene.Name}.zip");

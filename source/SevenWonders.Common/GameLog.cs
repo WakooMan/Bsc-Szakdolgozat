@@ -44,7 +44,7 @@ namespace SevenWonders.Common
             Log.Verbose($"[{methodName}] {message}");
         }
 
-        public static void InitializeFileLogger()
+        public static void InitializeFileLogger(string directoryPath)
         {
             var logFileName = ConfigurationManager.AppSettings["logFileName"];
 
@@ -53,7 +53,7 @@ namespace SevenWonders.Common
                 throw new InvalidOperationException("Log file name is null!");
             }
 
-            var logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", logFileName);
+            var logFilePath = Path.Combine(directoryPath, "Logs", logFileName);
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()

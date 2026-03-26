@@ -22,7 +22,7 @@ namespace SevenWonders.SceneEditor.Views
             base.OnAppearing();
 
             InitializeComponent();
-            GameLog.InitializeFileLogger();
+            GameLog.InitializeFileLogger(FileSystem.AppDataDirectory);
 
             foreach (Scene scene in m_sceneLoader.LoadScenes().GetAwaiter().GetResult())
             {

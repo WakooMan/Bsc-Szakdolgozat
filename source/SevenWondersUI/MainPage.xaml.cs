@@ -29,7 +29,7 @@ namespace SevenWondersUI
             base.OnAppearing();
 
             InitializeComponent();
-            GameLog.InitializeFileLogger();
+            GameLog.InitializeFileLogger(FileSystem.AppDataDirectory);
             m_engine.RegisterSubSystem(m_animationManager);
 
             foreach (Scene scene in await m_sceneLoader.LoadScenes())

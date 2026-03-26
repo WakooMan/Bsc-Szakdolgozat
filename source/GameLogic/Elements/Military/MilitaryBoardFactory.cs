@@ -11,10 +11,10 @@ namespace GameLogic.Elements.Military
 
         public IMilitaryBoard Create()
         {
-            return m_xmlHandler.Deserialize<MilitaryBoard>(CARDLIST_FILE);
+            return m_xmlHandler.DeserializeEmbeddedResource<MilitaryBoard>(CARDLIST_FILE);
         }
 
-        private readonly string CARDLIST_FILE = Path.Combine(Directory.GetCurrentDirectory(), "Data", "MilitaryBoard.xml");
+        private readonly string CARDLIST_FILE = "GameLogic.Data.MilitaryBoard.xml";
         private readonly IXmlHandler m_xmlHandler;
     }
 }

@@ -8,7 +8,7 @@ namespace GameLogic.Ages
     {
         public override AgesEnum Age => AgesEnum.I;
 
-        public override string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(),"Data","FirstAgeComposition.csv");
+        public override string CardCompositionFile => "GameLogic.Data.FirstAgeComposition.csv";
 
         public FirstAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList) : base(eventManager, cardCompositionFactory, cardList?.Cards.Where(card => card.Age == AgesEnum.I).Take(20).ToList() ?? null)
         { }

@@ -1,16 +1,17 @@
 ﻿using GameLogic.GameStructures;
 using SevenWonders.Common;
+using System.Xml.Serialization;
 
 namespace GameLogic.Handlers
 {
     public class CardCompositionFileHandler : ICardCompositionFileHandler
     {
-        private readonly string m_compositionFileName;
-        public CardCompositionFileHandler(string compositionFileName)
+        private readonly string m_compositionResourcePath;
+        public CardCompositionFileHandler(string compositionResourcePath)
         {
-            ArgumentChecker.CheckNullOrEmpty(compositionFileName, nameof(compositionFileName));
+            ArgumentChecker.CheckNullOrEmpty(compositionResourcePath, nameof(compositionResourcePath));
 
-            m_compositionFileName = compositionFileName;
+            m_compositionResourcePath = compositionResourcePath;
         }
 
         public void SetCompositionForCards(List<ICardNode> cardNodes)
@@ -18,24 +19,34 @@ namespace GameLogic.Handlers
             try
             {
                 ArgumentChecker.CheckNull(cardNodes, nameof(cardNodes));
-                string[] lines = File.ReadAllLines(m_compositionFileName);
-                ArgumentChecker.CheckPredicateForOperation(() => cardNodes.Count != lines.Length, $"File line number is not equal to card number! File number: {lines.Length}, Card number: {cardNodes.Count}");
-                
-                for (int i = 0; i < lines.Length; i++)
+                var assembly = typeof(CardCompositionFileHandler).Assembly;
+
+                using (Stream? stream = assembly.GetManifestResourceStream(m_compositionResourcePath))
                 {
-                    string[] splitted = lines[i].Split(";");
-                    if (splitted.Length != 3)
+                    if (stream is not null)
                     {
-                        throw new InvalidOperationException($"All the lines should contain exactly one semicolon in the file: {m_compositionFileName}");
-                    }
-                    bool hidden = bool.Parse(splitted[0]);
-                    List<int> coveredBy = splitted[1].Split(",", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToList();
-                    string nodeName = splitted[2];
-                    cardNodes[i].Hidden = hidden;
-                    cardNodes[i].NodeName = nodeName;
-                    foreach (int n in coveredBy)
-                    {
-                        cardNodes[i].AddParent(cardNodes[n]);
+                        using var reader = new StreamReader(stream);
+                        string[] lines = reader.ReadToEnd()
+                                               .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                        ArgumentChecker.CheckPredicateForOperation(() => cardNodes.Count != lines.Length, $"File line number is not equal to card number! File number: {lines.Length}, Card number: {cardNodes.Count}");
+
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            string[] splitted = lines[i].Split(";");
+                            if (splitted.Length != 3)
+                            {
+                                throw new InvalidOperationException($"All the lines should contain exactly one semicolon in the file: {m_compositionResourcePath}");
+                            }
+                            bool hidden = bool.Parse(splitted[0]);
+                            List<int> coveredBy = splitted[1].Split(",", StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToList();
+                            string nodeName = splitted[2];
+                            cardNodes[i].Hidden = hidden;
+                            cardNodes[i].NodeName = nodeName;
+                            foreach (int n in coveredBy)
+                            {
+                                cardNodes[i].AddParent(cardNodes[n]);
+                            }
+                        }
                     }
                 }
             }

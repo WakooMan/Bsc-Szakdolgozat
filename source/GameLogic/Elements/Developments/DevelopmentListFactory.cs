@@ -11,10 +11,10 @@ namespace GameLogic.Elements.Developments
 
         public IDevelopmentList Create()
         {
-            return m_xmlHandler.Deserialize<DevelopmentList>(CARDLIST_FILE);
+            return m_xmlHandler.DeserializeEmbeddedResource<DevelopmentList>(CARDLIST_FILE);
         }
 
-        private readonly string CARDLIST_FILE = Path.Combine(Directory.GetCurrentDirectory(), "Data", "AllDevelopments.xml");
+        private readonly string CARDLIST_FILE = "GameLogic.Data.AllDevelopments.xml";
         private readonly IXmlHandler m_xmlHandler;
     }
 }
