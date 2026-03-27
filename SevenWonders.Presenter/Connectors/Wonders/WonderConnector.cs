@@ -1,16 +1,18 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
+using SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers;
 using SevenWonders.Presenter.Views;
 using SevenWonders.Presenter.Views.Factories;
 
-namespace SevenWonders.Presenter.Connectors
+namespace SevenWonders.Presenter.Connectors.Wonders
 {
     public class WonderConnector : IWonderConnector
     {
-        public WonderConnector(IGameElements gameElements, IGameObjectViewFactory gameObjectViewFactory)
+        public WonderConnector(IGameElements gameElements, IGameObjectViewFactory gameObjectViewFactory, IWonderChildTextureHandler wonderChildTextureHandler)
         {
             m_wonderList = gameElements.Wonders;
             m_gameObjectViewFactory = gameObjectViewFactory;
+            m_wonderChildTextureHandler = wonderChildTextureHandler;
         }
 
         
@@ -21,6 +23,7 @@ namespace SevenWonders.Presenter.Connectors
             foreach (Wonder wonder in m_wonderList.Wonders)
             {
                 result.Add(wonder, m_gameObjectViewFactory.CreateView(wonder.Name));
+                m_wonderChildTextureHandler.Handle(wonder);
             }
 
             return result;
@@ -28,5 +31,6 @@ namespace SevenWonders.Presenter.Connectors
 
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
         private readonly IWonderList m_wonderList;
+        private readonly IWonderChildTextureHandler m_wonderChildTextureHandler;
     }
 }

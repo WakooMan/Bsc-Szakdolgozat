@@ -4,6 +4,7 @@ using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
+using SevenWonders.Presenter.Connectors.Wonders;
 using SevenWonders.Presenter.Views;
 using System.Numerics;
 

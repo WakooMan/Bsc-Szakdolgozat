@@ -1,7 +1,7 @@
 ﻿using GameLogic.Elements.Wonders;
 using SevenWonders.Presenter.Views;
 
-namespace SevenWonders.Presenter.Connectors
+namespace SevenWonders.Presenter.Connectors.Wonders
 {
     public interface IWonderConnector
     {

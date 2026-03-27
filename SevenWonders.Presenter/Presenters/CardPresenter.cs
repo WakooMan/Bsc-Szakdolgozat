@@ -115,6 +115,12 @@ namespace SevenWonders.Presenter.Presenters
                 }
                 MoveToDropCardDeck(eventObj.Card).GetAwaiter().GetResult();
             });
+            m_eventManager.Subscribe<CardNodeAvailableEvent>(eventObj => {
+                var view = m_cards[eventObj.CardNode.CardObj];
+                var group = view.GetAnimationGroupBuilder();
+                group.Flip(1, 0.5f);
+                view.Execute().GetAwaiter().GetResult();
+            });
         }
 
         private async Task MoveToActionLocation(Card card)

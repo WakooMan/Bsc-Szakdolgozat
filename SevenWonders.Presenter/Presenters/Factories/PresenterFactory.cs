@@ -1,6 +1,7 @@
 ﻿using GameLogic.Events;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Cards;
+using SevenWonders.Presenter.Connectors.Wonders;
 
 namespace SevenWonders.Presenter.Presenters.Factories
 {
