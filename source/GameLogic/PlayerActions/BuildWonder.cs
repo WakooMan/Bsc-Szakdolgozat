@@ -32,7 +32,7 @@ namespace GameLogic.PlayerActions
             Card card = player.PickedCard.CardObj;
             player.PickedCard = null;
             await gameContext.EventManager.PublishAsync(new OnWonderBuilt(player, card, m_wonder));
-            m_wonder.OnBuilt(gameContext);
+            await m_wonder.OnBuilt(gameContext);
         }
 
         public async Task<bool> CanPerform(IGameContext gameContext)

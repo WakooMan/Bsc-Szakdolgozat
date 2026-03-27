@@ -48,24 +48,7 @@ namespace SevenWondersUI
             m_wonderPresenter.Initialize();
             m_cardPresenter.Initialize();
             m_game.Initialize("Player1", "Player2");
-            m_game.Context.EventManager.Subscribe<OnChooseWonderStateStart>(state => {
-                foreach (Wonder wonder in state.Wonders)
-                {
-                    m_wonderPresenter.MoveToCenter(wonder);
-                }
-            });
-            m_game.Context.EventManager.Subscribe<OnFourWondersChosen>(state => {
-                foreach (Wonder wonder in state.Wonders)
-                {
-                    m_wonderPresenter.MoveToCenter(wonder);
-                }
-            });
-            m_game.Context.EventManager.Subscribe<OnChooseWonderStateEnd>(state => {
-                foreach (Wonder wonder in state.Wonders)
-                {
-                    m_wonderPresenter.MoveToDeck(wonder);
-                }
-            });
+            m_wonderPresenter.SubscribeToEvents();
             m_game.Context.EventManager.Subscribe<OnAgeStarted>(state => {
                 foreach (ICardNode cardNode in state.Age.Composition.AllCards)
                 {

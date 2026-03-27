@@ -1,21 +1,21 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
+using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Views;
 using System.Numerics;
-using static SevenWonders.Presenter.Presenters.IWonderPresenter;
 
 namespace SevenWonders.Presenter.Presenters
 {
     public class WonderPresenter : IWonderPresenter
     {
-        public event WonderPresenterDelegate? WonderChosen;
-
-        public WonderPresenter(IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver)
+        public WonderPresenter(IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager)
         {
             m_wonderConnector = wonderConnector;
             m_gameEngineReceiver = gameEngineReceiver;
+            m_eventManager = eventManager;
             m_wonders = new Dictionary<Wonder, IGameObjectView>();
             m_player1Targets = new Stack<GameObject>();
             m_player2Targets = new Stack<GameObject>();
@@ -53,7 +53,35 @@ namespace SevenWonders.Presenter.Presenters
             m_wonderLayer.Visible = true;
         }
 
-        public void MoveToPlayer(Player player, Wonder wonder)
+        public void SubscribeToEvents()
+        {
+            m_eventManager.Subscribe<OnChooseWonderStateStart>(state => {
+                foreach (Wonder wonder in state.Wonders)
+                {
+                    MoveToCenter(wonder);
+                }
+            });
+
+            m_eventManager.Subscribe<OnFourWondersChosen>(state => {
+                foreach (Wonder wonder in state.Wonders)
+                {
+                    MoveToCenter(wonder);
+                }
+            });
+
+            m_eventManager.Subscribe<OnChooseWonderStateEnd>(state => {
+                foreach (Wonder wonder in state.Wonders)
+                {
+                    MoveToDeck(wonder);
+                }
+            });
+
+            m_eventManager.Subscribe<OnWonderChosen>(state => {
+                MoveToPlayer(state.Player, state.Wonder);
+            });
+        }
+
+        private void MoveToPlayer(Player player, Wonder wonder)
         {
             if (player.Id == 1)
             {
@@ -65,7 +93,7 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        public void MoveToCenter(Wonder wonder)
+        private void MoveToCenter(Wonder wonder)
         {
             if (m_centerTargets.Count > 0)
             {
@@ -77,12 +105,10 @@ namespace SevenWonders.Presenter.Presenters
 
                 group.Highlight(new Vector2(1.0f, 1.0f), true, 0.2f);
                 view.Execute();
-
-                view.SubscribeClickAtAnimationEnd(() => WonderChosen?.Invoke(wonder));
             }
         }
 
-        public void MoveToDeck(Wonder wonder)
+        private void MoveToDeck(Wonder wonder)
         {
             if (m_wonderDeck is not null)
             {
@@ -134,6 +160,7 @@ namespace SevenWonders.Presenter.Presenters
         private readonly IDictionary<Wonder, IGameObjectView> m_wonders;
         private readonly IWonderConnector m_wonderConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
+        private readonly IEventManager m_eventManager;
         private readonly Stack<GameObject> m_player1Targets;
         private readonly Stack<GameObject> m_player2Targets;
         private readonly Stack<GameObject> m_centerTargets;

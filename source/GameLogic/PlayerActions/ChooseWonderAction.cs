@@ -1,7 +1,10 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
+using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
 using System;
+using System.Numerics;
 
 namespace GameLogic.PlayerActions
 {
@@ -28,13 +31,13 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(m_wonders.Contains(m_wonder));
         }
 
-        public Task DoPlayerAction(IGameContext gameContext)
+        public async Task DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_wonders.Contains(m_wonder), "Wonder list does not contain the wonder! Action cannot be performed!");
 
             m_player().Wonders.Add(m_wonder);
             m_wonders.Remove(m_wonder);
-            return Task.CompletedTask;
+            await gameContext.EventManager.PublishAsync(new OnWonderChosen(m_player(), m_wonder));
         }
 
         private readonly Wonder m_wonder;
