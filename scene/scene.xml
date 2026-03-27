@@ -5035,7 +5035,7 @@
         </GameObject>
         <GameObject>
           <Name>kőraktár</Name>
-          <Id>270</Id>
+          <Id>2000</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -5110,7 +5110,7 @@
         </GameObject>
         <GameObject>
           <Name>Agyagraktár</Name>
-          <Id>270</Id>
+          <Id>2001</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -5185,7 +5185,7 @@
         </GameObject>
         <GameObject>
           <Name>Fogadó</Name>
-          <Id>270</Id>
+          <Id>2002</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -5260,7 +5260,7 @@
         </GameObject>
         <GameObject>
           <Name>Színház</Name>
-          <Id>270</Id>
+          <Id>2003</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -5335,7 +5335,7 @@
         </GameObject>
         <GameObject>
           <Name>Oltár</Name>
-          <Id>270</Id>
+          <Id>2004</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -5410,7 +5410,7 @@
         </GameObject>
         <GameObject>
           <Name>Fürdő</Name>
-          <Id>270</Id>
+          <Id>2005</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -5485,7 +5485,7 @@
         </GameObject>
         <GameObject>
           <Name>Faraktár</Name>
-          <Id>270</Id>
+          <Id>2006</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8122,7 +8122,7 @@
         </GameObject>
         <GameObject>
           <Name>Fórum</Name>
-          <Id>270</Id>
+          <Id>2007</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8197,7 +8197,7 @@
         </GameObject>
         <GameObject>
           <Name>Karavánszeráj</Name>
-          <Id>270</Id>
+          <Id>2008</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8272,7 +8272,7 @@
         </GameObject>
         <GameObject>
           <Name>Vámház</Name>
-          <Id>270</Id>
+          <Id>2009</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8347,7 +8347,7 @@
         </GameObject>
         <GameObject>
           <Name>Sörfőzde</Name>
-          <Id>270</Id>
+          <Id>2010</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8422,7 +8422,7 @@
         </GameObject>
         <GameObject>
           <Name>Szobor</Name>
-          <Id>270</Id>
+          <Id>2011</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8497,7 +8497,7 @@
         </GameObject>
         <GameObject>
           <Name>Bíróság</Name>
-          <Id>270</Id>
+          <Id>2012</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8572,7 +8572,7 @@
         </GameObject>
         <GameObject>
           <Name>Templom</Name>
-          <Id>270</Id>
+          <Id>2013</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8647,7 +8647,7 @@
         </GameObject>
         <GameObject>
           <Name>Vízvezeték</Name>
-          <Id>270</Id>
+          <Id>2014</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -8722,7 +8722,7 @@
         </GameObject>
         <GameObject>
           <Name>Szószék</Name>
-          <Id>270</Id>
+          <Id>2015</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -10984,7 +10984,7 @@
         </GameObject>
         <GameObject>
           <Name>Kereskedelmi kamara</Name>
-          <Id>270</Id>
+          <Id>2016</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11059,7 +11059,7 @@
         </GameObject>
         <GameObject>
           <Name>Kikötő</Name>
-          <Id>270</Id>
+          <Id>2017</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11134,7 +11134,7 @@
         </GameObject>
         <GameObject>
           <Name>Fegyvertár</Name>
-          <Id>270</Id>
+          <Id>2018</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11209,7 +11209,7 @@
         </GameObject>
         <GameObject>
           <Name>Világítótorony</Name>
-          <Id>270</Id>
+          <Id>2019</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11284,7 +11284,7 @@
         </GameObject>
         <GameObject>
           <Name>Aréna</Name>
-          <Id>270</Id>
+          <Id>2020</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11359,7 +11359,7 @@
         </GameObject>
         <GameObject>
           <Name>Palota</Name>
-          <Id>270</Id>
+          <Id>2021</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11434,7 +11434,7 @@
         </GameObject>
         <GameObject>
           <Name>Városháza</Name>
-          <Id>270</Id>
+          <Id>2022</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11509,7 +11509,7 @@
         </GameObject>
         <GameObject>
           <Name>Obeliszk</Name>
-          <Id>270</Id>
+          <Id>2023</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11584,7 +11584,7 @@
         </GameObject>
         <GameObject>
           <Name>Kertek</Name>
-          <Id>270</Id>
+          <Id>2024</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11659,7 +11659,7 @@
         </GameObject>
         <GameObject>
           <Name>Panteon</Name>
-          <Id>270</Id>
+          <Id>2025</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11734,7 +11734,7 @@
         </GameObject>
         <GameObject>
           <Name>Szenátus</Name>
-          <Id>270</Id>
+          <Id>2030</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11809,7 +11809,7 @@
         </GameObject>
         <GameObject>
           <Name>Kereskedők céhe</Name>
-          <Id>270</Id>
+          <Id>2031</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11884,7 +11884,7 @@
         </GameObject>
         <GameObject>
           <Name>Hajósok céhe</Name>
-          <Id>270</Id>
+          <Id>2032</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -11959,7 +11959,7 @@
         </GameObject>
         <GameObject>
           <Name>Építők céhe</Name>
-          <Id>270</Id>
+          <Id>2033</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -12034,7 +12034,7 @@
         </GameObject>
         <GameObject>
           <Name>Elöljárók céhe</Name>
-          <Id>270</Id>
+          <Id>2034</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -12109,7 +12109,7 @@
         </GameObject>
         <GameObject>
           <Name>Tudósok céhe</Name>
-          <Id>270</Id>
+          <Id>2035</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -12184,7 +12184,7 @@
         </GameObject>
         <GameObject>
           <Name>Uzsorások céhe</Name>
-          <Id>270</Id>
+          <Id>2036</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
@@ -12259,7 +12259,7 @@
         </GameObject>
         <GameObject>
           <Name>Stratégák céhe</Name>
-          <Id>270</Id>
+          <Id>2037</Id>
           <ZIndex>0</ZIndex>
           <Visible>true</Visible>
           <Position>
