@@ -95,18 +95,25 @@ namespace SevenWonders.Presenter.Presenters
                 MoveToActionLocation(eventObj.Card).GetAwaiter().GetResult();
             });
             m_eventManager.Subscribe<OnCardUnpicked>(eventObj => {
-                MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName).GetAwaiter().GetResult();
                 if (m_pickCardLayer is not null)
                 {
                     m_pickCardLayer.Visible = false;
                 }
+                MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName).GetAwaiter().GetResult();
             });
             m_eventManager.Subscribe<OnCardBuilt>(eventObj => {
-                MoveToPlayer(eventObj.Builder, eventObj.Card).GetAwaiter().GetResult();
                 if (m_pickCardLayer is not null)
                 {
                     m_pickCardLayer.Visible = false;
                 }
+                MoveToPlayer(eventObj.Builder, eventObj.Card).GetAwaiter().GetResult();
+            });
+            m_eventManager.Subscribe<OnCardSold>(eventObj => {
+                if (m_pickCardLayer is not null)
+                {
+                    m_pickCardLayer.Visible = false;
+                }
+                MoveToDropCardDeck(eventObj.Card).GetAwaiter().GetResult();
             });
         }
 
@@ -161,7 +168,9 @@ namespace SevenWonders.Presenter.Presenters
             if (m_dropCardDeck is not null)
             {
                 var view = m_cards[card];
-                view.GetAnimationGroupBuilder().MoveTo(m_dropCardDeck, 1.5f);
+                var animationBuilder = view.GetAnimationGroupBuilder().Unhighlight(false, 0.1f);
+                await view.Execute();
+                animationBuilder.MoveTo(m_dropCardDeck, 0.5f).Flip(0, 0.5f);
                 await view.Execute();
             }
         }
@@ -184,8 +193,8 @@ namespace SevenWonders.Presenter.Presenters
             {
                 var view = m_cards[card];
                 view.GetAnimationGroupBuilder()
-                    .MoveTo(m_player1Targets[card.GetType()], 1.5f)
-                    .Unhighlight(false, 1.5f);
+                    .MoveTo(m_player1Targets[card.GetType()], 0.5f)
+                    .Unhighlight(false, 0.5f);
                 await view.Execute();
             }
         }
@@ -196,8 +205,8 @@ namespace SevenWonders.Presenter.Presenters
             {
                 var view = m_cards[card];
                 view.GetAnimationGroupBuilder()
-                    .MoveTo(m_player2Targets[card.GetType()], 1.5f)
-                    .Unhighlight(false, 1.5f);
+                    .MoveTo(m_player2Targets[card.GetType()], 0.5f)
+                    .Unhighlight(false, 0.5f);
                 await view.Execute();
             }
         }

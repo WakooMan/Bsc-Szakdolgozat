@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStates;
 using SevenWonders.Common;
 
@@ -29,6 +30,8 @@ namespace GameLogic
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_isInitialized, "Cannot start an uninitialized game!");
 
+            m_gameContext.EventManager.PublishAsync(new OnGameStarted(m_players)).GetAwaiter().GetResult();
+
             while (CurrentState is not EndGameState)
             {
                 await CurrentState.DoStateAction();
@@ -42,7 +45,7 @@ namespace GameLogic
         {
             if (!m_isInitialized)
             {
-                m_players = [new Player(player1, 1), new Player(player2, 2)];
+                m_players = [new Player(player1, 1, 7), new Player(player2, 2, 7)];
                 m_gameContext.Initialize(m_players);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;

@@ -19,6 +19,16 @@ namespace SevenWonders.Presenter.Connectors
             return gameObject;
         }
 
+        public TextLabel ReceiveTextLabel(string name)
+        {
+            TextLabel? textLabel = m_sceneManager.GetTextLabelByName(name);
+            if (textLabel is null)
+            {
+                throw new InvalidOperationException($"TextLabel with name {name} does not exist.");
+            }
+            return textLabel;
+        }
+
         public IInteractiveObject ReceiveInteractiveObject(string name)
         {
             IInteractiveObject? interactiveObject = m_sceneManager.GetInteractiveObjectByName(name);

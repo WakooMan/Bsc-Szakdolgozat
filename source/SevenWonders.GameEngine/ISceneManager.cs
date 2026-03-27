@@ -15,6 +15,7 @@ namespace SevenWonders.GameEngine
         void RegisterScene(Scene scene);
         void Render(SKPaintSurfaceEventArgs eventArgs);
         GameObject? GetObjectByName(string name);
+        TextLabel? GetTextLabelByName(string name);
         ButtonObject? GetButtonByName(string name);
         GraphicsLayer? GetLayerByName(string name);
         IInteractiveObject? GetInteractiveObjectByName(string name);

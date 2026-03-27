@@ -9,7 +9,9 @@ namespace SevenWonders.Presenter.Presenters
             m_presenters = new List<IPresenter>
             {
                 presenterFactory.CreateCardPresenter(),
-                presenterFactory.CreateWonderPresenter()
+                presenterFactory.CreateWonderPresenter(),
+                presenterFactory.CreatePlayer1Presenter(),
+                presenterFactory.CreatePlayer2Presenter()
             };
         }
 

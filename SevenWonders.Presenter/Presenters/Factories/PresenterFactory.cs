@@ -24,6 +24,16 @@ namespace SevenWonders.Presenter.Presenters.Factories
             return new WonderPresenter(m_wonderConnector, m_gameEngineReceiver, m_eventManager);
         }
 
+        public IPresenter CreatePlayer1Presenter()
+        {
+            return new PlayerPresenter(m_gameEngineReceiver, m_eventManager, 1);
+        }
+
+        public IPresenter CreatePlayer2Presenter()
+        {
+            return new PlayerPresenter(m_gameEngineReceiver, m_eventManager, 2);
+        }
+
         private readonly ICardConnector m_cardConnector;
         private readonly IWonderConnector m_wonderConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;

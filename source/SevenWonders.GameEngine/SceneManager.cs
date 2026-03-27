@@ -68,6 +68,27 @@ namespace SevenWonders.GameEngine
             return null;
         }
 
+        public TextLabel? GetTextLabelByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                foreach (TextLabel textLabel in graphicsLayer.TextLabels)
+                {
+                    if (textLabel.Name.ToLower() == name.ToLower())
+                    {
+                        return textLabel;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public IInteractiveObject? GetInteractiveObjectByName(string name)
         {
             if (CurrentScene is null)

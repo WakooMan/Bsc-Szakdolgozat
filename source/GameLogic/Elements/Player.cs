@@ -76,14 +76,14 @@ namespace GameLogic.Elements
             Money = 0;
         }
 
-        public Player(string name, int id)
+        public Player(string name, int id, int money)
         {
             Name = name;
             Id = id;
             Wonders = new List<Wonder>();
             Cards = new List<Card>();
             Developments = new List<Development>();
-            Money = 0;
+            Money = money;
         }
 
         private int m_money;

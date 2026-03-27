@@ -5,6 +5,7 @@ namespace SevenWonders.Presenter.Connectors
     public interface IGameEngineReceiver
     {
         GameObject ReceiveGameObject(string name);
+        TextLabel ReceiveTextLabel(string name);
         IInteractiveObject ReceiveInteractiveObject(string name);
         ICollection<GameObject> ReceiveGameObjects(string name, int number);
         GraphicsLayer ReceiveGraphicsLayer(string name);

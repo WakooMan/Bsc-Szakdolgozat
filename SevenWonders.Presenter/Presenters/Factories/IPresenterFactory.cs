@@ -4,5 +4,7 @@
     {
         IPresenter CreateCardPresenter();
         IPresenter CreateWonderPresenter();
+        IPresenter CreatePlayer1Presenter();
+        IPresenter CreatePlayer2Presenter();
     }
 }
