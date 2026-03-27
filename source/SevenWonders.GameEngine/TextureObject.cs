@@ -22,29 +22,7 @@ namespace SevenWonders.GameEngine
 
         public bool Equals(TextureObject? other)
         {
-            if (other is null)
-            {
-                return false;
-            }
-
-            return base.Equals(other) &&
-                   TextureId.Equals(other.TextureId);
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (obj is TextureObject textureObject)
-            {
-                return Equals(textureObject);
-            }
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode() ^
-                   TextureId.GetHashCode();
+            return base.Equals(other);
         }
 
         public void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)

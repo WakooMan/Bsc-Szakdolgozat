@@ -54,15 +54,7 @@ namespace SevenWonders.GameEngine
                 return false;
             }
 
-            return Name.Equals(other.Name) &&
-                   Id.Equals(other.Id) &&
-                   ZIndex.Equals(other.ZIndex) &&
-                   Visible.Equals(other.Visible) &&
-                   Position.Equals(other.Position) &&
-                   Width.Equals(other.Width) &&
-                   Height.Equals(other.Height) &&
-                   Rotation.Equals(other.Rotation) &&
-                   Scale.Equals(other.Scale);
+            return Id.Equals(other.Id);
         }
 
         public override bool Equals(object? obj)
@@ -77,15 +69,7 @@ namespace SevenWonders.GameEngine
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() ^
-                   Id.GetHashCode() ^
-                   ZIndex.GetHashCode() ^
-                   Visible.GetHashCode() ^
-                   Position.GetHashCode() ^
-                   Width.GetHashCode() ^
-                   Height.GetHashCode() ^
-                   Rotation.GetHashCode() ^
-                   Scale.GetHashCode();
+            return Id.GetHashCode();
         }
     }
 }

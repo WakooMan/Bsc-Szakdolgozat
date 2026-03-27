@@ -29,21 +29,6 @@ namespace SevenWonders.GameEngine
             return base.Equals(other);
         }
 
-        public override bool Equals(object? obj)
-        {
-            if (obj is ButtonObject button)
-            {
-                return Equals(button);
-            }
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
         public void OnTouchReleased(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer)
         {
             if (graphicsLayer.Visible && Visible && IsTouchInButton(eventArgs.Location.X, eventArgs.Location.Y))

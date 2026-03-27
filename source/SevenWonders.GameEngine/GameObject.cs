@@ -52,48 +52,7 @@ namespace SevenWonders.GameEngine
 
         public bool Equals(GameObject? other)
         {
-            if (other is null)
-            {
-                return false;
-            }
-
-            return base.Equals(other) &&
-                   Direction.Equals(other.Direction) &&
-                   VisualSize.Equals(other.VisualSize) &&
-                   FlipMultiplier.Equals(other.FlipMultiplier) &&
-                   Collidable.Equals(other.Collidable) &&
-                   InFrustum.Equals(other.InFrustum) &&
-                   Animations.SequenceEqual(other.Animations) &&
-                   CurrentAnim.Equals(other.CurrentAnim) &&
-                   NumberOfFrames.Equals(other.NumberOfFrames) &&
-                   Speed.Equals(other.Speed) &&
-                   Highlighted.Equals(other.Highlighted);
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (obj is GameObject gameObject)
-            {
-                return Equals(gameObject);
-            }
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = base.GetHashCode() ^
-                   Direction.GetHashCode() ^
-                   VisualSize.GetHashCode() ^
-                   FlipMultiplier.GetHashCode() ^
-                   Collidable.GetHashCode() ^
-                   InFrustum.GetHashCode() ^
-                   CurrentAnim.GetHashCode() ^
-                   NumberOfFrames.GetHashCode() ^
-                   Speed.GetHashCode() ^
-                   Highlighted.GetHashCode();
-            Animations.ForEach(anim => hashCode = hashCode ^ anim.GetHashCode());
-            return hashCode;
+            return base.Equals(other);
         }
 
         public override void Resize(Vector2 oldResolution, Vector2 newResolution)

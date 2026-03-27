@@ -41,35 +41,7 @@ namespace SevenWonders.GameEngine
 
         public bool Equals(TextLabel? other)
         {
-            if (other is null)
-            {
-                return false;
-            }
-
-            return base.Equals(other) &&
-                   BackgroundTextureId.Equals(other.BackgroundTextureId) &&
-                   Text.Equals(other.Text) &&
-                   FontSize.Equals(other.FontSize) &&
-                   TextColor.Equals(other.TextColor);
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (obj is TextLabel textLabel)
-            {
-                return Equals(textLabel);
-            }
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode() ^
-                   BackgroundTextureId.GetHashCode() ^
-                   Text.GetHashCode() ^
-                   FontSize.GetHashCode() ^
-                   TextColor.GetHashCode();
+            return base.Equals(other);
         }
 
         public override void Resize(Vector2 oldResolution, Vector2 newResolution)
