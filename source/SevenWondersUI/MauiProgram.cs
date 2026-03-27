@@ -18,6 +18,7 @@ using SevenWonders.Presenter.Connectors.Cards;
 using SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers;
 using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
+using SevenWonders.Presenter.Presenters.Factories;
 using SevenWonders.Presenter.Views.Factories;
 using SevenWondersUI.Views.Factories;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -75,9 +76,9 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(ICardChildTextureHandler), typeof(CardChildTextureHandler));
 
         builder.Services.AddSingleton(typeof(IWonderConnector), typeof(WonderConnector));
-        builder.Services.AddSingleton(typeof(IWonderPresenter), typeof(WonderPresenter));
+        builder.Services.AddSingleton(typeof(IPresenterFactory), typeof(PresenterFactory));
+        builder.Services.AddSingleton(typeof(IPresenter), typeof(Presenter));
         builder.Services.AddSingleton(typeof(ICardConnector), typeof(CardConnector));
-        builder.Services.AddSingleton(typeof(ICardPresenter), typeof(CardPresenter));
 
         builder.Services.AddTransient<MainPage>();
 

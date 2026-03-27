@@ -13,40 +13,40 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_signal = new ManualResetEventSlim(false);
-            m_gameObjectToPlayerAction = new Dictionary<GameObject, IPlayerAction>();
+            m_interactiveObjectToPlayerAction = new Dictionary<IInteractiveObject, IPlayerAction>();
         }
         public IPlayerAction ReceivePlayerAction(Player player, ICollection<IPlayerAction> playerActions)
         {
-            m_chosenGameObject = null;
+            m_chosenInteractiveObject = null;
             m_signal.Reset();
-            m_gameObjectToPlayerAction.Clear();
+            m_interactiveObjectToPlayerAction.Clear();
             foreach (IPlayerAction playerAction in playerActions)
             {
-                GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(playerAction.Name);
-                m_gameObjectToPlayerAction[gameObject] = playerAction;
-                gameObject.ClickedEvent += OnGameObjectClicked;
+                IInteractiveObject interactiveObject = m_gameEngineReceiver.ReceiveInteractiveObject(playerAction.Name);
+                m_interactiveObjectToPlayerAction[interactiveObject] = playerAction;
+                interactiveObject.ClickedEvent += OnInteractiveObjectClicked;
             }
 
-            while (m_chosenGameObject is null)
+            while (m_chosenInteractiveObject is null)
             {
                 m_signal.Wait();
 
-                if (m_chosenGameObject is not null)
+                if (m_chosenInteractiveObject is not null)
                 {
-                    foreach (GameObject gameObject in m_gameObjectToPlayerAction.Keys)
+                    foreach (IInteractiveObject interactiveObject in m_interactiveObjectToPlayerAction.Keys)
                     {
-                        gameObject.ClickedEvent -= OnGameObjectClicked;
+                        interactiveObject.ClickedEvent -= OnInteractiveObjectClicked;
                     }
-                    return m_gameObjectToPlayerAction[m_chosenGameObject];
+                    return m_interactiveObjectToPlayerAction[m_chosenInteractiveObject];
                 }
             }
 
             throw new InvalidOperationException($"No matching playeraction.");
         }
 
-        private void OnGameObjectClicked(GameObject gameObject, SKTouchEventArgs args)
+        private void OnInteractiveObjectClicked(IInteractiveObject interactiveObject, SKTouchEventArgs args)
         {
-            m_chosenGameObject = gameObject;
+            m_chosenInteractiveObject = interactiveObject;
             m_signal.Set();
         }
 
@@ -57,8 +57,8 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly ManualResetEventSlim m_signal;
-        private readonly Dictionary<GameObject, IPlayerAction> m_gameObjectToPlayerAction;
-        private GameObject? m_chosenGameObject;
+        private readonly Dictionary<IInteractiveObject, IPlayerAction> m_interactiveObjectToPlayerAction;
+        private IInteractiveObject? m_chosenInteractiveObject;
 
     }
 }

@@ -17,6 +17,7 @@ namespace SevenWonders.GameEngine
         GameObject? GetObjectByName(string name);
         ButtonObject? GetButtonByName(string name);
         GraphicsLayer? GetLayerByName(string name);
+        IInteractiveObject? GetInteractiveObjectByName(string name);
         Scene GetScene(Guid sceneID);
         Scene GetSceneByName(string name);
         void FreeObject(int id);

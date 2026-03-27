@@ -1,6 +1,6 @@
 ﻿namespace SevenWonders.Presenter.Presenters
 {
-    public interface IWonderPresenter
+    public interface IPresenter
     {
         void Initialize();
         void SubscribeToEvents();

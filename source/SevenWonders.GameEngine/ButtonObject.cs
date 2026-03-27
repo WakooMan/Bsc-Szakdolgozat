@@ -7,14 +7,12 @@ using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
-    public class ButtonObject : TextLabel, IEquatable<ButtonObject>
+    public class ButtonObject : TextLabel, IInteractiveObject, IEquatable<ButtonObject>
     {
-        public delegate void TouchEvent(SKTouchEventArgs eventArgs);
-
-        public event TouchEvent ReleasedEvent = delegate { };
-        public event TouchEvent PressedEvent = delegate { };
-        public event TouchEvent MoveEvent = delegate { };
-        public event TouchEvent ClickedEvent = delegate { };
+        public event IInteractiveObject.TouchEvent ReleasedEvent = delegate { };
+        public event IInteractiveObject.TouchEvent PressedEvent = delegate { };
+        public event IInteractiveObject.TouchEvent MoveEvent = delegate { };
+        public event IInteractiveObject.TouchEvent ClickedEvent = delegate { };
 
         public ButtonObject() : base()
         {
@@ -34,7 +32,7 @@ namespace SevenWonders.GameEngine
             if (graphicsLayer.Visible && Visible && IsTouchInButton(eventArgs.Location.X, eventArgs.Location.Y))
             {
                 GameLog.Info($"ButtonObject released with ID: {Id} and name: {Name}");
-                ReleasedEvent(eventArgs);
+                ReleasedEvent(this, eventArgs);
             }
         }
 
@@ -43,7 +41,7 @@ namespace SevenWonders.GameEngine
             if (graphicsLayer.Visible && Visible && IsTouchInButton(eventArgs.Location.X, eventArgs.Location.Y))
             {
                 GameLog.Info($"ButtonObject pressed with ID: {Id} and name: {Name}");
-                PressedEvent(eventArgs);
+                PressedEvent(this, eventArgs);
             }
         }
 
@@ -51,7 +49,7 @@ namespace SevenWonders.GameEngine
         {
             if (graphicsLayer.Visible && Visible && IsTouchInButton(eventArgs.Location.X, eventArgs.Location.Y))
             {
-                MoveEvent(eventArgs);
+                MoveEvent(this, eventArgs);
             }
         }
 
@@ -60,7 +58,7 @@ namespace SevenWonders.GameEngine
             if (graphicsLayer.Visible && Visible && IsTouchInButton(eventArgs.Location.X, eventArgs.Location.Y))
             {
                 GameLog.Info($"ButtonObject clicked with ID: {Id} and name: {Name}");
-                ClickedEvent(eventArgs);
+                ClickedEvent(this ,eventArgs);
             }
         }
 

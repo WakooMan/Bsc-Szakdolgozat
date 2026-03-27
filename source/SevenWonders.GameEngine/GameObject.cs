@@ -6,14 +6,12 @@ using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
-    public class GameObject : SceneObject, IEquatable<GameObject>
+    public class GameObject : SceneObject, IInteractiveObject, IEquatable<GameObject>
     {
-        public delegate void TouchEvent(GameObject gameObject, SKTouchEventArgs eventArgs);
-
-        public event TouchEvent ReleasedEvent = delegate { };
-        public event TouchEvent PressedEvent = delegate { };
-        public event TouchEvent MoveEvent = delegate { };
-        public event TouchEvent ClickedEvent = delegate { };
+        public event IInteractiveObject.TouchEvent ReleasedEvent = delegate { };
+        public event IInteractiveObject.TouchEvent PressedEvent = delegate { };
+        public event IInteractiveObject.TouchEvent MoveEvent = delegate { };
+        public event IInteractiveObject.TouchEvent ClickedEvent = delegate { };
 
         public Vector2 Direction { get; set;}
         public Vector2 VisualSize { get; set; }

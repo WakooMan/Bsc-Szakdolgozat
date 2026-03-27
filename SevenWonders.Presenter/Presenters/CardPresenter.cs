@@ -1,28 +1,24 @@
 ﻿using GameLogic.Ages;
 using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
+using GameLogic.Events;
+using GameLogic.Events.GameEvents;
+using GameLogic.GameStructures;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Cards;
 using SevenWonders.Presenter.Views;
-using SkiaSharp.Views.Maui;
-using System.Numerics;
-using static SevenWonders.Presenter.Presenters.ICardPresenter;
 
 namespace SevenWonders.Presenter.Presenters
 {
-    public class CardPresenter : ICardPresenter
+    public class CardPresenter : IPresenter
     {
-        public event CardPresenterDelegate? CardChosen;
-        public event DecisionDelegate? BuildCardChosen;
-        public event DecisionDelegate? SellCardChosen;
-        public event DecisionDelegate? UnpickCardChosen;
-        public event DecisionDelegate? BuildWonderChosen;
 
-        public CardPresenter(ICardConnector cardConnector, IGameEngineReceiver gameEngineReceiver)
+        public CardPresenter(ICardConnector cardConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager)
         {
             m_cardConnector = cardConnector;
             m_gameEngineReceiver = gameEngineReceiver;
+            m_eventManager = eventManager;
             m_cards = new Dictionary<Card, IGameObjectView>();
             m_ageCardDecks = new Dictionary<AgesEnum, GameObject>();
             m_player1Targets = new Dictionary<Type, GameObject>();
@@ -41,10 +37,6 @@ namespace SevenWonders.Presenter.Presenters
             m_ageCardDecks[AgesEnum.I] = m_gameEngineReceiver.ReceiveGameObject("FirstAgeDeck");
             m_ageCardDecks[AgesEnum.II] = m_gameEngineReceiver.ReceiveGameObject("SecondAgeDeck");
             m_ageCardDecks[AgesEnum.III] = m_gameEngineReceiver.ReceiveGameObject("ThirdAgeDeck");
-            m_buildWonderButton = m_gameEngineReceiver.ReceiveButton("BuildWonder");
-            m_unpickCardButton = m_gameEngineReceiver.ReceiveButton("UnpickCard");
-            m_buildCardButton = m_gameEngineReceiver.ReceiveButton("BuildCard");
-            m_sellCardButton = m_gameEngineReceiver.ReceiveButton("SellCard");
 
             foreach (var connection in m_cardConnector.ReceiveCardConnection())
             {
@@ -90,7 +82,35 @@ namespace SevenWonders.Presenter.Presenters
             m_thirdAgeLayer.Visible = true;
         }
 
-        public void MoveToActionLocation(Card card)
+        public void SubscribeToEvents()
+        {
+            m_eventManager.Subscribe<OnAgeStarted>(state => {
+                foreach (ICardNode cardNode in state.Age.Composition.AllCards)
+                {
+                    MoveToCenter(cardNode.CardObj, cardNode.Hidden, cardNode.NodeName);
+                }
+            });
+
+            m_eventManager.Subscribe<OnCardPicked>(eventObj => {
+                MoveToActionLocation(eventObj.Card);
+            });
+            m_eventManager.Subscribe<OnCardUnpicked>(eventObj => {
+                MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName);
+                if (m_pickCardLayer is not null)
+                {
+                    m_pickCardLayer.Visible = false;
+                }
+            });
+            m_eventManager.Subscribe<OnCardBuilt>(eventObj => {
+                MoveToPlayer(eventObj.Builder, eventObj.Card);
+                if (m_pickCardLayer is not null)
+                {
+                    m_pickCardLayer.Visible = false;
+                }
+            });
+        }
+
+        private void MoveToActionLocation(Card card)
         {
             if (m_cardActionLocation is not null)
             {
@@ -99,48 +119,14 @@ namespace SevenWonders.Presenter.Presenters
                 .MoveTo(m_cardActionLocation, 0.3f)
                 .Highlight(m_cardActionLocation.VisualSize, false, 0.3f);
                 view.Execute();
-                m_pickCardLayer.Visible = true;
-                m_buildWonderButton.ClickedEvent += OnBuildWonderButtonClicked;
-                m_unpickCardButton.ClickedEvent += OnUnpickCardButtonClicked;
-                m_buildCardButton.ClickedEvent += OnBuildCardButtonClicked;
-                m_sellCardButton.ClickedEvent += OnSellCardButtonClicked;
+                if (m_pickCardLayer is not null)
+                {
+                    m_pickCardLayer.Visible = true;
+                }
             }
         }
 
-        private void UnsubscribeDecisionButtons()
-        {
-            m_buildWonderButton.ClickedEvent -= OnBuildWonderButtonClicked;
-            m_unpickCardButton.ClickedEvent -= OnUnpickCardButtonClicked;
-            m_buildCardButton.ClickedEvent -= OnBuildCardButtonClicked;
-            m_sellCardButton.ClickedEvent -= OnSellCardButtonClicked;
-            m_pickCardLayer.Visible = false;
-        }
-
-        private void OnBuildWonderButtonClicked(SKTouchEventArgs eventArgs)
-        {
-            UnsubscribeDecisionButtons();
-            BuildWonderChosen?.Invoke();
-        }
-
-        private void OnUnpickCardButtonClicked(SKTouchEventArgs eventArgs)
-        {
-            UnsubscribeDecisionButtons();
-            UnpickCardChosen?.Invoke();
-        }
-
-        private void OnBuildCardButtonClicked(SKTouchEventArgs eventArgs)
-        {
-            UnsubscribeDecisionButtons();
-            BuildCardChosen?.Invoke();
-        }
-
-        private void OnSellCardButtonClicked(SKTouchEventArgs eventArgs)
-        {
-            UnsubscribeDecisionButtons();
-            SellCardChosen?.Invoke();
-        }
-
-        public void MoveToCenter(Card card, bool hidden, string nodeName)
+        private void MoveToCenter(Card card, bool hidden, string nodeName)
         {
             var view = m_cards[card];
             var group = view.GetAnimationGroupBuilder();
@@ -154,10 +140,9 @@ namespace SevenWonders.Presenter.Presenters
             }
             view.Execute();
             view.IncreaseZIndex();
-            view.SubscribeClickAtAnimationEnd(() => CardChosen?.Invoke(card));
         }
 
-        public void MoveBackToCenter(Card card, string nodeName)
+        private void MoveBackToCenter(Card card, string nodeName)
         {
             var view = m_cards[card];
             var group = view.GetAnimationGroupBuilder();
@@ -172,7 +157,7 @@ namespace SevenWonders.Presenter.Presenters
             //view.SubscribeClickAtAnimationEnd(() => CardChosen?.Invoke(card));
         }
 
-        public void MoveToDropCardDeck(Card card)
+        private void MoveToDropCardDeck(Card card)
         {
             if (m_dropCardDeck is not null)
             {
@@ -183,7 +168,7 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        public void MoveToPlayer(Player player, Card card)
+        private void MoveToPlayer(Player player, Card card)
         {
             if (player.Id == 1)
             {
@@ -222,6 +207,7 @@ namespace SevenWonders.Presenter.Presenters
         private readonly IDictionary<Card, IGameObjectView> m_cards;
         private readonly ICardConnector m_cardConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
+        private readonly IEventManager m_eventManager;
         private readonly Dictionary<Type, GameObject> m_player1Targets;
         private readonly Dictionary<Type, GameObject> m_player2Targets;
         private GraphicsLayer? m_pickCardLayer;
@@ -230,10 +216,6 @@ namespace SevenWonders.Presenter.Presenters
         private GraphicsLayer? m_thirdAgeLayer;
         private readonly Dictionary<string, GameObject> m_centerTargets;
         private GameObject? m_cardActionLocation;
-        private ButtonObject m_buildWonderButton;
-        private ButtonObject m_unpickCardButton;
-        private ButtonObject m_buildCardButton;
-        private ButtonObject m_sellCardButton;
         private readonly Dictionary<AgesEnum , GameObject> m_ageCardDecks;
         private GameObject? m_dropCardDeck;
     }

@@ -16,25 +16,6 @@ namespace SevenWondersUI.Views
             m_groupBuilder = animationGroupBuilderFactory.Create(wonder);
         }
 
-        public void SubscribeClickAtAnimationEnd(Action action)
-        {
-            if (m_touchEvent is null)
-            {
-                // Wait for animation to end
-                m_touchEvent = (obj, args) => action();
-                m_gameObject.ClickedEvent += m_touchEvent;
-            }
-        }
-
-        public void UnsubscribeClick()
-        {
-            if (m_touchEvent is not null)
-            {
-                m_gameObject.ClickedEvent -= m_touchEvent;
-                m_touchEvent = null;
-            }
-        }
-
         public IAnimationGroupBuilder GetAnimationGroupBuilder()
         {
             return m_groupBuilder;
@@ -59,6 +40,5 @@ namespace SevenWondersUI.Views
         private readonly IAnimationManager m_animationManager;
         private readonly IAnimationGroupBuilder m_groupBuilder;
         private readonly GameObject m_gameObject;
-        private GameObject.TouchEvent? m_touchEvent;
     }
 }

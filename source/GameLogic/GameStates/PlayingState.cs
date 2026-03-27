@@ -28,7 +28,7 @@ namespace GameLogic.GameStates
 
                 while (playerTurnState is not EndTurn)
                 {
-                    playerTurnState.ExecuteTurnState();
+                    await playerTurnState.ExecuteTurnState();
                     playerTurnState = playerTurnState.GetNextTurnState();
                 }
 
@@ -40,7 +40,7 @@ namespace GameLogic.GameStates
                         IsGameOver = !await GameContext.AgeHandler.NextAge();
                     }
 
-                    GameContext.TurnHandler.NextPlayer();
+                    await GameContext.TurnHandler.NextPlayer();
                 }
             }
 

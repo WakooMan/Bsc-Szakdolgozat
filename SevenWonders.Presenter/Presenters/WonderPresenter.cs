@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace SevenWonders.Presenter.Presenters
 {
-    public class WonderPresenter : IWonderPresenter
+    public class WonderPresenter : IPresenter
     {
         public WonderPresenter(IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager)
         {
@@ -113,7 +113,6 @@ namespace SevenWonders.Presenter.Presenters
             if (m_wonderDeck is not null)
             {
                 var view = m_wonders[wonder];
-                view.UnsubscribeClick();
 
                 var group = view.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
@@ -130,7 +129,6 @@ namespace SevenWonders.Presenter.Presenters
             if (m_player1Targets.Count > 0)
             {
                 var view = m_wonders[wonder];
-                view.UnsubscribeClick();
 
                 var group = view.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
@@ -146,7 +144,6 @@ namespace SevenWonders.Presenter.Presenters
             if (m_player2Targets.Count > 0)
             {
                 var view = m_wonders[wonder];
-                view.UnsubscribeClick();
 
                 var group = view.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);

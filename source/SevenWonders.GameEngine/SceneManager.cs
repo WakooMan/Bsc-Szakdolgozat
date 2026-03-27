@@ -68,6 +68,35 @@ namespace SevenWonders.GameEngine
             return null;
         }
 
+        public IInteractiveObject? GetInteractiveObjectByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                foreach (GameObject gameObject in graphicsLayer.ObjectList)
+                {
+                    if (gameObject.Name.ToLower() == name.ToLower())
+                    {
+                        return gameObject;
+                    }
+                }
+
+                foreach (ButtonObject button in graphicsLayer.Buttons)
+                {
+                    if (button.Name.ToLower() == name.ToLower())
+                    {
+                        return button;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public ButtonObject? GetButtonByName(string name)
         {
             if (CurrentScene is null)

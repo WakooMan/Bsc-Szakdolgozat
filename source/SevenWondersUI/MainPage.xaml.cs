@@ -14,10 +14,9 @@ namespace SevenWondersUI
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IWonderPresenter wonderPresenter, ICardPresenter cardPresenter)
+        public MainPage(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IPresenter presenter)
         {
-            m_wonderPresenter = wonderPresenter;
-            m_cardPresenter = cardPresenter;
+            m_presenter = presenter;
             m_animationManager = animationManager;
             m_sceneLoader = sceneLoader;
             m_game = game;
@@ -45,26 +44,9 @@ namespace SevenWondersUI
             }
 
             m_engine.Startup();
-            m_wonderPresenter.Initialize();
-            m_cardPresenter.Initialize();
+            m_presenter.Initialize();
             m_game.Initialize("Player1", "Player2");
-            m_wonderPresenter.SubscribeToEvents();
-            m_game.Context.EventManager.Subscribe<OnAgeStarted>(state => {
-                foreach (ICardNode cardNode in state.Age.Composition.AllCards)
-                {
-                    m_cardPresenter.MoveToCenter(cardNode.CardObj, cardNode.Hidden, cardNode.NodeName);
-                }
-            });
-
-            m_game.Context.EventManager.Subscribe<OnCardPicked>(eventObj => {
-                m_cardPresenter.MoveToActionLocation(eventObj.Card);
-            });
-            m_game.Context.EventManager.Subscribe<OnCardUnpicked>(eventObj => {
-                m_cardPresenter.MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName);
-            });
-            m_game.Context.EventManager.Subscribe<OnCardBuilt>(eventObj => {
-                m_cardPresenter.MoveToPlayer(eventObj.Builder, eventObj.Card);
-            });
+            m_presenter.SubscribeToEvents();
             _ = Task.Run(m_game.GameLoop);
 
         }
@@ -104,8 +86,7 @@ namespace SevenWondersUI
         private readonly IEngine m_engine;
         private readonly IGame m_game;
         private readonly IAnimationManager m_animationManager;
-        private readonly IWonderPresenter m_wonderPresenter;
-        private readonly ICardPresenter m_cardPresenter;
+        private readonly IPresenter m_presenter;
 
     }
 

@@ -19,6 +19,16 @@ namespace SevenWonders.Presenter.Connectors
             return gameObject;
         }
 
+        public IInteractiveObject ReceiveInteractiveObject(string name)
+        {
+            IInteractiveObject? interactiveObject = m_sceneManager.GetInteractiveObjectByName(name);
+            if (interactiveObject is null)
+            {
+                throw new InvalidOperationException($"GameObject with name {name} does not exist.");
+            }
+            return interactiveObject;
+        }
+
         public ICollection<GameObject> ReceiveGameObjects(string name, int number)
         {
             List<GameObject> result = new List<GameObject>();
