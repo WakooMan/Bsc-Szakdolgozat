@@ -9,7 +9,7 @@ namespace SevenWonders.GameEngine.Components
             Id = 100;
             Name = nameof(AnimationManager);
             m_activeAnimations = new List<IAnimation>();
-            m_animationQueue = new Queue<List<IAnimation>>();
+            m_animationQueue = new Queue<(List<IAnimation>, TaskCompletionSource?)>();
         }
 
         public int Id { get; set; }
@@ -19,12 +19,14 @@ namespace SevenWonders.GameEngine.Components
         {
             m_activeAnimations.Clear();
             m_animationQueue.Clear();
+            m_activeTcs = null;
         }
 
         public void Startup()
         {
             m_activeAnimations.Clear();
             m_animationQueue.Clear();
+            m_activeTcs = null;
         }
 
         public void Update(float deltaTime)
@@ -37,7 +39,9 @@ namespace SevenWonders.GameEngine.Components
                 }
                 else
                 {
-                    m_activeAnimations.AddRange(m_animationQueue.Dequeue());
+                    var (animations, tcs) = m_animationQueue.Dequeue();
+                    m_activeTcs = tcs;
+                    m_activeAnimations.AddRange(animations);
                     m_activeAnimations.ForEach(animation => animation.Start());
                 }
             }
@@ -50,15 +54,25 @@ namespace SevenWonders.GameEngine.Components
             if (m_activeAnimations.All(animation => !animation.IsPlaying))
             {
                 m_activeAnimations.Clear();
+                m_activeTcs?.SetResult();
+                m_activeTcs = null;
             }
         }
 
         public void Enqueue(params IAnimation[] animations)
         {
-            m_animationQueue.Enqueue([.. animations]);
+            m_animationQueue.Enqueue(([.. animations], null));
         }
 
+        public Task EnqueueAsync(params IAnimation[] animations)
+        {
+            var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            m_animationQueue.Enqueue(([.. animations], tcs));
+            return tcs.Task;
+        }
+
+        private TaskCompletionSource? m_activeTcs;
         private readonly List<IAnimation> m_activeAnimations;
-        private readonly Queue<List<IAnimation>> m_animationQueue;
+        private readonly Queue<(List<IAnimation>, TaskCompletionSource?)> m_animationQueue;
     }
 }

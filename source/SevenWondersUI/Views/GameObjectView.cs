@@ -21,9 +21,9 @@ namespace SevenWondersUI.Views
             return m_groupBuilder;
         }
 
-        public void Execute()
+        public async Task Execute()
         {
-            m_animationManager.Enqueue(m_groupBuilder.GetAnimations());
+            await m_animationManager.EnqueueAsync(m_groupBuilder.GetAnimations());
             m_groupBuilder.Clear();
         }
 

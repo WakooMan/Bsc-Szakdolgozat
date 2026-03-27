@@ -3,7 +3,7 @@
     public interface IGameObjectView
     {
         IAnimationGroupBuilder GetAnimationGroupBuilder();
-        void Execute();
+        Task Execute();
         void IncreaseZIndex();
         void DecreaseZIndex();
     }

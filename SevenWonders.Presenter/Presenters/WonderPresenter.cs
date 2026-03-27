@@ -32,7 +32,7 @@ namespace SevenWonders.Presenter.Presenters
             {
                 m_wonders[connection.Key] = connection.Value;
                 var group = connection.Value.GetAnimationGroupBuilder().Flip(1, 0f).MoveTo(m_wonderDeck, 0f);
-                connection.Value.Execute();
+                _ = connection.Value.Execute();
             }
 
             foreach (var player1Target in m_gameEngineReceiver.ReceiveGameObjects("player1Wonder", 4))
@@ -58,57 +58,57 @@ namespace SevenWonders.Presenter.Presenters
             m_eventManager.Subscribe<OnChooseWonderStateStart>(state => {
                 foreach (Wonder wonder in state.Wonders)
                 {
-                    MoveToCenter(wonder);
+                    MoveToCenter(wonder).GetAwaiter().GetResult();
                 }
             });
 
             m_eventManager.Subscribe<OnFourWondersChosen>(state => {
                 foreach (Wonder wonder in state.Wonders)
                 {
-                    MoveToCenter(wonder);
+                    MoveToCenter(wonder).GetAwaiter().GetResult();
                 }
             });
 
             m_eventManager.Subscribe<OnChooseWonderStateEnd>(state => {
                 foreach (Wonder wonder in state.Wonders)
                 {
-                    MoveToDeck(wonder);
+                    MoveToDeck(wonder).GetAwaiter().GetResult();
                 }
             });
 
             m_eventManager.Subscribe<OnWonderChosen>(state => {
-                MoveToPlayer(state.Player, state.Wonder);
+                MoveToPlayer(state.Player, state.Wonder).GetAwaiter().GetResult();
             });
         }
 
-        private void MoveToPlayer(Player player, Wonder wonder)
+        private async Task MoveToPlayer(Player player, Wonder wonder)
         {
             if (player.Id == 1)
             {
-                MoveToPlayer1(wonder);
+                await MoveToPlayer1(wonder);
             }
             if (player.Id == 2)
             {
-                MoveToPlayer2(wonder);
+                await MoveToPlayer2(wonder);
             }
         }
 
-        private void MoveToCenter(Wonder wonder)
+        private async Task MoveToCenter(Wonder wonder)
         {
             if (m_centerTargets.Count > 0)
             {
                 var view = m_wonders[wonder];
                 var group = view.GetAnimationGroupBuilder();
                 group.MoveTo(m_centerTargets.Pop(), 1.0f)
-                .Flip(0, 1.0f);
-                view.Execute();
+                    .Flip(0, 1.0f);
+                await view.Execute();
 
                 group.Highlight(new Vector2(1.0f, 1.0f), true, 0.2f);
-                view.Execute();
+                await view.Execute();
             }
         }
 
-        private void MoveToDeck(Wonder wonder)
+        private async Task MoveToDeck(Wonder wonder)
         {
             if (m_wonderDeck is not null)
             {
@@ -116,15 +116,15 @@ namespace SevenWonders.Presenter.Presenters
 
                 var group = view.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
-                view.Execute();
+                await view.Execute();
 
                 group.MoveTo(m_wonderDeck, 1.0f)
-                .Flip(1, 1.0f);
-                view.Execute();
+                    .Flip(1, 1.0f);
+                await view.Execute();
             }
         }
 
-        private void MoveToPlayer1(Wonder wonder)
+        private async Task MoveToPlayer1(Wonder wonder)
         {
             if (m_player1Targets.Count > 0)
             {
@@ -132,14 +132,14 @@ namespace SevenWonders.Presenter.Presenters
 
                 var group = view.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
-                view.Execute();
+                await view.Execute();
 
                 group.MoveTo(m_player1Targets.Pop(), 1.0f);
-                view.Execute();
+                await view.Execute();
             }
         }
 
-        private void MoveToPlayer2(Wonder wonder)
+        private async Task MoveToPlayer2(Wonder wonder)
         {
             if (m_player2Targets.Count > 0)
             {
@@ -147,10 +147,10 @@ namespace SevenWonders.Presenter.Presenters
 
                 var group = view.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
-                view.Execute();
+                await view.Execute();
 
                 group.MoveTo(m_player2Targets.Pop(), 1.0f);
-                view.Execute();
+                await view.Execute();
             }
         }
 

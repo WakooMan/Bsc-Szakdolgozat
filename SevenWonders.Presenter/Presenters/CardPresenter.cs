@@ -42,7 +42,7 @@ namespace SevenWonders.Presenter.Presenters
             {
                 m_cards[connection.Key] = connection.Value;
                 connection.Value.GetAnimationGroupBuilder().Flip(0, 0f).MoveTo(m_ageCardDecks[connection.Key.Age], 0f);
-                connection.Value.Execute();
+                _ = connection.Value.Execute();
             }
 
             foreach (var firstAgeCenterTarget in m_gameEngineReceiver.ReceiveGameObjects("firstAgeCenter", 20))
@@ -87,22 +87,22 @@ namespace SevenWonders.Presenter.Presenters
             m_eventManager.Subscribe<OnAgeStarted>(state => {
                 foreach (ICardNode cardNode in state.Age.Composition.AllCards)
                 {
-                    MoveToCenter(cardNode.CardObj, cardNode.Hidden, cardNode.NodeName);
+                    MoveToCenter(cardNode.CardObj, cardNode.Hidden, cardNode.NodeName).GetAwaiter().GetResult();
                 }
             });
 
             m_eventManager.Subscribe<OnCardPicked>(eventObj => {
-                MoveToActionLocation(eventObj.Card);
+                MoveToActionLocation(eventObj.Card).GetAwaiter().GetResult();
             });
             m_eventManager.Subscribe<OnCardUnpicked>(eventObj => {
-                MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName);
+                MoveBackToCenter(eventObj.CardNode.CardObj, eventObj.CardNode.NodeName).GetAwaiter().GetResult();
                 if (m_pickCardLayer is not null)
                 {
                     m_pickCardLayer.Visible = false;
                 }
             });
             m_eventManager.Subscribe<OnCardBuilt>(eventObj => {
-                MoveToPlayer(eventObj.Builder, eventObj.Card);
+                MoveToPlayer(eventObj.Builder, eventObj.Card).GetAwaiter().GetResult();
                 if (m_pickCardLayer is not null)
                 {
                     m_pickCardLayer.Visible = false;
@@ -110,15 +110,15 @@ namespace SevenWonders.Presenter.Presenters
             });
         }
 
-        private void MoveToActionLocation(Card card)
+        private async Task MoveToActionLocation(Card card)
         {
             if (m_cardActionLocation is not null)
             {
                 var view = m_cards[card];
-                var group = view.GetAnimationGroupBuilder()
-                .MoveTo(m_cardActionLocation, 0.3f)
-                .Highlight(m_cardActionLocation.VisualSize, false, 0.3f);
-                view.Execute();
+                view.GetAnimationGroupBuilder()
+                    .MoveTo(m_cardActionLocation, 0.3f)
+                    .Highlight(m_cardActionLocation.VisualSize, false, 0.3f);
+                await view.Execute();
                 if (m_pickCardLayer is not null)
                 {
                     m_pickCardLayer.Visible = true;
@@ -126,7 +126,7 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        private void MoveToCenter(Card card, bool hidden, string nodeName)
+        private async Task MoveToCenter(Card card, bool hidden, string nodeName)
         {
             var view = m_cards[card];
             var group = view.GetAnimationGroupBuilder();
@@ -138,69 +138,67 @@ namespace SevenWonders.Presenter.Presenters
             {
                 group.Flip(1, 0.5f);
             }
-            view.Execute();
+            await view.Execute();
             view.IncreaseZIndex();
         }
 
-        private void MoveBackToCenter(Card card, string nodeName)
+        private async Task MoveBackToCenter(Card card, string nodeName)
         {
             var view = m_cards[card];
             var group = view.GetAnimationGroupBuilder();
             if (m_centerTargets.TryGetValue(nodeName, out var target))
             {
                 group.MoveTo(target, 0.5f)
-                .Unhighlight(false, 0.5f);
+                    .Unhighlight(false, 0.5f);
             }
 
-            view.Execute();
+            await view.Execute();
             view.DecreaseZIndex();
-            //view.SubscribeClickAtAnimationEnd(() => CardChosen?.Invoke(card));
         }
 
-        private void MoveToDropCardDeck(Card card)
+        private async Task MoveToDropCardDeck(Card card)
         {
             if (m_dropCardDeck is not null)
             {
                 var view = m_cards[card];
-                var group = view.GetAnimationGroupBuilder();
-                group.MoveTo(m_dropCardDeck, 1.5f);
-                view.Execute();
+                view.GetAnimationGroupBuilder().MoveTo(m_dropCardDeck, 1.5f);
+                await view.Execute();
             }
         }
 
-        private void MoveToPlayer(Player player, Card card)
+        private async Task MoveToPlayer(Player player, Card card)
         {
             if (player.Id == 1)
             {
-                MoveToPlayer1(card);
+                await MoveToPlayer1(card);
             }
             if (player.Id == 2)
             {
-                MoveToPlayer2(card);
+                await MoveToPlayer2(card);
             }
         }
 
-        private void MoveToPlayer1(Card card)
+        private async Task MoveToPlayer1(Card card)
         {
             if (m_player1Targets.ContainsKey(card.GetType()))
             {
                 var view = m_cards[card];
-                var group = view.GetAnimationGroupBuilder();
-                group.MoveTo(m_player1Targets[card.GetType()], 1.5f).
-                Unhighlight(false, 1.5f);
-                view.Execute();
+                view.GetAnimationGroupBuilder()
+                    .MoveTo(m_player1Targets[card.GetType()], 1.5f)
+                    .Unhighlight(false, 1.5f);
+                await view.Execute();
             }
         }
 
-        private void MoveToPlayer2(Card card)
+        private async Task MoveToPlayer2(Card card)
         {
             if (m_player2Targets.ContainsKey(card.GetType()))
             {
                 var view = m_cards[card];
-                var group = view.GetAnimationGroupBuilder();
-                group.MoveTo(m_player2Targets[card.GetType()], 1.5f)
-                .Unhighlight(false, 1.5f);
-                view.Execute();
+                view.GetAnimationGroupBuilder()
+                    .MoveTo(m_player2Targets[card.GetType()], 1.5f)
+                    .Unhighlight(false, 1.5f);
+                await view.Execute();
             }
         }
 
