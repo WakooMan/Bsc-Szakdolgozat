@@ -25,9 +25,9 @@ namespace GameLogic.Elements.Military
             m_keyValuePairs.Add(players.First(), PlayerSide.First);
             m_keyValuePairs.Add(players.Last(), PlayerSide.Second);
             Developments.AddRange(developments);
-            gameContext.EventManager.Subscribe<OnScientificProgress>(async (args) => await OnScientificProgress(gameContext, args));
+            gameContext.EventManager.Subscribe<OnScientificProgress>((args) => OnScientificProgress(gameContext, args).GetAwaiter().GetResult());
             gameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
-            gameContext.EventManager.Subscribe<OnMilitaryAdvanced>(async (args) => await OnMilitaryAdvanced(gameContext.EventManager, args));
+            gameContext.EventManager.Subscribe<OnMilitaryAdvanced>((args) => OnMilitaryAdvanced(gameContext.EventManager, args).GetAwaiter().GetResult());
         }
 
         private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)

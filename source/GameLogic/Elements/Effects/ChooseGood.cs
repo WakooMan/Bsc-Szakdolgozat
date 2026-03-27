@@ -38,7 +38,7 @@ namespace GameLogic.Elements.Effects
         public override Task Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<TurnStarted>(async (args) => await SelectGood(gameContext, player, args));
+            gameContext.EventManager.Subscribe<TurnStarted>((args) => SelectGood(gameContext, player, args).GetAwaiter().GetResult());
             return Task.CompletedTask;
         }
 
