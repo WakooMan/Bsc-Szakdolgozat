@@ -34,12 +34,13 @@ namespace GameLogic.Handlers
             m_ageBase = null;
         }
 
-        public void Initialize()
+        public async Task Initialize()
         {
             m_ageBase = new FirstAge(m_eventManager, m_cardCompositionFactory, m_cardList);
+            await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
         }
 
-        public bool NextAge()
+        public async Task<bool> NextAge()
         {
             if (CurrentAge is null)
             {
@@ -52,15 +53,17 @@ namespace GameLogic.Handlers
             {
                 case AgesEnum.I:
                     m_ageBase = new SecondAge(m_eventManager, m_cardCompositionFactory, m_cardList);
+                    await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
                     break;
                 case AgesEnum.II:
                     m_ageBase = new ThirdAge(m_eventManager, m_cardCompositionFactory, m_cardList);
+                    await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
                     break;
                 default:
                     return false;
             }
 
-            m_eventManager.Publish(new OnAgeEnded(previousAge));
+            await m_eventManager.PublishAsync(new OnAgeEnded(previousAge));
             return true;
         }
 

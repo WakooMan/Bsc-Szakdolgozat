@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
 {
     public class DropCard : IPlayerAction
     {
+        public string Name => m_card.Name;
         public DropCard() { }
         public DropCard(Player player, Card card)
         {
@@ -17,17 +18,17 @@ namespace GameLogic.PlayerActions
             m_player = player;
             m_card = card;
         }
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return m_player.Cards.Contains(m_card);
+            return Task.FromResult(m_player.Cards.Contains(m_card));
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public async Task DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_player.Cards.Contains(m_card), "Player does not have the specific card! Action cannot be performed!");
 
             m_player.Cards.Remove(m_card);
-            gameContext.EventManager.Publish(new OnCardDestroyed(m_player, m_card));
+            await gameContext.EventManager.PublishAsync(new OnCardDestroyed(m_player, m_card));
         }
 
         private readonly Card m_card;

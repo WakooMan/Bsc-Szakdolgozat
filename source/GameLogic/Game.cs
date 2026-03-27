@@ -25,13 +25,13 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public void GameLoop()
+        public async void GameLoop()
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_isInitialized, "Cannot start an uninitialized game!");
 
             while (CurrentState is not EndGameState)
             {
-                CurrentState.DoStateAction();
+                await CurrentState.DoStateAction();
                 CurrentState = CurrentState.GetNextState();
             }
 

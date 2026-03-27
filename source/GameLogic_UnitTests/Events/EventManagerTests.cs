@@ -17,7 +17,7 @@ namespace GameLogic_UnitTests.Events
         {
             int called = 0;
             m_eventManager.Subscribe((OnBuildingCostCalculated calculated) => called++);
-            m_eventManager.Publish(new OnBuildingCostCalculated(new Player()));
+            m_eventManager.PublishAsync(new OnBuildingCostCalculated(new Player()));
 
             Assert.That(called, Is.EqualTo(1));
         }
@@ -28,7 +28,7 @@ namespace GameLogic_UnitTests.Events
             int called = 0;
             m_eventManager.Subscribe((OnBuildingCostCalculated calculated) => called++);
             m_eventManager.ClearSubscriptions();
-            m_eventManager.Publish(new OnBuildingCostCalculated(new Player()));
+            m_eventManager.PublishAsync(new OnBuildingCostCalculated(new Player()));
 
             Assert.That(called, Is.EqualTo(0));
         }
@@ -40,7 +40,7 @@ namespace GameLogic_UnitTests.Events
             Action<OnBuildingCostCalculated> action =(calculated) => called++;
             m_eventManager.Subscribe(action);
             m_eventManager.Unsubscribe(action);
-            m_eventManager.Publish(new OnBuildingCostCalculated(new Player()));
+            m_eventManager.PublishAsync(new OnBuildingCostCalculated(new Player()));
 
             Assert.That(called, Is.EqualTo(0));
         }

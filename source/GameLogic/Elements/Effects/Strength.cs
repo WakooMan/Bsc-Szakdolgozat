@@ -21,9 +21,9 @@ namespace GameLogic.Elements.Effects
             return new Strength(this);
         }
 
-        public override void Apply(IGameContext gameContext)
+        public override async Task Apply(IGameContext gameContext)
         {
-            gameContext.EventManager.Publish(new OnMilitaryAdvanced(gameContext.TurnHandler.CurrentPlayer, Points));
+            await gameContext.EventManager.PublishAsync(new OnMilitaryAdvanced(gameContext.TurnHandler.CurrentPlayer, Points));
         }
     }
 }

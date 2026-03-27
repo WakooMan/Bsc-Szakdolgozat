@@ -5,7 +5,7 @@ namespace GameLogic.Handlers
     public interface IAgeHandler
     {
         IAgeBase CurrentAge { get; }
-        void Initialize();
-        bool NextAge();
+        Task Initialize();
+        Task<bool> NextAge();
     }
 }

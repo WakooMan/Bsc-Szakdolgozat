@@ -8,7 +8,7 @@ namespace SevenWonders.GameEngine
 {
     public class GameObject : SceneObject, IEquatable<GameObject>
     {
-        public delegate void TouchEvent(SKTouchEventArgs eventArgs);
+        public delegate void TouchEvent(GameObject gameObject, SKTouchEventArgs eventArgs);
 
         public event TouchEvent ReleasedEvent = delegate { };
         public event TouchEvent PressedEvent = delegate { };
@@ -146,7 +146,7 @@ namespace SevenWonders.GameEngine
             if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
                 GameLog.Info($"GameObject released with ID: {Id} and name: {Name}");
-                ReleasedEvent(eventArgs);
+                ReleasedEvent(this, eventArgs);
             }
         }
 
@@ -155,7 +155,7 @@ namespace SevenWonders.GameEngine
             if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
                 GameLog.Info($"GameObject pressed with ID: {Id} and name: {Name}");
-                PressedEvent(eventArgs);
+                PressedEvent(this, eventArgs);
             }
         }
 
@@ -163,7 +163,7 @@ namespace SevenWonders.GameEngine
         {
             if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
-                MoveEvent(eventArgs);
+                MoveEvent(this, eventArgs);
             }
         }
 
@@ -172,7 +172,7 @@ namespace SevenWonders.GameEngine
             if (graphicsLayer.Visible && Visible && IsTouchInGameObject(eventArgs.Location.X, eventArgs.Location.Y))
             {
                 GameLog.Info($"GameObject clicked with ID: {Id} and name: {Name}");
-                ClickedEvent(eventArgs);
+                ClickedEvent(this, eventArgs);
             }
         }
 

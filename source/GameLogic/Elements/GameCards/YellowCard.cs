@@ -17,9 +17,12 @@ namespace GameLogic.Elements.GameCards
             Effects = yellowCard.Effects.Select(act => act.Clone()).ToList();
         }
 
-        public override void OnBuilt(IGameContext gameContext)
+        public override async Task OnBuilt(IGameContext gameContext)
         {
-            Effects.ForEach(effect => effect.Apply(gameContext));
+            foreach (var effect in Effects)
+            {
+                await effect.Apply(gameContext);
+            }
         }
 
         public override YellowCard Clone()

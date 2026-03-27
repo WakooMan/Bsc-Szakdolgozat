@@ -30,25 +30,25 @@ namespace GameLogic.Handlers
 
         public bool WondersChosen => WondersChosenNum == 7;
 
-        public void ChooseWonder()
+        public async Task ChooseWonder()
         {
             ArgumentChecker.CheckPredicateForOperation(() => m_players.Count == 0 || m_wonders.Count == 0, "Wonder cannot be chosen if initialize is not called or all the wonders are chosen!");
             if (WondersChosenNum == 0)
             {
-                m_gameContext.EventManager.Publish(new OnChooseWonderStateStart(m_wonderPlayerActions1.Select(action => action.Wonder).ToList()));
+                await m_gameContext.EventManager.PublishAsync(new OnChooseWonderStateStart(m_wonderPlayerActions1.Select(action => action.Wonder).ToList()));
             }
             if (WondersChosenNum == 4)
             {
-                m_gameContext.EventManager.Publish(new OnFourWondersChosen(m_wonderPlayerActions2.Select(action => action.Wonder).ToList()));
+                await m_gameContext.EventManager.PublishAsync(new OnFourWondersChosen(m_wonderPlayerActions2.Select(action => action.Wonder).ToList()));
             }
 
             Player player = m_players[m_indexOfPlayer];
             List<ChooseWonderAction> actions = WondersChosenNum < 4 ? m_wonderPlayerActions1 : m_wonderPlayerActions2;
-            var playerAction = m_playerActionReceiver.ReceivePlayerAction(player, actions.Select(action => action).ToList());
+            var playerAction = m_playerActionReceiver.ReceivePlayerAction(player, actions.Select(action => (IPlayerAction)action).ToList());
 
-            if (playerAction.CanPerform(m_gameContext))
+            if (await playerAction.CanPerform(m_gameContext))
             {
-                playerAction.DoPlayerAction(m_gameContext);
+                await playerAction.DoPlayerAction(m_gameContext);
             }
 
             actions.Remove((ChooseWonderAction)playerAction);
@@ -57,7 +57,7 @@ namespace GameLogic.Handlers
 
             if (WondersChosen)
             {
-                m_gameContext.EventManager.Publish(new OnChooseWonderStateEnd(actions.Select(action => action.Wonder).ToList()));
+                await m_gameContext.EventManager.PublishAsync(new OnChooseWonderStateEnd(actions.Select(action => action.Wonder).ToList()));
             }
 
         }

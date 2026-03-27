@@ -31,10 +31,10 @@ namespace GameLogic.Elements.GameCards
             return Point.Points;
         }
 
-        public override void OnBuilt(IGameContext gameContext)
+        public override async Task OnBuilt(IGameContext gameContext)
         {
-            gameContext.EventManager.Publish(new OnScientificProgress(gameContext.TurnHandler.CurrentPlayer, Discipline, gameContext.PlayerActionReceiver));
-            Point.Apply(gameContext);
+            await gameContext.EventManager.PublishAsync(new OnScientificProgress(gameContext.TurnHandler.CurrentPlayer, Discipline, gameContext.PlayerActionReceiver));
+            await Point.Apply(gameContext);
         }
     }
 }

@@ -25,9 +25,9 @@ namespace GameLogic.Elements.Military
             m_keyValuePairs.Add(players.First(), PlayerSide.First);
             m_keyValuePairs.Add(players.Last(), PlayerSide.Second);
             Developments.AddRange(developments);
-            gameContext.EventManager.Subscribe<OnScientificProgress>((args) => OnScientificProgress(gameContext, args));
+            gameContext.EventManager.Subscribe<OnScientificProgress>(async (args) => await OnScientificProgress(gameContext, args));
             gameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
-            gameContext.EventManager.Subscribe<OnMilitaryAdvanced>((args) => OnMilitaryAdvanced(gameContext.EventManager, args));
+            gameContext.EventManager.Subscribe<OnMilitaryAdvanced>(async (args) => await OnMilitaryAdvanced(gameContext.EventManager, args));
         }
 
         private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)
@@ -35,7 +35,7 @@ namespace GameLogic.Elements.Military
             eventArgs.MilitaryCards.ForEach(card => MilitaryCards.Remove(card));
         }
 
-        private void OnMilitaryAdvanced(IEventManager eventManager, OnMilitaryAdvanced eventArgs)
+        private async Task OnMilitaryAdvanced(IEventManager eventManager, OnMilitaryAdvanced eventArgs)
         {
             int index = Fields.IndexOf(MilitaryField.Shield);
             PlayerSide playerSide = m_keyValuePairs[eventArgs.Player];
@@ -59,30 +59,30 @@ namespace GameLogic.Elements.Military
 
             if (militaryCards.Count > 0)
             {
-                eventManager.Publish(new OnMilitaryTokenReachedThreshold(militaryCards));
+                await eventManager.PublishAsync(new OnMilitaryTokenReachedThreshold(militaryCards));
             }
 
             if (newIdx == 0 || newIdx == Fields.Count - 1)
             {
-                eventManager.Publish(new MilitaryVictory());
+                await eventManager.PublishAsync(new MilitaryVictory());
             }
         }
 
-        private void OnScientificProgress(IGameContext gameContext, OnScientificProgress eventArgs)
+        private async Task OnScientificProgress(IGameContext gameContext, OnScientificProgress eventArgs)
         {
             var disciplines = eventArgs.Player.Disciplines;
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
                 var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(eventArgs.Player, dev, Developments)).ToArray());
-                if (playerAction.CanPerform(gameContext))
+                if (await playerAction.CanPerform(gameContext))
                 {
-                    playerAction.DoPlayerAction(gameContext);
+                    await playerAction.DoPlayerAction(gameContext);
                 }
             }
 
             if (disciplines.Count >= 6)
             {
-                gameContext.EventManager.Publish(new ScientificVictory());
+                await gameContext.EventManager.PublishAsync(new ScientificVictory());
             }
         }
 

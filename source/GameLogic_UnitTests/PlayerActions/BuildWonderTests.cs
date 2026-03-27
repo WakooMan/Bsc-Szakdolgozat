@@ -146,7 +146,7 @@ namespace GameLogic_UnitTests.PlayerActions
             Assert.That(m_current.Cards.Contains(cardNode.CardObj), Is.False);
             Assert.That(wonder.HasBeenBuilt, Is.True);
             m_costCalculator.Received(1).GetBuildCost(Arg.Any<IBuildable>(), Arg.Any<Player>(), Arg.Any<Player>());
-            m_eventManager.Received(1).Publish(Arg.Any<OnWonderBuilt>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnWonderBuilt>());
             Assert.That(m_current.Money, Is.EqualTo(Math.Max(0, playerMoney - buildCost)));
         }
 

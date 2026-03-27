@@ -35,21 +35,22 @@ namespace GameLogic.Elements.Effects
             return new List<Good>() { m_selectedGood };
         }
 
-        public override void Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<TurnStarted>((args) => SelectGood(gameContext, player, args));
+            gameContext.EventManager.Subscribe<TurnStarted>(async (args) => await SelectGood(gameContext, player, args));
+            return Task.CompletedTask;
         }
 
-        private void SelectGood(IGameContext gameContext, Player player, TurnStarted eventArgs)
+        private async Task SelectGood(IGameContext gameContext, Player player, TurnStarted eventArgs)
         {
             if (eventArgs.Player == player)
             {
                 IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory, SetSelectedGood)).ToArray());
                 
-                if (playerAction.CanPerform(gameContext))
+                if (await playerAction.CanPerform(gameContext))
                 {
-                    playerAction.DoPlayerAction(gameContext);
+                    await playerAction.DoPlayerAction(gameContext);
                 }
             }
         }

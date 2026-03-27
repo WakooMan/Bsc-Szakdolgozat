@@ -21,10 +21,11 @@ namespace GameLogic.Elements.Effects
             return new Mathematics(this);
         }
 
-        public override void Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
             gameContext.EventManager.Subscribe<OnGameEnded>((args) => OnGameEnded(player, args));
+            return Task.CompletedTask;
         }
 
         private void OnGameEnded(Player player, OnGameEnded args)

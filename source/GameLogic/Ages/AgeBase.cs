@@ -21,7 +21,6 @@ namespace GameLogic.Ages
 
             m_cardCompositionFactory = cardCompositionFactory;
             Composition = m_cardCompositionFactory.Create(CardCompositionFile, cards);
-            eventManager.Publish(new OnAgeStarted(this));
         }
 
         protected ICardCompositionFactory m_cardCompositionFactory;

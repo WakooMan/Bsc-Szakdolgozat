@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseCardAction : IPlayerAction
     {
+        public string Name => m_card.Name;
         public ChooseCardAction()
         {
             m_card = new RedCard();
@@ -18,12 +19,12 @@ namespace GameLogic.PlayerActions
             m_card = card;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return gameContext.DroppedCardList is not null && gameContext.DroppedCardList.Cards.Contains(m_card);
+            return Task.FromResult(gameContext.DroppedCardList is not null && gameContext.DroppedCardList.Cards.Contains(m_card));
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public async Task DoPlayerAction(IGameContext gameContext)
         {
             if (gameContext.DroppedCardList is null)
             {
@@ -34,8 +35,8 @@ namespace GameLogic.PlayerActions
             Player player = gameContext.TurnHandler.CurrentPlayer;
             gameContext.DroppedCardList.Cards.Remove(m_card);
             player.Cards.Add(m_card);
-            gameContext.EventManager.Publish(new OnCardBuilt(m_card, player, 0, false));
-            m_card.OnBuilt(gameContext);
+            await gameContext.EventManager.PublishAsync(new OnCardBuilt(m_card, player, 0, false));
+            await m_card.OnBuilt(gameContext);
         }
 
         private readonly Card m_card;

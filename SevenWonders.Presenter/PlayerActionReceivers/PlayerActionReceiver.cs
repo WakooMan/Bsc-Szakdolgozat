@@ -1,28 +1,64 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
-using SevenWonders.Presenter.PlayerActionHandler;
+using SevenWonders.GameEngine;
+using SevenWonders.Presenter.Connectors;
+using SkiaSharp.Views.Maui;
 
 namespace SevenWonders.Presenter.PlayerActionReceivers
 {
-    public class PlayerActionReceiver : IPlayerActionReceiver
+    public class PlayerActionReceiver : IPlayerActionReceiver, IDisposable
     {
-        public PlayerActionReceiver(IServiceProvider serviceProvider)
+        public PlayerActionReceiver(IGameEngineReceiver gameEngineReceiver)
         {
-            m_serviceProvider = serviceProvider;
+            m_gameEngineReceiver = gameEngineReceiver;
+            m_signal = new ManualResetEventSlim(false);
+            m_gameObjectToPlayerAction = new Dictionary<GameObject, IPlayerAction>();
         }
-        public TPlayerAction ReceivePlayerAction<TPlayerAction>(Player player, ICollection<TPlayerAction> playerActions) where TPlayerAction : class, IPlayerAction, new()
+        public IPlayerAction ReceivePlayerAction(Player player, ICollection<IPlayerAction> playerActions)
         {
-            var waiter = m_serviceProvider.GetService<IPlayerActionWaiter<TPlayerAction>>();
-
-            if (waiter == null)
+            m_chosenGameObject = null;
+            m_signal.Reset();
+            m_gameObjectToPlayerAction.Clear();
+            foreach (IPlayerAction playerAction in playerActions)
             {
-                throw new InvalidOperationException($"There is no registered waiter for type: {typeof(TPlayerAction).Name}");
+                GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(playerAction.Name);
+                m_gameObjectToPlayerAction[gameObject] = playerAction;
+                gameObject.ClickedEvent += OnGameObjectClicked;
             }
 
-            return waiter.WaitForPlayerAction(playerActions);
+            while (m_chosenGameObject is null)
+            {
+                m_signal.Wait();
+
+                if (m_chosenGameObject is not null)
+                {
+                    foreach (GameObject gameObject in m_gameObjectToPlayerAction.Keys)
+                    {
+                        gameObject.ClickedEvent -= OnGameObjectClicked;
+                    }
+                    return m_gameObjectToPlayerAction[m_chosenGameObject];
+                }
+            }
+
+            throw new InvalidOperationException($"No matching playeraction.");
         }
 
-        private readonly IServiceProvider m_serviceProvider;
+        private void OnGameObjectClicked(GameObject gameObject, SKTouchEventArgs args)
+        {
+            m_chosenGameObject = gameObject;
+            m_signal.Set();
+        }
+
+        public void Dispose()
+        {
+            m_signal?.Dispose();
+        }
+
+        private readonly IGameEngineReceiver m_gameEngineReceiver;
+        private readonly ManualResetEventSlim m_signal;
+        private readonly Dictionary<GameObject, IPlayerAction> m_gameObjectToPlayerAction;
+        private GameObject? m_chosenGameObject;
+
     }
 }

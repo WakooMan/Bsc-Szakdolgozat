@@ -77,7 +77,7 @@ namespace GameLogic_UnitTests.PlayerActions
             m_cardComposition.Received(1).RemoveCard(cardNode);
             Assert.That(m_current.PickedCard, Is.Null);
             Assert.That(m_current.Money, Is.EqualTo(2));
-            m_gameContext.EventManager.Received(1).Publish(Arg.Any<OnCardSold>());
+            m_gameContext.EventManager.Received(1).PublishAsync(Arg.Any<OnCardSold>());
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace GameLogic_UnitTests.PlayerActions
             m_cardComposition.Received(1).RemoveCard(cardNode);
             Assert.That(m_current.PickedCard, Is.Null);
             Assert.That(m_current.Money, Is.EqualTo(4));
-            m_gameContext.EventManager.Received(1).Publish(Arg.Any<OnCardSold>());
+            m_gameContext.EventManager.Received(1).PublishAsync(Arg.Any<OnCardSold>());
         }
 
         private SellCard m_sellCard;

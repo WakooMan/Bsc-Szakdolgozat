@@ -2,6 +2,7 @@
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 using GameLogic.PlayerActions;
+using System.Runtime.CompilerServices;
 
 namespace GameLogic.PlayerTurnStates
 {
@@ -15,7 +16,7 @@ namespace GameLogic.PlayerTurnStates
             GoToPrevState = false;
         }
 
-        public void ExecuteTurnState()
+        public async Task ExecuteTurnState()
         {
             Action<OnCardUnpicked> action = (args) => GoToPrevState = true;
             m_gameContext.EventManager.Subscribe(action);
@@ -28,12 +29,12 @@ namespace GameLogic.PlayerTurnStates
             IPlayerAction playerAction;
             do
             {
-                playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions);
-            } while (!GoToPrevState && !playerAction.CanPerform(m_gameContext));
+                playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions.Select(decision => (IPlayerAction)decision).ToList());
+            } while (!GoToPrevState && !await playerAction.CanPerform(m_gameContext));
 
             if (!GoToPrevState)
             {
-                playerAction.DoPlayerAction(m_gameContext);
+                await playerAction.DoPlayerAction(m_gameContext);
             }
 
             m_gameContext.EventManager.Unsubscribe(action);

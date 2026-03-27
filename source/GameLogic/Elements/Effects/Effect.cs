@@ -25,7 +25,7 @@ namespace GameLogic.Elements.Effects
     public abstract class Effect
     {
         public abstract Effect Clone();
-        public virtual void Apply(IGameContext gameContext) { }
+        public virtual Task Apply(IGameContext gameContext) { return Task.CompletedTask; }
         public virtual List<Good> GetGoods()
         {
             return new List<Good>();

@@ -15,12 +15,12 @@ namespace GameLogic.GameStates
             GameContext = gameContext;
         }
         
-        public void DoStateAction()
+        public async Task DoStateAction()
         {
             GameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             GameContext.EventManager.Subscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Subscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
-            GameContext.AgeHandler.Initialize();
+            await GameContext.AgeHandler.Initialize();
 
             while (!IsGameOver)
             {
@@ -37,7 +37,7 @@ namespace GameLogic.GameStates
 
                     if (GameContext.AgeHandler.CurrentAge.IsAgeOver)
                     {
-                        IsGameOver = !GameContext.AgeHandler.NextAge();
+                        IsGameOver = !await GameContext.AgeHandler.NextAge();
                     }
 
                     GameContext.TurnHandler.NextPlayer();
@@ -47,7 +47,7 @@ namespace GameLogic.GameStates
             GameContext.EventManager.Unsubscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             GameContext.EventManager.Unsubscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Unsubscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
-            GameContext.EventManager.Publish(new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
+            await GameContext.EventManager.PublishAsync(new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
 
         }
 

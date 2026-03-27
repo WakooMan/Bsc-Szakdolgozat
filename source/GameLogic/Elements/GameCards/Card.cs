@@ -37,9 +37,9 @@ namespace GameLogic.Elements.GameCards
             return new List<Good>();
         }
 
-        public virtual void OnBuilt(IGameContext gameContext)
+        public virtual Task OnBuilt(IGameContext gameContext)
         {
-
+            return Task.CompletedTask;
         }
 
         protected Card()

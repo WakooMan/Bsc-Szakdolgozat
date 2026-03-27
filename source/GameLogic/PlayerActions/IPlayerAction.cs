@@ -4,8 +4,10 @@ namespace GameLogic.PlayerActions
 {
     public interface IPlayerAction
     {
-        void DoPlayerAction(IGameContext gameContext);
+        string Name { get; }
 
-        bool CanPerform(IGameContext gameContext);
+        Task DoPlayerAction(IGameContext gameContext);
+
+        Task<bool> CanPerform(IGameContext gameContext);
     }
 }

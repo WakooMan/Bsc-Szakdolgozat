@@ -19,18 +19,19 @@ namespace GameLogic.Events
             list.Add(listener);
         }
 
-        public void Publish<TGameEvent>(TGameEvent eventArgs) where TGameEvent : GameEvent
+        public Task PublishAsync<TGameEvent>(TGameEvent eventArgs) where TGameEvent : GameEvent
         {
             if (_listeners.TryGetValue(typeof(TGameEvent), out var list))
             {
-                foreach (var del in list)
-                {
-                    if (del is Action<TGameEvent> action)
-                    {
-                        action(eventArgs);
-                    }
-                }
+                var tasks = list
+                    .OfType<Action<TGameEvent>>()
+                    .Select(action => Task.Run(() => action(eventArgs)))
+                    .ToArray();
+
+                return Task.WhenAll(tasks);
             }
+
+            return Task.CompletedTask;
         }
 
         public bool Unsubscribe<TGameEvent>(Action<TGameEvent> listener) where TGameEvent : GameEvent

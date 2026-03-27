@@ -2,6 +2,7 @@
 {
     public class TurnDecision : IPlayerAction
     {
+        public string Name => m_playerAction?.Name ?? throw new InvalidOperationException("No player action selected.");
         public IPlayerAction? PlayerAction => m_playerAction;
 
         public TurnDecision()
@@ -29,13 +30,13 @@
             m_playerAction = playerAction;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public async Task<bool> CanPerform(IGameContext gameContext)
         {
-            return m_playerAction?.CanPerform(gameContext) ?? false;
+            return await (m_playerAction?.CanPerform(gameContext) ?? Task.FromResult(false));
         }
-        public void DoPlayerAction(IGameContext gameContext)
+        public async Task DoPlayerAction(IGameContext gameContext)
         {
-            m_playerAction?.DoPlayerAction(gameContext);
+            await (m_playerAction?.DoPlayerAction(gameContext) ?? Task.CompletedTask);
         }
 
         private readonly IPlayerAction? m_playerAction;

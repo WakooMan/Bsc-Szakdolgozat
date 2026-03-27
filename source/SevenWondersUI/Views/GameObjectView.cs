@@ -21,7 +21,7 @@ namespace SevenWondersUI.Views
             if (m_touchEvent is null)
             {
                 // Wait for animation to end
-                m_touchEvent = (args) => action();
+                m_touchEvent = (obj, args) => action();
                 m_gameObject.ClickedEvent += m_touchEvent;
             }
         }

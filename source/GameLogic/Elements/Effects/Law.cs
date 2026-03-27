@@ -22,7 +22,7 @@ namespace GameLogic.Elements.Effects
             return new Law(this);
         }
 
-        public override void Apply(IGameContext gameContext)
+        public override async Task Apply(IGameContext gameContext)
         {
             var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, [
                 new ChooseDisciplineAction(new Building(), SetDiscipline),
@@ -33,9 +33,9 @@ namespace GameLogic.Elements.Effects
                 new ChooseDisciplineAction(new Trading(), SetDiscipline),
                 new ChooseDisciplineAction(new Writing(), SetDiscipline)]);
 
-            if (playerAction.CanPerform(gameContext))
+            if (await playerAction.CanPerform(gameContext))
             {
-                playerAction.DoPlayerAction(gameContext);
+                await playerAction.DoPlayerAction(gameContext);
             }
         }
 

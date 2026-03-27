@@ -23,14 +23,14 @@ namespace GameLogic.Elements.Effects
             return new DropEnemyCard(this);
         }
 
-        public override void Apply(IGameContext gameContext)
+        public override async Task Apply(IGameContext gameContext)
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
             IPlayerAction action = gameContext.PlayerActionReceiver.ReceivePlayerAction(currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => new DropCard(opponentPlayer, card)).ToArray());
-            if (action.CanPerform(gameContext))
+            if (await action.CanPerform(gameContext))
             {
-                action.DoPlayerAction(gameContext);
+                await action.DoPlayerAction(gameContext);
             }
         }
     }

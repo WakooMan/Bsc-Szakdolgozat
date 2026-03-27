@@ -16,20 +16,20 @@ namespace GameLogic.Handlers
             m_eventManager = eventManager;
         }
 
-        public bool CanAfford(IBuildable buildable, Player buyer, Player opponent)
+        public async Task<bool> CanAfford(IBuildable buildable, Player buyer, Player opponent)
         {
-            int cost = GetBuildCost(buildable, buyer, opponent);
+            int cost = await GetBuildCost(buildable, buyer, opponent);
             return buyer.Money >= cost;
         }
 
-        public int GetBuildCost(IBuildable buildable, Player buyer, Player opponent)
+        public async Task<int> GetBuildCost(IBuildable buildable, Player buyer, Player opponent)
         {
             var missing = GetMissingGoods(buildable, buyer);
             int totalCost = 0;
             Dictionary<Type, Good> opponentGoods = opponent.Goods;
 
             OnBuildingCostCalculated onBuildingCostCalculated = new OnBuildingCostCalculated(buyer);
-            m_eventManager.Publish(onBuildingCostCalculated);
+            await m_eventManager.PublishAsync(onBuildingCostCalculated);
 
             foreach (var cheaperBuilding in onBuildingCostCalculated.CheaperBuildings.Where(cb => cb.BuildingType == buildable.BuildingType))
             {

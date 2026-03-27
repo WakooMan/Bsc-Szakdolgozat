@@ -50,7 +50,7 @@ namespace GameLogic_UnitTests.GameStates
             m_eventManager.Received(1).Unsubscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
             m_eventManager.Received(1).Unsubscribe(Arg.Any<Action<MilitaryVictory>>());
             m_eventManager.Received(1).Unsubscribe(Arg.Any<Action<ScientificVictory>>());
-            m_eventManager.Received(1).Publish(Arg.Any<OnGameEnded>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnGameEnded>());
 
 
         }

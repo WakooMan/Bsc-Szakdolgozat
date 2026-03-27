@@ -6,6 +6,7 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseGoodAction : IPlayerAction
     {
+        public string Name => m_goodFactory.CreateGood().GetType().Name;
         public ChooseGoodAction() { }
         public ChooseGoodAction(GoodFactory goodFactory, Action<Good> setter)
         {
@@ -16,14 +17,15 @@ namespace GameLogic.PlayerActions
             m_setter = setter;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return true;
+            return Task.FromResult(true);
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public Task DoPlayerAction(IGameContext gameContext)
         {
             m_setter(m_goodFactory.CreateGood());
+            return Task.CompletedTask;
         }
 
         private readonly GoodFactory m_goodFactory;

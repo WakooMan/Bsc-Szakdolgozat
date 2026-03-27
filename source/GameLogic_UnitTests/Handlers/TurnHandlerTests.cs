@@ -53,16 +53,16 @@ namespace GameLogic_UnitTests.Handlers
         {
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player2, Is.True);
-            m_eventManager.Received(1).Publish(Arg.Any<TurnStarted>());
-            m_eventManager.Received(1).Publish(Arg.Any<TurnEnded>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<TurnStarted>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<TurnEnded>());
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player1, Is.True);
-            m_eventManager.Received(2).Publish(Arg.Any<TurnStarted>());
-            m_eventManager.Received(2).Publish(Arg.Any<TurnEnded>());
+            m_eventManager.Received(2).PublishAsync(Arg.Any<TurnStarted>());
+            m_eventManager.Received(2).PublishAsync(Arg.Any<TurnEnded>());
             m_turnHandler.NextPlayer();
             Assert.That(m_turnHandler.CurrentPlayer == m_player2, Is.True);
-            m_eventManager.Received(3).Publish(Arg.Any<TurnStarted>());
-            m_eventManager.Received(3).Publish(Arg.Any<TurnEnded>());
+            m_eventManager.Received(3).PublishAsync(Arg.Any<TurnStarted>());
+            m_eventManager.Received(3).PublishAsync(Arg.Any<TurnEnded>());
         }
 
         private TurnHandler m_turnHandler;

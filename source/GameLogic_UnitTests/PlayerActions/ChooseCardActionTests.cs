@@ -102,7 +102,7 @@ namespace GameLogic_UnitTests.PlayerActions
 
             Assert.That(cards.Contains(card), Is.False);
             Assert.That(m_current.Cards.Contains(card), Is.True);
-            m_eventManager.Received(1).Publish(Arg.Any<OnCardBuilt>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnCardBuilt>());
         }
 
         private Player m_current;

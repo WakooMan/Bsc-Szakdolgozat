@@ -82,7 +82,7 @@ namespace GameLogic_UnitTests.PlayerActions
             m_chooseGoodAction.DoPlayerAction(m_gameContext);
 
             Assert.That(m_current.Cards.Contains(m_card), Is.False);
-            m_gameContext.EventManager.Received(1).Publish(Arg.Any<OnCardDestroyed>());
+            m_gameContext.EventManager.Received(1).PublishAsync(Arg.Any<OnCardDestroyed>());
         }
 
         private Card m_card;

@@ -5,6 +5,7 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseDisciplineAction: IPlayerAction
     {
+        public string Name => m_discipline.GetType().Name;
         public ChooseDisciplineAction() { }
         public ChooseDisciplineAction(Discipline discipline, Action<Discipline> setter)
         {
@@ -15,14 +16,15 @@ namespace GameLogic.PlayerActions
             m_setter = setter;
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public Task DoPlayerAction(IGameContext gameContext)
         {
             m_setter(m_discipline);
+            return Task.CompletedTask;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return true;
+            return Task.FromResult(true);
         }
 
         private readonly Discipline m_discipline;
