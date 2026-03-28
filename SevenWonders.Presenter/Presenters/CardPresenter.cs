@@ -7,6 +7,8 @@ using GameLogic.GameStructures;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Cards;
+using SevenWonders.Presenter.Presenters.Factories;
+using SevenWonders.Presenter.Presenters.Handlers;
 using SevenWonders.Presenter.Views;
 
 namespace SevenWonders.Presenter.Presenters
@@ -14,15 +16,17 @@ namespace SevenWonders.Presenter.Presenters
     public class CardPresenter : IPresenter
     {
 
-        public CardPresenter(ICardConnector cardConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager)
+        public CardPresenter(ICardConnector cardConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager)
         {
             m_cardConnector = cardConnector;
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
+            m_playerCardHandlerFactory = playerCardHandlerFactory;
+            m_sceneManager = sceneManager;
             m_cards = new Dictionary<Card, IGameObjectView>();
             m_ageCardDecks = new Dictionary<AgesEnum, GameObject>();
-            m_player1Targets = new Dictionary<Type, GameObject>();
-            m_player2Targets = new Dictionary<Type, GameObject>();
+            m_player1Targets = new Dictionary<Type, IPlayerCardHandler>();
+            m_player2Targets = new Dictionary<Type, IPlayerCardHandler>();
             m_centerTargets = new Dictionary<string, GameObject>();
         }
 
@@ -60,22 +64,22 @@ namespace SevenWonders.Presenter.Presenters
                 m_centerTargets[thirdAgeCenterTarget.Name] = thirdAgeCenterTarget;
             }
 
-            m_player1Targets.Add(typeof(RedCard), m_gameEngineReceiver.ReceiveGameObject("player1RedCard"));
-            m_player1Targets.Add(typeof(GreenCard), m_gameEngineReceiver.ReceiveGameObject("player1GreenCard"));
-            m_player1Targets.Add(typeof(GrayCard), m_gameEngineReceiver.ReceiveGameObject("player1GrayCard"));
-            m_player1Targets.Add(typeof(BrownCard), m_gameEngineReceiver.ReceiveGameObject("player1BrownCard"));
-            m_player1Targets.Add(typeof(PurpleCard), m_gameEngineReceiver.ReceiveGameObject("player1PurpleCard"));
-            m_player1Targets.Add(typeof(YellowCard), m_gameEngineReceiver.ReceiveGameObject("player1YellowCard"));
-            m_player1Targets.Add(typeof(BlueCard), m_gameEngineReceiver.ReceiveGameObject("player1BlueCard"));
+            m_player1Targets.Add(typeof(RedCard),  m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene, m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1RedCard")));
+            m_player1Targets.Add(typeof(GreenCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1GreenCard")));
+            m_player1Targets.Add(typeof(GrayCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1GrayCard")));
+            m_player1Targets.Add(typeof(BrownCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1BrownCard")));
+            m_player1Targets.Add(typeof(PurpleCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1PurpleCard")));
+            m_player1Targets.Add(typeof(YellowCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1YellowCard")));
+            m_player1Targets.Add(typeof(BlueCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1BlueCard")));
 
 
-            m_player2Targets.Add(typeof(RedCard), m_gameEngineReceiver.ReceiveGameObject("player2RedCard"));
-            m_player2Targets.Add(typeof(GreenCard), m_gameEngineReceiver.ReceiveGameObject("player2GreenCard"));
-            m_player2Targets.Add(typeof(GrayCard), m_gameEngineReceiver.ReceiveGameObject("player2GrayCard"));
-            m_player2Targets.Add(typeof(BrownCard), m_gameEngineReceiver.ReceiveGameObject("player2BrownCard"));
-            m_player2Targets.Add(typeof(PurpleCard), m_gameEngineReceiver.ReceiveGameObject("player2PurpleCard"));
-            m_player2Targets.Add(typeof(YellowCard), m_gameEngineReceiver.ReceiveGameObject("player2YellowCard"));
-            m_player2Targets.Add(typeof(BlueCard), m_gameEngineReceiver.ReceiveGameObject("player2BlueCard"));
+            m_player2Targets.Add(typeof(RedCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene, m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2RedCard")));
+            m_player2Targets.Add(typeof(GreenCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2GreenCard")));
+            m_player2Targets.Add(typeof(GrayCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2GrayCard")));
+            m_player2Targets.Add(typeof(BrownCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2BrownCard")));
+            m_player2Targets.Add(typeof(PurpleCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2PurpleCard")));
+            m_player2Targets.Add(typeof(YellowCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2YellowCard")));
+            m_player2Targets.Add(typeof(BlueCard), m_playerCardHandlerFactory.Create(m_sceneManager.CurrentScene,m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2BlueCard")));
 
             m_firstAgeLayer.Visible = true;
             m_secondAgeLayer.Visible = true;
@@ -196,10 +200,7 @@ namespace SevenWonders.Presenter.Presenters
             if (m_player1Targets.ContainsKey(card.GetType()))
             {
                 var view = m_cards[card];
-                view.GetAnimationGroupBuilder()
-                    .MoveTo(m_player1Targets[card.GetType()], 0.5f)
-                    .Unhighlight(false, 0.5f);
-                await view.Execute();
+                await m_player1Targets[card.GetType()].MoveCardToTarget(view);
             }
         }
 
@@ -208,10 +209,7 @@ namespace SevenWonders.Presenter.Presenters
             if (m_player2Targets.ContainsKey(card.GetType()))
             {
                 var view = m_cards[card];
-                view.GetAnimationGroupBuilder()
-                    .MoveTo(m_player2Targets[card.GetType()], 0.5f)
-                    .Unhighlight(false, 0.5f);
-                await view.Execute();
+                await m_player2Targets[card.GetType()].MoveCardToTarget(view);
             }
         }
 
@@ -219,8 +217,10 @@ namespace SevenWonders.Presenter.Presenters
         private readonly ICardConnector m_cardConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
-        private readonly Dictionary<Type, GameObject> m_player1Targets;
-        private readonly Dictionary<Type, GameObject> m_player2Targets;
+        private readonly IPlayerCardHandlerFactory m_playerCardHandlerFactory;
+        private readonly ISceneManager m_sceneManager;
+        private readonly Dictionary<Type, IPlayerCardHandler> m_player1Targets;
+        private readonly Dictionary<Type, IPlayerCardHandler> m_player2Targets;
         private GraphicsLayer? m_pickCardLayer;
         private GraphicsLayer? m_firstAgeLayer;
         private GraphicsLayer? m_secondAgeLayer;

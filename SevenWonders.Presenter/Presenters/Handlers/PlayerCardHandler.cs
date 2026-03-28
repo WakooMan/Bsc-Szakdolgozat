@@ -1,18 +1,13 @@
 ﻿using SevenWonders.GameEngine;
-using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 
 namespace SevenWonders.Presenter.Presenters.Handlers
 {
-    public class PlayerCardHandler
+    public class PlayerCardHandler : IPlayerCardHandler
     {
 
-        public PlayerCardHandler(IObjectManager objectManager, GameObject cardTarget, Scene scene, GraphicsLayer graphicsLayer)
+        public PlayerCardHandler(IObjectManager objectManager, Scene scene, GraphicsLayer graphicsLayer, GameObject cardTarget)
         {
             m_objectManager = objectManager;
             m_cardTarget = cardTarget;
@@ -25,8 +20,24 @@ namespace SevenWonders.Presenter.Presenters.Handlers
         {
             if(!m_cardViews.ContainsKey(cardView))
             {
-                GameObject cardTarget = m_objectManager.CopyGameObject(m_scene, m_graphicsLayer, m_cardTarget, m_cardTarget.Name + m_cardViews.Count);
-                var group = cardView.GetAnimationGroupBuilder().MoveTo(cardTarget, 0.5f);
+                GameObject cardTarget = m_cardViews.Any() ? m_objectManager.CopyGameObject(m_scene, m_graphicsLayer, m_cardTarget, m_cardTarget.Name + m_cardViews.Count) : m_cardTarget;
+                if (m_cardTarget != cardTarget)
+                {
+                    cardTarget.ZIndex--;
+                    GameObject last = m_cardViews.Values.Last();
+                    if (cardTarget.Rotation == 0f)
+                    {
+                        cardTarget.Position = last.Position - new Vector2(0f, last.Height/4);
+                    }
+                    else
+                    {
+                        cardTarget.Position = last.Position + new Vector2(0f, last.Height/4);
+                    }
+                }
+   
+                var group = cardView.GetAnimationGroupBuilder()
+                    .MoveTo(cardTarget, 0.5f)
+                    .Unhighlight(false, 0.5f);
                 await cardView.Execute();
                 m_cardViews.Add(cardView, cardTarget);
             }

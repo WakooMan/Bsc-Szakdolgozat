@@ -77,6 +77,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IGameEngineReceiver), typeof(GameEngineReceiver));
         builder.Services.AddSingleton(typeof(ICardChildTextureHandler), typeof(CardChildTextureHandler));
 
+        builder.Services.AddSingleton(typeof(IPlayerCardHandlerFactory), typeof(PlayerCardHandlerFactory));
         builder.Services.AddSingleton(typeof(IWonderChildTextureHandler), typeof(WonderChildTextureHandler));
         builder.Services.AddSingleton(typeof(IWonderConnector), typeof(WonderConnector));
         builder.Services.AddSingleton(typeof(IPresenterFactory), typeof(PresenterFactory));
