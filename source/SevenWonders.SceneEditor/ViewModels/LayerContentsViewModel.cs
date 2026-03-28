@@ -67,7 +67,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             get
             {
                 if (m_selectedLayer is null) return null;
-                return LayerViews.FirstOrDefault(l => l.Id == m_selectedLayer.ID);
+                return LayerViews.FirstOrDefault(l => l.Id == m_selectedLayer.Id);
             }
             set
             {
@@ -209,7 +209,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            SelectedLayer = m_currentScene.Layers.FirstOrDefault(layer => layer.ID == layerViewModel.Id);
+            SelectedLayer = m_currentScene.Layers.FirstOrDefault(layer => layer.Id == layerViewModel.Id);
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
@@ -231,7 +231,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             {
                 return;
             }
-            LayerListViewModel? layerListViewModel = LayerViews.FirstOrDefault(layer => layer.Id == SelectedLayer.ID);
+            LayerListViewModel? layerListViewModel = LayerViews.FirstOrDefault(layer => layer.Id == SelectedLayer.Id);
             if (layerListViewModel is not null)
             {
                 LayerViews.Remove(layerListViewModel);

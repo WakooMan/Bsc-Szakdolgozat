@@ -8,6 +8,7 @@ namespace SevenWonders.GameEngine
     public class Scene : IEquatable<Scene>
     {
         public Guid Id { get; set; }
+        [XmlIgnore]
         public HashSet<int> UsedIds => Layers
                 .SelectMany(layer => layer.ObjectList.Select(o => o.Id)
                 .Concat(layer.TextureObjects.Select(t => t.Id))
