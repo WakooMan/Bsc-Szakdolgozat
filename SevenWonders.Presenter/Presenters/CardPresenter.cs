@@ -152,7 +152,6 @@ namespace SevenWonders.Presenter.Presenters
                 group.Flip(1, 0.5f);
             }
             await view.Execute();
-            view.IncreaseZIndex();
         }
 
         private async Task MoveBackToCenter(Card card, string nodeName)
@@ -166,7 +165,6 @@ namespace SevenWonders.Presenter.Presenters
             }
 
             await view.Execute();
-            view.DecreaseZIndex();
         }
 
         private async Task MoveToDropCardDeck(Card card)
