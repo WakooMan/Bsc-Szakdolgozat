@@ -1159,7 +1159,7 @@
         <GameObject>
           <Name>player1BrownCard</Name>
           <Id>229</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1348.3148</X>
@@ -1310,7 +1310,7 @@
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
           <Position>
-            <X>3429.2346</X>
+            <X>3429.2349</X>
             <Y>1339.9111</Y>
           </Position>
           <Width>144.4623</Width>
@@ -1419,7 +1419,7 @@
         <GameObject>
           <Name>player1BlueCard</Name>
           <Id>291</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>2504.0134</X>
@@ -1475,7 +1475,7 @@
         <GameObject>
           <Name>player1GrayCard</Name>
           <Id>292</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1540.931</X>
@@ -1531,7 +1531,7 @@
         <GameObject>
           <Name>player1GreenCard</Name>
           <Id>293</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>2118.7805</X>
@@ -1587,7 +1587,7 @@
         <GameObject>
           <Name>player1RedCard</Name>
           <Id>294</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
@@ -1643,7 +1643,7 @@
         <GameObject>
           <Name>player1PurpleCard</Name>
           <Id>295</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>2311.3967</X>
@@ -1699,7 +1699,7 @@
         <GameObject>
           <Name>player1YellowCard</Name>
           <Id>296</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1926.1642</X>
@@ -1755,7 +1755,7 @@
         <GameObject>
           <Name>player2BlueCard</Name>
           <Id>297</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>2504.0134</X>
@@ -1811,7 +1811,7 @@
         <GameObject>
           <Name>player2GrayCard</Name>
           <Id>298</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1540.931</X>
@@ -1867,7 +1867,7 @@
         <GameObject>
           <Name>player2GreenCard</Name>
           <Id>299</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>2118.7805</X>
@@ -1923,7 +1923,7 @@
         <GameObject>
           <Name>player2RedCard</Name>
           <Id>300</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
@@ -1979,7 +1979,7 @@
         <GameObject>
           <Name>player2PurpleCard</Name>
           <Id>301</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>2311.3967</X>
@@ -2035,7 +2035,7 @@
         <GameObject>
           <Name>player2YellowCard</Name>
           <Id>302</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1926.1642</X>
@@ -2091,7 +2091,7 @@
         <GameObject>
           <Name>player2BrownCard</Name>
           <Id>303</Id>
-          <ZIndex>0</ZIndex>
+          <ZIndex>99</ZIndex>
           <Visible>false</Visible>
           <Position>
             <X>1348.3148</X>
@@ -2257,7 +2257,7 @@
           </Scale>
           <BackgroundTextureId>1109</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>57.49494</FontSize>
+          <FontSize>41.794395</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
         <TextLabel>
@@ -2278,7 +2278,7 @@
           </Scale>
           <BackgroundTextureId>291</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>57.49494</FontSize>
+          <FontSize>41.794395</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
         <TextLabel>
@@ -2299,7 +2299,7 @@
           </Scale>
           <BackgroundTextureId>291</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>57.49494</FontSize>
+          <FontSize>41.794395</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
         <TextLabel>
@@ -2320,7 +2320,7 @@
           </Scale>
           <BackgroundTextureId>1109</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>57.49494</FontSize>
+          <FontSize>41.794395</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
       </TextLabels>
@@ -13332,7 +13332,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Wonder</Text>
-          <FontSize>12.267114</FontSize>
+          <FontSize>8.917248</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13353,7 +13353,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Card</Text>
-          <FontSize>12.267114</FontSize>
+          <FontSize>8.917248</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13374,7 +13374,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Sell Card</Text>
-          <FontSize>12.267114</FontSize>
+          <FontSize>8.917248</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13395,7 +13395,7 @@
           </Scale>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Unpick Card</Text>
-          <FontSize>12.267114</FontSize>
+          <FontSize>8.917248</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
       </Buttons>
