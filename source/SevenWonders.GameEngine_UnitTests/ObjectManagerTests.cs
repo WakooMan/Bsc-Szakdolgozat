@@ -25,7 +25,7 @@ namespace SevenWonders.GameEngine_UnitTests
             // Setting up data
             _testLayer = new GraphicsLayer
             {
-                ID = 10,
+                Id = 10,
                 Name = "TestLayer",
                 ObjectList = new List<GameObject>()
             };
@@ -131,7 +131,7 @@ namespace SevenWonders.GameEngine_UnitTests
             Assert.That(newName, Is.EqualTo(result.Name));
             Assert.That(_testScene.Layers.Contains(result), Is.True);
             // Verify that the ID was incremented for the copy
-            Assert.That(_testLayer.ID, Is.Not.EqualTo(result.ID));
+            Assert.That(_testLayer.Id, Is.Not.EqualTo(result.Id));
         }
     }
 }

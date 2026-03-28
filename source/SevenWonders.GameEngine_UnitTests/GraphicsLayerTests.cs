@@ -16,7 +16,7 @@ namespace SevenWonders.GameEngine_UnitTests
         {
             _originalLayer = new GraphicsLayer
             {
-                ID = 1,
+                Id = 1,
                 Name = "BackgroundLayer",
                 Visible = true,
                 ZIndex = 5,
@@ -52,7 +52,7 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(_originalLayer.ID, Is.EqualTo(copy.ID));
+                Assert.That(_originalLayer.Id, Is.EqualTo(copy.Id));
                 Assert.That(_originalLayer.Name, Is.EqualTo(copy.Name));
 
                 // Referencia ellenőrzés: nem ugyanaz az objektum
@@ -95,7 +95,7 @@ namespace SevenWonders.GameEngine_UnitTests
         public void Equals_GraphicsLayer_Null_ShouldReturnFalse()
         {
             // Arrange
-            var obj1 = new GraphicsLayer { ID = 1, Name = "Layer" };
+            var obj1 = new GraphicsLayer { Id = 1, Name = "Layer" };
             GraphicsLayer? obj2 = null;
 
             // Assert
@@ -106,7 +106,7 @@ namespace SevenWonders.GameEngine_UnitTests
         public void Equals_Object_Not_GraphicsLayer_ShouldReturnFalse()
         {
             // Arrange
-            var obj1 = new GraphicsLayer { ID = 1, Name = "Layer" };
+            var obj1 = new GraphicsLayer { Id = 1, Name = "Layer" };
             object? obj2 = new object();
 
             // Assert

@@ -25,7 +25,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 Resolution = new Vector2(1920, 1080),
                 Layers = new List<GraphicsLayer>
                 {
-                    new GraphicsLayer { ID = 1, Name = "Background" }
+                    new GraphicsLayer { Id = 1, Name = "Background" }
                 }
             };
         }

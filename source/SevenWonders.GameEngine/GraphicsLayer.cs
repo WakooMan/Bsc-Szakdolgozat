@@ -14,7 +14,7 @@ namespace SevenWonders.GameEngine
         public  bool Visible { get; set; }
         public bool EnableCollision { get; set; }
         public string Name { get; set; }
-        public int ID { get; set; }
+        public int Id { get; set; }
         public int ZIndex { get; set; }
 
         public GraphicsLayer()
@@ -35,7 +35,7 @@ namespace SevenWonders.GameEngine
             Visible = graphicsLayer.Visible;
             EnableCollision = graphicsLayer.EnableCollision;
             Name = new string(graphicsLayer.Name);
-            ID = graphicsLayer.ID;
+            Id = graphicsLayer.Id;
             ZIndex = graphicsLayer.ZIndex;
         }
 
@@ -51,7 +51,7 @@ namespace SevenWonders.GameEngine
                    Buttons.SequenceEqual(other.Buttons) &&
                    TextLabels.SequenceEqual(other.TextLabels) &&
                    Name.Equals(other.Name) &&
-                   ID.Equals(other.ID) &&
+                   Id.Equals(other.Id) &&
                    Visible.Equals(other.Visible) &&
                    EnableCollision.Equals(other.EnableCollision) &&
                    ZIndex.Equals(other.ZIndex);
@@ -70,7 +70,7 @@ namespace SevenWonders.GameEngine
         public override int GetHashCode()
         {
             int hashCode = Name.GetHashCode() ^
-            ID.GetHashCode() ^
+            Id.GetHashCode() ^
             Visible.GetHashCode() ^
             EnableCollision.GetHashCode() ^
             ZIndex.GetHashCode();

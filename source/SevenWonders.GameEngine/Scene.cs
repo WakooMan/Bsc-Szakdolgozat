@@ -8,7 +8,14 @@ namespace SevenWonders.GameEngine
     public class Scene : IEquatable<Scene>
     {
         public Guid Id { get; set; }
-        public int BiggestId { get; set; }
+        public HashSet<int> UsedIds => Layers
+                .SelectMany(layer => layer.ObjectList.Select(o => o.Id)
+                .Concat(layer.TextureObjects.Select(t => t.Id))
+                .Concat(layer.Buttons.Select(b => b.Id))
+                .Concat(layer.TextLabels.Select(tl => tl.Id))
+                .Concat([layer.Id]))
+                .Concat(Textures.Select(t => t.Id))
+                .ToHashSet();
         public List<GraphicsLayer> Layers { get; set; }
         public List<Texture> Textures { get; set; }
         public string Name { get; set; }
@@ -21,7 +28,6 @@ namespace SevenWonders.GameEngine
         public Scene()
         {
             Id = Guid.Empty;
-            BiggestId = 0;
             Layers = new List<GraphicsLayer>();
             Textures = new List<Texture>();
             Resolution = new Vector2(3840, 2160);
@@ -31,7 +37,6 @@ namespace SevenWonders.GameEngine
         public Scene(Scene scene)
         {
             Id = Guid.NewGuid();
-            BiggestId = scene.BiggestId;
             Layers = scene.Layers.Select(layer => new GraphicsLayer(layer)).ToList();
             Textures = scene.Textures.Select(texture => new Texture(texture)).ToList();
             Name = scene.Name;
@@ -49,8 +54,7 @@ namespace SevenWonders.GameEngine
                    Textures.SequenceEqual(other.Textures) &&
                    Name.Equals(other.Name) &&
                    Id.Equals(other.Id) &&
-                   Visible.Equals(other.Visible) &&
-                   BiggestId.Equals(other.BiggestId);
+                   Visible.Equals(other.Visible);
         }
 
         public override bool Equals(object? obj)
@@ -67,8 +71,7 @@ namespace SevenWonders.GameEngine
         {
             int hashCode = Name.GetHashCode() ^
                    Visible.GetHashCode() ^
-                   Id.GetHashCode() ^
-                   BiggestId.GetHashCode();
+                   Id.GetHashCode();
             Layers.ForEach(layer => hashCode = hashCode ^ layer.GetHashCode());
             Textures.ForEach(texture => hashCode = hashCode ^ texture.GetHashCode());
             return hashCode;

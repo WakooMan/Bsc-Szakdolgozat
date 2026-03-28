@@ -1,4 +1,5 @@
 ﻿using SevenWonders.GameEngine.Animations;
+using System.Collections.Concurrent;
 
 namespace SevenWonders.GameEngine.Components
 {
@@ -9,7 +10,7 @@ namespace SevenWonders.GameEngine.Components
             Id = 100;
             Name = nameof(AnimationManager);
             m_activeAnimations = new List<IAnimation>();
-            m_animationQueue = new Queue<(List<IAnimation>, TaskCompletionSource?)>();
+            m_animationQueue = new ConcurrentQueue<(List<IAnimation>, TaskCompletionSource?)>();
         }
 
         public int Id { get; set; }
@@ -39,10 +40,12 @@ namespace SevenWonders.GameEngine.Components
                 }
                 else
                 {
-                    var (animations, tcs) = m_animationQueue.Dequeue();
-                    m_activeTcs = tcs;
-                    m_activeAnimations.AddRange(animations);
-                    m_activeAnimations.ForEach(animation => animation.Start());
+                    if (m_animationQueue.TryDequeue(out var animation))
+                    {
+                        m_activeTcs = animation.Item2;
+                        m_activeAnimations.AddRange(animation.Item1);
+                        m_activeAnimations.ForEach(animation => animation.Start());
+                    }
                 }
             }
 
@@ -73,6 +76,6 @@ namespace SevenWonders.GameEngine.Components
 
         private TaskCompletionSource? m_activeTcs;
         private readonly List<IAnimation> m_activeAnimations;
-        private readonly Queue<(List<IAnimation>, TaskCompletionSource?)> m_animationQueue;
+        private readonly ConcurrentQueue<(List<IAnimation>, TaskCompletionSource?)> m_animationQueue;
     }
 }
