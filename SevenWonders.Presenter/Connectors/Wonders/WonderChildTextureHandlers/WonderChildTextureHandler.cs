@@ -1,22 +1,17 @@
-﻿using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Wonders;
+﻿using GameLogic.Elements.Wonders;
 using SevenWonders.GameEngine;
+using SevenWonders.Presenter.Connectors.Effects;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
 {
     public class WonderChildTextureHandler : IWonderChildTextureHandler
     {
-        public WonderChildTextureHandler(IGameEngineReceiver gameEngineReceiver)
+        public WonderChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler)
         {
             m_gameEngineReceiver = gameEngineReceiver;
+            m_effectHandler = effectHandler;
         }
 
         public void Handle(Wonder wonder)
@@ -46,24 +41,24 @@ namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
                     }
 
                     List<ChildObject> childObjects = new List<ChildObject>();
-                    //wonder.Effects.ForEach(effect =>
-                    //{
-                    //    if (m_effectHandlers.TryGetValue(effect.GetType(), out Func<Effect, ICollection<ChildObject>>? handler))
-                    //    {
-                    //        childObjects.AddRange(handler(effect));
-                    //    }
-                    //});
+                    wonder.Effects.ForEach(effect =>
+                    {
+                        childObjects.AddRange(m_effectHandler.HandleEffect(effect));
+                    });
 
-                    //float totalWidthPercent = childObjects.Sum(co => co.WidthPercent);
-                    //float groupStartX = (1f - totalWidthPercent) / 2f;
-                    //float centeredY = (0.2f - childObjects.First().HeightPercent);
-                    //float currentX = groupStartX;
-                    //foreach (ChildObject childObject in childObjects)
-                    //{
-                    //    childObject.PositionPercent = new Vector2(currentX, centeredY);
-                    //    frontSprite.AddChildObject(childObject);
-                    //    currentX += childObject.WidthPercent;
-                    //}
+                    if (childObjects.Any())
+                    {
+                        float totalHeightPercent = childObjects.Sum(co => co.HeightPercent);
+                        float groupStartY = (1f - totalHeightPercent) / 2f;
+                        float locationX = (1.0f - childObjects.First().WidthPercent);
+                        float currentY = groupStartY;
+                        foreach (ChildObject childObject in childObjects)
+                        {
+                            childObject.PositionPercent = new Vector2(locationX, currentY);
+                            frontSprite.AddChildObject(childObject);
+                            currentY += childObject.HeightPercent;
+                        }
+                    }
 
                     ChildTextLabel childTextLabel = new ChildTextLabel
                     {
@@ -87,5 +82,6 @@ namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
 
 
         private readonly IGameEngineReceiver m_gameEngineReceiver;
+        private readonly IEffectHandler m_effectHandler;
     }
 }

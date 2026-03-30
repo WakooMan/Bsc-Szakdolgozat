@@ -56,8 +56,16 @@ namespace SevenWonders.Presenter
             { nameof(BlueCard), 1096},
             { nameof(GreenCard), 1099},
             { nameof(RedCard), 1101},
-            { nameof(PurpleCard), 1100},
-            { nameof(YellowCard), 1102}
+            { nameof(PurpleCard), 1110},
+            { nameof(YellowCard), 1111},
+            { nameof(GetMoneyForWonders), 1112},
+            { nameof(NewTurn), 1113},
+            { nameof(RedCard) + nameof(DropEnemyCard), 1114},
+            { nameof(GrayCard) + nameof(DropEnemyCard), 1115},
+            { nameof(BrownCard) + nameof(DropEnemyCard), 1118},
+            { nameof(BuildFreeFromDroppedCards), 1116},
+            { nameof(EnemyLoseMoney), 1117},
+            { nameof(ChooseDevelopment), 1007}
 
         };
     }

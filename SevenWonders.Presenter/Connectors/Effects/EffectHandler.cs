@@ -203,8 +203,100 @@ namespace SevenWonders.Presenter.Connectors.Effects
                         WidthPercent = 0.15f,
                         HeightPercent = 0.15f,
                     });
+
+                    childObjects.Add(new ChildTexture
+                    {
+                        TextureId = TextureIdDictionary.GetTextureId(nameof(GetMoneyForWonders)),
+                        WidthPercent = 0.15f,
+                        HeightPercent = 0.15f,
+                    });
                 }
                 return childObjects;
+            }
+            return [];
+        }
+
+        private static ICollection<ChildObject> HandleEnemyLoseMoneyEffect(Effect effect)
+        {
+            if (effect is EnemyLoseMoney enemyLoseMoney)
+            {
+                if (enemyLoseMoney.Money > 0)
+                {
+                    int coinTextureId = TextureIdDictionary.GetTextureId(nameof(EnemyLoseMoney));
+                    return [new ChildTextLabel
+                    {
+                        TextLabel = new TextLabel()
+                        {
+                            BackgroundTextureId = coinTextureId,
+                            Text = enemyLoseMoney.Money.ToString(),
+                            TextColor = SKColors.Gold,
+                            FontSize = 6,
+                            Visible = true,
+                        },
+                        WidthPercent = 0.15f,
+                        HeightPercent = 0.15f,
+                    }];
+                }
+            }
+            return [];
+        }
+
+        private static ICollection<ChildObject> HandleNewTurnEffect(Effect effect)
+        {
+            if (effect is NewTurn newTurn)
+            {
+                int textureId = TextureIdDictionary.GetTextureId(nameof(NewTurn));
+                return [new ChildTexture
+                {
+                    TextureId = textureId,
+                    WidthPercent = 0.15f,
+                    HeightPercent = 0.15f,
+                }];
+            }
+            return [];
+        }
+
+        private static ICollection<ChildObject> HandleBuildFreeFromDroppedCardsEffect(Effect effect)
+        {
+            if (effect is BuildFreeFromDroppedCards buildFreeFromDroppedCards)
+            {
+                int textureId = TextureIdDictionary.GetTextureId(nameof(BuildFreeFromDroppedCards));
+                return [new ChildTexture
+                {
+                    TextureId = textureId,
+                    WidthPercent = 0.15f,
+                    HeightPercent = 0.15f,
+                }];
+            }
+            return [];
+        }
+
+        private static ICollection<ChildObject> HandleDropEnemyCardEffect(Effect effect)
+        {
+            if (effect is DropEnemyCard dropEnemyCard)
+            {
+                int textureId = TextureIdDictionary.GetTextureId(dropEnemyCard.CardType + nameof(DropEnemyCard));
+                return [new ChildTexture
+                {
+                    TextureId = textureId,
+                    WidthPercent = 0.15f,
+                    HeightPercent = 0.15f,
+                }];
+            }
+            return [];
+        }
+
+        private static ICollection<ChildObject> HandleChooseDevelopmentEffect(Effect effect)
+        {
+            if (effect is ChooseDevelopment chooseDevelopment)
+            {
+                int textureId = TextureIdDictionary.GetTextureId(nameof(ChooseDevelopment));
+                return [new ChildTexture
+                {
+                    TextureId = textureId,
+                    WidthPercent = 0.15f,
+                    HeightPercent = 0.15f,
+                }];
             }
             return [];
         }
@@ -216,7 +308,12 @@ namespace SevenWonders.Presenter.Connectors.Effects
             { typeof(BuyGoods), HandleBuyGoodsEffect },
             { typeof(GetMoneyForCard), HandleGetMoneyForCardEffect },
             { typeof(GetMoney), HandleGetMoneyEffect },
-            { typeof(GetMoneyForWonders), HandleGetMoneyForWondersEffect }
+            { typeof(GetMoneyForWonders), HandleGetMoneyForWondersEffect },
+            { typeof(EnemyLoseMoney), HandleEnemyLoseMoneyEffect },
+            { typeof(NewTurn), HandleNewTurnEffect },
+            { typeof(BuildFreeFromDroppedCards), HandleBuildFreeFromDroppedCardsEffect },
+            { typeof(DropEnemyCard), HandleDropEnemyCardEffect },
+            { typeof(ChooseDevelopment), HandleChooseDevelopmentEffect }
 
         };
     }

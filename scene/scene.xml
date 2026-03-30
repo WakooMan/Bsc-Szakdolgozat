@@ -14255,6 +14255,55 @@
       <FileName>Slash.png</FileName>
       <Id>292</Id>
     </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>GetMoneyForWonders.png</FileName>
+      <Id>1112</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>NewTurn.png</FileName>
+      <Id>1113</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>RedCardDropEnemyCard.png</FileName>
+      <Id>1114</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>GrayCardDropEnemyCard.png</FileName>
+      <Id>1115</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>BuildFreeFromDroppedCards.png</FileName>
+      <Id>1116</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>EnemyLoseMoney.png</FileName>
+      <Id>1117</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>873</OriginalHeight>
+      <Color />
+      <FileName>BrownCardDropEnemyCard.png</FileName>
+      <Id>1118</Id>
+    </Texture>
   </Textures>
   <Name>scene</Name>
   <Visible>true</Visible>
