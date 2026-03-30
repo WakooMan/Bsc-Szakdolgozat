@@ -1,10 +1,11 @@
 ﻿using GameLogic.Elements.GameCards;
+using SevenWonders.Presenter.Connectors.Effects;
 
 namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class CardChildTextureHandler: ICardChildTextureHandler
     {
-        public CardChildTextureHandler(IGameEngineReceiver gameEngineReceiver)
+        public CardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_cardTypeTextureHandlers = new()
@@ -15,7 +16,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                 { typeof(GreenCard),  new GreenCardChildTextureHandler(m_gameEngineReceiver) },
                 { typeof(PurpleCard), new PurpleCardChildTextureHandler(m_gameEngineReceiver) },
                 { typeof(RedCard),    new RedCardChildTextureHandler(m_gameEngineReceiver) },
-                { typeof(YellowCard), new YellowCardChildTextureHandler(m_gameEngineReceiver) },
+                { typeof(YellowCard), new YellowCardChildTextureHandler(m_gameEngineReceiver, effectHandler) },
             };
         }
 
