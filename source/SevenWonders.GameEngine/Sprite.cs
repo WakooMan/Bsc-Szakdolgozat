@@ -100,18 +100,18 @@ namespace SevenWonders.GameEngine
                     
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height, TextureRegistry textureRegistry)
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height, bool dimmed, TextureRegistry textureRegistry)
         {
             if (Frames.Count <= 0)
             {
                 return;
             }
 
-            Frames[ActualFrame].Draw(eventArgs, position, scale, rotation, width, height, textureRegistry);
+            Frames[ActualFrame].Draw(eventArgs, position, scale, rotation, width, height, dimmed, textureRegistry);
 
             foreach (var child in Children)
             {
-                child.Draw(eventArgs, position, scale, rotation, width, height, textureRegistry);
+                child.Draw(eventArgs, position, scale, rotation, width, height, dimmed,  textureRegistry);
             }
             LastUpdate++;
             if (Fps < LastUpdate)

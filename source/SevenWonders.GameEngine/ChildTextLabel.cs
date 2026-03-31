@@ -63,7 +63,7 @@ namespace SevenWonders.GameEngine
 
         [ExcludeFromCodeCoverage]
         public override void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 parentPosition, Vector2 parentVisualSize,
-                         float parentRotation, float parentWidth, float parentHeight, TextureRegistry textureRegistry)
+                         float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry)
         {
             var childWidth = parentWidth * WidthPercent;
             var childHeight = parentHeight * HeightPercent;
@@ -101,6 +101,7 @@ namespace SevenWonders.GameEngine
             TextLabel.Rotation = parentRotation;
             TextLabel.Scale = parentVisualSize;
 
+            TextLabel.Dimmed = dimmed;
             TextLabel.Draw(eventArgs, textureRegistry);
 
             TextLabel.Position = originalPosition;

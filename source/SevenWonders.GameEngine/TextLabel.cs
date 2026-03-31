@@ -65,10 +65,21 @@ namespace SevenWonders.GameEngine
             canvas.RotateDegrees(Rotation);
             canvas.Scale(Scale.X, Scale.Y);
 
-            // Draw background image
-            textureRegistry.Get(BackgroundTextureId).Draw(eventArgs, Vector2.Zero, Vector2.One, 0, Width, Height);
+            Texture texture = textureRegistry.Get(BackgroundTextureId);
+            if (Dimmed)
+            {
+                texture.CustomColorFilter = SKColorFilter.CreateBlendMode(
+                                    SKColors.Black.WithAlpha(120),
+                                    SKBlendMode.SrcOver
+                                );
+            }
+            else if(texture.CustomColorFilter is not null)
+            {
+                texture.CustomColorFilter = null;
+            }
 
-            // Draw text on top
+            texture.Draw(eventArgs, Vector2.Zero, Vector2.One, 0, Width, Height);
+
             if (!string.IsNullOrEmpty(Text))
             {
                 using var textPaint = new SKPaint
@@ -77,7 +88,11 @@ namespace SevenWonders.GameEngine
                     Color = TextColor,
                     TextSize = FontSize,
                     TextAlign = SKTextAlign.Center,
-                    IsStroke = false
+                    IsStroke = false,
+                    ColorFilter = Dimmed ? SKColorFilter.CreateBlendMode(
+                                    SKColors.Black.WithAlpha(120),
+                                    SKBlendMode.SrcOver
+                                ) : null
                 };
 
                 float textY = textPaint.FontMetrics.CapHeight / 2;

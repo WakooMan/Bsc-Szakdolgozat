@@ -3,6 +3,7 @@ using GameLogic.Elements.Goods.Factories;
 using GameLogic.Events.GameEvents;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using System.Net.Http.Headers;
 
 namespace GameLogic.Elements.Effects
 {
@@ -46,11 +47,14 @@ namespace GameLogic.Elements.Effects
         {
             if (eventArgs.Player == player)
             {
-                IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory, SetSelectedGood)).ToArray());
-                
-                if (await playerAction.CanPerform(gameContext))
+                PlayerActionWrapper playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, GoodFactories.Select(goodFactory => {
+                    var action = new ChooseGoodAction(goodFactory, SetSelectedGood);
+                    return new PlayerActionWrapper(action, action.CanPerform(gameContext).GetAwaiter().GetResult());
+                }).ToArray());
+
+                if (playerAction.CanPerform)
                 {
-                    await playerAction.DoPlayerAction(gameContext);
+                    await playerAction.PlayerAction.DoPlayerAction(gameContext);
                 }
             }
         }

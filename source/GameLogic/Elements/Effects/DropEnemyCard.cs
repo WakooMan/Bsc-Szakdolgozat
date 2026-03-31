@@ -1,4 +1,5 @@
-﻿using GameLogic.PlayerActions;
+﻿using GameLogic.Interfaces;
+using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
 {
@@ -27,10 +28,13 @@ namespace GameLogic.Elements.Effects
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
-            IPlayerAction action = gameContext.PlayerActionReceiver.ReceivePlayerAction(currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => new DropCard(opponentPlayer, card)).ToArray());
-            if (await action.CanPerform(gameContext))
+            PlayerActionWrapper action = gameContext.PlayerActionReceiver.ReceivePlayerAction(currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => {
+                var dropCard = new DropCard(opponentPlayer, card);
+                return new PlayerActionWrapper(dropCard, dropCard.CanPerform(gameContext).GetAwaiter().GetResult());
+            }).ToArray());
+            if (action.CanPerform)
             {
-                await action.DoPlayerAction(gameContext);
+                await action.PlayerAction.DoPlayerAction(gameContext);
             }
         }
     }

@@ -1,3 +1,4 @@
+using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
 
@@ -54,7 +55,7 @@ namespace SevenWonders.GameEngine
                    TextureId.GetHashCode();
         }
 
-        public override void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 parentPosition, Vector2 parentVisualSize, float parentRotation, float parentWidth, float parentHeight, TextureRegistry textureRegistry)
+        public override void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 parentPosition, Vector2 parentVisualSize, float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry)
         {
             var childWidth = parentWidth * WidthPercent;
             var childHeight = parentHeight * HeightPercent;
@@ -64,11 +65,9 @@ namespace SevenWonders.GameEngine
             var scaledChildWidth = childWidth * parentVisualSize.X;
             var scaledChildHeight = childHeight * parentVisualSize.Y;
 
-            // Offset from parent center in unrotated space
             var offsetX = -scaledParentWidth / 2 + scaledChildWidth / 2 + PositionPercent.X * scaledParentWidth;
             var offsetY = -scaledParentHeight / 2 + scaledChildHeight / 2 + PositionPercent.Y * scaledParentHeight;
 
-            // Rotate the offset by the parent's rotation angle
             var radians = parentRotation * MathF.PI / 180f;
             var cos = MathF.Cos(radians);
             var sin = MathF.Sin(radians);
@@ -79,7 +78,19 @@ namespace SevenWonders.GameEngine
                 parentPosition.X + rotatedOffsetX,
                 parentPosition.Y + rotatedOffsetY);
 
-            textureRegistry.Get(TextureId).Draw(eventArgs, childPosition, parentVisualSize, parentRotation, childWidth, childHeight);
+            Texture texture = textureRegistry.Get(TextureId);
+            if (dimmed)
+            {
+                texture.CustomColorFilter = SKColorFilter.CreateBlendMode(
+                    SKColors.Black.WithAlpha(120),
+                    SKBlendMode.SrcOver
+                );
+            }
+            else if (texture.CustomColorFilter is not null)
+            {
+                texture.CustomColorFilter = null;
+            }
+            texture.Draw(eventArgs, childPosition, parentVisualSize, parentRotation, childWidth, childHeight);
         }
     }
 }

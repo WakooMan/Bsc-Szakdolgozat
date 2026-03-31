@@ -13,18 +13,19 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_signal = new ManualResetEventSlim(false);
-            m_interactiveObjectToPlayerAction = new Dictionary<IInteractiveObject, IPlayerAction>();
+            m_interactiveObjectToPlayerAction = new Dictionary<IInteractiveObject, PlayerActionWrapper>();
         }
-        public IPlayerAction ReceivePlayerAction(Player player, ICollection<IPlayerAction> playerActions)
+        public PlayerActionWrapper ReceivePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
         {
             m_chosenInteractiveObject = null;
             m_signal.Reset();
             m_interactiveObjectToPlayerAction.Clear();
-            foreach (IPlayerAction playerAction in playerActions)
+            foreach (PlayerActionWrapper playerActionWrapper in playerActions)
             {
-                IInteractiveObject interactiveObject = m_gameEngineReceiver.ReceiveInteractiveObject(playerAction.Name);
-                m_interactiveObjectToPlayerAction[interactiveObject] = playerAction;
+                IInteractiveObject interactiveObject = m_gameEngineReceiver.ReceiveInteractiveObject(playerActionWrapper.PlayerAction.Name);
+                m_interactiveObjectToPlayerAction[interactiveObject] = playerActionWrapper;
                 interactiveObject.ClickedEvent += OnInteractiveObjectClicked;
+                interactiveObject.Dimmed = !playerActionWrapper.CanPerform;
             }
 
             while (m_chosenInteractiveObject is null)
@@ -57,7 +58,7 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly ManualResetEventSlim m_signal;
-        private readonly Dictionary<IInteractiveObject, IPlayerAction> m_interactiveObjectToPlayerAction;
+        private readonly Dictionary<IInteractiveObject, PlayerActionWrapper> m_interactiveObjectToPlayerAction;
         private IInteractiveObject? m_chosenInteractiveObject;
 
     }

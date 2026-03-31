@@ -1,9 +1,5 @@
 using SevenWonders.Common;
-using SkiaSharp;
 using SkiaSharp.Views.Maui;
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
-using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {

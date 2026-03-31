@@ -18,6 +18,7 @@ namespace SevenWonders.GameEngine
         public float Height { get; set; }
         public float Rotation { get; set; }
         public Vector2 Scale { get; set; }
+        public bool Dimmed { get; set; }
 
         protected SceneObject()
         {

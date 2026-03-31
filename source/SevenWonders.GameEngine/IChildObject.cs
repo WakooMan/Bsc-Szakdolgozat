@@ -36,7 +36,7 @@ namespace SevenWonders.GameEngine
         /// Draws the child object relative to the parent frame's position and transform.
         /// </summary>
         public abstract void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 parentPosition, Vector2 parentVisualSize,
-                  float parentRotation, float parentWidth, float parentHeight, TextureRegistry textureRegistry);
+                  float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry);
 
         public virtual bool Equals(ChildObject? other)
         {

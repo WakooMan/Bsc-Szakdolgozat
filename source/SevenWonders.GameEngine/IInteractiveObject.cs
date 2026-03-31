@@ -10,5 +10,7 @@ namespace SevenWonders.GameEngine
         event TouchEvent PressedEvent;
         event TouchEvent MoveEvent;
         event TouchEvent ClickedEvent;
+
+        bool Dimmed { get; set; }
     }
 }

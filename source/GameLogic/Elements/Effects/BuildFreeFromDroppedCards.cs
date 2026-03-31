@@ -1,4 +1,6 @@
-﻿using GameLogic.PlayerActions;
+﻿using GameLogic.Elements.GameCards;
+using GameLogic.Interfaces;
+using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
 {
@@ -7,10 +9,13 @@ namespace GameLogic.Elements.Effects
         public BuildFreeFromDroppedCards() { }
         public override async Task Apply(IGameContext gameContext)
         {
-            IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, gameContext.DroppedCardList?.Cards.Select(card => new ChooseCardAction(card)).ToArray() ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!"));
-            if (await playerAction.CanPerform(gameContext))
+            ICardList droppedCardList = gameContext.DroppedCardList ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!");
+            PlayerActionWrapper playerActionWrapper = gameContext.PlayerActionReceiver.ReceivePlayerAction(
+                gameContext.TurnHandler.CurrentPlayer,
+                droppedCardList.Cards.Select(card => new PlayerActionWrapper(new ChooseCardAction(card), true)).ToList());
+            if (playerActionWrapper.CanPerform)
             {
-                await playerAction.DoPlayerAction(gameContext);
+                await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
             }
         }
 

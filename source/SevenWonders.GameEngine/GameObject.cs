@@ -95,7 +95,7 @@ namespace SevenWonders.GameEngine
                 canvas.Restore();
             }
 
-            Animations[CurrentAnim].Draw(eventArgs, Position, effectiveScale, Rotation, Width, Height, textureRegistry);
+            Animations[CurrentAnim].Draw(eventArgs, Position, effectiveScale, Rotation, Width, Height, Dimmed, textureRegistry);
         }
 
         public void OnTouchReleased(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer)

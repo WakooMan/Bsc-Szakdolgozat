@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
+using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 using System.Runtime.CompilerServices;
 
@@ -26,15 +27,15 @@ namespace GameLogic.PlayerTurnStates
                 .. CurrentPlayer.Wonders.Select(wonder => new TurnDecision(new BuildWonder(wonder))),
             ];
 
-            IPlayerAction playerAction;
+            PlayerActionWrapper playerAction;
             do
             {
-                playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions.Select(decision => (IPlayerAction)decision).ToList());
-            } while (!GoToPrevState && !await playerAction.CanPerform(m_gameContext));
+                playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions.Select(decision => new PlayerActionWrapper(decision, decision.CanPerform(m_gameContext).GetAwaiter().GetResult())).ToList());
+            } while (!GoToPrevState && !playerAction.CanPerform);
 
             if (!GoToPrevState)
             {
-                await playerAction.DoPlayerAction(m_gameContext);
+                await playerAction.PlayerAction.DoPlayerAction(m_gameContext);
             }
 
             m_gameContext.EventManager.Unsubscribe(action);

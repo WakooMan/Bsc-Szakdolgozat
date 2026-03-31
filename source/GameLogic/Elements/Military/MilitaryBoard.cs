@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements.Modifiers;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
+using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 using System.Xml.Serialization;
 
@@ -73,10 +74,13 @@ namespace GameLogic.Elements.Military
             var disciplines = eventArgs.Player.Disciplines;
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
-                var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, Developments.Select(dev => new ChooseDevelopmentAction(eventArgs.Player, dev, Developments)).ToArray());
-                if (await playerAction.CanPerform(gameContext))
+                var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, Developments.Select(dev => { 
+                    var action = new ChooseDevelopmentAction(eventArgs.Player, dev, Developments);
+                    return new PlayerActionWrapper(action, action.CanPerform(gameContext).GetAwaiter().GetResult());
+                }).ToArray());
+                if (playerAction.CanPerform)
                 {
-                    await playerAction.DoPlayerAction(gameContext);
+                    await playerAction.PlayerAction.DoPlayerAction(gameContext);
                 }
             }
 
