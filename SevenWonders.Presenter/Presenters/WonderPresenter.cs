@@ -70,13 +70,6 @@ namespace SevenWonders.Presenter.Presenters
                 }
             });
 
-            m_eventManager.Subscribe<OnChooseWonderStateEnd>(state => {
-                foreach (Wonder wonder in state.Wonders)
-                {
-                    MoveToDeck(wonder).GetAwaiter().GetResult();
-                }
-            });
-
             m_eventManager.Subscribe<OnWonderChosen>(state => {
                 MoveToPlayer(state.Player, state.Wonder).GetAwaiter().GetResult();
             });

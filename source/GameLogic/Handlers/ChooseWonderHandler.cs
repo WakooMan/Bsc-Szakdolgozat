@@ -28,7 +28,7 @@ namespace GameLogic.Handlers
             m_wonders = new List<Wonder>();
         }
 
-        public bool WondersChosen => WondersChosenNum == 7;
+        public bool WondersChosen => WondersChosenNum == 8;
 
         public async Task ChooseWonder()
         {
@@ -44,9 +44,19 @@ namespace GameLogic.Handlers
 
             Player player = m_players[m_indexOfPlayer];
             List<ChooseWonderAction> actions = WondersChosenNum < 4 ? m_wonderPlayerActions1 : m_wonderPlayerActions2;
-            var playerAction = m_playerActionReceiver.ReceivePlayerAction(player, actions.Select(action => (IPlayerAction)action).ToList());
 
-            if (await playerAction.CanPerform(m_gameContext))
+            IPlayerAction? playerAction = null;
+
+            if (actions.Count > 1)
+            {
+                playerAction = m_playerActionReceiver.ReceivePlayerAction(player, actions.Select(action => (IPlayerAction)action).ToList());
+            }
+            else
+            {
+                playerAction = actions.FirstOrDefault();
+            }
+
+            if (playerAction is not null && await playerAction.CanPerform(m_gameContext))
             {
                 await playerAction.DoPlayerAction(m_gameContext);
             }
@@ -57,7 +67,7 @@ namespace GameLogic.Handlers
 
             if (WondersChosen)
             {
-                await m_gameContext.EventManager.PublishAsync(new OnChooseWonderStateEnd(actions.Select(action => action.Wonder).ToList()));
+                await m_gameContext.EventManager.PublishAsync(new OnChooseWonderStateEnd());
             }
 
         }
