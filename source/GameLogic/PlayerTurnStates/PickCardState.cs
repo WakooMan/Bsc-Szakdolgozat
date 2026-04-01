@@ -16,16 +16,7 @@ namespace GameLogic.PlayerTurnStates
 
         public async Task ExecuteTurnState()
         {
-            PlayerActionWrapper playerAction;
-            do
-            {
-                playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, Composition.AvailableCards.Select(card => { 
-                    PickCard pickCard = new PickCard(CurrentPlayer, card);
-                    return new PlayerActionWrapper(pickCard, pickCard.CanPerform(m_gameContext).GetAwaiter().GetResult());
-                }).ToList());
-            } while (!playerAction.CanPerform);
-
-            await playerAction.PlayerAction.DoPlayerAction(m_gameContext);
+            await m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, CurrentPlayer, Composition.AvailableCards.Select(card => (IPlayerAction)new PickCard(CurrentPlayer, card)).ToList());
         }
 
         public IPlayerTurnState GetNextTurnState()

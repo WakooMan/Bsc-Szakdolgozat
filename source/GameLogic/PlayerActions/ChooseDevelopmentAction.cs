@@ -30,7 +30,7 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(!m_player.Developments.Contains(m_development) && m_developments.Contains(m_development));
         }
 
-        public Task DoPlayerAction(IGameContext gameContext)
+        public Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => m_player.Developments.Contains(m_development), "Cannot perform action, because player already has the development!");
             ArgumentChecker.CheckPredicateForOperation(() => !m_developments.Contains(m_development), "Cannot perform action, because development list does not contain the development!");
@@ -38,7 +38,7 @@ namespace GameLogic.PlayerActions
             m_player.Developments.Add(m_development);
            m_development.OnDevelopmentEstablished(gameContext);
            m_developments.Remove(m_development);
-           return Task.CompletedTask;
+            return Task.FromResult(true);
         }
 
         private readonly List<Development> m_developments;

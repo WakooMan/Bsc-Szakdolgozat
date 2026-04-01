@@ -10,13 +10,8 @@ namespace GameLogic.Elements.Effects
         public override async Task Apply(IGameContext gameContext)
         {
             ICardList droppedCardList = gameContext.DroppedCardList ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!");
-            PlayerActionWrapper playerActionWrapper = gameContext.PlayerActionReceiver.ReceivePlayerAction(
-                gameContext.TurnHandler.CurrentPlayer,
-                droppedCardList.Cards.Select(card => new PlayerActionWrapper(new ChooseCardAction(card), true)).ToList());
-            if (playerActionWrapper.CanPerform)
-            {
-                await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
-            }
+
+            await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, gameContext.TurnHandler.CurrentPlayer, droppedCardList.Cards.Select(card => (IPlayerAction)new ChooseCardAction(card)).ToList());
         }
 
         public override BuildFreeFromDroppedCards Clone()

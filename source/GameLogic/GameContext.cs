@@ -26,6 +26,7 @@ namespace GameLogic
 
         public IChooseWonderHandler ChooseWonderHandler { get; }
         public IRandomGenerator RandomGenerator { get; }
+        public IPlayerActionHandler PlayerActionHandler { get; }
 
         public ICardList? CardList { get; private set; }
         public ICardList? DroppedCardList { get; private set; }
@@ -35,7 +36,7 @@ namespace GameLogic
         public IDevelopmentList? DevelopmentList { get; private set; }
         public IMilitaryBoard? MilitaryBoard { get; private set; }
 
-        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [FromKeyedServices(nameof(EmptyCardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory, IRandomElementReceiver randomElementReceiver)
+        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [FromKeyedServices(nameof(EmptyCardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory, IRandomElementReceiver randomElementReceiver, IPlayerActionHandler playerActionHandler)
         {
             ArgumentChecker.CheckNull(ageHandler, nameof(ageHandler));
             ArgumentChecker.CheckNull(turnHandler, nameof(turnHandler));
@@ -48,6 +49,7 @@ namespace GameLogic
             ArgumentChecker.CheckNull(droppedCardListFactory, nameof(droppedCardListFactory));
             ArgumentChecker.CheckNull(militaryBoardFactory, nameof(militaryBoardFactory));
             ArgumentChecker.CheckNull(randomElementReceiver, nameof(randomElementReceiver));
+            ArgumentChecker.CheckNull(playerActionHandler, nameof(playerActionHandler));
 
             AgeHandler = ageHandler;
             TurnHandler = turnHandler;
@@ -60,6 +62,7 @@ namespace GameLogic
             RandomGenerator = randomGenerator;
             m_militaryBoardFactory = militaryBoardFactory;
             m_randomElementReceiver = randomElementReceiver;
+            PlayerActionHandler = playerActionHandler;
         }
 
         public void Initialize(ICollection<Player> players)

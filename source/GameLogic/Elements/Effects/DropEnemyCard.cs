@@ -28,14 +28,11 @@ namespace GameLogic.Elements.Effects
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
-            PlayerActionWrapper action = gameContext.PlayerActionReceiver.ReceivePlayerAction(currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => {
-                var dropCard = new DropCard(opponentPlayer, card);
-                return new PlayerActionWrapper(dropCard, dropCard.CanPerform(gameContext).GetAwaiter().GetResult());
+
+            await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => {
+                IPlayerAction dropCard = new DropCard(opponentPlayer, card);
+                return dropCard;
             }).ToArray());
-            if (action.CanPerform)
-            {
-                await action.PlayerAction.DoPlayerAction(gameContext);
-            }
         }
     }
 }

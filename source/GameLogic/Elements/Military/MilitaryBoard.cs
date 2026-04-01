@@ -3,6 +3,7 @@ using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Military
@@ -74,14 +75,11 @@ namespace GameLogic.Elements.Military
             var disciplines = eventArgs.Player.Disciplines;
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
-                var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, Developments.Select(dev => { 
-                    var action = new ChooseDevelopmentAction(eventArgs.Player, dev, Developments);
-                    return new PlayerActionWrapper(action, action.CanPerform(gameContext).GetAwaiter().GetResult());
+
+                await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, eventArgs.Player, Developments.Select(dev => {
+                    IPlayerAction action = new ChooseDevelopmentAction(eventArgs.Player, dev, Developments);
+                    return action;
                 }).ToArray());
-                if (playerAction.CanPerform)
-                {
-                    await playerAction.PlayerAction.DoPlayerAction(gameContext);
-                }
             }
 
             if (disciplines.Count >= 6)

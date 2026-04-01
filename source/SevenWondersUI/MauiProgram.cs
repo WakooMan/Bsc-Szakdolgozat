@@ -63,6 +63,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IAgeHandler), typeof(AgeHandler));
         builder.Services.AddSingleton(typeof(IMilitaryBoardFactory), typeof(MilitaryBoardFactory));
         builder.Services.AddSingleton(typeof(IPlayerActionReceiver), typeof(PlayerActionReceiver));
+        builder.Services.AddSingleton(typeof(IPlayerActionHandler), typeof(PlayerActionHandler));
         builder.Services.AddSingleton(typeof(IGameContext), typeof(GameContext));
         builder.Services.AddSingleton(typeof(IGame), typeof(Game));
         builder.Services.AddSingleton(typeof(IAnimationManager), typeof(AnimationManager));

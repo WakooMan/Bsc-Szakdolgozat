@@ -22,10 +22,10 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(true);
         }
 
-        public Task DoPlayerAction(IGameContext gameContext)
+        public Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             m_setter(m_goodFactory.CreateGood());
-            return Task.CompletedTask;
+            return Task.FromResult(true);
         }
 
         private readonly GoodFactory m_goodFactory;

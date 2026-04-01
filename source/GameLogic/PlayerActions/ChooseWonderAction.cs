@@ -31,13 +31,14 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(m_wonders.Contains(m_wonder));
         }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_wonders.Contains(m_wonder), "Wonder list does not contain the wonder! Action cannot be performed!");
 
             m_player().Wonders.Add(m_wonder);
             m_wonders.Remove(m_wonder);
             await gameContext.EventManager.PublishAsync(new OnWonderChosen(m_player(), m_wonder));
+            return true;
         }
 
         private readonly Wonder m_wonder;

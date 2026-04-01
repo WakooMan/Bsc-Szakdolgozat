@@ -16,10 +16,10 @@ namespace GameLogic.PlayerActions
             m_setter = setter;
         }
 
-        public Task DoPlayerAction(IGameContext gameContext)
+        public Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             m_setter(m_discipline);
-            return Task.CompletedTask;
+            return Task.FromResult(true);
         }
 
         public Task<bool> CanPerform(IGameContext gameContext)

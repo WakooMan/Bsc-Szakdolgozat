@@ -24,7 +24,10 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
             {
                 IInteractiveObject interactiveObject = m_gameEngineReceiver.ReceiveInteractiveObject(playerActionWrapper.PlayerAction.Name);
                 m_interactiveObjectToPlayerAction[interactiveObject] = playerActionWrapper;
-                interactiveObject.ClickedEvent += OnInteractiveObjectClicked;
+                if (playerActionWrapper.CanPerform)
+                {
+                    interactiveObject.ClickedEvent += OnInteractiveObjectClicked;
+                }
                 interactiveObject.Dimmed = !playerActionWrapper.CanPerform;
             }
 
@@ -36,7 +39,11 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
                 {
                     foreach (IInteractiveObject interactiveObject in m_interactiveObjectToPlayerAction.Keys)
                     {
-                        interactiveObject.ClickedEvent -= OnInteractiveObjectClicked;
+                        if (!interactiveObject.Dimmed)
+                        {
+                            interactiveObject.ClickedEvent -= OnInteractiveObjectClicked;
+                        }
+                        interactiveObject.Dimmed = false;
                     }
                     return m_interactiveObjectToPlayerAction[m_chosenInteractiveObject];
                 }

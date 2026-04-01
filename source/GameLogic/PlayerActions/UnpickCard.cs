@@ -20,7 +20,7 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(m_player.PickedCard is not null);
         }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             if (m_player.PickedCard is null)
             {
@@ -30,6 +30,7 @@ namespace GameLogic.PlayerActions
             ICardNode cardNode = m_player.PickedCard;
             m_player.PickedCard = null;
             await gameContext.EventManager.PublishAsync(new OnCardUnpicked(m_player, cardNode));
+            return true;
         }
 
         private readonly Player m_player;

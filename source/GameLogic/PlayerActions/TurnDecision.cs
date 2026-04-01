@@ -25,7 +25,7 @@
             m_playerAction = playerAction;
         }
 
-        public TurnDecision(BuildWonder playerAction)
+        public TurnDecision(BuildWonderProcess playerAction)
         {
             m_playerAction = playerAction;
         }
@@ -34,9 +34,9 @@
         {
             return await (m_playerAction?.CanPerform(gameContext) ?? Task.FromResult(false));
         }
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
-            await (m_playerAction?.DoPlayerAction(gameContext) ?? Task.CompletedTask);
+            return await (m_playerAction?.DoPlayerAction(gameContext) ?? Task.FromResult(false));
         }
 
         private readonly IPlayerAction? m_playerAction;

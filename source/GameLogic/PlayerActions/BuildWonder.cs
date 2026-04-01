@@ -1,7 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
-using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 using SevenWonders.Common;
@@ -10,13 +9,14 @@ namespace GameLogic.PlayerActions
 {
     public class BuildWonder : IPlayerAction
     {
-        public string Name => nameof(BuildWonder);
+        public string Name => m_wonder.Name;
+        public Wonder Wonder => m_wonder;
         public BuildWonder(Wonder wonder)
         {
             m_wonder = wonder;
         }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             Player player = GetPlayer(gameContext);
             Player opponent = GetOpponent(gameContext);
@@ -33,6 +33,8 @@ namespace GameLogic.PlayerActions
             player.PickedCard = null;
             await gameContext.EventManager.PublishAsync(new OnWonderBuilt(player, card, m_wonder));
             await m_wonder.OnBuilt(gameContext);
+
+            return true;
         }
 
         public async Task<bool> CanPerform(IGameContext gameContext)

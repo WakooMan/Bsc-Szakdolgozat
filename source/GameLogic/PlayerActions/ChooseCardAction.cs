@@ -24,7 +24,7 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(gameContext.DroppedCardList is not null && gameContext.DroppedCardList.Cards.Contains(m_card));
         }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             if (gameContext.DroppedCardList is null)
             {
@@ -37,6 +37,8 @@ namespace GameLogic.PlayerActions
             player.Cards.Add(m_card);
             await gameContext.EventManager.PublishAsync(new OnCardBuilt(m_card, player, 0, false));
             await m_card.OnBuilt(gameContext);
+
+            return true;
         }
 
         private readonly Card m_card;

@@ -11,7 +11,7 @@
           <Visible>false</Visible>
           <Position>
             <X>3490.8713</X>
-            <Y>948.7431</Y>
+            <Y>948.74304</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -20,6 +20,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -70,12 +71,13 @@
             <Y>833.4058</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -123,15 +125,16 @@
           <Visible>true</Visible>
           <Position>
             <X>215.73036</X>
-            <Y>881.6497</Y>
+            <Y>881.64966</Y>
           </Position>
           <Width>225</Width>
-          <Height>204.20166</Height>
+          <Height>204.20164</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -182,12 +185,13 @@
             <Y>1082.9548</Y>
           </Position>
           <Width>225</Width>
-          <Height>204.20166</Height>
+          <Height>204.20164</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -235,15 +239,16 @@
           <Visible>true</Visible>
           <Position>
             <X>216.99437</X>
-            <Y>1281.0508</Y>
+            <Y>1281.0507</Y>
           </Position>
           <Width>225</Width>
-          <Height>204.20166</Height>
+          <Height>204.20164</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -300,6 +305,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -347,7 +353,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>876.99274</Y>
+            <Y>876.9927</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -356,6 +362,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -403,7 +410,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2359.5508</X>
-            <Y>876.99274</Y>
+            <Y>876.9927</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -412,6 +419,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -468,6 +476,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -524,6 +533,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -571,7 +581,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1562.4999</X>
-            <Y>876.99274</Y>
+            <Y>876.9927</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -580,6 +590,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -607,7 +618,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2359.5508</X>
-            <Y>876.99274</Y>
+            <Y>876.9927</Y>
           </Position>
           <Width>0</Width>
           <Height>0</Height>
@@ -616,6 +627,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -652,6 +664,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -688,6 +701,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -715,7 +729,7 @@
           <Visible>false</Visible>
           <Position>
             <X>936.11566</X>
-            <Y>1927.9877</Y>
+            <Y>1927.9875</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -724,6 +738,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -771,7 +786,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1591.0115</X>
-            <Y>1927.9877</Y>
+            <Y>1927.9875</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -780,6 +795,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -827,7 +843,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2245.907</X>
-            <Y>1927.9877</Y>
+            <Y>1927.9875</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -836,6 +852,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -883,7 +900,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2900.8027</X>
-            <Y>1927.9877</Y>
+            <Y>1927.9875</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -892,6 +909,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -939,7 +957,7 @@
           <Visible>false</Visible>
           <Position>
             <X>936.11566</X>
-            <Y>228.74431</Y>
+            <Y>228.7443</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -948,6 +966,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -995,7 +1014,7 @@
           <Visible>false</Visible>
           <Position>
             <X>1591.0115</X>
-            <Y>228.74431</Y>
+            <Y>228.7443</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -1004,6 +1023,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1051,7 +1071,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2245.907</X>
-            <Y>228.74431</Y>
+            <Y>228.7443</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -1060,6 +1080,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1107,7 +1128,7 @@
           <Visible>false</Visible>
           <Position>
             <X>2900.8027</X>
-            <Y>228.74431</Y>
+            <Y>228.7443</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -1116,6 +1137,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1166,12 +1188,13 @@
             <Y>1841.5803</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1228,6 +1251,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1258,12 +1282,13 @@
             <Y>1339.9111</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1314,12 +1339,13 @@
             <Y>1339.9111</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1370,12 +1396,13 @@
             <Y>1339.9111</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1426,12 +1453,13 @@
             <Y>1841.5803</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1482,12 +1510,13 @@
             <Y>1841.5803</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1538,12 +1567,13 @@
             <Y>1841.5803</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1594,12 +1624,13 @@
             <Y>1841.5803</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1650,12 +1681,13 @@
             <Y>1841.5803</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1706,12 +1738,13 @@
             <Y>1841.5803</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1762,12 +1795,13 @@
             <Y>318.41956</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1818,12 +1852,13 @@
             <Y>318.41956</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1874,12 +1909,13 @@
             <Y>318.41956</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1930,12 +1966,13 @@
             <Y>318.41956</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -1986,12 +2023,13 @@
             <Y>318.41956</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2042,12 +2080,13 @@
             <Y>318.41956</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2098,12 +2137,13 @@
             <Y>318.41956</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2162,6 +2202,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <TextureId>1000</TextureId>
         </TextureObject>
         <TextureObject>
@@ -2171,15 +2212,16 @@
           <Visible>true</Visible>
           <Position>
             <X>1920</X>
-            <Y>1833.2224</Y>
+            <Y>1833.2223</Y>
           </Position>
           <Width>3081.862</Width>
-          <Height>653.5553</Height>
+          <Height>653.55524</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <TextureId>277</TextureId>
         </TextureObject>
         <TextureObject>
@@ -2189,15 +2231,16 @@
           <Visible>true</Visible>
           <Position>
             <X>1918.4594</X>
-            <Y>326.77765</Y>
+            <Y>326.77762</Y>
           </Position>
           <Width>3081.862</Width>
-          <Height>653.5553</Height>
+          <Height>653.55524</Height>
           <Rotation>180</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <TextureId>277</TextureId>
         </TextureObject>
         <TextureObject>
@@ -2216,6 +2259,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <TextureId>1002</TextureId>
         </TextureObject>
         <TextureObject>
@@ -2234,10 +2278,34 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <TextureId>1001</TextureId>
         </TextureObject>
       </TextureObjects>
-      <Buttons />
+      <Buttons>
+	    <ButtonObject>
+          <Name>BackToTurnDecisions</Name>
+          <Id>6000</Id>
+          <ZIndex>5</ZIndex>
+          <Visible>false</Visible>
+          <Position>
+            <X>1926.1642</X>
+            <Y>1668.2001</Y>
+          </Position>
+          <Width>462.2794</Width>
+          <Height>261.4221</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <Dimmed>false</Dimmed>
+          <BackgroundTextureId>1095</BackgroundTextureId>
+          <Text>Back</Text>
+          <FontSize>48.721806</FontSize>
+          <TextColorHex>#fffaebd7</TextColorHex>
+        </ButtonObject>
+	  </Buttons>
       <TextLabels>
         <TextLabel>
           <Name>player1Money</Name>
@@ -2246,7 +2314,7 @@
           <Visible>true</Visible>
           <Position>
             <X>228.57147</X>
-            <Y>1692.5372</Y>
+            <Y>1692.5371</Y>
           </Position>
           <Width>285.7143</Width>
           <Height>201.49252</Height>
@@ -2255,9 +2323,10 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>1109</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>41.794395</FontSize>
+          <FontSize>35.239273</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
         <TextLabel>
@@ -2267,7 +2336,7 @@
           <Visible>true</Visible>
           <Position>
             <X>228.57147</X>
-            <Y>1894.0298</Y>
+            <Y>1894.0297</Y>
           </Position>
           <Width>285.7143</Width>
           <Height>201.49252</Height>
@@ -2276,9 +2345,10 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>291</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>41.794395</FontSize>
+          <FontSize>35.239273</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
         <TextLabel>
@@ -2288,7 +2358,7 @@
           <Visible>true</Visible>
           <Position>
             <X>3611.4287</X>
-            <Y>265.97015</Y>
+            <Y>265.97012</Y>
           </Position>
           <Width>285.7143</Width>
           <Height>201.49252</Height>
@@ -2297,9 +2367,10 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>291</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>41.794395</FontSize>
+          <FontSize>35.239273</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
         <TextLabel>
@@ -2309,7 +2380,7 @@
           <Visible>true</Visible>
           <Position>
             <X>3611.4287</X>
-            <Y>467.4627</Y>
+            <Y>467.46268</Y>
           </Position>
           <Width>285.7143</Width>
           <Height>201.49252</Height>
@@ -2318,16 +2389,17 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>1109</BackgroundTextureId>
           <Text>0</Text>
-          <FontSize>41.794395</FontSize>
+          <FontSize>35.239273</FontSize>
           <TextColorHex>#ffffffff</TextColorHex>
         </TextLabel>
       </TextLabels>
       <Visible>true</Visible>
       <EnableCollision>true</EnableCollision>
       <Name>background</Name>
-      <Id>0</Id>
+      <Id>5000</Id>
       <ZIndex>0</ZIndex>
     </GraphicsLayer>
     <GraphicsLayer>
@@ -2342,12 +2414,13 @@
             <Y>800.6052</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2417,12 +2490,13 @@
             <Y>800.6052</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2492,12 +2566,13 @@
             <Y>931.31635</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2567,12 +2642,13 @@
             <Y>931.31635</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2642,12 +2718,13 @@
             <Y>931.31635</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2714,15 +2791,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1540.931</X>
-            <Y>1094.7048</Y>
+            <Y>1094.7047</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2789,15 +2867,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2118.7805</X>
-            <Y>1094.7048</Y>
+            <Y>1094.7047</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2864,15 +2943,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1926.1642</X>
-            <Y>1094.7048</Y>
+            <Y>1094.7047</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -2939,15 +3019,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1733.5474</X>
-            <Y>1094.7048</Y>
+            <Y>1094.7047</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3017,12 +3098,13 @@
             <Y>1225.4161</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3092,12 +3174,13 @@
             <Y>1225.4161</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3167,12 +3250,13 @@
             <Y>1225.4161</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3242,12 +3326,13 @@
             <Y>1225.4161</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3317,12 +3402,13 @@
             <Y>1225.4161</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3392,12 +3478,13 @@
             <Y>1356.1273</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3467,12 +3554,13 @@
             <Y>1356.1273</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3542,12 +3630,13 @@
             <Y>1356.1273</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3617,12 +3706,13 @@
             <Y>1356.1273</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3692,12 +3782,13 @@
             <Y>1356.1273</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3767,12 +3858,13 @@
             <Y>1356.1273</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3842,12 +3934,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3917,12 +4010,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -3992,12 +4086,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4067,12 +4162,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4142,12 +4238,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4217,12 +4314,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4292,12 +4390,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4367,12 +4466,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4442,12 +4542,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4517,12 +4618,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4592,12 +4694,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4667,12 +4770,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4742,12 +4846,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4817,12 +4922,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4892,12 +4998,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -4967,12 +5074,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5042,12 +5150,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5117,12 +5226,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5192,12 +5302,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5267,12 +5378,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5342,12 +5454,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5417,12 +5530,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5492,12 +5606,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5564,7 +5679,7 @@
       <Visible>false</Visible>
       <EnableCollision>true</EnableCollision>
       <Name>FirstAge</Name>
-      <Id>0</Id>
+      <Id>5001</Id>
       <ZIndex>2</ZIndex>
     </GraphicsLayer>
     <GraphicsLayer>
@@ -5576,15 +5691,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1826.9998</X>
-            <Y>869.9999</Y>
+            <Y>869.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5651,15 +5767,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1971.0001</X>
-            <Y>869.9999</Y>
+            <Y>869.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5726,15 +5843,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>869.9999</Y>
+            <Y>869.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5801,15 +5919,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>869.9999</Y>
+            <Y>869.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5876,15 +5995,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
-            <Y>869.9999</Y>
+            <Y>869.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -5951,15 +6071,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2547</X>
-            <Y>869.9999</Y>
+            <Y>869.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6026,15 +6147,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1899.0002</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99976</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6101,15 +6223,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2043.0005</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99976</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6176,15 +6299,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2187</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99976</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6251,15 +6375,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99976</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6326,15 +6451,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2475</X>
-            <Y>1013.9998</Y>
+            <Y>1013.99976</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6404,12 +6530,13 @@
             <Y>1109.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6479,12 +6606,13 @@
             <Y>1109.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6554,12 +6682,13 @@
             <Y>1109.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6629,12 +6758,13 @@
             <Y>1109.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6704,12 +6834,13 @@
             <Y>1253.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6779,12 +6910,13 @@
             <Y>1253.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6854,12 +6986,13 @@
             <Y>1253.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -6926,15 +7059,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1350</Y>
+            <Y>1349.9999</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7001,15 +7135,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1350</Y>
+            <Y>1349.9999</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7079,12 +7214,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7154,12 +7290,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7229,12 +7366,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7304,12 +7442,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7379,12 +7518,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7454,12 +7594,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7529,12 +7670,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7604,12 +7746,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7679,12 +7822,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7754,12 +7898,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7829,12 +7974,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7904,12 +8050,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -7979,12 +8126,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8054,12 +8202,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8129,12 +8278,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8204,12 +8354,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8279,12 +8430,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8354,12 +8506,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8429,12 +8582,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8504,12 +8658,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8579,12 +8734,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8654,12 +8810,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8729,12 +8886,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8801,7 +8959,7 @@
       <Visible>false</Visible>
       <EnableCollision>true</EnableCollision>
       <Name>SecondAge</Name>
-      <Id>0</Id>
+      <Id>5002</Id>
       <ZIndex>2</ZIndex>
     </GraphicsLayer>
     <GraphicsLayer>
@@ -8813,15 +8971,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>762.0001</Y>
+            <Y>762.00006</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8888,15 +9047,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>762.0001</Y>
+            <Y>762.00006</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -8963,15 +9123,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2043.0005</X>
-            <Y>858.00006</Y>
+            <Y>858</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9038,15 +9199,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2187</X>
-            <Y>858.00006</Y>
+            <Y>858</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9113,15 +9275,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2331.0002</X>
-            <Y>858.00006</Y>
+            <Y>858</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9188,15 +9351,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1971.0001</X>
-            <Y>1002</Y>
+            <Y>1001.99994</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9263,15 +9427,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1002</Y>
+            <Y>1001.99994</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9338,15 +9503,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1002</Y>
+            <Y>1001.99994</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9413,15 +9579,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
-            <Y>1002</Y>
+            <Y>1001.99994</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9491,12 +9658,13 @@
             <Y>1098</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9566,12 +9734,13 @@
             <Y>1098</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9638,15 +9807,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1971.0001</X>
-            <Y>1241.9999</Y>
+            <Y>1241.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9713,15 +9883,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1241.9999</Y>
+            <Y>1241.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9788,15 +9959,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1241.9999</Y>
+            <Y>1241.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9863,15 +10035,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2402.9998</X>
-            <Y>1241.9999</Y>
+            <Y>1241.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -9941,12 +10114,13 @@
             <Y>1337.9994</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10016,12 +10190,13 @@
             <Y>1337.9994</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10091,12 +10266,13 @@
             <Y>1337.9994</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10163,15 +10339,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2114.9998</X>
-            <Y>1481.9999</Y>
+            <Y>1481.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10238,15 +10415,16 @@
           <Visible>false</Visible>
           <Position>
             <X>2258.9998</X>
-            <Y>1481.9999</Y>
+            <Y>1481.9998</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10316,12 +10494,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10391,12 +10570,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10466,12 +10646,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10541,12 +10722,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10616,12 +10798,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10691,12 +10874,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10766,12 +10950,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10841,12 +11026,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10916,12 +11102,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -10991,12 +11178,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11066,12 +11254,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11141,12 +11330,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11216,12 +11406,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11291,12 +11482,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11366,12 +11558,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11441,12 +11634,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11516,12 +11710,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11591,12 +11786,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11666,12 +11862,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11741,12 +11938,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11816,12 +12014,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11891,12 +12090,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -11966,12 +12166,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12041,12 +12242,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12116,12 +12318,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12191,12 +12394,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12266,12 +12470,13 @@
             <Y>714.5865</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12338,7 +12543,7 @@
       <Visible>false</Visible>
       <EnableCollision>true</EnableCollision>
       <Name>ThirdAge</Name>
-      <Id>0</Id>
+      <Id>5003</Id>
       <ZIndex>2</ZIndex>
     </GraphicsLayer>
     <GraphicsLayer>
@@ -12350,7 +12555,7 @@
           <Visible>true</Visible>
           <Position>
             <X>385.23276</X>
-            <Y>245.08319</Y>
+            <Y>245.08318</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12359,6 +12564,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12425,7 +12631,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1040.1285</X>
-            <Y>245.08319</Y>
+            <Y>245.08318</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12434,6 +12640,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12500,7 +12707,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1695.024</X>
-            <Y>245.08319</Y>
+            <Y>245.08318</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12509,6 +12716,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12575,7 +12783,7 @@
           <Visible>true</Visible>
           <Position>
             <X>2349.9202</X>
-            <Y>245.08319</Y>
+            <Y>245.08318</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12584,6 +12792,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12650,7 +12859,7 @@
           <Visible>true</Visible>
           <Position>
             <X>3004.8162</X>
-            <Y>245.08319</Y>
+            <Y>245.08318</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12659,6 +12868,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12725,7 +12935,7 @@
           <Visible>true</Visible>
           <Position>
             <X>385.23276</X>
-            <Y>653.5553</Y>
+            <Y>653.55524</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12734,6 +12944,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12800,7 +13011,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1040.1285</X>
-            <Y>653.5553</Y>
+            <Y>653.55524</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12809,6 +13020,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12875,7 +13087,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1695.024</X>
-            <Y>653.5553</Y>
+            <Y>653.55524</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12884,6 +13096,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -12950,7 +13163,7 @@
           <Visible>true</Visible>
           <Position>
             <X>2349.9202</X>
-            <Y>653.5553</Y>
+            <Y>653.55524</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -12959,6 +13172,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -13025,7 +13239,7 @@
           <Visible>true</Visible>
           <Position>
             <X>3004.8162</X>
-            <Y>653.5553</Y>
+            <Y>653.55524</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -13034,6 +13248,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -13100,7 +13315,7 @@
           <Visible>true</Visible>
           <Position>
             <X>385.23276</X>
-            <Y>1062.0275</Y>
+            <Y>1062.0273</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -13109,6 +13324,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -13175,7 +13391,7 @@
           <Visible>true</Visible>
           <Position>
             <X>1040.1285</X>
-            <Y>1062.0275</Y>
+            <Y>1062.0273</Y>
           </Position>
           <Width>462.2794</Width>
           <Height>261.4221</Height>
@@ -13184,6 +13400,7 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -13250,7 +13467,7 @@
       <Visible>false</Visible>
       <EnableCollision>true</EnableCollision>
       <Name>Wonders</Name>
-      <Id>0</Id>
+      <Id>5004</Id>
       <ZIndex>3</ZIndex>
     </GraphicsLayer>
     <GraphicsLayer>
@@ -13262,15 +13479,16 @@
           <Visible>false</Visible>
           <Position>
             <X>1921.3486</X>
-            <Y>1112.6779</Y>
+            <Y>1112.6777</Y>
           </Position>
           <Width>144.4623</Width>
-          <Height>245.08319</Height>
+          <Height>245.08318</Height>
           <Rotation>0</Rotation>
           <Scale>
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <Direction>
             <X>0</X>
             <Y>0</Y>
@@ -13315,7 +13533,7 @@
       <TextureObjects />
       <Buttons>
         <ButtonObject>
-          <Name>BuildWonder</Name>
+          <Name>BuildWonderProcess</Name>
           <Id>272</Id>
           <ZIndex>5</ZIndex>
           <Visible>true</Visible>
@@ -13330,9 +13548,10 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Wonder</Text>
-          <FontSize>8.917248</FontSize>
+          <FontSize>48.721806</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13351,9 +13570,10 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Build Card</Text>
-          <FontSize>8.917248</FontSize>
+          <FontSize>48.721806</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13372,9 +13592,10 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Sell Card</Text>
-          <FontSize>8.917248</FontSize>
+          <FontSize>48.721806</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
         <ButtonObject>
@@ -13393,9 +13614,10 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
+          <Dimmed>false</Dimmed>
           <BackgroundTextureId>1095</BackgroundTextureId>
           <Text>Unpick Card</Text>
-          <FontSize>8.917248</FontSize>
+          <FontSize>48.721806</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
         </ButtonObject>
       </Buttons>
@@ -13403,7 +13625,7 @@
       <Visible>false</Visible>
       <EnableCollision>true</EnableCollision>
       <Name>PickCardLayer</Name>
-      <Id>0</Id>
+      <Id>5005</Id>
       <ZIndex>4</ZIndex>
     </GraphicsLayer>
   </Layers>
@@ -14256,50 +14478,50 @@
       <Id>292</Id>
     </Texture>
     <Texture>
-      <OriginalWidth>1024</OriginalWidth>
-      <OriginalHeight>873</OriginalHeight>
+      <OriginalWidth>700</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
       <Color />
       <FileName>GetMoneyForWonders.png</FileName>
       <Id>1112</Id>
     </Texture>
     <Texture>
       <OriginalWidth>1024</OriginalWidth>
-      <OriginalHeight>873</OriginalHeight>
+      <OriginalHeight>1024</OriginalHeight>
       <Color />
       <FileName>NewTurn.png</FileName>
       <Id>1113</Id>
     </Texture>
     <Texture>
-      <OriginalWidth>1024</OriginalWidth>
-      <OriginalHeight>873</OriginalHeight>
+      <OriginalWidth>700</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
       <Color />
       <FileName>RedCardDropEnemyCard.png</FileName>
       <Id>1114</Id>
     </Texture>
     <Texture>
-      <OriginalWidth>1024</OriginalWidth>
-      <OriginalHeight>873</OriginalHeight>
+      <OriginalWidth>700</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
       <Color />
       <FileName>GrayCardDropEnemyCard.png</FileName>
       <Id>1115</Id>
     </Texture>
     <Texture>
-      <OriginalWidth>1024</OriginalWidth>
-      <OriginalHeight>873</OriginalHeight>
+      <OriginalWidth>700</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
       <Color />
       <FileName>BuildFreeFromDroppedCards.png</FileName>
       <Id>1116</Id>
     </Texture>
     <Texture>
       <OriginalWidth>1024</OriginalWidth>
-      <OriginalHeight>873</OriginalHeight>
+      <OriginalHeight>1024</OriginalHeight>
       <Color />
       <FileName>EnemyLoseMoney.png</FileName>
       <Id>1117</Id>
     </Texture>
     <Texture>
-      <OriginalWidth>1024</OriginalWidth>
-      <OriginalHeight>873</OriginalHeight>
+      <OriginalWidth>700</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
       <Color />
       <FileName>BrownCardDropEnemyCard.png</FileName>
       <Id>1118</Id>

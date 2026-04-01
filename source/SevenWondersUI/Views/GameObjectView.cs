@@ -1,14 +1,14 @@
 ﻿using SevenWonders.GameEngine;
-using SevenWonders.GameEngine.Animations;
 using SevenWonders.GameEngine.Components;
 using SevenWonders.Presenter.Views;
 using SevenWonders.Presenter.Views.Factories;
-using System.Numerics;
 
 namespace SevenWondersUI.Views
 {
     public class GameObjectView : IGameObjectView
     {
+        public bool IsDimmed =>m_gameObject.Dimmed;
+
         public GameObjectView(GameObject wonder, IAnimationManager animationManager, IAnimationGroupBuilderFactory animationGroupBuilderFactory)
         {
             m_gameObject = wonder;

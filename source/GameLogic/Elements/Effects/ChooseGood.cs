@@ -47,15 +47,10 @@ namespace GameLogic.Elements.Effects
         {
             if (eventArgs.Player == player)
             {
-                PlayerActionWrapper playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, GoodFactories.Select(goodFactory => {
-                    var action = new ChooseGoodAction(goodFactory, SetSelectedGood);
-                    return new PlayerActionWrapper(action, action.CanPerform(gameContext).GetAwaiter().GetResult());
-                }).ToArray());
-
-                if (playerAction.CanPerform)
-                {
-                    await playerAction.PlayerAction.DoPlayerAction(gameContext);
-                }
+                await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, eventArgs.Player, GoodFactories.Select(goodFactory => {
+                    IPlayerAction action = new ChooseGoodAction(goodFactory, SetSelectedGood);
+                    return action;
+                }).ToList());
             }
         }
 

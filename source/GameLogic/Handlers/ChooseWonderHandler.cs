@@ -1,10 +1,12 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.Modifiers;
 using GameLogic.Elements.Wonders;
 using GameLogic.Events.GameEvents;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 using SevenWonders.Common;
 using System;
+using System.Diagnostics.Tracing;
 
 namespace GameLogic.Handlers
 {
@@ -49,20 +51,19 @@ namespace GameLogic.Handlers
 
             if (actions.Count > 1)
             {
-                playerAction = m_playerActionReceiver.ReceivePlayerAction(player, actions.Select(action => new PlayerActionWrapper(action, action.CanPerform(m_gameContext).GetAwaiter().GetResult())).ToList());
+                await m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
             }
             else
             {
                 var action = actions.FirstOrDefault();
                 if (action != null)
                 {
-                    playerAction = new PlayerActionWrapper(action, action.CanPerform(m_gameContext).GetAwaiter().GetResult());
+                    await m_gameContext.PlayerActionHandler.HandlePlayerAction(m_gameContext, player, action);
                 }
             }
 
-            if (playerAction is not null && playerAction.CanPerform)
+            if (playerAction is not null)
             {
-                await playerAction.PlayerAction.DoPlayerAction(m_gameContext);
                 actions.Remove((ChooseWonderAction)playerAction.PlayerAction);
             }
 

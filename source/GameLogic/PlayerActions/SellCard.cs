@@ -15,7 +15,7 @@ namespace GameLogic.PlayerActions
             m_player = player;
         }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             if (m_player.PickedCard is null)
             {
@@ -28,6 +28,7 @@ namespace GameLogic.PlayerActions
             Card card = m_player.PickedCard.CardObj;
             m_player.PickedCard = null;
             await gameContext.EventManager.PublishAsync(new OnCardSold(m_player, card, money));
+            return true;
         }
 
         public Task<bool> CanPerform(IGameContext gameContext)

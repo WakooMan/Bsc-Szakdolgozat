@@ -25,12 +25,13 @@ namespace GameLogic.PlayerActions
            return  Task.FromResult(gameContext.AgeHandler.CurrentAge.Composition.AvailableCards.Contains(m_cardNode));
         }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !gameContext.AgeHandler.CurrentAge.Composition.AvailableCards.Contains(m_cardNode), "Action cannot be performed, because composition does not contain cardnode!");
 
             m_player.PickedCard = m_cardNode;
             await gameContext.EventManager.PublishAsync(new OnCardPicked(m_player, m_cardNode.CardObj));
+            return true;
         }
 
         private readonly ICardNode m_cardNode;

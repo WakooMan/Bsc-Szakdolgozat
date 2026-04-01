@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements.Disciplines;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using Microsoft.VisualBasic;
 
 namespace GameLogic.Elements.Effects
 {
@@ -25,7 +26,7 @@ namespace GameLogic.Elements.Effects
 
         public override async Task Apply(IGameContext gameContext)
         {
-            var list = new List<ChooseDisciplineAction>
+            var list = new List<IPlayerAction>
             {
                 new ChooseDisciplineAction(new Building(), SetDiscipline),
                 new ChooseDisciplineAction(new Geography(), SetDiscipline),
@@ -35,12 +36,7 @@ namespace GameLogic.Elements.Effects
                 new ChooseDisciplineAction(new Trading(), SetDiscipline),
                 new ChooseDisciplineAction(new Writing(), SetDiscipline)
             };
-            var playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, list.Select(action => new PlayerActionWrapper(action, action.CanPerform(gameContext).GetAwaiter().GetResult())).ToList());
-
-            if (playerAction.CanPerform)
-            {
-                await playerAction.PlayerAction.DoPlayerAction(gameContext);
-            }
+            await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, gameContext.TurnHandler.CurrentPlayer, list);
         }
 
         private void SetDiscipline(Discipline discipline)

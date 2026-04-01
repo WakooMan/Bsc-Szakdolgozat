@@ -6,7 +6,7 @@ namespace GameLogic.PlayerActions
     {
         string Name { get; }
 
-        Task DoPlayerAction(IGameContext gameContext);
+        Task<bool> DoPlayerAction(IGameContext gameContext);
 
         Task<bool> CanPerform(IGameContext gameContext);
     }

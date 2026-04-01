@@ -2,6 +2,7 @@
 {
     public interface IGameObjectView
     {
+        bool IsDimmed { get; }
         IAnimationGroupBuilder GetAnimationGroupBuilder();
         Task Execute();
         void IncreaseZIndex();

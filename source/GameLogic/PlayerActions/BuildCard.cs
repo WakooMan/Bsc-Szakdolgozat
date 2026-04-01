@@ -12,7 +12,7 @@ namespace GameLogic.PlayerActions
 
         public BuildCard() { }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             Player player = GetPlayer(gameContext);
             Player opponent = GetOpponent(gameContext);
@@ -38,6 +38,7 @@ namespace GameLogic.PlayerActions
             await gameContext.EventManager.PublishAsync(new OnCardBuilt(card.CardObj, player, BuildCost, chainBuildUsed));
             await card.CardObj.OnBuilt(gameContext);
 
+            return true;
         }
 
         public async Task<bool> CanPerform(IGameContext gameContext)

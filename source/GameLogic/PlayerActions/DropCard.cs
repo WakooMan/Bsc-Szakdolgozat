@@ -23,12 +23,13 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(m_player.Cards.Contains(m_card));
         }
 
-        public async Task DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_player.Cards.Contains(m_card), "Player does not have the specific card! Action cannot be performed!");
 
             m_player.Cards.Remove(m_card);
             await gameContext.EventManager.PublishAsync(new OnCardDestroyed(m_player, m_card));
+            return true;
         }
 
         private readonly Card m_card;
