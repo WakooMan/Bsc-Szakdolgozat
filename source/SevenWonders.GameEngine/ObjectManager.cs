@@ -24,7 +24,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info("Done");
             gameObject.Id = GetNextUniqueId(scene);
             SubscribeGameObjectToTouchEvents(gameObject, graphicsLayer);
-            graphicsLayer.ObjectList.Add(gameObject);
+            graphicsLayer.AddGameObject(gameObject);
             GameLog.Info($"Added GameObject \"{gameObject.Id} - {gameObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
         }
 
@@ -44,7 +44,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Adding GraphicsLayer \"{graphicsLayer.Id} - {graphicsLayer.Name}\" to scene \"{scene.Id} - {scene.Name}\"");
             GameLog.Info("Done");
             graphicsLayer.Id = GetNextUniqueId(scene);
-            scene.Layers.Add(graphicsLayer);
+            scene.AddLayer(graphicsLayer);
             GameLog.Info($"Added GraphicsLayer \"{graphicsLayer.Id} - {graphicsLayer.Name}\" to scene \"{scene.Id} - {scene.Name}\"");
         }
 
@@ -58,7 +58,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Adding Texture \"{texture.Id} - {texture.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
             GameLog.Info("Done");
             texture.Id = GetNextUniqueId(scene);
-            graphicsLayer.TextureObjects.Add(texture);
+            graphicsLayer.AddTextureObject(texture);
             GameLog.Info($"Added Texture \"{texture.Id} - {texture.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
         }
 
@@ -73,7 +73,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info("Done");
             button.Id = GetNextUniqueId(scene);
             SubscribeButtonToTouchEvents(button, graphicsLayer);
-            graphicsLayer.Buttons.Add(button);
+            graphicsLayer.AddButton(button);
             GameLog.Info($"Added ButtonObject \"{button.Id} - {button.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
         }
 
@@ -87,7 +87,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Adding TextLabel \"{textLabel.Id} - {textLabel.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
             GameLog.Info("Done");
             textLabel.Id = GetNextUniqueId(scene);
-            graphicsLayer.TextLabels.Add(textLabel);
+            graphicsLayer.AddTextLabel(textLabel);
             GameLog.Info($"Added TextLabel \"{textLabel.Id} - {textLabel.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
         }
 

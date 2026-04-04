@@ -1,5 +1,9 @@
 GameObject-ek, amik kellenek:
-- tudományos jelkép progress karikáknak object
-- Katonai progress karikáknak object
-- Object-ek a wonder építéshez
+- tudományos jelkép progress karikáknak object -> Done
+- Katonai progress karikáknak object -> Done
+- Object-ek a wonder építéshez -> Done
 - Fejlesztéseknek object-ek
+- Katonai effect-ek progress-nél
+- lila kártyák kezelése
+- player turn kezelés
+- game over kezelés

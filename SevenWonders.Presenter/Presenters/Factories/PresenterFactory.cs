@@ -3,12 +3,13 @@ using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Cards;
 using SevenWonders.Presenter.Connectors.Wonders;
+using SevenWonders.Presenter.Views.Factories;
 
 namespace SevenWonders.Presenter.Presenters.Factories
 {
     public class PresenterFactory : IPresenterFactory
     {
-        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager)
+        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory)
         {
             m_cardConnector = cardConnector;
             m_wonderConnector = wonderConnector;
@@ -16,6 +17,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
             m_eventManager = eventManager;
             m_playerCardHandlerFactory = playerCardHandlerFactory;
             m_sceneManager = sceneManager;
+            m_gameObjectViewFactory = gameObjectViewFactory;
         }
 
         public IPresenter CreateCardPresenter()
@@ -38,11 +40,17 @@ namespace SevenWonders.Presenter.Presenters.Factories
             return new PlayerPresenter(m_gameEngineReceiver, m_eventManager, m_wonderConnector, 2);
         }
 
+        public IPresenter CreateMilitaryBoardPresenter()
+        {
+            return new MilitaryBoardPresenter(m_gameEngineReceiver, m_eventManager, m_gameObjectViewFactory);
+        }
+
         private readonly ICardConnector m_cardConnector;
         private readonly IWonderConnector m_wonderConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
         private readonly IPlayerCardHandlerFactory m_playerCardHandlerFactory;
         private readonly ISceneManager m_sceneManager;
+        private readonly IGameObjectViewFactory m_gameObjectViewFactory;
     }
 }

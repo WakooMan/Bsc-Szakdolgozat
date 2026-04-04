@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
@@ -18,6 +19,7 @@ namespace SevenWonders.GameEngine
         public float Height { get; set; }
         public float Rotation { get; set; }
         public Vector2 Scale { get; set; }
+        [XmlIgnore]
         public bool Dimmed { get; set; }
 
         protected SceneObject()
@@ -37,6 +39,7 @@ namespace SevenWonders.GameEngine
             Height = other.Height;
             Rotation = other.Rotation;
             Scale = other.Scale;
+            Dimmed = other.Dimmed;
         }
 
         public virtual void Resize(Vector2 oldResolution, Vector2 newResolution)

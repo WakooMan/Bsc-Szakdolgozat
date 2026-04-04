@@ -84,10 +84,7 @@ namespace SevenWonders.GameEngine
             if (!Visible)
                 return;
 
-            List<GraphicsLayer> objects = [.. Layers];
-            objects.Sort(new GraphicsLayerComparer());
-
-            foreach (GraphicsLayer layer in objects)
+            foreach (GraphicsLayer layer in Layers)
             {
                 layer.Draw(eventArgs, TextureRegistry);
             }
@@ -100,7 +97,15 @@ namespace SevenWonders.GameEngine
                 texture.LoadTexture(sceneFolder);
             }
 
+            SortAllLayers();
             InitializeTextureRegistry();
+        }
+
+        public void AddLayer(GraphicsLayer layer)
+        {
+            var comparer = new GraphicsLayerComparer();
+            int index = Layers.BinarySearch(layer, comparer);
+            Layers.Insert(index < 0 ? ~index : index, layer);
         }
 
         public void AddTexture(Texture texture, string sceneFolder)
@@ -120,6 +125,15 @@ namespace SevenWonders.GameEngine
         {
             TextureRegistry.Clear();
             TextureRegistry.Register(Textures);
+        }
+
+        private void SortAllLayers()
+        {
+            Layers.Sort(new GraphicsLayerComparer());
+            foreach (GraphicsLayer layer in Layers)
+            {
+                layer.SortAllObjects();
+            }
         }
     }
 }

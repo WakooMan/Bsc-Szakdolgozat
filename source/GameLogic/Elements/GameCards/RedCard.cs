@@ -24,5 +24,10 @@ namespace GameLogic.Elements.GameCards
         {
             return Strength.Points;
         }
+
+        public override async Task OnBuilt(IGameContext gameContext)
+        {
+            await Strength.Apply(gameContext);
+        }
     }
 }

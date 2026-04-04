@@ -1,17 +1,16 @@
 ﻿using SkiaSharp.Views.Maui;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
 {
-    public class GraphicsLayer:IEquatable<GraphicsLayer>
+    public class GraphicsLayer : IEquatable<GraphicsLayer>
     {
         public List<GameObject> ObjectList { get; set; }
         public List<TextureObject> TextureObjects { get; set; }
         public List<ButtonObject> Buttons { get; set; }
         public List<TextLabel> TextLabels { get; set; }
-        public  bool Visible { get; set; }
+        public bool Visible { get; set; }
         public bool EnableCollision { get; set; }
         public string Name { get; set; }
         public int Id { get; set; }
@@ -37,6 +36,32 @@ namespace SevenWonders.GameEngine
             Name = new string(graphicsLayer.Name);
             Id = graphicsLayer.Id;
             ZIndex = graphicsLayer.ZIndex;
+        }
+
+        public void AddGameObject(GameObject gameObject)
+        {
+            var comparer = new GameObjectComparer();
+            int index = ObjectList.BinarySearch(gameObject, comparer);
+            ObjectList.Insert(index < 0 ? ~index : index, gameObject);
+        }
+
+        public void AddTextureObject(TextureObject textureObject)
+        {
+            var comparer = new TextureObjectComparer();
+            int index = TextureObjects.BinarySearch(textureObject, comparer);
+            TextureObjects.Insert(index < 0 ? ~index : index, textureObject);
+        }
+
+        public void AddButton(ButtonObject button)
+        {
+            int index = Buttons.BinarySearch(button, Comparer<ButtonObject>.Create((a, b) => a.ZIndex.CompareTo(b.ZIndex)));
+            Buttons.Insert(index < 0 ? ~index : index, button);
+        }
+
+        public void AddTextLabel(TextLabel textLabel)
+        {
+            int index = TextLabels.BinarySearch(textLabel, Comparer<TextLabel>.Create((a, b) => a.ZIndex.CompareTo(b.ZIndex)));
+            TextLabels.Insert(index < 0 ? ~index : index, textLabel);
         }
 
         public bool Equals(GraphicsLayer? other)
@@ -89,31 +114,22 @@ namespace SevenWonders.GameEngine
                 return;
             }
 
-            List<TextureObject> textures = [.. TextureObjects];
-            textures.Sort(new TextureObjectComparer());
-            foreach (var texture in textures)
+            foreach (var texture in TextureObjects)
             {
                 texture.Draw(eventArgs, textureRegistry);
             }
 
-            List<GameObject> gameObjects = [.. ObjectList];
-            gameObjects.Sort(new GameObjectComparer());
-
-            foreach (var gameObject in gameObjects)
+            foreach (var gameObject in ObjectList)
             {
                 gameObject.Draw(eventArgs, textureRegistry);
             }
 
-            List<ButtonObject> buttons = [.. Buttons];
-            buttons.Sort((a, b) => a.ZIndex.CompareTo(b.ZIndex));
-            foreach (var button in buttons)
+            foreach (var button in Buttons)
             {
                 button.Draw(eventArgs, textureRegistry);
             }
 
-            List<TextLabel> textLabels = [.. TextLabels];
-            textLabels.Sort((a, b) => a.ZIndex.CompareTo(b.ZIndex));
-            foreach (var label in textLabels)
+            foreach (var label in TextLabels)
             {
                 label.Draw(eventArgs, textureRegistry);
             }
@@ -125,6 +141,14 @@ namespace SevenWonders.GameEngine
             ObjectList.ForEach(gameObject => gameObject.Resize(oldResolution, newResolution));
             Buttons.ForEach(button => button.Resize(oldResolution, newResolution));
             TextLabels.ForEach(label => label.Resize(oldResolution, newResolution));
+        }
+
+        public void SortAllObjects()
+        {
+            ObjectList.Sort(new GameObjectComparer());
+            TextureObjects.Sort(new TextureObjectComparer());
+            Buttons.Sort((a, b) => a.ZIndex.CompareTo(b.ZIndex));
+            TextLabels.Sort((a, b) => a.ZIndex.CompareTo(b.ZIndex));
         }
     }
 }

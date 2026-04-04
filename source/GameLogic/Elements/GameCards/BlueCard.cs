@@ -1,5 +1,4 @@
 ﻿using GameLogic.Elements.Effects;
-using GameLogic.Elements.Goods;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -24,6 +23,11 @@ namespace GameLogic.Elements.GameCards
         public override int GetVictoryPoints(Player player)
         {
             return Point.Points;
+        }
+
+        public override async Task OnBuilt(IGameContext gameContext)
+        {
+            await Point.Apply(gameContext);
         }
     }
 }

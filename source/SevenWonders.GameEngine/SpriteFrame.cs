@@ -71,7 +71,7 @@ namespace SevenWonders.GameEngine
             Texture texture = textureRegistry.Get(TextureId);
             if (dimmed)
             {
-                texture.CustomColorFilter = SKColorFilter.CreateBlendMode(
+                texture.CustomColorFilter ??= SKColorFilter.CreateBlendMode(
                                     SKColors.Black.WithAlpha(120),
                                     SKBlendMode.SrcOver
                                 );

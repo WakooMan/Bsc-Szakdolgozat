@@ -96,7 +96,6 @@ namespace SevenWonders.SceneEditor.ViewModels
 
             Texture texture = new Texture()
             {
-                Color = SKColor.Empty,
                 FileName = fileName,
             };
 
