@@ -1,0 +1,5 @@
+GameObject-ek, amik kellenek:
+- tudományos jelkép progress karikáknak object
+- Katonai progress karikáknak object
+- Object-ek a wonder építéshez
+- Fejlesztéseknek object-ek
