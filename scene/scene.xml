@@ -397,7 +397,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player1Wonder3Card</Name>
+          <Name>player1WonderCard3</Name>
           <Id>30</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
@@ -453,7 +453,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player2Wonder2Card</Name>
+          <Name>player2WonderCard2</Name>
           <Id>33</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
@@ -509,7 +509,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player2Wonder4Card</Name>
+          <Name>player2WonderCard4</Name>
           <Id>36</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
@@ -565,7 +565,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player2Wonder3Card</Name>
+          <Name>player2WonderCard3</Name>
           <Id>34</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
@@ -621,7 +621,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player1Wonder4Card</Name>
+          <Name>player1WonderCard4</Name>
           <Id>31</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
@@ -677,7 +677,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player1Wonder2Card</Name>
+          <Name>player1WonderCard2</Name>
           <Id>27</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
@@ -1045,7 +1045,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player1Wonder1Card</Name>
+          <Name>player1WonderCard1</Name>
           <Id>19</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>
@@ -1213,7 +1213,7 @@
           <Highlighted>false</Highlighted>
         </GameObject>
         <GameObject>
-          <Name>player2Wonder1Card</Name>
+          <Name>player2WonderCard1</Name>
           <Id>37</Id>
           <ZIndex>0</ZIndex>
           <Visible>false</Visible>

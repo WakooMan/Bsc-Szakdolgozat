@@ -47,24 +47,24 @@ namespace GameLogic.Handlers
             Player player = m_players[m_indexOfPlayer];
             List<ChooseWonderAction> actions = WondersChosenNum < 4 ? m_wonderPlayerActions1 : m_wonderPlayerActions2;
 
-            PlayerActionWrapper? playerAction = null;
+            IPlayerAction? playerAction = null;
 
             if (actions.Count > 1)
             {
-                await m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
+                playerAction = await m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
             }
             else
             {
-                var action = actions.FirstOrDefault();
-                if (action != null)
+                playerAction = actions.FirstOrDefault();
+                if (playerAction is not null)
                 {
-                    await m_gameContext.PlayerActionHandler.HandlePlayerAction(m_gameContext, player, action);
+                    await m_gameContext.PlayerActionHandler.HandlePlayerAction(m_gameContext, player, playerAction);
                 }
             }
 
             if (playerAction is not null)
             {
-                actions.Remove((ChooseWonderAction)playerAction.PlayerAction);
+                actions.Remove((ChooseWonderAction)playerAction);
             }
 
             int nextPlayer = (m_indexOfPlayer == 0) ? 1 : 0;

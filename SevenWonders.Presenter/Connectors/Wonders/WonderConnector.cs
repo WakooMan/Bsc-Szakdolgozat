@@ -17,12 +17,12 @@ namespace SevenWonders.Presenter.Connectors.Wonders
 
         
 
-        public IDictionary<Wonder, IGameObjectView> ReceiveWonderConnection()
+        public IDictionary<Wonder, WonderConnection> ReceiveWonderConnection()
         {
-            Dictionary<Wonder, IGameObjectView> result = new Dictionary<Wonder, IGameObjectView>();
+            Dictionary<Wonder, WonderConnection> result = new Dictionary<Wonder, WonderConnection>();
             foreach (Wonder wonder in m_wonderList.Wonders)
             {
-                result.Add(wonder, m_gameObjectViewFactory.CreateView(wonder.Name));
+                result.Add(wonder, new WonderConnection(m_gameObjectViewFactory.CreateView(wonder.Name)));
                 m_wonderChildTextureHandler.Handle(wonder);
             }
 

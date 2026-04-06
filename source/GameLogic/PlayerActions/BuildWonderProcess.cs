@@ -17,7 +17,7 @@ namespace GameLogic.PlayerActions
         public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             await gameContext.EventManager.PublishAsync(new OnBuildWonderProcessStart(m_buildWonderActions, m_backAction));
-            bool result = await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, m_player, [m_backAction, .. m_buildWonderActions]);
+            var (result, playerAction) = await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, m_player, [m_backAction, .. m_buildWonderActions]);
             await gameContext.EventManager.PublishAsync(new OnBuildWonderProcessEnd(m_buildWonderActions, m_backAction, result));
             return result;
         }

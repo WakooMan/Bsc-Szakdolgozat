@@ -9,7 +9,7 @@ namespace GameLogic.Handlers
     {
         public PlayerActionHandler() { }
 
-        public async Task HandlePlayerActionsCompleted(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
+        public async Task<IPlayerAction?> HandlePlayerActionsCompleted(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
         {
             bool completed = false;
 
@@ -22,11 +22,14 @@ namespace GameLogic.Handlers
                 if (playerActionWrapper.CanPerform)
                 {
                     completed = await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
+                    return playerActionWrapper.PlayerAction;
                 }
             }
+
+            return null;
         }
 
-        public async Task<bool> HandlePlayerActions(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
+        public async Task<(bool completed, IPlayerAction? playerAction)> HandlePlayerActions(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
         {
             var wrappers = await Task.WhenAll(playerActions.Select(async playerAction =>
                 new PlayerActionWrapper(playerAction, await playerAction.CanPerform(gameContext))));
@@ -34,19 +37,21 @@ namespace GameLogic.Handlers
             PlayerActionWrapper playerActionWrapper = gameContext.PlayerActionReceiver.ReceivePlayerAction(player, wrappers);
             if (playerActionWrapper.CanPerform)
             {
-                return await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
+                return (await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext), playerActionWrapper.PlayerAction);
             }
 
-            return false;
+            return (false, null);
         }
 
-        public async Task HandlePlayerAction(IGameContext gameContext, Player player, IPlayerAction playerAction)
+        public async Task<bool> HandlePlayerAction(IGameContext gameContext, Player player, IPlayerAction playerAction)
         {
             PlayerActionWrapper playerActionWrapper = new PlayerActionWrapper(playerAction, await playerAction.CanPerform(gameContext));
             if (playerActionWrapper.CanPerform)
             {
-                await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
+                return await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
             }
+
+            return false;
         }
     }
 }

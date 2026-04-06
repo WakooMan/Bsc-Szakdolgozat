@@ -19,7 +19,7 @@ namespace SevenWonders.Presenter.Presenters
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
             m_wonderConnector = wonderConnector;
-            m_wonders = new Dictionary<Wonder, IGameObjectView>();
+            m_wonders = new Dictionary<Wonder, WonderConnection>();
             m_playerId = id;
             m_moneyLabel = null;
             m_pointLabel = null;
@@ -93,12 +93,12 @@ namespace SevenWonders.Presenter.Presenters
 
             foreach (BuildWonder action in e.BuildWonderActions)
             {
-                IGameObjectView view = m_wonders[action.Wonder];
-                if (!view.IsDimmed)
+                WonderConnection connection = m_wonders[action.Wonder];
+                if (!connection.GameObjectView.IsDimmed)
                 {
-                    var group = view.GetAnimationGroupBuilder();
+                    var group = connection.GameObjectView.GetAnimationGroupBuilder();
                     group.Unhighlight(true, 0f);
-                    view.Execute().GetAwaiter().GetResult();
+                    connection.GameObjectView.Execute().GetAwaiter().GetResult();
                 }
                 
             }
@@ -116,17 +116,17 @@ namespace SevenWonders.Presenter.Presenters
 
             foreach (BuildWonder action in e.BuildWonderActions)
             {
-                IGameObjectView view = m_wonders[action.Wonder];
-                var group = view.GetAnimationGroupBuilder();
+                WonderConnection connection = m_wonders[action.Wonder];
+                var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0f);
-                view.Execute().GetAwaiter().GetResult();
+                connection.GameObjectView.Execute().GetAwaiter().GetResult();
             }
         }
 
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
         private readonly IWonderConnector m_wonderConnector;
-        private readonly Dictionary<Wonder, IGameObjectView> m_wonders;
+        private readonly Dictionary<Wonder, WonderConnection> m_wonders;
         private readonly int m_playerId;
         private TextLabel? m_moneyLabel;
         private TextLabel? m_pointLabel;

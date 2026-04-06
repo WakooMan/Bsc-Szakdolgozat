@@ -7,6 +7,7 @@ using GameLogic.GameStructures;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Cards;
+using SevenWonders.Presenter.GameEvents;
 using SevenWonders.Presenter.Presenters.Factories;
 using SevenWonders.Presenter.Presenters.Handlers;
 using SevenWonders.Presenter.Views;
@@ -124,6 +125,26 @@ namespace SevenWonders.Presenter.Presenters
                 var group = view.GetAnimationGroupBuilder();
                 group.Flip(1, 0.5f);
                 view.Execute().GetAwaiter().GetResult();
+            });
+            m_eventManager.Subscribe<OnCardBuiltIntoWonder>(eventObj => {
+                var cardView = m_cards[eventObj.Card];
+                var connection = eventObj.WonderConnection;
+
+                if (connection.CardTarget is null)
+                {
+                    throw new InvalidOperationException("Card target cannot be null when building into wonder");
+                }
+
+                var group = cardView.GetAnimationGroupBuilder();
+
+                group.Unhighlight(false, 0.3f);
+                cardView.Execute().GetAwaiter().GetResult();
+
+                group.Flip(0, 0.2f);
+                cardView.Execute().GetAwaiter().GetResult();
+
+                group.MoveTo(connection.CardTarget, 0.5f);
+                cardView.Execute().GetAwaiter().GetResult();
             });
         }
 

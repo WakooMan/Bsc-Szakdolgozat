@@ -5,7 +5,7 @@ using GameLogic.Events.GameEvents;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Wonders;
-using SevenWonders.Presenter.Views;
+using SevenWonders.Presenter.GameEvents;
 using System.Numerics;
 
 namespace SevenWonders.Presenter.Presenters
@@ -17,9 +17,9 @@ namespace SevenWonders.Presenter.Presenters
             m_wonderConnector = wonderConnector;
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
-            m_wonders = new Dictionary<Wonder, IGameObjectView>();
-            m_player1Targets = new Stack<GameObject>();
-            m_player2Targets = new Stack<GameObject>();
+            m_wonders = new Dictionary<Wonder, WonderConnection>();
+            m_player1Targets = new Stack<(GameObject, GameObject)>();
+            m_player2Targets = new Stack<(GameObject, GameObject)>();
             m_centerTargets = new Stack<GameObject>();
             m_wonderDeck = null;
         }
@@ -32,18 +32,24 @@ namespace SevenWonders.Presenter.Presenters
             foreach (var connection in m_wonderConnector.ReceiveWonderConnection())
             {
                 m_wonders[connection.Key] = connection.Value;
-                var group = connection.Value.GetAnimationGroupBuilder().Flip(1, 0f).MoveTo(m_wonderDeck, 0f);
-                _ = connection.Value.Execute();
+                var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip(1, 0f).MoveTo(m_wonderDeck, 0f);
+                _ = connection.Value.GameObjectView.Execute();
             }
 
-            foreach (var player1Target in m_gameEngineReceiver.ReceiveGameObjects("player1Wonder", 4))
+            List<GameObject> player1WonderTargets = m_gameEngineReceiver.ReceiveGameObjects("player1Wonder", 4).ToList();
+            List<GameObject> player1CardTargets = m_gameEngineReceiver.ReceiveGameObjects("player1WonderCard", 4).ToList();
+
+            for (int i = 0; i < 4; i++)
             {
-                m_player1Targets.Push(player1Target);
+                m_player1Targets.Push((player1WonderTargets[i], player1CardTargets[i]));
             }
 
-            foreach (var player2Target in m_gameEngineReceiver.ReceiveGameObjects("player2Wonder", 4))
+            List<GameObject> player2WonderTargets = m_gameEngineReceiver.ReceiveGameObjects("player2Wonder", 4).ToList();
+            List<GameObject> player2CardTargets = m_gameEngineReceiver.ReceiveGameObjects("player2WonderCard", 4).ToList();
+
+            for (int i = 0; i < 4; i++)
             {
-                m_player2Targets.Push(player2Target);
+                m_player2Targets.Push((player2WonderTargets[i], player2CardTargets[i]));
             }
 
             foreach (var centerTarget in m_gameEngineReceiver.ReceiveGameObjects("centerWonder", 8))
@@ -73,6 +79,11 @@ namespace SevenWonders.Presenter.Presenters
             m_eventManager.Subscribe<OnWonderChosen>(state => {
                 MoveToPlayer(state.Player, state.Wonder).GetAwaiter().GetResult();
             });
+            m_eventManager.Subscribe<OnWonderBuilt>(eventObj =>
+            {
+                var connection = m_wonders[eventObj.Wonder];
+                m_eventManager.PublishAsync(new OnCardBuiltIntoWonder(eventObj, connection)).GetAwaiter().GetResult();
+            });
         }
 
         private async Task MoveToPlayer(Player player, Wonder wonder)
@@ -91,14 +102,14 @@ namespace SevenWonders.Presenter.Presenters
         {
             if (m_centerTargets.Count > 0)
             {
-                var view = m_wonders[wonder];
-                var group = view.GetAnimationGroupBuilder();
+                var connection = m_wonders[wonder];
+                var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.MoveTo(m_centerTargets.Pop(), 1.0f)
                     .Flip(0, 1.0f);
-                await view.Execute();
+                await connection.GameObjectView.Execute();
 
                 group.Highlight(new Vector2(1.0f, 1.0f), true, 0.2f);
-                await view.Execute();
+                await connection.GameObjectView.Execute();
             }
         }
 
@@ -106,15 +117,15 @@ namespace SevenWonders.Presenter.Presenters
         {
             if (m_wonderDeck is not null)
             {
-                var view = m_wonders[wonder];
+                var connection = m_wonders[wonder];
 
-                var group = view.GetAnimationGroupBuilder();
+                var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
-                await view.Execute();
+                await connection.GameObjectView.Execute();
 
                 group.MoveTo(m_wonderDeck, 1.0f)
                     .Flip(1, 1.0f);
-                await view.Execute();
+                await connection.GameObjectView.Execute();
             }
         }
 
@@ -122,14 +133,18 @@ namespace SevenWonders.Presenter.Presenters
         {
             if (m_player1Targets.Count > 0)
             {
-                var view = m_wonders[wonder];
+                var connection = m_wonders[wonder];
+                var target = m_player1Targets.Pop();
+                connection.WonderTarget = target.wonderTarget;
+                connection.CardTarget = target.cardTarget;
 
-                var group = view.GetAnimationGroupBuilder();
+
+                var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
-                await view.Execute();
+                await connection.GameObjectView.Execute();
 
-                group.MoveTo(m_player1Targets.Pop(), 1.0f);
-                await view.Execute();
+                group.MoveTo(connection.WonderTarget, 1.0f);
+                await connection.GameObjectView.Execute();
             }
         }
 
@@ -137,23 +152,26 @@ namespace SevenWonders.Presenter.Presenters
         {
             if (m_player2Targets.Count > 0)
             {
-                var view = m_wonders[wonder];
+                var connection = m_wonders[wonder];
+                var target = m_player2Targets.Pop();
+                connection.WonderTarget = target.wonderTarget;
+                connection.CardTarget = target.cardTarget;
 
-                var group = view.GetAnimationGroupBuilder();
+                var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
-                await view.Execute();
+                await connection.GameObjectView.Execute();
 
-                group.MoveTo(m_player2Targets.Pop(), 1.0f);
-                await view.Execute();
+                group.MoveTo(connection.WonderTarget, 1.0f);
+                await connection.GameObjectView.Execute();
             }
         }
 
-        private readonly IDictionary<Wonder, IGameObjectView> m_wonders;
+        private readonly IDictionary<Wonder, WonderConnection> m_wonders;
         private readonly IWonderConnector m_wonderConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
-        private readonly Stack<GameObject> m_player1Targets;
-        private readonly Stack<GameObject> m_player2Targets;
+        private readonly Stack<(GameObject wonderTarget, GameObject cardTarget)> m_player1Targets;
+        private readonly Stack<(GameObject wonderTarget, GameObject cardTarget)> m_player2Targets;
         private readonly Stack<GameObject> m_centerTargets;
         private GameObject? m_wonderDeck;
         private GraphicsLayer? m_wonderLayer;
