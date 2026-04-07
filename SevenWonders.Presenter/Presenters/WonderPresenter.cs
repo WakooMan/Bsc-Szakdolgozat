@@ -32,8 +32,6 @@ namespace SevenWonders.Presenter.Presenters
             foreach (var connection in m_wonderConnector.ReceiveWonderConnection())
             {
                 m_wonders.Add(connection);
-                var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip(1, 0f).MoveTo(m_wonderDeck, 0f);
-                _ = connection.Value.GameObjectView.Execute();
             }
 
             List<GameObject> player1WonderTargets = m_gameEngineReceiver.ReceiveGameObjects("player1Wonder", 4).ToList();
@@ -62,6 +60,15 @@ namespace SevenWonders.Presenter.Presenters
 
         public void SubscribeToEvents()
         {
+            m_eventManager.Subscribe<OnGameInitialized>(eventObj =>
+            {
+                foreach (var connection in m_wonders)
+                {
+                    var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip(1, 0f).MoveTo(m_wonderDeck, 0f);
+                    connection.Value.GameObjectView.Execute().GetAwaiter().GetResult();
+                }
+            });
+
             m_eventManager.Subscribe<OnChooseWonderStateStart>(state => {
                 foreach (Wonder wonder in state.Wonders)
                 {

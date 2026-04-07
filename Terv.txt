@@ -11,3 +11,4 @@ GameObject-ek, amik kellenek:
 - lila kártyák kezelése
 - game over kezelés
 - loading screen
+- New Turn

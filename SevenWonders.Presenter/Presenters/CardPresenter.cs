@@ -46,8 +46,6 @@ namespace SevenWonders.Presenter.Presenters
             foreach (var connection in m_cardConnector.ReceiveCardConnection())
             {
                 m_cards.Add(connection);
-                connection.Value.GetAnimationGroupBuilder().Flip(0, 0f).MoveTo(m_ageCardDecks[connection.Key.Age], 0f);
-                _ = connection.Value.Execute();
             }
 
             foreach (var firstAgeCenterTarget in m_gameEngineReceiver.ReceiveGameObjects("firstAgeCenter", 20))
@@ -89,6 +87,15 @@ namespace SevenWonders.Presenter.Presenters
 
         public void SubscribeToEvents()
         {
+            m_eventManager.Subscribe<OnGameInitialized>(eventObj =>
+            {
+                foreach (var connection in m_cards)
+                {
+                    connection.Value.GetAnimationGroupBuilder().Flip(0, 0f).MoveTo(m_ageCardDecks[connection.Key.Age], 0f);
+                    connection.Value.Execute().GetAwaiter().GetResult();
+                }
+            });
+
             m_eventManager.Subscribe<OnAgeStarted>(state => {
                 foreach (ICardNode cardNode in state.Age.Composition.AllCards)
                 {

@@ -1,7 +1,5 @@
-﻿using SkiaSharp;
-using SkiaSharp.Views.Maui;
+﻿using SkiaSharp.Views.Maui;
 using System.Numerics;
-using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
@@ -10,10 +8,6 @@ namespace SevenWonders.GameEngine
         public List<SpriteFrame> Frames { get; set; }
         public int NumFrames { get; set; }
         public int ActualFrame { get; set; }
-        [XmlIgnore]
-        public uint LastUpdate { get; set; }
-        public uint Fps { get; set; }
-        public float RotationZ { get; set; }
         public string Name { get; set; }
         public bool LoopAnimation { get; set; }
 
@@ -35,9 +29,6 @@ namespace SevenWonders.GameEngine
         {
             NumFrames = sprite.NumFrames;
             ActualFrame = sprite.ActualFrame;
-            LastUpdate = sprite.LastUpdate;
-            Fps = sprite.Fps;
-            RotationZ = sprite.RotationZ;
             Name = new string(sprite.Name);
             LoopAnimation = sprite.LoopAnimation;
             Frames = sprite.Frames.Select(spriteFrame => new SpriteFrame(spriteFrame)).ToList();
@@ -66,9 +57,6 @@ namespace SevenWonders.GameEngine
 
             return NumFrames.Equals(other.NumFrames) &&
                    ActualFrame.Equals(other.ActualFrame) &&
-                   LastUpdate.Equals(other.LastUpdate) &&
-                   Fps.Equals(other.Fps) &&
-                   RotationZ.Equals(other.RotationZ) &&
                    Name.Equals(other.Name) &&
                    LoopAnimation.Equals(other.LoopAnimation) &&
                    Frames.SequenceEqual(other.Frames) &&
@@ -89,9 +77,6 @@ namespace SevenWonders.GameEngine
         {
             int hashCode = NumFrames.GetHashCode() ^
                    ActualFrame.GetHashCode() ^
-                   LastUpdate.GetHashCode() ^
-                   Fps.GetHashCode() ^
-                   RotationZ.GetHashCode() ^
                    Name.GetHashCode() ^
                    LoopAnimation.GetHashCode();
             Frames.ForEach(frame => hashCode = hashCode ^frame.GetHashCode());
@@ -113,10 +98,14 @@ namespace SevenWonders.GameEngine
             {
                 child.Draw(eventArgs, position, scale, rotation, width, height, dimmed,  textureRegistry);
             }
-            LastUpdate++;
-            if (Fps < LastUpdate)
+
+            if (Frames.Count > ActualFrame + 1)
             {
-                ActualFrame = (Frames.Count > ActualFrame) ? ActualFrame++ : LoopAnimation ? 0 : ActualFrame;
+                ActualFrame++;
+            }
+            else if (LoopAnimation)
+            {
+                ActualFrame = 0;
             }
         }
     }

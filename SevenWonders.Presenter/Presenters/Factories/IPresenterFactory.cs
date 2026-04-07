@@ -8,5 +8,6 @@
         IPresenter CreatePlayer2Presenter();
         IPresenter CreateMilitaryBoardPresenter();
         IPresenter CreateDevelopmentPresenter();
+        IPresenter CreateScreenPresenter();
     }
 }

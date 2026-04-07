@@ -37,7 +37,7 @@ namespace SevenWonders.Presenter.Presenters
 
         public void SubscribeToEvents()
         {
-            m_eventManager.Subscribe<OnGameStarted>(eventObj =>
+            m_eventManager.Subscribe<OnGameInitialized>(eventObj =>
             {
                 if (eventObj.GameContext.DevelopmentList is not null && m_developmentDeck is not null)
                 {

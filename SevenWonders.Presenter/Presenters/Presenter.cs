@@ -13,7 +13,8 @@ namespace SevenWonders.Presenter.Presenters
                 presenterFactory.CreatePlayer1Presenter(),
                 presenterFactory.CreatePlayer2Presenter(),
                 presenterFactory.CreateMilitaryBoardPresenter(),
-                presenterFactory.CreateDevelopmentPresenter()
+                presenterFactory.CreateDevelopmentPresenter(),
+                presenterFactory.CreateScreenPresenter()
             };
         }
 

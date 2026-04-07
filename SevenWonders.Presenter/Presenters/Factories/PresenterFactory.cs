@@ -52,6 +52,11 @@ namespace SevenWonders.Presenter.Presenters.Factories
             return new DevelopmentPresenter(m_developmentConnector, m_gameEngineReceiver, m_eventManager);
         }
 
+        public IPresenter CreateScreenPresenter()
+        {
+            return new ScreenPresenter(m_gameEngineReceiver, m_eventManager);
+        }
+
         private readonly ICardConnector m_cardConnector;
         private readonly IWonderConnector m_wonderConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
