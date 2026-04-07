@@ -16360,6 +16360,72 @@
       <FileName>BrownCardDropEnemyCard.png</FileName>
       <Id>1118</Id>
     </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>developmentbackground.png</FileName>
+      <Id>1119</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Filozófia.png</FileName>
+      <Id>1120</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Gazdaság.png</FileName>
+      <Id>1121</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Kőművesség.png</FileName>
+      <Id>1122</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Matematika.png</FileName>
+      <Id>1123</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Mezőgazdaság.png</FileName>
+      <Id>1124</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Stratégia.png</FileName>
+      <Id>1125</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Teológia.png</FileName>
+      <Id>1126</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Törvény.png</FileName>
+      <Id>1127</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Urbanizmus.png</FileName>
+      <Id>1128</Id>
+    </Texture>
+    <Texture>
+      <OriginalWidth>1024</OriginalWidth>
+      <OriginalHeight>1024</OriginalHeight>
+      <FileName>Építészet.png</FileName>
+      <Id>1129</Id>
+    </Texture>
   </Textures>
   <Name>scene</Name>
   <Visible>true</Visible>

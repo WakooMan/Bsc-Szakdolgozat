@@ -10,3 +10,4 @@ GameObject-ek, amik kellenek:
 - lila kártyák kezelése
 - player turn kezelés
 - game over kezelés
+- loading screen
