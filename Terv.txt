@@ -5,9 +5,9 @@ GameObject-ek, amik kellenek:
 - Fix z index issues with cards -> Done
 - Second Age fixálása scene editor-ban -> Done
 - Third age fixálása screen editor-ban majd
-- Fejlesztéseknek object-ek
+- Fejlesztéseknek object-ek -> Done
+- Fejlesztés választás csodánál
 - Katonai effect-ek progress-nél
 - lila kártyák kezelése
-- player turn kezelés
 - game over kezelés
 - loading screen

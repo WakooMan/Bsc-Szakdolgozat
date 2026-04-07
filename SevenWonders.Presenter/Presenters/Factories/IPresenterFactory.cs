@@ -7,5 +7,6 @@
         IPresenter CreatePlayer1Presenter();
         IPresenter CreatePlayer2Presenter();
         IPresenter CreateMilitaryBoardPresenter();
+        IPresenter CreateDevelopmentPresenter();
     }
 }

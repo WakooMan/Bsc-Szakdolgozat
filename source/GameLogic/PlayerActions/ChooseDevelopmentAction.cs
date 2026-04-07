@@ -1,12 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Modifiers;
+using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLogic.PlayerActions
 {
@@ -30,7 +25,7 @@ namespace GameLogic.PlayerActions
             return Task.FromResult(!m_player.Developments.Contains(m_development) && m_developments.Contains(m_development));
         }
 
-        public Task<bool> DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => m_player.Developments.Contains(m_development), "Cannot perform action, because player already has the development!");
             ArgumentChecker.CheckPredicateForOperation(() => !m_developments.Contains(m_development), "Cannot perform action, because development list does not contain the development!");
@@ -38,7 +33,8 @@ namespace GameLogic.PlayerActions
             m_player.Developments.Add(m_development);
            m_development.OnDevelopmentEstablished(gameContext);
            m_developments.Remove(m_development);
-            return Task.FromResult(true);
+           await gameContext.EventManager.PublishAsync(new OnPlayerDevelopmentReceived(m_player, m_development));
+           return true;
         }
 
         private readonly List<Development> m_developments;

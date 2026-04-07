@@ -30,7 +30,7 @@ namespace GameLogic
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_isInitialized, "Cannot start an uninitialized game!");
 
-            m_gameContext.EventManager.PublishAsync(new OnGameStarted(m_players)).GetAwaiter().GetResult();
+            m_gameContext.EventManager.PublishAsync(new OnGameStarted(m_players, m_gameContext)).GetAwaiter().GetResult();
 
             while (CurrentState is not EndGameState)
             {

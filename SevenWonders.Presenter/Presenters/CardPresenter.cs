@@ -45,7 +45,7 @@ namespace SevenWonders.Presenter.Presenters
 
             foreach (var connection in m_cardConnector.ReceiveCardConnection())
             {
-                m_cards[connection.Key] = connection.Value;
+                m_cards.Add(connection);
                 connection.Value.GetAnimationGroupBuilder().Flip(0, 0f).MoveTo(m_ageCardDecks[connection.Key.Age], 0f);
                 _ = connection.Value.Execute();
             }

@@ -31,7 +31,7 @@ namespace SevenWonders.Presenter.Presenters
 
             foreach (var connection in m_wonderConnector.ReceiveWonderConnection())
             {
-                m_wonders[connection.Key] = connection.Value;
+                m_wonders.Add(connection);
                 var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip(1, 0f).MoveTo(m_wonderDeck, 0f);
                 _ = connection.Value.GameObjectView.Execute();
             }
