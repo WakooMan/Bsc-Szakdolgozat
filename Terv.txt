@@ -2,8 +2,8 @@ GameObject-ek, amik kellenek:
 - tudományos jelkép progress karikáknak object -> Done
 - Katonai progress karikáknak object -> Done
 - Object-ek a wonder építéshez -> Done
-- Fix z index issues with cards
-- Second Age fixálása scene editor-ban
+- Fix z index issues with cards -> Done
+- Second Age fixálása scene editor-ban -> Done
 - Third age fixálása screen editor-ban majd
 - Fejlesztéseknek object-ek
 - Katonai effect-ek progress-nél
