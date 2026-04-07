@@ -1,3 +1,4 @@
+using SkiaSharp.Views.Maui;
 using System.Numerics;
 using System.Xml.Serialization;
 
@@ -8,11 +9,30 @@ namespace SevenWonders.GameEngine
     /// Provides the common properties shared by <see cref="TextureObject"/>,
     /// <see cref="TextLabel"/> and <see cref="GameObject"/>.
     /// </summary>
+    [XmlInclude(typeof(GameObject))]
+    [XmlInclude(typeof(TextLabel))]
+    [XmlInclude(typeof(TextureObject))]
     public abstract class SceneObject : IEquatable<SceneObject>
     {
+        public event Action<SceneObject>? OnZIndexChanged;
+
         public string Name { get; set; }
         public int Id { get; set; }
-        public int ZIndex { get; set; }
+        public int ZIndex
+        { 
+            get
+            {
+                return m_zIndex;
+            }
+            set
+            {
+                if (m_zIndex != value)
+                {
+                    m_zIndex = value;
+                    OnZIndexChanged?.Invoke(this);
+                }
+            }
+        }
         public bool Visible { get; set; }
         public Vector2 Position { get; set; }
         public float Width { get; set; }
@@ -26,6 +46,7 @@ namespace SevenWonders.GameEngine
         {
             Name = string.Empty;
             Scale = new Vector2(1, 1);
+            OnZIndexChanged = null;
         }
 
         protected SceneObject(SceneObject other)
@@ -40,6 +61,7 @@ namespace SevenWonders.GameEngine
             Rotation = other.Rotation;
             Scale = other.Scale;
             Dimmed = other.Dimmed;
+            OnZIndexChanged = null;
         }
 
         public virtual void Resize(Vector2 oldResolution, Vector2 newResolution)
@@ -75,5 +97,11 @@ namespace SevenWonders.GameEngine
         {
             return Id.GetHashCode();
         }
+
+        public abstract void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry);
+
+        public abstract SceneObject Clone();
+
+        private int m_zIndex;
     }
 }

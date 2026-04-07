@@ -10,12 +10,7 @@ namespace SevenWonders.GameEngine
         public Guid Id { get; set; }
         [XmlIgnore]
         public HashSet<int> UsedIds => Layers
-                .SelectMany(layer => layer.ObjectList.Select(o => o.Id)
-                .Concat(layer.TextureObjects.Select(t => t.Id))
-                .Concat(layer.Buttons.Select(b => b.Id))
-                .Concat(layer.TextLabels.Select(tl => tl.Id))
-                .Concat([layer.Id]))
-                .Concat(Textures.Select(t => t.Id))
+                .SelectMany(layer => layer.SceneObjects.Select(o => o.Id))
                 .ToHashSet();
         public List<GraphicsLayer> Layers { get; set; }
         public List<Texture> Textures { get; set; }

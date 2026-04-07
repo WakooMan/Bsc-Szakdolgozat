@@ -235,7 +235,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Scale = new Vector2(1, 1)
             };
 
-            m_engine.ObjectManager.AddTextureObject(m_engine.SceneManager.CurrentScene, SelectedLayer, textureObject);
+            m_engine.ObjectManager.AddSceneObject(m_engine.SceneManager.CurrentScene, SelectedLayer, textureObject);
             TextureViews.Add(new TextureListViewModel(textureObject));
             SelectedTexture = textureObject;
         }
@@ -265,7 +265,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 TextureViews.Remove(textureListViewModel);
             }
 
-            m_selectedLayer.TextureObjects.Remove(SelectedTexture);
+            m_engine.ObjectManager.RemoveSceneObject(m_selectedLayer, SelectedTexture);
             SelectedTexture = null;
         }
 

@@ -65,14 +65,10 @@ namespace SevenWonders.GameEngine
         {
             scene.Layers.ForEach(layer =>
             {
-                layer.ObjectList.ForEach(obj =>
+                foreach (var interactiveObject in layer.InteractiveObjects)
                 {
-                    ObjectManager.SubscribeGameObjectToTouchEvents(obj, layer);
-                });
-                layer.Buttons.ForEach(button =>
-                {
-                    ObjectManager.SubscribeButtonToTouchEvents(button, layer);
-                });
+                    ObjectManager.SubscribeInteractiveObjectToTouchEvents(interactiveObject, layer);
+                }
             });
         }
 
@@ -80,10 +76,10 @@ namespace SevenWonders.GameEngine
         {
             scene.Layers.ForEach(layer =>
             {
-                layer.ObjectList.ForEach(obj =>
+                foreach (var interactiveObject in layer.InteractiveObjects)
                 {
-                    ObjectManager.UnsubscribeGameObjectToTouchEvents(obj);
-                });
+                    ObjectManager.UnsubscribeInteractiveObjectToTouchEvents(interactiveObject);
+                }
             });
         }
 

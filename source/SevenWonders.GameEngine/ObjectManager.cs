@@ -7,88 +7,65 @@ namespace SevenWonders.GameEngine
     {
         public ObjectManager(IInputManager inputManager, ISceneLoader sceneFileHandler)
         {
-            m_subscribedGameObjects = new Dictionary<GameObject, GameObjectEvents>();
-            m_subscribedButtons = new Dictionary<ButtonObject, GameObjectEvents>();
+            m_subscribedInteractiveObjects = new Dictionary<IInteractiveObject, InteractiveObjectEvents>();
             m_inputManager = inputManager;
             m_sceneFileHandler = sceneFileHandler;
         }
 
-        public void AddGameObject(Scene scene, GraphicsLayer graphicsLayer, GameObject gameObject)
+        public void AddInteractiveObject(Scene scene, GraphicsLayer graphicsLayer, IInteractiveObject interactiveObject)
         {
             if (!scene.Layers.Contains(graphicsLayer))
             {
                 throw new InvalidOperationException("The given scene does not contain the given graphics layer!");
             }
 
-            GameLog.Info($"Adding GameObject \"{gameObject.Id} - {gameObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
-            GameLog.Info("Done");
-            gameObject.Id = GetNextUniqueId(scene);
-            SubscribeGameObjectToTouchEvents(gameObject, graphicsLayer);
-            graphicsLayer.AddGameObject(gameObject);
-            GameLog.Info($"Added GameObject \"{gameObject.Id} - {gameObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
+            if (interactiveObject is SceneObject sceneObject)
+            {
+                GameLog.Info($"Subscribing interactive object: \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" to touch events...");
+                SubscribeInteractiveObjectToTouchEvents(interactiveObject, graphicsLayer);
+                AddSceneObject(scene, graphicsLayer, sceneObject);
+            }
         }
 
-        public void RemoveGameObject(GraphicsLayer graphicsLayer, GameObject gameObject)
+        public void RemoveInteractiveObject(GraphicsLayer graphicsLayer, IInteractiveObject interactiveObject)
         {
-            if (graphicsLayer.ObjectList.Contains(gameObject))
+            if (interactiveObject is SceneObject sceneObject && graphicsLayer.InteractiveObjects.Contains(interactiveObject))
             {
-                GameLog.Info($"Removing GameObject \"{gameObject.Id} - {gameObject.Name}\" from layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
-                UnsubscribeGameObjectToTouchEvents(gameObject);
-                graphicsLayer.ObjectList.Remove(gameObject);
-                GameLog.Info($"Removed GameObject \"{gameObject.Id} - {gameObject.Name}\" from layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
+                GameLog.Info($"Unsubscribing interactive object: \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" from touch events...");
+                UnsubscribeInteractiveObjectToTouchEvents(interactiveObject);
+                RemoveSceneObject(graphicsLayer, sceneObject);
+            }
+        }
+
+        public void AddSceneObject(Scene scene, GraphicsLayer graphicsLayer, SceneObject sceneObject)
+        {
+            if (!scene.Layers.Contains(graphicsLayer))
+            {
+                throw new InvalidOperationException("The given scene does not contain the given graphics layer!");
+            }
+
+            GameLog.Info($"Adding \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
+            sceneObject.Id = GetNextUniqueId(scene);
+            graphicsLayer.AddSceneObject(sceneObject);
+            GameLog.Info($"Added \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
+        }
+
+        public void RemoveSceneObject(GraphicsLayer graphicsLayer, SceneObject sceneObject)
+        {
+            if (graphicsLayer.SceneObjects.Contains(sceneObject))
+            {
+                GameLog.Info($"Removing \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" from layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
+                graphicsLayer.RemoveSceneObject(sceneObject);
+                GameLog.Info($"Removed \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" from layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
             }
         }
 
         public void AddGraphicsLayer(Scene scene, GraphicsLayer graphicsLayer)
         {
             GameLog.Info($"Adding GraphicsLayer \"{graphicsLayer.Id} - {graphicsLayer.Name}\" to scene \"{scene.Id} - {scene.Name}\"");
-            GameLog.Info("Done");
             graphicsLayer.Id = GetNextUniqueId(scene);
             scene.AddLayer(graphicsLayer);
             GameLog.Info($"Added GraphicsLayer \"{graphicsLayer.Id} - {graphicsLayer.Name}\" to scene \"{scene.Id} - {scene.Name}\"");
-        }
-
-        public void AddTextureObject(Scene scene, GraphicsLayer graphicsLayer, TextureObject texture)
-        {
-            if (!scene.Layers.Contains(graphicsLayer))
-            {
-                throw new InvalidOperationException("The given scene does not contain the given graphics layer!");
-            }
-
-            GameLog.Info($"Adding Texture \"{texture.Id} - {texture.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
-            GameLog.Info("Done");
-            texture.Id = GetNextUniqueId(scene);
-            graphicsLayer.AddTextureObject(texture);
-            GameLog.Info($"Added Texture \"{texture.Id} - {texture.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
-        }
-
-        public void AddButtonObject(Scene scene, GraphicsLayer graphicsLayer, ButtonObject button)
-        {
-            if (!scene.Layers.Contains(graphicsLayer))
-            {
-                throw new InvalidOperationException("The given scene does not contain the given graphics layer!");
-            }
-
-            GameLog.Info($"Adding ButtonObject \"{button.Id} - {button.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
-            GameLog.Info("Done");
-            button.Id = GetNextUniqueId(scene);
-            SubscribeButtonToTouchEvents(button, graphicsLayer);
-            graphicsLayer.AddButton(button);
-            GameLog.Info($"Added ButtonObject \"{button.Id} - {button.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
-        }
-
-        public void AddTextLabel(Scene scene, GraphicsLayer graphicsLayer, TextLabel textLabel)
-        {
-            if (!scene.Layers.Contains(graphicsLayer))
-            {
-                throw new InvalidOperationException("The given scene does not contain the given graphics layer!");
-            }
-
-            GameLog.Info($"Adding TextLabel \"{textLabel.Id} - {textLabel.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
-            GameLog.Info("Done");
-            textLabel.Id = GetNextUniqueId(scene);
-            graphicsLayer.AddTextLabel(textLabel);
-            GameLog.Info($"Added TextLabel \"{textLabel.Id} - {textLabel.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
         }
 
         public void AddTexture(Scene scene, Texture texture)
@@ -99,7 +76,6 @@ namespace SevenWonders.GameEngine
             }
 
             GameLog.Info($"Adding Texture \"{texture.FileName}\" to scene \"{scene.Id} - {scene.Name}\"");
-            GameLog.Info("Done");
             texture.Id = GetNextUniqueId(scene);
             scene.AddTexture(texture, m_sceneFileHandler.ReceiveSceneFolder(scene));
             GameLog.Info($"Added Texture \"{texture.Id} - {texture.FileName}\" to scene \"{scene.Id} - {scene.Name}\"");
@@ -110,7 +86,6 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Copying GraphicsLayer \"{graphicsLayer.Id} - {graphicsLayer.Name}\" and changing it's name to \"{newName}\"...");
             GraphicsLayer result = new GraphicsLayer(graphicsLayer);
             result.Name = newName;
-            GameLog.Info("Done");
             AddGraphicsLayer(scene, result);
             return result;
         }
@@ -120,8 +95,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Copying GameObject \"{gameObject.Id} - {gameObject.Name}\" and changing it's name to \"{newName}\"...");
             GameObject result = new GameObject(gameObject);
             result.Name = newName;
-            GameLog.Info("Done");
-            AddGameObject(scene, graphicsLayer, result);
+            AddSceneObject(scene, graphicsLayer, result);
             return result;
         }
 
@@ -130,8 +104,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Copying TextureObject \"{textureObject.Id} - {textureObject.Name}\" and changing it's name to \"{newName}\"...");
             TextureObject result = new TextureObject(textureObject);
             result.Name = newName;
-            GameLog.Info("Done");
-            AddTextureObject(scene, graphicsLayer, result);
+            AddSceneObject(scene, graphicsLayer, result);
             return result;
         }
 
@@ -140,8 +113,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Copying ButtonObject \"{button.Id} - {button.Name}\" and changing it's name to \"{newName}\"...");
             ButtonObject result = new ButtonObject(button);
             result.Name = newName;
-            GameLog.Info("Done");
-            AddButtonObject(scene, graphicsLayer, result);
+            AddSceneObject(scene, graphicsLayer, result);
             return result;
         }
 
@@ -150,86 +122,46 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Copying TextLabel \"{textLabel.Id} - {textLabel.Name}\" and changing it's name to \"{newName}\"...");
             TextLabel result = new TextLabel(textLabel);
             result.Name = newName;
-            GameLog.Info("Done");
-            AddTextLabel(scene, graphicsLayer, result);
+            AddSceneObject(scene, graphicsLayer, result);
             return result;
         }
 
-        public void SubscribeGameObjectToTouchEvents(GameObject gameObject, GraphicsLayer graphicsLayer)
+        public void SubscribeInteractiveObjectToTouchEvents(IInteractiveObject interactiveObject, GraphicsLayer graphicsLayer)
         {
-            if (m_subscribedGameObjects.ContainsKey(gameObject))
+            if (m_subscribedInteractiveObjects.ContainsKey(interactiveObject))
             {
                 GameLog.Info("The gameobject is already subscribed to touch events.");
                 return;
             }
 
-            GameLog.Info($"Subscribing touch events for gameobject with name {gameObject.Name} and id {gameObject.Id}...");
-            GameObjectEvents gameObjectEvents = new GameObjectEvents((args) => gameObject.OnTouchPressed(args, graphicsLayer),
-                                                                     (args) => gameObject.OnTouchReleased(args, graphicsLayer),
-                                                                     (args) => gameObject.OnTouchClicked(args, graphicsLayer),
-                                                                     (args) => gameObject.OnTouchMoved(args, graphicsLayer));
+            GameLog.Info($"Subscribing touch events for gameobject with name {interactiveObject.Name} and id {interactiveObject.Id}...");
+            InteractiveObjectEvents gameObjectEvents = new InteractiveObjectEvents((args) => interactiveObject.OnTouchPressed(args, graphicsLayer),
+                                                                     (args) => interactiveObject.OnTouchReleased(args, graphicsLayer),
+                                                                     (args) => interactiveObject.OnTouchClicked(args, graphicsLayer),
+                                                                     (args) => interactiveObject.OnTouchMoved(args, graphicsLayer));
             m_inputManager.SubscribeTouchEvent(TouchEvent.Released, SKMouseButton.Left, gameObjectEvents.TouchReleased);
             m_inputManager.SubscribeTouchEvent(TouchEvent.Pressed, SKMouseButton.Left, gameObjectEvents.TouchPressed);
             m_inputManager.SubscribeTouchEvent(TouchEvent.Moved, SKMouseButton.Left, gameObjectEvents.TouchMoved);
             m_inputManager.SubscribeTouchEvent(TouchEvent.Clicked, SKMouseButton.Left, gameObjectEvents.TouchClicked);
-            m_subscribedGameObjects.Add(gameObject, gameObjectEvents);
+            m_subscribedInteractiveObjects.Add(interactiveObject, gameObjectEvents);
             GameLog.Info("Done");
         }
 
-        public void UnsubscribeGameObjectToTouchEvents(GameObject gameObject)
+        public void UnsubscribeInteractiveObjectToTouchEvents(IInteractiveObject interactiveObject)
         {
-            if (!m_subscribedGameObjects.ContainsKey(gameObject))
+            if (!m_subscribedInteractiveObjects.ContainsKey(interactiveObject))
             {
-                GameLog.Info("The gameobject is not subscribed to touch events.");
+                GameLog.Info("The interactiveObject is not subscribed to touch events.");
                 return;
             }
 
-            GameLog.Info($"Unsubscribing touch events for gameobject with name {gameObject.Name} and id {gameObject.Id}...");
-            GameObjectEvents gameObjectEvents = m_subscribedGameObjects[gameObject];
+            GameLog.Info($"Unsubscribing touch events for interactiveObject with name {interactiveObject.Name} and id {interactiveObject.Id}...");
+            InteractiveObjectEvents gameObjectEvents = m_subscribedInteractiveObjects[interactiveObject];
             m_inputManager.UnsubscribeTouchEvent(TouchEvent.Released, SKMouseButton.Left, gameObjectEvents.TouchReleased);
             m_inputManager.UnsubscribeTouchEvent(TouchEvent.Pressed, SKMouseButton.Left, gameObjectEvents.TouchPressed);
             m_inputManager.UnsubscribeTouchEvent(TouchEvent.Moved, SKMouseButton.Left, gameObjectEvents.TouchMoved);
             m_inputManager.UnsubscribeTouchEvent(TouchEvent.Clicked, SKMouseButton.Left, gameObjectEvents.TouchClicked);
-            m_subscribedGameObjects.Remove(gameObject);
-            GameLog.Info("Done");
-        }
-
-        public void SubscribeButtonToTouchEvents(ButtonObject button, GraphicsLayer graphicsLayer)
-        {
-            if (m_subscribedButtons.ContainsKey(button))
-            {
-                GameLog.Info("The button is already subscribed to touch events.");
-                return;
-            }
-
-            GameLog.Info($"Subscribing touch events for button with name {button.Name} and id {button.Id}...");
-            GameObjectEvents buttonEvents = new GameObjectEvents((args) => button.OnTouchPressed(args, graphicsLayer),
-                                                                  (args) => button.OnTouchReleased(args, graphicsLayer),
-                                                                  (args) => button.OnTouchClicked(args, graphicsLayer),
-                                                                  (args) => button.OnTouchMoved(args, graphicsLayer));
-            m_inputManager.SubscribeTouchEvent(TouchEvent.Released, SKMouseButton.Left, buttonEvents.TouchReleased);
-            m_inputManager.SubscribeTouchEvent(TouchEvent.Pressed, SKMouseButton.Left, buttonEvents.TouchPressed);
-            m_inputManager.SubscribeTouchEvent(TouchEvent.Moved, SKMouseButton.Left, buttonEvents.TouchMoved);
-            m_inputManager.SubscribeTouchEvent(TouchEvent.Clicked, SKMouseButton.Left, buttonEvents.TouchClicked);
-            m_subscribedButtons.Add(button, buttonEvents);
-            GameLog.Info("Done");
-        }
-
-        public void UnsubscribeButtonToTouchEvents(ButtonObject button)
-        {
-            if (!m_subscribedButtons.ContainsKey(button))
-            {
-                GameLog.Info("The button is not subscribed to touch events.");
-                return;
-            }
-
-            GameLog.Info($"Unsubscribing touch events for button with name {button.Name} and id {button.Id}...");
-            GameObjectEvents buttonEvents = m_subscribedButtons[button];
-            m_inputManager.UnsubscribeTouchEvent(TouchEvent.Released, SKMouseButton.Left, buttonEvents.TouchReleased);
-            m_inputManager.UnsubscribeTouchEvent(TouchEvent.Pressed, SKMouseButton.Left, buttonEvents.TouchPressed);
-            m_inputManager.UnsubscribeTouchEvent(TouchEvent.Moved, SKMouseButton.Left, buttonEvents.TouchMoved);
-            m_inputManager.UnsubscribeTouchEvent(TouchEvent.Clicked, SKMouseButton.Left, buttonEvents.TouchClicked);
-            m_subscribedButtons.Remove(button);
+            m_subscribedInteractiveObjects.Remove(interactiveObject);
             GameLog.Info("Done");
         }
 
@@ -248,7 +180,6 @@ namespace SevenWonders.GameEngine
 
         private readonly IInputManager m_inputManager;
         private readonly ISceneLoader m_sceneFileHandler;
-        private readonly Dictionary<GameObject, GameObjectEvents> m_subscribedGameObjects;
-        private readonly Dictionary<ButtonObject, GameObjectEvents> m_subscribedButtons;
+        private readonly Dictionary<IInteractiveObject, InteractiveObjectEvents> m_subscribedInteractiveObjects;
     }
 }

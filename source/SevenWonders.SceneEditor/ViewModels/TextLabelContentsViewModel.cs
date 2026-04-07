@@ -296,7 +296,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 TextColor = SkiaSharp.SKColors.White,
             };
 
-            m_engine.ObjectManager.AddTextLabel(m_engine.SceneManager.CurrentScene, SelectedLayer, textLabel);
+            m_engine.ObjectManager.AddSceneObject(m_engine.SceneManager.CurrentScene, SelectedLayer, textLabel);
             TextLabelViews.Add(new TextLabelListViewModel(textLabel));
             SelectedTextLabel = textLabel;
         }
@@ -324,7 +324,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 TextLabelViews.Remove(vm);
             }
 
-            m_selectedLayer.TextLabels.Remove(SelectedTextLabel);
+            m_engine.ObjectManager.RemoveSceneObject(m_selectedLayer, SelectedTextLabel);
             SelectedTextLabel = null;
         }
 

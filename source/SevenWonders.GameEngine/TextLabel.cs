@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
+    [XmlInclude(typeof(ButtonObject))]
     public class TextLabel : SceneObject, IEquatable<TextLabel>
     {
         public int BackgroundTextureId { get; set; }
@@ -53,7 +54,7 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public override void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
         {
             if (!Visible)
                 return;
@@ -100,6 +101,11 @@ namespace SevenWonders.GameEngine
             }
 
             canvas.Restore();
+        }
+
+        public override SceneObject Clone()
+        {
+            return new TextLabel(this);
         }
     }
 }

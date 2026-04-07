@@ -1,8 +1,8 @@
 ﻿namespace SevenWonders.GameEngine
 {
-    public class GameObjectComparer : IComparer<GameObject>
+    public class SceneObjectComparer : IComparer<SceneObject>
     {
-        public int Compare(GameObject? x, GameObject? y)
+        public int Compare(SceneObject? x, SceneObject? y)
         {
             if (x is null || y is null)
             {

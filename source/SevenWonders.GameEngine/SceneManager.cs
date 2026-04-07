@@ -56,7 +56,7 @@ namespace SevenWonders.GameEngine
 
             foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
             {
-                foreach (GameObject gameObject in graphicsLayer.ObjectList)
+                foreach (GameObject gameObject in graphicsLayer.GameObjects)
                 {
                     if (gameObject.Name.ToLower() == name.ToLower())
                     {
@@ -98,19 +98,11 @@ namespace SevenWonders.GameEngine
 
             foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
             {
-                foreach (GameObject gameObject in graphicsLayer.ObjectList)
+                foreach (IInteractiveObject interactiveObject in graphicsLayer.InteractiveObjects)
                 {
-                    if (gameObject.Name.ToLower() == name.ToLower())
+                    if (interactiveObject.Name.ToLower() == name.ToLower())
                     {
-                        return gameObject;
-                    }
-                }
-
-                foreach (ButtonObject button in graphicsLayer.Buttons)
-                {
-                    if (button.Name.ToLower() == name.ToLower())
-                    {
-                        return button;
+                        return interactiveObject;
                     }
                 }
             }
@@ -127,7 +119,7 @@ namespace SevenWonders.GameEngine
 
             foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
             {
-                foreach (ButtonObject button in graphicsLayer.Buttons)
+                foreach (ButtonObject button in graphicsLayer.ButtonObjects)
                 {
                     if (button.Name.ToLower() == name.ToLower())
                     {

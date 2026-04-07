@@ -67,5 +67,10 @@ namespace SevenWonders.GameEngine
                    y >= Position.Y - actualHalfHeight &&
                    y <= Position.Y + actualHalfHeight;
         }
+
+        public override SceneObject Clone()
+        {
+            return new ButtonObject(this);
+        }
     }
 }

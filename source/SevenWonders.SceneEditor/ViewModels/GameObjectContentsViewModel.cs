@@ -29,7 +29,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                     if (m_selectedLayer is not null)
                     {
                         GameObjectViews.Clear();
-                        foreach (GameObjectListViewModel gameObjectListViewModel in m_selectedLayer.ObjectList.Select(gameObject => new GameObjectListViewModel(gameObject)))
+                        foreach (GameObjectListViewModel gameObjectListViewModel in m_selectedLayer.GameObjects.Select(gameObject => new GameObjectListViewModel(gameObject)))
                         {
                             GameObjectViews.Add(gameObjectListViewModel);
                         }
@@ -313,7 +313,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 FlipMultiplier = new Vector2(1, 1),
                 ZIndex = 0
             };
-            m_engine.ObjectManager.AddGameObject(m_engine.SceneManager.CurrentScene, SelectedLayer, gameObject);
+            m_engine.ObjectManager.AddInteractiveObject(m_engine.SceneManager.CurrentScene, SelectedLayer, gameObject);
             GameObjectViews.Add(new GameObjectListViewModel(gameObject));
             SelectedGameObject = gameObject;
         }
@@ -325,7 +325,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            SelectedGameObject = m_selectedLayer.ObjectList.FirstOrDefault(gameObject => gameObject.Id == gameObjectListViewModel.Id);
+            SelectedGameObject = m_selectedLayer.GameObjects.FirstOrDefault(gameObject => gameObject.Id == gameObjectListViewModel.Id);
         }
 
         public void SetSelectedSprite(SpriteListViewModel? spriteListViewModel)
@@ -353,7 +353,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 GameObjectViews.Remove(gameObjectListViewModel);
             }
 
-            m_selectedLayer.ObjectList.Remove(SelectedGameObject);
+            m_engine.ObjectManager.RemoveInteractiveObject(m_selectedLayer, SelectedGameObject);
             SelectedGameObject = null;
         }
 

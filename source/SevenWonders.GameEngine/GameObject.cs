@@ -59,7 +59,7 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public override void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
         {
             if (!Visible || Animations.Count <= 0)
             { 
@@ -96,6 +96,11 @@ namespace SevenWonders.GameEngine
             }
 
             Animations[CurrentAnim].Draw(eventArgs, Position, effectiveScale, Rotation, Width, Height, Dimmed, textureRegistry);
+        }
+
+        public override SceneObject Clone()
+        {
+            return new GameObject(this);
         }
 
         public void OnTouchReleased(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer)

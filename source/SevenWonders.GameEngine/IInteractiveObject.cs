@@ -12,5 +12,14 @@ namespace SevenWonders.GameEngine
         event TouchEvent ClickedEvent;
 
         bool Dimmed { get; set; }
+
+        string Name { get; }
+
+        int Id { get; }
+
+        void OnTouchPressed(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer);
+        void OnTouchReleased(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer);
+        void OnTouchMoved(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer);
+        void OnTouchClicked(SKTouchEventArgs eventArgs, GraphicsLayer graphicsLayer);
     }
 }

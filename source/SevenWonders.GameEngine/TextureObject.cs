@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui.Storage;
-using SkiaSharp;
-using SkiaSharp.Views.Maui;
-using System.Numerics;
+﻿using SkiaSharp.Views.Maui;
 
 namespace SevenWonders.GameEngine
 {
@@ -25,12 +22,17 @@ namespace SevenWonders.GameEngine
             return base.Equals(other);
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public override void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
         {
             if (!Visible)
                 return;
 
             textureRegistry.Get(TextureId).Draw(eventArgs, Position, Scale, Rotation, Width, Height);
+        }
+
+        public override SceneObject Clone()
+        {
+            return new TextureObject(this);
         }
     }
 }

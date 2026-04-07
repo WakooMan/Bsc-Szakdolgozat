@@ -5,7 +5,5 @@
         bool IsDimmed { get; }
         IAnimationGroupBuilder GetAnimationGroupBuilder();
         Task Execute();
-        void IncreaseZIndex();
-        void DecreaseZIndex();
     }
 }

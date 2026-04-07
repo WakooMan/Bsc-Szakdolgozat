@@ -25,7 +25,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                     if (m_selectedLayer is not null)
                     {
                         ButtonViews.Clear();
-                        foreach (ButtonListViewModel buttonListViewModel in m_selectedLayer.Buttons.Select(button => new ButtonListViewModel(button)))
+                        foreach (ButtonListViewModel buttonListViewModel in m_selectedLayer.ButtonObjects.Select(button => new ButtonListViewModel(button)))
                         {
                             ButtonViews.Add(buttonListViewModel);
                         }
@@ -299,7 +299,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 TextColor = SKColors.White,
             };
 
-            m_engine.ObjectManager.AddButtonObject(m_engine.SceneManager.CurrentScene, SelectedLayer, button);
+            m_engine.ObjectManager.AddSceneObject(m_engine.SceneManager.CurrentScene, SelectedLayer, button);
             ButtonViews.Add(new ButtonListViewModel(button));
             SelectedButton = button;
         }
@@ -311,7 +311,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            SelectedButton = m_selectedLayer.Buttons.FirstOrDefault(button => button.Id == buttonListViewModel.Id);
+            SelectedButton = m_selectedLayer.ButtonObjects.FirstOrDefault(button => button.Id == buttonListViewModel.Id);
         }
 
         public void DeleteSelectedButton()
@@ -327,8 +327,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 ButtonViews.Remove(buttonListViewModel);
             }
 
-            m_engine.ObjectManager.UnsubscribeButtonToTouchEvents(SelectedButton);
-            m_selectedLayer.Buttons.Remove(SelectedButton);
+            m_engine.ObjectManager.RemoveInteractiveObject(m_selectedLayer, SelectedButton);
             SelectedButton = null;
         }
 

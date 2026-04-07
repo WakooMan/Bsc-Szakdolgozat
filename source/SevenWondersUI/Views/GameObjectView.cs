@@ -27,16 +27,6 @@ namespace SevenWondersUI.Views
             m_groupBuilder.Clear();
         }
 
-        public void IncreaseZIndex()
-        {
-            m_gameObject.ZIndex++;
-        }
-
-        public void DecreaseZIndex()
-        {
-            m_gameObject.ZIndex--;
-        }
-
         private readonly IAnimationManager m_animationManager;
         private readonly IAnimationGroupBuilder m_groupBuilder;
         private readonly GameObject m_gameObject;
