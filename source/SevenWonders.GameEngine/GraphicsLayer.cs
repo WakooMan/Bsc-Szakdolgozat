@@ -15,22 +15,77 @@ namespace SevenWonders.GameEngine
         public List<SceneObject> SceneObjectsProxy { get; set; }
 
         [XmlIgnore]
-        public IReadOnlyList<IInteractiveObject> InteractiveObjects => SceneObjectsProxy.OfType<IInteractiveObject>().ToList();
+        public IReadOnlyList<IInteractiveObject> InteractiveObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<IInteractiveObject>().ToList();
+                }
+            }
+        }
 
         [XmlIgnore]
-        public IReadOnlyList<GameObject> GameObjects => SceneObjectsProxy.OfType<GameObject>().ToList();
+        public IReadOnlyList<GameObject> GameObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<GameObject>().ToList();
+                }
+            }
+        }
+
 
         [XmlIgnore]
-        public IReadOnlyList<ButtonObject> ButtonObjects => SceneObjectsProxy.OfType<ButtonObject>().ToList();
+        public IReadOnlyList<ButtonObject> ButtonObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<ButtonObject>().ToList();
+                }
+            }
+        }
 
         [XmlIgnore]
-        public IReadOnlyList<TextLabel> TextLabels => SceneObjectsProxy.OfType<TextLabel>().ToList();
+        public IReadOnlyList<TextLabel> TextLabels
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<TextLabel>().ToList();
+                }
+            }
+        }
 
         [XmlIgnore]
-        public IReadOnlyList<TextureObject> TextureObjects => SceneObjectsProxy.OfType<TextureObject>().ToList();
+        public IReadOnlyList<TextureObject> TextureObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<TextureObject>().ToList();
+                }
+            }
+        }
 
         [XmlIgnore]
-        public IReadOnlyList<SceneObject> SceneObjects => SceneObjectsProxy;
+        public IReadOnlyList<SceneObject> SceneObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.ToList();
+                }
+            }
+        }
 
 
         public GraphicsLayer()
@@ -41,7 +96,10 @@ namespace SevenWonders.GameEngine
 
         public GraphicsLayer(GraphicsLayer graphicsLayer)
         {
-            SceneObjectsProxy = graphicsLayer.SceneObjectsProxy.Select(obj => obj.Clone()).ToList();
+            lock (graphicsLayer.SceneObjectsProxy)
+            {
+                SceneObjectsProxy = graphicsLayer.SceneObjectsProxy.Select(obj => obj.Clone()).ToList();
+            }
             Visible = graphicsLayer.Visible;
             EnableCollision = graphicsLayer.EnableCollision;
             Name = new string(graphicsLayer.Name);
@@ -51,16 +109,22 @@ namespace SevenWonders.GameEngine
 
         internal void AddSceneObject(SceneObject sceneObject)
         {
-            var comparer = new SceneObjectComparer();
-            int index = SceneObjectsProxy.BinarySearch(sceneObject, comparer);
-            SceneObjectsProxy.Insert(index < 0 ? ~index : index, sceneObject);
-            sceneObject.OnZIndexChanged += OnZIndexChanged;
+            lock (SceneObjectsProxy)
+            {
+                var comparer = new SceneObjectComparer();
+                int index = SceneObjectsProxy.BinarySearch(sceneObject, comparer);
+                SceneObjectsProxy.Insert(index < 0 ? ~index : index, sceneObject);
+                sceneObject.OnZIndexChanged += OnZIndexChanged;
+            }
         }
 
         internal void RemoveSceneObject(SceneObject sceneObject)
         {
-            SceneObjectsProxy.Remove(sceneObject);
-            sceneObject.OnZIndexChanged -= OnZIndexChanged;
+            lock (SceneObjectsProxy)
+            {
+                SceneObjectsProxy.Remove(sceneObject);
+                sceneObject.OnZIndexChanged -= OnZIndexChanged;
+            }
         }
 
         public bool Equals(GraphicsLayer? other)
@@ -70,12 +134,15 @@ namespace SevenWonders.GameEngine
                 return false;
             }
 
-            return SceneObjectsProxy.SequenceEqual(other.SceneObjectsProxy) &&
-                   Name.Equals(other.Name) &&
-                   Id.Equals(other.Id) &&
-                   Visible.Equals(other.Visible) &&
-                   EnableCollision.Equals(other.EnableCollision) &&
-                   ZIndex.Equals(other.ZIndex);
+            lock (SceneObjectsProxy)
+            {
+                return SceneObjectsProxy.SequenceEqual(other.SceneObjectsProxy) &&
+                       Name.Equals(other.Name) &&
+                       Id.Equals(other.Id) &&
+                       Visible.Equals(other.Visible) &&
+                       EnableCollision.Equals(other.EnableCollision) &&
+                       ZIndex.Equals(other.ZIndex);
+            }
         }
 
         public override bool Equals(object? obj)
@@ -95,7 +162,10 @@ namespace SevenWonders.GameEngine
             Visible.GetHashCode() ^
             EnableCollision.GetHashCode() ^
             ZIndex.GetHashCode();
-            SceneObjectsProxy.ForEach(obj => hashCode = hashCode ^ obj.GetHashCode());
+            lock (SceneObjectsProxy)
+            {
+                SceneObjectsProxy.ForEach(obj => hashCode = hashCode ^ obj.GetHashCode());
+            }
             return hashCode;
         }
 
@@ -107,28 +177,40 @@ namespace SevenWonders.GameEngine
                 return;
             }
 
-            foreach (var sceneObject in SceneObjectsProxy)
+            lock (SceneObjectsProxy)
             {
-                sceneObject.Draw(eventArgs, textureRegistry);
+                foreach (var sceneObject in SceneObjectsProxy)
+                {
+                    sceneObject.Draw(eventArgs, textureRegistry);
+                }
             }
         }
 
         internal void Resize(Vector2 oldResolution, Vector2 newResolution)
         {
-            SceneObjectsProxy.ForEach(sceneObject => sceneObject.Resize(oldResolution, newResolution));
+            lock (SceneObjectsProxy)
+            {
+                SceneObjectsProxy.ForEach(sceneObject => sceneObject.Resize(oldResolution, newResolution));
+            }
         }
 
         internal void SortAllObjects()
         {
-            var comparer = new SceneObjectComparer();
-            SceneObjectsProxy.Sort(comparer);
-            SceneObjectsProxy.ForEach(sceneObject => sceneObject.OnZIndexChanged += OnZIndexChanged);
+            lock (SceneObjectsProxy)
+            {
+                var comparer = new SceneObjectComparer();
+                SceneObjectsProxy.Sort(comparer);
+                SceneObjectsProxy.ForEach(sceneObject => sceneObject.OnZIndexChanged += OnZIndexChanged);
+            }
         }
 
         private void OnZIndexChanged(SceneObject sceneObject)
         {
-            RemoveSceneObject(sceneObject);
-            AddSceneObject(sceneObject);
+            lock (SceneObjectsProxy)
+            {
+                RemoveSceneObject(sceneObject);
+                AddSceneObject(sceneObject);
+            }
         }
     }
 }
