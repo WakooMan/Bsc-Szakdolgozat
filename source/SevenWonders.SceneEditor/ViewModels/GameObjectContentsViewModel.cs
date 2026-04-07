@@ -413,12 +413,9 @@ namespace SevenWonders.SceneEditor.ViewModels
             {
                 ActualFrame = 0,
                 Name = name,
-                Fps = 60,
                 Frames = frames,
                 NumFrames = frames.Count,
                 LoopAnimation = true,
-                RotationZ = 0,
-                LastUpdate = 0,
             };
 
             m_selectedGameObject.Animations.Add(sprite);

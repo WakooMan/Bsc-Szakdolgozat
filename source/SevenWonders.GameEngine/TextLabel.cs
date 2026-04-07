@@ -66,20 +66,23 @@ namespace SevenWonders.GameEngine
             canvas.RotateDegrees(Rotation);
             canvas.Scale(Scale.X, Scale.Y);
 
-            Texture texture = textureRegistry.Get(BackgroundTextureId);
-            if (Dimmed)
+            if (BackgroundTextureId != -1)
             {
-                texture.CustomColorFilter = SKColorFilter.CreateBlendMode(
-                                    SKColors.Black.WithAlpha(120),
-                                    SKBlendMode.SrcOver
-                                );
-            }
-            else if(texture.CustomColorFilter is not null)
-            {
-                texture.CustomColorFilter = null;
-            }
+                Texture texture = textureRegistry.Get(BackgroundTextureId);
+                if (Dimmed)
+                {
+                    texture.CustomColorFilter = SKColorFilter.CreateBlendMode(
+                                        SKColors.Black.WithAlpha(120),
+                                        SKBlendMode.SrcOver
+                                    );
+                }
+                else if (texture.CustomColorFilter is not null)
+                {
+                    texture.CustomColorFilter = null;
+                }
 
-            texture.Draw(eventArgs, Vector2.Zero, Vector2.One, 0, Width, Height);
+                texture.Draw(eventArgs, Vector2.Zero, Vector2.One, 0, Width, Height);
+            }
 
             if (!string.IsNullOrEmpty(Text))
             {

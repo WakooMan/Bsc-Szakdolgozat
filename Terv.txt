@@ -7,8 +7,9 @@ GameObject-ek, amik kellenek:
 - Third age fixálása screen editor-ban majd
 - Fejlesztéseknek object-ek -> Done
 - Fejlesztés választás csodánál
+- Egyéb player action-ök
 - Katonai effect-ek progress-nél
 - lila kártyák kezelése
-- game over kezelés
-- loading screen
+- game over kezelés -> Done
+- loading screen -> Done
 - New Turn

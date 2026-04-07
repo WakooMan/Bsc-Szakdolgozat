@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameLogic.Elements;
 
 namespace GameLogic.Events.GameEvents
 {
     public class ScientificVictory: GameEvent
     {
+        public Player Player { get; }
+
+        public ScientificVictory(Player player)
+        {
+            Player = player;
+        }
     }
 }

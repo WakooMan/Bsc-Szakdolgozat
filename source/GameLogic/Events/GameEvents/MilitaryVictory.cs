@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameLogic.Elements;
 
 namespace GameLogic.Events.GameEvents
 {
     public class MilitaryVictory: GameEvent
     {
+        public Player Player { get; }
+
+        public MilitaryVictory(Player player)
+        {
+            Player = player;
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace SevenWonders.Presenter.Presenters
         {
             m_moneyLabel = m_gameEngineReceiver.ReceiveTextLabel($"player{m_playerId}Money");
             m_pointLabel = m_gameEngineReceiver.ReceiveTextLabel($"player{m_playerId}Points");
+            m_nameLabel = m_gameEngineReceiver.ReceiveTextLabel($"player{m_playerId}Name");
             m_pickCardLayer = m_gameEngineReceiver.ReceiveGraphicsLayer("PickCardLayer");
             foreach (var connection in m_wonderConnector.ReceiveWonderConnection())
             {
@@ -49,10 +50,11 @@ namespace SevenWonders.Presenter.Presenters
         {
             if (e.Players.FirstOrDefault(player => player.Id == m_playerId) is Player player)
             {
-                if(m_moneyLabel is not null && m_pointLabel is not null)
+                if(m_moneyLabel is not null && m_pointLabel is not null && m_nameLabel is not null)
                 {
                     m_moneyLabel.Text = player.Money.ToString();
                     m_pointLabel.Text = player.VictoryPoints.ToString();
+                    m_nameLabel.Text = player.Name;
                 }
             }
         }
@@ -130,6 +132,7 @@ namespace SevenWonders.Presenter.Presenters
         private readonly int m_playerId;
         private TextLabel? m_moneyLabel;
         private TextLabel? m_pointLabel;
+        private TextLabel? m_nameLabel;
         private GraphicsLayer? m_pickCardLayer;
     }
 }
