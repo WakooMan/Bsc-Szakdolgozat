@@ -5,19 +5,22 @@ using GameLogic.Events.GameEvents;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Developments;
+using SevenWonders.Presenter.Presenters.Factories;
+using SevenWonders.Presenter.Presenters.Handlers;
 using SevenWonders.Presenter.Views;
 
 namespace SevenWonders.Presenter.Presenters
 {
     public class DevelopmentPresenter : IPresenter
     {
-        public DevelopmentPresenter(IDevelopmentConnector developmentConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager)
+        public DevelopmentPresenter(IDevelopmentConnector developmentConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IDevelopmentHandlerFactory developmentHandlerFactory)
         {
             m_developmentConnector = developmentConnector;
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
             m_developments = new Dictionary<Development, IGameObjectView>();
             m_militaryBoardTargets = new List<GameObject>();
+            m_developmentHandlerFactory = developmentHandlerFactory;
         }
 
         public void Initialize()
@@ -29,8 +32,8 @@ namespace SevenWonders.Presenter.Presenters
 
             m_militaryBoardTargets.AddRange(m_gameEngineReceiver.ReceiveGameObjects("dev", 3));
 
-            m_player1Target = m_gameEngineReceiver.ReceiveGameObject("player1Development");
-            m_player2Target = m_gameEngineReceiver.ReceiveGameObject("player2Development");
+            m_player1DevelopmentHandler = m_developmentHandlerFactory.Create(m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1Development"));
+            m_player2DevelopmentHandler = m_developmentHandlerFactory.Create(m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2Development"));
             m_developmentDeck = m_gameEngineReceiver.ReceiveGameObject("developmentDeck");
 
         }
@@ -72,30 +75,24 @@ namespace SevenWonders.Presenter.Presenters
 
         private async Task MoveToPlayer(Player player, Development development)
         {
-            if (player.Id == 1)
+            if (player.Id == 1 && m_player1DevelopmentHandler is not null)
             {
-                await MoveToPlayer(m_player1Target, development);
+                await m_player1DevelopmentHandler.MoveDevelopmentToTarget(m_developments[development]);
             }
-            if (player.Id == 2)
+            if (player.Id == 2 && m_player2DevelopmentHandler is not null)
             {
-                await MoveToPlayer(m_player2Target, development);
+                await m_player2DevelopmentHandler.MoveDevelopmentToTarget(m_developments[development]);
             }
-        }
-
-        private async Task MoveToPlayer(GameObject target, Development development)
-        {
-            IGameObjectView gameObjectView = m_developments[development];
-            gameObjectView.GetAnimationGroupBuilder().MoveTo(target, 0.5f);
-            await gameObjectView.Execute();
         }
 
         private readonly IEventManager m_eventManager;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IDevelopmentConnector m_developmentConnector;
+        private readonly IDevelopmentHandlerFactory m_developmentHandlerFactory;
         private readonly IDictionary<Development, IGameObjectView> m_developments;
         private readonly List<GameObject> m_militaryBoardTargets;
-        private GameObject? m_player1Target;
-        private GameObject? m_player2Target;
+        private IDevelopmentHandler? m_player1DevelopmentHandler;
+        private IDevelopmentHandler? m_player2DevelopmentHandler;
         private GameObject? m_developmentDeck;
     }
 }

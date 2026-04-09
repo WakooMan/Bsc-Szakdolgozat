@@ -229,8 +229,8 @@ namespace SevenWonders.Presenter.Connectors.Effects
                         {
                             BackgroundTextureId = coinTextureId,
                             Text = enemyLoseMoney.Money.ToString(),
-                            TextColor = SKColors.Gold,
-                            FontSize = 6,
+                            TextColor = SKColors.Red,
+                            FontSize = 10,
                             Visible = true,
                         },
                         WidthPercent = 0.15f,

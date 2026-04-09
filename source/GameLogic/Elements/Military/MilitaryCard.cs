@@ -4,6 +4,7 @@ namespace GameLogic.Elements.Military
 {
     public class MilitaryCard
     {
+        public string Name { get; set; }
         public EnemyLoseMoney EnemyLoseMoney { get; set; }
         public VictoryPoints VictoryPoints { get; set; }
         public int IndexStart { get; set; }
@@ -11,6 +12,7 @@ namespace GameLogic.Elements.Military
 
         public MilitaryCard()
         {
+            Name = string.Empty;
             EnemyLoseMoney = new EnemyLoseMoney();
             VictoryPoints = new VictoryPoints();
         }

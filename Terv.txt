@@ -11,10 +11,11 @@ GameObject-ek, amik kellenek:
 - fix id handling -> Done
 - PlayerTurn kezelés -> Done
 - New Turn -> Done
-- Katonai effect-ek progress-nél
+- Katonai effect-ek progress-nél -> Done
+- Discipline-ek számosság kezelése -> Done
+- Development-ek kezelése a játékosnál + felirat -> Done
+- Military token victory point kezelése
 - Choose fixes
-- Development-ek kezelése a játékosnál + felirat
-- Discipline-ek számosság kezelése
 - game over kezelés, military és scientific-nél
 - lila kártyák kezelése
 - Third age fixálása screen editor-ban majd

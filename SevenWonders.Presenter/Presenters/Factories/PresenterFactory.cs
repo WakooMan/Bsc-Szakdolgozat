@@ -3,6 +3,7 @@ using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Cards;
 using SevenWonders.Presenter.Connectors.Developments;
+using SevenWonders.Presenter.Connectors.MilitaryBoard;
 using SevenWonders.Presenter.Connectors.Wonders;
 using SevenWonders.Presenter.Views.Factories;
 
@@ -10,7 +11,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
 {
     public class PresenterFactory : IPresenterFactory
     {
-        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory, IDevelopmentConnector developmentConnector, IObjectManager objectManager, ITextureIdHandler textureIdHandler)
+        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory, IDevelopmentConnector developmentConnector, IObjectManager objectManager, ITextureIdHandler textureIdHandler, IMilitaryTokenChildTextureHandler militaryTokenChildTextureHandler, IDevelopmentHandlerFactory developmentHandlerFactory)
         {
             m_cardConnector = cardConnector;
             m_wonderConnector = wonderConnector;
@@ -22,6 +23,8 @@ namespace SevenWonders.Presenter.Presenters.Factories
             m_developmentConnector = developmentConnector;
             m_objectManager = objectManager;
             m_textureIdHandler = textureIdHandler;
+            m_militaryTokenChildTextureHandler = militaryTokenChildTextureHandler;
+            m_developmentHandlerFactory = developmentHandlerFactory;
         }
 
         public IPresenter CreateCardPresenter()
@@ -46,12 +49,12 @@ namespace SevenWonders.Presenter.Presenters.Factories
 
         public IPresenter CreateMilitaryBoardPresenter()
         {
-            return new MilitaryBoardPresenter(m_gameEngineReceiver, m_eventManager, m_gameObjectViewFactory, m_textureIdHandler);
+            return new MilitaryBoardPresenter(m_gameEngineReceiver, m_eventManager, m_gameObjectViewFactory, m_textureIdHandler, m_militaryTokenChildTextureHandler);
         }
 
         public IPresenter CreateDevelopmentPresenter()
         {
-            return new DevelopmentPresenter(m_developmentConnector, m_gameEngineReceiver, m_eventManager);
+            return new DevelopmentPresenter(m_developmentConnector, m_gameEngineReceiver, m_eventManager, m_developmentHandlerFactory);
         }
 
         public IPresenter CreateScreenPresenter()
@@ -74,5 +77,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
         private readonly IDevelopmentConnector m_developmentConnector;
         private readonly IObjectManager m_objectManager;
         private readonly ITextureIdHandler m_textureIdHandler;
+        private readonly IMilitaryTokenChildTextureHandler m_militaryTokenChildTextureHandler;
+        private readonly IDevelopmentHandlerFactory m_developmentHandlerFactory;
     }
 }

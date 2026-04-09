@@ -29,6 +29,23 @@ namespace SevenWonders.Presenter.Connectors
             return textLabel;
         }
 
+        public ICollection<TextLabel> ReceiveTextLabels(string name, int number)
+        {
+            List<TextLabel> result = new List<TextLabel>();
+            for (int i = 1; i <= number; i++)
+            {
+                string targetName = $"{name}{i}";
+                TextLabel? textLabel = m_sceneManager.GetTextLabelByName(targetName);
+                if (textLabel is null)
+                {
+                    throw new InvalidOperationException($"TextLabel with name {targetName}, does not exist.");
+                }
+                result.Add(textLabel);
+            }
+
+            return result;
+        }
+
         public IInteractiveObject ReceiveInteractiveObject(string name)
         {
             IInteractiveObject? interactiveObject = m_sceneManager.GetInteractiveObjectByName(name);

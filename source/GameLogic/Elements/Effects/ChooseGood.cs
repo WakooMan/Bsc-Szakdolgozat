@@ -47,12 +47,12 @@ namespace GameLogic.Elements.Effects
         {
             if (eventArgs.Player == player)
             {
-                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Good", GoodFactories.Select(factory => factory.GoodType.Name).ToArray()));
+                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Good", GoodFactories.Select(factory => factory.GoodType.Name).ToArray(), "Goods"));
                 await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, eventArgs.Player, GoodFactories.Select(goodFactory => {
                     IPlayerAction action = new ChooseGoodAction(goodFactory, SetSelectedGood);
                     return action;
                 }).ToList());
-                await gameContext.EventManager.PublishAsync(new OnObjectChosen(GoodFactories.Select(factory => factory.GoodType.Name).ToArray()));
+                await gameContext.EventManager.PublishAsync(new OnObjectChosen(GoodFactories.Select(factory => factory.GoodType.Name).ToArray(), "Goods"));
             }
         }
 

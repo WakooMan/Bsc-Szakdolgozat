@@ -6,7 +6,6 @@ namespace SevenWonders.Presenter.Presenters.Handlers
 {
     public class PlayerCardHandler : IPlayerCardHandler
     {
-
         public PlayerCardHandler(IObjectManager objectManager, Scene scene, GraphicsLayer graphicsLayer, GameObject cardTarget)
         {
             m_objectManager = objectManager;

@@ -62,12 +62,22 @@ namespace SevenWonders.Presenter.Presenters
                 m_previousElement.ClickedEvent += OnPreviousElementClicked;
                 m_nextElement.ClickedEvent += OnNextElementClicked;
                 m_chooseObjectLayer.Visible = true;
+                if (eventObj.LayerName is not null)
+                {
+                    GraphicsLayer graphicsLayer = m_gameEngineReceiver.ReceiveGraphicsLayer(eventObj.LayerName);
+                    graphicsLayer.Visible = true;
+                }
             });
 
             m_eventManager.Subscribe<OnObjectChosen>(eventObj =>
             {
                 m_previousElement.ClickedEvent -= OnPreviousElementClicked;
                 m_nextElement.ClickedEvent -= OnNextElementClicked;
+                if (eventObj.LayerName is not null)
+                {
+                    GraphicsLayer graphicsLayer = m_gameEngineReceiver.ReceiveGraphicsLayer(eventObj.LayerName);
+                    graphicsLayer.Visible = false;
+                }
                 foreach (var cache in m_objectCache)
                 {
                     IGameObjectView gameObjectView = cache.objectView;
