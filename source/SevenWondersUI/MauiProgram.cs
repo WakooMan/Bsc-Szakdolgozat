@@ -42,7 +42,9 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+                fonts.AddFont("Cinzel-Bold.ttf", "CinzelBold");
+                fonts.AddFont("Cinzel-Regular.ttf", "CinzelRegular");
+            });
 
 #if DEBUG
 		builder.Logging.AddDebug();

@@ -24,6 +24,7 @@ namespace GameLogic.GameStates
 
             while (!IsGameOver)
             {
+                await GameContext.EventManager.PublishAsync(new TurnStarted(GameContext.TurnHandler.CurrentPlayer));
                 IPlayerTurnState playerTurnState = new PickCardState(GameContext);
 
                 while (playerTurnState is not EndTurn)

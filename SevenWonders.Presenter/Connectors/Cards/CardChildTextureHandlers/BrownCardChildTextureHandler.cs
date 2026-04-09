@@ -27,12 +27,15 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
             card.ProducedResources.ForEach(resource =>
             {
                 int resourceTextureId = m_textureIdHandler.GetTextureId(resource.GetType().Name);
-                childObjects.Add(new ChildTexture
+                for (int i = 0; i < resource.Amount; i++)
                 {
-                    TextureId = resourceTextureId,
-                    WidthPercent = iconWidthPercent,
-                    HeightPercent = iconHeightPercent,
-                });
+                    childObjects.Add(new ChildTexture
+                    {
+                        TextureId = resourceTextureId,
+                        WidthPercent = iconWidthPercent,
+                        HeightPercent = iconHeightPercent,
+                    });
+                }
             });
 
             float groupStartX = (1f - childObjects.Count * iconWidthPercent) / 2f;

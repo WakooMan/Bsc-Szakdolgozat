@@ -24,6 +24,8 @@ namespace SevenWonders.SceneEditor
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Cinzel-Bold.ttf", "CinzelBold");
+                    fonts.AddFont("Cinzel-Regular.ttf", "CinzelRegular");
                 }).
                 RegisterGameEngine().
                 RegisterViewModels().

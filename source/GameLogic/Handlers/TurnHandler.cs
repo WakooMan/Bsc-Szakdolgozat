@@ -60,7 +60,6 @@ namespace GameLogic.Handlers
             {
                 m_index = (m_index + 1 < m_players.Count) ? m_index + 1 : 0;
             }
-            await m_eventManager.PublishAsync(new TurnStarted(CurrentPlayer));
             m_newTurnForced = false;
         }
 

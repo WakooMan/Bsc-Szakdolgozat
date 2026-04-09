@@ -7,10 +7,15 @@ GameObject-ek, amik kellenek:
 - Fejlesztéseknek object-ek -> Done
 - Fejlesztés választás csodánál -> Done
 - Egyéb player action-ök -> Done
-- Katonai effect-ek progress-nél
-- lila kártyák kezelése
-- game over kezelés -> Done
 - loading screen -> Done
+- fix id handling -> Done
+- PlayerTurn kezelés
 - New Turn
-- fix id handling
+- Katonai effect-ek progress-nél
+- Choose fixes
+- Development-ek kezelése a játékosnál + felirat
+- Discipline-ek számosság kezelése
+- game over kezelés, military és scientific-nél
+- lila kártyák kezelése
 - Third age fixálása screen editor-ban majd
+- game over kezelés, amikor végig játszák a 3 kort

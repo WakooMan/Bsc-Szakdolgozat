@@ -36,12 +36,12 @@ namespace SevenWonders.Presenter.Presenters.Factories
 
         public IPresenter CreatePlayer1Presenter()
         {
-            return new PlayerPresenter(m_gameEngineReceiver, m_eventManager, m_wonderConnector, 1);
+            return new PlayerPresenter(m_gameEngineReceiver, m_eventManager, m_wonderConnector, m_textureIdHandler, 1);
         }
 
         public IPresenter CreatePlayer2Presenter()
         {
-            return new PlayerPresenter(m_gameEngineReceiver, m_eventManager, m_wonderConnector, 2);
+            return new PlayerPresenter(m_gameEngineReceiver, m_eventManager, m_wonderConnector, m_textureIdHandler, 2);
         }
 
         public IPresenter CreateMilitaryBoardPresenter()

@@ -2,6 +2,7 @@
 using GameLogic.Elements.Modifiers;
 using GameLogic.Elements.Wonders;
 using GameLogic.Events.GameEvents;
+using GameLogic.GameStates;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 using SevenWonders.Common;
@@ -51,6 +52,7 @@ namespace GameLogic.Handlers
 
             if (actions.Count > 1)
             {
+                await m_gameContext.EventManager.PublishAsync(new ChooseWonderStarted(player));
                 (bool completed, playerAction) = await m_gameContext.PlayerActionHandler.HandlePlayerActions(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
             }
             else

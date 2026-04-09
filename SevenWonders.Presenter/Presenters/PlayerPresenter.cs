@@ -14,11 +14,12 @@ namespace SevenWonders.Presenter.Presenters
 {
     public class PlayerPresenter : IPresenter
     {
-        public PlayerPresenter(IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IWonderConnector wonderConnector, int id)
+        public PlayerPresenter(IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IWonderConnector wonderConnector, ITextureIdHandler textureIdHandler, int id)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
             m_wonderConnector = wonderConnector;
+            m_textureIdHandler = textureIdHandler;
             m_wonders = new Dictionary<Wonder, WonderConnection>();
             m_playerId = id;
             m_moneyLabel = null;
@@ -31,6 +32,7 @@ namespace SevenWonders.Presenter.Presenters
             m_pointLabel = m_gameEngineReceiver.ReceiveTextLabel($"player{m_playerId}Points");
             m_nameLabel = m_gameEngineReceiver.ReceiveTextLabel($"player{m_playerId}Name");
             m_pickCardLayer = m_gameEngineReceiver.ReceiveGraphicsLayer("PickCardLayer");
+            m_newTurnLayer = m_gameEngineReceiver.ReceiveGraphicsLayer("NewTurnLayer");
             foreach (var connection in m_wonderConnector.ReceiveWonderConnection())
             {
                 m_wonders[connection.Key] = connection.Value;
@@ -44,6 +46,48 @@ namespace SevenWonders.Presenter.Presenters
             m_eventManager.Subscribe<OnCardBuilt>(OnCardBuilt);
             m_eventManager.Subscribe<OnBuildWonderProcessStart>(OnBuildWonderProcessStart);
             m_eventManager.Subscribe<OnBuildWonderProcessEnd>(OnBuildWonderProcessEnd);
+            m_eventManager.Subscribe<ExtraTurnGranted>(OnExtraTurnGranted);
+            m_eventManager.Subscribe<TurnStarted>(OnTurnStarted);
+            m_eventManager.Subscribe<ChooseWonderStarted>(OnChooseWonderStarted);
+        }
+
+        private void OnChooseWonderStarted(ChooseWonderStarted started)
+        {
+            OnPlayerTurnStart(started.Player);
+        }
+
+        private void OnTurnStarted(TurnStarted started)
+        {
+            OnPlayerTurnStart(started.Player);
+        }
+
+        private void OnPlayerTurnStart(Player player)
+        {
+            if (m_nameLabel is not null)
+            {
+                if (player.Id == m_playerId)
+                {
+                    m_nameLabel.BackgroundTextureId = m_textureIdHandler.GetTextureId("Active_Player");
+                    m_nameLabel.TextColorHex = "#FFFFFF";
+                    m_nameLabel.Bold = true;
+                }
+                else
+                {
+                    m_nameLabel.BackgroundTextureId = m_textureIdHandler.GetTextureId("Inactive_Player");
+                    m_nameLabel.TextColorHex = "#ECECEC";
+                    m_nameLabel.Bold = false;
+                }
+            }
+        }
+
+        private void OnExtraTurnGranted(ExtraTurnGranted granted)
+        {
+            if (m_newTurnLayer is not null)
+            {
+                m_newTurnLayer.Visible = true;
+                Thread.Sleep(3000);
+                m_newTurnLayer.Visible = false;
+            }
         }
 
         private void OnGameStarted(OnGameStarted e)
@@ -128,11 +172,13 @@ namespace SevenWonders.Presenter.Presenters
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
         private readonly IWonderConnector m_wonderConnector;
+        private readonly ITextureIdHandler m_textureIdHandler;
         private readonly Dictionary<Wonder, WonderConnection> m_wonders;
         private readonly int m_playerId;
         private TextLabel? m_moneyLabel;
         private TextLabel? m_pointLabel;
         private TextLabel? m_nameLabel;
         private GraphicsLayer? m_pickCardLayer;
+        private GraphicsLayer? m_newTurnLayer;
     }
 }

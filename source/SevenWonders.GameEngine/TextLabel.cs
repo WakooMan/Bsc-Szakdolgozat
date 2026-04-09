@@ -1,4 +1,3 @@
-using SevenWonders.Common;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Diagnostics.CodeAnalysis;
@@ -12,6 +11,7 @@ namespace SevenWonders.GameEngine
     {
         public int BackgroundTextureId { get; set; }
         public string Text { get; set; }
+        public bool Bold { get; set; }
         public float FontSize { get; set; }
 
         [XmlIgnore]
@@ -27,6 +27,7 @@ namespace SevenWonders.GameEngine
         {
             Name = string.Empty;
             Text = string.Empty;
+            Bold = false;
             Scale = new Vector2(1, 1);
             FontSize = 24f;
             TextColor = SKColors.White;
@@ -38,6 +39,7 @@ namespace SevenWonders.GameEngine
             Text = new string(other.Text);
             FontSize = other.FontSize;
             TextColor = other.TextColor;
+            Bold = other.Bold;
         }
 
         public bool Equals(TextLabel? other)
@@ -86,21 +88,27 @@ namespace SevenWonders.GameEngine
 
             if (!string.IsNullOrEmpty(Text))
             {
-                using var textPaint = new SKPaint
+                var typeface = SKTypeface.FromFamilyName(Bold? "CinzelBold" : "CinzelRegular");
+
+                using var font = new SKFont
                 {
-                    IsAntialias = true,
-                    Color = TextColor,
-                    TextSize = FontSize,
-                    TextAlign = SKTextAlign.Center,
-                    IsStroke = false,
-                    ColorFilter = Dimmed ? SKColorFilter.CreateBlendMode(
-                                    SKColors.Black.WithAlpha(120),
-                                    SKBlendMode.SrcOver
-                                ) : null
+                    Typeface = typeface,
+                    Size = FontSize,
+                    Edging = SKFontEdging.Antialias
                 };
 
-                float textY = textPaint.FontMetrics.CapHeight / 2;
-                canvas.DrawText(Text, 0, textY, textPaint);
+                using var textPaint = new SKPaint
+                {
+                    Color = TextColor,
+                    ColorFilter = Dimmed ? SKColorFilter.CreateBlendMode(
+                                SKColors.Black.WithAlpha(120),
+                                SKBlendMode.SrcOver
+                            ) : null
+                };
+
+                float textY = font.Metrics.CapHeight / 2;
+
+                canvas.DrawText(Text, 0, textY, SKTextAlign.Center, font, textPaint);
             }
 
             canvas.Restore();
