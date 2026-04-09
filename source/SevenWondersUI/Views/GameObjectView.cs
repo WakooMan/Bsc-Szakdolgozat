@@ -27,6 +27,11 @@ namespace SevenWondersUI.Views
             m_groupBuilder.Clear();
         }
 
+        public void SetVisible(bool visible)
+        {
+            m_gameObject.Visible = visible;
+        }
+
         private readonly IAnimationManager m_animationManager;
         private readonly IAnimationGroupBuilder m_groupBuilder;
         private readonly GameObject m_gameObject;

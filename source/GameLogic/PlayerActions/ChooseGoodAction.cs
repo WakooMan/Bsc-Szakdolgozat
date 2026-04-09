@@ -6,7 +6,7 @@ namespace GameLogic.PlayerActions
 {
     public class ChooseGoodAction : IPlayerAction
     {
-        public string Name => m_goodFactory.CreateGood().GetType().Name;
+        public string Name => m_goodFactory.GoodType.Name;
         public ChooseGoodAction() { }
         public ChooseGoodAction(GoodFactory goodFactory, Action<Good> setter)
         {

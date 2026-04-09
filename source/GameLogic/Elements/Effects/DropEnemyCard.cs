@@ -29,12 +29,12 @@ namespace GameLogic.Elements.Effects
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
-            await gameContext.EventManager.PublishAsync(new OnChooseCards(opponentPlayer.Cards));
+            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Drop Enemy Card", opponentPlayer.Cards.Select(card => card.Name).ToArray()));
             await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => {
                 IPlayerAction dropCard = new DropCard(opponentPlayer, card);
                 return dropCard;
             }).ToArray());
-            await gameContext.EventManager.PublishAsync(new OnCardChosen(opponentPlayer.Cards));
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen());
         }
     }
 }

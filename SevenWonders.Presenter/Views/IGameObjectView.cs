@@ -5,5 +5,7 @@
         bool IsDimmed { get; }
         IAnimationGroupBuilder GetAnimationGroupBuilder();
         Task Execute();
+
+        void SetVisible(bool visible);
     }
 }

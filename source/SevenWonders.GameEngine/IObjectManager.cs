@@ -10,6 +10,7 @@
         void AddTexture(Scene scene, Texture texture);
         GraphicsLayer CopyGraphicsLayer(Scene scene, GraphicsLayer graphicsLayer, string newName);
         GameObject CopyGameObject(Scene scene, GraphicsLayer graphicsLayer, GameObject gameObject, string newName);
+        GameObject CopyGameObject(GraphicsLayer graphicsLayer, GameObject gameObject, string newName);
         ButtonObject CopyButtonObject(Scene scene, GraphicsLayer graphicsLayer, ButtonObject button, string newName);
         TextLabel CopyTextLabel(Scene scene, GraphicsLayer graphicsLayer, TextLabel textLabel, string newName);
         TextureObject CopyTextureObject(Scene scene, GraphicsLayer graphicsLayer, TextureObject textureObject, string newName);

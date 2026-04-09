@@ -5,11 +5,12 @@ namespace SevenWonders.GameEngine
 {
     public class ObjectManager : IObjectManager
     {
-        public ObjectManager(IInputManager inputManager, ISceneLoader sceneFileHandler)
+        public ObjectManager(IInputManager inputManager, ISceneLoader sceneFileHandler, ISceneManager sceneManager)
         {
             m_subscribedInteractiveObjects = new Dictionary<IInteractiveObject, InteractiveObjectEvents>();
             m_inputManager = inputManager;
             m_sceneFileHandler = sceneFileHandler;
+            m_sceneManager = sceneManager;
         }
 
         public void AddInteractiveObject(Scene scene, GraphicsLayer graphicsLayer, IInteractiveObject interactiveObject)
@@ -99,6 +100,20 @@ namespace SevenWonders.GameEngine
             return result;
         }
 
+        public GameObject CopyGameObject(GraphicsLayer graphicsLayer, GameObject gameObject, string newName)
+        {
+            if (m_sceneManager.CurrentScene is not null)
+            {
+                GameLog.Info($"Copying GameObject \"{gameObject.Id} - {gameObject.Name}\" and changing it's name to \"{newName}\"...");
+                GameObject result = new GameObject(gameObject);
+                result.Name = newName;
+                AddSceneObject(m_sceneManager.CurrentScene, graphicsLayer, result);
+                return result;
+            }
+
+            throw new InvalidOperationException("There is no scene, that is active. Cannot copy the game object!");
+        }
+
         public TextureObject CopyTextureObject(Scene scene, GraphicsLayer graphicsLayer, TextureObject textureObject, string newName)
         {
             GameLog.Info($"Copying TextureObject \"{textureObject.Id} - {textureObject.Name}\" and changing it's name to \"{newName}\"...");
@@ -180,6 +195,7 @@ namespace SevenWonders.GameEngine
 
         private readonly IInputManager m_inputManager;
         private readonly ISceneLoader m_sceneFileHandler;
+        private readonly ISceneManager m_sceneManager;
         private readonly Dictionary<IInteractiveObject, InteractiveObjectEvents> m_subscribedInteractiveObjects;
     }
 }

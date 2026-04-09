@@ -9,5 +9,6 @@
         IPresenter CreateMilitaryBoardPresenter();
         IPresenter CreateDevelopmentPresenter();
         IPresenter CreateScreenPresenter();
+        IPresenter CreateChooseObjectPresenter();
     }
 }

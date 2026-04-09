@@ -10,7 +10,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
 {
     public class PresenterFactory : IPresenterFactory
     {
-        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory, IDevelopmentConnector developmentConnector)
+        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory, IDevelopmentConnector developmentConnector, IObjectManager objectManager)
         {
             m_cardConnector = cardConnector;
             m_wonderConnector = wonderConnector;
@@ -20,6 +20,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
             m_sceneManager = sceneManager;
             m_gameObjectViewFactory = gameObjectViewFactory;
             m_developmentConnector = developmentConnector;
+            m_objectManager = objectManager;
         }
 
         public IPresenter CreateCardPresenter()
@@ -57,6 +58,11 @@ namespace SevenWonders.Presenter.Presenters.Factories
             return new ScreenPresenter(m_gameEngineReceiver, m_eventManager);
         }
 
+        public IPresenter CreateChooseObjectPresenter()
+        {
+            return new ChooseObjectPresenter(m_gameEngineReceiver, m_eventManager, m_gameObjectViewFactory, m_objectManager);
+        }
+
         private readonly ICardConnector m_cardConnector;
         private readonly IWonderConnector m_wonderConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
@@ -65,5 +71,6 @@ namespace SevenWonders.Presenter.Presenters.Factories
         private readonly ISceneManager m_sceneManager;
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
         private readonly IDevelopmentConnector m_developmentConnector;
+        private readonly IObjectManager m_objectManager;
     }
 }

@@ -25,20 +25,20 @@ namespace GameLogic.Elements.Effects
 
         public override async Task Apply(IGameContext gameContext)
         {
-            var list = new List<Discipline>
+            var list = new List<IPlayerAction>
             {
-                new Building(),
-                new Geography(),
-                new Healing(),
-                new Mechanics(),
-                new Physics(),
-                new Trading(),
-                new Writing()
+                new ChooseDisciplineAction(new Building(), SetDiscipline),
+                new ChooseDisciplineAction(new Geography(), SetDiscipline),
+                new ChooseDisciplineAction(new Healing(), SetDiscipline),
+                new ChooseDisciplineAction(new Mechanics(), SetDiscipline),
+                new ChooseDisciplineAction(new Physics(), SetDiscipline),
+                new ChooseDisciplineAction(new Trading(), SetDiscipline),
+                new ChooseDisciplineAction(new Writing(), SetDiscipline)
             };
 
-            await gameContext.EventManager.PublishAsync(new OnChooseDiscipline(list));
-            await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, gameContext.TurnHandler.CurrentPlayer, list.Select(discipline => (IPlayerAction)new ChooseDisciplineAction(discipline, SetDiscipline)).ToList());
-            await gameContext.EventManager.PublishAsync(new OnDisciplineChosen(list));
+            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Discipline", list.Select(action => action.Name).ToArray()));
+            await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, gameContext.TurnHandler.CurrentPlayer, list);
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen());
         }
 
         private void SetDiscipline(Discipline discipline)

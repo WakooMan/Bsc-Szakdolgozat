@@ -68,26 +68,6 @@ namespace SevenWonders.Presenter.Presenters
             {
                 MoveToPlayer(eventObj.Player, eventObj.Development).GetAwaiter().GetResult();
             });
-
-            m_eventManager.Subscribe<OnChooseDevelopmentsBegin>(eventObj =>
-            {
-                foreach (Development development in eventObj.Developments)
-                {
-                    IGameObjectView gameObjectView = m_developments[development];
-                    gameObjectView.GetAnimationGroupBuilder().Unhighlight(true, 0f);
-                    gameObjectView.Execute().GetAwaiter().GetResult();
-                }
-            });
-
-            m_eventManager.Subscribe<OnChooseDevelopmentsEnd>(eventObj =>
-            {
-                foreach (Development development in eventObj.Developments)
-                {
-                    IGameObjectView gameObjectView = m_developments[development];
-                    gameObjectView.GetAnimationGroupBuilder().Unhighlight(false, 0f);
-                    gameObjectView.Execute().GetAwaiter().GetResult();
-                }
-            });
         }
 
         private async Task MoveToPlayer(Player player, Development development)
