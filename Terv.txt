@@ -9,8 +9,8 @@ GameObject-ek, amik kellenek:
 - Egyéb player action-ök -> Done
 - loading screen -> Done
 - fix id handling -> Done
-- PlayerTurn kezelés
-- New Turn
+- PlayerTurn kezelés -> Done
+- New Turn -> Done
 - Katonai effect-ek progress-nél
 - Choose fixes
 - Development-ek kezelése a játékosnál + felirat

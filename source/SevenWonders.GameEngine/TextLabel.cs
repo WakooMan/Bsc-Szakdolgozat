@@ -88,7 +88,10 @@ namespace SevenWonders.GameEngine
 
             if (!string.IsNullOrEmpty(Text))
             {
-                var typeface = SKTypeface.FromFamilyName(Bold? "CinzelBold" : "CinzelRegular");
+                var typeface = SKTypeface.FromFamilyName(Bold ? "CinzelBold" : "CinzelRegular",
+                                                         Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+                                                         SKFontStyleWidth.Normal,
+                                                         SKFontStyleSlant.Upright);
 
                 using var font = new SKFont
                 {
