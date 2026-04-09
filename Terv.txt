@@ -19,3 +19,4 @@ GameObject-ek, amik kellenek:
 - lila kártyák kezelése
 - Third age fixálása screen editor-ban majd
 - game over kezelés, amikor végig játszák a 3 kort
+- font resize
