@@ -19,8 +19,8 @@ namespace SevenWonders.Presenter.Connectors.MilitaryBoard
             GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(militaryCard.Name);
             if (gameObject is not null)
             {
-                Sprite? sprite = gameObject.Animations.FirstOrDefault();
-                if (sprite is not null)
+                Sprite? tokenSprite = gameObject.Animations.FirstOrDefault(s => s.Name == "Token");
+                if (tokenSprite is not null)
                 {
                     ChildObject? childObject = m_effectHandler.HandleEffect(militaryCard.EnemyLoseMoney, m_textureIdHandler).FirstOrDefault();
                     if (childObject is not null)
@@ -28,7 +28,20 @@ namespace SevenWonders.Presenter.Connectors.MilitaryBoard
                         childObject.WidthPercent = 0.6f;
                         childObject.HeightPercent = 0.6f;
                         childObject.PositionPercent = new Vector2(0.2f, 0.2f);
-                        sprite.AddChildObject(childObject);
+                        tokenSprite.AddChildObject(childObject);
+                    }
+                }
+
+                Sprite? backSprite = gameObject.Animations.FirstOrDefault(s => s.Name == "Back");
+                if (backSprite is not null)
+                {
+                    ChildObject? childObject = m_effectHandler.HandleEffect(militaryCard.VictoryPoints, m_textureIdHandler).FirstOrDefault();
+                    if (childObject is not null)
+                    {
+                        childObject.WidthPercent = 0.6f;
+                        childObject.HeightPercent = 0.6f;
+                        childObject.PositionPercent = new Vector2(0.2f, 0.2f);
+                        backSprite.AddChildObject(childObject);
                     }
                 }
             }

@@ -68,7 +68,11 @@ namespace SevenWonders.Presenter.Presenters
                 GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(militaryCard.Name);
                 if (gameObject is not null)
                 {
-                    gameObject.Visible = false;
+                    int spriteIdx = gameObject.Animations.FindIndex(anim => anim.Name == "Back");
+                    if (spriteIdx != -1)
+                    {
+                        gameObject.CurrentAnim = spriteIdx;
+                    }
                 }
             }
         }

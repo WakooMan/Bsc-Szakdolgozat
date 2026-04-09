@@ -14,10 +14,11 @@ GameObject-ek, amik kellenek:
 - Katonai effect-ek progress-nél -> Done
 - Discipline-ek számosság kezelése -> Done
 - Development-ek kezelése a játékosnál + felirat -> Done
-- Military token victory point kezelése
-- Choose fixes
-- game over kezelés, military és scientific-nél
+- Military token victory point kezelése -> Done
+- Choose fixes -> Done
 - lila kártyák kezelése
 - Third age fixálása screen editor-ban majd
+- game over kezelés, military és scientific-nél
 - game over kezelés, amikor végig játszák a 3 kort
 - font resize
+- Developments és Goods elrejtése amikor ki kell választani
