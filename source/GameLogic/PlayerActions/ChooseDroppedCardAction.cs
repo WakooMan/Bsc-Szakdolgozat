@@ -6,15 +6,15 @@ using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
 {
-    public class ChooseCardAction : IPlayerAction
+    public class ChooseDroppedCardAction : IPlayerAction
     {
         public string Name => m_card.Name;
-        public ChooseCardAction()
+        public ChooseDroppedCardAction()
         {
             m_card = new RedCard();
         }
 
-        public ChooseCardAction(Card card)
+        public ChooseDroppedCardAction(Card card)
         {
             m_card = card;
         }

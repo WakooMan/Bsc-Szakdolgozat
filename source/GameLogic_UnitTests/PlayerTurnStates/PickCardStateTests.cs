@@ -37,11 +37,11 @@ namespace GameLogic_UnitTests.PlayerTurnStates
             IPlayerAction playerAction = Substitute.For<IPlayerAction>();
             playerAction.CanPerform(m_gameContext).Returns(true);
             m_cardComposition.AvailableCards.Returns([]);
-            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(),Arg.Any<ICollection<ChooseCardAction>>()).Returns(playerAction);
+            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(),Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(playerAction);
 
             m_pickCardState.ExecuteTurnState();
 
-            m_playerActionReceiver.Received(1).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseCardAction>>());
+            m_playerActionReceiver.Received(1).ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseDroppedCardAction>>());
             playerAction.Received(1).CanPerform(m_gameContext);
             playerAction.Received(1).DoPlayerAction(m_gameContext);
         }

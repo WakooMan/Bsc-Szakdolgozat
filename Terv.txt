@@ -4,7 +4,6 @@ GameObject-ek, amik kellenek:
 - Object-ek a wonder építéshez -> Done
 - Fix z index issues with cards -> Done
 - Second Age fixálása scene editor-ban -> Done
-- Third age fixálása screen editor-ban majd
 - Fejlesztéseknek object-ek -> Done
 - Fejlesztés választás csodánál
 - Egyéb player action-ök
@@ -13,3 +12,5 @@ GameObject-ek, amik kellenek:
 - game over kezelés -> Done
 - loading screen -> Done
 - New Turn
+- fix id handling
+- Third age fixálása screen editor-ban majd

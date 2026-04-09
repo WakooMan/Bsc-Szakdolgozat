@@ -31,7 +31,7 @@ namespace GameLogic_UnitTests.Elements.Effects
             m_player = new Player();
             m_turnHandler.CurrentPlayer.Returns(m_player);
             m_playerAction.CanPerform(m_gameContext).Returns(true);
-            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseCardAction>>()).Returns(m_playerAction);
+            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(m_playerAction);
             m_gameContext.PlayerActionReceiver.Returns(m_playerActionReceiver);
             m_gameContext.TurnHandler.Returns(m_turnHandler);
             m_gameContext.EventManager.Returns(m_eventManager);
@@ -59,7 +59,7 @@ namespace GameLogic_UnitTests.Elements.Effects
 
             _ = m_turnHandler.Received(1).CurrentPlayer;
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<TurnStarted>>());
-            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseCardAction>>());
+            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             m_playerAction.Received(1).CanPerform(m_gameContext);
             m_playerAction.Received(1).DoPlayerAction(m_gameContext);
         }
@@ -74,7 +74,7 @@ namespace GameLogic_UnitTests.Elements.Effects
 
             _ = m_turnHandler.Received(1).CurrentPlayer;
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<TurnStarted>>());
-            m_playerActionReceiver.DidNotReceive().ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseCardAction>>());
+            m_playerActionReceiver.DidNotReceive().ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             m_playerAction.DidNotReceive().CanPerform(m_gameContext);
             m_playerAction.DidNotReceive().DoPlayerAction(m_gameContext);
         }

@@ -45,7 +45,7 @@ namespace GameLogic_UnitTests.PlayerActions
         public void When_CanPerform_Called_DroppedCardList_Is_Null()
         {
             m_gameContext.DroppedCardList.Returns(null as ICardList);
-            ChooseCardAction chooseCardAction = new ChooseCardAction(new RedCard());
+            ChooseDroppedCardAction chooseCardAction = new ChooseDroppedCardAction(new RedCard());
             Assert.That(chooseCardAction.CanPerform(m_gameContext), Is.False);
         }
 
@@ -55,7 +55,7 @@ namespace GameLogic_UnitTests.PlayerActions
             ICardList cardList = Substitute.For<ICardList>();
             cardList.Cards.Returns([]);
             m_gameContext.DroppedCardList.Returns(cardList);
-            ChooseCardAction chooseCardAction = new ChooseCardAction(new RedCard());
+            ChooseDroppedCardAction chooseCardAction = new ChooseDroppedCardAction(new RedCard());
             Assert.That(chooseCardAction.CanPerform(m_gameContext), Is.False);
         }
 
@@ -66,7 +66,7 @@ namespace GameLogic_UnitTests.PlayerActions
             ICardList cardList = Substitute.For<ICardList>();
             cardList.Cards.Returns([card]);
             m_gameContext.DroppedCardList.Returns(cardList);
-            ChooseCardAction chooseCardAction = new ChooseCardAction(card);
+            ChooseDroppedCardAction chooseCardAction = new ChooseDroppedCardAction(card);
             Assert.That(chooseCardAction.CanPerform(m_gameContext), Is.True);
         }
 
@@ -74,7 +74,7 @@ namespace GameLogic_UnitTests.PlayerActions
         public void When_DoPlayerAction_Called_And_DroppedCardList_Is_Null()
         {
             m_gameContext.DroppedCardList.Returns(null as ICardList);
-            ChooseCardAction chooseCardAction = new ChooseCardAction(new RedCard());
+            ChooseDroppedCardAction chooseCardAction = new ChooseDroppedCardAction(new RedCard());
             Assert.Throws<InvalidOperationException>(() => chooseCardAction.DoPlayerAction(m_gameContext));
         }
 
@@ -84,7 +84,7 @@ namespace GameLogic_UnitTests.PlayerActions
             ICardList cardList = Substitute.For<ICardList>();
             cardList.Cards.Returns([]);
             m_gameContext.DroppedCardList.Returns(cardList);
-            ChooseCardAction chooseCardAction = new ChooseCardAction(new RedCard());
+            ChooseDroppedCardAction chooseCardAction = new ChooseDroppedCardAction(new RedCard());
             Assert.Throws<InvalidOperationException>(() => chooseCardAction.DoPlayerAction(m_gameContext));
         }
 
@@ -96,7 +96,7 @@ namespace GameLogic_UnitTests.PlayerActions
             ICardList cardList = Substitute.For<ICardList>();
             cardList.Cards.Returns(cards);
             m_gameContext.DroppedCardList.Returns(cardList);
-            ChooseCardAction chooseCardAction = new ChooseCardAction(card);
+            ChooseDroppedCardAction chooseCardAction = new ChooseDroppedCardAction(card);
 
             chooseCardAction.DoPlayerAction(m_gameContext);
 

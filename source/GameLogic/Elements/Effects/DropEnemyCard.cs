@@ -1,4 +1,5 @@
-﻿using GameLogic.Interfaces;
+﻿using GameLogic.Events.GameEvents;
+using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
@@ -28,11 +29,12 @@ namespace GameLogic.Elements.Effects
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
-
+            await gameContext.EventManager.PublishAsync(new OnChooseCards(opponentPlayer.Cards));
             await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => {
                 IPlayerAction dropCard = new DropCard(opponentPlayer, card);
                 return dropCard;
             }).ToArray());
+            await gameContext.EventManager.PublishAsync(new OnCardChosen(opponentPlayer.Cards));
         }
     }
 }

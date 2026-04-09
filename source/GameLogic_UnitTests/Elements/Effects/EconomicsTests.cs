@@ -29,7 +29,7 @@ namespace GameLogic_UnitTests.Elements.Effects
             m_player = new Player();
             m_turnHandler.CurrentPlayer.Returns(m_player);
             m_playerAction.CanPerform(m_gameContext).Returns(true);
-            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseCardAction>>()).Returns(m_playerAction);
+            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(m_playerAction);
             m_gameContext.PlayerActionReceiver.Returns(m_playerActionReceiver);
             m_gameContext.TurnHandler.Returns(m_turnHandler);
             m_gameContext.EventManager.Returns(m_eventManager);
