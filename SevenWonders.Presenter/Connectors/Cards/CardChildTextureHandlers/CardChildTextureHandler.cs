@@ -5,18 +5,18 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class CardChildTextureHandler: ICardChildTextureHandler
     {
-        public CardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler)
+        public CardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler, ITextureIdHandler textureIdHandler)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_cardTypeTextureHandlers = new()
             {
-                { typeof(BlueCard),   new BlueCardChildTextureHandler(m_gameEngineReceiver) },
-                { typeof(BrownCard),  new BrownCardChildTextureHandler(m_gameEngineReceiver) },
-                { typeof(GrayCard),   new GrayCardChildTextureHandler(m_gameEngineReceiver) },
-                { typeof(GreenCard),  new GreenCardChildTextureHandler(m_gameEngineReceiver) },
-                { typeof(PurpleCard), new PurpleCardChildTextureHandler(m_gameEngineReceiver) },
-                { typeof(RedCard),    new RedCardChildTextureHandler(m_gameEngineReceiver) },
-                { typeof(YellowCard), new YellowCardChildTextureHandler(m_gameEngineReceiver, effectHandler) },
+                { typeof(BlueCard),   new BlueCardChildTextureHandler(m_gameEngineReceiver, textureIdHandler) },
+                { typeof(BrownCard),  new BrownCardChildTextureHandler(m_gameEngineReceiver, textureIdHandler) },
+                { typeof(GrayCard),   new GrayCardChildTextureHandler(m_gameEngineReceiver, textureIdHandler) },
+                { typeof(GreenCard),  new GreenCardChildTextureHandler(m_gameEngineReceiver, textureIdHandler) },
+                { typeof(PurpleCard), new PurpleCardChildTextureHandler(m_gameEngineReceiver, textureIdHandler) },
+                { typeof(RedCard),    new RedCardChildTextureHandler(m_gameEngineReceiver, textureIdHandler) },
+                { typeof(YellowCard), new YellowCardChildTextureHandler(m_gameEngineReceiver, effectHandler, textureIdHandler) },
             };
         }
 

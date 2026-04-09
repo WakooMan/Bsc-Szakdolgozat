@@ -6,7 +6,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class GrayCardChildTextureHandler : BaseCardChildTextureHandler<GrayCard>
     {
-        public GrayCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver) : base(TextureIdDictionary.GetTextureId("GrayCardHeader"), gameEngineReceiver)
+        public GrayCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, ITextureIdHandler textureIdHandler) : base("GrayCard", gameEngineReceiver, textureIdHandler)
         {
         }
 
@@ -24,7 +24,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 
             card.CreatedProducts.ForEach(product =>
             {
-                int productTextureId = TextureIdDictionary.GetTextureId(product.GetType().Name);
+                int productTextureId = m_textureIdHandler.GetTextureId(product.GetType().Name);
                 childObjects.Add(new ChildTexture
                 {
                     TextureId = productTextureId,

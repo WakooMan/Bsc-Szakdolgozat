@@ -8,10 +8,11 @@ namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
 {
     public class WonderChildTextureHandler : IWonderChildTextureHandler
     {
-        public WonderChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler)
+        public WonderChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler, ITextureIdHandler textureIdHandler)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_effectHandler = effectHandler;
+            m_textureIdHandler = textureIdHandler;
         }
 
         public void Handle(Wonder wonder)
@@ -30,7 +31,7 @@ namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
                             float sizePercent = 0.15f;
                             ChildTexture goodTexture = new ChildTexture
                             {
-                                TextureId = TextureIdDictionary.GetTextureId(good.GetType().Name),
+                                TextureId = m_textureIdHandler.GetTextureId(good.GetType().Name),
                                 WidthPercent = sizePercent,
                                 HeightPercent = sizePercent,
                                 PositionPercent = new Vector2(0f, 0.9f - i * sizePercent)
@@ -43,7 +44,7 @@ namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
                     List<ChildObject> childObjects = new List<ChildObject>();
                     wonder.Effects.ForEach(effect =>
                     {
-                        childObjects.AddRange(m_effectHandler.HandleEffect(effect));
+                        childObjects.AddRange(m_effectHandler.HandleEffect(effect, m_textureIdHandler));
                     });
 
                     if (childObjects.Any())
@@ -67,7 +68,7 @@ namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
                             Text = wonder.Name,
                             TextColor = SKColors.Wheat,
                             FontSize = 12,
-                            BackgroundTextureId = TextureIdDictionary.GetTextureId("CardNameBackground"),
+                            BackgroundTextureId = m_textureIdHandler.GetTextureId("CardNameBackground"),
                             Visible = true
                         },
                         WidthPercent = 0.6f,
@@ -83,5 +84,6 @@ namespace SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers
 
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEffectHandler m_effectHandler;
+        private readonly ITextureIdHandler m_textureIdHandler;
     }
 }

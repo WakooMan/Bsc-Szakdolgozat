@@ -1,5 +1,4 @@
 ﻿using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Goods;
 using SevenWonders.GameEngine;
 using SkiaSharp;
 using System.Numerics;
@@ -8,10 +7,11 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public abstract class BaseCardChildTextureHandler<TCard> : ICardChildTextureHandler where TCard : Card
     {
-        protected BaseCardChildTextureHandler(int textureId, IGameEngineReceiver gameEngineReceiver)
+        protected BaseCardChildTextureHandler(string textureName, IGameEngineReceiver gameEngineReceiver, ITextureIdHandler textureIdHandler)
         {
-            m_textureId = textureId;
+            m_textureName = textureName;
             m_gameEngineReceiver = gameEngineReceiver;
+            m_textureIdHandler = textureIdHandler;
         }
 
         public void Handle(Card card)
@@ -27,7 +27,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 
                 ChildTexture childTexture = new ChildTexture
                 {
-                    TextureId = m_textureId,
+                    TextureId = m_textureIdHandler.GetTextureId(m_textureName),
                     WidthPercent = 1.0f,
                     HeightPercent = 0.20f,
                     PositionPercent = new Vector2(0f, 0f)
@@ -43,7 +43,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                         float sizePercent = 0.15f;
                         ChildTexture goodTexture = new ChildTexture
                         {
-                            TextureId = TextureIdDictionary.GetTextureId(good.GetType().Name),
+                            TextureId = m_textureIdHandler.GetTextureId(good.GetType().Name),
                             WidthPercent = sizePercent,
                             HeightPercent = sizePercent,
                             PositionPercent = new Vector2(0f + i * sizePercent, yOffset)
@@ -65,7 +65,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                             Text = card.MoneyCost.ToString(),
                             TextColor = SKColors.Gold,
                             FontSize = 6,
-                            BackgroundTextureId = TextureIdDictionary.GetTextureId("Coin")
+                            BackgroundTextureId = m_textureIdHandler.GetTextureId("Coin")
                         },
                         WidthPercent = sizePercent,
                         HeightPercent = sizePercent,
@@ -81,7 +81,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                         Text = card.Name,
                         TextColor = SKColors.Wheat,
                         FontSize = 8,
-                        BackgroundTextureId = TextureIdDictionary.GetTextureId("CardNameBackground"),
+                        BackgroundTextureId = m_textureIdHandler.GetTextureId("CardNameBackground"),
                         Visible = true
                     },
                     WidthPercent = 0.6f,
@@ -96,7 +96,8 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 
         protected abstract void HandleCard(TCard card, GameObject gameObject);
 
-        private readonly int m_textureId;
+        private readonly string m_textureName;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
+        protected readonly ITextureIdHandler m_textureIdHandler;
     }
 }

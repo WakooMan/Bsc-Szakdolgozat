@@ -8,7 +8,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class BlueCardChildTextureHandler : BaseCardChildTextureHandler<BlueCard>
     {
-        public BlueCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver) : base(TextureIdDictionary.GetTextureId("BlueCardHeader"), gameEngineReceiver)
+        public BlueCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, ITextureIdHandler textureIdHandler) : base("BlueCard", gameEngineReceiver, textureIdHandler)
         {
         }
 
@@ -26,7 +26,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 
             if (card.Point.Points > 0)
             {
-                int victoryPointsTextureId = TextureIdDictionary.GetTextureId(nameof(VictoryPoints));
+                int victoryPointsTextureId = m_textureIdHandler.GetTextureId(nameof(VictoryPoints));
                 childObjects.Add(new ChildTextLabel
                 {
                     TextLabel = new TextLabel()

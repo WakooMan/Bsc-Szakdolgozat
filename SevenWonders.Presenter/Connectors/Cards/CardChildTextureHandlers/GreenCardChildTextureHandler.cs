@@ -8,7 +8,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class GreenCardChildTextureHandler : BaseCardChildTextureHandler<GreenCard>
     {
-        public GreenCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver) : base(TextureIdDictionary.GetTextureId("GreenCardHeader"), gameEngineReceiver)
+        public GreenCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, ITextureIdHandler textureIdHandler) : base("GreenCard", gameEngineReceiver, textureIdHandler)
         {
         }
 
@@ -24,7 +24,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
             float iconHeightPercent = 0.15f;
             List<ChildObject> childObjects = new List<ChildObject>();
 
-            int disciplineTextureId = TextureIdDictionary.GetTextureId(card.Discipline.GetType().Name);
+            int disciplineTextureId = m_textureIdHandler.GetTextureId(card.Discipline.GetType().Name);
             childObjects.Add(new ChildTexture
             {
                 TextureId = disciplineTextureId,
@@ -34,7 +34,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 
             if (card.Point.Points > 0)
             {
-                int victoryPointsTextureId = TextureIdDictionary.GetTextureId(nameof(VictoryPoints));
+                int victoryPointsTextureId = m_textureIdHandler.GetTextureId(nameof(VictoryPoints));
                 childObjects.Add(new ChildTextLabel
                 {
                     TextLabel = new TextLabel()

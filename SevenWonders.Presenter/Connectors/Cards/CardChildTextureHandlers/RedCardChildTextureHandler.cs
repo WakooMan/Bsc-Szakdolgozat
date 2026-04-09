@@ -6,7 +6,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class RedCardChildTextureHandler: BaseCardChildTextureHandler<RedCard>
     {
-        public RedCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver) : base(TextureIdDictionary.GetTextureId("RedCardHeader"), gameEngineReceiver)
+        public RedCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, ITextureIdHandler textureIdHandler) : base("RedCard", gameEngineReceiver, textureIdHandler)
         {
         }
 
@@ -24,7 +24,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                 return;
             }
 
-            int strengthTextureId = TextureIdDictionary.GetTextureId("Strength");
+            int strengthTextureId = m_textureIdHandler.GetTextureId("Military");
 
             float iconWidthPercent = 0.15f;
             float iconHeightPercent = 0.15f;

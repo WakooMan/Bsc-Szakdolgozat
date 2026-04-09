@@ -8,7 +8,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class BrownCardChildTextureHandler: BaseCardChildTextureHandler<BrownCard>
     {
-        public BrownCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver) : base(TextureIdDictionary.GetTextureId("BrownCardHeader"), gameEngineReceiver)
+        public BrownCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, ITextureIdHandler textureIdHandler) : base("BrownCard", gameEngineReceiver, textureIdHandler)
         {
         }
 
@@ -26,7 +26,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 
             card.ProducedResources.ForEach(resource =>
             {
-                int resourceTextureId = TextureIdDictionary.GetTextureId(resource.GetType().Name);
+                int resourceTextureId = m_textureIdHandler.GetTextureId(resource.GetType().Name);
                 childObjects.Add(new ChildTexture
                 {
                     TextureId = resourceTextureId,

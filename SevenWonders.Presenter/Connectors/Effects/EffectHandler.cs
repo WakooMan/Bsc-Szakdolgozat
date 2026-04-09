@@ -7,21 +7,21 @@ namespace SevenWonders.Presenter.Connectors.Effects
 {
     public class EffectHandler : IEffectHandler
     {
-        public ICollection<ChildObject> HandleEffect(Effect effect)
+        public ICollection<ChildObject> HandleEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
-            if (m_effectHandlers.TryGetValue(effect.GetType(), out Func<Effect, ICollection<ChildObject>>? handler))
+            if (m_effectHandlers.TryGetValue(effect.GetType(), out Func<Effect, ITextureIdHandler, ICollection<ChildObject>>? handler))
             {
-                return handler(effect);
+                return handler(effect, textureIdHandler);
             }
 
             return [];
         }
 
-        private static ICollection<ChildObject> HandleVictoryPointEffect(Effect effect)
+        private static ICollection<ChildObject> HandleVictoryPointEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
             if (effect is VictoryPoints victoryPoints)
             {
-                int victoryPointsTextureId = TextureIdDictionary.GetTextureId(nameof(VictoryPoints));
+                int victoryPointsTextureId = textureIdHandler.GetTextureId(nameof(VictoryPoints));
                 return new List<ChildObject>
                 {
                     new ChildTextLabel
@@ -42,7 +42,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleChooseGoodEffect(Effect effect)
+        private static ICollection<ChildObject> HandleChooseGoodEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
 
             if (effect is ChooseGood chooseGood)
@@ -53,7 +53,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                 {
                     if (!isFirst)
                     {
-                        int slashTextureId = TextureIdDictionary.GetTextureId("Slash");
+                        int slashTextureId = textureIdHandler.GetTextureId("Slash");
                         childObjects.Add(new ChildTexture
                         {
                             TextureId = slashTextureId,
@@ -65,7 +65,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                     {
                         isFirst = false;
                     }
-                    int goodTextureId = TextureIdDictionary.GetTextureId(goodFactory.CreateGood().GetType().Name);
+                    int goodTextureId = textureIdHandler.GetTextureId(goodFactory.CreateGood().GetType().Name);
                     childObjects.Add(new ChildTexture
                     {
                         TextureId = goodTextureId,
@@ -78,7 +78,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleBuyGoodsEffect(Effect effect)
+        private static ICollection<ChildObject> HandleBuyGoodsEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
 
             if (effect is BuyGoods buyGood)
@@ -88,7 +88,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                 {
                     if (buyGoodItem.MoneyCost > 0)
                     {
-                        int coinTextureId = TextureIdDictionary.GetTextureId("Coin");
+                        int coinTextureId = textureIdHandler.GetTextureId("Coin");
                         childObjects.Add(new ChildTextLabel
                         {
                             TextLabel = new TextLabel()
@@ -104,7 +104,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                         });
                     }
 
-                    int goodTextureId = TextureIdDictionary.GetTextureId(buyGoodItem.GoodType);
+                    int goodTextureId = textureIdHandler.GetTextureId(buyGoodItem.GoodType);
                     childObjects.Add(new ChildTexture
                     {
                         TextureId = goodTextureId,
@@ -117,7 +117,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleGetMoneyForCardEffect(Effect effect)
+        private static ICollection<ChildObject> HandleGetMoneyForCardEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
 
             if (effect is GetMoneyForCard getMoneyForCard)
@@ -125,7 +125,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                 List<ChildObject> childObjects = new List<ChildObject>();
                 if (getMoneyForCard.MoneyPerCard > 0)
                 {
-                    int coinTextureId = TextureIdDictionary.GetTextureId("Coin");
+                    int coinTextureId = textureIdHandler.GetTextureId("Coin");
                     childObjects.Add(new ChildTextLabel
                     {
                         TextLabel = new TextLabel()
@@ -141,7 +141,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                     });
                 }
 
-                int cardTextureId = TextureIdDictionary.GetTextureId(getMoneyForCard.CardType);
+                int cardTextureId = textureIdHandler.GetTextureId(getMoneyForCard.CardType);
                 childObjects.Add(new ChildTexture
                 {
                     TextureId = cardTextureId,
@@ -153,7 +153,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleGetMoneyEffect(Effect effect)
+        private static ICollection<ChildObject> HandleGetMoneyEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
 
             if (effect is GetMoney getMoney)
@@ -161,7 +161,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                 List<ChildObject> childObjects = new List<ChildObject>();
                 if (getMoney.Money > 0)
                 {
-                    int coinTextureId = TextureIdDictionary.GetTextureId("Coin");
+                    int coinTextureId = textureIdHandler.GetTextureId("Coin");
                     childObjects.Add(new ChildTextLabel
                     {
                         TextLabel = new TextLabel()
@@ -181,7 +181,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleGetMoneyForWondersEffect(Effect effect)
+        private static ICollection<ChildObject> HandleGetMoneyForWondersEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
 
             if (effect is GetMoneyForWonders getMoneyForWonders)
@@ -189,7 +189,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
                 List<ChildObject> childObjects = new List<ChildObject>();
                 if (getMoneyForWonders.MoneyPerWonder > 0)
                 {
-                    int coinTextureId = TextureIdDictionary.GetTextureId("Coin");
+                    int coinTextureId = textureIdHandler.GetTextureId("Coin");
                     childObjects.Add(new ChildTextLabel
                     {
                         TextLabel = new TextLabel()
@@ -206,7 +206,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
 
                     childObjects.Add(new ChildTexture
                     {
-                        TextureId = TextureIdDictionary.GetTextureId(nameof(GetMoneyForWonders)),
+                        TextureId = textureIdHandler.GetTextureId(nameof(GetMoneyForWonders)),
                         WidthPercent = 0.15f,
                         HeightPercent = 0.15f,
                     });
@@ -216,13 +216,13 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleEnemyLoseMoneyEffect(Effect effect)
+        private static ICollection<ChildObject> HandleEnemyLoseMoneyEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
             if (effect is EnemyLoseMoney enemyLoseMoney)
             {
                 if (enemyLoseMoney.Money > 0)
                 {
-                    int coinTextureId = TextureIdDictionary.GetTextureId(nameof(EnemyLoseMoney));
+                    int coinTextureId = textureIdHandler.GetTextureId(nameof(EnemyLoseMoney));
                     return [new ChildTextLabel
                     {
                         TextLabel = new TextLabel()
@@ -241,11 +241,11 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleNewTurnEffect(Effect effect)
+        private static ICollection<ChildObject> HandleNewTurnEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
             if (effect is NewTurn newTurn)
             {
-                int textureId = TextureIdDictionary.GetTextureId(nameof(NewTurn));
+                int textureId = textureIdHandler.GetTextureId(nameof(NewTurn));
                 return [new ChildTexture
                 {
                     TextureId = textureId,
@@ -256,11 +256,11 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleBuildFreeFromDroppedCardsEffect(Effect effect)
+        private static ICollection<ChildObject> HandleBuildFreeFromDroppedCardsEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
             if (effect is BuildFreeFromDroppedCards buildFreeFromDroppedCards)
             {
-                int textureId = TextureIdDictionary.GetTextureId(nameof(BuildFreeFromDroppedCards));
+                int textureId = textureIdHandler.GetTextureId(nameof(BuildFreeFromDroppedCards));
                 return [new ChildTexture
                 {
                     TextureId = textureId,
@@ -271,11 +271,11 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleDropEnemyCardEffect(Effect effect)
+        private static ICollection<ChildObject> HandleDropEnemyCardEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
             if (effect is DropEnemyCard dropEnemyCard)
             {
-                int textureId = TextureIdDictionary.GetTextureId(dropEnemyCard.CardType + nameof(DropEnemyCard));
+                int textureId = textureIdHandler.GetTextureId(dropEnemyCard.CardType + nameof(DropEnemyCard));
                 return [new ChildTexture
                 {
                     TextureId = textureId,
@@ -286,11 +286,11 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private static ICollection<ChildObject> HandleChooseDevelopmentEffect(Effect effect)
+        private static ICollection<ChildObject> HandleChooseDevelopmentEffect(Effect effect, ITextureIdHandler textureIdHandler)
         {
             if (effect is ChooseDevelopment chooseDevelopment)
             {
-                int textureId = TextureIdDictionary.GetTextureId(nameof(ChooseDevelopment));
+                int textureId = textureIdHandler.GetTextureId("developmentbackground");
                 return [new ChildTexture
                 {
                     TextureId = textureId,
@@ -301,7 +301,7 @@ namespace SevenWonders.Presenter.Connectors.Effects
             return [];
         }
 
-        private readonly Dictionary<Type, Func<Effect, ICollection<ChildObject>>> m_effectHandlers = new Dictionary<Type, Func<Effect, ICollection<ChildObject>>>()
+        private readonly Dictionary<Type, Func<Effect, ITextureIdHandler, ICollection<ChildObject>>> m_effectHandlers = new Dictionary<Type, Func<Effect, ITextureIdHandler, ICollection<ChildObject>>>()
         {
             { typeof(VictoryPoints), HandleVictoryPointEffect },
             { typeof(ChooseGood), HandleChooseGoodEffect },

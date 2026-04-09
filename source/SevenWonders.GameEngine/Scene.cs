@@ -10,7 +10,9 @@ namespace SevenWonders.GameEngine
         public Guid Id { get; set; }
         [XmlIgnore]
         public HashSet<int> UsedIds => Layers
-                .SelectMany(layer => layer.SceneObjects.Select(o => o.Id))
+                .Select(layer => layer.Id)
+                .Concat(Textures.Select(texture => texture.Id))
+                .Concat(Layers.SelectMany(layer => layer.SceneObjects.Select(sceneObject => sceneObject.Id)))
                 .ToHashSet();
         public List<GraphicsLayer> Layers { get; set; }
         public List<Texture> Textures { get; set; }
@@ -116,7 +118,7 @@ namespace SevenWonders.GameEngine
             Resolution = newResolution;
         }
 
-        private void InitializeTextureRegistry()
+        public void InitializeTextureRegistry()
         {
             TextureRegistry.Clear();
             TextureRegistry.Register(Textures);

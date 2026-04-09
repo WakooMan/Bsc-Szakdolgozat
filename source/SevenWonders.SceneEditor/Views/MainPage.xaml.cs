@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
+using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
@@ -27,6 +28,7 @@ namespace SevenWonders.SceneEditor.Views
             foreach (Scene scene in m_sceneLoader.LoadScenes().GetAwaiter().GetResult())
             {
                 m_engine.SceneManager.RegisterScene(scene);
+                SceneIdHandler.OrderIds(scene);
             }
             m_currentPopup = null;
             SizeChanged += MainPage_SizeChanged;

@@ -10,7 +10,7 @@ namespace SevenWonders.Presenter.Presenters
 {
     public class MilitaryBoardPresenter : IPresenter
     {
-        public MilitaryBoardPresenter(IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IGameObjectViewFactory gameObjectViewFactory)
+        public MilitaryBoardPresenter(IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IGameObjectViewFactory gameObjectViewFactory, ITextureIdHandler textureIdHandler)
         {
             m_eventManager = eventManager;
             m_gameEngineReceiver = gameEngineReceiver;
@@ -18,6 +18,7 @@ namespace SevenWonders.Presenter.Presenters
             m_militaryObjects = new List<GameObject>();
             m_player1ScientificObjects = new List<GameObject>();
             m_player2ScientificObjects = new List<GameObject>();
+            m_textureIdHandler = textureIdHandler;
         }
 
         public void Initialize()
@@ -66,9 +67,9 @@ namespace SevenWonders.Presenter.Presenters
             if (anim is not null)
             {
                 var frame = anim.Frames.FirstOrDefault();
-                if (frame is not null && frame.TextureId != TextureIdDictionary.GetTextureId(type.Name))
+                if (frame is not null && frame.TextureId != m_textureIdHandler.GetTextureId(type.Name))
                 {
-                    frame.TextureId = TextureIdDictionary.GetTextureId(type.Name);
+                    frame.TextureId = m_textureIdHandler.GetTextureId(type.Name);
                     gameObject.Visible = true;
                 }
             }
@@ -81,5 +82,6 @@ namespace SevenWonders.Presenter.Presenters
         private readonly IEventManager m_eventManager;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
+        private readonly ITextureIdHandler m_textureIdHandler;
     }
 }

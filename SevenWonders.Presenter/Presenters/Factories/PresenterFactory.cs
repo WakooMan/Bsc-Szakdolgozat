@@ -10,7 +10,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
 {
     public class PresenterFactory : IPresenterFactory
     {
-        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory, IDevelopmentConnector developmentConnector, IObjectManager objectManager)
+        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory, IDevelopmentConnector developmentConnector, IObjectManager objectManager, ITextureIdHandler textureIdHandler)
         {
             m_cardConnector = cardConnector;
             m_wonderConnector = wonderConnector;
@@ -21,6 +21,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
             m_gameObjectViewFactory = gameObjectViewFactory;
             m_developmentConnector = developmentConnector;
             m_objectManager = objectManager;
+            m_textureIdHandler = textureIdHandler;
         }
 
         public IPresenter CreateCardPresenter()
@@ -45,7 +46,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
 
         public IPresenter CreateMilitaryBoardPresenter()
         {
-            return new MilitaryBoardPresenter(m_gameEngineReceiver, m_eventManager, m_gameObjectViewFactory);
+            return new MilitaryBoardPresenter(m_gameEngineReceiver, m_eventManager, m_gameObjectViewFactory, m_textureIdHandler);
         }
 
         public IPresenter CreateDevelopmentPresenter()
@@ -72,5 +73,6 @@ namespace SevenWonders.Presenter.Presenters.Factories
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
         private readonly IDevelopmentConnector m_developmentConnector;
         private readonly IObjectManager m_objectManager;
+        private readonly ITextureIdHandler m_textureIdHandler;
     }
 }

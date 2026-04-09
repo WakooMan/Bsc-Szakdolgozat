@@ -5,6 +5,6 @@ namespace SevenWonders.Presenter.Connectors.Effects
 {
     public interface IEffectHandler
     {
-        ICollection<ChildObject> HandleEffect(Effect effect);
+        ICollection<ChildObject> HandleEffect(Effect effect, ITextureIdHandler textureIdHandler);
     }
 }

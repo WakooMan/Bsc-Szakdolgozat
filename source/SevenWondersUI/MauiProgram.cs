@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
+using SevenWonders.Presenter;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Cards;
 using SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers;
@@ -80,6 +81,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IGameEngineReceiver), typeof(GameEngineReceiver));
         builder.Services.AddSingleton(typeof(ICardChildTextureHandler), typeof(CardChildTextureHandler));
         builder.Services.AddSingleton(typeof(IDevelopmentConnector), typeof(DevelopmentConnector));
+        builder.Services.AddSingleton(typeof(ITextureIdHandler), typeof(TextureIdHandler));
 
         builder.Services.AddSingleton(typeof(IEffectHandler), typeof(EffectHandler));
         builder.Services.AddSingleton(typeof(IPlayerCardHandlerFactory), typeof(PlayerCardHandlerFactory));

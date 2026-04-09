@@ -5,7 +5,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class PurpleCardChildTextureHandler: BaseCardChildTextureHandler<PurpleCard>
     {
-        public PurpleCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver) : base(TextureIdDictionary.GetTextureId("PurpleCardHeader"), gameEngineReceiver)
+        public PurpleCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, ITextureIdHandler textureIdHandler) : base("PurpleCard", gameEngineReceiver, textureIdHandler)
         {
         }
 

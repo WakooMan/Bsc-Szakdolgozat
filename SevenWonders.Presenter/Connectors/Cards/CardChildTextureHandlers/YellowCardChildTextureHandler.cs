@@ -12,7 +12,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
 {
     public class YellowCardChildTextureHandler: BaseCardChildTextureHandler<YellowCard>
     {
-        public YellowCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler) : base(TextureIdDictionary.GetTextureId("YellowCardHeader"), gameEngineReceiver)
+        public YellowCardChildTextureHandler(IGameEngineReceiver gameEngineReceiver, IEffectHandler effectHandler, ITextureIdHandler textureIdHandler) : base("YellowCard", gameEngineReceiver, textureIdHandler)
         {
             m_effectHandler = effectHandler;
         }
@@ -22,7 +22,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
             List<ChildObject> childObjects = new List<ChildObject>();
             card.Effects.ForEach(effect =>
             {
-               childObjects.AddRange(m_effectHandler.HandleEffect(effect));
+               childObjects.AddRange(m_effectHandler.HandleEffect(effect, m_textureIdHandler));
             });
 
             Sprite? frontSprite = gameObject.Animations.FirstOrDefault(s => s.Name == "front");
