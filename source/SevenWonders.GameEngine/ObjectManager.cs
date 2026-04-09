@@ -51,6 +51,27 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Added \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
         }
 
+        public void AddSceneObject(GraphicsLayer graphicsLayer, SceneObject sceneObject)
+        {
+            if (m_sceneManager.CurrentScene is not null)
+            {
+                if (!m_sceneManager.CurrentScene.Layers.Contains(graphicsLayer))
+                {
+                    throw new InvalidOperationException("The given scene does not contain the given graphics layer!");
+                }
+
+                GameLog.Info($"Adding \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
+                sceneObject.Id = GetNextUniqueId(m_sceneManager.CurrentScene);
+                graphicsLayer.AddSceneObject(sceneObject);
+                GameLog.Info($"Added \"{sceneObject.GetType().Name} - {sceneObject.Id} - {sceneObject.Name}\" to layer \"{graphicsLayer.Id} - {graphicsLayer.Name}\"");
+            }
+            else
+            {
+
+                throw new InvalidOperationException("There is no scene, that is active. Cannot copy the game object!");
+            }
+        }
+
         public void RemoveSceneObject(GraphicsLayer graphicsLayer, SceneObject sceneObject)
         {
             if (graphicsLayer.SceneObjects.Contains(sceneObject))

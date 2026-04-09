@@ -47,7 +47,7 @@ namespace GameLogic.Handlers
 
             foreach (Good good in missing)
             {
-                List<BuyGoodItem> items = onBuildingCostCalculated.BuyGoodItems.Where(item => good.GetType().Name == item.GoodType).ToList();
+                List<BuyGoodItem> items = onBuildingCostCalculated.BuyGoodItems.Where(item => good.GetType().Name == (item?.GoodType ?? "None")).ToList();
                 int enemyGoodNumber = opponentGoods.ContainsKey(good.GetType()) ? opponentGoods[good.GetType()].Amount : 0;
                 int price = items.Count > 0 ? GetDiscount(items) : 2 + enemyGoodNumber;
                 totalCost += price * good.Amount;

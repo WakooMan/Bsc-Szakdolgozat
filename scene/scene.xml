@@ -142,7 +142,7 @@
           <Name>ChooseObjectCenterTarget</Name>
           <Id>417</Id>
           <ZIndex>3</ZIndex>
-          <Visible>true</Visible>
+          <Visible>false</Visible>
           <Position>
             <X>1920</X>
             <Y>1080</Y>
@@ -5053,7 +5053,7 @@
       <EnableCollision>true</EnableCollision>
       <Name>Developments</Name>
       <Id>242</Id>
-      <ZIndex>2</ZIndex>
+      <ZIndex>5</ZIndex>
       <SceneObjectsProxy>
         <SceneObject xsi:type="GameObject">
           <Name>Gazdaság</Name>

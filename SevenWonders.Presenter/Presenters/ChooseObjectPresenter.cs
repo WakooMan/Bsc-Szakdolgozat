@@ -18,6 +18,7 @@ namespace SevenWonders.Presenter.Presenters
             m_eventManager = eventManager;
             m_gameObjectViewFactory = gameObjectViewFactory;
             m_objectCache = new List<(IGameObjectView objectView, GameObject previousPosTarget)>();
+            m_objectManager = objectManager;
             m_currentObject = -1;
         }
 
@@ -43,8 +44,15 @@ namespace SevenWonders.Presenter.Presenters
                 {
                     GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(objectName);
                     IGameObjectView gameObjectView = m_gameObjectViewFactory.CreateView(objectName);
-                    GameObject previousPosTarget = m_objectManager.CopyGameObject(m_chooseObjectLayer, gameObject, gameObject.Name + "previousPositionTarget");
-                    previousPosTarget.Visible = false;
+                    GameObject previousPosTarget = new GameObject()
+                    {
+                        Name = gameObject.Name + "previousPositionTarget",
+                        Visible = false,
+                        Rotation = gameObject.Rotation,
+                        Position = gameObject.Position,
+                        ZIndex = gameObject.ZIndex,
+                    };
+                    m_objectManager.AddSceneObject(m_chooseObjectLayer, previousPosTarget);
                     m_objectCache.Add((gameObjectView, previousPosTarget));
                     gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, 0.5f);
                     gameObjectView.Execute().GetAwaiter().GetResult();
@@ -108,8 +116,8 @@ namespace SevenWonders.Presenter.Presenters
                 m_objectCache[i].objectView.SetVisible((m_currentObject == i) ? true : false);
             }
 
-            m_previousElement.Dimmed = CanClickPreviousElement();
-            m_nextElement.Dimmed = CanClickNextElement();
+            m_previousElement.Dimmed = !CanClickPreviousElement();
+            m_nextElement.Dimmed = !CanClickNextElement();
         }
 
         private GraphicsLayer? m_chooseObjectLayer;

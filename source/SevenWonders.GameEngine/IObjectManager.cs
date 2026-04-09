@@ -5,6 +5,8 @@
         void AddInteractiveObject(Scene scene, GraphicsLayer graphicsLayer, IInteractiveObject interactiveObject);
         void RemoveInteractiveObject(GraphicsLayer graphicsLayer, IInteractiveObject interactiveObject);
         void AddSceneObject(Scene scene, GraphicsLayer graphicsLayer, SceneObject sceneObject);
+
+        void AddSceneObject(GraphicsLayer graphicsLayer, SceneObject sceneObject);
         void RemoveSceneObject(GraphicsLayer graphicsLayer, SceneObject sceneObject);
         void AddGraphicsLayer(Scene scene, GraphicsLayer graphicsLayer);
         void AddTexture(Scene scene, Texture texture);
