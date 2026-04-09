@@ -71,9 +71,13 @@ namespace SevenWonders.Presenter.Presenters
                 foreach (var cache in m_objectCache)
                 {
                     IGameObjectView gameObjectView = cache.objectView;
-                    gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, 0.5f);
-                    gameObjectView.Execute().GetAwaiter().GetResult();
-                    m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
+                    if (eventObj.Objects.Contains(gameObjectView.Name))
+                    {
+                        gameObjectView.SetVisible(true);
+                        gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, 0.5f);
+                        gameObjectView.Execute().GetAwaiter().GetResult();
+                        m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
+                    }
                 }
                 m_chooseObjectLayer.Visible = false;
                 m_objectCache.Clear();

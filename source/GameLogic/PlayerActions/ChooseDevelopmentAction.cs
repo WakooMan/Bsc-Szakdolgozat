@@ -31,10 +31,11 @@ namespace GameLogic.PlayerActions
             ArgumentChecker.CheckPredicateForOperation(() => !m_developments.Contains(m_development), "Cannot perform action, because development list does not contain the development!");
 
             m_player.Developments.Add(m_development);
-           m_development.OnDevelopmentEstablished(gameContext);
-           m_developments.Remove(m_development);
-           await gameContext.EventManager.PublishAsync(new OnPlayerDevelopmentReceived(m_player, m_development));
-           return true;
+            m_developments.Remove(m_development);
+            await gameContext.EventManager.PublishAsync(new OnPlayerDevelopmentReceived(m_player, m_development));
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray()));
+            m_development.OnDevelopmentEstablished(gameContext);
+            return true;
         }
 
         private readonly List<Development> m_developments;

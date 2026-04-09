@@ -37,8 +37,8 @@ namespace GameLogic.Elements.Effects
             };
 
             await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Discipline", list.Select(action => action.Name).ToArray()));
-            await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, gameContext.TurnHandler.CurrentPlayer, list);
-            await gameContext.EventManager.PublishAsync(new OnObjectChosen());
+            await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, gameContext.TurnHandler.CurrentPlayer, list);
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen(list.Select(action => action.Name).ToArray()));
         }
 
         private void SetDiscipline(Discipline discipline)

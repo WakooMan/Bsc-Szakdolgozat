@@ -78,11 +78,10 @@ namespace GameLogic.Elements.Military
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
                 await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Development", Developments.Select(dev => dev.Name).ToArray()));
-                await gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(gameContext, eventArgs.Player, Developments.Select(dev => {
+                await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, eventArgs.Player, Developments.Select(dev => {
                     IPlayerAction action = new ChooseDevelopmentAction(eventArgs.Player, dev, Developments);
                     return action;
                 }).ToArray());
-                await gameContext.EventManager.PublishAsync(new OnObjectChosen());
             }
 
             if (disciplines.Count >= 6)

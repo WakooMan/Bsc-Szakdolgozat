@@ -51,7 +51,7 @@ namespace GameLogic.Handlers
 
             if (actions.Count > 1)
             {
-                playerAction = await m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
+                (bool completed, playerAction) = await m_gameContext.PlayerActionHandler.HandlePlayerActions(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
             }
             else
             {

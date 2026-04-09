@@ -2,6 +2,7 @@
 {
     public interface IGameObjectView
     {
+        string Name { get; }
         bool IsDimmed { get; }
         IAnimationGroupBuilder GetAnimationGroupBuilder();
         Task Execute();

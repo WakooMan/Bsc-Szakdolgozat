@@ -7,6 +7,7 @@ namespace SevenWondersUI.Views
 {
     public class GameObjectView : IGameObjectView
     {
+        public string Name => m_gameObject.Name;
         public bool IsDimmed =>m_gameObject.Dimmed;
 
         public GameObjectView(GameObject wonder, IAnimationManager animationManager, IAnimationGroupBuilderFactory animationGroupBuilderFactory)
