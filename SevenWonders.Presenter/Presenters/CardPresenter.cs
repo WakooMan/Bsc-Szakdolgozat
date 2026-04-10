@@ -120,6 +120,14 @@ namespace SevenWonders.Presenter.Presenters
                 }
                 MoveToPlayer(eventObj.Builder, eventObj.Card).GetAwaiter().GetResult();
             });
+            m_eventManager.Subscribe<OnCardDestroyed>(eventObj =>
+            {
+                if (m_pickCardLayer is not null)
+                {
+                    m_pickCardLayer.Visible = false;
+                }
+                MoveToDropCardDeck(eventObj.Card).GetAwaiter().GetResult();
+            });
             m_eventManager.Subscribe<OnCardSold>(eventObj => {
                 if (m_pickCardLayer is not null)
                 {

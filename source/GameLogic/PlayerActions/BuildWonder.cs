@@ -32,8 +32,8 @@ namespace GameLogic.PlayerActions
             Card card = player.PickedCard.CardObj;
             player.PickedCard = null;
             await gameContext.EventManager.PublishAsync(new OnWonderBuilt(player, card, m_wonder));
-            await m_wonder.OnBuilt(gameContext);
-
+            await m_wonder.OnBuilt(gameContext, player.Id);
+            await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, m_wonder));
             return true;
         }
 

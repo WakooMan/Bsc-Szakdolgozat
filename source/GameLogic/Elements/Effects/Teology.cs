@@ -11,7 +11,7 @@ namespace GameLogic.Elements.Effects
             return new Teology();
         }
 
-        public override Task Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
             gameContext.EventManager.Subscribe<OnWonderBuilt>((args) => OnWonderBuilt(player, args));

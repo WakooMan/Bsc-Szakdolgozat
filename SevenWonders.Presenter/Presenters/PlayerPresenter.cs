@@ -43,7 +43,7 @@ namespace SevenWonders.Presenter.Presenters
         {
             m_eventManager.Subscribe<OnGameStarted>(OnGameStarted);
             m_eventManager.Subscribe<OnCardSold>(OnCardSold);
-            m_eventManager.Subscribe<OnCardBuilt>(OnCardBuilt);
+            m_eventManager.Subscribe<AfterBuildableBuilt>(AfterBuildableBuilt);
             m_eventManager.Subscribe<OnBuildWonderProcessStart>(OnBuildWonderProcessStart);
             m_eventManager.Subscribe<OnBuildWonderProcessEnd>(OnBuildWonderProcessEnd);
             m_eventManager.Subscribe<ExtraTurnGranted>(OnExtraTurnGranted);
@@ -97,7 +97,7 @@ namespace SevenWonders.Presenter.Presenters
                 if(m_moneyLabel is not null && m_pointLabel is not null && m_nameLabel is not null)
                 {
                     m_moneyLabel.Text = player.Money.ToString();
-                    m_pointLabel.Text = player.VictoryPoints.ToString();
+                    m_pointLabel.Text = player.GetPlayerProperties().GetAwaiter().GetResult().VictoryPoints.ToString();
                     m_nameLabel.Text = player.Name;
                 }
             }
@@ -115,14 +115,14 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        private void OnCardBuilt(OnCardBuilt e)
+        private void AfterBuildableBuilt(AfterBuildableBuilt e)
         {
             if (e.Builder.Id == m_playerId)
             {
                 if (m_moneyLabel is not null && m_pointLabel is not null)
                 {
                     m_moneyLabel.Text = e.Builder.Money.ToString();
-                    m_pointLabel.Text = e.Builder.VictoryPoints.ToString();
+                    m_pointLabel.Text = e.Builder.GetPlayerProperties().GetAwaiter().GetResult().VictoryPoints.ToString();
                     //Todo: animation for money decrease, point increase
                 }
             }

@@ -37,7 +37,7 @@ namespace GameLogic.PlayerActions
             player.Cards.Add(m_card);
             await gameContext.EventManager.PublishAsync(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray(), true));
             await gameContext.EventManager.PublishAsync(new OnCardBuilt(m_card, player, 0, false));
-            await m_card.OnBuilt(gameContext);
+            await m_card.OnBuilt(gameContext, player.Id);
 
             return true;
         }

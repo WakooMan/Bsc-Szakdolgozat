@@ -6,6 +6,7 @@ using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.MilitaryBoard;
 using SevenWonders.Presenter.Views;
 using SevenWonders.Presenter.Views.Factories;
+using System;
 
 namespace SevenWonders.Presenter.Presenters
 {
@@ -49,6 +50,7 @@ namespace SevenWonders.Presenter.Presenters
         {
             m_eventManager.Subscribe<OnMilitaryBoardChanged>(OnMilitaryBoardChanged);
             m_eventManager.Subscribe<OnScientificProgress>(OnScientificProgress);
+            m_eventManager.Subscribe<OnScientificRegress>(OnScientificRegress);
             m_eventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             m_eventManager.Subscribe<OnGameInitialized>(OnGameInitialized);
         }
@@ -89,11 +91,20 @@ namespace SevenWonders.Presenter.Presenters
 
         private void OnScientificProgress(OnScientificProgress progress)
         {
-            var disciplines = progress.Player.Disciplines;
+            UpdateScientificState(progress.Disciplines, progress.PlayerId);
+        }
+
+        private void OnScientificRegress(OnScientificRegress regress)
+        {
+            UpdateScientificState(regress.Disciplines, regress.PlayerId);
+        }
+
+        private void UpdateScientificState(IReadOnlyDictionary<Type, int> disciplines, int playerId)
+        {
             int i = 0;
             foreach (var discipline in disciplines)
             {
-                if (progress.Player.Id == 1)
+                if (playerId == 1)
                 {
                     MakeScientificProgressVisible(m_player1ScientificObjects[i], discipline.Key, discipline.Value);
                 }

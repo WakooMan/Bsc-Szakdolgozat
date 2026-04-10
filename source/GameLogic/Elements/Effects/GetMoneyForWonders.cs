@@ -19,7 +19,7 @@ namespace GameLogic.Elements.Effects
             return new GetMoneyForWonders(this);
         }
 
-        public override Task Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
             player.Money += MoneyPerWonder * player.Wonders.Count(wonder => wonder.HasBeenBuilt);

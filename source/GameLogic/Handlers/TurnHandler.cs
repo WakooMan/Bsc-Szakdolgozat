@@ -30,6 +30,15 @@ namespace GameLogic.Handlers
             }
         }
 
+        public Player GetPlayer(int id)
+        {
+            if (m_players is null)
+            {
+                throw new InvalidOperationException("Cannot get players until SetPlayers method is not called!");
+            }
+            return m_players[id - 1];
+        }
+
         public TurnHandler(IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));

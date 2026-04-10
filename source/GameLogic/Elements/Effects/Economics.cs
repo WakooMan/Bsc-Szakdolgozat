@@ -12,7 +12,7 @@ namespace GameLogic.Elements.Effects
             return new Economics();
         }
 
-        public override Task Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
             gameContext.EventManager.Subscribe<OnCardBuilt>((args) => OnCardBuilt(player, args));

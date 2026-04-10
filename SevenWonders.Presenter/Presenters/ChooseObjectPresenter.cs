@@ -35,54 +35,70 @@ namespace SevenWonders.Presenter.Presenters
         {
             m_eventManager.Subscribe<OnChooseObjects>(eventObj =>
             {
-                if (m_objectCache.Count > 0)
+                lock (m_objectCache)
                 {
-                    throw new InvalidOperationException("The object view cache is not cleared before publishing this event!");
-                }
-                m_chooseObjectTitle.Text = eventObj.Title;
-                foreach (string objectName in eventObj.Objects)
-                {
-                    GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(objectName);
-                    IGameObjectView gameObjectView = m_gameObjectViewFactory.CreateView(objectName);
-                    GameObject previousPosTarget = new GameObject()
+                    if (m_objectCache.Count > 0)
                     {
-                        Name = gameObject.Name + "previousPositionTarget",
-                        Visible = false,
-                        Rotation = gameObject.Rotation,
-                        Position = gameObject.Position,
-                        ZIndex = gameObject.ZIndex,
-                    };
-                    m_objectManager.AddSceneObject(m_chooseObjectLayer, previousPosTarget);
-                    m_objectCache.Add((gameObjectView, previousPosTarget));
-                    gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, eventObj.Visible ? 0.5f : 0f);
-                    gameObjectView.Execute().GetAwaiter().GetResult();
-                    gameObjectView.SetVisible(true);
+                        throw new InvalidOperationException("The object view cache is not cleared before publishing this event!");
+                    }
+                    m_chooseObjectTitle.Text = eventObj.Title;
+                    foreach (string objectName in eventObj.Objects)
+                    {
+                        GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(objectName);
+                        IGameObjectView gameObjectView = m_gameObjectViewFactory.CreateView(objectName);
+                        GameObject previousPosTarget = new GameObject()
+                        {
+                            Name = gameObject.Name + "previousPositionTarget",
+                            Visible = false,
+                            Rotation = gameObject.Rotation,
+                            Position = gameObject.Position,
+                            ZIndex = gameObject.ZIndex,
+                        };
+                        m_objectManager.AddSceneObject(m_chooseObjectLayer, previousPosTarget);
+                        m_objectCache.Add((gameObjectView, previousPosTarget));
+                        int frontSpriteIdx = gameObjectView.FindAnimationIndexByName("front");
+                        var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, eventObj.Visible ? 0.5f : 0f);
+                        if (frontSpriteIdx >= 0)
+                        {
+                            group.Flip(frontSpriteIdx, 0.5f);
+                        }
+                        gameObjectView.Execute().GetAwaiter().GetResult();
+                        gameObjectView.SetVisible(true);
+                    }
+                    m_currentObject = 0;
+                    UpdateProperties();
+                    m_previousElement.ClickedEvent += OnPreviousElementClicked;
+                    m_nextElement.ClickedEvent += OnNextElementClicked;
+                    m_chooseObjectLayer.Visible = true;
                 }
-                m_currentObject = 0;
-                UpdateProperties();
-                m_previousElement.ClickedEvent += OnPreviousElementClicked;
-                m_nextElement.ClickedEvent += OnNextElementClicked;
-                m_chooseObjectLayer.Visible = true;
             });
 
             m_eventManager.Subscribe<OnObjectChosen>(eventObj =>
             {
-                m_previousElement.ClickedEvent -= OnPreviousElementClicked;
-                m_nextElement.ClickedEvent -= OnNextElementClicked;
-                foreach (var cache in m_objectCache)
+                lock (m_objectCache)
                 {
-                    IGameObjectView gameObjectView = cache.objectView;
-                    if (eventObj.Objects.Contains(gameObjectView.Name))
+                    m_previousElement.ClickedEvent -= OnPreviousElementClicked;
+                    m_nextElement.ClickedEvent -= OnNextElementClicked;
+                    foreach (var cache in m_objectCache)
                     {
-                        gameObjectView.SetVisible(eventObj.Visible);
-                        gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, eventObj.Visible ? 0.5f : 0f);
-                        gameObjectView.Execute().GetAwaiter().GetResult();
-                        m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
+                        IGameObjectView gameObjectView = cache.objectView;
+                        if (eventObj.Objects.Contains(gameObjectView.Name))
+                        {
+                            gameObjectView.SetVisible(eventObj.Visible);
+                            int backSpriteIdx = gameObjectView.FindAnimationIndexByName("back");
+                            var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, eventObj.Visible ? 0.5f : 0f);
+                            if (eventObj.Visible && backSpriteIdx >= 0)
+                            {
+                                group.Flip(backSpriteIdx, 0.5f);
+                            }
+                            gameObjectView.Execute().GetAwaiter().GetResult();
+                            m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
+                        }
                     }
+                    m_chooseObjectLayer.Visible = false;
+                    m_objectCache.Clear();
+                    m_currentObject = -1;
                 }
-                m_chooseObjectLayer.Visible = false;
-                m_objectCache.Clear();
-                m_currentObject = -1;
             });
         }
 

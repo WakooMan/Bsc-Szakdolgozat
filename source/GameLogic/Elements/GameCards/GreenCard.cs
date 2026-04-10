@@ -1,7 +1,5 @@
 ﻿using GameLogic.Elements.Disciplines;
 using GameLogic.Elements.Effects;
-using GameLogic.Events;
-using GameLogic.Events.GameEvents;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -26,15 +24,16 @@ namespace GameLogic.Elements.GameCards
             return new GreenCard(this);
         }
 
-        public override int GetVictoryPoints(Player player)
+        public override async Task OnBuilt(IGameContext gameContext, int playerId)
         {
-            return Point.Points;
+            await Point.Apply(gameContext, playerId);
+            await Discipline.Apply(gameContext, playerId);
         }
 
-        public override async Task OnBuilt(IGameContext gameContext)
+        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
         {
-            await gameContext.EventManager.PublishAsync(new OnScientificProgress(gameContext.TurnHandler.CurrentPlayer, Discipline, gameContext.PlayerActionReceiver));
-            await Point.Apply(gameContext);
+            await Point.Unapply(gameContext, playerId);
+            await Discipline.Unapply(gameContext, playerId);
         }
     }
 }

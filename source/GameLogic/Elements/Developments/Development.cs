@@ -24,9 +24,14 @@ namespace GameLogic.Elements.Modifiers
             return new Development(this);
         }
 
-        public void OnDevelopmentEstablished(IGameContext gameContext)
+        public void OnDevelopmentEstablished(IGameContext gameContext, int playerId)
         {
-            Effects.ForEach(effect => effect.Apply(gameContext));
+            Effects.ForEach(effect => effect.Apply(gameContext, playerId));
+        }
+
+        public void OnDevelopmentRemoved(IGameContext gameContext, int playerId)
+        {
+            Effects.ForEach(effect => effect.Unapply(gameContext, playerId));
         }
     }
 }

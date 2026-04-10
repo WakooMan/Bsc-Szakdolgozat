@@ -6,15 +6,17 @@ namespace GameLogic.Events.GameEvents
 {
     public class OnScientificProgress: GameEvent
     {
-        public Player Player { get; set; }
-        public Discipline Discipline { get; set; }
-        public IPlayerActionReceiver PlayerActionReceiver { get; set; }
+        public int PlayerId { get; }
+        public IReadOnlyDictionary<Type, int> Disciplines { get; }
+        public Discipline Discipline { get; }
+        public IPlayerActionReceiver PlayerActionReceiver { get; }
 
-        public OnScientificProgress(Player player, Discipline discipline, IPlayerActionReceiver playerActionReceiver)
+        public OnScientificProgress(int playerId, IReadOnlyDictionary<Type, int> disciplines, Discipline discipline, IPlayerActionReceiver playerActionReceiver)
         {
-            Player = player;    
+            PlayerId = playerId;    
             Discipline = discipline;
             PlayerActionReceiver = playerActionReceiver;
+            Disciplines = disciplines;
         }
     }
 }

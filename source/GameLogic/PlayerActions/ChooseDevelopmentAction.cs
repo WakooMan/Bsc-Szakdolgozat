@@ -34,7 +34,7 @@ namespace GameLogic.PlayerActions
             m_developments.Remove(m_development);
             await gameContext.EventManager.PublishAsync(new OnPlayerDevelopmentReceived(m_player, m_development));
             await gameContext.EventManager.PublishAsync(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray(), true));
-            m_development.OnDevelopmentEstablished(gameContext);
+            m_development.OnDevelopmentEstablished(gameContext, m_player.Id);
             return true;
         }
 

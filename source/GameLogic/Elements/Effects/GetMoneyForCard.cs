@@ -23,7 +23,7 @@ namespace GameLogic.Elements.Effects
             return new GetMoneyForCard(this);
         }
 
-        public override Task Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
             player.Money += MoneyPerCard * player.Cards.Count(card => card.BuildingType == CardType);

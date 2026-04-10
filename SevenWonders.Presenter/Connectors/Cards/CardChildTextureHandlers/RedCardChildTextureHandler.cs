@@ -18,7 +18,7 @@ namespace SevenWonders.Presenter.Connectors.Cards.CardChildTextureHandlers
                 return;
             }
 
-            int strengthCount = card.GetStrength();
+            int strengthCount = card.Strength.Points;
             if (strengthCount == 0)
             {
                 return;

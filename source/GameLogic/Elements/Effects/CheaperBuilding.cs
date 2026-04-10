@@ -24,7 +24,7 @@ namespace GameLogic.Elements.Effects
             return new CheaperBuilding(this);
         }
 
-        public override Task Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
             gameContext.EventManager.Subscribe<OnBuildingCostCalculated>((args) => OnBuildingCostCalculated(player, args));

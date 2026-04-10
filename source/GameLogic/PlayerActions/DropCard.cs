@@ -28,6 +28,8 @@ namespace GameLogic.PlayerActions
             ArgumentChecker.CheckPredicateForOperation(() => !m_player.Cards.Contains(m_card), "Player does not have the specific card! Action cannot be performed!");
 
             m_player.Cards.Remove(m_card);
+            gameContext.DroppedCardList.Cards.Add(m_card);
+            await m_card.OnDestroyed(gameContext, m_player.Id);
             await gameContext.EventManager.PublishAsync(new OnCardDestroyed(m_player, m_card));
             return true;
         }

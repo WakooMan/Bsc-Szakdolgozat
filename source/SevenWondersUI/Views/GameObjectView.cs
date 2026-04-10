@@ -33,6 +33,11 @@ namespace SevenWondersUI.Views
             m_gameObject.Visible = visible;
         }
 
+        public int FindAnimationIndexByName(string name)
+        {
+            return m_gameObject.Animations.FindIndex(anim => anim.Name.ToLower() == name.ToLower());
+        }
+
         private readonly IAnimationManager m_animationManager;
         private readonly IAnimationGroupBuilder m_groupBuilder;
         private readonly GameObject m_gameObject;

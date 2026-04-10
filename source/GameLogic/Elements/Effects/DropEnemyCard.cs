@@ -25,7 +25,7 @@ namespace GameLogic.Elements.Effects
             return new DropEnemyCard(this);
         }
 
-        public override async Task Apply(IGameContext gameContext)
+        public override async Task Apply(IGameContext gameContext, int playerId)
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;

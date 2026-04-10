@@ -1,5 +1,4 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Events.GameEvents;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
@@ -22,7 +21,10 @@ namespace GameLogic.Handlers
                 if (playerActionWrapper.CanPerform)
                 {
                     completed = await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
-                    return playerActionWrapper.PlayerAction;
+                    if (completed)
+                    {
+                        return playerActionWrapper.PlayerAction;
+                    }
                 }
             }
 

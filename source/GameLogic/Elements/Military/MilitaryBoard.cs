@@ -19,6 +19,7 @@ namespace GameLogic.Elements.Military
             MilitaryCards = new List<MilitaryCard>();
             Developments = new List<Development>();
             m_keyValuePairs = new Dictionary<Player, PlayerSide>();
+            m_currentMilitaryCard = null;
         }
 
         public void Initialize(ICollection<Player> players, ICollection<Development> developments, IGameContext gameContext)
@@ -28,13 +29,8 @@ namespace GameLogic.Elements.Military
             m_keyValuePairs.Add(players.Last(), PlayerSide.Second);
             Developments.AddRange(developments);
             gameContext.EventManager.Subscribe<OnScientificProgress>((args) => OnScientificProgress(gameContext, args).GetAwaiter().GetResult());
-            gameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             gameContext.EventManager.Subscribe<OnMilitaryAdvanced>((args) => OnMilitaryAdvanced(gameContext.EventManager, args).GetAwaiter().GetResult());
-        }
-
-        private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)
-        {
-            eventArgs.MilitaryCards.ForEach(card => MilitaryCards.Remove(card));
+            gameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>((eventArgs) => OnMilitaryTokenReachedThreshold(gameContext, eventArgs));
         }
 
         private async Task OnMilitaryAdvanced(IEventManager eventManager, OnMilitaryAdvanced eventArgs)
@@ -46,25 +42,23 @@ namespace GameLogic.Elements.Military
             Fields[index] = MilitaryField.None;
 
             List<MilitaryCard> militaryCards = new List<MilitaryCard>();
-            int halfOfFieldCount = Fields.Count / 2;
 
-            if (playerSide == PlayerSide.First && newIdx > halfOfFieldCount)
+            int minIdx = Math.Min(index, newIdx);
+            int maxIdx = Math.Max(index, newIdx);
+
+            for (int i = minIdx; i <= maxIdx; i++)
             {
-                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexStart > halfOfFieldCount &&
-                    ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexEnd < newIdx))).ToList();
-            }
-            else if (playerSide == PlayerSide.Second && newIdx < halfOfFieldCount)
-            {
-                militaryCards = MilitaryCards.Where(militaryCard => militaryCard.IndexEnd < halfOfFieldCount &&
-                    ((militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx) || (militaryCard.IndexStart > newIdx))).ToList();
+                MilitaryCard? militaryCard = MilitaryCards.FirstOrDefault(militaryCard => militaryCard.IndexStart <= i && militaryCard.IndexEnd >= i);
+                if (militaryCard is not null && !militaryCards.Contains(militaryCard))
+                {
+                    militaryCards.Add(militaryCard);
+                }
             }
 
+            MilitaryCard? previousMilitaryCard = m_currentMilitaryCard;
+            m_currentMilitaryCard = militaryCards.FirstOrDefault(militaryCard => militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx);
             await eventManager.PublishAsync(new OnMilitaryBoardChanged(Fields));
-
-            if (militaryCards.Count > 0)
-            {
-                await eventManager.PublishAsync(new OnMilitaryTokenReachedThreshold(militaryCards));
-            }
+            await eventManager.PublishAsync(new OnMilitaryTokenReachedThreshold(eventArgs.Player, militaryCards, previousMilitaryCard, m_currentMilitaryCard));
 
             if (newIdx == 0 || newIdx == Fields.Count - 1)
             {
@@ -72,25 +66,48 @@ namespace GameLogic.Elements.Military
             }
         }
 
+        private void OnMilitaryTokenReachedThreshold(IGameContext gameContext, OnMilitaryTokenReachedThreshold eventArgs)
+        {
+            eventArgs.MilitaryCards.ForEach(militaryCard =>
+            {
+                if (militaryCard != eventArgs.CurrentMilitaryCard)
+                {
+                    if (militaryCard != eventArgs.PreviousMilitaryCard)
+                    {
+                        militaryCard.Apply(gameContext);
+                    }
+                    militaryCard.Unapply(gameContext);
+                }
+            });
+
+            if (eventArgs.CurrentMilitaryCard is not null)
+            {
+                eventArgs.CurrentMilitaryCard.Apply(gameContext);
+            }
+        }
+
         private async Task OnScientificProgress(IGameContext gameContext, OnScientificProgress eventArgs)
         {
-            var disciplines = eventArgs.Player.Disciplines;
+            var disciplines = eventArgs.Disciplines;
+            Player player = gameContext.TurnHandler.GetPlayer(eventArgs.PlayerId);
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
                 await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Development", Developments.Select(dev => dev.Name).ToArray(), true));
-                await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, eventArgs.Player, Developments.Select(dev => {
-                    IPlayerAction action = new ChooseDevelopmentAction(eventArgs.Player, dev, Developments);
+                await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, player, Developments.Select(dev => {
+                    IPlayerAction action = new ChooseDevelopmentAction(player, dev, Developments);
                     return action;
                 }).ToArray());
             }
 
             if (disciplines.Count >= 6)
             {
-                await gameContext.EventManager.PublishAsync(new ScientificVictory(eventArgs.Player));
+                await gameContext.EventManager.PublishAsync(new ScientificVictory(player));
             }
         }
 
         [XmlIgnore]
         private readonly Dictionary<Player, PlayerSide> m_keyValuePairs;
+
+        private MilitaryCard? m_currentMilitaryCard;
     }
 }

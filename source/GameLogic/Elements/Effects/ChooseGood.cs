@@ -36,7 +36,7 @@ namespace GameLogic.Elements.Effects
             return new List<Good>() { m_selectedGood };
         }
 
-        public override Task Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
             gameContext.EventManager.Subscribe<TurnStarted>((args) => SelectGood(gameContext, player, args).GetAwaiter().GetResult());

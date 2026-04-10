@@ -18,5 +18,15 @@ namespace GameLogic.Elements.GameCards
         {
             return new PurpleCard(this);
         }
+
+        public override Task OnBuilt(IGameContext gameContext, int playerId)
+        {
+            return base.OnBuilt(gameContext, playerId);
+        }
+
+        public override Task OnDestroyed(IGameContext gameContext, int playerId)
+        {
+            return base.OnDestroyed(gameContext, playerId);
+        }
     }
 }

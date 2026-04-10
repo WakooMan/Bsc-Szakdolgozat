@@ -6,7 +6,7 @@ namespace GameLogic.Handlers
     public interface IBuildable
     {
         List<Good> GoodCost { get; set; }
-        Task OnBuilt(IGameContext gameContext);
+        Task OnBuilt(IGameContext gameContext, int playerId);
         string BuildingType { get; }
         int MoneyCost { get; }
     }

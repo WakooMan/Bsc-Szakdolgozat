@@ -7,19 +7,20 @@ namespace GameLogic.PlayerActions
     {
         public string Name => m_discipline.GetType().Name;
         public ChooseDisciplineAction() { }
-        public ChooseDisciplineAction(Discipline discipline, Action<Discipline> setter)
+        public ChooseDisciplineAction(Discipline discipline, Func<IGameContext, Discipline, int, Task> setter, int playerId)
         {
             ArgumentChecker.CheckNull(discipline, nameof(discipline));
             ArgumentChecker.CheckNull(setter, nameof(setter));
 
             m_discipline = discipline;
             m_setter = setter;
+            m_playerId = playerId;
         }
 
-        public Task<bool> DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
-            m_setter(m_discipline);
-            return Task.FromResult(true);
+            await m_setter(gameContext, m_discipline, m_playerId);
+            return true;
         }
 
         public Task<bool> CanPerform(IGameContext gameContext)
@@ -28,6 +29,7 @@ namespace GameLogic.PlayerActions
         }
 
         private readonly Discipline m_discipline;
-        private readonly Action<Discipline> m_setter;
+        private readonly Func<IGameContext, Discipline, int, Task> m_setter;
+        private readonly int m_playerId;
     }
 }

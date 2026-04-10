@@ -80,6 +80,10 @@ namespace GameLogic
             ICollection<Development> developments = m_randomElementReceiver.ReceiveRandomElements(DevelopmentList.Developments, 3);
             DevelopmentList.Developments.RemoveAll(developments.Contains);
             MilitaryBoard.Initialize(players, developments, this);
+            foreach (var player in players)
+            {
+                player.Initialize(EventManager);
+            }
         }
 
         private readonly IGameElements m_gameElements;

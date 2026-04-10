@@ -27,6 +27,7 @@ namespace GameLogic.PlayerActions
             m_player.Money += money;
             Card card = m_player.PickedCard.CardObj;
             m_player.PickedCard = null;
+            gameContext.DroppedCardList.Cards.Add(card);
             await gameContext.EventManager.PublishAsync(new OnCardSold(m_player, card, money));
             return true;
         }

@@ -17,7 +17,6 @@ namespace GameLogic.GameStates
         
         public async Task DoStateAction()
         {
-            GameContext.EventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             GameContext.EventManager.Subscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Subscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
             await GameContext.AgeHandler.Initialize();
@@ -45,7 +44,6 @@ namespace GameLogic.GameStates
                 }
             }
 
-            GameContext.EventManager.Unsubscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             GameContext.EventManager.Unsubscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Unsubscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
             await GameContext.EventManager.PublishAsync(new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
@@ -55,11 +53,6 @@ namespace GameLogic.GameStates
         public IGameState GetNextState()
         {
             return new EndGameState();
-        }
-
-        private void OnMilitaryTokenReachedThreshold(OnMilitaryTokenReachedThreshold eventArgs)
-        {
-            eventArgs.MilitaryCards.ForEach(militaryCard => militaryCard.Apply(GameContext));
         }
 
         private void OnScientificOrMilitaryVictory(GameEvent args)
