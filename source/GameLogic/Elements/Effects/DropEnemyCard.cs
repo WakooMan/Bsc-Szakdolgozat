@@ -29,7 +29,7 @@ namespace GameLogic.Elements.Effects
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponentPlayer = gameContext.TurnHandler.OpponentPlayer;
-            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Drop Enemy Card", opponentPlayer.Cards.Select(card => card.Name).ToArray(), true));
+            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Ellenfél kártyájának kidobása", opponentPlayer.Cards.Select(card => card.Name).ToArray(), true));
             await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, currentPlayer, opponentPlayer.Cards.Where(card => card.BuildingType == CardType).Select(card => {
                 IPlayerAction dropCard = new DropCard(opponentPlayer, card);
                 return dropCard;

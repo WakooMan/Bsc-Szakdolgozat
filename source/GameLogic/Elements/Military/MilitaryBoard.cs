@@ -92,7 +92,7 @@ namespace GameLogic.Elements.Military
             Player player = gameContext.TurnHandler.GetPlayer(eventArgs.PlayerId);
             if (disciplines.ContainsKey(eventArgs.Discipline.GetType()) && disciplines[eventArgs.Discipline.GetType()] == 2)
             {
-                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Development", Developments.Select(dev => dev.Name).ToArray(), true));
+                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz fejlesztést", Developments.Select(dev => dev.Name).ToArray(), true));
                 await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, player, Developments.Select(dev => {
                     IPlayerAction action = new ChooseDevelopmentAction(player, dev, Developments);
                     return action;

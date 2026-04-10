@@ -47,7 +47,7 @@ namespace GameLogic.Elements.Effects
         {
             if (eventArgs.Player == player)
             {
-                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Good", GoodFactories.Select(factory => factory.GoodType.Name).ToArray(), false));
+                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz Nyersanyagot", GoodFactories.Select(factory => factory.GoodType.Name).ToArray(), false));
                 await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, eventArgs.Player, GoodFactories.Select(goodFactory => {
                     IPlayerAction action = new ChooseGoodAction(goodFactory, SetSelectedGood);
                     return action;

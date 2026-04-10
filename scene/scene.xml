@@ -4790,7 +4790,7 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Back</Text>
+          <Text>Vissza</Text>
           <Bold>false</Bold>
           <FontSize>61.10614</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
@@ -15908,7 +15908,7 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Build Card</Text>
+          <Text>Kártya építése</Text>
           <Bold>false</Bold>
           <FontSize>61.10614</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
@@ -15930,7 +15930,7 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Unpick Card</Text>
+          <Text>Kártya visszarakása</Text>
           <Bold>false</Bold>
           <FontSize>61.10614</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
@@ -15952,7 +15952,7 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Sell Card</Text>
+          <Text>Kártya eladása</Text>
           <Bold>false</Bold>
           <FontSize>61.10614</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
@@ -15974,7 +15974,7 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Build Wonder</Text>
+          <Text>Csoda építése</Text>
           <Bold>false</Bold>
           <FontSize>61.10614</FontSize>
           <TextColorHex>#fffaebd7</TextColorHex>
@@ -16851,7 +16851,7 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>Title</Text>
+          <Text>Cím</Text>
           <Bold>false</Bold>
           <FontSize>127.30464</FontSize>
           <TextColorHex>#ffbc0000</TextColorHex>

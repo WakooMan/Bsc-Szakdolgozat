@@ -21,7 +21,7 @@ namespace GameLogic.Elements.Effects
             List<Development> developments = gameContext.DevelopmentList?.Developments ?? throw new InvalidOperationException($"{nameof(gameContext.DevelopmentList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!");
             List<Development> selected = developments.OrderBy(_ => gameContext.RandomGenerator.Next()).Take(3).ToList();
 
-            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Development", selected.Select(dev => dev.Name).ToArray(), true));
+            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz fejlesztést", selected.Select(dev => dev.Name).ToArray(), true));
             await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, 
                   gameContext.TurnHandler.CurrentPlayer, 
                   selected.Select(dev => (IPlayerAction)new ChooseDevelopmentAction(gameContext.TurnHandler.CurrentPlayer, dev, developments)).ToList());

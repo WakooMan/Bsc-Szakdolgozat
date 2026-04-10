@@ -37,7 +37,7 @@ namespace GameLogic.Elements.Effects
                 new ChooseDisciplineAction(new Writing(), SetDiscipline, playerId)
             };
 
-            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Choose Discipline", list.Select(action => action.Name).ToArray(), false));
+            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz tudományos jelképet", list.Select(action => action.Name).ToArray(), false));
 
             await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, player, list);
             await gameContext.EventManager.PublishAsync(new OnObjectChosen(list.Select(action => action.Name).ToArray(), false));
