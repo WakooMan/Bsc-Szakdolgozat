@@ -17,5 +17,8 @@ namespace GameLogic.Elements.Guilds
     public abstract class Guild
     {
         public abstract Guild Clone();
+
+        public abstract Task Apply(IGameContext gameContext, int playerId);
+        public abstract Task Unapply(IGameContext gameContext, int playerId);
     }
 }

@@ -1,6 +1,9 @@
-﻿using GameLogic.Events.GameEvents;
+﻿using GameLogic.Elements;
+using GameLogic.Elements.Effects;
+using GameLogic.Events.GameEvents;
 using GameLogic.Handlers;
 using GameLogic.PlayerTurnStates;
+using System.Numerics;
 
 namespace GameLogic.GameStates
 {
@@ -46,7 +49,13 @@ namespace GameLogic.GameStates
 
             GameContext.EventManager.Unsubscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Unsubscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
-            await GameContext.EventManager.PublishAsync(new OnGameEnded([GameContext.TurnHandler.CurrentPlayer, GameContext.TurnHandler.OpponentPlayer]));
+            await GameContext.EventManager.PublishAsync(new BeforeGameEnded());
+            IDictionary<Player, int> victoryPoints = new Dictionary<Player, int>
+            {
+                { GameContext.TurnHandler.CurrentPlayer, (await GameContext.TurnHandler.CurrentPlayer.GetPlayerProperties()).VictoryPoints },
+                { GameContext.TurnHandler.OpponentPlayer, (await GameContext.TurnHandler.OpponentPlayer.GetPlayerProperties()).VictoryPoints }
+            };
+            await GameContext.EventManager.PublishAsync(new OnGameEnded(victoryPoints));
 
         }
 

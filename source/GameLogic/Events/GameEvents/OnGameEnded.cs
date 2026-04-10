@@ -4,16 +4,11 @@ namespace GameLogic.Events.GameEvents
 {
     public class OnGameEnded: GameEvent
     {
-        public Dictionary<Player, int> VictoryPoints { get; }
+        public IDictionary<Player, int> VictoryPoints { get; }
 
-        public OnGameEnded(ICollection<Player> players)
+        public OnGameEnded(IDictionary<Player, int> victoryPoints)
         {
-            VictoryPoints = new Dictionary<Player, int>();
-            foreach (Player player in players)
-            {
-                VictoryPoints.Add(player, 0);
-            }
-
+            VictoryPoints = victoryPoints;
         }
     }
 }

@@ -21,7 +21,7 @@ GameObject-ek, amik kellenek:
 - lila kártyák kezelése -> Done
 - font resize -> Done
 - drop card flip választásnál -> Done
-- Guild implementálása
+- Guild implementálása -> Done
 - Játékos pontok számítása
 - game over kezelés, military és scientific-nél
 - game over kezelés, amikor végig játszák a 3 kort

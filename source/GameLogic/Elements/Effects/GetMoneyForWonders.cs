@@ -1,7 +1,4 @@
-﻿using GameLogic.Events;
-using GameLogic.GameStates;
-
-namespace GameLogic.Elements.Effects
+﻿namespace GameLogic.Elements.Effects
 {
     public class GetMoneyForWonders : Effect
     {
@@ -21,7 +18,7 @@ namespace GameLogic.Elements.Effects
 
         public override Task Apply(IGameContext gameContext, int playerId)
         {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
+            Player player = gameContext.TurnHandler.GetPlayer(playerId);
             player.Money += MoneyPerWonder * player.Wonders.Count(wonder => wonder.HasBeenBuilt);
             return Task.CompletedTask;
         }
