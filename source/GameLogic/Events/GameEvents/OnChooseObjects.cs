@@ -4,10 +4,12 @@
     {
         public List<string> Objects { get; }
         public string Title { get; }
-        public OnChooseObjects(string title, ICollection<string> objects)
+        public bool Visible { get; }
+        public OnChooseObjects(string title, ICollection<string> objects, bool visible)
         {
             Title = title;
             Objects = objects.ToList();
+            Visible = visible;
         }
     }
 }

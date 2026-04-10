@@ -54,7 +54,7 @@ namespace SevenWonders.Presenter.Presenters
                     };
                     m_objectManager.AddSceneObject(m_chooseObjectLayer, previousPosTarget);
                     m_objectCache.Add((gameObjectView, previousPosTarget));
-                    gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, 0.5f);
+                    gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, eventObj.Visible ? 0.5f : 0f);
                     gameObjectView.Execute().GetAwaiter().GetResult();
                     gameObjectView.SetVisible(true);
                 }
@@ -75,7 +75,7 @@ namespace SevenWonders.Presenter.Presenters
                     if (eventObj.Objects.Contains(gameObjectView.Name))
                     {
                         gameObjectView.SetVisible(eventObj.Visible);
-                        gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, 0.5f);
+                        gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, eventObj.Visible ? 0.5f : 0f);
                         gameObjectView.Execute().GetAwaiter().GetResult();
                         m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
                     }
