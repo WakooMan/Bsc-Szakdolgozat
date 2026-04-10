@@ -33,7 +33,7 @@ namespace GameLogic.PlayerActions
             player.PickedCard = null;
             await gameContext.EventManager.PublishAsync(new OnWonderBuilt(player, card, m_wonder));
             await m_wonder.OnBuilt(gameContext, player.Id);
-            await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, m_wonder));
+            await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, opponent, m_wonder));
             return true;
         }
 

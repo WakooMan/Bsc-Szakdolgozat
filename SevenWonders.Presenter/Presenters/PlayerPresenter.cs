@@ -115,16 +115,26 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        private void AfterBuildableBuilt(AfterBuildableBuilt e)
+        private void AfterBuildableBuilt(AfterBuildableBuilt eventArgs)
         {
-            if (e.Builder.Id == m_playerId)
+            if (eventArgs.Builder.Id == m_playerId)
             {
-                if (m_moneyLabel is not null && m_pointLabel is not null)
-                {
-                    m_moneyLabel.Text = e.Builder.Money.ToString();
-                    m_pointLabel.Text = e.Builder.GetPlayerProperties().GetAwaiter().GetResult().VictoryPoints.ToString();
-                    //Todo: animation for money decrease, point increase
-                }
+                UpdatePlayerState(eventArgs.Builder);
+            }
+
+            if (eventArgs.Opponent.Id == m_playerId)
+            {
+                UpdatePlayerState(eventArgs.Opponent);
+            }
+        }
+
+        private void UpdatePlayerState(Player player)
+        {
+            if (m_moneyLabel is not null && m_pointLabel is not null)
+            {
+                m_moneyLabel.Text = player.Money.ToString();
+                m_pointLabel.Text = player.GetPlayerProperties().GetAwaiter().GetResult().VictoryPoints.ToString();
+                //Todo: animation for money decrease, point increase
             }
         }
 

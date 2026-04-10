@@ -37,7 +37,7 @@ namespace GameLogic.PlayerActions
             player.PickedCard = null;
             await gameContext.EventManager.PublishAsync(new OnCardBuilt(card.CardObj, player, BuildCost, chainBuildUsed));
             await card.CardObj.OnBuilt(gameContext, player.Id);
-            await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, card.CardObj));
+            await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, opponent, card.CardObj));
             return true;
         }
 

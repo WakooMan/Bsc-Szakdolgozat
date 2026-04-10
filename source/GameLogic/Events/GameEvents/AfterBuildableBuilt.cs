@@ -7,11 +7,13 @@ namespace GameLogic.Events.GameEvents
     {
         public IBuildable Buildable { get; set; }
         public Player Builder { get; set; }
+        public Player Opponent { get; set; }
 
-        public AfterBuildableBuilt(Player builder, IBuildable buildable)
+        public AfterBuildableBuilt(Player builder, Player opponent, IBuildable buildable)
         {
             Buildable = buildable;
             Builder = builder;
+            Opponent = opponent;
         }
     }
 }
