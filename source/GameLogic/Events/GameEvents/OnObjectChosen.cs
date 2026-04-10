@@ -3,11 +3,11 @@
     public class OnObjectChosen: GameEvent
     {
         public List<string> Objects { get; }
-        public string? LayerName { get; }
-        public OnObjectChosen(ICollection<string> objects, string? layerName = null)
+        public bool Visible { get; }
+        public OnObjectChosen(ICollection<string> objects, bool visible)
         {
             Objects = objects.ToList();
-            LayerName = layerName;
+            Visible = visible;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace GameLogic.PlayerActions
             Player player = gameContext.TurnHandler.CurrentPlayer;
             gameContext.DroppedCardList.Cards.Remove(m_card);
             player.Cards.Add(m_card);
-            await gameContext.EventManager.PublishAsync(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray()));
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray(), true));
             await gameContext.EventManager.PublishAsync(new OnCardBuilt(m_card, player, 0, false));
             await m_card.OnBuilt(gameContext);
 

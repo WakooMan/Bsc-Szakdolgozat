@@ -34,7 +34,7 @@ namespace GameLogic.Elements.Effects
                 IPlayerAction dropCard = new DropCard(opponentPlayer, card);
                 return dropCard;
             }).ToArray());
-            await gameContext.EventManager.PublishAsync(new OnObjectChosen(opponentPlayer.Cards.Select(card => card.Name).ToArray()));
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen(opponentPlayer.Cards.Select(card => card.Name).ToArray(), true));
         }
     }
 }

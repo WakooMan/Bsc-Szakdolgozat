@@ -56,34 +56,25 @@ namespace SevenWonders.Presenter.Presenters
                     m_objectCache.Add((gameObjectView, previousPosTarget));
                     gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, 0.5f);
                     gameObjectView.Execute().GetAwaiter().GetResult();
+                    gameObjectView.SetVisible(true);
                 }
                 m_currentObject = 0;
                 UpdateProperties();
                 m_previousElement.ClickedEvent += OnPreviousElementClicked;
                 m_nextElement.ClickedEvent += OnNextElementClicked;
                 m_chooseObjectLayer.Visible = true;
-                if (eventObj.LayerName is not null)
-                {
-                    GraphicsLayer graphicsLayer = m_gameEngineReceiver.ReceiveGraphicsLayer(eventObj.LayerName);
-                    graphicsLayer.Visible = true;
-                }
             });
 
             m_eventManager.Subscribe<OnObjectChosen>(eventObj =>
             {
                 m_previousElement.ClickedEvent -= OnPreviousElementClicked;
                 m_nextElement.ClickedEvent -= OnNextElementClicked;
-                if (eventObj.LayerName is not null)
-                {
-                    GraphicsLayer graphicsLayer = m_gameEngineReceiver.ReceiveGraphicsLayer(eventObj.LayerName);
-                    graphicsLayer.Visible = false;
-                }
                 foreach (var cache in m_objectCache)
                 {
                     IGameObjectView gameObjectView = cache.objectView;
                     if (eventObj.Objects.Contains(gameObjectView.Name))
                     {
-                        gameObjectView.SetVisible(true);
+                        gameObjectView.SetVisible(eventObj.Visible);
                         gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, 0.5f);
                         gameObjectView.Execute().GetAwaiter().GetResult();
                         m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
