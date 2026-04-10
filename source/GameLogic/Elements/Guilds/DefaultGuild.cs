@@ -12,5 +12,15 @@ namespace GameLogic.Elements.Guilds
         {
             return new DefaultGuild();
         }
+
+        public override Task Apply(IGameContext gameContext, int playerId)
+        {
+            return Task.CompletedTask;
+        }
+
+        public override Task Unapply(IGameContext gameContext, int playerId)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

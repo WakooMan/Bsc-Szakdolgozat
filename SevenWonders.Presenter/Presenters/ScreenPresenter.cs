@@ -17,9 +17,9 @@ namespace SevenWonders.Presenter.Presenters
         {
             m_loadingScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("LoadingScreen");
             m_scienceGameOverScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("ScienceGameOverScreen");
-            m_scienceGameResult = m_gameEngineReceiver.ReceiveTextLabel("ScienceResult");
+            m_sciencePlayerName = m_gameEngineReceiver.ReceiveTextLabel("ScienceName");
             m_militaryGameOverScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("MilitaryGameOverScreen");
-            m_militaryGameResult = m_gameEngineReceiver.ReceiveTextLabel("MilitaryResult");
+            m_militaryPlayerName = m_gameEngineReceiver.ReceiveTextLabel("MilitaryName");
             m_citizenGameOverScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("CitizenGameOverScreen");
             m_citizenGameResult = m_gameEngineReceiver.ReceiveTextLabel("CitizenResult");
             m_citizenFirstPlayerName = m_gameEngineReceiver.ReceiveTextLabel("CitizenFirstPlayerName");
@@ -42,18 +42,18 @@ namespace SevenWonders.Presenter.Presenters
 
             m_eventManager.Subscribe<MilitaryVictory>(eventObj =>
             {
-                if (m_militaryGameOverScreen is not null && m_militaryGameResult is not null)
+                if (m_militaryGameOverScreen is not null && m_militaryPlayerName is not null)
                 {
-                    m_militaryGameResult.Text = $"{eventObj.PlayerName} Nyert!";
+                    m_militaryPlayerName.Text = $"{eventObj.PlayerName}";
                     m_militaryGameOverScreen.Visible = true;
                 }
             });
 
             m_eventManager.Subscribe<ScientificVictory>(eventObj =>
             {
-                if (m_scienceGameOverScreen is not null && m_scienceGameResult is not null)
+                if (m_scienceGameOverScreen is not null && m_sciencePlayerName is not null)
                 {
-                    m_scienceGameResult.Text = $"{eventObj.PlayerName} Nyert!";
+                    m_sciencePlayerName.Text = $"{eventObj.PlayerName}";
                     m_scienceGameOverScreen.Visible = true;
                 }
             });
@@ -81,21 +81,25 @@ namespace SevenWonders.Presenter.Presenters
                     string resultText = string.Empty;
                     if (eventObj.FirstPlayer.victoryPoints > eventObj.SecondPlayer.victoryPoints)
                     {
-                        resultText = $"{eventObj.FirstPlayer.name} Nyert!";
+                        resultText = "Győzelem!";
+                        m_citizenFirstPlayerName.Bold = true;
                     }
                     else if (eventObj.FirstPlayer.victoryPoints < eventObj.SecondPlayer.victoryPoints)
                     {
-                        resultText = $"{eventObj.SecondPlayer.name} Nyert!";
+                        resultText = "Győzelem!";
+                        m_citizenSecondPlayerName.Bold = true;
                     }
                     else
                     {
                         if (eventObj.FirstPlayer.numberOfBlueCards > eventObj.SecondPlayer.numberOfBlueCards)
                         {
-                            resultText = $"{eventObj.FirstPlayer.name} Nyert!";
+                            resultText = "Győzelem!";
+                            m_citizenFirstPlayerName.Bold = true;
                         }
                         else if (eventObj.FirstPlayer.numberOfBlueCards < eventObj.SecondPlayer.numberOfBlueCards)
                         {
-                            resultText = $"{eventObj.SecondPlayer.name} Nyert!";
+                            resultText = "Győzelem!";
+                            m_citizenSecondPlayerName.Bold = true;
                         }
                         else
                         {
@@ -109,8 +113,8 @@ namespace SevenWonders.Presenter.Presenters
             });
         }
 
-        private TextLabel? m_militaryGameResult;
-        private TextLabel? m_scienceGameResult;
+        private TextLabel? m_militaryPlayerName;
+        private TextLabel? m_sciencePlayerName;
         private TextLabel? m_citizenGameResult;
         private TextLabel? m_citizenFirstPlayerName;
         private TextLabel? m_citizenFirstPlayerVictoryPoints;

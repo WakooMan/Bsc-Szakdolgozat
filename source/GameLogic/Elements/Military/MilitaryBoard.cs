@@ -62,7 +62,7 @@ namespace GameLogic.Elements.Military
 
             if (newIdx == 0 || newIdx == Fields.Count - 1)
             {
-                await eventManager.PublishAsync(new MilitaryVictory(eventArgs.Player));
+                await eventManager.PublishAsync(new MilitaryVictory(eventArgs.Player.Name));
             }
         }
 
@@ -101,7 +101,7 @@ namespace GameLogic.Elements.Military
 
             if (disciplines.Count >= 6)
             {
-                await gameContext.EventManager.PublishAsync(new ScientificVictory(player));
+                await gameContext.EventManager.PublishAsync(new ScientificVictory(player.Name));
             }
         }
 

@@ -9,7 +9,7 @@ namespace GameLogic.Elements.Guilds
     {
         public BuilderGuild()
         {
-            m_victoryPoints = new List<VictoryPoints>();
+            m_victoryPoint = null;
         }
 
         public override Guild Clone()

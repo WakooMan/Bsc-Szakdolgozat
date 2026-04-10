@@ -4,33 +4,42 @@ namespace GameLogic.Elements.Effects
 {
     public class Mathematics : Effect
     {
-        public VictoryPoints VictoryPointsPerDevelopment { get; set; }
-
-        public Mathematics()
-        {
-            VictoryPointsPerDevelopment = new VictoryPoints();
-        }
-
-        private Mathematics(Mathematics mathematics)
-        {
-            VictoryPointsPerDevelopment = mathematics.VictoryPointsPerDevelopment.Clone();
-        }
-
         public override Mathematics Clone()
         {
-            return new Mathematics(this);
+            return new Mathematics();
         }
 
         public override Task Apply(IGameContext gameContext, int playerId)
         {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnGameEnded>((args) => OnGameEnded(player, args));
+            Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
+            Player opponent = gameContext.TurnHandler.OpponentPlayer;
+            m_action = (eventObj) =>
+            {
+                int maxCount = currentPlayer.Developments.Count;
+                m_victoryPoint = new VictoryPoints()
+                {
+                    Points = 3 * currentPlayer.Developments.Count
+                };
+                m_victoryPoint.Apply(gameContext, playerId).GetAwaiter().GetResult();
+            };
+            gameContext.EventManager.Subscribe(m_action);
             return Task.CompletedTask;
         }
 
-        private void OnGameEnded(Player player, OnGameEnded args)
+        public override async Task Unapply(IGameContext gameContext, int playerId)
         {
-            args.Points[player] += VictoryPointsPerDevelopment.Points * player.Developments.Count;
+            if (m_action is not null)
+            {
+                gameContext.EventManager.Unsubscribe(m_action);
+            }
+            if (m_victoryPoint is not null)
+            {
+                await m_victoryPoint.Unapply(gameContext, playerId);
+                m_victoryPoint = null;
+            }
         }
+
+        private Action<BeforeGameEnded>? m_action;
+        private VictoryPoints? m_victoryPoint;
     }
 }
