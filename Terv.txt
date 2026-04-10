@@ -18,7 +18,9 @@ GameObject-ek, amik kellenek:
 - Choose fixes -> Done
 - Third age fixálása screen editor-ban -> Done
 - Developments és Goods elrejtése amikor ki kell választani -> Done
-- lila kártyák kezelése
+- lila kártyák kezelése -> Done
+- font resize -> Done
+- Játékos pontok számítása
 - game over kezelés, military és scientific-nél
 - game over kezelés, amikor végig játszák a 3 kort
-- font resize
+- drop card flip választásnál

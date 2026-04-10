@@ -52,7 +52,13 @@ namespace SevenWonders.GameEngine
             base.Resize(oldResolution, newResolution);
             float xRatio = newResolution.X / oldResolution.X;
             float yRatio = newResolution.Y / oldResolution.Y;
-            FontSize = FontSize * Math.Min(xRatio, yRatio);
+            float matchFactor = 0.5f;
+            float logWidth = MathF.Log2(xRatio);
+            float logHeight = MathF.Log2(yRatio);
+            float logWeightedAverage = logWidth * (1 - matchFactor) + logHeight * matchFactor;
+            float finalScale = MathF.Pow(2, logWeightedAverage);
+
+            FontSize = FontSize * finalScale;
         }
 
         [ExcludeFromCodeCoverage]

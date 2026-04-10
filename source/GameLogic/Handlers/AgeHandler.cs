@@ -22,21 +22,23 @@ namespace GameLogic.Handlers
             }
         }
 
-        public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager)
+        public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager, IRandomElementReceiver randomElementReceiver)
         {
             ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));
             ArgumentChecker.CheckNull(gameElements, nameof(gameElements));
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
+            ArgumentChecker.CheckNull(randomElementReceiver, nameof(randomElementReceiver));
 
             m_cardCompositionFactory = cardCompositionFactory;
             m_cardList = gameElements.Cards;
             m_eventManager = eventManager;
+            m_randomElementReceiver = randomElementReceiver;
             m_ageBase = null;
         }
 
         public async Task Initialize()
         {
-            m_ageBase = new FirstAge(m_eventManager, m_cardCompositionFactory, m_cardList);
+            m_ageBase = new FirstAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomElementReceiver);
             await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
         }
 
@@ -52,11 +54,11 @@ namespace GameLogic.Handlers
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
-                    m_ageBase = new SecondAge(m_eventManager, m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new SecondAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomElementReceiver);
                     await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
                     break;
                 case AgesEnum.II:
-                    m_ageBase = new ThirdAge(m_eventManager, m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new ThirdAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomElementReceiver);
                     await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
                     break;
                 default:
@@ -70,6 +72,7 @@ namespace GameLogic.Handlers
         private readonly ICardCompositionFactory m_cardCompositionFactory;
         private readonly ICardList m_cardList;
         private readonly IEventManager m_eventManager;
+        private readonly IRandomElementReceiver m_randomElementReceiver;
         private IAgeBase? m_ageBase;
     }
 }

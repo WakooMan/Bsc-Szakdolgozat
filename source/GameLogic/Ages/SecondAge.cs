@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 using GameLogic.GameStructures.Factories;
+using GameLogic.Handlers;
 
 namespace GameLogic.Ages
 {
@@ -10,7 +11,7 @@ namespace GameLogic.Ages
 
         public override string CardCompositionFile => "GameLogic.Data.SecondAgeComposition.csv";
 
-        public SecondAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList) : base(eventManager, cardCompositionFactory, cardList?.Cards.Where(card => card.Age == AgesEnum.II).Take(20).ToList() ?? null)
+        public SecondAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList, IRandomElementReceiver randomElementReceiver) : base(eventManager, cardCompositionFactory, randomElementReceiver.ReceiveRandomElements(cardList?.Cards.Where(card => card.Age == AgesEnum.II).ToArray() ?? [], 20))
         { }
     }
 }
