@@ -1,5 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Effects;
+using GameLogic.Elements.GameCards;
 using GameLogic.Events.GameEvents;
 using GameLogic.Handlers;
 using GameLogic.PlayerTurnStates;
@@ -16,10 +17,12 @@ namespace GameLogic.GameStates
         {
             IsGameOver = false;
             GameContext = gameContext;
+            m_gameOverType = typeof(OnGameEnded);
         }
         
         public async Task DoStateAction()
         {
+            m_gameOverType = typeof(OnGameEnded);
             GameContext.EventManager.Subscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Subscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
             await GameContext.AgeHandler.Initialize();
@@ -49,14 +52,15 @@ namespace GameLogic.GameStates
 
             GameContext.EventManager.Unsubscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Unsubscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
-            await GameContext.EventManager.PublishAsync(new BeforeGameEnded());
-            IDictionary<Player, int> victoryPoints = new Dictionary<Player, int>
+            if (m_gameOverType == typeof(OnGameEnded))
             {
-                { GameContext.TurnHandler.CurrentPlayer, (await GameContext.TurnHandler.CurrentPlayer.GetPlayerProperties()).VictoryPoints },
-                { GameContext.TurnHandler.OpponentPlayer, (await GameContext.TurnHandler.OpponentPlayer.GetPlayerProperties()).VictoryPoints }
-            };
-            await GameContext.EventManager.PublishAsync(new OnGameEnded(victoryPoints));
-
+                await GameContext.EventManager.PublishAsync(new BeforeGameEnded());
+                Player firstPlayer = GameContext.TurnHandler.GetPlayer(1);
+                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties();
+                Player secondPlayer = GameContext.TurnHandler.GetPlayer(2);
+                PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties();
+                await GameContext.EventManager.PublishAsync(new OnGameEnded((firstPlayer.Name, firstPlayerProperties.VictoryPoints, firstPlayer.Cards.OfType<BlueCard>().Count()), (secondPlayer.Name, secondPlayerProperties.VictoryPoints, secondPlayer.Cards.OfType<BlueCard>().Count())));
+            }
         }
 
         public IGameState GetNextState()
@@ -66,7 +70,10 @@ namespace GameLogic.GameStates
 
         private void OnScientificOrMilitaryVictory(GameEvent args)
         {
+            m_gameOverType = args.GetType();
             IsGameOver = true;
         }
+
+        private Type m_gameOverType;
     }
 }

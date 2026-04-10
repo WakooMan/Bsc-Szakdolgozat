@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements.Modifiers;
 using GameLogic.Events.GameEvents;
-using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects

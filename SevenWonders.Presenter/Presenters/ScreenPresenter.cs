@@ -16,8 +16,18 @@ namespace SevenWonders.Presenter.Presenters
         public void Initialize()
         {
             m_loadingScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("LoadingScreen");
-            m_gameOverScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("GameOverScreen");
-            m_gameResult = m_gameEngineReceiver.ReceiveTextLabel("Result");
+            m_scienceGameOverScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("ScienceGameOverScreen");
+            m_scienceGameResult = m_gameEngineReceiver.ReceiveTextLabel("ScienceResult");
+            m_militaryGameOverScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("MilitaryGameOverScreen");
+            m_militaryGameResult = m_gameEngineReceiver.ReceiveTextLabel("MilitaryResult");
+            m_citizenGameOverScreen = m_gameEngineReceiver.ReceiveGraphicsLayer("CitizenGameOverScreen");
+            m_citizenGameResult = m_gameEngineReceiver.ReceiveTextLabel("CitizenResult");
+            m_citizenFirstPlayerName = m_gameEngineReceiver.ReceiveTextLabel("CitizenFirstPlayerName");
+            m_citizenFirstPlayerVictoryPoints = m_gameEngineReceiver.ReceiveTextLabel("CitizenFirstPlayerVictoryPoints");
+            m_citizenFirstPlayerBlueCardNumber = m_gameEngineReceiver.ReceiveTextLabel("CitizenFirstPlayerBlueCardNumber");
+            m_citizenSecondPlayerName = m_gameEngineReceiver.ReceiveTextLabel("CitizenSecondPlayerName");
+            m_citizenSecondPlayerVictoryPoints = m_gameEngineReceiver.ReceiveTextLabel("CitizenSecondPlayerVictoryPoints");
+            m_citizenSecondPlayerBlueCardNumber = m_gameEngineReceiver.ReceiveTextLabel("CitizenSecondPlayerBlueCardNumber");
         }
 
         public void SubscribeToEvents()
@@ -32,32 +42,86 @@ namespace SevenWonders.Presenter.Presenters
 
             m_eventManager.Subscribe<MilitaryVictory>(eventObj =>
             {
-                if (m_gameResult is not null)
+                if (m_militaryGameOverScreen is not null && m_militaryGameResult is not null)
                 {
-                    m_gameResult.Text = $"{eventObj.Player.Name} Won!";
+                    m_militaryGameResult.Text = $"{eventObj.PlayerName} Nyert!";
+                    m_militaryGameOverScreen.Visible = true;
                 }
             });
 
             m_eventManager.Subscribe<ScientificVictory>(eventObj =>
             {
-                if (m_gameResult is not null)
+                if (m_scienceGameOverScreen is not null && m_scienceGameResult is not null)
                 {
-                    m_gameResult.Text = $"{eventObj.Player.Name} Won!";
+                    m_scienceGameResult.Text = $"{eventObj.PlayerName} Nyert!";
+                    m_scienceGameOverScreen.Visible = true;
                 }
             });
 
             m_eventManager.Subscribe<OnGameEnded>(eventObj =>
             {
-                if (m_gameOverScreen is not null)
+                if (m_citizenGameOverScreen is not null && 
+                    m_citizenGameResult is not null &&
+                    m_citizenFirstPlayerName is not null &&
+                    m_citizenFirstPlayerVictoryPoints is not null &&
+                    m_citizenFirstPlayerBlueCardNumber is not null &&
+                    m_citizenSecondPlayerName is not null &&
+                    m_citizenSecondPlayerVictoryPoints is not null &&
+                    m_citizenSecondPlayerBlueCardNumber is not null)
                 {
-                    m_gameOverScreen.Visible = true;
+                    m_citizenFirstPlayerName.Text = eventObj.FirstPlayer.name;
+                    m_citizenFirstPlayerVictoryPoints.Text = eventObj.FirstPlayer.victoryPoints.ToString();
+                    m_citizenFirstPlayerBlueCardNumber.Text = eventObj.FirstPlayer.numberOfBlueCards.ToString();
+
+                    m_citizenSecondPlayerName.Text = eventObj.SecondPlayer.name;
+                    m_citizenSecondPlayerVictoryPoints.Text = eventObj.SecondPlayer.victoryPoints.ToString();
+                    m_citizenSecondPlayerBlueCardNumber.Text = eventObj.SecondPlayer.numberOfBlueCards.ToString();
+
+
+                    string resultText = string.Empty;
+                    if (eventObj.FirstPlayer.victoryPoints > eventObj.SecondPlayer.victoryPoints)
+                    {
+                        resultText = $"{eventObj.FirstPlayer.name} Nyert!";
+                    }
+                    else if (eventObj.FirstPlayer.victoryPoints < eventObj.SecondPlayer.victoryPoints)
+                    {
+                        resultText = $"{eventObj.SecondPlayer.name} Nyert!";
+                    }
+                    else
+                    {
+                        if (eventObj.FirstPlayer.numberOfBlueCards > eventObj.SecondPlayer.numberOfBlueCards)
+                        {
+                            resultText = $"{eventObj.FirstPlayer.name} Nyert!";
+                        }
+                        else if (eventObj.FirstPlayer.numberOfBlueCards < eventObj.SecondPlayer.numberOfBlueCards)
+                        {
+                            resultText = $"{eventObj.SecondPlayer.name} Nyert!";
+                        }
+                        else
+                        {
+                            resultText = "Döntetlen!";
+                        }
+                    }
+
+                    m_citizenGameResult.Text = resultText;
+                    m_citizenGameOverScreen.Visible = true;
                 }
             });
         }
 
-        private TextLabel? m_gameResult;
+        private TextLabel? m_militaryGameResult;
+        private TextLabel? m_scienceGameResult;
+        private TextLabel? m_citizenGameResult;
+        private TextLabel? m_citizenFirstPlayerName;
+        private TextLabel? m_citizenFirstPlayerVictoryPoints;
+        private TextLabel? m_citizenFirstPlayerBlueCardNumber;
+        private TextLabel? m_citizenSecondPlayerName;
+        private TextLabel? m_citizenSecondPlayerVictoryPoints;
+        private TextLabel? m_citizenSecondPlayerBlueCardNumber;
         private GraphicsLayer? m_loadingScreen;
-        private GraphicsLayer? m_gameOverScreen;
+        private GraphicsLayer? m_scienceGameOverScreen;
+        private GraphicsLayer? m_militaryGameOverScreen;
+        private GraphicsLayer? m_citizenGameOverScreen;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
     }

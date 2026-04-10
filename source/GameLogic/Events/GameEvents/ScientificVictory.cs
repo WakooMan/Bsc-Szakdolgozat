@@ -1,14 +1,12 @@
-﻿using GameLogic.Elements;
-
-namespace GameLogic.Events.GameEvents
+﻿namespace GameLogic.Events.GameEvents
 {
     public class ScientificVictory: GameEvent
     {
-        public Player Player { get; }
+        public string PlayerName { get; }
 
-        public ScientificVictory(Player player)
+        public ScientificVictory(string playerName)
         {
-            Player = player;
+            PlayerName = playerName;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace GameLogic.Elements.Effects
 
         private void OnGameEnded(Player player, OnGameEnded args)
         {
-            args.VictoryPoints[player] += VictoryPointsPerDevelopment.Points * player.Developments.Count;
+            args.Points[player] += VictoryPointsPerDevelopment.Points * player.Developments.Count;
         }
     }
 }
