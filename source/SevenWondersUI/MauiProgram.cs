@@ -10,6 +10,7 @@ using GameLogic.Handlers;
 using GameLogic.Handlers.Factories;
 using GameLogic.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Hosting;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
@@ -26,6 +27,9 @@ using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
 using SevenWonders.Presenter.Presenters.Factories;
 using SevenWonders.Presenter.Views.Factories;
+using SevenWondersUI.Services;
+using SevenWondersUI.ViewModels;
+using SevenWondersUI.Views;
 using SevenWondersUI.Views.Factories;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -95,7 +99,19 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IPresenterFactory), typeof(PresenterFactory));
         builder.Services.AddSingleton(typeof(IPresenter), typeof(Presenter));
         builder.Services.AddSingleton(typeof(ICardConnector), typeof(CardConnector));
+        builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+        builder.Services.AddSingleton(typeof(IGameOverHandler), typeof(GameOverHandler));
+        builder.Services.AddSingleton<AppShell>();
+        builder.Services.AddSingleton<App>();
 
+        builder.Services.AddTransient<GamePageViewModel>();
+        builder.Services.AddTransient<GamePage>();
+
+
+        builder.Services.AddTransient<PlayerNamePageViewModel>();
+        builder.Services.AddTransient<PlayerNamePage>();
+
+        builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<MainPage>();
 
 

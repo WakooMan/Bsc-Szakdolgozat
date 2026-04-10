@@ -11,7 +11,19 @@ namespace SevenWonders.Presenter.Presenters.Factories
 {
     public class PresenterFactory : IPresenterFactory
     {
-        public PresenterFactory(ICardConnector cardConnector, IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IPlayerCardHandlerFactory playerCardHandlerFactory, ISceneManager sceneManager, IGameObjectViewFactory gameObjectViewFactory, IDevelopmentConnector developmentConnector, IObjectManager objectManager, ITextureIdHandler textureIdHandler, IMilitaryTokenChildTextureHandler militaryTokenChildTextureHandler, IDevelopmentHandlerFactory developmentHandlerFactory)
+        public PresenterFactory(ICardConnector cardConnector, 
+                                IWonderConnector wonderConnector, 
+                                IGameEngineReceiver gameEngineReceiver, 
+                                IEventManager eventManager, 
+                                IPlayerCardHandlerFactory playerCardHandlerFactory, 
+                                ISceneManager sceneManager, 
+                                IGameObjectViewFactory gameObjectViewFactory, 
+                                IDevelopmentConnector developmentConnector, 
+                                IObjectManager objectManager, 
+                                ITextureIdHandler textureIdHandler, 
+                                IMilitaryTokenChildTextureHandler militaryTokenChildTextureHandler, 
+                                IDevelopmentHandlerFactory developmentHandlerFactory,
+                                IGameOverHandler gameOverHandler)
         {
             m_cardConnector = cardConnector;
             m_wonderConnector = wonderConnector;
@@ -25,6 +37,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
             m_textureIdHandler = textureIdHandler;
             m_militaryTokenChildTextureHandler = militaryTokenChildTextureHandler;
             m_developmentHandlerFactory = developmentHandlerFactory;
+            m_gameOverHandler = gameOverHandler;
         }
 
         public IPresenter CreateCardPresenter()
@@ -59,7 +72,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
 
         public IPresenter CreateScreenPresenter()
         {
-            return new ScreenPresenter(m_gameEngineReceiver, m_eventManager);
+            return new ScreenPresenter(m_gameEngineReceiver, m_eventManager, m_gameOverHandler);
         }
 
         public IPresenter CreateChooseObjectPresenter()
@@ -79,5 +92,6 @@ namespace SevenWonders.Presenter.Presenters.Factories
         private readonly ITextureIdHandler m_textureIdHandler;
         private readonly IMilitaryTokenChildTextureHandler m_militaryTokenChildTextureHandler;
         private readonly IDevelopmentHandlerFactory m_developmentHandlerFactory;
+        private readonly IGameOverHandler m_gameOverHandler;
     }
 }

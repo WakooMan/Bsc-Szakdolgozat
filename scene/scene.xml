@@ -17741,7 +17741,7 @@
           <TextColorHex>#ff008080</TextColorHex>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
-          <Name>GoToMenu</Name>
+          <Name>ScienceBackToMenu</Name>
           <Id>472</Id>
           <ZIndex>5</ZIndex>
           <Visible>true</Visible>
@@ -17874,7 +17874,7 @@
           <TextColorHex>#ffbc0000</TextColorHex>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
-          <Name>GoToMenu</Name>
+          <Name>MilitaryBackToMenu</Name>
           <Id>479</Id>
           <ZIndex>5</ZIndex>
           <Visible>true</Visible>
@@ -18117,7 +18117,7 @@
           <TextColorHex>#ff001f5c</TextColorHex>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
-          <Name>GoToMenu</Name>
+          <Name>CitizenBackToMenu</Name>
           <Id>486</Id>
           <ZIndex>5</ZIndex>
           <Visible>true</Visible>

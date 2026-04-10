@@ -2,15 +2,17 @@
 using GameLogic.Events.GameEvents;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
+using SkiaSharp.Views.Maui;
 
 namespace SevenWonders.Presenter.Presenters
 {
     public class ScreenPresenter : IPresenter
     {
-        public ScreenPresenter(IGameEngineReceiver gameEngineReceiver, IEventManager eventManager)
+        public ScreenPresenter(IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, IGameOverHandler gameOverHandler)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
+            m_gameOverHandler = gameOverHandler;
         }
 
         public void Initialize()
@@ -28,6 +30,9 @@ namespace SevenWonders.Presenter.Presenters
             m_citizenSecondPlayerName = m_gameEngineReceiver.ReceiveTextLabel("CitizenSecondPlayerName");
             m_citizenSecondPlayerVictoryPoints = m_gameEngineReceiver.ReceiveTextLabel("CitizenSecondPlayerVictoryPoints");
             m_citizenSecondPlayerBlueCardNumber = m_gameEngineReceiver.ReceiveTextLabel("CitizenSecondPlayerBlueCardNumber");
+            m_citizenBackToMenu = m_gameEngineReceiver.ReceiveButton("CitizenBackToMenu");
+            m_militaryBackToMenu = m_gameEngineReceiver.ReceiveButton("MilitaryBackToMenu");
+            m_scienceBackToMenu = m_gameEngineReceiver.ReceiveButton("ScienceBackToMenu");
         }
 
         public void SubscribeToEvents()
@@ -42,8 +47,9 @@ namespace SevenWonders.Presenter.Presenters
 
             m_eventManager.Subscribe<MilitaryVictory>(eventObj =>
             {
-                if (m_militaryGameOverScreen is not null && m_militaryPlayerName is not null)
+                if (m_militaryGameOverScreen is not null && m_militaryPlayerName is not null && m_militaryBackToMenu is not null)
                 {
+                    m_militaryBackToMenu.ClickedEvent += OnClickBackToMenu;
                     m_militaryPlayerName.Text = $"{eventObj.PlayerName}";
                     m_militaryGameOverScreen.Visible = true;
                 }
@@ -51,8 +57,9 @@ namespace SevenWonders.Presenter.Presenters
 
             m_eventManager.Subscribe<ScientificVictory>(eventObj =>
             {
-                if (m_scienceGameOverScreen is not null && m_sciencePlayerName is not null)
+                if (m_scienceGameOverScreen is not null && m_sciencePlayerName is not null && m_scienceBackToMenu is not null)
                 {
+                    m_scienceBackToMenu.ClickedEvent += OnClickBackToMenu;
                     m_sciencePlayerName.Text = $"{eventObj.PlayerName}";
                     m_scienceGameOverScreen.Visible = true;
                 }
@@ -67,8 +74,11 @@ namespace SevenWonders.Presenter.Presenters
                     m_citizenFirstPlayerBlueCardNumber is not null &&
                     m_citizenSecondPlayerName is not null &&
                     m_citizenSecondPlayerVictoryPoints is not null &&
-                    m_citizenSecondPlayerBlueCardNumber is not null)
+                    m_citizenSecondPlayerBlueCardNumber is not null &&
+                    m_citizenBackToMenu is not null)
                 {
+                    m_citizenBackToMenu.ClickedEvent += OnClickBackToMenu;
+
                     m_citizenFirstPlayerName.Text = eventObj.FirstPlayer.name;
                     m_citizenFirstPlayerVictoryPoints.Text = eventObj.FirstPlayer.victoryPoints.ToString();
                     m_citizenFirstPlayerBlueCardNumber.Text = eventObj.FirstPlayer.numberOfBlueCards.ToString();
@@ -113,6 +123,12 @@ namespace SevenWonders.Presenter.Presenters
             });
         }
 
+        private void OnClickBackToMenu(IInteractiveObject interactiveObject, SKTouchEventArgs eventArgs)
+        {
+            m_gameOverHandler.OnGameOver();
+            interactiveObject.ClickedEvent -= OnClickBackToMenu;
+        }
+
         private TextLabel? m_militaryPlayerName;
         private TextLabel? m_sciencePlayerName;
         private TextLabel? m_citizenGameResult;
@@ -122,11 +138,15 @@ namespace SevenWonders.Presenter.Presenters
         private TextLabel? m_citizenSecondPlayerName;
         private TextLabel? m_citizenSecondPlayerVictoryPoints;
         private TextLabel? m_citizenSecondPlayerBlueCardNumber;
+        private ButtonObject? m_citizenBackToMenu;
+        private ButtonObject? m_militaryBackToMenu;
+        private ButtonObject? m_scienceBackToMenu;
         private GraphicsLayer? m_loadingScreen;
         private GraphicsLayer? m_scienceGameOverScreen;
         private GraphicsLayer? m_militaryGameOverScreen;
         private GraphicsLayer? m_citizenGameOverScreen;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
+        private readonly IGameOverHandler m_gameOverHandler;
     }
 }
