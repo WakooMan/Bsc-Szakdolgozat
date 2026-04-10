@@ -18,5 +18,15 @@ namespace GameLogic.Elements.GameCards
         {
             return new PurpleCard(this);
         }
+
+        public override async Task OnBuilt(IGameContext gameContext, int playerId)
+        {
+            await GuildObj.Apply(gameContext, playerId);
+        }
+
+        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
+        {
+            await GuildObj.Unapply(gameContext, playerId);
+        }
     }
 }

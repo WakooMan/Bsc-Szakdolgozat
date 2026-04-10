@@ -2,11 +2,9 @@
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
-    [Export(typeof(ITurnHandler))]
     public class TurnHandler: ITurnHandler
     {
         public Player CurrentPlayer
@@ -32,7 +30,15 @@ namespace GameLogic.Handlers
             }
         }
 
-        [ImportingConstructor]
+        public Player GetPlayer(int id)
+        {
+            if (m_players is null)
+            {
+                throw new InvalidOperationException("Cannot get players until SetPlayers method is not called!");
+            }
+            return m_players[id - 1];
+        }
+
         public TurnHandler(IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
@@ -51,23 +57,22 @@ namespace GameLogic.Handlers
             m_newTurnForced = false;
         }
 
-        public void NextPlayer()
+        public async Task NextPlayer()
         {
             if (m_players is null)
             {
                 throw new InvalidOperationException("Cannot execute NextPlayer method until SetPlayers method is not called!");
             }
 
-            m_eventManager.Publish(new TurnEnded(CurrentPlayer));
+            await m_eventManager.PublishAsync(new TurnEnded(CurrentPlayer));
             if (!m_newTurnForced)
             {
                 m_index = (m_index + 1 < m_players.Count) ? m_index + 1 : 0;
             }
-            m_eventManager.Publish(new TurnStarted(CurrentPlayer));
             m_newTurnForced = false;
         }
 
-        public void ForceNewTurn()
+        public async Task ForceNewTurn()
         {
             if (m_players is null)
             {
@@ -75,7 +80,7 @@ namespace GameLogic.Handlers
             }
 
             m_newTurnForced = true;
-            m_eventManager.Publish(new ExtraTurnGranted());
+            await m_eventManager.PublishAsync(new ExtraTurnGranted());
         }
 
         private List<Player>? m_players;

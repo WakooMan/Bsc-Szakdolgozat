@@ -38,7 +38,7 @@ namespace GameLogic_UnitTests.Elements.Effects
         {
             m_strength.Apply(m_gameContext);
 
-            m_eventManager.Received(1).Publish(Arg.Any<OnMilitaryAdvanced>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnMilitaryAdvanced>());
         }
 
         private IGameContext m_gameContext;

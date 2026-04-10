@@ -1,14 +1,20 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Wonders;
+using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
 using System;
+using System.Numerics;
 
 namespace GameLogic.PlayerActions
 {
     public class ChooseWonderAction : IPlayerAction
     {
+        public string Name => m_wonder.Name;
         public Wonder Wonder => m_wonder;
+        public Player Player => m_player();
 
+        public ChooseWonderAction() { }
         public ChooseWonderAction(Wonder wonder, List<Wonder> wonders, Func<Player> player)
         {
             ArgumentChecker.CheckNull(wonder, nameof(wonder));
@@ -20,17 +26,19 @@ namespace GameLogic.PlayerActions
             m_player = player;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return m_wonders.Contains(m_wonder);
+            return Task.FromResult(m_wonders.Contains(m_wonder));
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_wonders.Contains(m_wonder), "Wonder list does not contain the wonder! Action cannot be performed!");
 
             m_player().Wonders.Add(m_wonder);
             m_wonders.Remove(m_wonder);
+            await gameContext.EventManager.PublishAsync(new OnWonderChosen(m_player(), m_wonder));
+            return true;
         }
 
         private readonly Wonder m_wonder;

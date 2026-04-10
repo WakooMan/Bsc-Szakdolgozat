@@ -41,14 +41,14 @@ namespace GameLogic_UnitTests.Elements.Effects
             Player player = new Player();
             turnHandler.CurrentPlayer.Returns(player);
             playerAction.CanPerform(gameContext).Returns(true);
-            playerActionReceiver.ReceivePlayerAction(player, Arg.Any<ICollection<IPlayerAction>>()).Returns(playerAction);
+            playerActionReceiver.ReceivePlayerAction(player, Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(playerAction);
             gameContext.PlayerActionReceiver.Returns(playerActionReceiver);
             gameContext.TurnHandler.Returns(turnHandler);
             gameContext.DroppedCardList.Returns(null as ICardList);
 
             Assert.Throws<InvalidOperationException>(()=> m_buildFreeFromDroppedCards.Apply(gameContext));
 
-            playerActionReceiver.DidNotReceive().ReceivePlayerAction(player, Arg.Any<ICollection<IPlayerAction>>());
+            playerActionReceiver.DidNotReceive().ReceivePlayerAction(player, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             playerAction.DidNotReceive().CanPerform(gameContext);
             playerAction.DidNotReceive().DoPlayerAction(gameContext);
         }
@@ -65,14 +65,14 @@ namespace GameLogic_UnitTests.Elements.Effects
             cardList.Cards.Returns([]);
             turnHandler.CurrentPlayer.Returns(player);
             playerAction.CanPerform(gameContext).Returns(true);
-            playerActionReceiver.ReceivePlayerAction(player, Arg.Any<ICollection<IPlayerAction>>()).Returns(playerAction);
+            playerActionReceiver.ReceivePlayerAction(player, Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(playerAction);
             gameContext.PlayerActionReceiver.Returns(playerActionReceiver);
             gameContext.TurnHandler.Returns(turnHandler);
             gameContext.DroppedCardList.Returns(cardList);
 
             m_buildFreeFromDroppedCards.Apply(gameContext);
 
-            playerActionReceiver.Received(1).ReceivePlayerAction(player, Arg.Any<ICollection<IPlayerAction>>());
+            playerActionReceiver.Received(1).ReceivePlayerAction(player, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             playerAction.Received(1).CanPerform(gameContext);
             playerAction.Received(1).DoPlayerAction(gameContext);
         }

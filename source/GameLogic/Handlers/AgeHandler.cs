@@ -5,11 +5,9 @@ using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures.Factories;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
-    [Export(typeof(IAgeHandler))]
     public class AgeHandler : IAgeHandler
     {
         public IAgeBase CurrentAge
@@ -24,52 +22,57 @@ namespace GameLogic.Handlers
             }
         }
 
-        [ImportingConstructor]
-        public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager)
+        public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager, IRandomElementReceiver randomElementReceiver)
         {
             ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));
             ArgumentChecker.CheckNull(gameElements, nameof(gameElements));
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
+            ArgumentChecker.CheckNull(randomElementReceiver, nameof(randomElementReceiver));
 
             m_cardCompositionFactory = cardCompositionFactory;
             m_cardList = gameElements.Cards;
             m_eventManager = eventManager;
+            m_randomElementReceiver = randomElementReceiver;
             m_ageBase = null;
         }
 
-        public void Initialize()
+        public async Task Initialize()
         {
-            m_ageBase = new FirstAge(m_cardCompositionFactory, m_cardList);
+            m_ageBase = new FirstAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomElementReceiver);
+            await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
         }
 
-        public bool NextAge()
+        public async Task<bool> NextAge()
         {
             if (CurrentAge is null)
             {
                 throw new InvalidOperationException("Initialize method is not called yet!");
             }
 
-            AgesEnum previousAge = CurrentAge.Age;
+            IAgeBase previousAge = CurrentAge;
 
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
-                    m_ageBase = new SecondAge(m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new SecondAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomElementReceiver);
+                    await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
                     break;
                 case AgesEnum.II:
-                    m_ageBase = new ThirdAge(m_cardCompositionFactory, m_cardList);
+                    m_ageBase = new ThirdAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomElementReceiver);
+                    await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
                     break;
                 default:
                     return false;
             }
 
-            m_eventManager.Publish(new OnAgeEnded(previousAge));
+            await m_eventManager.PublishAsync(new OnAgeEnded(previousAge));
             return true;
         }
 
         private readonly ICardCompositionFactory m_cardCompositionFactory;
         private readonly ICardList m_cardList;
         private readonly IEventManager m_eventManager;
+        private readonly IRandomElementReceiver m_randomElementReceiver;
         private IAgeBase? m_ageBase;
     }
 }

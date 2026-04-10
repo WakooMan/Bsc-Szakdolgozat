@@ -1,17 +1,19 @@
-﻿using GameLogic.PlayerActions;
+﻿using GameLogic.Elements.GameCards;
+using GameLogic.Events.GameEvents;
+using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
 {
     public class BuildFreeFromDroppedCards : Effect
     {
         public BuildFreeFromDroppedCards() { }
-        public override void Apply(IGameContext gameContext)
+        public override async Task Apply(IGameContext gameContext, int playerId)
         {
-            IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, gameContext.DroppedCardList?.Cards.Select(card => (IPlayerAction)new ChooseCardAction(card)).ToArray() ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!"));
-            if (playerAction.CanPerform(gameContext))
-            {
-                playerAction.DoPlayerAction(gameContext);
-            }
+            ICardList droppedCardList = gameContext.DroppedCardList ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!");
+            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz az eldobott kártyákból", droppedCardList.Cards.Select(card => card.Name).ToArray(), true));
+            await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext,
+                  gameContext.TurnHandler.CurrentPlayer, 
+                  droppedCardList.Cards.Select(card => (IPlayerAction)new ChooseDroppedCardAction(card)).ToList());
         }
 
         public override BuildFreeFromDroppedCards Clone()

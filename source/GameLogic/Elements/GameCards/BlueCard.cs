@@ -1,5 +1,4 @@
 ﻿using GameLogic.Elements.Effects;
-using GameLogic.Elements.Goods;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -21,9 +20,14 @@ namespace GameLogic.Elements.GameCards
             return new BlueCard(this);
         }
 
-        public override int GetVictoryPoints(Player player)
+        public override async Task OnBuilt(IGameContext gameContext, int playerId)
         {
-            return Point.Points;
+            await Point.Apply(gameContext, playerId);
+        }
+
+        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
+        {
+            await Point.Unapply(gameContext, playerId);
         }
     }
 }

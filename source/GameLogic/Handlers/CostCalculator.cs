@@ -4,14 +4,11 @@ using GameLogic.Elements.Goods;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic.Handlers
 {
-    [Export(typeof(ICostCalculator))]
     public class CostCalculator : ICostCalculator
     {
-        [ImportingConstructor]
         public CostCalculator(IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
@@ -19,20 +16,20 @@ namespace GameLogic.Handlers
             m_eventManager = eventManager;
         }
 
-        public bool CanAfford(IBuildable buildable, Player buyer, Player opponent)
+        public async Task<bool> CanAfford(IBuildable buildable, Player buyer, Player opponent)
         {
-            int cost = GetBuildCost(buildable, buyer, opponent);
+            int cost = await GetBuildCost(buildable, buyer, opponent);
             return buyer.Money >= cost;
         }
 
-        public int GetBuildCost(IBuildable buildable, Player buyer, Player opponent)
+        public async Task<int> GetBuildCost(IBuildable buildable, Player buyer, Player opponent)
         {
-            var missing = GetMissingGoods(buildable, buyer);
+            var missing = await GetMissingGoods(buildable, buyer);
             int totalCost = 0;
-            Dictionary<Type, Good> opponentGoods = opponent.Goods;
+            IReadOnlyDictionary<Type, Good> opponentGoods = (await opponent.GetPlayerProperties()).Goods;
 
             OnBuildingCostCalculated onBuildingCostCalculated = new OnBuildingCostCalculated(buyer);
-            m_eventManager.Publish(onBuildingCostCalculated);
+            await m_eventManager.PublishAsync(onBuildingCostCalculated);
 
             foreach (var cheaperBuilding in onBuildingCostCalculated.CheaperBuildings.Where(cb => cb.BuildingType == buildable.BuildingType))
             {
@@ -50,7 +47,7 @@ namespace GameLogic.Handlers
 
             foreach (Good good in missing)
             {
-                List<BuyGoodItem> items = onBuildingCostCalculated.BuyGoodItems.Where(item => good.GetType().Name == item.GoodType).ToList();
+                List<BuyGoodItem> items = onBuildingCostCalculated.BuyGoodItems.Where(item => good.GetType().Name == (item?.GoodType ?? "None")).ToList();
                 int enemyGoodNumber = opponentGoods.ContainsKey(good.GetType()) ? opponentGoods[good.GetType()].Amount : 0;
                 int price = items.Count > 0 ? GetDiscount(items) : 2 + enemyGoodNumber;
                 totalCost += price * good.Amount;
@@ -59,10 +56,10 @@ namespace GameLogic.Handlers
             return totalCost + buildable.MoneyCost;
         }
 
-        public List<Good> GetMissingGoods(IBuildable buildable, Player buyer)
+        public async Task<List<Good>> GetMissingGoods(IBuildable buildable, Player buyer)
         {
             List<Good> missing = new List<Good>();
-            Dictionary<Type, Good> ownerGoods = buyer.Goods;
+            IReadOnlyDictionary<Type, Good> ownerGoods = (await buyer.GetPlayerProperties()).Goods;
 
             foreach (Good good in buildable.GoodCost)
             {

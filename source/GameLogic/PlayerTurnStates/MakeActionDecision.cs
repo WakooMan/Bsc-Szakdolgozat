@@ -1,7 +1,9 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
+using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using System.Runtime.CompilerServices;
 
 namespace GameLogic.PlayerTurnStates
 {
@@ -15,22 +17,16 @@ namespace GameLogic.PlayerTurnStates
             GoToPrevState = false;
         }
 
-        public void ExecuteTurnState()
+        public async Task ExecuteTurnState()
         {
             Action<OnCardUnpicked> action = (args) => GoToPrevState = true;
             m_gameContext.EventManager.Subscribe(action);
             List<IPlayerAction> playerActions =
             [
-                new UnpickCard(CurrentPlayer), new BuildCard(), new SellCard(CurrentPlayer),
-                .. CurrentPlayer.Wonders.Select(wonder => new BuildWonder(wonder)),
+                new TurnDecision(new UnpickCard(CurrentPlayer)), new TurnDecision(new BuildCard()), new TurnDecision(new SellCard(CurrentPlayer)),
+                new TurnDecision(new BuildWonderProcess(CurrentPlayer, CurrentPlayer.Wonders.Select(wonder => new BuildWonder(wonder)).ToList())),
             ];
-
-            IPlayerAction playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, playerActions);
-            if (playerAction.CanPerform(m_gameContext))
-            {
-                playerAction.DoPlayerAction(m_gameContext);
-            }
-
+            await m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, CurrentPlayer, playerActions);
             m_gameContext.EventManager.Unsubscribe(action);
         }
 

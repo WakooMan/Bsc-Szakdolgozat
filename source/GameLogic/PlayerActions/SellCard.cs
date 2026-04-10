@@ -1,14 +1,13 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
-using GameLogic.Events;
 using GameLogic.Events.GameEvents;
-using GameLogic.GameStructures;
 using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
 {
     public class SellCard : IPlayerAction
     {
+        public string Name => nameof(SellCard);
         public SellCard(Player player)
         {
             ArgumentChecker.CheckNull(player, nameof(player));
@@ -16,7 +15,7 @@ namespace GameLogic.PlayerActions
             m_player = player;
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             if (m_player.PickedCard is null)
             {
@@ -28,12 +27,14 @@ namespace GameLogic.PlayerActions
             m_player.Money += money;
             Card card = m_player.PickedCard.CardObj;
             m_player.PickedCard = null;
-            gameContext.EventManager.Publish(new OnCardSold(m_player, card, money));
+            gameContext.DroppedCardList.Cards.Add(card);
+            await gameContext.EventManager.PublishAsync(new OnCardSold(m_player, card, money));
+            return true;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return m_player.PickedCard is not null;
+            return Task.FromResult(m_player.PickedCard is not null);
         }
 
         private readonly Player m_player;

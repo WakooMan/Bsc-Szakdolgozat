@@ -8,6 +8,7 @@ using GameLogic.GameStates;
 using GameLogic.GameStructures;
 using GameLogic.GameStructures.Factories;
 using GameLogic.Handlers;
+using GameLogic.Events;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace GameLogic_UnitTests
         [SetUp]
         public void Setup()
         {
+            m_eventManager = Substitute.For<IEventManager>();
             m_turnHandler = Substitute.For<ITurnHandler>();
             m_ageHandler = Substitute.For<IAgeHandler>();
             m_chooseWonderHandler = Substitute.For<IChooseWonderHandler>();
@@ -61,7 +63,7 @@ namespace GameLogic_UnitTests
             cardCompositionFactory.Create(Arg.Any<string>(), Arg.Any<ICollection<Card>>()).Returns(cardComposition);
             ICardList cardList = Substitute.For<ICardList>();
             cardList.Cards.Returns([]);
-            AgeBase currentAge = new FirstAge(cardCompositionFactory, cardList);
+            AgeBase currentAge = new FirstAge(m_eventManager, cardCompositionFactory, cardList);
             m_ageHandler.CurrentAge.Returns(currentAge);
             m_chooseWonderHandler.WondersChosen.Returns(true);
             m_ageHandler.NextAge().Returns(false);
@@ -80,6 +82,7 @@ namespace GameLogic_UnitTests
             Assert.Throws<InvalidOperationException>(m_game.GameLoop);
         }
 
+        private IEventManager m_eventManager;
         private ITurnHandler m_turnHandler;
         private IAgeHandler m_ageHandler;
         private IChooseWonderHandler m_chooseWonderHandler;

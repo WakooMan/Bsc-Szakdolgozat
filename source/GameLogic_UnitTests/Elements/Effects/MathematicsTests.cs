@@ -53,7 +53,7 @@ namespace GameLogic_UnitTests.Elements.Effects
 
             _ = m_turnHandler.Received(1).CurrentPlayer;
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnGameEnded>>());
-            Assert.That(onGameEnded.VictoryPoints[m_player], Is.EqualTo(10));
+            Assert.That(onGameEnded.Points[m_player], Is.EqualTo(10));
 
         }
 

@@ -1,5 +1,6 @@
 ﻿using GameLogic.Ages;
 using GameLogic.Elements.GameCards;
+using GameLogic.Events;
 using GameLogic.GameStructures;
 using GameLogic.GameStructures.Factories;
 using NSubstitute;
@@ -11,6 +12,7 @@ namespace GameLogic_UnitTests.Ages
         [SetUp]
         public void Setup()
         {
+            m_eventManager = Substitute.For<IEventManager>();
             m_cardCompositionFactory = Substitute.For<ICardCompositionFactory>();
             m_cardComposition = Substitute.For<ICardComposition>();
             m_cardCompositionFactory.Create(Arg.Any<string>(), Arg.Any<ICollection<Card>>()).Returns(m_cardComposition);
@@ -19,14 +21,14 @@ namespace GameLogic_UnitTests.Ages
             m_card2 = new BrownCard() { Age = AgesEnum.II };
             m_card3 = new BrownCard() { Age = AgesEnum.III };
             m_cardList.Cards.Returns(new List<Card>() { m_card1, m_card2, m_card3 });
-            m_thirdAge = new ThirdAge(m_cardCompositionFactory, m_cardList);
+            m_thirdAge = new ThirdAge(m_eventManager, m_cardCompositionFactory, m_cardList);
         }
 
         [Test]
         public void When_Constructor_Called_With_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new ThirdAge(null, m_cardList));
-            Assert.Throws<ArgumentNullException>(() => new ThirdAge(m_cardCompositionFactory, null));
+            Assert.Throws<ArgumentNullException>(() => new ThirdAge(m_eventManager, null, m_cardList));
+            Assert.Throws<ArgumentNullException>(() => new ThirdAge(m_eventManager, m_cardCompositionFactory, null));
         }
 
         [Test]
@@ -38,6 +40,7 @@ namespace GameLogic_UnitTests.Ages
 
         }
 
+        private IEventManager m_eventManager;
         private ThirdAge m_thirdAge;
         private ICardCompositionFactory m_cardCompositionFactory;
         private ICardComposition m_cardComposition;

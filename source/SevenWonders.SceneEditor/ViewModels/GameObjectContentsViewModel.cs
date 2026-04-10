@@ -29,7 +29,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                     if (m_selectedLayer is not null)
                     {
                         GameObjectViews.Clear();
-                        foreach (GameObjectListViewModel gameObjectListViewModel in m_selectedLayer.ObjectList.Select(gameObject => new GameObjectListViewModel(gameObject)))
+                        foreach (GameObjectListViewModel gameObjectListViewModel in m_selectedLayer.GameObjects.Select(gameObject => new GameObjectListViewModel(gameObject)))
                         {
                             GameObjectViews.Add(gameObjectListViewModel);
                         }
@@ -53,12 +53,46 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedGameObjectPositionX));
                 OnPropertyChanged(nameof(SelectedGameObjectPositionY));
                 OnPropertyChanged(nameof(SelectedGameObjectRotation));
-                OnPropertyChanged(nameof(SelectedGameObjectScaleX));
-                OnPropertyChanged(nameof(SelectedGameObjectScaleY));
+                OnPropertyChanged(nameof(SelectedGameObjectVisualSizeX));
+                OnPropertyChanged(nameof(SelectedGameObjectVisualSizeY));
                 OnPropertyChanged(nameof(SelectedGameObjectZIndex));
+                OnPropertyChanged(nameof(SelectedGameObjectHeight));
+                OnPropertyChanged(nameof(SelectedGameObjectWidth));
+                OnPropertyChanged(nameof(SelectedGameObjectVisible));
+                OnPropertyChanged(nameof(SelectedGameObjectView));
                 if (m_selectedGameObject is not null)
                 {
                     m_selectedGameObject.Animations.ForEach(animation => SpriteViews.Add(new SpriteListViewModel(animation)));
+                }
+            }
+        }
+
+        public GameObjectListViewModel? SelectedGameObjectView
+        {
+            get
+            {
+                if (m_selectedGameObject is null) return null;
+                return GameObjectViews.FirstOrDefault(g => g.Id == m_selectedGameObject.Id);
+            }
+            set
+            {
+                SetSelectedGameObject(value);
+            }
+        }
+
+        public SpriteListViewModel? SelectedSpriteView
+        {
+            get
+            {
+                return m_selectedSpriteView;
+            }
+            set
+            {
+                m_selectedSpriteView = value;
+                OnPropertyChanged();
+                if (value is not null)
+                {
+                    SetSelectedSprite(value);
                 }
             }
         }
@@ -173,33 +207,33 @@ namespace SevenWonders.SceneEditor.ViewModels
         }
 
 
-        public float SelectedGameObjectScaleX
+        public float SelectedGameObjectVisualSizeX
         {
             get
             {
-                return SelectedGameObject?.Scale.X ?? -1;
+                return SelectedGameObject?.VisualSize.X ?? -1;
             }
             set
             {
                 if (SelectedGameObject is not null)
                 {
-                    SelectedGameObject.Scale = new Vector2(value, SelectedGameObject.Scale.Y);
+                    SelectedGameObject.VisualSize = new Vector2(value, SelectedGameObject.VisualSize.Y);
                     OnPropertyChanged();
                 }
             }
         }
 
-        public float SelectedGameObjectScaleY
+        public float SelectedGameObjectVisualSizeY
         {
             get
             {
-                return SelectedGameObject?.Scale.Y ?? -1;
+                return SelectedGameObject?.VisualSize.Y ?? -1;
             }
             set
             {
                 if (SelectedGameObject is not null)
                 {
-                    SelectedGameObject.Scale = new Vector2(SelectedGameObject.Scale.X, value);
+                    SelectedGameObject.VisualSize = new Vector2(SelectedGameObject.VisualSize.X, value);
                     OnPropertyChanged();
                 }
             }
@@ -275,10 +309,11 @@ namespace SevenWonders.SceneEditor.ViewModels
                 Name = name,
                 Position = new Vector2(0, 0),
                 Visible = visible,
-                Scale = new Vector2(1, 1),
+                VisualSize = new Vector2(1, 1),
+                FlipMultiplier = new Vector2(1, 1),
                 ZIndex = 0
             };
-            m_engine.ObjectManager.AddGameObject(m_engine.SceneManager.CurrentScene, SelectedLayer, gameObject);
+            m_engine.ObjectManager.AddInteractiveObject(m_engine.SceneManager.CurrentScene, SelectedLayer, gameObject);
             GameObjectViews.Add(new GameObjectListViewModel(gameObject));
             SelectedGameObject = gameObject;
         }
@@ -290,7 +325,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            SelectedGameObject = m_selectedLayer.ObjectList.FirstOrDefault(gameObject => gameObject.Id == gameObjectListViewModel.Id);
+            SelectedGameObject = m_selectedLayer.GameObjects.FirstOrDefault(gameObject => gameObject.Id == gameObjectListViewModel.Id);
         }
 
         public void SetSelectedSprite(SpriteListViewModel? spriteListViewModel)
@@ -318,7 +353,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 GameObjectViews.Remove(gameObjectListViewModel);
             }
 
-            m_selectedLayer.ObjectList.Remove(SelectedGameObject);
+            m_engine.ObjectManager.RemoveInteractiveObject(m_selectedLayer, SelectedGameObject);
             SelectedGameObject = null;
         }
 
@@ -350,28 +385,12 @@ namespace SevenWonders.SceneEditor.ViewModels
             m_selectedGameObject.CurrentAnim = 0;
         }
 
-        public void AddSpriteToGameObject(string name, string textureName, bool visible, int width, int height, string fullPath, int frameHeight, int frameWidth, int rows, int columns)
+        public void AddSpriteToGameObject(string name, int textureId, bool visible, int frameHeight, int frameWidth, int rows, int columns)
         {
             if (m_engine.SceneManager.CurrentScene is null || m_selectedGameObject is null)
             {
                 return;
             }
-
-            string fileName = Path.GetFileName(fullPath);
-            string sceneFolderPath = m_engine.SceneFileHandler.ReceiveSceneFolder(m_engine.SceneManager.CurrentScene);
-            string destinationFileName = Path.Combine(sceneFolderPath, fileName);
-            if (!File.Exists(destinationFileName))
-            {
-                File.Copy(fullPath, destinationFileName);
-            }
-
-            Texture texture = new Texture()
-            {
-                Color = SKColor.Empty,
-                FileName = fileName,
-            };
-
-            texture.LoadTexture(sceneFolderPath);
 
             List<SpriteFrame> frames = new List<SpriteFrame>();
             for (int i = 0; i < rows; i++)
@@ -380,7 +399,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 {
                     frames.Add(new SpriteFrame()
                     {
-                        Frame = texture,
+                        TextureId = textureId,
                         Name = name,
                         Left = j * frameWidth,
                         Right = (j + 1) * frameWidth,
@@ -394,12 +413,9 @@ namespace SevenWonders.SceneEditor.ViewModels
             {
                 ActualFrame = 0,
                 Name = name,
-                Fps = 60,
                 Frames = frames,
                 NumFrames = frames.Count,
                 LoopAnimation = true,
-                RotationZ = 0,
-                LastUpdate = 0,
             };
 
             m_selectedGameObject.Animations.Add(sprite);
@@ -410,5 +426,6 @@ namespace SevenWonders.SceneEditor.ViewModels
         private GraphicsLayer? m_selectedLayer;
         private string m_copyName;
         private bool m_isCopyEnabled;
+        private SpriteListViewModel? m_selectedSpriteView;
     }
 }

@@ -21,7 +21,7 @@ namespace GameLogic_UnitTests.Elements.Effects
             m_playerActionReceiver = Substitute.For<IPlayerActionReceiver>();
             m_player = new Player();
             m_playerAction.CanPerform(m_gameContext).Returns(true);
-            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<IPlayerAction>>()).Returns(m_playerAction);
+            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(m_playerAction);
             m_turnHandler.CurrentPlayer.Returns(m_player);
             m_gameContext.TurnHandler.Returns(m_turnHandler);
             m_gameContext.PlayerActionReceiver.Returns(m_playerActionReceiver);
@@ -43,7 +43,7 @@ namespace GameLogic_UnitTests.Elements.Effects
 
             m_law.Apply(m_gameContext);
 
-            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player, Arg.Any<ICollection<IPlayerAction>>());
+            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             m_playerAction.Received(1).CanPerform(m_gameContext);
             m_playerAction.Received(1).DoPlayerAction(m_gameContext);
         }

@@ -9,5 +9,7 @@ namespace GameLogic.Elements
         ICardList Cards { get; }
         IWonderList Wonders { get; }
         IDevelopmentList Developments { get; }
+
+        public void ResetElements();
     }
 }

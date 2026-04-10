@@ -53,9 +53,25 @@ namespace SevenWonders.SceneEditor.ViewModels
                 OnPropertyChanged(nameof(SelectedLayerVisible));
                 OnPropertyChanged(nameof(SelectedLayerEnableCollision));
                 OnPropertyChanged(nameof(SelectedLayerZIndex));
+                OnPropertyChanged(nameof(SelectedLayerView));
                 m_textureContentsViewModel.SelectedLayer = m_selectedLayer;
                 m_gameObjectContentsViewModel.SelectedLayer = m_selectedLayer;
+                m_buttonContentsViewModel.SelectedLayer = m_selectedLayer;
+                m_textLabelContentsViewModel.SelectedLayer = m_selectedLayer;
                 m_onUnselectLayerCommand.ChangeCanExecute();
+            }
+        }
+
+        public LayerListViewModel? SelectedLayerView
+        {
+            get
+            {
+                if (m_selectedLayer is null) return null;
+                return LayerViews.FirstOrDefault(l => l.Id == m_selectedLayer.Id);
+            }
+            set
+            {
+                SetSelectedLayer(value);
             }
         }
 
@@ -153,11 +169,13 @@ namespace SevenWonders.SceneEditor.ViewModels
         }
 
 
-        public LayerContentsViewModel(IEngine engine, TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsView)
+        public LayerContentsViewModel(IEngine engine, TextureContentsViewModel textureContentsViewModel, GameObjectContentsViewModel gameObjectContentsViewModel, ButtonContentsViewModel buttonContentsViewModel, TextLabelContentsViewModel textLabelContentsViewModel)
         {
             m_engine = engine;
             m_textureContentsViewModel = textureContentsViewModel;
-            m_gameObjectContentsViewModel = gameObjectContentsView;
+            m_gameObjectContentsViewModel = gameObjectContentsViewModel;
+            m_buttonContentsViewModel = buttonContentsViewModel;
+            m_textLabelContentsViewModel = textLabelContentsViewModel;
             LayerViews = new ObservableCollection<LayerListViewModel>();
             m_onUnselectLayerCommand = new Command(OnUnselectLayer, () => CurrentScene is not null && SelectedLayer is not null);
             CurrentScene = null;
@@ -191,20 +209,20 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            SelectedLayer = m_currentScene.Layers.FirstOrDefault(layer => layer.ID == layerViewModel.Id);
+            SelectedLayer = m_currentScene.Layers.FirstOrDefault(layer => layer.Id == layerViewModel.Id);
         }
 
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        public void DrawSelectedLayer(SKPaintSurfaceEventArgs eventArgs)
+        public void DrawSelectedLayer(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
         {
             if (SelectedLayer is null)
             {
                 return;
             }
 
-            SelectedLayer.Draw(eventArgs);
+            SelectedLayer.Draw(eventArgs, textureRegistry);
         }
 
         public void DeleteSelectedLayer()
@@ -213,7 +231,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             {
                 return;
             }
-            LayerListViewModel? layerListViewModel = LayerViews.FirstOrDefault(layer => layer.Id == SelectedLayer.ID);
+            LayerListViewModel? layerListViewModel = LayerViews.FirstOrDefault(layer => layer.Id == SelectedLayer.Id);
             if (layerListViewModel is not null)
             {
                 LayerViews.Remove(layerListViewModel);
@@ -245,6 +263,8 @@ namespace SevenWonders.SceneEditor.ViewModels
         private Scene? m_currentScene;
         private readonly TextureContentsViewModel m_textureContentsViewModel;
         private readonly GameObjectContentsViewModel m_gameObjectContentsViewModel;
+        private readonly ButtonContentsViewModel m_buttonContentsViewModel;
+        private readonly TextLabelContentsViewModel m_textLabelContentsViewModel;
         private readonly IEngine m_engine;
         private string m_copyName;
         private bool m_isCopyEnabled;

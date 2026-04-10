@@ -25,13 +25,13 @@
                              VerticalOptions="Center" 
                              Margin="10">
                     <Label Text="Sprite name:"/>
-                    <Entry MaxLength="10" 
+                    <Entry MaxLength="40" 
 Text="{Binding Name, Mode=TwoWay}" 
 TextColor="White" 
 Background="Gray" 
 HorizontalTextAlignment="Center"/>
                     <Label Text="Texture name:"/>
-                    <Entry MaxLength="10" 
+                    <Entry MaxLength="40" 
                    Text="{Binding TextureName, Mode=TwoWay}" 
                    TextColor="White" 
                    Background="Gray" 
@@ -84,12 +84,13 @@ HorizontalTextAlignment="Center"/>
                        HorizontalOptions="Center"/>
                         <CheckBox IsChecked="{Binding Visible}" />
                     </HorizontalStackLayout>
-                    <HorizontalStackLayout HorizontalOptions="Center">
-                        <Button Text="Choose file"
-                        Clicked="FilePicker_Clicked" />
-                        <Label Text="{Binding SelectedFileName}" 
-                       HorizontalOptions="Center" />
-                    </HorizontalStackLayout>
+                    <Label Text="Texture ID:"/>
+                    <Entry MaxLength="10"
+                        Keyboard="Numeric"
+                        Text="{Binding TextureId, Mode=TwoWay}"
+                        TextColor="White"
+                        Background="Gray"
+                        HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </ScrollView>
             <HorizontalStackLayout HorizontalOptions="Center"

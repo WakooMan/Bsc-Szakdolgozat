@@ -4,10 +4,10 @@ namespace GameLogic.Events.GameEvents
 {
     public class OnAgeEnded: GameEvent
     {
-        public AgesEnum EndedAge { get; }
-        public OnAgeEnded(AgesEnum endedAge)
+        public IAgeBase Age { get; }
+        public OnAgeEnded(IAgeBase age)
         {
-            EndedAge = endedAge;
+            Age = age;
         }
     }
 }

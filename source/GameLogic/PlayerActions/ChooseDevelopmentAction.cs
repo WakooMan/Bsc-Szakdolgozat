@@ -1,17 +1,14 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Modifiers;
+using GameLogic.Events.GameEvents;
 using SevenWonders.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLogic.PlayerActions
 {
     public class ChooseDevelopmentAction : IPlayerAction
     {
-
+        public string Name => m_development.Name;
+        public ChooseDevelopmentAction() { }
         public ChooseDevelopmentAction(Player player, Development development, List<Development> developments)
         {
             ArgumentChecker.CheckNull(player, nameof(player));
@@ -23,19 +20,22 @@ namespace GameLogic.PlayerActions
             m_developments = developments;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return !m_player.Developments.Contains(m_development) && m_developments.Contains(m_development);
+            return Task.FromResult(!m_player.Developments.Contains(m_development) && m_developments.Contains(m_development));
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => m_player.Developments.Contains(m_development), "Cannot perform action, because player already has the development!");
             ArgumentChecker.CheckPredicateForOperation(() => !m_developments.Contains(m_development), "Cannot perform action, because development list does not contain the development!");
 
             m_player.Developments.Add(m_development);
-           m_development.OnDevelopmentEstablished(gameContext);
-           m_developments.Remove(m_development);
+            m_developments.Remove(m_development);
+            await gameContext.EventManager.PublishAsync(new OnPlayerDevelopmentReceived(m_player, m_development));
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray(), true));
+            m_development.OnDevelopmentEstablished(gameContext, m_player.Id);
+            return true;
         }
 
         private readonly List<Development> m_developments;

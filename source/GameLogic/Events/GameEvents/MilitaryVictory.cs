@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLogic.Events.GameEvents
+﻿namespace GameLogic.Events.GameEvents
 {
     public class MilitaryVictory: GameEvent
     {
+        public string PlayerName { get; }
+
+        public MilitaryVictory(string playerName)
+        {
+            PlayerName = playerName;
+        }
     }
 }

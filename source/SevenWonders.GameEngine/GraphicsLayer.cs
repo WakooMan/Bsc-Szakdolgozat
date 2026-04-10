@@ -1,36 +1,130 @@
 ﻿using SkiaSharp.Views.Maui;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
-    public class GraphicsLayer:IEquatable<GraphicsLayer>
+    public class GraphicsLayer : IEquatable<GraphicsLayer>
     {
-        public List<GameObject> ObjectList { get; set; }
-        public List<TextureObject> Textures { get; set; }
-        public  bool Visible { get; set; }
+        public bool Visible { get; set; }
         public bool EnableCollision { get; set; }
         public string Name { get; set; }
-        public int ID { get; set; }
+        public int Id { get; set; }
         public int ZIndex { get; set; }
+        public List<SceneObject> SceneObjectsProxy { get; set; }
+
+        [XmlIgnore]
+        public IReadOnlyList<IInteractiveObject> InteractiveObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<IInteractiveObject>().ToList();
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public IReadOnlyList<GameObject> GameObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<GameObject>().ToList();
+                }
+            }
+        }
+
+
+        [XmlIgnore]
+        public IReadOnlyList<ButtonObject> ButtonObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<ButtonObject>().ToList();
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public IReadOnlyList<TextLabel> TextLabels
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<TextLabel>().ToList();
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public IReadOnlyList<TextureObject> TextureObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.OfType<TextureObject>().ToList();
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public IReadOnlyList<SceneObject> SceneObjects
+        {
+            get
+            {
+                lock (SceneObjectsProxy)
+                {
+                    return SceneObjectsProxy.ToList();
+                }
+            }
+        }
+
 
         public GraphicsLayer()
         {
-            ObjectList = new List<GameObject>();
-            Textures = new List<TextureObject>();
+            SceneObjectsProxy = new List<SceneObject>();
             Name = string.Empty;
         }
 
         public GraphicsLayer(GraphicsLayer graphicsLayer)
         {
-            ObjectList = graphicsLayer.ObjectList.Select(obj => new GameObject(obj)).ToList();
-            Textures = graphicsLayer.Textures.Select(texture => new TextureObject(texture)).ToList();
+            lock (graphicsLayer.SceneObjectsProxy)
+            {
+                SceneObjectsProxy = graphicsLayer.SceneObjectsProxy.Select(obj => obj.Clone()).ToList();
+            }
             Visible = graphicsLayer.Visible;
             EnableCollision = graphicsLayer.EnableCollision;
             Name = new string(graphicsLayer.Name);
-            ID = graphicsLayer.ID;
+            Id = graphicsLayer.Id;
             ZIndex = graphicsLayer.ZIndex;
+        }
+
+        internal void AddSceneObject(SceneObject sceneObject)
+        {
+            lock (SceneObjectsProxy)
+            {
+                var comparer = new SceneObjectComparer();
+                int index = SceneObjectsProxy.BinarySearch(sceneObject, comparer);
+                SceneObjectsProxy.Insert(index < 0 ? ~index : index, sceneObject);
+                sceneObject.OnZIndexChanged += OnZIndexChanged;
+            }
+        }
+
+        internal void RemoveSceneObject(SceneObject sceneObject)
+        {
+            lock (SceneObjectsProxy)
+            {
+                SceneObjectsProxy.Remove(sceneObject);
+                sceneObject.OnZIndexChanged -= OnZIndexChanged;
+            }
         }
 
         public bool Equals(GraphicsLayer? other)
@@ -40,13 +134,15 @@ namespace SevenWonders.GameEngine
                 return false;
             }
 
-            return ObjectList.SequenceEqual(other.ObjectList) &&
-                   Textures.SequenceEqual(other.Textures) &&
-                   Name.Equals(other.Name) &&
-                   ID.Equals(other.ID) &&
-                   Visible.Equals(other.Visible) &&
-                   EnableCollision.Equals(other.EnableCollision) &&
-                   ZIndex.Equals(other.ZIndex);
+            lock (SceneObjectsProxy)
+            {
+                return SceneObjectsProxy.SequenceEqual(other.SceneObjectsProxy) &&
+                       Name.Equals(other.Name) &&
+                       Id.Equals(other.Id) &&
+                       Visible.Equals(other.Visible) &&
+                       EnableCollision.Equals(other.EnableCollision) &&
+                       ZIndex.Equals(other.ZIndex);
+            }
         }
 
         public override bool Equals(object? obj)
@@ -62,56 +158,59 @@ namespace SevenWonders.GameEngine
         public override int GetHashCode()
         {
             int hashCode = Name.GetHashCode() ^
-            ID.GetHashCode() ^
+            Id.GetHashCode() ^
             Visible.GetHashCode() ^
             EnableCollision.GetHashCode() ^
             ZIndex.GetHashCode();
-            ObjectList.ForEach(obj => hashCode = hashCode ^ obj.GetHashCode());
-            Textures.ForEach(texture => hashCode = hashCode ^ texture.GetHashCode());
+            lock (SceneObjectsProxy)
+            {
+                SceneObjectsProxy.ForEach(obj => hashCode = hashCode ^ obj.GetHashCode());
+            }
             return hashCode;
         }
 
         [ExcludeFromCodeCoverage]
-        public void Draw(SKPaintSurfaceEventArgs eventArgs)
+        public void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
         {
             if (!Visible)
             {
                 return;
             }
 
-            List<TextureObject> textures = [.. Textures];
-            textures.Sort(new TextureObjectComparer());
-            foreach (var texture in textures)
+            lock (SceneObjectsProxy)
             {
-                texture.Draw(eventArgs);
-            }
-
-            List<GameObject> gameObjects = [.. ObjectList];
-            gameObjects.Sort(new GameObjectComparer());
-
-            foreach (var gameObject in gameObjects)
-            {
-                gameObject.Draw(eventArgs);
+                foreach (var sceneObject in SceneObjectsProxy)
+                {
+                    sceneObject.Draw(eventArgs, textureRegistry);
+                }
             }
         }
 
-        public void LoadTextures(string tempPath)
+        internal void Resize(Vector2 oldResolution, Vector2 newResolution)
         {
-            foreach (var texture in Textures)
+            lock (SceneObjectsProxy)
             {
-                texture.LoadTexture(tempPath);
-            }
-
-            foreach (var gameObject in ObjectList)
-            {
-                gameObject.LoadTextures(tempPath);
+                SceneObjectsProxy.ForEach(sceneObject => sceneObject.Resize(oldResolution, newResolution));
             }
         }
 
-        public void Resize(Vector2 oldResolution, Vector2 newResolution)
+        internal void SortAllObjects()
         {
-            Textures.ForEach(texture => texture.Resize(oldResolution, newResolution));
-            ObjectList.ForEach(gameObject => gameObject.Resize(oldResolution, newResolution));
+            lock (SceneObjectsProxy)
+            {
+                var comparer = new SceneObjectComparer();
+                SceneObjectsProxy.Sort(comparer);
+                SceneObjectsProxy.ForEach(sceneObject => sceneObject.OnZIndexChanged += OnZIndexChanged);
+            }
+        }
+
+        private void OnZIndexChanged(SceneObject sceneObject)
+        {
+            lock (SceneObjectsProxy)
+            {
+                RemoveSceneObject(sceneObject);
+                AddSceneObject(sceneObject);
+            }
         }
     }
 }

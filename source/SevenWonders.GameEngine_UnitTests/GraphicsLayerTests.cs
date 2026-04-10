@@ -16,7 +16,7 @@ namespace SevenWonders.GameEngine_UnitTests
         {
             _originalLayer = new GraphicsLayer
             {
-                ID = 1,
+                Id = 1,
                 Name = "BackgroundLayer",
                 Visible = true,
                 ZIndex = 5,
@@ -24,7 +24,7 @@ namespace SevenWonders.GameEngine_UnitTests
                 {
                     new GameObject { Id = 101, Name = "Player" }
                 },
-                Textures = new List<TextureObject>
+                TextureObjects = new List<TextureObject>
                 {
                     new TextureObject { Id = 201, Name = "Grass" }
                 }
@@ -39,7 +39,7 @@ namespace SevenWonders.GameEngine_UnitTests
 
             // Assert
             Assert.That(layer.ObjectList, Is.Not.Null);
-            Assert.That(layer.Textures, Is.Not.Null);
+            Assert.That(layer.TextureObjects, Is.Not.Null);
             Assert.That(layer.Name, Is.EqualTo(string.Empty));
         }
 
@@ -52,7 +52,7 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(_originalLayer.ID, Is.EqualTo(copy.ID));
+                Assert.That(_originalLayer.Id, Is.EqualTo(copy.Id));
                 Assert.That(_originalLayer.Name, Is.EqualTo(copy.Name));
 
                 // Referencia ellenőrzés: nem ugyanaz az objektum
@@ -60,11 +60,11 @@ namespace SevenWonders.GameEngine_UnitTests
 
                 // Lista tartalom ellenőrzés
                 Assert.That(_originalLayer.ObjectList.Count, Is.EqualTo(copy.ObjectList.Count));
-                Assert.That(_originalLayer.Textures.Count, Is.EqualTo(copy.Textures.Count));
+                Assert.That(_originalLayer.TextureObjects.Count, Is.EqualTo(copy.TextureObjects.Count));
 
                 // Mély másolás ellenőrzése: a listában lévő objektumoknak is új példányoknak kell lenniük
                 Assert.That(ReferenceEquals(_originalLayer.ObjectList[0], copy.ObjectList[0]), Is.False);
-                Assert.That(ReferenceEquals(_originalLayer.Textures[0], copy.Textures[0]), Is.False);
+                Assert.That(ReferenceEquals(_originalLayer.TextureObjects[0], copy.TextureObjects[0]), Is.False);
             });
         }
 
@@ -95,7 +95,7 @@ namespace SevenWonders.GameEngine_UnitTests
         public void Equals_GraphicsLayer_Null_ShouldReturnFalse()
         {
             // Arrange
-            var obj1 = new GraphicsLayer { ID = 1, Name = "Layer" };
+            var obj1 = new GraphicsLayer { Id = 1, Name = "Layer" };
             GraphicsLayer? obj2 = null;
 
             // Assert
@@ -106,7 +106,7 @@ namespace SevenWonders.GameEngine_UnitTests
         public void Equals_Object_Not_GraphicsLayer_ShouldReturnFalse()
         {
             // Arrange
-            var obj1 = new GraphicsLayer { ID = 1, Name = "Layer" };
+            var obj1 = new GraphicsLayer { Id = 1, Name = "Layer" };
             object? obj2 = new object();
 
             // Assert
@@ -120,11 +120,11 @@ namespace SevenWonders.GameEngine_UnitTests
             var oldRes = new Vector2(800, 600);
             var newRes = new Vector2(1600, 1200); // 2x skálázás
 
-            var gameObject = new GameObject { Position = new Vector2(10, 10), Scale = new Vector2(1, 1) };
+            var gameObject = new GameObject { Position = new Vector2(10, 10), VisualSize = new Vector2(1, 1) };
             var texture = new TextureObject { Position = new Vector2(20, 20), Width = 100 };
 
             _originalLayer.ObjectList = new List<GameObject> { gameObject };
-            _originalLayer.Textures = new List<TextureObject> { texture };
+            _originalLayer.TextureObjects = new List<TextureObject> { texture };
 
             // Act
             _originalLayer.Resize(oldRes, newRes);

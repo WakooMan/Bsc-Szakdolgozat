@@ -1,4 +1,6 @@
 ﻿using GameLogic.Elements.GameCards;
+using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 using GameLogic.GameStructures.Factories;
 using SevenWonders.Common;
@@ -12,7 +14,7 @@ namespace GameLogic.Ages
         public ICardComposition Composition { get; }
         public bool IsAgeOver => Composition.AvailableCards.Count <= 0;
 
-        protected AgeBase(ICardCompositionFactory cardCompositionFactory, ICollection<Card>? cards)
+        protected AgeBase(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICollection<Card>? cards)
         {
             ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));
             ArgumentChecker.CheckNull(cards, nameof(cards));

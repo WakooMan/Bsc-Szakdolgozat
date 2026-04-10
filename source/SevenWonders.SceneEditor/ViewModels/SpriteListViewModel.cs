@@ -12,6 +12,8 @@ namespace SevenWonders.SceneEditor.ViewModels
 
         public Sprite Sprite => m_sprite;
 
+        public override string ToString() => Name;
+
         public SpriteListViewModel(Sprite sprite)
         {
             m_sprite = sprite;

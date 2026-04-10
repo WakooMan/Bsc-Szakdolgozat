@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events;
 using GameLogic.GameStructures;
+using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.PlayerTurnStates
@@ -13,13 +14,9 @@ namespace GameLogic.PlayerTurnStates
             m_gameContext = gameContext;
         }
 
-        public void ExecuteTurnState()
+        public async Task ExecuteTurnState()
         {
-            IPlayerAction playerAction = m_gameContext.PlayerActionReceiver.ReceivePlayerAction(CurrentPlayer, Composition.AvailableCards.Select(card => (IPlayerAction)new PickCard(CurrentPlayer, card)).ToList());
-            if (playerAction.CanPerform(m_gameContext))
-            {
-                playerAction.DoPlayerAction(m_gameContext);
-            }
+            await m_gameContext.PlayerActionHandler.HandlePlayerActions(m_gameContext, CurrentPlayer, Composition.AvailableCards.Select(card => (IPlayerAction)new PickCard(CurrentPlayer, card)).ToList());
         }
 
         public IPlayerTurnState GetNextTurnState()

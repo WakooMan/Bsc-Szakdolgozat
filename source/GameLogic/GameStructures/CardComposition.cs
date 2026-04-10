@@ -1,4 +1,6 @@
 ﻿using GameLogic.Elements.GameCards;
+using GameLogic.Events;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures.Factories;
 using GameLogic.Handlers;
 using SevenWonders.Common;
@@ -10,15 +12,17 @@ namespace GameLogic.GameStructures
         public IReadOnlyList<ICardNode> AvailableCards => m_cardNodes.Where(card => card.CoveredBy.Count <= 0).ToList();
         public IReadOnlyList<ICardNode> AllCards => m_cardNodes;
 
-        public CardComposition(ICardCompositionFileHandler cardCompositionFileHandler, ICardNodeFactory cardNodeFactory, ICollection<Card> cards)
+        public CardComposition(ICardCompositionFileHandler cardCompositionFileHandler, ICardNodeFactory cardNodeFactory, IEventManager eventManager, ICollection<Card> cards)
         {
             ArgumentChecker.CheckNull(cardCompositionFileHandler, nameof(cardCompositionFileHandler));
             ArgumentChecker.CheckNull(cardNodeFactory, nameof(cardNodeFactory));
+            ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
             ArgumentChecker.CheckNull(cards, nameof(cards));
             ArgumentChecker.CheckPredicateForArgument(() => cards.Count != 20, $"Argument with name {nameof(cards)} should contain exactly 20 cards!");
 
             m_cardCompositionFileHandler = cardCompositionFileHandler;
             m_cardNodeFactory = cardNodeFactory;
+            m_eventManager = eventManager;
             m_cardNodes = new List<ICardNode>();
 
             foreach (Card card in cards)
@@ -42,6 +46,7 @@ namespace GameLogic.GameStructures
                     if (c.CoveredBy.Count <= 0 && c.Hidden)
                     {
                         c.Hidden = false;
+                        m_eventManager.PublishAsync(new CardNodeAvailableEvent(c)).GetAwaiter().GetResult();
                     }
                 }
             }
@@ -50,5 +55,6 @@ namespace GameLogic.GameStructures
         private readonly List<ICardNode> m_cardNodes;
         private readonly ICardCompositionFileHandler m_cardCompositionFileHandler;
         private readonly ICardNodeFactory m_cardNodeFactory;
+        private readonly IEventManager m_eventManager;
     }
 }

@@ -5,8 +5,8 @@ namespace GameLogic.Handlers
 {
     public interface ICostCalculator
     {
-        int GetBuildCost(IBuildable buildable, Player buyer, Player opponent);
-        bool CanAfford(IBuildable buildable, Player buyer, Player opponent);
-        List<Good> GetMissingGoods(IBuildable buildable, Player buyer);
+        Task<int> GetBuildCost(IBuildable buildable, Player buyer, Player opponent);
+        Task<bool> CanAfford(IBuildable buildable, Player buyer, Player opponent);
+        Task<List<Good>> GetMissingGoods(IBuildable buildable, Player buyer);
     }
 }

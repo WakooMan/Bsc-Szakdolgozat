@@ -4,7 +4,7 @@ namespace GameLogic.PlayerTurnStates
 {
     public interface IPlayerTurnState
     {
-        void ExecuteTurnState();
+        Task ExecuteTurnState();
         IPlayerTurnState GetNextTurnState();
     }
 }

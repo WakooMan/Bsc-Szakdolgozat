@@ -17,34 +17,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Data\AllCards.xml">
+    <EmbeddedResource Include="Data\AllCards.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\AllDevelopments.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\AllDevelopments.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\AllWonders.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\AllWonders.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\FirstAgeComposition.csv">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\FirstAgeComposition.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\MilitaryBoard.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\MilitaryBoard.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\SecondAgeComposition.csv">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\SecondAgeComposition.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\ThirdAgeComposition.csv">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\ThirdAgeComposition.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="10.0.1" />
-    <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.5" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace SevenWonders.GameEngine_UnitTests
         [SetUp]
         public void Setup()
         {
-            m_gameObjectComparer = new GameObjectComparer();
+            m_gameObjectComparer = new SceneObjectComparer();
         }
 
         [Test]
@@ -44,6 +44,6 @@ namespace SevenWonders.GameEngine_UnitTests
             Assert.That(result, Is.EqualTo(expectedResult));
         }
 
-        private GameObjectComparer m_gameObjectComparer;
+        private SceneObjectComparer m_gameObjectComparer;
     }
 }

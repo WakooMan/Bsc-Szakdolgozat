@@ -25,7 +25,7 @@ namespace GameLogic_UnitTests.Elements.Military
             m_eventManager = Substitute.For<IEventManager>();
             m_playerActionReceiver = Substitute.For<IPlayerActionReceiver>();
             m_playerAction = Substitute.For<IPlayerAction>();
-            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<IPlayerAction>>()).Returns(m_playerAction);
+            m_playerActionReceiver.ReceivePlayerAction(Arg.Any<Player>(), Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(m_playerAction);
             m_player1 = new Player();
             m_player2 = new Player();
             m_gameContext.EventManager.Returns(m_eventManager);
@@ -48,8 +48,8 @@ namespace GameLogic_UnitTests.Elements.Military
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
             Assert.That(m_militaryBoard.Fields[5] == MilitaryField.None, Is.True);
             Assert.That(m_militaryBoard.Fields[10] == MilitaryField.Shield, Is.True);
-            m_eventManager.Received(1).Publish(Arg.Any<OnMilitaryTokenReachedThreshold>());
-            m_eventManager.Received(1).Publish(Arg.Any<MilitaryVictory>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnMilitaryTokenReachedThreshold>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<MilitaryVictory>());
         }
 
         [Test]
@@ -65,8 +65,8 @@ namespace GameLogic_UnitTests.Elements.Military
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
             Assert.That(m_militaryBoard.Fields[5] == MilitaryField.None, Is.True);
             Assert.That(m_militaryBoard.Fields[0] == MilitaryField.Shield, Is.True);
-            m_eventManager.Received(1).Publish(Arg.Any<OnMilitaryTokenReachedThreshold>());
-            m_eventManager.Received(1).Publish(Arg.Any<MilitaryVictory>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnMilitaryTokenReachedThreshold>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<MilitaryVictory>());
         }
 
         [Test]
@@ -92,10 +92,10 @@ namespace GameLogic_UnitTests.Elements.Military
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryAdvanced>>());
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificProgress>>());
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
-            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player1, Arg.Any<ICollection<IPlayerAction>>());
+            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player1, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             m_playerAction.Received(1).CanPerform(m_gameContext);
             m_playerAction.Received(1).DoPlayerAction(m_gameContext);
-            m_eventManager.Received(1).Publish(Arg.Any<ScientificVictory>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<ScientificVictory>());
 
         }
 

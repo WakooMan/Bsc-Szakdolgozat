@@ -79,7 +79,7 @@ namespace GameLogic_UnitTests.PlayerActions
             m_unpickCard.DoPlayerAction(m_gameContext);
 
             Assert.That(m_current.PickedCard, Is.Null);
-            m_gameContext.EventManager.Received(1).Publish(Arg.Any<OnCardUnpicked>());
+            m_gameContext.EventManager.Received(1).PublishAsync(Arg.Any<OnCardUnpicked>());
         }
 
         private UnpickCard m_unpickCard;

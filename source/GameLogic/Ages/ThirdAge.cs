@@ -1,5 +1,7 @@
 ﻿using GameLogic.Elements.GameCards;
+using GameLogic.Events;
 using GameLogic.GameStructures.Factories;
+using GameLogic.Handlers;
 
 namespace GameLogic.Ages
 {
@@ -7,9 +9,9 @@ namespace GameLogic.Ages
     {
         public override AgesEnum Age => AgesEnum.III;
 
-        public override string CardCompositionFile => Path.Combine(Directory.GetCurrentDirectory(), "Data", "ThirdAgeComposition.csv");
+        public override string CardCompositionFile => "GameLogic.Data.ThirdAgeComposition.csv";
 
-        public ThirdAge(ICardCompositionFactory cardCompositionFactory, ICardList cardList) : base(cardCompositionFactory, cardList?.Cards.Where(card => card.Age == AgesEnum.III).ToList() ?? null)
+        public ThirdAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList, IRandomElementReceiver randomElementReceiver) : base(eventManager, cardCompositionFactory, randomElementReceiver.ReceiveRandomElements(cardList?.Cards.Where(card => card.Age == AgesEnum.III).ToArray() ?? [], 20))
         { }
     }
 }

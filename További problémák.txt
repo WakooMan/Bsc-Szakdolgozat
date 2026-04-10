@@ -1,0 +1,5 @@
+- Csoda építésnél és kártya építésnél nem látszik előre, hogy mennyi pénzbe kerülne megépíteni
+- Choose good nem látszik a nyersanyag
+- Vannak olyan developmentek, melyek valamiért front sprite-ban vannak
+- túl nagy betűk a magyarítás miatt
+- canvas invalidatesurface

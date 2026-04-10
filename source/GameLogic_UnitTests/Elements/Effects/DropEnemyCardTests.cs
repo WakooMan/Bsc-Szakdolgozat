@@ -23,7 +23,7 @@ namespace GameLogic_UnitTests.Elements.Effects
             m_turnHandler.CurrentPlayer.Returns(m_player);
             m_turnHandler.OpponentPlayer.Returns(m_opponent);
             m_playerAction.CanPerform(m_gameContext).Returns(true);
-            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<IPlayerAction>>()).Returns(m_playerAction);
+            m_playerActionReceiver.ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>()).Returns(m_playerAction);
             m_gameContext.PlayerActionReceiver.Returns(m_playerActionReceiver);
             m_gameContext.TurnHandler.Returns(m_turnHandler);
             m_dropEnemyCard = new DropEnemyCard();
@@ -47,7 +47,7 @@ namespace GameLogic_UnitTests.Elements.Effects
 
             _ = m_turnHandler.Received(1).CurrentPlayer;
             _ = m_turnHandler.Received(1).OpponentPlayer;
-            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player, Arg.Any<ICollection<IPlayerAction>>());
+            m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             m_playerAction.Received(1).CanPerform(m_gameContext);
             m_playerAction.Received(1).DoPlayerAction(m_gameContext);
         }

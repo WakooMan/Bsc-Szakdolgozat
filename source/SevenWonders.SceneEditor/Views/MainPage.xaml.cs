@@ -1,11 +1,9 @@
 ﻿using CommunityToolkit.Maui.Views;
-using Serilog;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp.Views.Maui;
-using SkiaSharp.Views.Maui.Controls;
 using System.Numerics;
 
 namespace SevenWonders.SceneEditor.Views
@@ -13,26 +11,29 @@ namespace SevenWonders.SceneEditor.Views
     public partial class MainPage : ContentPage
     {
 
-        public MainPage()
+        public MainPage(MainPageViewModel mainPageViewModel, IEngine engine, ISceneLoader sceneLoader)
         {
+            m_engine = engine;
+            m_sceneLoader = sceneLoader;
+            m_mainPageViewModel = mainPageViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
             InitializeComponent();
-            IInputManager inputManager = new InputManager();
-            NormalZipFileReceiver normalZipFileReceiver = new NormalZipFileReceiver();
-            m_sceneLoader = new SceneLoader(new XmlHandler(), normalZipFileReceiver);
-            m_engine = new Engine(new SceneManager(), inputManager, new ObjectManager(inputManager, m_sceneLoader), m_sceneLoader, Dispatcher.CreateTimer(), canvas);
-            if (!Directory.Exists(normalZipFileReceiver.ScenesPath))
-            {
-                Directory.CreateDirectory(normalZipFileReceiver.ScenesPath);
-            }
+            GameLog.InitializeFileLogger(FileSystem.AppDataDirectory);
 
             foreach (Scene scene in m_sceneLoader.LoadScenes().GetAwaiter().GetResult())
             {
                 m_engine.SceneManager.RegisterScene(scene);
+                SceneIdHandler.OrderIds(scene);
             }
-            m_mainPageViewModel = new MainPageViewModel(m_engine);
             m_currentPopup = null;
             SizeChanged += MainPage_SizeChanged;
             BindingContext = m_mainPageViewModel;
+            m_engine.RedrawRequested += (e, args) => canvas?.InvalidateSurface();
             m_engine.Startup();
         }
 
@@ -49,9 +50,9 @@ namespace SevenWonders.SceneEditor.Views
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             e.Surface.Canvas.Clear();
-            if (m_mainPageViewModel.LayerContentsViewModel.SelectedLayer is not null)
+            if (m_engine.SceneManager.CurrentScene is not null && m_mainPageViewModel.LayerContentsViewModel.SelectedLayer is not null)
             {
-                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e);
+                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e, m_engine.SceneManager.CurrentScene.TextureRegistry);
             }
             else if (m_mainPageViewModel.CurrentScene is not null)
             {
@@ -59,40 +60,21 @@ namespace SevenWonders.SceneEditor.Views
             }
         }
 
-        private void Layer_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            m_mainPageViewModel.LayerContentsViewModel.SetSelectedLayer(e.SelectedItem as LayerListViewModel);
-        }
-
-        private void Texture_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            m_mainPageViewModel.TextureContentsViewModel.SetSelectedTexture(e.SelectedItem as TextureListViewModel);
-        }
-
-        private void GameObject_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            m_mainPageViewModel.GameObjectContentsViewModel.SetSelectedGameObject(e.SelectedItem as GameObjectListViewModel);
-        }
-
-        private void Sprite_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            m_mainPageViewModel.GameObjectContentsViewModel.SetSelectedSprite(e.SelectedItem as SpriteListViewModel);
-        }
-
         private async void Add_New_Texture_Clicked(object sender, EventArgs e)
         {
-            AddTexturePopupWindow addTexturePopupWindow = new AddTexturePopupWindow(new AddTexturePopupWindowViewModel());
-            m_currentPopup = addTexturePopupWindow;
+            AddTextureObjectPopupWindow addTextureObjectPopupWindow = new AddTextureObjectPopupWindow(new AddTextureObjectPopupWindowViewModel(m_mainPageViewModel.SceneTextureContentsViewModel.SceneTextureViews));
+            m_currentPopup = addTextureObjectPopupWindow;
             m_currentPopup.Size = m_currentPopupSize;
-            await this.ShowPopupAsync(addTexturePopupWindow);
-            if (addTexturePopupWindow.ViewModel.AddActivated)
+            await this.ShowPopupAsync(addTextureObjectPopupWindow);
+            if (addTextureObjectPopupWindow.ViewModel.AddActivated)
             {
-                m_mainPageViewModel.TextureContentsViewModel.AddTextureToLayer(addTexturePopupWindow.ViewModel.Name,
-                                                      addTexturePopupWindow.ViewModel.Visible,
-                                                      addTexturePopupWindow.ViewModel.Width,
-                                                      addTexturePopupWindow.ViewModel.Height,
-                                                      addTexturePopupWindow.ViewModel.SelectedFilePath);
-                addTexturePopupWindow.ViewModel.Clear();
+                m_mainPageViewModel.TextureContentsViewModel.AddTextureObjectToLayer(
+                    addTextureObjectPopupWindow.ViewModel.Name,
+                    addTextureObjectPopupWindow.ViewModel.Visible,
+                    addTextureObjectPopupWindow.ViewModel.Width,
+                    addTextureObjectPopupWindow.ViewModel.Height,
+                    addTextureObjectPopupWindow.ViewModel.SelectedTextureId);
+                addTextureObjectPopupWindow.ViewModel.Clear();
             }
             m_currentPopup = null;
         }
@@ -111,6 +93,20 @@ namespace SevenWonders.SceneEditor.Views
             m_currentPopup = null;
         }
 
+        private async void Add_New_Button_Clicked(object sender, EventArgs e)
+        {
+            AddButtonPopupWindow addButtonPopupWindow = new AddButtonPopupWindow(new AddButtonPopupWindowViewModel());
+            m_currentPopup = addButtonPopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
+            await this.ShowPopupAsync(addButtonPopupWindow);
+            if (addButtonPopupWindow.ViewModel.AddActivated)
+            {
+                m_mainPageViewModel.ButtonContentsViewModel.AddButtonToLayer(addButtonPopupWindow.ViewModel.Name, addButtonPopupWindow.ViewModel.ButtonText, addButtonPopupWindow.ViewModel.FontSize , addButtonPopupWindow.ViewModel.Visible, addButtonPopupWindow.ViewModel.Width, addButtonPopupWindow.ViewModel.Height, addButtonPopupWindow.ViewModel.SelectedTextureId);
+                addButtonPopupWindow.ViewModel.Clear();
+            }
+            m_currentPopup = null;
+        }
+
         private async void Add_New_Sprite_Clicked(object sender, EventArgs e)
         {
             AddSpritePopupWindow addSpritePopupWindow = new AddSpritePopupWindow(new AddSpritePopupWindowViewModel());
@@ -120,11 +116,8 @@ namespace SevenWonders.SceneEditor.Views
             if (addSpritePopupWindow.ViewModel.AddActivated)
             {
                 m_mainPageViewModel.GameObjectContentsViewModel.AddSpriteToGameObject(addSpritePopupWindow.ViewModel.Name, 
-                                                                                      addSpritePopupWindow.ViewModel.TextureName,
+                                                                                      addSpritePopupWindow.ViewModel.TextureId,
                                                                                       addSpritePopupWindow.ViewModel.Visible,
-                                                                                      addSpritePopupWindow.ViewModel.Width,
-                                                                                      addSpritePopupWindow.ViewModel.Height,
-                                                                                      addSpritePopupWindow.ViewModel.SelectedFilePath,
                                                                                       addSpritePopupWindow.ViewModel.FrameHeight,
                                                                                       addSpritePopupWindow.ViewModel.FrameWidth,
                                                                                       addSpritePopupWindow.ViewModel.Rows,
@@ -132,6 +125,19 @@ namespace SevenWonders.SceneEditor.Views
                 addSpritePopupWindow.ViewModel.Clear();
             }
             m_currentPopup = null;
+        }
+
+        private async void Add_New_Scene_Texture_Clicked(object sender, EventArgs e)
+        {
+            AddSceneTexturePopupWindow addSceneTexturePopupWindow = new AddSceneTexturePopupWindow(new AddSceneTexturePopupWindowViewModel());
+            m_currentPopup = addSceneTexturePopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
+            await this.ShowPopupAsync(addSceneTexturePopupWindow);
+            if (addSceneTexturePopupWindow.ViewModel.AddActivated)
+            {
+                m_mainPageViewModel.SceneTextureContentsViewModel.AddSceneTexture(addSceneTexturePopupWindow.ViewModel.SelectedFilePath);
+                addSceneTexturePopupWindow.ViewModel.Clear();
+            }
         }
 
         private async void Add_New_Scene_Clicked(object sender, EventArgs e)
@@ -198,19 +204,60 @@ namespace SevenWonders.SceneEditor.Views
         {
             LayersContent.IsVisible = false;
             TexturesContent.IsVisible = false;
+            TextureObjectsContent.IsVisible = false;
             GameObjectsContent.IsVisible = false;
+            ButtonsContent.IsVisible = false;
+            TextLabelsContent.IsVisible = false;
 
             switch (tabIndex)
             {
                 case 1: LayersContent.IsVisible = true; break;
                 case 2: TexturesContent.IsVisible = true; break;
-                case 3: GameObjectsContent.IsVisible = true; break;
+                case 3: TextureObjectsContent.IsVisible = true; break;
+                case 4: GameObjectsContent.IsVisible = true; break;
+                case 5: ButtonsContent.IsVisible = true; break;
+                case 6: TextLabelsContent.IsVisible = true; break;
             }
         }
 
         private void OnLayersClicked(object sender, EventArgs e) => ShowTab(1);
         private void OnTexturesClicked(object sender, EventArgs e) => ShowTab(2);
-        private void OnGameObjectsClicked(object sender, EventArgs e) => ShowTab(3);
+        private void OnTextureObjectsClicked(object sender, EventArgs e) => ShowTab(3);
+        private void OnGameObjectsClicked(object sender, EventArgs e) => ShowTab(4);
+        private void OnButtonsClicked(object sender, EventArgs e) => ShowTab(5);
+        private void OnTextLabelsClicked(object sender, EventArgs e) => ShowTab(6);
+
+        private async void Add_New_TextLabel_Clicked(object sender, EventArgs e)
+        {
+            AddTextLabelPopupWindow addTextLabelPopupWindow = new AddTextLabelPopupWindow(new AddTextLabelPopupWindowViewModel());
+            m_currentPopup = addTextLabelPopupWindow;
+            m_currentPopup.Size = m_currentPopupSize;
+            await this.ShowPopupAsync(addTextLabelPopupWindow);
+            if (addTextLabelPopupWindow.ViewModel.AddActivated)
+            {
+                m_mainPageViewModel.TextLabelContentsViewModel.AddTextLabelToLayer(
+                    addTextLabelPopupWindow.ViewModel.Name,
+                    addTextLabelPopupWindow.ViewModel.LabelText,
+                    addTextLabelPopupWindow.ViewModel.FontSize,
+                    addTextLabelPopupWindow.ViewModel.Visible,
+                    addTextLabelPopupWindow.ViewModel.Width,
+                    addTextLabelPopupWindow.ViewModel.Height,
+                    addTextLabelPopupWindow.ViewModel.BackgroundTextureId);
+                addTextLabelPopupWindow.ViewModel.Clear();
+            }
+            m_currentPopup = null;
+        }
+
+        private void Delete_Selected_TextLabel_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.TextLabelContentsViewModel.DeleteSelectedTextLabel();
+        }
+
+        private void Copy_Selected_TextLabel_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.TextLabelContentsViewModel.CopySelectedTextLabel();
+        }
+
         private void Delete_Selected_Layer_Clicked(object sender, EventArgs e)
         {
             m_mainPageViewModel.LayerContentsViewModel.DeleteSelectedLayer();
@@ -226,6 +273,11 @@ namespace SevenWonders.SceneEditor.Views
             m_mainPageViewModel.GameObjectContentsViewModel.DeleteSelectedGameObject();
         }
 
+        private void Delete_Selected_Button_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.ButtonContentsViewModel.DeleteSelectedButton();
+        }
+
         private void Copy_Selected_GameObject_Clicked(object sender, EventArgs e)
         {
             m_mainPageViewModel.GameObjectContentsViewModel.CopySelectedGameObject();
@@ -236,9 +288,19 @@ namespace SevenWonders.SceneEditor.Views
             m_mainPageViewModel.LayerContentsViewModel.CopySelectedLayer();
         }
 
+        private void Copy_Selected_Button_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.ButtonContentsViewModel.CopySelectedButton();
+        }
+
         private void Delete_Selected_Sprite_Clicked(object sender, EventArgs e)
         {
             m_mainPageViewModel.GameObjectContentsViewModel.DeleteSelectedSprite();
+        }
+
+        private void Delete_Selected_Scene_Texture_Clicked(object sender, EventArgs e)
+        {
+            m_mainPageViewModel.SceneTextureContentsViewModel.DeleteSelectedSceneTexture();
         }
 
         private void Save_Scene_Clicked(object sender, EventArgs e)

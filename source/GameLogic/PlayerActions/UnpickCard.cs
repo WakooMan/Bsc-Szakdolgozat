@@ -1,13 +1,13 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Elements.GameCards;
-using GameLogic.Events;
 using GameLogic.Events.GameEvents;
+using GameLogic.GameStructures;
 using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
 {
     public class UnpickCard : IPlayerAction
     {
+        public string Name => nameof(UnpickCard);
         public UnpickCard(Player player)
         {
             ArgumentChecker.CheckNull(player, nameof(player));
@@ -15,21 +15,22 @@ namespace GameLogic.PlayerActions
             m_player = player;
         }
 
-        public bool CanPerform(IGameContext gameContext)
+        public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return m_player.PickedCard is not null;
+            return Task.FromResult(m_player.PickedCard is not null);
         }
 
-        public void DoPlayerAction(IGameContext gameContext)
+        public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
             if (m_player.PickedCard is null)
             {
                 throw new InvalidOperationException("Cannot perform action if picked card is null!");
             }
 
-            Card card = m_player.PickedCard.CardObj;
+            ICardNode cardNode = m_player.PickedCard;
             m_player.PickedCard = null;
-            gameContext.EventManager.Publish(new OnCardUnpicked(m_player, card));
+            await gameContext.EventManager.PublishAsync(new OnCardUnpicked(m_player, cardNode));
+            return true;
         }
 
         private readonly Player m_player;

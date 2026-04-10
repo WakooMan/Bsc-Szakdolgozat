@@ -13,7 +13,7 @@ namespace SevenWonders.SceneEditor.ViewModels
         }
 
         public override string Name => m_graphicsLayer.Name;
-        public override int Id => m_graphicsLayer.ID;
+        public override int Id => m_graphicsLayer.Id;
 
         private readonly GraphicsLayer m_graphicsLayer;
     }

@@ -2,7 +2,9 @@
 {
     public interface IXmlHandler
     {
-        void Serialize<T>(string filePath, T obj);
-        T Deserialize<T>(string filePath);
+        void SerializeFile<T>(string filePath, T obj);
+        T DeserializeFile<T>(string filePath);
+        void SerializeEmbeddedResource<T>(string resourcePath, T obj);
+        T DeserializeEmbeddedResource<T>(string resourcePath);
     }
 }

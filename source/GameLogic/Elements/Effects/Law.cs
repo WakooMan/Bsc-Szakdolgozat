@@ -1,4 +1,5 @@
 ﻿using GameLogic.Elements.Disciplines;
+using GameLogic.Events.GameEvents;
 using GameLogic.PlayerActions;
 
 namespace GameLogic.Elements.Effects
@@ -22,26 +23,35 @@ namespace GameLogic.Elements.Effects
             return new Law(this);
         }
 
-        public override void Apply(IGameContext gameContext)
+        public override async Task Apply(IGameContext gameContext, int playerId)
         {
-            IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(gameContext.TurnHandler.CurrentPlayer, [
-                new ChooseDisciplineAction(new Building(), SetDiscipline),
-                new ChooseDisciplineAction(new Geography(), SetDiscipline),
-                new ChooseDisciplineAction(new Healing(), SetDiscipline),
-                new ChooseDisciplineAction(new Mechanics(), SetDiscipline),
-                new ChooseDisciplineAction(new Physics(), SetDiscipline),
-                new ChooseDisciplineAction(new Trading(), SetDiscipline),
-                new ChooseDisciplineAction(new Writing(), SetDiscipline)]);
-
-            if (playerAction.CanPerform(gameContext))
+            Player player = gameContext.TurnHandler.GetPlayer(playerId);
+            var list = new List<IPlayerAction>
             {
-                playerAction.DoPlayerAction(gameContext);
-            }
+                new ChooseDisciplineAction(new Building(), SetDiscipline, playerId),
+                new ChooseDisciplineAction(new Geography(), SetDiscipline, playerId),
+                new ChooseDisciplineAction(new Healing(), SetDiscipline, playerId),
+                new ChooseDisciplineAction(new Mechanics(), SetDiscipline, playerId),
+                new ChooseDisciplineAction(new Physics(), SetDiscipline, playerId),
+                new ChooseDisciplineAction(new Trading(), SetDiscipline, playerId),
+                new ChooseDisciplineAction(new Writing(), SetDiscipline, playerId)
+            };
+
+            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz tudományos jelképet", list.Select(action => action.Name).ToArray(), false));
+
+            await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, player, list);
+            await gameContext.EventManager.PublishAsync(new OnObjectChosen(list.Select(action => action.Name).ToArray(), false));
         }
 
-        private void SetDiscipline(Discipline discipline)
+        public override async Task Unapply(IGameContext gameContext, int playerId)
+        {
+            await m_discipline.Unapply(gameContext, playerId);
+        }
+
+        private async Task SetDiscipline(IGameContext gameContext, Discipline discipline, int playerId)
         {
             m_discipline = discipline;
+            await m_discipline.Apply(gameContext, playerId);
         }
 
         private Discipline m_discipline;

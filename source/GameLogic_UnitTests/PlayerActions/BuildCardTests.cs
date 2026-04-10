@@ -107,7 +107,7 @@ namespace GameLogic_UnitTests.PlayerActions
             m_cardComposition.Received(1).RemoveCard(cardNode);
             Assert.That(m_current.PickedCard, Is.Null);
             Assert.That(m_current.Cards.Contains(cardNode.CardObj));
-            m_eventManager.Received(1).Publish(Arg.Any<OnCardBuilt>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnCardBuilt>());
 
         }
 
@@ -129,7 +129,7 @@ namespace GameLogic_UnitTests.PlayerActions
             Assert.That(m_current.PickedCard, Is.Null);
             Assert.That(m_current.Cards.Contains(cardNode.CardObj), Is.True);
             m_costCalculator.Received(1).GetBuildCost(Arg.Any<IBuildable>(), Arg.Any<Player>(), Arg.Any<Player>());
-            m_eventManager.Received(1).Publish(Arg.Any<OnCardBuilt>());
+            m_eventManager.Received(1).PublishAsync(Arg.Any<OnCardBuilt>());
             Assert.That(m_current.Money, Is.EqualTo(Math.Max(0, playerMoney - buildCost)));
         }
 

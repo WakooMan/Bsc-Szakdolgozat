@@ -7,6 +7,7 @@ namespace GameLogic.GameStructures
     {
         public Card CardObj { get; }
         public bool Hidden { get; set; }
+        public string NodeName { get; set; }
 
         public IReadOnlyList<ICardNode> CoveredBy => m_coveredBy;
 
@@ -15,6 +16,7 @@ namespace GameLogic.GameStructures
             ArgumentChecker.CheckNull(cardObj, nameof(cardObj));
 
             CardObj = cardObj;
+            NodeName = string.Empty;
             m_coveredBy = new List<ICardNode>();
         }
 

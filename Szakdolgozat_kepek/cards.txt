@@ -1,0 +1,73 @@
+Fakitermelés
+Fatelep
+Agyagbánya
+Agyaglelőhely
+Kőfejtő
+Kőbánya
+Fűrésztelep
+Téglagyár
+Külszíni fejtés
+Üveggyár
+Prés
+Üvegfúvó
+Szárítóterem
+Őrtorony
+Istálló
+Helyőrség
+Cölöpkerítés
+Falak
+Lótenyésztők
+Barakk
+Íjászterület
+Alakulótér
+Fegyverarzenál
+Főhadiszállás
+Erőd
+Ostromműhely
+Cirkusz
+Műhely
+Patika
+Scriptorium
+Gyógyszerész
+Könyvtár
+Kórház
+Iskola
+Laboratórium
+Akadémia
+Tanterem
+Egyetem
+Csillagvizsgáló
+Kőraktár
+Agyagraktár
+Faraktár
+Fogadó
+Fórum
+Karavánszeráj
+Vámház
+Sörfőzde
+Kereskedelmi kamara
+Kikötő
+Fegyvertár
+Világítótorony
+Aréna
+Színház
+Oltár
+Fürdő
+Bíróság
+Szobor
+Templom
+Vízvezeték
+Szószék
+Palota
+Városháza
+Obeliszk
+Kertek
+Panteon
+Szenátus
+Kereskedők céhe
+Hajósok céhe
+Építők céhe
+Elöljárók céhe
+Tudósok céhe
+Uzsorások céhe
+Stratégák céhe

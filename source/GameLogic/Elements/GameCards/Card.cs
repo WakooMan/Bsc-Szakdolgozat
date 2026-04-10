@@ -23,23 +23,15 @@ namespace GameLogic.Elements.GameCards
         public string BuildingType => GetType().Name;
 
         public abstract Card Clone();
-        public virtual int GetStrength()
+
+        public virtual Task OnBuilt(IGameContext gameContext, int playerId)
         {
-            return 0;
-        }
-        public virtual int GetVictoryPoints(Player player)
-        {
-            return 0;
+            return Task.CompletedTask;
         }
 
-        public virtual List<Good> GetGoods()
+        public virtual Task OnDestroyed(IGameContext gameContext, int playerId)
         {
-            return new List<Good>();
-        }
-
-        public virtual void OnBuilt(IGameContext gameContext)
-        {
-
+            return Task.CompletedTask;
         }
 
         protected Card()

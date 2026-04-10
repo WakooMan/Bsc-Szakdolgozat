@@ -1,5 +1,4 @@
-﻿using GameLogic.Handlers;
-using GameLogic.Interfaces;
+﻿using GameLogic.Events.GameEvents;
 
 namespace GameLogic.GameStates
 {
@@ -12,11 +11,11 @@ namespace GameLogic.GameStates
             m_gameContext = gameContext;
         }
 
-        public void DoStateAction()
+        public async Task DoStateAction()
         {
             while (!m_gameContext.ChooseWonderHandler.WondersChosen)
             {
-                m_gameContext.ChooseWonderHandler.ChooseWonder();
+                await m_gameContext.ChooseWonderHandler.ChooseWonder();
             }
         }
 

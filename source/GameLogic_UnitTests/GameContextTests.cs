@@ -10,12 +10,6 @@ using GameLogic.Handlers;
 using GameLogic.Interfaces;
 using NSubstitute;
 using SevenWonders.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLogic_UnitTests
 {
@@ -77,7 +71,7 @@ namespace GameLogic_UnitTests
             _ = m_gameElements.Received(1).Developments;
             _ = m_wonderList.Received(2).Wonders;
             _ = m_developmentList.Received(2).Developments;
-            m_chooseWonderHandler.Received(1).Initialize(Arg.Any<ICollection<Player>>(), Arg.Any<ICollection<Wonder>>());
+            m_chooseWonderHandler.Received(1).Initialize(Arg.Any<ICollection<Player>>(), Arg.Any<ICollection<Wonder>>(), m_gameContext);
             m_turnHandler.Received(1).Initialize(Arg.Any<ICollection<Player>>());
             m_eventManager.Received(1).ClearSubscriptions();
             m_ageHandler.Received(1).Initialize();

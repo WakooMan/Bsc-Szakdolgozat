@@ -85,7 +85,7 @@ namespace GameLogic_UnitTests.PlayerActions
 
             Assert.That(m_current.PickedCard, Is.Not.Null);
             Assert.That(m_current.PickedCard, Is.EqualTo(m_cardNode));
-            m_gameContext.EventManager.Received(1).Publish(Arg.Any<OnCardPicked>());
+            m_gameContext.EventManager.Received(1).PublishAsync(Arg.Any<OnCardPicked>());
         }
 
         private ICardNode m_cardNode;

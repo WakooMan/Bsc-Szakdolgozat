@@ -8,7 +8,7 @@ namespace GameLogic.GameStates
 {
     public interface IGameState
     {
-        void DoStateAction();
+        Task DoStateAction();
         IGameState GetNextState();
     }
 }

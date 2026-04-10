@@ -3,6 +3,7 @@ using GameLogic.Elements.Goods.Factories;
 using GameLogic.Events.GameEvents;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using System.Net.Http.Headers;
 
 namespace GameLogic.Elements.Effects
 {
@@ -35,22 +36,23 @@ namespace GameLogic.Elements.Effects
             return new List<Good>() { m_selectedGood };
         }
 
-        public override void Apply(IGameContext gameContext)
+        public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<TurnStarted>((args) => SelectGood(gameContext, player, args));
+            gameContext.EventManager.Subscribe<TurnStarted>((args) => SelectGood(gameContext, player, args).GetAwaiter().GetResult());
+            return Task.CompletedTask;
         }
 
-        private void SelectGood(IGameContext gameContext, Player player, TurnStarted eventArgs)
+        private async Task SelectGood(IGameContext gameContext, Player player, TurnStarted eventArgs)
         {
             if (eventArgs.Player == player)
             {
-                IPlayerAction playerAction = gameContext.PlayerActionReceiver.ReceivePlayerAction(eventArgs.Player, GoodFactories.Select(goodFactory => new ChooseGoodAction(goodFactory, SetSelectedGood)).ToArray());
-                
-                if (playerAction.CanPerform(gameContext))
-                {
-                    playerAction.DoPlayerAction(gameContext);
-                }
+                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz Nyersanyagot", GoodFactories.Select(factory => factory.GoodType.Name).ToArray(), false));
+                await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, eventArgs.Player, GoodFactories.Select(goodFactory => {
+                    IPlayerAction action = new ChooseGoodAction(goodFactory, SetSelectedGood);
+                    return action;
+                }).ToList());
+                await gameContext.EventManager.PublishAsync(new OnObjectChosen(GoodFactories.Select(factory => factory.GoodType.Name).ToArray(), false));
             }
         }
 

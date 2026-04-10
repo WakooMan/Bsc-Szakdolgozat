@@ -23,6 +23,9 @@
 	</Fields>
 	<MilitaryCards>
 		<MilitaryCard>
+			<Name>player1MilitaryToken3</Name>
+			<PlayerId>2</PlayerId>
+			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>5</Money>
 			</EnemyLoseMoney>
@@ -33,6 +36,9 @@
 			<IndexEnd>3</IndexEnd>
 		</MilitaryCard>
 		<MilitaryCard>
+			<Name>player1MilitaryToken2</Name>
+			<PlayerId>2</PlayerId>
+			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>2</Money>
 			</EnemyLoseMoney>
@@ -43,6 +49,9 @@
 			<IndexEnd>6</IndexEnd>
 		</MilitaryCard>
 		<MilitaryCard>
+			<Name>player1MilitaryToken1</Name>
+			<PlayerId>2</PlayerId>
+			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>0</Money>
 			</EnemyLoseMoney>
@@ -53,6 +62,9 @@
 			<IndexEnd>8</IndexEnd>
 		</MilitaryCard>
 		<MilitaryCard>
+			<Name>player2MilitaryToken1</Name>
+			<PlayerId>1</PlayerId>
+			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>0</Money>
 			</EnemyLoseMoney>
@@ -63,6 +75,9 @@
 			<IndexEnd>11</IndexEnd>
 		</MilitaryCard>
 		<MilitaryCard>
+			<Name>player2MilitaryToken2</Name>
+			<PlayerId>1</PlayerId>
+			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>2</Money>
 			</EnemyLoseMoney>
@@ -73,6 +88,9 @@
 			<IndexEnd>14</IndexEnd>
 		</MilitaryCard>
 		<MilitaryCard>
+			<Name>player2MilitaryToken3</Name>
+			<PlayerId>1</PlayerId>
+			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>5</Money>
 			</EnemyLoseMoney>

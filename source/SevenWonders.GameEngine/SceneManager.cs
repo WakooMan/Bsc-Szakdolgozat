@@ -56,9 +56,9 @@ namespace SevenWonders.GameEngine
 
             foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
             {
-                foreach (GameObject gameObject in graphicsLayer.ObjectList)
+                foreach (GameObject gameObject in graphicsLayer.GameObjects)
                 {
-                    if (gameObject.Name == name)
+                    if (gameObject.Name.ToLower() == name.ToLower())
                     {
                         return gameObject;
                     }
@@ -67,6 +67,88 @@ namespace SevenWonders.GameEngine
 
             return null;
         }
+
+        public TextLabel? GetTextLabelByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                foreach (TextLabel textLabel in graphicsLayer.TextLabels)
+                {
+                    if (textLabel.Name.ToLower() == name.ToLower())
+                    {
+                        return textLabel;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public IInteractiveObject? GetInteractiveObjectByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                foreach (IInteractiveObject interactiveObject in graphicsLayer.InteractiveObjects)
+                {
+                    if (interactiveObject.Name.ToLower() == name.ToLower())
+                    {
+                        return interactiveObject;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public ButtonObject? GetButtonByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                foreach (ButtonObject button in graphicsLayer.ButtonObjects)
+                {
+                    if (button.Name.ToLower() == name.ToLower())
+                    {
+                        return button;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public GraphicsLayer? GetLayerByName(string name)
+        {
+            if (CurrentScene is null)
+            {
+                return null;
+            }
+
+            foreach (GraphicsLayer graphicsLayer in CurrentScene.Layers)
+            {
+                if (graphicsLayer.Name.ToLower() == name.ToLower())
+                {
+                    return graphicsLayer;
+                }
+            }
+
+            return null;
+        }
+
         public Scene GetScene(Guid sceneID)
         {
             return m_scenes.First(scene => scene.Id == sceneID);

@@ -8,7 +8,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Wood"/>
+				<GameResource xsi:type="Wood">
+					<Amount>1</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -18,7 +20,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Wood"/>
+				<GameResource xsi:type="Wood">
+					<Amount>1</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -28,7 +32,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Clay"/>
+				<GameResource xsi:type="Clay">
+					<Amount>1</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -38,7 +44,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Clay"/>
+				<GameResource xsi:type="Clay">
+					<Amount>1</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -48,7 +56,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Stone"/>
+				<GameResource xsi:type="Stone">
+					<Amount>1</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -58,7 +68,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Stone"/>
+				<GameResource xsi:type="Stone">
+					<Amount>1</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -68,8 +80,9 @@
 			<PreviousBuilding/>
 			<Age>II</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Wood"/>
-				<GameResource xsi:type="Wood"/>
+				<GameResource xsi:type="Wood">
+					<Amount>2</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -79,8 +92,9 @@
 			<PreviousBuilding/>
 			<Age>II</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Clay"/>
-				<GameResource xsi:type="Clay"/>
+				<GameResource xsi:type="Clay">
+					<Amount>2</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
@@ -90,8 +104,9 @@
 			<PreviousBuilding/>
 			<Age>II</Age>
 			<ProducedResources>
-				<GameResource xsi:type="Stone"/>
-				<GameResource xsi:type="Stone"/>
+				<GameResource xsi:type="Stone">
+					<Amount>2</Amount>
+				</GameResource>
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="GrayCard">
@@ -101,7 +116,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<CreatedProducts>
-				<Product xsi:type="Glass"/>
+				<Product xsi:type="Glass">
+					<Amount>1</Amount>
+			    </Product>
 			</CreatedProducts>
 		
 		</Card>
@@ -112,7 +129,9 @@
 			<PreviousBuilding/>
 			<Age>I</Age>
 			<CreatedProducts>
-				<Product xsi:type="Papirus"/>
+				<Product xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Product>
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="GrayCard">
@@ -122,7 +141,9 @@
 			<PreviousBuilding/>
 			<Age>II</Age>
 			<CreatedProducts>
-				<Product xsi:type="Glass"/>
+				<Product xsi:type="Glass">
+					<Amount>1</Amount>
+				</Product>
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="GrayCard">
@@ -132,7 +153,9 @@
 			<PreviousBuilding/>
 			<Age>II</Age>
 			<CreatedProducts>
-				<Product xsi:type="Papirus"/>
+				<Product xsi:type="Papirus">
+					<Amount>1</Amount>
+				</Product>
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="RedCard">

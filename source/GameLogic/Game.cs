@@ -1,13 +1,10 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Elements.Modifiers;
-using GameLogic.Elements.Wonders;
+using GameLogic.Events.GameEvents;
 using GameLogic.GameStates;
 using SevenWonders.Common;
-using System.ComponentModel.Composition;
 
 namespace GameLogic
 {
-    [Export(typeof(IGame))]
     public class Game: IGame
     {
         private List<Player> m_players;
@@ -17,7 +14,8 @@ namespace GameLogic
         public IReadOnlyList<Player> Players => m_players;
         public bool IsInitialized => m_isInitialized;
 
-        [ImportingConstructor]
+        public IGameContext Context => m_gameContext;
+
         public Game(IGameContext gameContext)
         {
             ArgumentChecker.CheckNull(gameContext, nameof(gameContext));
@@ -28,13 +26,16 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public void GameLoop()
+        public async void GameLoop()
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_isInitialized, "Cannot start an uninitialized game!");
 
+            await m_gameContext.EventManager.PublishAsync(new OnGameInitialized(m_gameContext));
+            await m_gameContext.EventManager.PublishAsync(new OnGameStarted(m_players));
+
             while (CurrentState is not EndGameState)
             {
-                CurrentState.DoStateAction();
+                await CurrentState.DoStateAction();
                 CurrentState = CurrentState.GetNextState();
             }
 
@@ -45,7 +46,7 @@ namespace GameLogic
         {
             if (!m_isInitialized)
             {
-                m_players = [new Player(player1), new Player(player2)];
+                m_players = [new Player(player1, 1, 7), new Player(player2, 2, 7)];
                 m_gameContext.Initialize(m_players);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;

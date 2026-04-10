@@ -38,9 +38,12 @@ namespace GameLogic.Elements.Wonders
             return new Wonder(this);
         }
 
-        public void OnBuilt(IGameContext gameContext)
+        public async Task OnBuilt(IGameContext gameContext, int playerId)
         {
-            Effects.ForEach(effect => effect.Apply(gameContext));
+            foreach (var effect in Effects)
+            {
+                await effect.Apply(gameContext, playerId);
+            }
         }
     }
 }
