@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameController", "source\Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIModell", "source\AIModell\AIModell.csproj", "{3C9BCAB7-4503-49BE-B852-C47D47780DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer", "source\WebServer\WebServer.csproj", "{91AC41CA-E836-453E-97F7-92EF4090166C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic_UnitTests", "source\GameLogic_UnitTests\GameLogic_UnitTests.csproj", "{A018E274-F949-49B9-BF61-8BFCE3054611}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "source\GameLogic\GameLogic.csproj", "{1CA9F130-B3CF-DFBC-F068-2112E661767F}"
@@ -22,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Presenter", "SevenWonders.Presenter\SevenWonders.Presenter.csproj", "{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.GameEngine_UnitTests", "source\SevenWonders.GameEngine_UnitTests\SevenWonders.GameEngine_UnitTests.csproj", "{1AB179DB-A890-D736-7396-1D70D9B7043C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.WebServer", "source\SevenWonders.WebServer\SevenWonders.WebServer.csproj", "{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,6 @@ Global
 		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A018E274-F949-49B9-BF61-8BFCE3054611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A018E274-F949-49B9-BF61-8BFCE3054611}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A018E274-F949-49B9-BF61-8BFCE3054611}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +65,10 @@ Global
 		{1AB179DB-A890-D736-7396-1D70D9B7043C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AB179DB-A890-D736-7396-1D70D9B7043C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AB179DB-A890-D736-7396-1D70D9B7043C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
