@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SevenWonders.WebServer
+namespace WebServer.Model.Client
 {
     public class ApplicationUser : IdentityUser
     {

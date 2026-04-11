@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.GameEngine_Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.WebServer", "source\SevenWonders.WebServer\SevenWonders.WebServer.csproj", "{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Contract", "source\WebServer.Contract\WebServer.Contract.csproj", "{3AE09890-4B83-4A82-96CB-D9199CC5218F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Model", "source\WebServer.Model\WebServer.Model.csproj", "{54477D34-2E02-40B9-8079-C1AFDBED53D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

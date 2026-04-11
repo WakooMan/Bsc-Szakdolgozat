@@ -11,5 +11,10 @@ namespace SevenWonders.Common
         {
             return RandomNumberGenerator.GetInt32(int.MaxValue);
         }
+
+        public int Next(int min, int max)
+        {
+            return RandomNumberGenerator.GetInt32(min, max);
+        }
     }
 }

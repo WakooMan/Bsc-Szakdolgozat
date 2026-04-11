@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace SevenWonders.WebServer
+namespace WebServer.Model.Client
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

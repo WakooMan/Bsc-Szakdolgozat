@@ -1,7 +1,5 @@
-
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SevenWonders.WebServer.Models;
+using WebServer.Model.Client;
 
 namespace SevenWonders.WebServer
 {

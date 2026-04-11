@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SevenWonders.WebServer.Models;
+using WebServer.Model.Client;
 
 namespace SevenWonders.WebServer.Controllers
 {
