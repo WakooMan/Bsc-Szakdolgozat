@@ -105,6 +105,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<App>();
 
+        builder.Services.AddTransient<LobbyMainPageViewModel>();
+        builder.Services.AddTransient<LobbyMainPage>();
+
         builder.Services.AddTransient<ConnectPageViewModel>();
         builder.Services.AddTransient<ConnectPage>();
 
