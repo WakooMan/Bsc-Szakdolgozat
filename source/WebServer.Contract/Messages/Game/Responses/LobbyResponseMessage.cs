@@ -1,5 +1,9 @@
-﻿namespace WebServer.Contract.Messages.Game.Responses
+﻿using System.Text.Json.Serialization;
+
+namespace WebServer.Contract.Messages.Game.Responses
 {
+    [JsonDerivedType(typeof(CreateLobbyResponseMessage), typeDiscriminator: "createlobbyresponse")]
+    [JsonDerivedType(typeof(JoinLobbyResponseMessage), typeDiscriminator: "joinlobbyresponse")]
     public class LobbyResponseMessage
     {
         public bool Success { get; set; }
