@@ -1,5 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using SevenWonders.Common;
 using WebServer.Model.Client;
+using WebServer.Model.Client.Factories;
+using WebServer.Model.Lobby;
+using WebServer.Model.MessageHandling;
+using WebServer.Model.MessageHandling.Factories;
+using WebServer.Model.PlayerStates.Factories;
 
 namespace SevenWonders.WebServer
 {
@@ -24,7 +30,24 @@ namespace SevenWonders.WebServer
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
 
-            builder.Services.AddSignalR();
+            builder.Services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+                options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+                options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+            });
+
+            builder.Services.AddSingleton<IRandomGenerator, RandomGenerator>();
+            builder.Services.AddSingleton<IXmlHandler, XmlHandler>();
+            builder.Services.AddSingleton<IClientManager, ClientManager>();
+            builder.Services.AddSingleton<ILobbyFactory, LobbyFactory>();
+            builder.Services.AddSingleton<ILobbyManager, LobbyManager>();
+            builder.Services.AddSingleton<IPlayerStateFactory, PlayerStateFactory>();
+            builder.Services.AddSingleton<IPlayerClientFactory, PlayerClientFactory>();
+            builder.Services.AddSingleton<ILobbyCodeGenerator, LobbyCodeGenerator>();
+            builder.Services.AddSingleton<IMessageRegistererFactory, MessageRegistererFactory>();
+            builder.Services.AddSingleton<ILobbyMessageHandlers, LobbyMessageHandlers>();
+            builder.Services.AddSingleton<IServerMessageDispatcher, ServerMessageDispatcher>();
 
             var app = builder.Build();
 
@@ -39,6 +62,7 @@ namespace SevenWonders.WebServer
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
+            app.MapHub<ServerHub>("/serverhub");
             app.Run();
         }
     }
