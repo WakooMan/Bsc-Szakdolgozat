@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SevenWonders.WebServer.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using WebServer.Contract;
 using WebServer.Model.Client;
 
 namespace SevenWonders.WebServer.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
@@ -26,10 +33,10 @@ namespace SevenWonders.WebServer.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(new { Message = "Successful registration!" });
+                return Ok(new RegisterResponse(true, "Successful registration!"));
             }
 
-            return BadRequest(result.Errors);
+            return BadRequest(new RegisterResponse(false, string.Join('\n', result.Errors.Select(error => error.ToString()).ToArray())));
         }
 
         [HttpPost("login")]
@@ -39,10 +46,33 @@ namespace SevenWonders.WebServer.Controllers
 
             if (result.Succeeded)
             {
-                return Ok(new { Message = "Successful login!" });
+                return Ok(new LoginResponse(true, "Successful login!", GenerateJwtToken(model.Username)));
             }
 
-            return BadRequest("Username or Password is wrong.");
+            return BadRequest(new LoginResponse(false, "Username or Password is wrong.", string.Empty));
+        }
+
+        private string GenerateJwtToken(string username)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes("Nagyon_Titkos_Es_Hosszu_Kulcs_123456789");
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+            new Claim(ClaimTypes.Name, username),
+            new Claim(ClaimTypes.NameIdentifier, username)
+        }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         private readonly UserManager<ApplicationUser> m_userManager;

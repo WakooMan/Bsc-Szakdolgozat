@@ -100,9 +100,16 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IPresenter), typeof(Presenter));
         builder.Services.AddSingleton(typeof(ICardConnector), typeof(CardConnector));
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+        builder.Services.AddSingleton<IAuthService, AuthService>();
         builder.Services.AddSingleton(typeof(IGameOverHandler), typeof(GameOverHandler));
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<App>();
+
+        builder.Services.AddTransient<ConnectPageViewModel>();
+        builder.Services.AddTransient<ConnectPage>();
+
+        builder.Services.AddTransient<LoginPageViewModel>();
+        builder.Services.AddTransient<LoginPage>();
 
         builder.Services.AddTransient<GamePageViewModel>();
         builder.Services.AddTransient<GamePage>();

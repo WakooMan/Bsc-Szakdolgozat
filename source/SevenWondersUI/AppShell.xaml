@@ -20,5 +20,17 @@
         Title="GamePage"
         ContentTemplate="{DataTemplate views:GamePage}"
         Route="GamePage" />
+    <ShellContent
+        Title="LoginPage"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage" />
+    <ShellContent
+        Title="ConnectPage"
+        ContentTemplate="{DataTemplate views:ConnectPage}"
+        Route="ConnectPage" />
+    <ShellContent
+        Title="LobbyMainPage"
+        ContentTemplate="{DataTemplate views:LobbyMainPage}"
+        Route="LobbyMainPage" />
 
 </Shell>
