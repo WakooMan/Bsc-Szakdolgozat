@@ -42,28 +42,35 @@ namespace SevenWonders.WebServer.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var result = await m_signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: true, lockoutOnFailure: false);
+            var user = await m_userManager.FindByNameAsync(model.Username);
+
+            if (user == null)
+            {
+                return Unauthorized(new LoginResponse(false, "Érvénytelen felhasználónév vagy jelszó.", string.Empty));
+            }
+
+            var result = await m_signInManager.CheckPasswordSignInAsync(user, model.Password, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                return Ok(new LoginResponse(true, "Successful login!", GenerateJwtToken(model.Username)));
+                var token = GenerateJwtToken(user);
+                return Ok(new LoginResponse(true, "Sikeres bejelentkezés", token));
             }
 
-            return BadRequest(new LoginResponse(false, "Username or Password is wrong.", string.Empty));
+            return Unauthorized(new LoginResponse(false, "Hibás jelszó.", string.Empty));
         }
 
-        private string GenerateJwtToken(string username)
+        private string GenerateJwtToken(ApplicationUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-
             var key = Encoding.ASCII.GetBytes("Nagyon_Titkos_Es_Hosszu_Kulcs_123456789");
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-            new Claim(ClaimTypes.Name, username),
-            new Claim(ClaimTypes.NameIdentifier, username)
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(
