@@ -10,8 +10,8 @@ namespace SevenWondersUI.ViewModels
         {
             m_navigationService = navigationService;
             m_authService = authService;
-            m_userNameEntry = ("Felhasználónév:", string.Empty);
-            m_passwordEntry = ("Jelszó:", string.Empty);
+            m_userNameEntry = ("Felhasználónév:", "Wakoo");
+            m_passwordEntry = ("Jelszó:", "NagyonErosJelszo123!");
             m_loginText = "Belépés";
             m_backText = "Vissza";
             m_loginCommand = new Command(OnLogin, ValidateTexts);
