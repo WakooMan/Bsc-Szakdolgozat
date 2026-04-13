@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.Messages.Game.Requests;
-using WebServer.Contract.Messages.Game.Responses;
-using WebServer.Contract.Messages.Lobby;
+using WebServer.Contract.Messages.Game.ClientMessages;
+using WebServer.Contract.Messages.Game.ServerMessages;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 
 namespace WebServer.Model.MessageHandling
 {
@@ -9,7 +10,7 @@ namespace WebServer.Model.MessageHandling
     {
         void RegisterHandler(IMessageHandler messageHandler);
         void UnregisterHandler(IMessageHandler messageHandler);
-        Task<LobbyResponseMessage> Dispatch(Hub hub, string connectionId, LobbyRequestMessage message);
-        Task<GameResponseMessage> Dispatch(Hub hub, string connectionId, GameRequestMessage message);
+        Task<LobbyServerMessage> Dispatch(Hub hub, string connectionId, LobbyClientMessage message);
+        Task<GameServerMessage> Dispatch(Hub hub, string connectionId, GameClientMessage message);
     }
 }

@@ -1,9 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using SevenWonders.WebClient.Model;
+using SevenWondersUI.Services;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 
 namespace SevenWondersUI.ViewModels
 {
-    public class LobbyMainPageViewModel : BaseViewModel
+    public class LobbyMainPageViewModel : BaseViewModel, IMessageHandler
     {
         private bool _isFriendlyModeVisible = true;
         private bool _isCompetitiveModeVisible = false;
@@ -47,7 +51,36 @@ namespace SevenWondersUI.ViewModels
             set { _searchTimerText = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<string> Rooms { get; set; }
+        private RoomModel? m_selectedRoom;
+
+        public ObservableCollection<RoomModel> Rooms { get; set; }
+
+        public RoomModel? SelectedRoom
+        {
+            get => m_selectedRoom;
+            set
+            {
+                if (m_selectedRoom != value)
+                {
+                    if (m_selectedRoom is not null)
+                    {
+                        m_selectedRoom.TextColor = Colors.Black;
+                        m_selectedRoom.BackgroundColor = Colors.White;
+                    }
+                    m_selectedRoom = value;
+                    if (m_selectedRoom is not null)
+                    {
+                        m_selectedRoom.TextColor = Colors.White;
+                        m_selectedRoom.BackgroundColor = Colors.Black;
+                    }
+                    OnPropertyChanged();
+                    ((Command)JoinGameCommand).ChangeCanExecute();
+                }
+            }
+        }
+
+        public ICommand JoinGameCommand { get; }
+        public ICommand CreateGameCommand { get; }
 
         public ICommand SelectFriendlyModeCommand { get; }
         public ICommand SelectCompetitiveModeCommand { get; }
@@ -55,45 +88,151 @@ namespace SevenWondersUI.ViewModels
         public ICommand StopSearchCommand { get; }
         public ICommand LogoutCommand { get; }
 
-        public LobbyMainPageViewModel()
+        public LobbyMainPageViewModel(IClientHubService clientHubService, INavigationService navigationService)
         {
-            Rooms = new ObservableCollection<string> { "Szoba #1", "Szoba #2", "Szoba #3" };
+            m_clientHubService = clientHubService;
+            m_navigationService = navigationService;
+            m_createLobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<CreateLobbyResponseMessage>(OnCreateLobbyResponseMessageReceived);
+            m_joinLobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<JoinLobbyResponseMessage>(OnJoinLobbyResponseMessageReceived);
+            m_startMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage>(OnStartMatchmakingResponseMessageReceived);
+            m_stopMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage>(OnStopMatchmakingResponseMessageReceived);
+            Rooms = new ObservableCollection<RoomModel>();
 
-            SelectFriendlyModeCommand = new Command(() => {
-                IsFriendlyModeVisible = true;
-                IsCompetitiveModeVisible = false;
-            });
+            JoinGameCommand = new Command(JoinGame, () => SelectedRoom != null);
 
-            SelectCompetitiveModeCommand = new Command(() => {
-                IsFriendlyModeVisible = false;
-                IsCompetitiveModeVisible = true;
-            });
+            CreateGameCommand = new Command(CreateGame);
+
+            SelectFriendlyModeCommand = new Command(SelectFriendlyMode);
+
+            SelectCompetitiveModeCommand = new Command(SelectCompetitiveMode);
 
             StartSearchCommand = new Command(StartSearch);
             StopSearchCommand = new Command(StopSearch);
-            LogoutCommand = new Command(async () => await App.Current.MainPage.DisplayAlert("Kijelentkezés", "Sikeres kijelentkezés!", "OK"));
+            LogoutCommand = new Command(Logout);
         }
 
-        private void StartSearch()
+        private void Logout()
         {
-            IsSearching = true;
-            _secondsElapsed = 0;
-            SearchTimerText = "00:00";
-
-            _timer = new System.Timers.Timer(1000);
-            _timer.Elapsed += (s, e) => {
-                _secondsElapsed++;
-                var time = TimeSpan.FromSeconds(_secondsElapsed);
-                SearchTimerText = time.ToString(@"mm\:ss");
-            };
-            _timer.Start();
+            throw new NotImplementedException();
         }
 
-        private void StopSearch()
+        public void Register(IMessageRegisterer registerer)
         {
-            _timer?.Stop();
-            _timer?.Dispose();
-            IsSearching = false;
+            registerer.Register(m_createLobbyResponseMessageHandlerDelegate);
+            registerer.Register(m_joinLobbyResponseMessageHandlerDelegate);
+            registerer.Register(m_startMatchmakingResponseMessageHandlerDelegate);
+            registerer.Register(m_stopMatchmakingResponseMessageHandlerDelegate);
         }
+
+        public void Unregister(IMessageRegisterer registerer)
+        {
+            registerer.Unregister(m_createLobbyResponseMessageHandlerDelegate);
+            registerer.Unregister(m_joinLobbyResponseMessageHandlerDelegate);
+            registerer.Unregister(m_startMatchmakingResponseMessageHandlerDelegate);
+            registerer.Unregister(m_stopMatchmakingResponseMessageHandlerDelegate);
+        }
+
+        private void CreateGame()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SelectFriendlyMode()
+        {
+            IsFriendlyModeVisible = true;
+            IsCompetitiveModeVisible = false;
+        }
+
+        private void SelectCompetitiveMode()
+        {
+            IsFriendlyModeVisible = false;
+            IsCompetitiveModeVisible = true;
+        }
+
+        private async void JoinGame()
+        {
+            if (SelectedRoom != null)
+            {
+                await m_clientHubService.InvokeLobbyCommand(new JoinLobbyRequestMessage(SelectedRoom.Code));
+            }
+        }
+
+        private Task<bool> OnStartMatchmakingResponseMessageReceived(StartMatchmakingResponseMessage message)
+        {
+            if (message.Success)
+            {
+                IsSearching = true;
+                _secondsElapsed = 0;
+                SearchTimerText = "00:00";
+
+                _timer = new System.Timers.Timer(1000);
+                _timer.Elapsed += (s, e) =>
+                {
+                    _secondsElapsed++;
+                    var time = TimeSpan.FromSeconds(_secondsElapsed);
+                    SearchTimerText = time.ToString(@"mm\:ss");
+                };
+                _timer.Start();
+                return Task.FromResult(true);
+            }
+
+            return Task.FromResult(false);
+        }
+
+        private Task<bool> OnStopMatchmakingResponseMessageReceived(StopMatchmakingResponseMessage message)
+        {
+            if (message.Success)
+            {
+                _timer?.Stop();
+                _timer?.Dispose();
+                IsSearching = false;
+                return Task.FromResult(true);
+            }
+
+            return Task.FromResult(false);
+        }
+
+        private async Task<bool> OnJoinLobbyResponseMessageReceived(JoinLobbyResponseMessage message)
+        {
+            if (message.Success)
+            {
+                await m_navigationService.NavigateToAsync("//LobbyPage", new Dictionary<string, object>
+                {
+                    { "LobbyDto", message.LobbyDto }
+                });
+                return true;
+            }
+            return false;
+        }
+
+        private async Task<bool> OnCreateLobbyResponseMessageReceived(CreateLobbyResponseMessage message)
+        {
+            if (message.Success)
+            {
+                await m_navigationService.NavigateToAsync("//LobbyPage", new Dictionary<string, object>
+                {
+                    { "LobbyDto", message.LobbyDto }
+                });
+                return true;
+            }
+            return false;
+        }
+
+        private async void StartSearch()
+        {
+            await m_clientHubService.InvokeLobbyCommand(new StartMatchmakingRequestMessage());
+        }
+
+        private async void StopSearch()
+        {
+            await m_clientHubService.InvokeLobbyCommand(new StopMatchmakingRequestMessage());
+        }
+
+        private readonly LobbyResponseMessageHandlerDelegate<CreateLobbyResponseMessage> m_createLobbyResponseMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<JoinLobbyResponseMessage> m_joinLobbyResponseMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage> m_startMatchmakingResponseMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage> m_stopMatchmakingResponseMessageHandlerDelegate;
+        private readonly IClientHubService m_clientHubService;
+        private readonly INavigationService m_navigationService;
     }
 }

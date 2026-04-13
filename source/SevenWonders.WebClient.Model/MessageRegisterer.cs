@@ -1,7 +1,7 @@
-﻿using WebServer.Contract.Messages.Game.ClientMessages;
-using WebServer.Contract.Messages.Lobby.ClientMessages;
+﻿using WebServer.Contract.Messages.Game.ServerMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 
-namespace WebServer.Model.MessageHandling
+namespace SevenWonders.WebClient.Model
 {
     public class MessageRegisterer: IMessageRegisterer
     {
@@ -13,7 +13,7 @@ namespace WebServer.Model.MessageHandling
             m_gameRequestHandlers = gameRequestHandlers;
         }
 
-        public void Register<T>(LobbyRequestMessageHandlerDelegate<T> handler) where T : LobbyClientMessage
+        public void Register<T>(LobbyResponseMessageHandlerDelegate<T> handler) where T : LobbyServerMessage
         {
             if (m_lobbyRequestHandlers.ContainsKey(typeof(T)))
             {
@@ -22,7 +22,7 @@ namespace WebServer.Model.MessageHandling
             m_lobbyRequestHandlers[typeof(T)] = handler;
         }
 
-        public void Register<T>(GameRequestMessageHandlerDelegate<T> handler) where T : GameClientMessage
+        public void Register<T>(GameResponseMessageHandlerDelegate<T> handler) where T : GameServerMessage
         {
             if (m_gameRequestHandlers.ContainsKey(typeof(T)))
             {
@@ -31,16 +31,16 @@ namespace WebServer.Model.MessageHandling
             m_gameRequestHandlers[typeof(T)] = handler;
         }
 
-        public void Unregister<T>(LobbyRequestMessageHandlerDelegate<T> handler) where T : LobbyClientMessage
+        public void Unregister<T>(LobbyResponseMessageHandlerDelegate<T> handler) where T : LobbyServerMessage
         {
-            if (!m_lobbyRequestHandlers.ContainsKey(typeof(T)) || (LobbyRequestMessageHandlerDelegate<T>)m_lobbyRequestHandlers[typeof(T)] != handler)
+            if (!m_lobbyRequestHandlers.ContainsKey(typeof(T)) || (LobbyResponseMessageHandlerDelegate<T>)m_lobbyRequestHandlers[typeof(T)] != handler)
                 return;
             m_lobbyRequestHandlers.Remove(typeof(T));
         }
 
-        public void Unregister<T>(GameRequestMessageHandlerDelegate<T> handler) where T : GameClientMessage
+        public void Unregister<T>(GameResponseMessageHandlerDelegate<T> handler) where T : GameServerMessage
         {
-            if (!m_gameRequestHandlers.ContainsKey(typeof(T)) || (GameRequestMessageHandlerDelegate<T>)m_gameRequestHandlers[typeof(T)] != handler)
+            if (!m_gameRequestHandlers.ContainsKey(typeof(T)) || (GameResponseMessageHandlerDelegate<T>)m_gameRequestHandlers[typeof(T)] != handler)
                 return;
             m_gameRequestHandlers.Remove(typeof(T));
         }

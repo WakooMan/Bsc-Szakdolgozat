@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebServer.Contract.Messages.Game.Requests
+namespace WebServer.Contract.Messages.Lobby.ClientMessages
 {
-    public class LeaveLobbyRequestMessage: LobbyRequestMessage
+    public class LeaveLobbyRequestMessage: LobbyClientMessage
     {
     }
 }

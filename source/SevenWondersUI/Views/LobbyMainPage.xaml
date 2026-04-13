@@ -3,31 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="SevenWondersUI.Views.LobbyMainPage"
              Title="LobbyMainPage">
-    <Grid RowDefinitions="Auto, *, Auto" Padding="20">
+    <Grid Background="WhiteSmoke" RowDefinitions="Auto, *, Auto" Padding="20">
 
         <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" Spacing="10" Margin="0,0,0,20">
             <Button Text="{Binding FriendlyTabText}" 
-                    Command="{Binding SelectFriendlyModeCommand}" />
+                    Command="{Binding SelectFriendlyModeCommand}" BackgroundColor="Black" TextColor="White" />
             <Button Text="{Binding CompetitiveTabText}" 
-                    Command="{Binding SelectCompetitiveModeCommand}" />
+                    Command="{Binding SelectCompetitiveModeCommand}" BackgroundColor="Black" TextColor="White" />
         </HorizontalStackLayout>
 
         <Grid Grid.Row="1">
             <VerticalStackLayout IsVisible="{Binding IsFriendlyModeVisible}" Spacing="15">
-                <Label Text="{Binding AvailableRoomsTitle}" FontAttributes="Bold" FontSize="18" />
+                <Label Text="{Binding AvailableRoomsTitle}" FontAttributes="Bold" FontSize="18" TextColor="White" />
 
-                <CollectionView ItemsSource="{Binding Rooms}" HeightRequest="300">
+                <CollectionView ItemsSource="{Binding Rooms}" 
+                    SelectedItem="{Binding SelectedRoom}"
+                    SelectionMode="Single"
+                    HeightRequest="300">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Margin="0,5" Padding="10">
-                                <Label Text="{Binding .}" />
-                            </Frame>
+                            <Grid Padding="10">
+                                <Frame CornerRadius="5" HasShadow="True">
+                                    <VerticalStackLayout BackgroundColor="{Binding BackgroundColor}">
+                                        <Label Text="{Binding RoomName}" 
+                                   FontSize="16" 
+                                   FontAttributes="Bold" TextColor="{Binding TextColor}"/>
+                                        <Label Text="{Binding HostName, StringFormat='Host: {0}'}" 
+                                   FontSize="12" 
+                                   TextColor="{Binding TextColor}" />
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Button Text="{Binding JoinButtonText}" />
-                <Button Text="{Binding CreateGameButtonText}" />
+                <Button Text="{Binding JoinButtonText}" 
+            Command="{Binding JoinCommand}" BackgroundColor="Black" TextColor="White"/>
+
+                <Button Text="{Binding CreateGameButtonText}" 
+            Command="{Binding CreateGameCommand}" BackgroundColor="Black" TextColor="White"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout IsVisible="{Binding IsCompetitiveModeVisible}" 
@@ -36,13 +51,15 @@
                 <Button Text="{Binding SearchGameButtonText}" 
                         Command="{Binding StartSearchCommand}"
                         IsVisible="{Binding IsSearchButtonVisible}"
+                        BackgroundColor="Black"
+                        TextColor="White"
                         HeightRequest="100" WidthRequest="200" CornerRadius="50" />
 
                 <VerticalStackLayout IsVisible="{Binding IsSearching}" Spacing="10" HorizontalOptions="Center">
                     <ActivityIndicator IsRunning="True" Color="#512BD4" />
                     <Label Text="{Binding SearchTimerText}" HorizontalOptions="Center" FontSize="24" />
                     <Button Text="{Binding StopSearchButtonText}" 
-                            BackgroundColor="Red"
+                            BackgroundColor="Black"
                             TextColor="White"
                             Command="{Binding StopSearchCommand}" />
                 </VerticalStackLayout>
@@ -52,8 +69,8 @@
         <Button Grid.Row="2" 
                 Text="{Binding LogoutButtonText}" 
                 Command="{Binding LogoutCommand}"
-                TextColor="Gray"
-                BackgroundColor="Transparent"
+                TextColor="White"
+                BackgroundColor="Black"
                 BorderColor="Gray"
                 BorderWidth="1" />
     </Grid>

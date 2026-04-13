@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.Messages.Game.Requests;
-using WebServer.Contract.Messages.Game.Responses;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Contract.Messages.Lobby;
 using WebServer.Model.MessageHandling.Factories;
+using WebServer.Contract.Messages.Game.ServerMessages;
+using WebServer.Contract.Messages.Game.ClientMessages;
 
 namespace WebServer.Model.MessageHandling
 {
@@ -33,33 +35,33 @@ namespace WebServer.Model.MessageHandling
             m_registeredHandlers.Remove(messageHandlerType);
         }
 
-        public async Task<LobbyResponseMessage> Dispatch(Hub hub, string connectionId, LobbyRequestMessage message)
+        public async Task<LobbyServerMessage> Dispatch(Hub hub, string connectionId, LobbyClientMessage message)
         {
             if (!m_gameRequestHandlers.ContainsKey(message.GetType()))
-                return await Task.FromResult(new LobbyResponseMessage(false, "Request message cannot be handled on the server side!"));
+                return await Task.FromResult(new FailureResponseMessage(false, "Request message cannot be handled on the server side!"));
             object? result = ((Delegate)m_lobbyRequestHandlers[message.GetType()])?.DynamicInvoke(new object[] { hub, connectionId, message });
             if (result is not null)
             {
-                return await (Task<LobbyResponseMessage>)result;
+                return await (Task<LobbyServerMessage>)result;
             }
             else
             {
-                return await Task.FromResult(new LobbyResponseMessage(false, "Result is not returned from the handler!"));
+                return await Task.FromResult(new FailureResponseMessage(false, "Result is not returned from the handler!"));
             }
         }
 
-        public async Task<GameResponseMessage> Dispatch(Hub hub, string connectionId, GameRequestMessage message)
+        public async Task<GameServerMessage> Dispatch(Hub hub, string connectionId, GameClientMessage message)
         {
             if (!m_gameRequestHandlers.ContainsKey(message.GetType()))
-                return await Task.FromResult(new GameResponseMessage(false));
+                return await Task.FromResult(new FailureServerMessage(false, "Request message cannot be handled on the server side!"));
             object? result = ((Delegate)m_gameRequestHandlers[message.GetType()])?.DynamicInvoke(new object[] { hub, connectionId, message });
             if (result is not null)
             {
-                return await (Task<GameResponseMessage>)result;
+                return await (Task<GameServerMessage>)result;
             }
             else
             {
-                return await Task.FromResult(new GameResponseMessage(false));
+                return await Task.FromResult(new FailureServerMessage(false, "Result is not returned from the handler!"));
             }
         }
 

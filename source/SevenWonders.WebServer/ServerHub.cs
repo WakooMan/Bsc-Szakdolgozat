@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.Messages.Game.Requests;
-using WebServer.Contract.Messages.Game.Responses;
-using WebServer.Contract.Messages.Lobby;
+using WebServer.Contract.Messages.Game.ClientMessages;
+using WebServer.Contract.Messages.Game.ServerMessages;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
 using WebServer.Model.Client.Factories;
 using WebServer.Model.MessageHandling;
@@ -66,13 +67,13 @@ namespace SevenWonders.WebServer
             await  base.OnDisconnectedAsync(exception);
         }
 
-        public async Task<LobbyResponseMessage> LobbyMessageReceived(LobbyRequestMessage lobbyMessage)
+        public async Task<LobbyServerMessage> LobbyMessageReceived(LobbyClientMessage lobbyMessage)
         {
             string connectionId = Context.ConnectionId;
             return await m_serverMessageDispatcher.Dispatch(this, connectionId, lobbyMessage);
         }
 
-        public async Task<GameResponseMessage> GameMessageReceived(GameRequestMessage gameMessage)
+        public async Task<GameServerMessage> GameMessageReceived(GameClientMessage gameMessage)
         {
             string connectionId = Context.ConnectionId;
             return await m_serverMessageDispatcher.Dispatch(this, connectionId, gameMessage);

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
-using SevenWondersUI.Services;
+﻿using SevenWondersUI.Services;
 
 namespace SevenWondersUI.ViewModels
 {
@@ -8,9 +7,10 @@ namespace SevenWondersUI.ViewModels
     {
         public string AuthToken { get; set; }
 
-        public ConnectPageViewModel(INavigationService navigationService)
+        public ConnectPageViewModel(INavigationService navigationService, IClientHubService clientHubService)
         {
             m_navigationService = navigationService;
+            m_clientHubService = clientHubService;
             AuthToken = string.Empty;
         }
 
@@ -30,18 +30,7 @@ namespace SevenWondersUI.ViewModels
                     throw new InvalidOperationException("Authorization token is not initialized in 30 seconds!");
                 }
 
-                var hubConnection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7206/serverhub", options =>
-                {
-                    options.AccessTokenProvider = () => Task.FromResult((string?)AuthToken);
-                })
-                .WithAutomaticReconnect()
-                .Build();
-
-                hubConnection.HandshakeTimeout = TimeSpan.FromSeconds(15);
-                hubConnection.ServerTimeout = TimeSpan.FromSeconds(30);
-
-                await hubConnection.StartAsync();
+                await m_clientHubService.Connect(AuthToken);
                 await m_navigationService.NavigateToAsync("//LobbyMainPage");
             }
             catch (Exception ex)
@@ -51,5 +40,6 @@ namespace SevenWondersUI.ViewModels
         }
 
         private readonly INavigationService m_navigationService;
+        private readonly IClientHubService m_clientHubService;
     }
 }

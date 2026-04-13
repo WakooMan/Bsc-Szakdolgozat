@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.Messages.Game.Requests;
-using WebServer.Contract.Messages.Game.Responses;
+using WebServer.Contract.DataTransferObjects;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
 using WebServer.Model.Lobby;
 
@@ -40,88 +41,88 @@ namespace WebServer.Model.MessageHandling
             registerer.Unregister(m_stopMatchmakingRequestMessageHandler);
         }
 
-        private async Task<LobbyResponseMessage> OnCreateLobbyMessageReceived(Hub hub, string connectionId, CreateLobbyRequestMessage requestMessage)
+        private async Task<LobbyServerMessage> OnCreateLobbyMessageReceived(Hub hub, string connectionId, CreateLobbyRequestMessage requestMessage)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
                 string code = m_lobbyCodeGenerator.GenerateUniqueCode();
                 ILobby lobby = playerClient.CreateLobby(code, requestMessage.Name);
-                return await Task.FromResult(new CreateLobbyResponseMessage(lobby.ToDto()));
+                return await Task.FromResult(new CreateLobbyResponseMessage(true, "Success", lobby.ToDto()));
             } 
             catch (Exception ex)
             {
-                return await Task.FromResult(new LobbyResponseMessage(false, ex.Message));
+                return await Task.FromResult(new CreateLobbyResponseMessage(false, ex.Message, new LobbyDto()));
             }
         }
 
-        private async Task<LobbyResponseMessage> OnStopMatchmakingMessageReceived(Hub hub, string connectionId, StopMatchmakingRequestMessage message)
+        private async Task<LobbyServerMessage> OnStopMatchmakingMessageReceived(Hub hub, string connectionId, StopMatchmakingRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
                 playerClient.ExitMatchmaking();
-                return await Task.FromResult(new LobbyResponseMessage(true, "OK"));
+                return await Task.FromResult(new StopMatchmakingResponseMessage(true, "OK"));
             }
             catch (Exception ex)
             {
-                return await Task.FromResult(new LobbyResponseMessage(false, ex.Message));
+                return await Task.FromResult(new StopMatchmakingResponseMessage(false, ex.Message));
             }
         }
 
-        private async Task<LobbyResponseMessage> OnStartMatchmakingMessageReceived(Hub hub, string connectionId, StartMatchmakingRequestMessage message)
+        private async Task<LobbyServerMessage> OnStartMatchmakingMessageReceived(Hub hub, string connectionId, StartMatchmakingRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
                 playerClient.StartMatchmaking();
-                return await Task.FromResult(new LobbyResponseMessage(true, "OK"));
+                return await Task.FromResult(new StartMatchmakingResponseMessage(true, "OK"));
             }
             catch (Exception ex)
             {
-                return await Task.FromResult(new LobbyResponseMessage(false, ex.Message));
+                return await Task.FromResult(new StartMatchmakingResponseMessage(false, ex.Message));
             }
         }
 
-        private async Task<LobbyResponseMessage> OnLeaveLobbyMessageReceived(Hub hub, string connectionId, LeaveLobbyRequestMessage message)
+        private async Task<LobbyServerMessage> OnLeaveLobbyMessageReceived(Hub hub, string connectionId, LeaveLobbyRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
                 playerClient.LeaveLobby();
-                return await Task.FromResult(new LobbyResponseMessage(true, "OK"));
+                return await Task.FromResult(new LeaveLobbyResponseMessage(true, "OK"));
             }
             catch (Exception ex)
             {
-                return await Task.FromResult(new LobbyResponseMessage(false, ex.Message));
+                return await Task.FromResult(new LeaveLobbyResponseMessage(false, ex.Message));
             }
         }
 
-        private async Task<LobbyResponseMessage> OnStartGameMessageReceived(Hub hub, string connectionId, StartGameRequestMessage message)
+        private async Task<LobbyServerMessage> OnStartGameMessageReceived(Hub hub, string connectionId, StartGameRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
                 playerClient.StartGame();
-                return await Task.FromResult(new LobbyResponseMessage(true, "OK"));
+                return await Task.FromResult(new StartGameResponseMessage(true, "OK"));
             }
             catch (Exception ex)
             {
-                return await Task.FromResult(new LobbyResponseMessage(false, ex.Message));
+                return await Task.FromResult(new StartGameResponseMessage(false, ex.Message));
             }
         }
 
-        private async Task<LobbyResponseMessage> OnJoinLobbyMessageReceived(Hub hub, string connectionId, JoinLobbyRequestMessage message)
+        private async Task<LobbyServerMessage> OnJoinLobbyMessageReceived(Hub hub, string connectionId, JoinLobbyRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
                 ILobby lobby = playerClient.JoinLobby(message.Code);
-                return await Task.FromResult(new JoinLobbyResponseMessage(lobby.ToDto()));
+                return await Task.FromResult(new JoinLobbyResponseMessage(true, "Success", lobby.ToDto()));
             }
             catch (Exception ex)
             {
-                return await Task.FromResult(new LobbyResponseMessage(false, ex.Message));
+                return await Task.FromResult(new JoinLobbyResponseMessage(false, ex.Message, new LobbyDto()));
             }
         }
 

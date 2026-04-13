@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.Messages.Game.Requests;
-using WebServer.Contract.Messages.Game.Responses;
-using WebServer.Contract.Messages.Lobby;
+using WebServer.Contract.Messages.Game.ClientMessages;
+using WebServer.Contract.Messages.Game.ServerMessages;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 
 namespace WebServer.Model.MessageHandling
 {
-    public delegate Task<LobbyResponseMessage> LobbyRequestMessageHandlerDelegate<T>(Hub hub, string connectionId, T message) where T : LobbyRequestMessage;
-    public delegate Task<GameResponseMessage> GameRequestMessageHandlerDelegate<T>(Hub hub, string connectionId, T message) where T : GameRequestMessage;
+    public delegate Task<LobbyServerMessage> LobbyRequestMessageHandlerDelegate<T>(Hub hub, string connectionId, T message) where T : LobbyClientMessage;
+    public delegate Task<GameServerMessage> GameRequestMessageHandlerDelegate<T>(Hub hub, string connectionId, T message) where T : GameClientMessage;
 
     public interface IMessageHandler
     {

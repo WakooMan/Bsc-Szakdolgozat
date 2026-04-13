@@ -1,6 +1,6 @@
-﻿namespace WebServer.Contract.Messages.Game.Requests
+﻿namespace WebServer.Contract.Messages.Lobby.ClientMessages
 {
-    public class CreateLobbyRequestMessage: LobbyRequestMessage
+    public class CreateLobbyRequestMessage: LobbyClientMessage
     {
         public string Name { get; set; }
 
