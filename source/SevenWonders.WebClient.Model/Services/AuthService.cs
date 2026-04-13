@@ -1,8 +1,7 @@
-﻿using System.Net;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using WebServer.Contract;
 
-namespace SevenWondersUI.Services
+namespace SevenWonders.WebClient.Model.Services
 {
     public class AuthService: IAuthService
     {
@@ -31,6 +30,16 @@ namespace SevenWondersUI.Services
                 return await response.Content.ReadFromJsonAsync<RegisterResponse>();
             }
             return new RegisterResponse(false, response?.ReasonPhrase ?? string.Empty);
+        }
+
+        public async Task<LogoutResponse?> LogoutAsync()
+        {
+            var response = await m_httpClient.PostAsync("api/auth/logout", null);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<LogoutResponse>();
+            }
+            return new LogoutResponse(false, response?.ReasonPhrase ?? string.Empty);
         }
 
         private readonly HttpClient m_httpClient;

@@ -3,5 +3,7 @@
     public interface ILobbyCodeGenerator
     {
         string GenerateUniqueCode();
+
+        bool RemoveUniqueCode(string code);
     }
 }

@@ -60,6 +60,14 @@ namespace SevenWonders.WebServer.Controllers
             return Unauthorized(new LoginResponse(false, "Hibás jelszó.", string.Empty));
         }
 
+
+        [HttpPost("logout")]
+        public Task<IActionResult> Logout()
+        {
+            return Task.FromResult<IActionResult>(Ok(new LogoutResponse(true, "Sikeres kijelentkezés")));
+        }
+
+
         private string GenerateJwtToken(ApplicationUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

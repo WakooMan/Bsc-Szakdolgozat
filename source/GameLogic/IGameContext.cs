@@ -16,7 +16,6 @@ namespace GameLogic
         public IChooseWonderHandler ChooseWonderHandler { get; }
         public IAgeHandler AgeHandler { get; }
         public ITurnHandler TurnHandler { get; }
-        public IPlayerActionReceiver PlayerActionReceiver { get; }
         public IEventManager EventManager { get; }
         public ICostCalculator CostCalculator { get; }
         public IRandomGenerator RandomGenerator { get; }

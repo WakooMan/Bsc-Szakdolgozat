@@ -33,7 +33,7 @@ namespace SevenWonders.WebClient.Model
 
         public async Task<bool> Dispatch(LobbyServerMessage message)
         {
-            if (!m_gameResponseHandlers.ContainsKey(message.GetType()))
+            if (!m_lobbyResponseHandlers.ContainsKey(message.GetType()))
                 return false;
             object? result = ((Delegate)m_lobbyResponseHandlers[message.GetType()])?.DynamicInvoke(new object[] { message });
             if (result is not null)

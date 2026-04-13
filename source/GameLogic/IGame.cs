@@ -1,6 +1,6 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Events;
 using GameLogic.GameStates;
+using GameLogic.Interfaces;
 
 namespace GameLogic
 {
@@ -10,6 +10,6 @@ namespace GameLogic
         IGameContext Context { get; }
         IReadOnlyList<Player> Players { get; }
         void GameLoop();
-        void Initialize(string player1, string player2);
+        void Initialize((string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2);
     }
 }

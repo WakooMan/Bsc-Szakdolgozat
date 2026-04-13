@@ -1,5 +1,5 @@
 ﻿using WebServer.Contract.DataTransferObjects;
-using WebServer.Model.Lobby;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.PlayerStates;
 using WebServer.Model.PlayerStates.Factories;
 
@@ -22,33 +22,38 @@ namespace WebServer.Model.Client
             m_state = playerState;
         }
 
-        public ILobby CreateLobby(string code, string name)
+        public Task<LobbyServerMessage> CreateLobby(string name)
         {
-            return m_state.CreateLobby(code, name);
+            return m_state.CreateLobby(name);
         }
-        public void StartMatchmaking()
+        public Task<LobbyServerMessage> StartMatchmaking()
         {
-            m_state.StartMatchmaking();
+            return m_state.StartMatchmaking();
         }
-        public void ExitMatchmaking()
+        public Task<LobbyServerMessage> ExitMatchmaking()
         {
-            m_state.ExitMatchmaking();
+            return m_state.ExitMatchmaking();
         }
-        public ILobby JoinLobby(string code)
+        public Task<LobbyServerMessage> JoinLobby(string code)
         {
             return m_state.JoinLobby(code);
         }
-        public void LeaveLobby()
+        public Task<LobbyServerMessage> LeaveLobby()
         {
-            m_state.LeaveLobby();
+            return m_state.LeaveLobby();
         }
-        public void StartGame()
+        public Task<LobbyServerMessage> StartGame()
         {
-            m_state.StartGame();
+            return m_state.StartGame();
         }
-        public void ExitGame()
+        public Task<LobbyServerMessage> ExitGame()
         {
-            m_state.ExitGame();
+            return m_state.ExitGame();
+        }
+
+        public Task<LobbyServerMessage> WriteChatMessage(string message)
+        {
+            return m_state.WriteChatMessage(message);
         }
 
         public LobbyPlayerDto ToDto(bool isHost)

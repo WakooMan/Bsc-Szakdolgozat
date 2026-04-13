@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using WebServer.Contract.Messages.Game.ClientMessages;
+using WebServer.Contract.Messages.Game.ServerMessages;
 using WebServer.Contract.Messages.Lobby.ClientMessages;
 using WebServer.Contract.Messages.Lobby.ServerMessages;
-using WebServer.Contract.Messages.Lobby;
 using WebServer.Model.MessageHandling.Factories;
-using WebServer.Contract.Messages.Game.ServerMessages;
-using WebServer.Contract.Messages.Game.ClientMessages;
 
 namespace WebServer.Model.MessageHandling
 {
-    public class ServerMessageDispatcher: IServerMessageDispatcher
+    public class ServerMessageDispatcher: IServerMessageDispatcher, IDisposable
     {
-        public ServerMessageDispatcher(IMessageRegistererFactory messageRegistererFactory)
+        public ServerMessageDispatcher(IMessageRegistererFactory messageRegistererFactory, ILobbyMessageHandlers lobbyMessageHandlers)
         {
             m_gameRequestHandlers = new Dictionary<Type, object>();
             m_lobbyRequestHandlers = new Dictionary<Type, object>();
             m_registeredHandlers = new Dictionary<Type, IMessageHandler>();
             m_messageRegisterer = messageRegistererFactory.Create(m_lobbyRequestHandlers, m_gameRequestHandlers);
+            m_lobbyMessageHandlers = lobbyMessageHandlers;
+            RegisterHandler(m_lobbyMessageHandlers);
         }
         public void RegisterHandler(IMessageHandler messageHandler)
         {
@@ -37,7 +38,7 @@ namespace WebServer.Model.MessageHandling
 
         public async Task<LobbyServerMessage> Dispatch(Hub hub, string connectionId, LobbyClientMessage message)
         {
-            if (!m_gameRequestHandlers.ContainsKey(message.GetType()))
+            if (!m_lobbyRequestHandlers.ContainsKey(message.GetType()))
                 return await Task.FromResult(new FailureResponseMessage(false, "Request message cannot be handled on the server side!"));
             object? result = ((Delegate)m_lobbyRequestHandlers[message.GetType()])?.DynamicInvoke(new object[] { hub, connectionId, message });
             if (result is not null)
@@ -65,9 +66,15 @@ namespace WebServer.Model.MessageHandling
             }
         }
 
+        public void Dispose()
+        {
+            UnregisterHandler(m_lobbyMessageHandlers);
+        }
+
         private readonly Dictionary<Type, object> m_lobbyRequestHandlers = new Dictionary<Type, object>();
         private readonly Dictionary<Type, object> m_gameRequestHandlers = new Dictionary<Type, object>();
         private readonly IMessageRegisterer m_messageRegisterer;
+        private readonly ILobbyMessageHandlers m_lobbyMessageHandlers;
         private readonly Dictionary<Type, IMessageHandler> m_registeredHandlers = new Dictionary<Type, IMessageHandler>();
     }
 }

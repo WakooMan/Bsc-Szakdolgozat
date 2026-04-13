@@ -1,20 +1,21 @@
 ﻿using GameLogic;
+using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
-using SevenWonders.Presenter;
+using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
-using SevenWondersUI.Services;
 
 namespace SevenWondersUI.ViewModels
 {
-    [QueryProperty(nameof(Player1Name), "Player1Name")]
-    [QueryProperty(nameof(Player2Name), "Player2Name")]
+    [QueryProperty(nameof(Player1), "Player1")]
+    [QueryProperty(nameof(Player2), "Player2")]
     public class GamePageViewModel: BaseViewModel
     {
-        public GamePageViewModel(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IPresenter presenter)
+        public GamePageViewModel(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IPresenter presenter, IPlayerActionReceiverFactory playerActionReceiverFactory)
         {
-            Player1Name = string.Empty;
-            Player2Name = string.Empty;
+            Player1 = new PlayerInitModel();
+            Player2 = new PlayerInitModel();
+            m_playerActionReceiverFactory = playerActionReceiverFactory;
             m_presenter = presenter;
             m_animationManager = animationManager;
             m_sceneLoader = sceneLoader;
@@ -22,8 +23,8 @@ namespace SevenWondersUI.ViewModels
             m_engine = engine;
         }
 
-        public string Player1Name { get; set; }
-        public string Player2Name { get; set; }
+        public PlayerInitModel Player1 { get; set; }
+        public PlayerInitModel Player2 { get; set; }
 
         public IEngine Engine => m_engine;
 
@@ -45,7 +46,7 @@ namespace SevenWondersUI.ViewModels
 
             m_engine.Startup();
             m_presenter.Initialize();
-            m_game.Initialize(Player1Name, Player2Name);
+            m_game.Initialize((Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType)));
             m_presenter.SubscribeToEvents();
             _ = Task.Run(m_game.GameLoop);
         }
@@ -55,5 +56,6 @@ namespace SevenWondersUI.ViewModels
         private readonly IGame m_game;
         private readonly IAnimationManager m_animationManager;
         private readonly IPresenter m_presenter;
+        private readonly IPlayerActionReceiverFactory m_playerActionReceiverFactory;
     }
 }

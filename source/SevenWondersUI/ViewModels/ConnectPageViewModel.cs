@@ -1,4 +1,5 @@
-﻿using SevenWondersUI.Services;
+﻿using SevenWonders.WebClient.Model.Services;
+using SevenWondersUI.Services;
 
 namespace SevenWondersUI.ViewModels
 {

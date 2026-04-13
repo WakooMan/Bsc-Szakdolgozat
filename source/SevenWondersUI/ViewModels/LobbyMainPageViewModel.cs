@@ -1,13 +1,17 @@
 ﻿using SevenWonders.WebClient.Model;
+using CommunityToolkit.Maui.Views;
 using SevenWondersUI.Services;
+using SevenWondersUI.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using WebServer.Contract.DataTransferObjects;
 using WebServer.Contract.Messages.Lobby.ClientMessages;
 using WebServer.Contract.Messages.Lobby.ServerMessages;
+using SevenWonders.WebClient.Model.Services;
 
 namespace SevenWondersUI.ViewModels
 {
-    public class LobbyMainPageViewModel : BaseViewModel, IMessageHandler
+    public class LobbyMainPageViewModel : BaseViewModel, IMessageHandler, IQueryAttributable
     {
         private bool _isFriendlyModeVisible = true;
         private bool _isCompetitiveModeVisible = false;
@@ -64,14 +68,14 @@ namespace SevenWondersUI.ViewModels
                 {
                     if (m_selectedRoom is not null)
                     {
-                        m_selectedRoom.TextColor = Colors.Black;
                         m_selectedRoom.BackgroundColor = Colors.White;
+                        m_selectedRoom.TextColor = Colors.Black;
                     }
                     m_selectedRoom = value;
                     if (m_selectedRoom is not null)
                     {
-                        m_selectedRoom.TextColor = Colors.White;
                         m_selectedRoom.BackgroundColor = Colors.Black;
+                        m_selectedRoom.TextColor = Colors.White;
                     }
                     OnPropertyChanged();
                     ((Command)JoinGameCommand).ChangeCanExecute();
@@ -88,14 +92,16 @@ namespace SevenWondersUI.ViewModels
         public ICommand StopSearchCommand { get; }
         public ICommand LogoutCommand { get; }
 
-        public LobbyMainPageViewModel(IClientHubService clientHubService, INavigationService navigationService)
+        public LobbyMainPageViewModel(IClientHubService clientHubService, INavigationService navigationService, IAuthService authService, CreateGamePopupWindow createGamePopupWindow)
         {
             m_clientHubService = clientHubService;
             m_navigationService = navigationService;
+            m_authService = authService;
             m_createLobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<CreateLobbyResponseMessage>(OnCreateLobbyResponseMessageReceived);
             m_joinLobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<JoinLobbyResponseMessage>(OnJoinLobbyResponseMessageReceived);
             m_startMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage>(OnStartMatchmakingResponseMessageReceived);
             m_stopMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage>(OnStopMatchmakingResponseMessageReceived);
+            m_lobbyUpdateMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage>(OnLobbyUpdateMessageReceived);
             Rooms = new ObservableCollection<RoomModel>();
 
             JoinGameCommand = new Command(JoinGame, () => SelectedRoom != null);
@@ -111,9 +117,20 @@ namespace SevenWondersUI.ViewModels
             LogoutCommand = new Command(Logout);
         }
 
-        private void Logout()
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            throw new NotImplementedException();
+            LobbyDto[]? lobbies = query["Lobbies"] as LobbyDto[];
+            if (lobbies is not null)
+            {
+                SetRooms(lobbies);
+            }
+        }
+
+        private async void Logout()
+        {
+            await m_clientHubService.Disconnect();
+            await m_authService.LogoutAsync();
+            await m_navigationService.NavigateToAsync("//LoginPage");
         }
 
         public void Register(IMessageRegisterer registerer)
@@ -122,6 +139,7 @@ namespace SevenWondersUI.ViewModels
             registerer.Register(m_joinLobbyResponseMessageHandlerDelegate);
             registerer.Register(m_startMatchmakingResponseMessageHandlerDelegate);
             registerer.Register(m_stopMatchmakingResponseMessageHandlerDelegate);
+            registerer.Register(m_lobbyUpdateMessageHandlerDelegate);
         }
 
         public void Unregister(IMessageRegisterer registerer)
@@ -130,11 +148,21 @@ namespace SevenWondersUI.ViewModels
             registerer.Unregister(m_joinLobbyResponseMessageHandlerDelegate);
             registerer.Unregister(m_startMatchmakingResponseMessageHandlerDelegate);
             registerer.Unregister(m_stopMatchmakingResponseMessageHandlerDelegate);
+            registerer.Unregister(m_lobbyUpdateMessageHandlerDelegate);
         }
 
-        private void CreateGame()
+        private async void CreateGame()
         {
-            throw new NotImplementedException();
+            CreateGamePopupWindow createGamePopupWindow = new CreateGamePopupWindow(new CreateGamePopupViewModel());
+            var page = Application.Current?.MainPage;
+            if (page is not null)
+            {
+                await page.ShowPopupAsync(createGamePopupWindow);
+                if (createGamePopupWindow.ViewModel.CreateActivated)
+                {
+                    await m_clientHubService.InvokeLobbyCommand(new CreateLobbyRequestMessage(createGamePopupWindow.ViewModel.RoomName));
+                }
+            }
         }
 
         private void SelectFriendlyMode()
@@ -157,65 +185,86 @@ namespace SevenWondersUI.ViewModels
             }
         }
 
-        private Task<bool> OnStartMatchmakingResponseMessageReceived(StartMatchmakingResponseMessage message)
+        private async Task<bool> OnStartMatchmakingResponseMessageReceived(StartMatchmakingResponseMessage message)
         {
             if (message.Success)
             {
-                IsSearching = true;
-                _secondsElapsed = 0;
-                SearchTimerText = "00:00";
-
-                _timer = new System.Timers.Timer(1000);
-                _timer.Elapsed += (s, e) =>
+                await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    _secondsElapsed++;
-                    var time = TimeSpan.FromSeconds(_secondsElapsed);
-                    SearchTimerText = time.ToString(@"mm\:ss");
-                };
-                _timer.Start();
-                return Task.FromResult(true);
+                    IsSearching = true;
+                    _secondsElapsed = 0;
+                    SearchTimerText = "00:00";
+
+                    _timer = new System.Timers.Timer(1000);
+                    _timer.Elapsed += (s, e) =>
+                    {
+                        _secondsElapsed++;
+                        var time = TimeSpan.FromSeconds(_secondsElapsed);
+                        SearchTimerText = time.ToString(@"mm\:ss");
+                    };
+                    _timer.Start();
+                });
             }
 
-            return Task.FromResult(false);
+            return message.Success;
         }
 
-        private Task<bool> OnStopMatchmakingResponseMessageReceived(StopMatchmakingResponseMessage message)
+        private async Task<bool> OnStopMatchmakingResponseMessageReceived(StopMatchmakingResponseMessage message)
         {
             if (message.Success)
             {
-                _timer?.Stop();
-                _timer?.Dispose();
-                IsSearching = false;
-                return Task.FromResult(true);
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    _timer?.Stop();
+                    _timer?.Dispose();
+                    IsSearching = false;
+                });
             }
 
-            return Task.FromResult(false);
+            return message.Success;
         }
 
         private async Task<bool> OnJoinLobbyResponseMessageReceived(JoinLobbyResponseMessage message)
         {
             if (message.Success)
             {
-                await m_navigationService.NavigateToAsync("//LobbyPage", new Dictionary<string, object>
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    { "LobbyDto", message.LobbyDto }
+                    await m_navigationService.NavigateToAsync("//LobbyPage", new Dictionary<string, object>
+                    {
+                        { "LobbyDto", message.LobbyDto }
+                    });
                 });
-                return true;
             }
-            return false;
+            return message.Success;
         }
 
         private async Task<bool> OnCreateLobbyResponseMessageReceived(CreateLobbyResponseMessage message)
         {
             if (message.Success)
             {
-                await m_navigationService.NavigateToAsync("//LobbyPage", new Dictionary<string, object>
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    { "LobbyDto", message.LobbyDto }
+                    await m_navigationService.NavigateToAsync("//LobbyPage", new Dictionary<string, object>
+                    {
+                        { "LobbyDto", message.LobbyDto }
+                    });
                 });
-                return true;
             }
-            return false;
+            return message.Success;
+        }
+
+        private async Task<bool> OnLobbyUpdateMessageReceived(LobbyUpdateMessage message)
+        {
+            if (message.Success)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    SetRooms(message.Lobbies);
+                });
+            }
+
+            return message.Success;
         }
 
         private async void StartSearch()
@@ -228,11 +277,29 @@ namespace SevenWondersUI.ViewModels
             await m_clientHubService.InvokeLobbyCommand(new StopMatchmakingRequestMessage());
         }
 
+        private void SetRooms(LobbyDto[] lobbies)
+        {
+            Rooms.Clear();
+            foreach (LobbyDto lobbyDto in lobbies)
+            {
+                Rooms.Add(new RoomModel
+                {
+                    RoomName = lobbyDto.Name,
+                    Code = lobbyDto.Code,
+                    HostName = lobbyDto.Members.FirstOrDefault(member => member.IsHost)?.UserName ?? "Unknown",
+                    BackgroundColor = Colors.White,
+                    TextColor = Colors.Black
+                });
+            }
+        }
+
         private readonly LobbyResponseMessageHandlerDelegate<CreateLobbyResponseMessage> m_createLobbyResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<JoinLobbyResponseMessage> m_joinLobbyResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage> m_startMatchmakingResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage> m_stopMatchmakingResponseMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage> m_lobbyUpdateMessageHandlerDelegate;
         private readonly IClientHubService m_clientHubService;
         private readonly INavigationService m_navigationService;
+        private readonly IAuthService m_authService;
     }
 }

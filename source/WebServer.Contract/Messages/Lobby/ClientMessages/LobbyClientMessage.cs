@@ -2,12 +2,15 @@
 
 namespace WebServer.Contract.Messages.Lobby.ClientMessages
 {
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
     [JsonDerivedType(typeof(CreateLobbyRequestMessage), typeDiscriminator: "createlobbyrequest")]
     [JsonDerivedType(typeof(JoinLobbyRequestMessage), typeDiscriminator: "joinlobbyrequest")]
-    [JsonDerivedType(typeof(LeaveLobbyRequestMessage), typeDiscriminator: "createlobbyrequest")]
+    [JsonDerivedType(typeof(LeaveLobbyRequestMessage), typeDiscriminator: "leavelobbyrequest")]
     [JsonDerivedType(typeof(StartGameRequestMessage), typeDiscriminator: "startgamerequest")]
     [JsonDerivedType(typeof(StartMatchmakingRequestMessage), typeDiscriminator: "startmatchmakingrequest")]
     [JsonDerivedType(typeof(StopMatchmakingRequestMessage), typeDiscriminator: "stopmatchmakingrequest")]
+    [JsonDerivedType(typeof(SendChatRequestMessage), typeDiscriminator: "sendchatrequest")]
+    [JsonDerivedType(typeof(ExitGameRequestMessage), typeDiscriminator: "exitgamerequest")]
     public abstract class LobbyClientMessage
     {
     }

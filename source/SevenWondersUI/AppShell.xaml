@@ -32,5 +32,9 @@
         Title="LobbyMainPage"
         ContentTemplate="{DataTemplate views:LobbyMainPage}"
         Route="LobbyMainPage" />
+    <ShellContent
+        Title="LobbyPage"
+        ContentTemplate="{DataTemplate views:LobbyPage}"
+        Route="LobbyPage" />
 
 </Shell>

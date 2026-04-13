@@ -3,12 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SevenWonders.Common;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using WebServer.Model.Client;
 using WebServer.Model.Client.Factories;
 using WebServer.Model.Lobby;
 using WebServer.Model.MessageHandling;
 using WebServer.Model.MessageHandling.Factories;
 using WebServer.Model.PlayerStates.Factories;
+using WebServer.Model.ServerHub;
 
 namespace SevenWonders.WebServer
 {
@@ -68,6 +71,14 @@ namespace SevenWonders.WebServer
                 options.EnableDetailedErrors = true;
                 options.KeepAliveInterval = TimeSpan.FromSeconds(15);
                 options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+            })
+            .AddJsonProtocol(options =>
+            {
+                options.PayloadSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                options.PayloadSerializerOptions.TypeInfoResolverChain.Insert(
+                    0,
+                    JsonSerializerOptions.Default.TypeInfoResolver!
+                );
             });
 
             builder.Services.AddSingleton<IRandomGenerator, RandomGenerator>();
@@ -81,6 +92,7 @@ namespace SevenWonders.WebServer
             builder.Services.AddSingleton<IMessageRegistererFactory, MessageRegistererFactory>();
             builder.Services.AddSingleton<ILobbyMessageHandlers, LobbyMessageHandlers>();
             builder.Services.AddSingleton<IServerMessageDispatcher, ServerMessageDispatcher>();
+            builder.Services.AddSingleton<IServerService, ServerService>();
 
             var app = builder.Build();
 

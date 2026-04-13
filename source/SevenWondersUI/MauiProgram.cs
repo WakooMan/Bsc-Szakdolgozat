@@ -1,4 +1,5 @@
-﻿using GameLogic;
+﻿using CommunityToolkit.Maui;
+using GameLogic;
 using GameLogic.Elements;
 using GameLogic.Elements.Developments;
 using GameLogic.Elements.GameCards;
@@ -27,6 +28,9 @@ using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
 using SevenWonders.Presenter.Presenters.Factories;
 using SevenWonders.Presenter.Views.Factories;
+using SevenWonders.WebClient.Model;
+using SevenWonders.WebClient.Model.Factories;
+using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Services;
 using SevenWondersUI.ViewModels;
 using SevenWondersUI.Views;
@@ -42,6 +46,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
 			.UseSkiaSharp()
 			.ConfigureFonts(fonts =>
 			{
@@ -71,7 +76,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(ITurnHandler), typeof(TurnHandler));
         builder.Services.AddSingleton(typeof(IAgeHandler), typeof(AgeHandler));
         builder.Services.AddSingleton(typeof(IMilitaryBoardFactory), typeof(MilitaryBoardFactory));
-        builder.Services.AddSingleton(typeof(IPlayerActionReceiver), typeof(PlayerActionReceiver));
+        builder.Services.AddSingleton(typeof(IPlayerActionReceiver), typeof(LocalPlayerActionReceiver));
         builder.Services.AddSingleton(typeof(IPlayerActionHandler), typeof(PlayerActionHandler));
         builder.Services.AddSingleton(typeof(IGameContext), typeof(GameContext));
         builder.Services.AddSingleton(typeof(IGame), typeof(Game));
@@ -102,6 +107,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
         builder.Services.AddSingleton<IAuthService, AuthService>();
         builder.Services.AddSingleton(typeof(IGameOverHandler), typeof(GameOverHandler));
+        builder.Services.AddSingleton(typeof(IClientHubService), typeof(ClientHubService));
+        builder.Services.AddSingleton(typeof(IClientMessageDispatcher), typeof(ClientMessageDispatcher));
+        builder.Services.AddSingleton(typeof(IMessageRegistererFactory), typeof(MessageRegistererFactory));
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<App>();
 
@@ -121,8 +129,14 @@ public static class MauiProgram
         builder.Services.AddTransient<PlayerNamePageViewModel>();
         builder.Services.AddTransient<PlayerNamePage>();
 
-        builder.Services.AddTransient<MainPageViewModel>();
-        builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<MainPageViewModel>();
+		builder.Services.AddTransient<MainPage>();
+
+		builder.Services.AddTransient<CreateGamePopupViewModel>();
+		builder.Services.AddTransient<CreateGamePopupWindow>();
+
+        builder.Services.AddTransient<LobbyPageViewModel>();
+        builder.Services.AddTransient<LobbyPage>();
 
 
         return builder.Build();

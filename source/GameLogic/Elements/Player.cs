@@ -6,6 +6,7 @@ using GameLogic.Elements.Wonders;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
+using GameLogic.Interfaces;
 using System.Xml.Serialization;
 
 namespace GameLogic.Elements
@@ -17,17 +18,7 @@ namespace GameLogic.Elements
         public List<Wonder> Wonders { get; set; }
         public List<Card> Cards { get; set; }
         public List<Development> Developments { get; set; }
-        //public Dictionary<Type, int> Disciplines
-        //{
-        //    get
-        //    {
-        //        Dictionary<Type, int> result = new Dictionary<Type, int>();
-        //        Wonders.ForEach(wonder => wonder.Effects.OfType<Law>().ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
-        //        Cards.OfType<GreenCard>().ToList().ForEach(card => { if (result.ContainsKey(card.Discipline.GetType())) { result[card.Discipline.GetType()] += 1; } else { result[card.Discipline.GetType()] = 1; } });
-        //        Developments.ForEach(dev => dev.Effects.OfType<Law>().ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
-        //        return result;
-        //    }
-        //}
+        public IPlayerActionReceiver? PlayerActionReceiver { get; set; }
 
         [XmlIgnore]
         public ICardNode? PickedCard { get; set; }
@@ -63,8 +54,9 @@ namespace GameLogic.Elements
             m_eventManager = null;
         }
 
-        public Player(string name, int id, int money)
+        public Player(IPlayerActionReceiver playerActionReceiver, string name, int id, int money)
         {
+            PlayerActionReceiver = playerActionReceiver;
             Name = name;
             Id = id;
             Wonders = new List<Wonder>();

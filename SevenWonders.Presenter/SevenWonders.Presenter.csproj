@@ -9,6 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\source\GameLogic\GameLogic.csproj" />
     <ProjectReference Include="..\source\SevenWonders.GameEngine\SevenWonders.GameEngine.csproj" />
+    <ProjectReference Include="..\source\SevenWonders.WebClient.Model\SevenWonders.WebClient.Model.csproj" />
+    <ProjectReference Include="..\source\WebServer.Contract\WebServer.Contract.csproj" />
   </ItemGroup>
 
 </Project>

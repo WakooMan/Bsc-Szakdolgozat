@@ -1,5 +1,5 @@
 ﻿using WebServer.Contract.DataTransferObjects;
-using WebServer.Model.Lobby;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.PlayerStates;
 
 namespace WebServer.Model.Client
@@ -11,19 +11,20 @@ namespace WebServer.Model.Client
 
         void ChangeState(PlayerState playerState);
 
-        ILobby CreateLobby(string code, string name);
+        Task<LobbyServerMessage> CreateLobby(string name);
+
+        Task<LobbyServerMessage> StartMatchmaking();
+
+        Task<LobbyServerMessage> ExitMatchmaking();
+
+        Task<LobbyServerMessage> JoinLobby(string code);
         
-        void StartMatchmaking();
-        
-        void ExitMatchmaking();
-        
-        ILobby JoinLobby(string code);
-        
-        void LeaveLobby();
-        
-        void StartGame();
-        
-        void ExitGame();
+        Task<LobbyServerMessage> LeaveLobby();
+
+        Task<LobbyServerMessage> StartGame();
+
+        Task<LobbyServerMessage> ExitGame();
+        Task<LobbyServerMessage> WriteChatMessage(string message);
 
         LobbyPlayerDto ToDto(bool isHost);
         

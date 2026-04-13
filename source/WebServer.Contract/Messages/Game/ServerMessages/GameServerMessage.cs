@@ -2,7 +2,10 @@
 
 namespace WebServer.Contract.Messages.Game.ServerMessages
 {
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
     [JsonDerivedType(typeof(FailureServerMessage), typeDiscriminator: "failureserver")]
+    [JsonDerivedType(typeof(PlayerActionResponseMessage), typeDiscriminator: "playeractionresponse")]
+    [JsonDerivedType(typeof(ServerPlayerActionMessage), typeDiscriminator: "serverplayeraction")]
     public abstract class GameServerMessage
     {
         public bool Success { get; set; }

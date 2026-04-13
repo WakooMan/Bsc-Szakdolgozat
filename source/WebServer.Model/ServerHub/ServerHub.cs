@@ -8,20 +8,20 @@ using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
 using WebServer.Model.Client.Factories;
 using WebServer.Model.MessageHandling;
+using WebServer.Model.PlayerStates;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace SevenWonders.WebServer
+namespace WebServer.Model.ServerHub
 {
     [Authorize]
     public class ServerHub: Hub
     {
-        public ServerHub(UserManager<ApplicationUser> userManager, IClientManager clientManager, IPlayerClientFactory playerClientFactory, IServerMessageDispatcher serverMessageDispatcher, ILobbyMessageHandlers lobbyMessageHandlers)
+        public ServerHub(UserManager<ApplicationUser> userManager, IClientManager clientManager, IPlayerClientFactory playerClientFactory, IServerMessageDispatcher serverMessageDispatcher)
         {
             m_userManager = userManager;
             m_clientManager = clientManager;
             m_playerClientFactory = playerClientFactory;
             m_serverMessageDispatcher = serverMessageDispatcher;
-            m_lobbyMessageHandlers = lobbyMessageHandlers;
-            m_serverMessageDispatcher.RegisterHandler(lobbyMessageHandlers);
         }
 
         public override async Task OnConnectedAsync()
@@ -36,6 +36,7 @@ namespace SevenWonders.WebServer
                     if (m_clientManager.AddClient(playerClient))
                     {
                         await base.OnConnectedAsync();
+                        await Groups.AddToGroupAsync(Context.ConnectionId, nameof(InMainMenu));
                         return;
                     }
                 }
@@ -49,7 +50,7 @@ namespace SevenWonders.WebServer
             IPlayerClient playerClient = m_clientManager.GetClient(Context.ConnectionId);
             try
             {
-                playerClient.LeaveLobby();
+                await playerClient.LeaveLobby();
             }
             catch (Exception ex)
             {
@@ -57,7 +58,7 @@ namespace SevenWonders.WebServer
             }
             try
             {
-                playerClient.ExitGame();
+                await playerClient.ExitGame();
             }
             catch (Exception ex)
             {
@@ -79,14 +80,7 @@ namespace SevenWonders.WebServer
             return await m_serverMessageDispatcher.Dispatch(this, connectionId, gameMessage);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            m_serverMessageDispatcher.UnregisterHandler(m_lobbyMessageHandlers);
-        }
-
         private readonly IServerMessageDispatcher m_serverMessageDispatcher;
-        private readonly ILobbyMessageHandlers m_lobbyMessageHandlers;
         private readonly IClientManager m_clientManager;
         private readonly IPlayerClientFactory m_playerClientFactory;
         private readonly UserManager<ApplicationUser> m_userManager;

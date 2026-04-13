@@ -19,7 +19,7 @@ namespace GameLogic.Elements.Disciplines
             Player player = gameContext.TurnHandler.GetPlayer(playerId);
             m_action = (properties) => OnCalculatePlayerProperties(player, properties);
             gameContext.EventManager.Subscribe(m_action);
-            await gameContext.EventManager.PublishAsync(new OnScientificProgress(player.Id, (await player.GetPlayerProperties()).Disciplines, this, gameContext.PlayerActionReceiver));
+            await gameContext.EventManager.PublishAsync(new OnScientificProgress(player.Id, (await player.GetPlayerProperties()).Disciplines, this, player.PlayerActionReceiver));
         }
 
         public async Task Unapply(IGameContext gameContext, int playerId)

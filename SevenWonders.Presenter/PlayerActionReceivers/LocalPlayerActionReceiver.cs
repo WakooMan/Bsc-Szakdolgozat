@@ -1,20 +1,28 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Interfaces;
-using GameLogic.PlayerActions;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
+using SevenWonders.WebClient.Model;
+using SevenWonders.WebClient.Model.Services;
 using SkiaSharp.Views.Maui;
+using WebServer.Contract.Messages.Game.ClientMessages;
+using WebServer.Contract.Messages.Game.ServerMessages;
 
 namespace SevenWonders.Presenter.PlayerActionReceivers
 {
-    public class PlayerActionReceiver : IPlayerActionReceiver, IDisposable
+    public class LocalPlayerActionReceiver : ILocalPlayerActionReceiver, IDisposable
     {
-        public PlayerActionReceiver(IGameEngineReceiver gameEngineReceiver)
+
+        public IClientHubService? ClientHubService { get; set; }
+
+        public LocalPlayerActionReceiver(IGameEngineReceiver gameEngineReceiver)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_signal = new ManualResetEventSlim(false);
             m_interactiveObjectToPlayerAction = new Dictionary<IInteractiveObject, PlayerActionWrapper>();
+            m_playerActionResponseMessageHandler = new GameResponseMessageHandlerDelegate<PlayerActionResponseMessage>(HandlePlayerActionResponseMessage);
         }
+
         public PlayerActionWrapper ReceivePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
         {
             m_chosenInteractiveObject = null;
@@ -52,21 +60,55 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
             throw new InvalidOperationException($"No matching playeraction.");
         }
 
-        private void OnInteractiveObjectClicked(IInteractiveObject interactiveObject, SKTouchEventArgs args)
-        {
-            m_chosenInteractiveObject = interactiveObject;
-            m_signal.Set();
-        }
-
         public void Dispose()
         {
             m_signal?.Dispose();
         }
 
+        public void Register(IMessageRegisterer registerer)
+        {
+            registerer.Register(m_playerActionResponseMessageHandler);
+        }
+
+        public void Unregister(IMessageRegisterer registerer)
+        {
+            registerer.Unregister(m_playerActionResponseMessageHandler);
+        }
+
+        private async void OnInteractiveObjectClicked(IInteractiveObject interactiveObject, SKTouchEventArgs args)
+        {
+            if (ClientHubService is not null)
+            {
+                int index = m_interactiveObjectToPlayerAction.Keys.ToList().IndexOf(interactiveObject);
+                if (index >= 0)
+                {
+                    await ClientHubService.InvokeGameCommand(new PlayerActionRequestMessage(index));
+                }
+            }
+            else
+            {
+                m_chosenInteractiveObject = interactiveObject;
+                m_signal.Set();
+            }
+        }
+
+        private Task<bool> HandlePlayerActionResponseMessage(PlayerActionResponseMessage message)
+        {
+            var list = m_interactiveObjectToPlayerAction.Keys.ToList();
+            if(message.ActionId >= 0 && message.ActionId < list.Count)
+            {
+                IInteractiveObject interactiveObject = list[message.ActionId];
+                m_chosenInteractiveObject = interactiveObject;
+                m_signal.Set();
+                return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly ManualResetEventSlim m_signal;
         private readonly Dictionary<IInteractiveObject, PlayerActionWrapper> m_interactiveObjectToPlayerAction;
+        private readonly GameResponseMessageHandlerDelegate<PlayerActionResponseMessage> m_playerActionResponseMessageHandler;
         private IInteractiveObject? m_chosenInteractiveObject;
-
     }
 }

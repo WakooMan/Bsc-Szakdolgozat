@@ -39,7 +39,7 @@
                 </CollectionView>
 
                 <Button Text="{Binding JoinButtonText}" 
-            Command="{Binding JoinCommand}" BackgroundColor="Black" TextColor="White"/>
+            Command="{Binding JoinGameCommand}" BackgroundColor="Black" TextColor="White"/>
 
                 <Button Text="{Binding CreateGameButtonText}" 
             Command="{Binding CreateGameCommand}" BackgroundColor="Black" TextColor="White"/>

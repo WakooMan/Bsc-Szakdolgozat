@@ -3,21 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SevenWonders.WebServer;
 using WebServer.Model.Client;
 
 #nullable disable
 
-namespace SevenWonders.WebServer.Migrations
+namespace WebServer.Model.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260411090344_InitialCreate")]
-    partial class InitialCreate
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,7 +155,7 @@ namespace SevenWonders.WebServer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SevenWonders.WebServer.ApplicationUser", b =>
+            modelBuilder.Entity("WebServer.Model.Client.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -241,7 +237,7 @@ namespace SevenWonders.WebServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SevenWonders.WebServer.ApplicationUser", null)
+                    b.HasOne("WebServer.Model.Client.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -250,7 +246,7 @@ namespace SevenWonders.WebServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SevenWonders.WebServer.ApplicationUser", null)
+                    b.HasOne("WebServer.Model.Client.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -265,7 +261,7 @@ namespace SevenWonders.WebServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SevenWonders.WebServer.ApplicationUser", null)
+                    b.HasOne("WebServer.Model.Client.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -274,7 +270,7 @@ namespace SevenWonders.WebServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SevenWonders.WebServer.ApplicationUser", null)
+                    b.HasOne("WebServer.Model.Client.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

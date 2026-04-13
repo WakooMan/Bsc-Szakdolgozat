@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStates;
+using GameLogic.Interfaces;
 using SevenWonders.Common;
 
 namespace GameLogic
@@ -42,11 +43,11 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public void Initialize(string player1, string player2)
+        public void Initialize((string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2)
         {
             if (!m_isInitialized)
             {
-                m_players = [new Player(player1, 1, 7), new Player(player2, 2, 7)];
+                m_players = [new Player(player1.actionReceiver, player1.name, 1, 7), new Player(player2.actionReceiver, player2.name, 2, 7)];
                 m_gameContext.Initialize(m_players);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;
