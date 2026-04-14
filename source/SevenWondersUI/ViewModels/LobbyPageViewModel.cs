@@ -138,7 +138,9 @@ namespace SevenWondersUI.ViewModels
                     {
                         { "Player1", message.Player1 },
                         { "Player2", message.Player2 },
-                        { "StartingPlayerId", message.StartingPlayerId }
+                        { "StartingPlayerId", message.StartingPlayerId },
+                        { "Seed", message.Seed },
+                        { "RandomGeneratorType", RandomGeneratorType.Deterministic }
                     });
                 });
             }

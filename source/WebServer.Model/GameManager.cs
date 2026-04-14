@@ -1,28 +1,21 @@
 ﻿using GameLogic;
 using System.Collections.Concurrent;
-using WebServer.Model.Client;
-using WebServer.Model.PlayerStates;
 
 namespace WebServer.Model
 {
     public class GameManager : IGameManager
     {
-        public GameManager(IGameInitializer gameInitializer)
+        public GameManager(IGameFactory gameInitializer)
         {
             m_gameInitializer = gameInitializer;
             Games = new ConcurrentDictionary<string, IGame>();
         }
 
         public ConcurrentDictionary<string, IGame> Games { get; }
-        public bool AddGame(IPlayerClient player1, IPlayerClient player2, string code, out IGame? game)
+        public bool AddGame(string code, out IGame? game)
         {
-            if(player1.CurrentState is InGame player1State && player2.CurrentState is InGame player2State)
-            {
-                game = m_gameInitializer.CreateAndInitialize(player1, player2, player1State, player2State);
-                return Games.TryAdd(code, game);
-            }
-            game = null;
-            return false;
+            game = m_gameInitializer.Create();
+            return Games.TryAdd(code, game);
         }
 
         public IGame? GetGame(string code)
@@ -47,6 +40,6 @@ namespace WebServer.Model
             }
         }
 
-        private readonly IGameInitializer m_gameInitializer;
+        private readonly IGameFactory m_gameInitializer;
     }
 }

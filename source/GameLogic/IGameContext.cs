@@ -18,13 +18,13 @@ namespace GameLogic
         public ITurnHandler TurnHandler { get; }
         public IEventManager EventManager { get; }
         public ICostCalculator CostCalculator { get; }
-        public IRandomGenerator RandomGenerator { get; }
+        public IRandomGenerator? RandomGenerator { get; }
         public ICardList? CardList { get; }
         public ICardList? DroppedCardList { get; }
         public IWonderList? WonderList { get; }
         public IDevelopmentList? DevelopmentList { get; }
         public IMilitaryBoard? MilitaryBoard { get; }
         public IPlayerActionHandler PlayerActionHandler { get; }
-        void Initialize(ICollection<Player> players);
+        void Initialize(ICollection<Player> players, IRandomGenerator randomGenerator);
     }
 }

@@ -5,9 +5,9 @@ namespace WebServer.Model.Lobby
 {
     public class LobbyCodeGenerator : ILobbyCodeGenerator
     {
-        public LobbyCodeGenerator(IRandomGenerator randomGenerator)
+        public LobbyCodeGenerator(IRandomGeneratorFactory randomGeneratorFactory)
         {
-            m_randomGenerator = randomGenerator;
+            m_randomGenerator = randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
             m_dummyValue = 0;
         }
 

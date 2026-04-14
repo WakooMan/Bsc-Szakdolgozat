@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using GameLogic.Elements;
 using SevenWonders.Common;
 using WebServer.Contract.DataTransferObjects;
 using WebServer.Contract.Messages.Lobby.ServerMessages;
@@ -11,11 +12,19 @@ namespace WebServer.Model.PlayerStates
 {
     public class InLobby : PlayerState
     {
-        public InLobby(IPlayerStateFactory playerStateFactory, ILobbyManager lobbyManager, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IGameManager gameManager, string lobbyCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
+        public InLobby(IPlayerStateFactory playerStateFactory, 
+                       ILobbyManager lobbyManager, 
+                       IPlayerClient player, 
+                       IServerService serverService, 
+                       ILobbyCodeGenerator lobbyCodeGenerator, 
+                       IGameManager gameManager, 
+                       IRandomGeneratorFactory randomGeneratorFactory,
+                       string lobbyCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
         {
             m_lobbyManager = lobbyManager;
             m_gameManager = gameManager;
             m_lobbyCode = lobbyCode;
+            m_randomGeneratorFactory = randomGeneratorFactory;
         }
 
         public override Task CreateLobby(string name)
@@ -101,12 +110,23 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.SendLobbyServerMessageToGroup(nameof(InMainMenu), new LobbyUpdateMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
 
             IPlayerClient otherPlayer = lobby.Members.First(m => m.Key != m_player.ConnectionId).Value;
-            m_gameManager.AddGame(m_player, otherPlayer, m_lobbyCode, out IGame? _);
-            m_gameManager.StartGame(m_lobbyCode);
-            await m_serverService.SendLobbyServerMessageToClient(otherPlayer.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
-                                                                                                                        new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer), 2));
-            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
-                                                                                                                        new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer), 1));
+            if (m_gameManager.AddGame(m_lobbyCode, out IGame? game) && 
+                game is not null && 
+                m_player.CurrentState is InGame playerState &&
+                otherPlayer.CurrentState is InGame otherPlayerState)
+            {
+                IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
+                int seed = randomGenerator.Next();
+                game.Initialize(
+                    m_randomGeneratorFactory.Create(RandomGeneratorType.Deterministic, seed),
+                    (m_player.ApplicationUser.UserName, playerState),
+                    (otherPlayer.ApplicationUser.UserName, otherPlayerState));
+                m_gameManager.StartGame(m_lobbyCode);
+                await m_serverService.SendLobbyServerMessageToClient(otherPlayer.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent),
+                                                                                                                            new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer), 2, seed));
+                await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent),
+                                                                                                                            new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer), 1, seed));
+            }
         }
 
         public override Task StartMatchmaking()
@@ -117,5 +137,6 @@ namespace WebServer.Model.PlayerStates
         private readonly string m_lobbyCode;
         private readonly ILobbyManager m_lobbyManager;
         private readonly IGameManager m_gameManager;
+        private readonly IRandomGeneratorFactory m_randomGeneratorFactory;
     }
 }

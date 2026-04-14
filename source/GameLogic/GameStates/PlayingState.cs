@@ -25,7 +25,7 @@ namespace GameLogic.GameStates
             m_gameOverType = typeof(OnGameEnded);
             GameContext.EventManager.Subscribe<MilitaryVictory>(OnScientificOrMilitaryVictory);
             GameContext.EventManager.Subscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
-            await GameContext.AgeHandler.Initialize();
+            await GameContext.AgeHandler.Initialize(GameContext.RandomGenerator);
 
             while (!IsGameOver)
             {

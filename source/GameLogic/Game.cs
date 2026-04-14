@@ -6,15 +6,15 @@ using SevenWonders.Common;
 
 namespace GameLogic
 {
-    public class Game: IGame
+    public class Game : IGame
     {
         private List<Player> m_players;
         private readonly IGameContext m_gameContext;
         private bool m_isInitialized = false;
+
         public IGameState CurrentState { get; private set; }
         public IReadOnlyList<Player> Players => m_players;
         public bool IsInitialized => m_isInitialized;
-
         public IGameContext Context => m_gameContext;
 
         public Game(IGameContext gameContext)
@@ -43,7 +43,7 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public void Initialize((string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2, int startingPlayerId = 1)
+        public void Initialize(IRandomGenerator randomGenerator, (string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2, int startingPlayerId = 1)
         {
             if (!m_isInitialized)
             {
@@ -51,7 +51,7 @@ namespace GameLogic
                 var p1 = new Player(player1.actionReceiver, player1.name, 1, 7);
                 var p2 = new Player(player2.actionReceiver, player2.name, 2, 7);
                 m_players = startingPlayerId == 1 ? [p1, p2] : [p2, p1];
-                m_gameContext.Initialize(m_players);
+                m_gameContext.Initialize(m_players, randomGenerator);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;
             }

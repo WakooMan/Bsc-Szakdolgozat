@@ -60,10 +60,10 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
         builder.Services.AddSingleton(typeof(IXmlHandler), typeof(XmlHandler));
-        builder.Services.AddSingleton(typeof(IRandomGenerator), typeof(RandomGenerator));
+        builder.Services.AddSingleton(typeof(IRandomGenerator), typeof(DefaultRandomGenerator));
         builder.Services.AddKeyedSingleton<ICardListFactory, EmptyCardListFactory>(nameof(EmptyCardListFactory));
         builder.Services.AddKeyedSingleton<ICardListFactory, MainCardListFactory>(nameof(MainCardListFactory));
-        builder.Services.AddSingleton(typeof(IRandomElementReceiver), typeof(RandomElementReceiver));
+        builder.Services.AddSingleton(typeof(IRandomGeneratorFactory), typeof(RandomGeneratorFactory));
         builder.Services.AddSingleton(typeof(IWonderListFactory), typeof(WonderListFactory));
         builder.Services.AddSingleton(typeof(IDevelopmentListFactory), typeof(DevelopmentListFactory));
         builder.Services.AddSingleton(typeof(IGameElements), typeof(GameElements));

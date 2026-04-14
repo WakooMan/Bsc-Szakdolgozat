@@ -1,4 +1,5 @@
-﻿using WebServer.Model.Client;
+﻿using SevenWonders.Common;
+using WebServer.Model.Client;
 using WebServer.Model.Lobby;
 using WebServer.Model.MessageHandling;
 using WebServer.Model.ServerHub;
@@ -7,13 +8,19 @@ namespace WebServer.Model.PlayerStates.Factories
 {
     public class PlayerStateFactory : IPlayerStateFactory
     {
-        public PlayerStateFactory(ILobbyManager lobbyManager, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IGameManager gameManager, IServerMessageDispatcher serverMessageDispatcher)
+        public PlayerStateFactory(ILobbyManager lobbyManager, 
+                                  IServerService serverService, 
+                                  ILobbyCodeGenerator lobbyCodeGenerator, 
+                                  IGameManager gameManager, 
+                                  IServerMessageDispatcher serverMessageDispatcher,
+                                  IRandomGeneratorFactory randomGeneratorFactory)
         {
             m_lobbyManager = lobbyManager;
             m_serverService = serverService;
             m_lobbyCodeGenerator = lobbyCodeGenerator;
             m_gameManager = gameManager;
             m_serverMessageDispatcher = serverMessageDispatcher;
+            m_randomGeneratorFactory = randomGeneratorFactory;
         }
 
         public InGame CreateInGameState(IPlayerClient playerClient, string gameCode)
@@ -23,7 +30,7 @@ namespace WebServer.Model.PlayerStates.Factories
 
         public InLobby CreateInLobbyState(IPlayerClient playerClient, string lobbyCode)
         {
-            return new InLobby(this, m_lobbyManager, playerClient, m_serverService, m_lobbyCodeGenerator, m_gameManager, lobbyCode);
+            return new InLobby(this, m_lobbyManager, playerClient, m_serverService, m_lobbyCodeGenerator, m_gameManager, m_randomGeneratorFactory, lobbyCode);
         }
 
         public InMainMenu CreateInMainMenuState(IPlayerClient playerClient)
@@ -41,5 +48,6 @@ namespace WebServer.Model.PlayerStates.Factories
         private readonly ILobbyCodeGenerator m_lobbyCodeGenerator;
         private readonly IGameManager m_gameManager;
         private readonly IServerMessageDispatcher m_serverMessageDispatcher;
+        private readonly IRandomGeneratorFactory m_randomGeneratorFactory;
     }
 }

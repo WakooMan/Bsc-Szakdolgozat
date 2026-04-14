@@ -94,10 +94,9 @@ namespace SevenWonders.WebServer
             });
 
             builder.Services.AddSingleton(typeof(IXmlHandler), typeof(XmlHandler));
-            builder.Services.AddSingleton(typeof(IRandomGenerator), typeof(RandomGenerator));
+            builder.Services.AddSingleton(typeof(IRandomGeneratorFactory), typeof(RandomGeneratorFactory));
             builder.Services.AddKeyedSingleton<ICardListFactory, EmptyCardListFactory>(nameof(EmptyCardListFactory));
             builder.Services.AddKeyedSingleton<ICardListFactory, MainCardListFactory>(nameof(MainCardListFactory));
-            builder.Services.AddSingleton(typeof(IRandomElementReceiver), typeof(RandomElementReceiver));
             builder.Services.AddSingleton(typeof(IWonderListFactory), typeof(WonderListFactory));
             builder.Services.AddSingleton(typeof(IDevelopmentListFactory), typeof(DevelopmentListFactory));
             builder.Services.AddSingleton(typeof(ICardCompositionFileHandlerFactory), typeof(CardCompositionFileHandlerFactory));
@@ -114,7 +113,7 @@ namespace SevenWonders.WebServer
             builder.Services.AddTransient(typeof(IEventManager), typeof(EventManager));
             builder.Services.AddTransient(typeof(IGameContext), typeof(GameContext));
             builder.Services.AddTransient(typeof(IGame), typeof(Game));
-            builder.Services.AddSingleton(typeof(IGameInitializer), typeof(GameInitializer));
+            builder.Services.AddSingleton(typeof(IGameFactory), typeof(GameFactory));
 
             builder.Services.AddSingleton<IClientManager, ClientManager>();
             builder.Services.AddSingleton<ILobbyFactory, LobbyFactory>();
