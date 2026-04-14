@@ -14,10 +14,15 @@ namespace WebServer.Model
         }
 
         public ConcurrentDictionary<string, IGame> Games { get; }
-        public bool AddGame(IPlayerClient player1, IPlayerClient player2, string code, out IGame game)
+        public bool AddGame(IPlayerClient player1, IPlayerClient player2, string code, out IGame? game)
         {
-            game = m_gameInitializer.CreateAndInitialize(player1, player2);
-            return Games.TryAdd(code, game);
+            if(player1.CurrentState is InGame player1State && player2.CurrentState is InGame player2State)
+            {
+                game = m_gameInitializer.CreateAndInitialize(player1, player2, player1State, player2State);
+                return Games.TryAdd(code, game);
+            }
+            game = null;
+            return false;
         }
 
         public IGame? GetGame(string code)

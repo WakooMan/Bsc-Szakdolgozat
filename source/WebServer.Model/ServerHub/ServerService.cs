@@ -44,15 +44,15 @@ namespace WebServer.Model.ServerHub
         }
 
 
-        public async Task SendGameServerMessageToGroup(string groupName, GameServerMessage message)
+        public async Task SendGameServerMessageToGroup(string groupName, GameServerMessage message, params string[] exceptions)
         {
-            await m_hubContext.Clients.Group(groupName)
+            await m_hubContext.Clients.GroupExcept(groupName, exceptions)
                 .SendAsync("ReceiveGameMessage", message);
         }
 
-        public async Task SendLobbyServerMessageToGroup(string groupName, LobbyServerMessage message)
+        public async Task SendLobbyServerMessageToGroup(string groupName, LobbyServerMessage message, params string[] exceptions)
         {
-            await m_hubContext.Clients.Group(groupName)
+            await m_hubContext.Clients.GroupExcept(groupName, exceptions)
                 .SendAsync("ReceiveLobbyMessage", message);
         }
 

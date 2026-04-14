@@ -10,6 +10,6 @@ namespace GameLogic
         IGameContext Context { get; }
         IReadOnlyList<Player> Players { get; }
         void GameLoop();
-        void Initialize((string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2);
+        void Initialize((string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2, int startingPlayerId = 1);
     }
 }

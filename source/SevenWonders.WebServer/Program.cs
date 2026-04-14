@@ -104,7 +104,6 @@ namespace SevenWonders.WebServer
             builder.Services.AddSingleton(typeof(ICardCompositionFactory), typeof(CardCompositionFactory));
             builder.Services.AddSingleton(typeof(ICardNodeFactory), typeof(CardNodeFactory));
             builder.Services.AddSingleton(typeof(IMilitaryBoardFactory), typeof(MilitaryBoardFactory));
-            builder.Services.AddSingleton(typeof(IServerPlayerActionReceiverFactory), typeof(ServerPlayerActionReceiverFactory));
             builder.Services.AddSingleton(typeof(IPlayerActionHandler), typeof(PlayerActionHandler));
 
             builder.Services.AddTransient(typeof(ITurnHandler), typeof(TurnHandler));

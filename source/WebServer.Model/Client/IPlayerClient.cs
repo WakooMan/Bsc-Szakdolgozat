@@ -8,6 +8,7 @@ namespace WebServer.Model.Client
     {
         ApplicationUser ApplicationUser { get; }
         string ConnectionId { get; }
+        PlayerState CurrentState { get; }
 
         void ChangeState(PlayerState playerState);
 

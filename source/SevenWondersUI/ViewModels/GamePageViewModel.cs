@@ -11,6 +11,7 @@ namespace SevenWondersUI.ViewModels
 {
     [QueryProperty(nameof(Player1), "Player1")]
     [QueryProperty(nameof(Player2), "Player2")]
+    [QueryProperty(nameof(StartingPlayerId), "StartingPlayerId")]
     public class GamePageViewModel: BaseViewModel
     {
         public GamePageViewModel(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IPresenter presenter, IPlayerActionReceiverFactory playerActionReceiverFactory)
@@ -24,6 +25,8 @@ namespace SevenWondersUI.ViewModels
             m_game = game;
             m_engine = engine;
         }
+
+        public int StartingPlayerId { get; set; }
 
         public PlayerInitModel Player1 { get; set; }
         public PlayerInitModel Player2 { get; set; }
@@ -48,7 +51,7 @@ namespace SevenWondersUI.ViewModels
 
             m_engine.Startup();
             m_presenter.Initialize();
-            m_game.Initialize((Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType, Player1.Name)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType, Player2.Name)));
+            m_game.Initialize((Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType, Player1.Name)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType, Player2.Name)), StartingPlayerId);
             m_presenter.SubscribeToEvents();
             _ = Task.Run(m_game.GameLoop);
         }

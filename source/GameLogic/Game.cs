@@ -43,11 +43,14 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public void Initialize((string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2)
+        public void Initialize((string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2, int startingPlayerId = 1)
         {
             if (!m_isInitialized)
             {
-                m_players = [new Player(player1.actionReceiver, player1.name, 1, 7), new Player(player2.actionReceiver, player2.name, 2, 7)];
+                ArgumentChecker.CheckPredicateForOperation(() => startingPlayerId != 1 && startingPlayerId != 2, "startingPlayerId must be 1 or 2.");
+                var p1 = new Player(player1.actionReceiver, player1.name, 1, 7);
+                var p2 = new Player(player2.actionReceiver, player2.name, 2, 7);
+                m_players = startingPlayerId == 1 ? [p1, p2] : [p2, p1];
                 m_gameContext.Initialize(m_players);
                 CurrentState = new ChooseWonderState(m_gameContext);
                 m_isInitialized = true;

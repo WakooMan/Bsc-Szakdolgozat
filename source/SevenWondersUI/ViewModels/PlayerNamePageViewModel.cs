@@ -134,7 +134,8 @@ namespace SevenWondersUI.ViewModels
             await m_navigationService.NavigateToAsync("//GamePage", new Dictionary<string, object>
             { 
                 { "Player1", new PlayerInitModel(m_player1Entry.entryText, PlayerType.LocalPlayer) },
-                { "Player2", new PlayerInitModel(m_player2Entry.entryText, PlayerType.LocalPlayer) }
+                { "Player2", new PlayerInitModel(m_player2Entry.entryText, PlayerType.LocalPlayer) },
+                { "StartingPlayerId", 1 }
             });
             m_player1Entry.entryText = string.Empty;
             m_player2Entry.entryText = string.Empty;

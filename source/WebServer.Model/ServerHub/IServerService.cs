@@ -16,9 +16,9 @@ namespace WebServer.Model.ServerHub
         Task SendLobbyServerMessageToAllClient(string connectionId, LobbyServerMessage message);
 
 
-        Task SendGameServerMessageToGroup(string groupName, GameServerMessage message);
+        Task SendGameServerMessageToGroup(string groupName, GameServerMessage message, params string[] exceptions);
 
-        Task SendLobbyServerMessageToGroup(string groupName, LobbyServerMessage message);
+        Task SendLobbyServerMessageToGroup(string groupName, LobbyServerMessage message, params string[] exceptions);
 
 
         Task SendGameServerMessageToGroups(string[] groupNames, GameServerMessage message);

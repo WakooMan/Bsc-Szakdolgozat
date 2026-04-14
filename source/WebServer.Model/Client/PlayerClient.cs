@@ -10,6 +10,8 @@ namespace WebServer.Model.Client
         public ApplicationUser ApplicationUser { get; }
         public string ConnectionId { get; }
 
+        public PlayerState CurrentState => m_state;
+
         public PlayerClient(IPlayerStateFactory playerStateFactory, ApplicationUser applicationUser, string connectionId)
         {
             ConnectionId = connectionId;

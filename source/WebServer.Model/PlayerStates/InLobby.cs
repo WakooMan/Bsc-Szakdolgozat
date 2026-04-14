@@ -102,12 +102,12 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.SendLobbyServerMessageToGroup(nameof(InMainMenu), new LobbyUpdateMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
 
             IPlayerClient otherPlayer = lobby.Members.First(m => m.Key != m_player.ConnectionId).Value;
-            m_gameManager.AddGame(m_player, otherPlayer, m_lobbyCode, out IGame _);
+            m_gameManager.AddGame(m_player, otherPlayer, m_lobbyCode, out IGame? _);
             m_gameManager.StartGame(m_lobbyCode);
             await m_serverService.SendLobbyServerMessageToClient(otherPlayer.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
-                                                                                                                        new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer)));
+                                                                                                                        new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer), 2));
             return new StartGameResponseMessage(new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
-                                                new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer));
+                                                new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer), 1);
         }
 
         public override Task<LobbyServerMessage> StartMatchmaking()
