@@ -1,4 +1,5 @@
-﻿using SevenWonders.Common;
+﻿using GameLogic;
+using SevenWonders.Common;
 using WebServer.Contract.DataTransferObjects;
 using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
@@ -10,7 +11,7 @@ namespace WebServer.Model.PlayerStates
 {
     public class InLobby : PlayerState
     {
-        public InLobby(IPlayerStateFactory playerStateFactory, ILobbyManager lobbyManager, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, string lobbyCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
+        public InLobby(IPlayerStateFactory playerStateFactory, ILobbyManager lobbyManager, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IGameManager gameManager, string lobbyCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
         {
             m_lobbyManager = lobbyManager;
             m_lobbyCode = lobbyCode;
@@ -100,10 +101,10 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.SendLobbyServerMessageToGroup(nameof(InMainMenu), new LobbyUpdateMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
 
             IPlayerClient otherPlayer = lobby.Members.First(m => m.Key != m_player.ConnectionId).Value;
-
+            m_gameManager.AddGame(m_player, otherPlayer, m_lobbyCode, out IGame _);
+            m_gameManager.StartGame(m_lobbyCode);
             await m_serverService.SendLobbyServerMessageToClient(otherPlayer.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
-                                                                                                                     new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer)));
-
+                                                                                                                        new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer)));
             return new StartGameResponseMessage(new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
                                                 new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer));
         }
@@ -115,5 +116,6 @@ namespace WebServer.Model.PlayerStates
 
         private readonly string m_lobbyCode;
         private readonly ILobbyManager m_lobbyManager;
+        private readonly IGameManager m_gameManager;
     }
 }

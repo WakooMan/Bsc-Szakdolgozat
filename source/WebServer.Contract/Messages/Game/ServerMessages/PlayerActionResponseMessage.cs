@@ -2,10 +2,18 @@
 {
     public class PlayerActionResponseMessage : GameServerMessage
     {
+        public string PlayerName { get; set; }
         public int ActionId { get; set; }
-        public PlayerActionResponseMessage(): base() { ActionId = -1; }
-        public PlayerActionResponseMessage(bool isSuccess, string message, int actionId) : base(isSuccess, message)
+        public PlayerActionResponseMessage(): base() { PlayerName = string.Empty; ActionId = -1; }
+        public PlayerActionResponseMessage(string message) : base(false, message)
         {
+            PlayerName = string.Empty;
+            ActionId = -1;
+        }
+
+        public PlayerActionResponseMessage(string playerName, int actionId) : base(true, "Success")
+        {
+            PlayerName = playerName;
             ActionId = actionId;
         }
     }

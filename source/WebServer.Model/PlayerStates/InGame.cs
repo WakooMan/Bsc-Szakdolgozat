@@ -8,8 +8,9 @@ namespace WebServer.Model.PlayerStates
 {
     public class InGame : PlayerState
     {
-        public InGame(IPlayerStateFactory playerStateFactory, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, string gameCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
+        public InGame(IPlayerStateFactory playerStateFactory, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IGameManager gameManager, string gameCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
         {
+            m_gameManager = gameManager;
             m_gameCode = gameCode;
         }
 
@@ -24,6 +25,7 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.LeaveGroup(m_player.ConnectionId, m_gameCode);
             await m_serverService.JoinGroup(m_player.ConnectionId, nameof(InMainMenu));
             m_lobbyCodeGenerator.RemoveUniqueCode(m_gameCode);
+            m_gameManager.RemoveGame(m_gameCode);
             return new ExitGameResponseMessage(true, "OK");
         }
 
@@ -58,5 +60,6 @@ namespace WebServer.Model.PlayerStates
         }
 
         private readonly string m_gameCode;
+        private readonly IGameManager m_gameManager;
     }
 }

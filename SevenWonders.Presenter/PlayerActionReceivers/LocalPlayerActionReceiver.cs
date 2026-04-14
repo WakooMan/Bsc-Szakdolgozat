@@ -15,8 +15,9 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         public IClientHubService? ClientHubService { get; set; }
 
-        public LocalPlayerActionReceiver(IGameEngineReceiver gameEngineReceiver)
+        public LocalPlayerActionReceiver(IGameEngineReceiver gameEngineReceiver, string playerName)
         {
+            m_playerName = playerName;
             m_gameEngineReceiver = gameEngineReceiver;
             m_signal = new ManualResetEventSlim(false);
             m_interactiveObjectToPlayerAction = new Dictionary<IInteractiveObject, PlayerActionWrapper>();
@@ -94,17 +95,20 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         private Task<bool> HandlePlayerActionResponseMessage(PlayerActionResponseMessage message)
         {
-            var list = m_interactiveObjectToPlayerAction.Keys.ToList();
-            if(message.ActionId >= 0 && message.ActionId < list.Count)
+            if (message.Success && message.PlayerName == m_playerName)
             {
-                IInteractiveObject interactiveObject = list[message.ActionId];
-                m_chosenInteractiveObject = interactiveObject;
-                m_signal.Set();
-                return Task.FromResult(true);
+                var list = m_interactiveObjectToPlayerAction.Keys.ToList();
+                if (message.ActionId >= 0 && message.ActionId < list.Count)
+                {
+                    IInteractiveObject interactiveObject = list[message.ActionId];
+                    m_chosenInteractiveObject = interactiveObject;
+                    m_signal.Set();
+                }
             }
-            return Task.FromResult(false);
+            return Task.FromResult(message.Success);
         }
 
+        private readonly string m_playerName;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly ManualResetEventSlim m_signal;
         private readonly Dictionary<IInteractiveObject, PlayerActionWrapper> m_interactiveObjectToPlayerAction;

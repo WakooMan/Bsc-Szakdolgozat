@@ -6,21 +6,22 @@ namespace WebServer.Model.PlayerStates.Factories
 {
     public class PlayerStateFactory : IPlayerStateFactory
     {
-        public PlayerStateFactory(ILobbyManager lobbyManager, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator)
+        public PlayerStateFactory(ILobbyManager lobbyManager, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IGameManager gameManager)
         {
             m_lobbyManager = lobbyManager;
             m_serverService = serverService;
             m_lobbyCodeGenerator = lobbyCodeGenerator;
+            m_gameManager = gameManager;
         }
 
         public InGame CreateInGameState(IPlayerClient playerClient, string gameCode)
         {
-            return new InGame(this, playerClient, m_serverService, m_lobbyCodeGenerator, gameCode);
+            return new InGame(this, playerClient, m_serverService, m_lobbyCodeGenerator, m_gameManager, gameCode);
         }
 
         public InLobby CreateInLobbyState(IPlayerClient playerClient, string lobbyCode)
         {
-            return new InLobby(this, m_lobbyManager, playerClient, m_serverService, m_lobbyCodeGenerator, lobbyCode);
+            return new InLobby(this, m_lobbyManager, playerClient, m_serverService, m_lobbyCodeGenerator, m_gameManager, lobbyCode);
         }
 
         public InMainMenu CreateInMainMenuState(IPlayerClient playerClient)
@@ -36,5 +37,6 @@ namespace WebServer.Model.PlayerStates.Factories
         private readonly ILobbyManager m_lobbyManager;
         private readonly IServerService m_serverService;
         private readonly ILobbyCodeGenerator m_lobbyCodeGenerator;
+        private readonly IGameManager m_gameManager;
     }
 }

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
     <ProjectReference Include="..\SevenWonders.Common\SevenWonders.Common.csproj" />
     <ProjectReference Include="..\WebServer.Contract\WebServer.Contract.csproj" />
   </ItemGroup>

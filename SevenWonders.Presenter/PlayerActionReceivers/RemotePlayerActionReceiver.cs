@@ -9,12 +9,13 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 {
     public class RemotePlayerActionReceiver: IRemotePlayerActionReceiver
     {
-        public RemotePlayerActionReceiver(IGameEngineReceiver gameEngineReceiver)
+        public RemotePlayerActionReceiver(IGameEngineReceiver gameEngineReceiver, string playerName)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_signal = new ManualResetEventSlim(false);
             m_playerActionToInteractiveObject = new Dictionary<PlayerActionWrapper, IInteractiveObject>();
             m_serverPlayerActionMessageHandler = new GameResponseMessageHandlerDelegate<ServerPlayerActionMessage>(HandleServerPlayerActionMessage);
+            m_playerName = playerName;
         }
 
         public PlayerActionWrapper ReceivePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
@@ -48,14 +49,16 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         private Task<bool> HandleServerPlayerActionMessage(ServerPlayerActionMessage message)
         {
-            var actions = m_playerActionToInteractiveObject.Keys.ToArray();
-            if(message.ActionId >= 0 && message.ActionId < actions.Length)
+            if (message.Success && message.PlayerName == m_playerName)
             {
-                m_chosenPlayerAction = actions[message.ActionId];
-                m_signal.Set();
-                return Task.FromResult(true);
+                var actions = m_playerActionToInteractiveObject.Keys.ToArray();
+                if (message.ActionId >= 0 && message.ActionId < actions.Length)
+                {
+                    m_chosenPlayerAction = actions[message.ActionId];
+                    m_signal.Set();
+                }
             }
-            return Task.FromResult(false);
+            return Task.FromResult(message.Success);
         }
 
         public void Dispose()
@@ -73,6 +76,7 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
             registerer.Unregister(m_serverPlayerActionMessageHandler);
         }
 
+        private readonly string m_playerName;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly ManualResetEventSlim m_signal;
         private readonly Dictionary<PlayerActionWrapper, IInteractiveObject> m_playerActionToInteractiveObject;

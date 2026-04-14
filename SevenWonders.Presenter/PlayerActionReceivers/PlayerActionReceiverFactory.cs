@@ -14,22 +14,22 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
             m_clientHubService = clientHubService;
         }
 
-        public IPlayerActionReceiver Create(PlayerType playerType)
+        public IPlayerActionReceiver Create(PlayerType playerType, string playerName)
         {
             switch (playerType)
             {
                 case PlayerType.LocalPlayer:
-                    return new LocalPlayerActionReceiver(m_gameEngineReceiver);
+                    return new LocalPlayerActionReceiver(m_gameEngineReceiver, playerName);
                 case PlayerType.LocalPlayerWithRemoteOpponent:
-                    var result = new LocalPlayerActionReceiver(m_gameEngineReceiver);
+                    var result = new LocalPlayerActionReceiver(m_gameEngineReceiver, playerName);
                     result.ClientHubService = m_clientHubService;
                     return result;
                 case PlayerType.RemotePlayer:
-                    return new RemotePlayerActionReceiver(m_gameEngineReceiver);
+                    return new RemotePlayerActionReceiver(m_gameEngineReceiver, playerName);
                 case PlayerType.AI:
                     throw new NotSupportedException("AI feature is not yet supported!");
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(playerType), playerType, null);
+                    throw new ArgumentOutOfRangeException(nameof(playerType), playerType, "Not handled");
             }
         }
 

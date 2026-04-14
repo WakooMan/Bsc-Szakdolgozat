@@ -1,4 +1,5 @@
-﻿using GameLogic;
+﻿using System;
+using GameLogic;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
@@ -46,7 +47,7 @@ namespace SevenWondersUI.ViewModels
 
             m_engine.Startup();
             m_presenter.Initialize();
-            m_game.Initialize((Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType)));
+            m_game.Initialize((Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType, Player1.Name)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType, Player2.Name)));
             m_presenter.SubscribeToEvents();
             _ = Task.Run(m_game.GameLoop);
         }

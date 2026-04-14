@@ -5,6 +5,6 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 {
     public interface IPlayerActionReceiverFactory
     {
-        IPlayerActionReceiver Create(PlayerType playerType);
+        IPlayerActionReceiver Create(PlayerType playerType, string playerName);
     }
 }
