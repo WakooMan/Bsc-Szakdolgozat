@@ -15,12 +15,9 @@ namespace GameLogic.Handlers
         private readonly List<ChooseWonderAction> m_wonderPlayerActions2;
         private int m_indexOfPlayer;
         private IGameContext? m_gameContext;
-        private readonly IPlayerActionReceiver m_playerActionReceiver;
 
-        public ChooseWonderHandler(IPlayerActionReceiver playerActionReceiver)
+        public ChooseWonderHandler()
         {
-            ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));
-            m_playerActionReceiver = playerActionReceiver;
             m_wonderPlayerActions1 = new List<ChooseWonderAction>();
             m_wonderPlayerActions2 = new List<ChooseWonderAction>();
             m_players = new List<Player>();

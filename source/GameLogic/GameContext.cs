@@ -17,9 +17,6 @@ namespace GameLogic
         public IAgeHandler AgeHandler { get; }
 
         public ITurnHandler TurnHandler { get; }
-
-        public IPlayerActionReceiver PlayerActionReceiver { get; }
-
         public IEventManager EventManager { get; }
 
         public ICostCalculator CostCalculator { get; }
@@ -36,11 +33,10 @@ namespace GameLogic
         public IDevelopmentList? DevelopmentList { get; private set; }
         public IMilitaryBoard? MilitaryBoard { get; private set; }
 
-        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IPlayerActionReceiver playerActionReceiver, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [FromKeyedServices(nameof(EmptyCardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory, IRandomElementReceiver randomElementReceiver, IPlayerActionHandler playerActionHandler)
+        public GameContext(IAgeHandler ageHandler, ITurnHandler turnHandler, IEventManager eventManager, ICostCalculator costCalculator, IChooseWonderHandler chooseWonderHandler, IGameElements gameElements, IRandomGenerator randomGenerator, [FromKeyedServices(nameof(EmptyCardListFactory))] ICardListFactory droppedCardListFactory, IMilitaryBoardFactory militaryBoardFactory, IRandomElementReceiver randomElementReceiver, IPlayerActionHandler playerActionHandler)
         {
             ArgumentChecker.CheckNull(ageHandler, nameof(ageHandler));
             ArgumentChecker.CheckNull(turnHandler, nameof(turnHandler));
-            ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
             ArgumentChecker.CheckNull(costCalculator, nameof(costCalculator));
             ArgumentChecker.CheckNull(chooseWonderHandler, nameof(chooseWonderHandler));
@@ -53,7 +49,6 @@ namespace GameLogic
 
             AgeHandler = ageHandler;
             TurnHandler = turnHandler;
-            PlayerActionReceiver = playerActionReceiver;
             EventManager = eventManager;
             CostCalculator = costCalculator;
             ChooseWonderHandler = chooseWonderHandler;

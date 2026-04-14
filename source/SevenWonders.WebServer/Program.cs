@@ -1,3 +1,14 @@
+using GameLogic;
+using GameLogic.Elements;
+using GameLogic.Elements.Developments;
+using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Military;
+using GameLogic.Elements.Wonders;
+using GameLogic.Events;
+using GameLogic.GameStructures.Factories;
+using GameLogic.Handlers;
+using GameLogic.Handlers.Factories;
+using GameLogic.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -5,6 +16,7 @@ using SevenWonders.Common;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
+using WebServer.Model;
 using WebServer.Model.Client;
 using WebServer.Model.Client.Factories;
 using WebServer.Model.Lobby;
@@ -81,8 +93,30 @@ namespace SevenWonders.WebServer
                 );
             });
 
-            builder.Services.AddSingleton<IRandomGenerator, RandomGenerator>();
-            builder.Services.AddSingleton<IXmlHandler, XmlHandler>();
+            builder.Services.AddSingleton(typeof(IXmlHandler), typeof(XmlHandler));
+            builder.Services.AddSingleton(typeof(IRandomGenerator), typeof(RandomGenerator));
+            builder.Services.AddKeyedSingleton<ICardListFactory, EmptyCardListFactory>(nameof(EmptyCardListFactory));
+            builder.Services.AddKeyedSingleton<ICardListFactory, MainCardListFactory>(nameof(MainCardListFactory));
+            builder.Services.AddSingleton(typeof(IRandomElementReceiver), typeof(RandomElementReceiver));
+            builder.Services.AddSingleton(typeof(IWonderListFactory), typeof(WonderListFactory));
+            builder.Services.AddSingleton(typeof(IDevelopmentListFactory), typeof(DevelopmentListFactory));
+            builder.Services.AddSingleton(typeof(ICardCompositionFileHandlerFactory), typeof(CardCompositionFileHandlerFactory));
+            builder.Services.AddSingleton(typeof(ICardCompositionFactory), typeof(CardCompositionFactory));
+            builder.Services.AddSingleton(typeof(ICardNodeFactory), typeof(CardNodeFactory));
+            builder.Services.AddSingleton(typeof(IMilitaryBoardFactory), typeof(MilitaryBoardFactory));
+            builder.Services.AddSingleton(typeof(IServerPlayerActionReceiverFactory), typeof(ServerPlayerActionReceiverFactory));
+            builder.Services.AddSingleton(typeof(IPlayerActionHandler), typeof(PlayerActionHandler));
+
+            builder.Services.AddTransient(typeof(ITurnHandler), typeof(TurnHandler));
+            builder.Services.AddTransient(typeof(IAgeHandler), typeof(AgeHandler));
+            builder.Services.AddTransient(typeof(ICostCalculator), typeof(CostCalculator));
+            builder.Services.AddTransient(typeof(IChooseWonderHandler), typeof(ChooseWonderHandler));
+            builder.Services.AddTransient(typeof(IGameElements), typeof(GameElements));
+            builder.Services.AddTransient(typeof(IEventManager), typeof(EventManager));
+            builder.Services.AddTransient(typeof(IGameContext), typeof(GameContext));
+            builder.Services.AddTransient(typeof(IGame), typeof(Game));
+            builder.Services.AddSingleton(typeof(IGameInitializer), typeof(GameInitializer));
+
             builder.Services.AddSingleton<IClientManager, ClientManager>();
             builder.Services.AddSingleton<ILobbyFactory, LobbyFactory>();
             builder.Services.AddSingleton<ILobbyManager, LobbyManager>();
@@ -93,6 +127,7 @@ namespace SevenWonders.WebServer
             builder.Services.AddSingleton<ILobbyMessageHandlers, LobbyMessageHandlers>();
             builder.Services.AddSingleton<IServerMessageDispatcher, ServerMessageDispatcher>();
             builder.Services.AddSingleton<IServerService, ServerService>();
+            builder.Services.AddSingleton(typeof(IGameManager), typeof(GameManager));
 
             var app = builder.Build();
 
