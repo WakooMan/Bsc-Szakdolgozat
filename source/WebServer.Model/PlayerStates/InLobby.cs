@@ -14,6 +14,7 @@ namespace WebServer.Model.PlayerStates
         public InLobby(IPlayerStateFactory playerStateFactory, ILobbyManager lobbyManager, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IGameManager gameManager, string lobbyCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
         {
             m_lobbyManager = lobbyManager;
+            m_gameManager = gameManager;
             m_lobbyCode = lobbyCode;
         }
 

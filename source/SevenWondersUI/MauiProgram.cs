@@ -110,6 +110,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IClientHubService), typeof(ClientHubService));
         builder.Services.AddSingleton(typeof(IClientMessageDispatcher), typeof(ClientMessageDispatcher));
         builder.Services.AddSingleton(typeof(IMessageRegistererFactory), typeof(MessageRegistererFactory));
+        builder.Services.AddSingleton(typeof(IPlayerActionReceiverFactory), typeof(PlayerActionReceiverFactory));
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<App>();
 

@@ -9,13 +9,15 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 {
     public class RemotePlayerActionReceiver: IRemotePlayerActionReceiver
     {
-        public RemotePlayerActionReceiver(IGameEngineReceiver gameEngineReceiver, string playerName)
+        public RemotePlayerActionReceiver(IGameEngineReceiver gameEngineReceiver, string playerName, IClientMessageDispatcher clientMessageDispatcher)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_signal = new ManualResetEventSlim(false);
             m_playerActionToInteractiveObject = new Dictionary<PlayerActionWrapper, IInteractiveObject>();
             m_serverPlayerActionMessageHandler = new GameResponseMessageHandlerDelegate<ServerPlayerActionMessage>(HandleServerPlayerActionMessage);
+            m_clientMessageDispatcher = clientMessageDispatcher;
             m_playerName = playerName;
+            m_clientMessageDispatcher.RegisterHandler(this);
         }
 
         public PlayerActionWrapper ReceivePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
@@ -63,6 +65,7 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         public void Dispose()
         {
+            m_clientMessageDispatcher?.UnregisterHandler(this);
             m_signal?.Dispose();
         }
 
@@ -81,6 +84,7 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
         private readonly ManualResetEventSlim m_signal;
         private readonly Dictionary<PlayerActionWrapper, IInteractiveObject> m_playerActionToInteractiveObject;
         private readonly GameResponseMessageHandlerDelegate<ServerPlayerActionMessage> m_serverPlayerActionMessageHandler;
+        private readonly IClientMessageDispatcher m_clientMessageDispatcher;
         private PlayerActionWrapper? m_chosenPlayerAction;
 
     }

@@ -5,6 +5,7 @@ using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
 using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
+using SevenWonders.WebClient.Model;
 
 namespace SevenWondersUI.ViewModels
 {

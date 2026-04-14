@@ -15,13 +15,15 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         public IClientHubService? ClientHubService { get; set; }
 
-        public LocalPlayerActionReceiver(IGameEngineReceiver gameEngineReceiver, string playerName)
+        public LocalPlayerActionReceiver(IGameEngineReceiver gameEngineReceiver, string playerName, IClientMessageDispatcher clientMessageDispatcher)
         {
             m_playerName = playerName;
             m_gameEngineReceiver = gameEngineReceiver;
             m_signal = new ManualResetEventSlim(false);
             m_interactiveObjectToPlayerAction = new Dictionary<IInteractiveObject, PlayerActionWrapper>();
+            m_clientMessageDispatcher = clientMessageDispatcher;
             m_playerActionResponseMessageHandler = new GameResponseMessageHandlerDelegate<PlayerActionResponseMessage>(HandlePlayerActionResponseMessage);
+            m_clientMessageDispatcher.RegisterHandler(this);
         }
 
         public PlayerActionWrapper ReceivePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
@@ -63,6 +65,7 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
 
         public void Dispose()
         {
+            m_clientMessageDispatcher?.UnregisterHandler(this);
             m_signal?.Dispose();
         }
 
@@ -113,6 +116,7 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
         private readonly ManualResetEventSlim m_signal;
         private readonly Dictionary<IInteractiveObject, PlayerActionWrapper> m_interactiveObjectToPlayerAction;
         private readonly GameResponseMessageHandlerDelegate<PlayerActionResponseMessage> m_playerActionResponseMessageHandler;
+        private readonly IClientMessageDispatcher m_clientMessageDispatcher;
         private IInteractiveObject? m_chosenInteractiveObject;
     }
 }
