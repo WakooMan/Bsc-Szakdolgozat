@@ -25,47 +25,47 @@ namespace WebServer.Model.PlayerStates
             m_serverMessageDispatcher.RegisterHandler(this);
         }
 
-        public override Task<LobbyServerMessage> CreateLobby(string name)
+        public override Task CreateLobby(string name)
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override async Task<LobbyServerMessage> ExitGame()
+        public override async Task ExitGame()
         {
             m_player.ChangeState(m_playerStateFactory.CreateInMainMenuState(m_player));
             await m_serverService.LeaveGroup(m_player.ConnectionId, m_gameCode);
             await m_serverService.JoinGroup(m_player.ConnectionId, nameof(InMainMenu));
             m_lobbyCodeGenerator.RemoveUniqueCode(m_gameCode);
             m_gameManager.RemoveGame(m_gameCode);
-            return new ExitGameResponseMessage(true, "OK");
+            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new ExitGameResponseMessage(true, "OK"));
         }
 
-        public override Task<LobbyServerMessage> ExitMatchmaking()
+        public override Task ExitMatchmaking()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> JoinLobby(string code)
+        public override Task JoinLobby(string code)
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> LeaveLobby()
+        public override Task LeaveLobby()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> StartGame()
+        public override Task StartGame()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> StartMatchmaking()
+        public override Task StartMatchmaking()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> WriteChatMessage(string message)
+        public override Task WriteChatMessage(string message)
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
@@ -90,21 +90,21 @@ namespace WebServer.Model.PlayerStates
             throw new InvalidOperationException($"No matching playeraction.");
         }
 
-        private Task<GameServerMessage> HandlePlayerActionRequestMessage(Hub hub, string connectionId, PlayerActionRequestMessage message)
+        private async Task HandlePlayerActionRequestMessage(string connectionId, PlayerActionRequestMessage message)
         {
             if (m_player.ConnectionId != connectionId)
             {
-                return Task.FromResult<GameServerMessage>(new PlayerActionResponseMessage("Wrong player sent the action!"));
+                await m_serverService.SendGameServerMessageToClient(m_player.ConnectionId, new PlayerActionResponseMessage("Wrong player sent the action!"));
             }
 
             if (message.ActionId >= 0 && message.ActionId < m_playerActions.Count)
             {
                 m_chosenPlayerAction = m_playerActions[message.ActionId];
                 m_signal.Set();
-                m_serverService.SendGameServerMessageToGroup(m_gameCode, new ServerPlayerActionMessage(m_player.ApplicationUser.UserName, message.ActionId), m_player.ConnectionId);
-                return Task.FromResult<GameServerMessage>(new PlayerActionResponseMessage(m_player.ApplicationUser.UserName, message.ActionId));
+                await m_serverService.SendGameServerMessageToGroup(m_gameCode, new ServerPlayerActionMessage(m_player.ApplicationUser.UserName, message.ActionId), m_player.ConnectionId);
+                await m_serverService.SendGameServerMessageToClient(m_player.ConnectionId, new PlayerActionResponseMessage(m_player.ApplicationUser.UserName, message.ActionId));
             }
-            return Task.FromResult<GameServerMessage>(new PlayerActionResponseMessage("The received action id is not a valid player action!"));
+            await m_serverService.SendGameServerMessageToClient(m_player.ConnectionId, new PlayerActionResponseMessage("The received action id is not a valid player action!"));
         }
 
         public void Dispose()

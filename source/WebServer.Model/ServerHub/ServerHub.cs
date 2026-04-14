@@ -68,16 +68,16 @@ namespace WebServer.Model.ServerHub
             await  base.OnDisconnectedAsync(exception);
         }
 
-        public async Task<LobbyServerMessage> LobbyMessageReceived(LobbyClientMessage lobbyMessage)
+        public async Task LobbyMessageReceived(LobbyClientMessage lobbyMessage)
         {
             string connectionId = Context.ConnectionId;
-            return await m_serverMessageDispatcher.Dispatch(this, connectionId, lobbyMessage);
+            await m_serverMessageDispatcher.Dispatch(connectionId, lobbyMessage);
         }
 
-        public async Task<GameServerMessage> GameMessageReceived(GameClientMessage gameMessage)
+        public async Task GameMessageReceived(GameClientMessage gameMessage)
         {
             string connectionId = Context.ConnectionId;
-            return await m_serverMessageDispatcher.Dispatch(this, connectionId, gameMessage);
+            await m_serverMessageDispatcher.Dispatch(connectionId, gameMessage);
         }
 
         private readonly IServerMessageDispatcher m_serverMessageDispatcher;

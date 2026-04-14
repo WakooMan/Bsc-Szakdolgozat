@@ -1,5 +1,4 @@
-﻿using WebServer.Contract.Messages.Lobby.ServerMessages;
-using WebServer.Model.Client;
+﻿using WebServer.Model.Client;
 using WebServer.Model.Lobby;
 using WebServer.Model.PlayerStates.Factories;
 using WebServer.Model.ServerHub;
@@ -16,14 +15,14 @@ namespace WebServer.Model.PlayerStates
             m_lobbyCodeGenerator = lobbyCodeGenerator;
         }
 
-        public abstract Task<LobbyServerMessage> CreateLobby(string name);
-        public abstract Task<LobbyServerMessage> StartMatchmaking();
-        public abstract Task<LobbyServerMessage> ExitMatchmaking();
-        public abstract Task<LobbyServerMessage> JoinLobby(string code);
-        public abstract Task<LobbyServerMessage> LeaveLobby();
-        public abstract Task<LobbyServerMessage> StartGame();
-        public abstract Task<LobbyServerMessage> ExitGame();
-        public abstract Task<LobbyServerMessage> WriteChatMessage(string message);
+        public abstract Task CreateLobby(string name);
+        public abstract Task StartMatchmaking();
+        public abstract Task ExitMatchmaking();
+        public abstract Task JoinLobby(string code);
+        public abstract Task LeaveLobby();
+        public abstract Task StartGame();
+        public abstract Task ExitGame();
+        public abstract Task WriteChatMessage(string message);
 
         protected readonly IPlayerClient m_player;
         protected readonly IServerService m_serverService;

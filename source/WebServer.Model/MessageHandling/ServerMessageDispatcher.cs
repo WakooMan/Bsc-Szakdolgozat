@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.Messages.Game.ClientMessages;
-using WebServer.Contract.Messages.Game.ServerMessages;
+﻿using WebServer.Contract.Messages.Game.ClientMessages;
 using WebServer.Contract.Messages.Lobby.ClientMessages;
-using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.MessageHandling.Factories;
 
 namespace WebServer.Model.MessageHandling
@@ -11,58 +8,54 @@ namespace WebServer.Model.MessageHandling
     {
         public ServerMessageDispatcher(IMessageRegistererFactory messageRegistererFactory, ILobbyMessageHandlers lobbyMessageHandlers)
         {
-            m_gameRequestHandlers = new Dictionary<Type, object>();
-            m_lobbyRequestHandlers = new Dictionary<Type, object>();
-            m_registeredHandlers = new Dictionary<Type, IMessageHandler>();
+            m_gameRequestHandlers = new Dictionary<Type, List<object>>();
+            m_lobbyRequestHandlers = new Dictionary<Type, List<object>>();
+            m_registeredHandlers = new List<IMessageHandler>();
             m_messageRegisterer = messageRegistererFactory.Create(m_lobbyRequestHandlers, m_gameRequestHandlers);
             m_lobbyMessageHandlers = lobbyMessageHandlers;
             RegisterHandler(m_lobbyMessageHandlers);
         }
         public void RegisterHandler(IMessageHandler messageHandler)
         {
-            Type messageHandlerType = messageHandler.GetType();
-            if (m_registeredHandlers.ContainsKey(messageHandlerType))
+            if (m_registeredHandlers.Contains(messageHandler))
                 return;
             messageHandler.Register(m_messageRegisterer);
-            m_registeredHandlers.Add(messageHandlerType, messageHandler);
+            m_registeredHandlers.Add(messageHandler);
         }
 
         public void UnregisterHandler(IMessageHandler messageHandler)
         {
-            Type messageHandlerType = messageHandler.GetType();
-            if (!m_registeredHandlers.ContainsKey(messageHandlerType))
+            if (!m_registeredHandlers.Contains(messageHandler))
                 return;
-            m_registeredHandlers[messageHandlerType].Unregister(m_messageRegisterer);
-            m_registeredHandlers.Remove(messageHandlerType);
+            messageHandler.Unregister(m_messageRegisterer);
+            m_registeredHandlers.Remove(messageHandler);
         }
 
-        public async Task<LobbyServerMessage> Dispatch(Hub hub, string connectionId, LobbyClientMessage message)
+        public async Task Dispatch(string connectionId, LobbyClientMessage message)
         {
             if (!m_lobbyRequestHandlers.ContainsKey(message.GetType()))
-                return await Task.FromResult(new FailureResponseMessage(false, "Request message cannot be handled on the server side!"));
-            object? result = ((Delegate)m_lobbyRequestHandlers[message.GetType()])?.DynamicInvoke(new object[] { hub, connectionId, message });
-            if (result is not null)
+                return;
+            foreach (var obj in m_lobbyRequestHandlers[message.GetType()])
             {
-                return await (Task<LobbyServerMessage>)result;
-            }
-            else
-            {
-                return await Task.FromResult(new FailureResponseMessage(false, "Result is not returned from the handler!"));
+                object? result = ((Delegate)obj)?.DynamicInvoke(new object[] { connectionId, message });
+                if (result is not null)
+                {
+                    await (Task)result;
+                }
             }
         }
 
-        public async Task<GameServerMessage> Dispatch(Hub hub, string connectionId, GameClientMessage message)
+        public async Task Dispatch(string connectionId, GameClientMessage message)
         {
             if (!m_gameRequestHandlers.ContainsKey(message.GetType()))
-                return await Task.FromResult(new FailureServerMessage(false, "Request message cannot be handled on the server side!"));
-            object? result = ((Delegate)m_gameRequestHandlers[message.GetType()])?.DynamicInvoke(new object[] { hub, connectionId, message });
-            if (result is not null)
+                return;
+            foreach (var obj in m_gameRequestHandlers[message.GetType()])
             {
-                return await (Task<GameServerMessage>)result;
-            }
-            else
-            {
-                return await Task.FromResult(new FailureServerMessage(false, "Result is not returned from the handler!"));
+                object? result = ((Delegate)obj)?.DynamicInvoke(new object[] { connectionId, message });
+                if (result is not null)
+                {
+                    await (Task)result;
+                }
             }
         }
 
@@ -71,10 +64,10 @@ namespace WebServer.Model.MessageHandling
             UnregisterHandler(m_lobbyMessageHandlers);
         }
 
-        private readonly Dictionary<Type, object> m_lobbyRequestHandlers = new Dictionary<Type, object>();
-        private readonly Dictionary<Type, object> m_gameRequestHandlers = new Dictionary<Type, object>();
+        private readonly Dictionary<Type, List<object>> m_lobbyRequestHandlers = new Dictionary<Type, List<object>>();
+        private readonly Dictionary<Type, List<object>> m_gameRequestHandlers = new Dictionary<Type, List<object>>();
         private readonly IMessageRegisterer m_messageRegisterer;
         private readonly ILobbyMessageHandlers m_lobbyMessageHandlers;
-        private readonly Dictionary<Type, IMessageHandler> m_registeredHandlers = new Dictionary<Type, IMessageHandler>();
+        private readonly List<IMessageHandler> m_registeredHandlers;
     }
 }

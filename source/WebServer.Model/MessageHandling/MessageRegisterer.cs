@@ -5,9 +5,9 @@ namespace WebServer.Model.MessageHandling
 {
     public class MessageRegisterer: IMessageRegisterer
     {
-        private readonly Dictionary<Type, object> m_lobbyRequestHandlers;
-        private readonly Dictionary<Type, object> m_gameRequestHandlers;
-        public MessageRegisterer(Dictionary<Type, object> lobbyRequestHandlers, Dictionary<Type, object> gameRequestHandlers)
+        private readonly Dictionary<Type, List<object>> m_lobbyRequestHandlers;
+        private readonly Dictionary<Type, List<object>> m_gameRequestHandlers;
+        public MessageRegisterer(Dictionary<Type, List<object>> lobbyRequestHandlers, Dictionary<Type, List<object>> gameRequestHandlers)
         {
             m_lobbyRequestHandlers = lobbyRequestHandlers;
             m_gameRequestHandlers = gameRequestHandlers;
@@ -15,34 +15,48 @@ namespace WebServer.Model.MessageHandling
 
         public void Register<T>(LobbyRequestMessageHandlerDelegate<T> handler) where T : LobbyClientMessage
         {
-            if (m_lobbyRequestHandlers.ContainsKey(typeof(T)))
+            if (m_lobbyRequestHandlers.ContainsKey(typeof(T)) && !m_lobbyRequestHandlers[typeof(T)].Contains(handler))
             {
-                throw new InvalidOperationException($"Lobby request message handler cannot be added for type {nameof(T)}!");
+                m_lobbyRequestHandlers[typeof(T)].Add(handler);
             }
-            m_lobbyRequestHandlers[typeof(T)] = handler;
+            else
+            {
+                m_lobbyRequestHandlers[typeof(T)] = [handler];
+            }
         }
 
         public void Register<T>(GameRequestMessageHandlerDelegate<T> handler) where T : GameClientMessage
         {
-            if (m_gameRequestHandlers.ContainsKey(typeof(T)))
+            if (m_gameRequestHandlers.ContainsKey(typeof(T)) && !m_gameRequestHandlers[typeof(T)].Contains(handler))
             {
-                throw new InvalidOperationException($"Game request message handler cannot be added for type {nameof(T)}!");
+                m_gameRequestHandlers[typeof(T)].Add(handler);
             }
-            m_gameRequestHandlers[typeof(T)] = handler;
+            else
+            {
+                m_gameRequestHandlers[typeof(T)] = [handler];
+            }
         }
 
         public void Unregister<T>(LobbyRequestMessageHandlerDelegate<T> handler) where T : LobbyClientMessage
         {
-            if (!m_lobbyRequestHandlers.ContainsKey(typeof(T)) || (LobbyRequestMessageHandlerDelegate<T>)m_lobbyRequestHandlers[typeof(T)] != handler)
+            if (!m_lobbyRequestHandlers.ContainsKey(typeof(T)) || !m_lobbyRequestHandlers[typeof(T)].Contains(handler))
                 return;
-            m_lobbyRequestHandlers.Remove(typeof(T));
+            m_lobbyRequestHandlers[typeof(T)].Remove(handler);
+            if (m_lobbyRequestHandlers[typeof(T)].Count == 0)
+            {
+                m_lobbyRequestHandlers.Remove(typeof(T));
+            }
         }
 
         public void Unregister<T>(GameRequestMessageHandlerDelegate<T> handler) where T : GameClientMessage
         {
-            if (!m_gameRequestHandlers.ContainsKey(typeof(T)) || (GameRequestMessageHandlerDelegate<T>)m_gameRequestHandlers[typeof(T)] != handler)
+            if (!m_gameRequestHandlers.ContainsKey(typeof(T)) || !m_gameRequestHandlers[typeof(T)].Contains(handler))
                 return;
-            m_gameRequestHandlers.Remove(typeof(T));
+            m_gameRequestHandlers[typeof(T)].Remove(handler);
+            if (m_gameRequestHandlers[typeof(T)].Count == 0)
+            {
+                m_gameRequestHandlers.Remove(typeof(T));
+            }
         }
     }
 }

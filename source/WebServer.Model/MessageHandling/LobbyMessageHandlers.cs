@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.DataTransferObjects;
-using WebServer.Contract.Messages.Lobby.ClientMessages;
-using WebServer.Contract.Messages.Lobby.ServerMessages;
+﻿using WebServer.Contract.Messages.Lobby.ClientMessages;
 using WebServer.Model.Client;
 
 namespace WebServer.Model.MessageHandling
@@ -42,94 +39,94 @@ namespace WebServer.Model.MessageHandling
             registerer.Unregister(m_sendChatRequestMessageHandler);
         }
 
-        private async Task<LobbyServerMessage> OnCreateLobbyMessageReceived(Hub hub, string connectionId, CreateLobbyRequestMessage requestMessage)
+        private async Task OnCreateLobbyMessageReceived(string connectionId, CreateLobbyRequestMessage requestMessage)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
-                return await playerClient.CreateLobby(requestMessage.Name);
+                await playerClient.CreateLobby(requestMessage.Name);
             } 
             catch (Exception ex)
             {
-                return new CreateLobbyResponseMessage(false, ex.Message, new LobbyDto());
+                // Handle exception if needed
             }
         }
 
-        private async Task<LobbyServerMessage> OnStopMatchmakingMessageReceived(Hub hub, string connectionId, StopMatchmakingRequestMessage message)
+        private async Task OnStopMatchmakingMessageReceived(string connectionId, StopMatchmakingRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
-                return await playerClient.ExitMatchmaking();
+                await playerClient.ExitMatchmaking();
             }
             catch (Exception ex)
             {
-                return new StopMatchmakingResponseMessage(false, ex.Message);
+                // Handle exception if needed
             }
         }
 
-        private async Task<LobbyServerMessage> OnStartMatchmakingMessageReceived(Hub hub, string connectionId, StartMatchmakingRequestMessage message)
+        private async Task OnStartMatchmakingMessageReceived(string connectionId, StartMatchmakingRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
-                return await playerClient.StartMatchmaking();
+                await playerClient.StartMatchmaking();
             }
             catch (Exception ex)
             {
-                return new StartMatchmakingResponseMessage(false, ex.Message);
+                // Handle exception if needed
             }
         }
 
-        private async Task<LobbyServerMessage> OnLeaveLobbyMessageReceived(Hub hub, string connectionId, LeaveLobbyRequestMessage message)
+        private async Task OnLeaveLobbyMessageReceived(string connectionId, LeaveLobbyRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
-                return await playerClient.LeaveLobby();
+                await playerClient.LeaveLobby();
             }
             catch (Exception ex)
             {
-                return new LeaveLobbyResponseMessage(false, ex.Message, []);
+                // Handle exception if needed
             }
         }
 
-        private async Task<LobbyServerMessage> OnStartGameMessageReceived(Hub hub, string connectionId, StartGameRequestMessage message)
+        private async Task OnStartGameMessageReceived(string connectionId, StartGameRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
-                return await playerClient.StartGame();
+                await playerClient.StartGame();
             }
             catch (Exception ex)
             {
-                return new StartGameResponseMessage(ex.Message);
+                // Handle exception if needed
             }
         }
 
-        private async Task<LobbyServerMessage> OnJoinLobbyMessageReceived(Hub hub, string connectionId, JoinLobbyRequestMessage message)
+        private async Task OnJoinLobbyMessageReceived(string connectionId, JoinLobbyRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
-                return await playerClient.JoinLobby(message.Code);
+                await playerClient.JoinLobby(message.Code);
             }
             catch (Exception ex)
             {
-                return new JoinLobbyResponseMessage(false, ex.Message, new LobbyDto());
+                // Handle exception if needed
             }
         }
 
-        private async Task<LobbyServerMessage> OnSendChatMessageReceived(Hub hub, string connectionId, SendChatRequestMessage message)
+        private async Task OnSendChatMessageReceived(string connectionId, SendChatRequestMessage message)
         {
             try
             {
                 IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
-                return await playerClient.WriteChatMessage(message.Message);
+                await playerClient.WriteChatMessage(message.Message);
             }
             catch (Exception ex)
             {
-                return new FailureResponseMessage(false, ex.Message);
+                // Handle exception if needed
             }
         }
 

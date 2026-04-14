@@ -2,6 +2,6 @@
 {
     public interface IMessageRegistererFactory
     {
-        IMessageRegisterer Create(Dictionary<Type, object> m_lobbyRequestHandlers, Dictionary<Type, object> m_gameRequestHandlers);
+        IMessageRegisterer Create(Dictionary<Type, List<object>> m_lobbyRequestHandlers, Dictionary<Type, List<object>> m_gameRequestHandlers);
     }
 }

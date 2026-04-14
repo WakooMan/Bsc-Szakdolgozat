@@ -9,7 +9,7 @@ namespace SevenWonders.WebClient.Model.Services
 
         Task Disconnect();
 
-        Task<bool> InvokeLobbyCommand(LobbyClientMessage lobbyRequestMessage);
-        Task<bool> InvokeGameCommand(GameClientMessage gameRequestMessage);
+        Task InvokeLobbyCommand(LobbyClientMessage lobbyRequestMessage);
+        Task InvokeGameCommand(GameClientMessage gameRequestMessage);
     }
 }

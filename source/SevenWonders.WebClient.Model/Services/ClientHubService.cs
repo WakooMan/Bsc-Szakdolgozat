@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
-using SevenWonders.WebClient.Model;
 using System.Text.Json;
 using WebServer.Contract.Messages.Game.ClientMessages;
 using WebServer.Contract.Messages.Game.ServerMessages;
@@ -60,26 +59,20 @@ namespace SevenWonders.WebClient.Model.Services
             }
         }
 
-        public async Task<bool> InvokeLobbyCommand(LobbyClientMessage lobbyRequestMessage)
+        public async Task InvokeLobbyCommand(LobbyClientMessage lobbyRequestMessage)
         {
             if (m_hubConnection is not null)
             {
-                LobbyServerMessage message = await m_hubConnection.InvokeAsync<LobbyServerMessage>("LobbyMessageReceived", lobbyRequestMessage);
-                return await m_clientMessageDispatcher.Dispatch(message);
+                await m_hubConnection.InvokeAsync<LobbyServerMessage>("LobbyMessageReceived", lobbyRequestMessage);
             }
-
-            return false;
         }
 
-        public async Task<bool> InvokeGameCommand(GameClientMessage gameRequestMessage)
+        public async Task InvokeGameCommand(GameClientMessage gameRequestMessage)
         {
             if (m_hubConnection is not null)
             {
-                GameServerMessage message = await m_hubConnection.InvokeAsync<GameServerMessage>("GameMessageReceived", gameRequestMessage);
-                return await m_clientMessageDispatcher.Dispatch(message);
+                await m_hubConnection.InvokeAsync<GameServerMessage>("GameMessageReceived", gameRequestMessage);
             }
-
-            return false;
         }
 
         private async Task ReceiveLobbyMessage(LobbyServerMessage message)

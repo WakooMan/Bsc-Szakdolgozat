@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using WebServer.Contract.Messages.Lobby.ServerMessages;
+﻿using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
 using WebServer.Model.Lobby;
 using WebServer.Model.PlayerStates.Factories;
@@ -14,7 +13,7 @@ namespace WebServer.Model.PlayerStates
             m_lobbyManager = lobbyManager;
         }
 
-        public override async Task<LobbyServerMessage> CreateLobby(string name)
+        public override async Task CreateLobby(string name)
         {
             string code = m_lobbyCodeGenerator.GenerateUniqueCode();
             ILobby? lobby = m_lobbyManager.GetLobby(code);
@@ -32,25 +31,25 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.LeaveGroup(m_player.ConnectionId, nameof(InMainMenu));
             await m_serverService.JoinGroup(m_player.ConnectionId, code);
             await m_serverService.SendLobbyServerMessageToGroup(nameof(InMainMenu), new LobbyUpdateMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
-            return new CreateLobbyResponseMessage(true, "Success", result.ToDto());
+            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new CreateLobbyResponseMessage(true, "Success", result.ToDto()));
         }
 
-        public override Task<LobbyServerMessage> ExitGame()
+        public override Task ExitGame()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> ExitMatchmaking()
+        public override Task ExitMatchmaking()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> WriteChatMessage(string message)
+        public override Task WriteChatMessage(string message)
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override async Task<LobbyServerMessage> JoinLobby(string code)
+        public override async Task JoinLobby(string code)
         {
             ILobby? lobby = m_lobbyManager.GetLobby(code);
             if (lobby is null)
@@ -65,26 +64,26 @@ namespace WebServer.Model.PlayerStates
                 await m_serverService.SendLobbyServerMessageToGroup($"{lobby.Code}", new LobbyStateUpdateMessage(lobby.ToDto()));
                 await m_serverService.LeaveGroup(m_player.ConnectionId, nameof(InMainMenu));
                 await m_serverService.JoinGroup(m_player.ConnectionId, code);
-                return new JoinLobbyResponseMessage(true, "Success", lobby.ToDto());
+                await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new JoinLobbyResponseMessage(true, "Success", lobby.ToDto()));
             }
 
             throw new InvalidOperationException("The lobby is filled!");
         }
 
-        public override Task<LobbyServerMessage> LeaveLobby()
+        public override Task LeaveLobby()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> StartGame()
+        public override Task StartGame()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> StartMatchmaking()
+        public override async Task StartMatchmaking()
         {
             m_player.ChangeState(m_playerStateFactory.CreateInMatchmakingState(m_player));
-            return Task.FromResult<LobbyServerMessage>(new StartMatchmakingResponseMessage(true, "OK"));
+            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new StartMatchmakingResponseMessage(true, "OK"));
         }
 
         private readonly ILobbyManager m_lobbyManager;

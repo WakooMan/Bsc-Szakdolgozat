@@ -1,5 +1,4 @@
 ﻿using WebServer.Contract.DataTransferObjects;
-using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.PlayerStates;
 using WebServer.Model.PlayerStates.Factories;
 
@@ -24,36 +23,36 @@ namespace WebServer.Model.Client
             m_state = playerState;
         }
 
-        public Task<LobbyServerMessage> CreateLobby(string name)
+        public Task CreateLobby(string name)
         {
             return m_state.CreateLobby(name);
         }
-        public Task<LobbyServerMessage> StartMatchmaking()
+        public Task StartMatchmaking()
         {
             return m_state.StartMatchmaking();
         }
-        public Task<LobbyServerMessage> ExitMatchmaking()
+        public Task ExitMatchmaking()
         {
             return m_state.ExitMatchmaking();
         }
-        public Task<LobbyServerMessage> JoinLobby(string code)
+        public Task JoinLobby(string code)
         {
             return m_state.JoinLobby(code);
         }
-        public Task<LobbyServerMessage> LeaveLobby()
+        public Task LeaveLobby()
         {
             return m_state.LeaveLobby();
         }
-        public Task<LobbyServerMessage> StartGame()
+        public Task StartGame()
         {
             return m_state.StartGame();
         }
-        public Task<LobbyServerMessage> ExitGame()
+        public Task ExitGame()
         {
             return m_state.ExitGame();
         }
 
-        public Task<LobbyServerMessage> WriteChatMessage(string message)
+        public Task WriteChatMessage(string message)
         {
             return m_state.WriteChatMessage(message);
         }

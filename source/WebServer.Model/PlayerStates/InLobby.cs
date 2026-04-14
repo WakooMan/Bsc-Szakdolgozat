@@ -18,18 +18,18 @@ namespace WebServer.Model.PlayerStates
             m_lobbyCode = lobbyCode;
         }
 
-        public override Task<LobbyServerMessage> CreateLobby(string name)
+        public override Task CreateLobby(string name)
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> ExitGame()
+        public override Task ExitGame()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
 
-        public override async Task<LobbyServerMessage> WriteChatMessage(string message)
+        public override async Task WriteChatMessage(string message)
         {
             ILobby? lobby = m_lobbyManager.GetLobby(m_lobbyCode);
             if (lobby is null)
@@ -39,20 +39,19 @@ namespace WebServer.Model.PlayerStates
 
             lobby.AddChatMessage(new ChatMessage(m_player.ApplicationUser.UserName ?? "Unknown", message, DateTime.UtcNow));
             await m_serverService.SendLobbyServerMessageToGroup($"{lobby.Code}", new LobbyStateUpdateMessage(lobby.ToDto()));
-            return new SendChatResponseMessage(true, "OK");
         }
 
-        public override Task<LobbyServerMessage> ExitMatchmaking()
+        public override Task ExitMatchmaking()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override Task<LobbyServerMessage> JoinLobby(string code)
+        public override Task JoinLobby(string code)
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
 
-        public override async Task<LobbyServerMessage> LeaveLobby()
+        public override async Task LeaveLobby()
         {
             ILobby? lobby = m_lobbyManager.GetLobby(m_lobbyCode);
             if (lobby is null)
@@ -76,10 +75,10 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.LeaveGroup(m_player.ConnectionId, m_lobbyCode);
             await m_serverService.JoinGroup(m_player.ConnectionId, nameof(InMainMenu));
             await m_serverService.SendLobbyServerMessageToGroup($"{lobby.Code}", new LobbyStateUpdateMessage(lobby.ToDto()));
-            return new LeaveLobbyResponseMessage(true, "OK", m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray());
+            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new LeaveLobbyResponseMessage(true, "OK", m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
         }
 
-        public override async Task<LobbyServerMessage> StartGame()
+        public override async Task StartGame()
         {
             ILobby? lobby = m_lobbyManager.GetLobby(m_lobbyCode);
 
@@ -106,11 +105,11 @@ namespace WebServer.Model.PlayerStates
             m_gameManager.StartGame(m_lobbyCode);
             await m_serverService.SendLobbyServerMessageToClient(otherPlayer.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
                                                                                                                         new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer), 2));
-            return new StartGameResponseMessage(new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
-                                                new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer), 1);
+            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent), 
+                                                                                                                        new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer), 1));
         }
 
-        public override Task<LobbyServerMessage> StartMatchmaking()
+        public override Task StartMatchmaking()
         {
             throw new NotSupportedException("Cannot execute action in this state!");
         }
