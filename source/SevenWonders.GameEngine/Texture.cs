@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using SkiaSharp.Views.Maui;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Xml.Serialization;
@@ -74,49 +73,53 @@ namespace SevenWonders.GameEngine
         public void LoadTexture(string sceneFolder)
         {
             using var stream = File.OpenRead(Path.Combine(sceneFolder, FileName));
-            m_bitmap = SKBitmap.Decode(stream);
-            OriginalWidth = m_bitmap.Width;
-            OriginalHeight = m_bitmap.Height;
+            m_image = SKImage.FromEncodedData(stream);
+            OriginalWidth = m_image.Width;
+            OriginalHeight = m_image.Height;
         }
 
         [ExcludeFromCodeCoverage]
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height)
+        public void Draw(SKCanvas canvas, Vector2 position, Vector2 scale, float rotation, float width, float height)
         {
-            if (m_bitmap == null)
+            if (m_image == null)
                 return;
 
-            m_defaultPaint ??= new SKPaint { IsAntialias = true, ColorFilter = m_customColorFilter };
+            m_defaultPaint ??= new SKPaint { IsAntialias = false, ColorFilter = m_customColorFilter };
+            SKSamplingOptions samplingOptions = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
 
-            var canvas = eventArgs.Surface.Canvas;
-            canvas.Save();
-            canvas.Translate(position.X, position.Y);
-            canvas.RotateDegrees(rotation);
-            canvas.Scale(scale.X, scale.Y);
+            var matrix = SKMatrix.CreateTranslation(position.X, position.Y);
+            matrix = matrix.PreConcat(SKMatrix.CreateRotationDegrees(rotation));
+            matrix = matrix.PreConcat(SKMatrix.CreateScale(scale.X, scale.Y));
+
+            canvas.SetMatrix(matrix);
+
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
-            canvas.DrawBitmap(m_bitmap, destRect, m_defaultPaint);
+            canvas.DrawImage(m_image, destRect, samplingOptions, m_defaultPaint);
             canvas.Restore();
         }
 
         [ExcludeFromCodeCoverage]
-        public void DrawPart(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, int left, int top, int right, int bottom, float width, float height)
+        public void DrawPart(SKCanvas canvas, Vector2 position, Vector2 scale, float rotation, int left, int top, int right, int bottom, float width, float height)
         {
-            if (m_bitmap == null)
+            if (m_image == null)
                 return;
 
             m_defaultPaint ??= new SKPaint { IsAntialias = true, ColorFilter = m_customColorFilter };
+            SKSamplingOptions samplingOptions = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
 
-            var canvas = eventArgs.Surface.Canvas;
-            canvas.Save();
-            canvas.Translate(position.X, position.Y);
-            canvas.RotateDegrees(rotation);
-            canvas.Scale(scale.X, scale.Y);
+            var matrix = SKMatrix.CreateTranslation(position.X, position.Y);
+            matrix = matrix.PreConcat(SKMatrix.CreateRotationDegrees(rotation));
+            matrix = matrix.PreConcat(SKMatrix.CreateScale(scale.X, scale.Y));
+
+            canvas.SetMatrix(matrix);
+
             var srcRect = new SKRectI(left, top, right, bottom);
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
-            canvas.DrawBitmap(m_bitmap, srcRect, destRect, m_defaultPaint);
+            canvas.DrawImage(m_image, srcRect, destRect, m_defaultPaint);
             canvas.Restore();
         }
 
-        private SKBitmap? m_bitmap;
+        private SKImage? m_image;
         private SKColorFilter? m_customColorFilter;
         private SKPaint? m_defaultPaint;
     }

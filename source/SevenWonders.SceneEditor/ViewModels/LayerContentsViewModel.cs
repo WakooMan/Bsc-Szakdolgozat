@@ -222,7 +222,7 @@ namespace SevenWonders.SceneEditor.ViewModels
                 return;
             }
 
-            SelectedLayer.Draw(eventArgs, textureRegistry);
+            SelectedLayer.Draw(eventArgs.Surface.Canvas, textureRegistry);
         }
 
         public void DeleteSelectedLayer()

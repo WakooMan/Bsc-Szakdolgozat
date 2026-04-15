@@ -1,4 +1,4 @@
-﻿using SkiaSharp.Views.Maui;
+﻿using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Xml.Serialization;
@@ -170,7 +170,7 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public void Draw(SKCanvas canvas, TextureRegistry textureRegistry)
         {
             if (!Visible)
             {
@@ -181,7 +181,7 @@ namespace SevenWonders.GameEngine
             {
                 foreach (var sceneObject in SceneObjectsProxy)
                 {
-                    sceneObject.Draw(eventArgs, textureRegistry);
+                    sceneObject.Draw(canvas, textureRegistry);
                 }
             }
         }

@@ -56,7 +56,7 @@ namespace SevenWonders.SceneEditor.Views
             }
             else if (m_mainPageViewModel.CurrentScene is not null)
             {
-                m_mainPageViewModel.CurrentScene.Draw(e);
+                m_mainPageViewModel.CurrentScene.Draw(e.Surface.Canvas);
             }
         }
 

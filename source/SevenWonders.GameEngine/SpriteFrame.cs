@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using SkiaSharp.Views.Maui;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
@@ -66,7 +65,7 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height, bool dimmed, TextureRegistry textureRegistry)
+        public void Draw(SKCanvas canvas, Vector2 position, Vector2 scale, float rotation, float width, float height, bool dimmed, TextureRegistry textureRegistry)
         {
             Texture texture = textureRegistry.Get(TextureId);
             if (dimmed)
@@ -80,7 +79,7 @@ namespace SevenWonders.GameEngine
             {
                 texture.CustomColorFilter = null;
             }
-            texture.DrawPart(eventArgs, position, scale, rotation, Left, Top, Right, Bottom, width, height);
+            texture.DrawPart(canvas, position, scale, rotation, Left, Top, Right, Bottom, width, height);
         }
     }
 }

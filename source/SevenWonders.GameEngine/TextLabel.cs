@@ -1,5 +1,4 @@
 using SkiaSharp;
-using SkiaSharp.Views.Maui;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Xml.Serialization;
@@ -62,17 +61,10 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public override void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public override void Draw(SKCanvas canvas, TextureRegistry textureRegistry)
         {
             if (!Visible)
                 return;
-
-            var canvas = eventArgs.Surface.Canvas;
-
-            canvas.Save();
-            canvas.Translate(Position.X, Position.Y);
-            canvas.RotateDegrees(Rotation);
-            canvas.Scale(Scale.X, Scale.Y);
 
             if (BackgroundTextureId != -1)
             {
@@ -89,7 +81,7 @@ namespace SevenWonders.GameEngine
                     texture.CustomColorFilter = null;
                 }
 
-                texture.Draw(eventArgs, Vector2.Zero, Vector2.One, 0, Width, Height);
+                texture.Draw(canvas, Position, Scale, Rotation, Width, Height);
             }
 
             if (!string.IsNullOrEmpty(Text))

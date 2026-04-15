@@ -1,4 +1,4 @@
-﻿using SkiaSharp.Views.Maui;
+﻿using SkiaSharp;
 
 namespace SevenWonders.GameEngine
 {
@@ -13,7 +13,7 @@ namespace SevenWonders.GameEngine
         IReadOnlyList<Scene> Scenes { get; }
         void SetCurrentScene(Scene scene);
         void RegisterScene(Scene scene);
-        void Render(SKPaintSurfaceEventArgs eventArgs);
+        void Render(SKCanvas canvas);
         GameObject? GetObjectByName(string name);
         TextLabel? GetTextLabelByName(string name);
         ButtonObject? GetButtonByName(string name);

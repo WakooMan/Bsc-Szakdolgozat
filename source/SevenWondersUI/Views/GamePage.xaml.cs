@@ -40,7 +40,7 @@ public partial class GamePage : ContentPage
         e.Surface.Canvas.Clear();
         if (m_gamePageViewModel.Engine.SceneManager.CurrentScene is not null)
         {
-            m_gamePageViewModel.Engine.SceneManager.CurrentScene.Draw(e);
+            m_gamePageViewModel.Engine.SceneManager.CurrentScene.Draw(e.Surface.Canvas);
         }
     }
 
