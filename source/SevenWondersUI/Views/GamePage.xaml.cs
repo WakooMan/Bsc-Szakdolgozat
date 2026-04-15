@@ -22,8 +22,11 @@ public partial class GamePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        await m_gamePageViewModel.Initialize();
+        while (m_gameView is null || m_gameView.GRContext is null)
+        {
+            await Task.Delay(100);
+        }
+        await m_gamePageViewModel.Initialize(m_gameView.GRContext);
         OnCanvasSizeChanged(this, EventArgs.Empty);
     }
 

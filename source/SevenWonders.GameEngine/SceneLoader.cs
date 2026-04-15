@@ -1,4 +1,5 @@
 ﻿using SevenWonders.Common;
+using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 
@@ -7,18 +8,18 @@ namespace SevenWonders.GameEngine
     [ExcludeFromCodeCoverage]
     public class SceneLoader : ISceneLoader
     {
-        public virtual string ScenesPath => Path.Combine(Directory.GetCurrentDirectory(), "Scenes");
+        public virtual string ScenesPath => Path.Combine(Path.GetTempPath(), "Scenes");
 
         public SceneLoader(IXmlHandler xmlHandler, IZipFileReceiver zipFileReceiver)
         {
             ArgumentChecker.CheckNull(xmlHandler, nameof(xmlHandler));
 
-            m_tempPath = Path.Combine(Directory.GetCurrentDirectory(), "ScenesTemp");
+            m_tempPath = Path.Combine(Path.GetTempPath(), "ScenesTemp");
             m_xmlHandler = xmlHandler;
             m_zipFileReceiver = zipFileReceiver;
         }
 
-        public async Task<ICollection<Scene>> LoadScenes()
+        public async Task<ICollection<Scene>> LoadScenes(GRContext gRContext)
         {
             List<Scene> result = new List<Scene>();
             if (!Directory.Exists(m_tempPath))
@@ -29,13 +30,13 @@ namespace SevenWonders.GameEngine
             // Directory.GetFiles(ScenesPath).Where(file => file.EndsWith(".zip"))
             foreach (SceneFile sceneFile in await m_zipFileReceiver.ReceiveZipFiles())
             {
-                result.Add(LoadScene(sceneFile));
+                result.Add(LoadScene(sceneFile, gRContext));
             }
 
             return result;
         }
 
-        private Scene LoadScene(SceneFile sceneFile)
+        private Scene LoadScene(SceneFile sceneFile, GRContext gRContext)
         {
             GameLog.Info($"Loading scene from file: \"{sceneFile.Name}\"");
             string extractedSceneLocation = Path.Combine(m_tempPath, sceneFile.Name);
@@ -49,7 +50,7 @@ namespace SevenWonders.GameEngine
             UnzipFile(sceneFile, extractedSceneLocation);
             Scene? scene = m_xmlHandler.DeserializeFile<Scene>(Path.Combine(extractedSceneLocation, "scene.xml"));
             ArgumentChecker.CheckPredicateForOperation(() => scene is null, $"The scene xml file could not be loaded correctly! Check the format of scene.xml in \"{sceneFile.Name}\" zip file.");
-            scene.LoadTextures(extractedSceneLocation);
+            scene.LoadTextures(extractedSceneLocation, gRContext);
             GameLog.Info($"Scene loaded: \"{scene.Id} - {scene.Name}\"");
             return scene;
         }

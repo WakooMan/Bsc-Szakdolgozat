@@ -1,4 +1,6 @@
-﻿namespace SevenWonders.GameEngine
+﻿using SkiaSharp;
+
+namespace SevenWonders.GameEngine
 {
     public interface IObjectManager
     {
@@ -9,7 +11,7 @@
         void AddSceneObject(GraphicsLayer graphicsLayer, SceneObject sceneObject);
         void RemoveSceneObject(GraphicsLayer graphicsLayer, SceneObject sceneObject);
         void AddGraphicsLayer(Scene scene, GraphicsLayer graphicsLayer);
-        void AddTexture(Scene scene, Texture texture);
+        void AddTexture(Scene scene, Texture texture, GRContext gRContext);
         GraphicsLayer CopyGraphicsLayer(Scene scene, GraphicsLayer graphicsLayer, string newName);
         GameObject CopyGameObject(Scene scene, GraphicsLayer graphicsLayer, GameObject gameObject, string newName);
         GameObject CopyGameObject(GraphicsLayer graphicsLayer, GameObject gameObject, string newName);

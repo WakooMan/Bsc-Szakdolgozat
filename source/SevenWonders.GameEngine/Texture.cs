@@ -70,10 +70,11 @@ namespace SevenWonders.GameEngine
                    Id.GetHashCode();
         }
 
-        public void LoadTexture(string sceneFolder)
+        public void LoadTexture(string sceneFolder, GRContext gRContext)
         {
             using var stream = File.OpenRead(Path.Combine(sceneFolder, FileName));
-            m_image = SKImage.FromEncodedData(stream);
+            using var cpuImage = SKImage.FromEncodedData(stream);
+            m_image = cpuImage.ToTextureImage(gRContext);
             OriginalWidth = m_image.Width;
             OriginalHeight = m_image.Height;
         }

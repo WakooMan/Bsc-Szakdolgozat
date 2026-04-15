@@ -1,4 +1,5 @@
 ﻿using SevenWonders.Common;
+using SkiaSharp;
 using SkiaSharp.Views.Maui;
 
 namespace SevenWonders.GameEngine
@@ -90,7 +91,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Added GraphicsLayer \"{graphicsLayer.Id} - {graphicsLayer.Name}\" to scene \"{scene.Id} - {scene.Name}\"");
         }
 
-        public void AddTexture(Scene scene, Texture texture)
+        public void AddTexture(Scene scene, Texture texture, GRContext gRContext)
         {
             if (scene.Textures.Any(t => t.FileName == texture.FileName))
             {
@@ -99,7 +100,7 @@ namespace SevenWonders.GameEngine
 
             GameLog.Info($"Adding Texture \"{texture.FileName}\" to scene \"{scene.Id} - {scene.Name}\"");
             texture.Id = GetNextUniqueId(scene);
-            scene.AddTexture(texture, m_sceneFileHandler.ReceiveSceneFolder(scene));
+            scene.AddTexture(texture, m_sceneFileHandler.ReceiveSceneFolder(scene), gRContext);
             GameLog.Info($"Added Texture \"{texture.Id} - {texture.FileName}\" to scene \"{scene.Id} - {scene.Name}\"");
         }
 

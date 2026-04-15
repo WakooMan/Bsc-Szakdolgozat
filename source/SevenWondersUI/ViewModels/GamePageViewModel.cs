@@ -4,6 +4,7 @@ using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
 using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
+using SkiaSharp;
 
 namespace SevenWondersUI.ViewModels
 {
@@ -36,11 +37,11 @@ namespace SevenWondersUI.ViewModels
 
         public IEngine Engine => m_engine;
 
-        public async Task Initialize()
+        public async Task Initialize(GRContext gRContext)
         {
             m_engine.RegisterSubSystem(m_animationManager);
 
-            foreach (Scene scene in await m_sceneLoader.LoadScenes())
+            foreach (Scene scene in await m_sceneLoader.LoadScenes(gRContext))
             {
                 m_engine.SceneManager.RegisterScene(scene);
             }
