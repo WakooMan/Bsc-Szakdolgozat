@@ -111,8 +111,6 @@ namespace SevenWonders.GameEngine
 
                 canvas.DrawText(Text, 0, textY, SKTextAlign.Center, font, textPaint);
             }
-
-            canvas.Restore();
         }
 
         public override SceneObject Clone()

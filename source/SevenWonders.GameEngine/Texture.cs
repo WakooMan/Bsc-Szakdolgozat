@@ -95,7 +95,6 @@ namespace SevenWonders.GameEngine
 
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
             canvas.DrawImage(m_image, destRect, samplingOptions, m_defaultPaint);
-            canvas.Restore();
         }
 
         [ExcludeFromCodeCoverage]
@@ -104,7 +103,7 @@ namespace SevenWonders.GameEngine
             if (m_image == null)
                 return;
 
-            m_defaultPaint ??= new SKPaint { IsAntialias = true, ColorFilter = m_customColorFilter };
+            m_defaultPaint ??= new SKPaint { IsAntialias = false, ColorFilter = m_customColorFilter };
             SKSamplingOptions samplingOptions = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
 
             var matrix = SKMatrix.CreateTranslation(position.X, position.Y);
@@ -116,7 +115,6 @@ namespace SevenWonders.GameEngine
             var srcRect = new SKRectI(left, top, right, bottom);
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
             canvas.DrawImage(m_image, srcRect, destRect, m_defaultPaint);
-            canvas.Restore();
         }
 
         private SKImage? m_image;

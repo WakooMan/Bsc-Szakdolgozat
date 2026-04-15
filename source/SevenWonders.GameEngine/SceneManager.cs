@@ -43,7 +43,7 @@ namespace SevenWonders.GameEngine
             {
                 return;
             }
-
+            canvas.Clear(SKColors.Black);
             CurrentScene.Draw(canvas);
         }
         public GameObject? GetObjectByName(string name)

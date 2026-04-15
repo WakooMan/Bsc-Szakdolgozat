@@ -3,6 +3,7 @@ using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
+using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
 
@@ -49,14 +50,14 @@ namespace SevenWonders.SceneEditor.Views
 
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            e.Surface.Canvas.Clear();
             if (m_engine.SceneManager.CurrentScene is not null && m_mainPageViewModel.LayerContentsViewModel.SelectedLayer is not null)
             {
-                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e, m_engine.SceneManager.CurrentScene.TextureRegistry);
+                e.Surface.Canvas.Clear(SKColors.Black);
+                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e.Surface.Canvas, m_engine.SceneManager.CurrentScene.TextureRegistry);
             }
             else if (m_mainPageViewModel.CurrentScene is not null)
             {
-                m_mainPageViewModel.CurrentScene.Draw(e.Surface.Canvas);
+                m_engine.SceneManager.Render(e.Surface.Canvas);
             }
         }
 
