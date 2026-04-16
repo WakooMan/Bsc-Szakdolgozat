@@ -59,7 +59,9 @@ namespace GameLogic.Handlers
         public async Task<List<Good>> GetMissingGoods(IBuildable buildable, Player buyer)
         {
             List<Good> missing = new List<Good>();
-            IReadOnlyDictionary<Type, Good> ownerGoods = (await buyer.GetPlayerProperties()).Goods;
+            PlayerProperties playerProperties = await buyer.GetPlayerProperties();
+            IReadOnlyDictionary<Type, Good> ownerGoods = playerProperties.Goods;
+            IReadOnlyList<ChooseGood> chooseGoods = playerProperties.GetEffects<ChooseGood>();
 
             foreach (Good good in buildable.GoodCost)
             {
@@ -75,6 +77,19 @@ namespace GameLogic.Handlers
                 else
                 {
                     missing.Add(missingGood);
+                }
+            }
+
+            foreach (ChooseGood chooseGood in chooseGoods)
+            {
+                foreach (Good choosableGood in chooseGood.GetGoods())
+                {
+                    Good? good = missing.FirstOrDefault(g => g.GetType() == choosableGood.GetType());
+                    if (good is not null)
+                    {
+                        missing.Remove(good);
+                        break;
+                    }
                 }
             }
 

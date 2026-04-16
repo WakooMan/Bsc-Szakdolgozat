@@ -1,6 +1,5 @@
 ﻿
 using GameLogic.Elements.Effects;
-using GameLogic.Events.GameEvents;
 
 namespace GameLogic.Elements.Guilds
 {
@@ -16,39 +15,26 @@ namespace GameLogic.Elements.Guilds
             return new ExtortionistGuild();
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            m_action = (eventObj) =>
+            if (m_victoryPoint is not null)
             {
-                Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
-                Player opponent = gameContext.TurnHandler.OpponentPlayer;
-                int maxCount = Math.Max(currentPlayer.Money, opponent.Money);
+                await m_victoryPoint.OnCalculatePlayerProperties(playerProperties);
+            }
+        }
 
-                m_victoryPoint = new VictoryPoints()
-                {
-                    Points = maxCount % 3
-                };
-                m_victoryPoint.Apply(gameContext, playerId).GetAwaiter().GetResult();
+        public override Task OnBeforeGameEnded(Player owner, Player opponent)
+        {
+            int maxCount = Math.Max(owner.Money, opponent.Money);
+
+            m_victoryPoint = new VictoryPoints()
+            {
+                Points = maxCount % 3
             };
-            gameContext.EventManager.Subscribe(m_action);
+
             return Task.CompletedTask;
         }
 
-        public override async Task Unapply(IGameContext gameContext, int playerId)
-        {
-            if (m_action is not null)
-            {
-                gameContext.EventManager.Unsubscribe(m_action);
-            }
-
-            if (m_victoryPoint is not null)
-            {
-                await m_victoryPoint.Unapply(gameContext, playerId);
-                m_victoryPoint = null;
-            }
-        }
-
-        private Action<BeforeGameEnded>? m_action;
         private VictoryPoints? m_victoryPoint;
     }
 }

@@ -34,6 +34,13 @@ namespace GameLogic.Elements.GameCards
             return Task.CompletedTask;
         }
 
+        public abstract Task OnCalculatePlayerProperties(PlayerProperties playerProperties);
+
+        public virtual Task OnBeforeGameEnded(Player owner, Player opponent)
+        {
+            return Task.CompletedTask;
+        }
+
         protected Card()
         {
             GoodCost = new List<Good>();

@@ -45,5 +45,21 @@ namespace GameLogic.Elements.Wonders
                 await effect.Apply(gameContext, playerId);
             }
         }
+
+        public async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            foreach (Effect effect in Effects)
+            {
+                await effect.OnCalculatePlayerProperties(playerProperties);
+            }
+        }
+
+        public async Task OnBeforeGameEnded(Player owner, Player opponent)
+        {
+            foreach (Effect effect in Effects)
+            {
+                await effect.OnBeforeGameEnded(owner, opponent);
+            }
+        }
     }
 }

@@ -24,9 +24,16 @@ namespace GameLogic.Elements.GameCards
             await GuildObj.Apply(gameContext, playerId);
         }
 
-        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await GuildObj.Unapply(gameContext, playerId);
+            await GuildObj.OnCalculatePlayerProperties(playerProperties);
         }
+
+        public override async Task OnBeforeGameEnded(Player owner, Player opponent)
+        {
+            await GuildObj.OnBeforeGameEnded(owner, opponent);
+        }
+
+
     }
 }

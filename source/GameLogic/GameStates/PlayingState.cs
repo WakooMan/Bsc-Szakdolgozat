@@ -54,10 +54,11 @@ namespace GameLogic.GameStates
             GameContext.EventManager.Unsubscribe<ScientificVictory>(OnScientificOrMilitaryVictory);
             if (m_gameOverType == typeof(OnGameEnded))
             {
-                await GameContext.EventManager.PublishAsync(new BeforeGameEnded());
                 Player firstPlayer = GameContext.TurnHandler.GetPlayer(1);
-                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties();
                 Player secondPlayer = GameContext.TurnHandler.GetPlayer(2);
+                await firstPlayer.OnBeforeGameEnded(secondPlayer);
+                await secondPlayer.OnBeforeGameEnded(firstPlayer);
+                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties();
                 PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties();
                 await GameContext.EventManager.PublishAsync(new OnGameEnded((firstPlayer.Name, firstPlayerProperties.VictoryPoints, firstPlayer.Cards.OfType<BlueCard>().Count()), (secondPlayer.Name, secondPlayerProperties.VictoryPoints, secondPlayer.Cards.OfType<BlueCard>().Count())));
             }

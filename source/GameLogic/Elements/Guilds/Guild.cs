@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Guilds
 {
@@ -18,7 +13,19 @@ namespace GameLogic.Elements.Guilds
     {
         public abstract Guild Clone();
 
-        public abstract Task Apply(IGameContext gameContext, int playerId);
-        public abstract Task Unapply(IGameContext gameContext, int playerId);
+        public virtual Task Apply(IGameContext gameContext, int playerId)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual Task OnBeforeGameEnded(Player owner, Player opponent)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

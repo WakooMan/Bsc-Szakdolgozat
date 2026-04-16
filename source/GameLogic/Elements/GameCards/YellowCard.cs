@@ -1,5 +1,4 @@
 ﻿using GameLogic.Elements.Effects;
-using GameLogic.Events;
 
 namespace GameLogic.Elements.GameCards
 {
@@ -36,6 +35,14 @@ namespace GameLogic.Elements.GameCards
         public override YellowCard Clone()
         {
             return new YellowCard(this);
+        }
+
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            foreach (Effect effect in Effects)
+            {
+                await effect.OnCalculatePlayerProperties(playerProperties);
+            }
         }
     }
 }

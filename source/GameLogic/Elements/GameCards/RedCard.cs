@@ -20,14 +20,9 @@ namespace GameLogic.Elements.GameCards
             return new RedCard(this);
         }
 
-        public override async Task OnBuilt(IGameContext gameContext, int playerId)
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await Strength.Apply(gameContext, playerId);
-        }
-
-        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
-        {
-            await Strength.Unapply(gameContext, playerId);
+            await Strength.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

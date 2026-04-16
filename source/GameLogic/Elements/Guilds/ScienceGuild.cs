@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.GameCards;
-using GameLogic.Events.GameEvents;
 
 namespace GameLogic.Elements.Guilds
 {
@@ -16,42 +15,37 @@ namespace GameLogic.Elements.Guilds
             return new ScienceGuild();
         }
 
-        public override async Task Unapply(IGameContext gameContext, int playerId)
-        {
-            if (m_action is not null)
-            {
-                gameContext.EventManager.Unsubscribe(m_action);
-            }
-            if (m_victoryPoint is not null)
-            {
-                await m_victoryPoint.Unapply(gameContext, playerId);
-                m_victoryPoint = null;
-            }
-        }
-
         public override Task Apply(IGameContext gameContext, int playerId)
         {
             Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
             Player opponent = gameContext.TurnHandler.OpponentPlayer;
-            int maxCount = Math.Max(currentPlayer.Cards.OfType<GreenCard>().Count(), opponent.Cards.OfType<GreenCard>().Count());
-            currentPlayer.Money += maxCount;
-
-            m_action = (eventObj) =>
-            {
-                Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
-                Player opponent = gameContext.TurnHandler.OpponentPlayer;
-                int maxCount = Math.Max(currentPlayer.Cards.OfType<GreenCard>().Count(), opponent.Cards.OfType<GreenCard>().Count());
-                m_victoryPoint = new VictoryPoints()
-                {
-                    Points = maxCount
-                };
-                m_victoryPoint.Apply(gameContext, playerId).GetAwaiter().GetResult();
-            };
-            gameContext.EventManager.Subscribe(m_action);
+            currentPlayer.Money += GetMaxGreenCardCount(currentPlayer, opponent);
+            
             return Task.CompletedTask;
         }
 
-        private Action<BeforeGameEnded>? m_action;
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            if (m_victoryPoint is not null)
+            {
+                await m_victoryPoint.OnCalculatePlayerProperties(playerProperties);
+            }
+        }
+
+        public override Task OnBeforeGameEnded(Player owner, Player opponent)
+        {
+            m_victoryPoint = new VictoryPoints()
+            {
+                Points = GetMaxGreenCardCount(owner, opponent)
+            };
+            return Task.CompletedTask;
+        }
+
+        private int GetMaxGreenCardCount(Player owner, Player opponent)
+        {
+            return Math.Max(owner.Cards.OfType<GreenCard>().Count(), opponent.Cards.OfType<GreenCard>().Count());
+        }
+
         private VictoryPoints? m_victoryPoint;
     }
 }
