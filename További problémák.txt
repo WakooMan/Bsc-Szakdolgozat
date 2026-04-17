@@ -7,11 +7,11 @@ Gameplay:
 - 5 development kell a táblán a 3 helyett
 Multiplayer:
 - Regisztráció kliens oldalon
-- Belépésnél küldeni a kliensnek a szobákat
+- ne léphessenek be ketten ugyanazzal a felhasználóval
+- game over handler game page-be integrálása
 - Menük finomítása
 - Matchmaking
 - player action szinkronizáció a szerverrel
-- game over handler game page-be integrálása
 - verseny mód statisztika
 Logging:
 - Add logs everywhere

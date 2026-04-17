@@ -14,10 +14,11 @@ namespace SevenWonders.WebServer.Controllers
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
-        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IClientManager clientManager)
         {
             m_userManager = userManager;
             m_signInManager = signInManager;
+            m_clientManager = clientManager;
         }
 
         [HttpPost("register")]
@@ -92,5 +93,6 @@ namespace SevenWonders.WebServer.Controllers
 
         private readonly UserManager<ApplicationUser> m_userManager;
         private readonly SignInManager<ApplicationUser> m_signInManager;
+        private readonly IClientManager m_clientManager;
     }
 }

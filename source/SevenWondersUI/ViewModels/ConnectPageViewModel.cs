@@ -13,11 +13,13 @@ namespace SevenWondersUI.ViewModels
         public string AuthToken { get; set; }
         public string UserName { get; set; }
 
-        public ConnectPageViewModel(INavigationService navigationService, IClientHubService clientHubService)
+        public ConnectPageViewModel(INavigationService navigationService, IClientHubService clientHubService, IAuthService authService)
         {
             m_navigationService = navigationService;
             m_clientHubService = clientHubService;
+            m_authService = authService;
             m_lobbyUpdateMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage>(OnLobbyUpdateMessageReceived);
+            m_failureResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
             AuthToken = string.Empty;
             UserName = string.Empty;
         }
@@ -25,11 +27,13 @@ namespace SevenWondersUI.ViewModels
         public void Register(IMessageRegisterer registerer)
         {
             registerer.Register(m_lobbyUpdateMessageHandlerDelegate);
+            registerer.Register(m_failureResponseMessageHandlerDelegate);
         }
 
         public void Unregister(IMessageRegisterer registerer)
         {
             registerer.Unregister(m_lobbyUpdateMessageHandlerDelegate);
+            registerer.Unregister(m_failureResponseMessageHandlerDelegate);
         }
 
         public async Task ConnectToServer()
@@ -72,8 +76,21 @@ namespace SevenWondersUI.ViewModels
             return message.Success;
         }
 
+        private async Task<bool> OnFailureResponseMessageReceived(FailureResponseMessage message)
+        {
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                await m_clientHubService.Disconnect();
+                await m_authService.LogoutAsync();
+                await m_navigationService.NavigateToAsync("//LoginPage");
+            });
+            return false;
+        }
+
         private readonly LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage> m_lobbyUpdateMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandlerDelegate;
         private readonly INavigationService m_navigationService;
         private readonly IClientHubService m_clientHubService;
+        private readonly IAuthService m_authService;
     }
 }
