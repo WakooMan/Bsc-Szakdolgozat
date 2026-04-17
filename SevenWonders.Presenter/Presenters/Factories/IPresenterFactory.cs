@@ -2,6 +2,7 @@
 {
     public interface IPresenterFactory
     {
+        void Initialize(bool isMultiplayer);
         IPresenter CreateCardPresenter();
         IPresenter CreateWonderPresenter();
         IPresenter CreatePlayer1Presenter();

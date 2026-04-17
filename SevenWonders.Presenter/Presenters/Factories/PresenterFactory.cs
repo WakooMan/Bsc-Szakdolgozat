@@ -23,7 +23,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
                                 ITextureIdHandler textureIdHandler, 
                                 IMilitaryTokenChildTextureHandler militaryTokenChildTextureHandler, 
                                 IDevelopmentHandlerFactory developmentHandlerFactory,
-                                IGameOverHandler gameOverHandler)
+                                IGameOverHandlerFactory gameOverHandlerFactory)
         {
             m_cardConnector = cardConnector;
             m_wonderConnector = wonderConnector;
@@ -37,7 +37,13 @@ namespace SevenWonders.Presenter.Presenters.Factories
             m_textureIdHandler = textureIdHandler;
             m_militaryTokenChildTextureHandler = militaryTokenChildTextureHandler;
             m_developmentHandlerFactory = developmentHandlerFactory;
-            m_gameOverHandler = gameOverHandler;
+            m_gameOverHandlerFactory = gameOverHandlerFactory;
+            m_isMultiplayer = false;
+        }
+
+        public void Initialize(bool isMultiplayer)
+        {
+            m_isMultiplayer = isMultiplayer;
         }
 
         public IPresenter CreateCardPresenter()
@@ -72,7 +78,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
 
         public IPresenter CreateScreenPresenter()
         {
-            return new ScreenPresenter(m_gameEngineReceiver, m_eventManager, m_gameOverHandler);
+            return new ScreenPresenter(m_gameEngineReceiver, m_eventManager, m_gameOverHandlerFactory.Create(m_isMultiplayer));
         }
 
         public IPresenter CreateChooseObjectPresenter()
@@ -92,6 +98,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
         private readonly ITextureIdHandler m_textureIdHandler;
         private readonly IMilitaryTokenChildTextureHandler m_militaryTokenChildTextureHandler;
         private readonly IDevelopmentHandlerFactory m_developmentHandlerFactory;
-        private readonly IGameOverHandler m_gameOverHandler;
+        private readonly IGameOverHandlerFactory m_gameOverHandlerFactory;
+        private bool m_isMultiplayer;
     }
 }

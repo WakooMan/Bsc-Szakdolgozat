@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Interfaces;
-using Microsoft.AspNetCore.SignalR;
 using WebServer.Contract.Messages.Game.ClientMessages;
 using WebServer.Contract.Messages.Game.ServerMessages;
 using WebServer.Contract.Messages.Lobby.ServerMessages;
@@ -14,13 +13,21 @@ namespace WebServer.Model.PlayerStates
 {
     public class InGame : PlayerState, IPlayerActionReceiver, IMessageHandler, IDisposable
     {
-        public InGame(IPlayerStateFactory playerStateFactory, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IGameManager gameManager, IServerMessageDispatcher serverMessageDispatcher, string gameCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
+        public InGame(IPlayerStateFactory playerStateFactory,
+                      IPlayerClient player,
+                      IServerService serverService,
+                      ILobbyCodeGenerator lobbyCodeGenerator,
+                      IGameManager gameManager,
+                      IServerMessageDispatcher serverMessageDispatcher,
+                      ILobbyManager lobbyManager,
+                      string gameCode) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
         {
             m_gameManager = gameManager;
             m_gameCode = gameCode;
             m_serverMessageDispatcher = serverMessageDispatcher;
             m_signal = new ManualResetEventSlim(false);
             m_playerActions = new List<PlayerActionWrapper>();
+            m_lobbyManager = lobbyManager;
             m_playerActionRequestMessageHandler = new GameRequestMessageHandlerDelegate<PlayerActionRequestMessage>(HandlePlayerActionRequestMessage);
             m_serverMessageDispatcher.RegisterHandler(this);
         }
@@ -37,7 +44,7 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.JoinGroup(m_player.ConnectionId, nameof(InMainMenu));
             m_lobbyCodeGenerator.RemoveUniqueCode(m_gameCode);
             m_gameManager.RemoveGame(m_gameCode);
-            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new ExitGameResponseMessage(true, "OK"));
+            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new ExitGameResponseMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
         }
 
         public override Task ExitMatchmaking()
@@ -129,6 +136,7 @@ namespace WebServer.Model.PlayerStates
         private readonly List<PlayerActionWrapper> m_playerActions;
         private readonly GameRequestMessageHandlerDelegate<PlayerActionRequestMessage> m_playerActionRequestMessageHandler;
         private readonly IServerMessageDispatcher m_serverMessageDispatcher;
+        private readonly ILobbyManager m_lobbyManager;
         private PlayerActionWrapper? m_chosenPlayerAction;
     }
 }

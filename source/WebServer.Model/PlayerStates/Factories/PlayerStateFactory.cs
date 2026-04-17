@@ -25,7 +25,7 @@ namespace WebServer.Model.PlayerStates.Factories
 
         public InGame CreateInGameState(IPlayerClient playerClient, string gameCode)
         {
-            return new InGame(this, playerClient, m_serverService, m_lobbyCodeGenerator, m_gameManager, m_serverMessageDispatcher, gameCode);
+            return new InGame(this, playerClient, m_serverService, m_lobbyCodeGenerator, m_gameManager, m_serverMessageDispatcher, m_lobbyManager, gameCode);
         }
 
         public InLobby CreateInLobbyState(IPlayerClient playerClient, string lobbyCode)

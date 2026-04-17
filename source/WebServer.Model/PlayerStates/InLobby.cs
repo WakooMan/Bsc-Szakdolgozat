@@ -84,7 +84,7 @@ namespace WebServer.Model.PlayerStates
             await m_serverService.LeaveGroup(m_player.ConnectionId, m_lobbyCode);
             await m_serverService.JoinGroup(m_player.ConnectionId, nameof(InMainMenu));
             await m_serverService.SendLobbyServerMessageToGroup($"{lobby.Code}", new LobbyStateUpdateMessage(lobby.ToDto()));
-            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new LeaveLobbyResponseMessage(true, "OK", m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
+            await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new LeaveLobbyResponseMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
         }
 
         public override async Task StartGame()

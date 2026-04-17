@@ -6,6 +6,6 @@ namespace WebServer.Contract.Messages.Lobby.ServerMessages
     {
         public LobbyDto[] Lobbies { get; set; }
         public LeaveLobbyResponseMessage() : base() { Lobbies = []; }
-        public LeaveLobbyResponseMessage(bool success, string message, LobbyDto[] lobbies) : base(success, message) { Lobbies = lobbies; }
+        public LeaveLobbyResponseMessage(LobbyDto[] lobbies) : base(true, "OK") { Lobbies = lobbies; }
     }
 }

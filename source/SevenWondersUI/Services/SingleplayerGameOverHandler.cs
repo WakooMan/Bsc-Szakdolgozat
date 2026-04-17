@@ -2,9 +2,9 @@
 
 namespace SevenWondersUI.Services
 {
-    public class GameOverHandler: IGameOverHandler
+    public class SingleplayerGameOverHandler: IGameOverHandler
     {
-        public GameOverHandler(INavigationService navigationService) 
+        public SingleplayerGameOverHandler(INavigationService navigationService) 
         {
             m_navigationService = navigationService;
         }

@@ -1,8 +1,11 @@
-﻿namespace WebServer.Contract.Messages.Lobby.ServerMessages
+﻿using WebServer.Contract.DataTransferObjects;
+
+namespace WebServer.Contract.Messages.Lobby.ServerMessages
 {
     public class ExitGameResponseMessage: LobbyServerMessage
     {
-        public ExitGameResponseMessage() : base() { }
-        public ExitGameResponseMessage(bool success, string message) : base(success, message) { }
+        public LobbyDto[] Lobbies { get; set; }
+        public ExitGameResponseMessage() : base() { Lobbies = []; }
+        public ExitGameResponseMessage(LobbyDto[] lobbies) : base(true, "OK") { Lobbies = lobbies; }
     }
 }

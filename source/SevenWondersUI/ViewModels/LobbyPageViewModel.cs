@@ -140,7 +140,7 @@ namespace SevenWondersUI.ViewModels
                         { "Player2", message.Player2 },
                         { "StartingPlayerId", message.StartingPlayerId },
                         { "Seed", message.Seed },
-                        { "RandomGeneratorType", RandomGeneratorType.Deterministic }
+                        { "IsMultiplayer", true }
                     });
                 });
             }

@@ -4,6 +4,9 @@ using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
 using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
+using SevenWonders.Presenter.Presenters.Factories;
+using SevenWonders.WebClient.Model.Services;
+using SevenWondersUI.Services;
 
 namespace SevenWondersUI.ViewModels
 {
@@ -11,10 +14,17 @@ namespace SevenWondersUI.ViewModels
     [QueryProperty(nameof(Player2), "Player2")]
     [QueryProperty(nameof(StartingPlayerId), "StartingPlayerId")]
     [QueryProperty(nameof(Seed), "Seed")]
-    [QueryProperty(nameof(RandomGeneratorType), "RandomGeneratorType")]
+    [QueryProperty(nameof(IsMultiplayer), "IsMultiplayer")]
     public class GamePageViewModel: BaseViewModel
     {
-        public GamePageViewModel(IGame game, IEngine engine, ISceneLoader sceneLoader, IAnimationManager animationManager, IPresenter presenter, IPlayerActionReceiverFactory playerActionReceiverFactory, IRandomGeneratorFactory randomGeneratorFactory)
+        public GamePageViewModel(IGame game,
+                                 IEngine engine,
+                                 ISceneLoader sceneLoader,
+                                 IAnimationManager animationManager,
+                                 IPresenter presenter,
+                                 IPlayerActionReceiverFactory playerActionReceiverFactory,
+                                 IRandomGeneratorFactory randomGeneratorFactory,
+                                 IPresenterFactory presenterFactory)
         {
             Player1 = new PlayerInitModel();
             Player2 = new PlayerInitModel();
@@ -25,13 +35,14 @@ namespace SevenWondersUI.ViewModels
             m_game = game;
             m_engine = engine;
             m_randomGeneratorFactory = randomGeneratorFactory;
+            m_presenterFactory = presenterFactory;
         }
 
         public int StartingPlayerId { get; set; }
 
         public PlayerInitModel Player1 { get; set; }
         public PlayerInitModel Player2 { get; set; }
-        public RandomGeneratorType RandomGeneratorType { get; set; }
+        public bool IsMultiplayer { get; set; }
         public int Seed { get; set; }
 
         public IEngine Engine => m_engine;
@@ -53,8 +64,9 @@ namespace SevenWondersUI.ViewModels
             }
 
             m_engine.Startup();
+            m_presenterFactory.Initialize(IsMultiplayer);
             m_presenter.Initialize();
-            m_game.Initialize(m_randomGeneratorFactory.Create(RandomGeneratorType, Seed), (Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType, Player1.Name)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType, Player2.Name)), StartingPlayerId);
+            m_game.Initialize(m_randomGeneratorFactory.Create(IsMultiplayer ? RandomGeneratorType.Deterministic : RandomGeneratorType.Undeterministic, Seed), (Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType, Player1.Name)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType, Player2.Name)), StartingPlayerId);
             m_presenter.SubscribeToEvents();
             _ = Task.Run(m_game.GameLoop);
         }
@@ -66,5 +78,6 @@ namespace SevenWondersUI.ViewModels
         private readonly IPresenter m_presenter;
         private readonly IPlayerActionReceiverFactory m_playerActionReceiverFactory;
         private readonly IRandomGeneratorFactory m_randomGeneratorFactory;
+        private readonly IPresenterFactory m_presenterFactory;
     }
 }

@@ -32,6 +32,7 @@ using SevenWonders.WebClient.Model;
 using SevenWonders.WebClient.Model.Factories;
 using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Services;
+using SevenWondersUI.Services.Factories;
 using SevenWondersUI.ViewModels;
 using SevenWondersUI.Views;
 using SevenWondersUI.Views.Factories;
@@ -106,7 +107,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(ICardConnector), typeof(CardConnector));
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
         builder.Services.AddSingleton<IAuthService, AuthService>();
-        builder.Services.AddSingleton(typeof(IGameOverHandler), typeof(GameOverHandler));
+        builder.Services.AddSingleton(typeof(IGameOverHandlerFactory), typeof(GameOverHandlerFactory));
         builder.Services.AddSingleton(typeof(IClientHubService), typeof(ClientHubService));
         builder.Services.AddSingleton(typeof(IClientMessageDispatcher), typeof(ClientMessageDispatcher));
         builder.Services.AddSingleton(typeof(IMessageRegistererFactory), typeof(MessageRegistererFactory));

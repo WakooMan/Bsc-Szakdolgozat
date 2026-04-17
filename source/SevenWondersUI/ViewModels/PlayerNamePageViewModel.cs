@@ -137,7 +137,7 @@ namespace SevenWondersUI.ViewModels
                 { "Player2", new PlayerInitModel(m_player2Entry.entryText, PlayerType.LocalPlayer) },
                 { "StartingPlayerId", 1 },
                 { "Seed", 0 },
-                { "RandomGeneratorType", RandomGeneratorType.Undeterministic }
+                { "IsMultiplayer", false }
             });
             m_player1Entry.entryText = string.Empty;
             m_player2Entry.entryText = string.Empty;

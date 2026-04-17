@@ -6,21 +6,25 @@ namespace SevenWonders.Presenter.Presenters
     {
         public Presenter(IPresenterFactory presenterFactory)
         {
-            m_presenters = new List<IPresenter>
-            {
-                presenterFactory.CreateCardPresenter(),
-                presenterFactory.CreateWonderPresenter(),
-                presenterFactory.CreatePlayer1Presenter(),
-                presenterFactory.CreatePlayer2Presenter(),
-                presenterFactory.CreateMilitaryBoardPresenter(),
-                presenterFactory.CreateDevelopmentPresenter(),
-                presenterFactory.CreateScreenPresenter(),
-                presenterFactory.CreateChooseObjectPresenter()
-            };
+            m_presenterFactory = presenterFactory;
+            m_presenters = new List<IPresenter>();
         }
 
         public void Initialize()
         {
+            m_presenters.Clear();
+            m_presenters.AddRange(
+            [
+                m_presenterFactory.CreateCardPresenter(),
+                m_presenterFactory.CreateWonderPresenter(),
+                m_presenterFactory.CreatePlayer1Presenter(),
+                m_presenterFactory.CreatePlayer2Presenter(),
+                m_presenterFactory.CreateMilitaryBoardPresenter(),
+                m_presenterFactory.CreateDevelopmentPresenter(),
+                m_presenterFactory.CreateScreenPresenter(),
+                m_presenterFactory.CreateChooseObjectPresenter()
+            ]);
+
             foreach (var presenter in m_presenters)
             {
                 presenter.Initialize();
@@ -36,5 +40,6 @@ namespace SevenWonders.Presenter.Presenters
         }
 
         private readonly List<IPresenter> m_presenters;
+        private readonly IPresenterFactory m_presenterFactory;
     }
 }
