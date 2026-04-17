@@ -11,6 +11,7 @@ namespace WebServer.Contract.Messages.Lobby.ClientMessages
     [JsonDerivedType(typeof(StopMatchmakingRequestMessage), typeDiscriminator: "stopmatchmakingrequest")]
     [JsonDerivedType(typeof(SendChatRequestMessage), typeDiscriminator: "sendchatrequest")]
     [JsonDerivedType(typeof(ExitGameRequestMessage), typeDiscriminator: "exitgamerequest")]
+    [JsonDerivedType(typeof(GetLobbiesRequestMessage), typeDiscriminator: "getlobbiesrequest")]
     public abstract class LobbyClientMessage
     {
     }

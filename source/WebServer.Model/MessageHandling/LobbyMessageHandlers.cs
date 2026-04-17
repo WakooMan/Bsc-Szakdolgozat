@@ -1,16 +1,19 @@
-﻿using WebServer.Contract.Messages.Lobby.ClientMessages;
+﻿using WebServer.Contract.DataTransferObjects;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
 using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
+using WebServer.Model.Lobby;
 using WebServer.Model.ServerHub;
 
 namespace WebServer.Model.MessageHandling
 {
     public class LobbyMessageHandlers : ILobbyMessageHandlers
     {
-        public LobbyMessageHandlers(IClientManager clientManager, IServerService serverService)
+        public LobbyMessageHandlers(IClientManager clientManager, IServerService serverService, ILobbyManager lobbyManager)
         {
             m_clientManager = clientManager;
             m_serverService = serverService;
+            m_lobbyManager = lobbyManager;
             m_createLobbyRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<CreateLobbyRequestMessage>(OnCreateLobbyMessageReceived);
             m_joinLobbyRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<JoinLobbyRequestMessage>(OnJoinLobbyMessageReceived);
             m_leaveLobbyRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<LeaveLobbyRequestMessage>(OnLeaveLobbyMessageReceived);
@@ -19,6 +22,7 @@ namespace WebServer.Model.MessageHandling
             m_stopMatchmakingRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<StopMatchmakingRequestMessage>(OnStopMatchmakingMessageReceived);
             m_sendChatRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<SendChatRequestMessage>(OnSendChatMessageReceived);
             m_exitGameRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<ExitGameRequestMessage>(OnExitGameMessageReceived);
+            m_getLobbiesRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<GetLobbiesRequestMessage>(OnGetLobbiesMessageReceived);
         }
 
         public void Register(IMessageRegisterer registerer)
@@ -31,6 +35,7 @@ namespace WebServer.Model.MessageHandling
             registerer.Register(m_stopMatchmakingRequestMessageHandler);
             registerer.Register(m_sendChatRequestMessageHandler);
             registerer.Register(m_exitGameRequestMessageHandler);
+            registerer.Register(m_getLobbiesRequestMessageHandler);
         }
 
         public void Unregister(IMessageRegisterer registerer)
@@ -43,6 +48,7 @@ namespace WebServer.Model.MessageHandling
             registerer.Unregister(m_stopMatchmakingRequestMessageHandler);
             registerer.Unregister(m_sendChatRequestMessageHandler);
             registerer.Unregister(m_exitGameRequestMessageHandler);
+            registerer.Unregister(m_getLobbiesRequestMessageHandler);
         }
 
         private async Task OnCreateLobbyMessageReceived(string connectionId, CreateLobbyRequestMessage requestMessage)
@@ -149,6 +155,19 @@ namespace WebServer.Model.MessageHandling
             }
         }
 
+        private async Task OnGetLobbiesMessageReceived(string connectionId, GetLobbiesRequestMessage message)
+        {
+            try
+            {
+                LobbyDto[] lobbies = m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray();
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new LobbyUpdateMessage(lobbies));
+            }
+            catch (Exception ex)
+            {
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
+            }
+        }
+
         private readonly LobbyRequestMessageHandlerDelegate<CreateLobbyRequestMessage> m_createLobbyRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<JoinLobbyRequestMessage> m_joinLobbyRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<LeaveLobbyRequestMessage> m_leaveLobbyRequestMessageHandler;
@@ -157,7 +176,9 @@ namespace WebServer.Model.MessageHandling
         private readonly LobbyRequestMessageHandlerDelegate<StopMatchmakingRequestMessage> m_stopMatchmakingRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<SendChatRequestMessage> m_sendChatRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<ExitGameRequestMessage> m_exitGameRequestMessageHandler;
+        private readonly LobbyRequestMessageHandlerDelegate<GetLobbiesRequestMessage> m_getLobbiesRequestMessageHandler;
         private readonly IClientManager m_clientManager;
         private readonly IServerService m_serverService;
+        private readonly ILobbyManager m_lobbyManager;
     }
 }

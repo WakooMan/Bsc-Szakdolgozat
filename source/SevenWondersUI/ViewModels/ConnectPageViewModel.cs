@@ -1,11 +1,14 @@
-﻿using SevenWonders.WebClient.Model.Services;
+﻿using SevenWonders.WebClient.Model;
+using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Services;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 
 namespace SevenWondersUI.ViewModels
 {
     [QueryProperty(nameof(AuthToken), "AuthToken")]
     [QueryProperty(nameof(UserName), "UserName")]
-    public class ConnectPageViewModel : BaseViewModel
+    public class ConnectPageViewModel : BaseViewModel, IMessageHandler
     {
         public string AuthToken { get; set; }
         public string UserName { get; set; }
@@ -14,8 +17,19 @@ namespace SevenWondersUI.ViewModels
         {
             m_navigationService = navigationService;
             m_clientHubService = clientHubService;
+            m_lobbyUpdateMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage>(OnLobbyUpdateMessageReceived);
             AuthToken = string.Empty;
             UserName = string.Empty;
+        }
+
+        public void Register(IMessageRegisterer registerer)
+        {
+            registerer.Register(m_lobbyUpdateMessageHandlerDelegate);
+        }
+
+        public void Unregister(IMessageRegisterer registerer)
+        {
+            registerer.Unregister(m_lobbyUpdateMessageHandlerDelegate);
         }
 
         public async Task ConnectToServer()
@@ -35,7 +49,7 @@ namespace SevenWondersUI.ViewModels
                 }
 
                 await m_clientHubService.Connect(UserName, AuthToken);
-                await m_navigationService.NavigateToAsync("//LobbyMainPage");
+                await m_clientHubService.InvokeLobbyCommand(new GetLobbiesRequestMessage());
             }
             catch (Exception)
             {
@@ -43,6 +57,22 @@ namespace SevenWondersUI.ViewModels
             }
         }
 
+        private async Task<bool> OnLobbyUpdateMessageReceived(LobbyUpdateMessage message)
+        {
+            if (message.Success)
+            {
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await m_navigationService.NavigateToAsync("//LobbyMainPage", new Dictionary<string, object>
+                    {
+                        { "Lobbies", message.Lobbies }
+                    });
+                });
+            }
+            return message.Success;
+        }
+
+        private readonly LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage> m_lobbyUpdateMessageHandlerDelegate;
         private readonly INavigationService m_navigationService;
         private readonly IClientHubService m_clientHubService;
     }
