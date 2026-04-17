@@ -3,12 +3,9 @@ using GameLogic.Elements.Wonders;
 using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.PlayerActions;
-using Microsoft.Maui.Controls;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.Presenter.Connectors.Wonders;
-using SevenWonders.Presenter.Views;
-using SevenWonders.Presenter.Views.Factories;
 
 namespace SevenWonders.Presenter.Presenters
 {
@@ -42,13 +39,12 @@ namespace SevenWonders.Presenter.Presenters
         public void SubscribeToEvents()
         {
             m_eventManager.Subscribe<OnGameStarted>(OnGameStarted);
-            m_eventManager.Subscribe<OnCardSold>(OnCardSold);
-            m_eventManager.Subscribe<AfterBuildableBuilt>(AfterBuildableBuilt);
             m_eventManager.Subscribe<OnBuildWonderProcessStart>(OnBuildWonderProcessStart);
             m_eventManager.Subscribe<OnBuildWonderProcessEnd>(OnBuildWonderProcessEnd);
             m_eventManager.Subscribe<ExtraTurnGranted>(OnExtraTurnGranted);
             m_eventManager.Subscribe<TurnStarted>(OnTurnStarted);
             m_eventManager.Subscribe<ChooseWonderStarted>(OnChooseWonderStarted);
+            m_eventManager.Subscribe<OnPlayerUpdate>(OnPlayerUpdate);
         }
 
         private void OnChooseWonderStarted(ChooseWonderStarted started)
@@ -103,37 +99,25 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        private void OnCardSold(OnCardSold e)
+        private void OnPlayerUpdate(OnPlayerUpdate eventArgs)
         {
-            if (e.Player.Id == m_playerId)
+            if (eventArgs.Player1.Player.Id == m_playerId)
             {
-                if (m_moneyLabel is not null)
-                {
-                    m_moneyLabel.Text = e.Player.Money.ToString();
-                    //Todo: animation for money increase
-                }
+                UpdatePlayerState(eventArgs.Player1);
+            }
+
+            if (eventArgs.Player2.Player.Id == m_playerId)
+            {
+                UpdatePlayerState(eventArgs.Player2);
             }
         }
 
-        private void AfterBuildableBuilt(AfterBuildableBuilt eventArgs)
-        {
-            if (eventArgs.Builder.Id == m_playerId)
-            {
-                UpdatePlayerState(eventArgs.Builder);
-            }
-
-            if (eventArgs.Opponent.Id == m_playerId)
-            {
-                UpdatePlayerState(eventArgs.Opponent);
-            }
-        }
-
-        private void UpdatePlayerState(Player player)
+        private void UpdatePlayerState(PlayerProperties player)
         {
             if (m_moneyLabel is not null && m_pointLabel is not null)
             {
-                m_moneyLabel.Text = player.Money.ToString();
-                m_pointLabel.Text = player.GetPlayerProperties().GetAwaiter().GetResult().VictoryPoints.ToString();
+                m_moneyLabel.Text = player.Player.Money.ToString();
+                m_pointLabel.Text = player.VictoryPoints.ToString();
                 //Todo: animation for money decrease, point increase
             }
         }

@@ -24,7 +24,6 @@ namespace GameLogic.Elements.Military
         public async Task OnUpdate(IGameContext gameContext, PlayerProperties player1, PlayerProperties player2)
         {
             await OnMilitaryAdvanced(gameContext, player1, player2);
-            await gameContext.EventManager.PublishAsync(new OnScientificUpdate(player1, player2));
         }
 
         private async Task OnMilitaryAdvanced(IGameContext gameContext, PlayerProperties player1, PlayerProperties player2)
@@ -33,33 +32,36 @@ namespace GameLogic.Elements.Military
             int diff = player1.Strength - player2.Strength;
             int middle = Fields.Count / 2;
             int newIdx = Math.Clamp(middle + diff, 0, Fields.Count - 1);
-            Fields[newIdx] = MilitaryField.Shield;
-            Fields[index] = MilitaryField.None;
-
-            List<MilitaryCard> militaryCards = new List<MilitaryCard>();
-
-            int minIdx = Math.Min(index, newIdx);
-            int maxIdx = Math.Max(index, newIdx);
-
-            for (int i = minIdx; i <= maxIdx; i++)
+            if (newIdx != index)
             {
-                MilitaryCard? militaryCard = MilitaryCards.FirstOrDefault(militaryCard => militaryCard.IndexStart <= i && militaryCard.IndexEnd >= i);
-                if (militaryCard is not null && !militaryCards.Contains(militaryCard))
+                Fields[newIdx] = MilitaryField.Shield;
+                Fields[index] = MilitaryField.None;
+
+                List<MilitaryCard> militaryCards = new List<MilitaryCard>();
+
+                int minIdx = Math.Min(index, newIdx);
+                int maxIdx = Math.Max(index, newIdx);
+
+                for (int i = minIdx; i <= maxIdx; i++)
                 {
-                    militaryCards.Add(militaryCard);
+                    MilitaryCard? militaryCard = MilitaryCards.FirstOrDefault(militaryCard => militaryCard.IndexStart <= i && militaryCard.IndexEnd >= i);
+                    if (militaryCard is not null && !militaryCards.Contains(militaryCard))
+                    {
+                        militaryCards.Add(militaryCard);
+                    }
                 }
-            }
 
-            MilitaryCard? previousMilitaryCard = m_currentMilitaryCard;
-            m_currentMilitaryCard = militaryCards.FirstOrDefault(militaryCard => militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx);
-            await gameContext.EventManager.PublishAsync(new OnMilitaryBoardChanged(Fields));
-            OnMilitaryTokenReachedThreshold evt = new OnMilitaryTokenReachedThreshold(militaryCards, previousMilitaryCard, m_currentMilitaryCard);
-            await OnMilitaryTokenReachedThreshold(gameContext, evt);
-            await gameContext.EventManager.PublishAsync(evt);
+                MilitaryCard? previousMilitaryCard = m_currentMilitaryCard;
+                m_currentMilitaryCard = militaryCards.FirstOrDefault(militaryCard => militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx);
+                await gameContext.EventManager.PublishAsync(new OnMilitaryBoardChanged(Fields));
+                OnMilitaryTokenReachedThreshold evt = new OnMilitaryTokenReachedThreshold(militaryCards, previousMilitaryCard, m_currentMilitaryCard);
+                await OnMilitaryTokenReachedThreshold(gameContext, evt);
+                await gameContext.EventManager.PublishAsync(evt);
 
-            if (newIdx == 0 || newIdx == Fields.Count - 1)
-            {
-                await gameContext.EventManager.PublishAsync(new MilitaryVictory(gameContext.TurnHandler.CurrentPlayer.Name));
+                if (newIdx == 0 || newIdx == Fields.Count - 1)
+                {
+                    await gameContext.EventManager.PublishAsync(new MilitaryVictory(gameContext.TurnHandler.CurrentPlayer.Name));
+                }
             }
         }
 

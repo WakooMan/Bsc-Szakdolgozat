@@ -42,8 +42,11 @@ namespace GameLogic.GameStates
                 Player secondPlayer = GameContext.TurnHandler.GetPlayer(2);
                 PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties();
                 PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties();
-
                 await GameContext.MilitaryBoard.OnUpdate(GameContext, firstPlayerProperties, secondPlayerProperties);
+
+                PlayerProperties firstPlayerProperties2 = await firstPlayer.GetPlayerProperties();
+                PlayerProperties secondPlayerProperties2 = await secondPlayer.GetPlayerProperties();
+                await GameContext.EventManager.PublishAsync(new OnPlayerUpdate(firstPlayerProperties2, secondPlayerProperties2));
 
                 if (!IsGameOver)
                 {

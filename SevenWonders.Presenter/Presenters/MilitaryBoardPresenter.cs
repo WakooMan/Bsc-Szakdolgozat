@@ -49,7 +49,7 @@ namespace SevenWonders.Presenter.Presenters
         public void SubscribeToEvents()
         {
             m_eventManager.Subscribe<OnMilitaryBoardChanged>(OnMilitaryBoardChanged);
-            m_eventManager.Subscribe<OnScientificUpdate>(OnScientificUpdate);
+            m_eventManager.Subscribe<OnPlayerUpdate>(OnPlayerUpdate);
             m_eventManager.Subscribe<OnMilitaryTokenReachedThreshold>(OnMilitaryTokenReachedThreshold);
             m_eventManager.Subscribe<OnGameInitialized>(OnGameInitialized);
         }
@@ -88,7 +88,7 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        private void OnScientificUpdate(OnScientificUpdate progress)
+        private void OnPlayerUpdate(OnPlayerUpdate progress)
         {
             UpdateScientificState(progress.Player1.Disciplines, progress.Player1.Player.Id);
             UpdateScientificState(progress.Player2.Disciplines, progress.Player2.Player.Id);

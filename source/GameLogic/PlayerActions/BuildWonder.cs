@@ -35,7 +35,6 @@ namespace GameLogic.PlayerActions
             await player.OnBuildWonder(onWonderBuilt);
             await gameContext.EventManager.PublishAsync(onWonderBuilt);
             await m_wonder.OnBuilt(gameContext, player, opponent);
-            await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, opponent, m_wonder));
             return true;
         }
 

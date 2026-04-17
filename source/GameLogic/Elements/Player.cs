@@ -45,12 +45,20 @@ namespace GameLogic.Elements
 
             foreach (Wonder wonder in Wonders)
             {
-                await wonder.OnCalculatePlayerProperties(properties);
+                if (wonder.HasBeenBuilt)
+                {
+                    await wonder.OnCalculatePlayerProperties(properties);
+                }
             }
 
             foreach (Development development in Developments)
             {
                 await development.OnCalculatePlayerProperties(properties);
+            }
+
+            foreach (MilitaryCard militaryCard in MilitaryCards)
+            {
+                await militaryCard.OnCalculatePlayerProperties(properties);
             }
 
             return properties;
@@ -88,7 +96,10 @@ namespace GameLogic.Elements
 
             foreach (Wonder wonder in Wonders)
             {
-                await wonder.OnBeforeGameEnded(this, opponent);
+                if (wonder.HasBeenBuilt)
+                {
+                    await wonder.OnBeforeGameEnded(this, opponent);
+                }
             }
 
             foreach (Development development in Developments)
