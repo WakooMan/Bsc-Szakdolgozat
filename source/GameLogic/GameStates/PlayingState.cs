@@ -38,6 +38,13 @@ namespace GameLogic.GameStates
                     playerTurnState = playerTurnState.GetNextTurnState();
                 }
 
+                Player firstPlayer = GameContext.TurnHandler.GetPlayer(1);
+                Player secondPlayer = GameContext.TurnHandler.GetPlayer(2);
+                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties();
+                PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties();
+
+                await GameContext.MilitaryBoard.OnUpdate(GameContext, firstPlayerProperties, secondPlayerProperties);
+
                 if (!IsGameOver)
                 {
 

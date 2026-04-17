@@ -24,12 +24,12 @@ namespace GameLogic.Elements.GameCards
 
         public abstract Card Clone();
 
-        public virtual Task OnBuilt(IGameContext gameContext, int playerId)
+        public virtual Task OnBuilt(IGameContext gameContext, Player owner, Player opponent)
         {
             return Task.CompletedTask;
         }
 
-        public virtual Task OnDestroyed(IGameContext gameContext, int playerId)
+        public virtual Task OnDestroyed(IGameContext gameContext, Player owner, Player opponent)
         {
             return Task.CompletedTask;
         }

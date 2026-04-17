@@ -10,31 +10,34 @@ namespace GameLogic.PlayerActions
     {
         public string Name => m_card.Name;
         public DropCard() { }
-        public DropCard(Player player, Card card)
+        public DropCard(Player owner, Player opponent, Card card)
         {
-            ArgumentChecker.CheckNull(player, nameof(player));
+            ArgumentChecker.CheckNull(owner, nameof(owner));
+            ArgumentChecker.CheckNull(opponent, nameof(opponent));
             ArgumentChecker.CheckNull(card, nameof(card));
 
-            m_player = player;
+            m_owner = owner;
+            m_opponent = opponent;
             m_card = card;
         }
         public Task<bool> CanPerform(IGameContext gameContext)
         {
-            return Task.FromResult(m_player.Cards.Contains(m_card));
+            return Task.FromResult(m_owner.Cards.Contains(m_card));
         }
 
         public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
-            ArgumentChecker.CheckPredicateForOperation(() => !m_player.Cards.Contains(m_card), "Player does not have the specific card! Action cannot be performed!");
+            ArgumentChecker.CheckPredicateForOperation(() => !m_owner.Cards.Contains(m_card), "Player does not have the specific card! Action cannot be performed!");
 
-            m_player.Cards.Remove(m_card);
+            m_owner.Cards.Remove(m_card);
             gameContext.DroppedCardList.Cards.Add(m_card);
-            await m_card.OnDestroyed(gameContext, m_player.Id);
-            await gameContext.EventManager.PublishAsync(new OnCardDestroyed(m_player, m_card));
+            await m_card.OnDestroyed(gameContext, m_owner, m_opponent);
+            await gameContext.EventManager.PublishAsync(new OnCardDestroyed(m_owner, m_card));
             return true;
         }
 
         private readonly Card m_card;
-        private readonly Player m_player;
+        private readonly Player m_owner;
+        private readonly Player m_opponent;
     }
 }

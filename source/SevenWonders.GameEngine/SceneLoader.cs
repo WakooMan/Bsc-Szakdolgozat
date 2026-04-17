@@ -1,5 +1,4 @@
 ﻿using SevenWonders.Common;
-using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 
@@ -19,7 +18,7 @@ namespace SevenWonders.GameEngine
             m_zipFileReceiver = zipFileReceiver;
         }
 
-        public async Task<ICollection<Scene>> LoadScenes(GRContext gRContext)
+        public async Task<ICollection<Scene>> LoadScenes()
         {
             List<Scene> result = new List<Scene>();
             if (!Directory.Exists(m_tempPath))
@@ -30,13 +29,13 @@ namespace SevenWonders.GameEngine
             // Directory.GetFiles(ScenesPath).Where(file => file.EndsWith(".zip"))
             foreach (SceneFile sceneFile in await m_zipFileReceiver.ReceiveZipFiles())
             {
-                result.Add(LoadScene(sceneFile, gRContext));
+                result.Add(LoadScene(sceneFile));
             }
 
             return result;
         }
 
-        private Scene LoadScene(SceneFile sceneFile, GRContext gRContext)
+        private Scene LoadScene(SceneFile sceneFile)
         {
             GameLog.Info($"Loading scene from file: \"{sceneFile.Name}\"");
             string extractedSceneLocation = Path.Combine(m_tempPath, sceneFile.Name);
@@ -50,7 +49,7 @@ namespace SevenWonders.GameEngine
             UnzipFile(sceneFile, extractedSceneLocation);
             Scene? scene = m_xmlHandler.DeserializeFile<Scene>(Path.Combine(extractedSceneLocation, "scene.xml"));
             ArgumentChecker.CheckPredicateForOperation(() => scene is null, $"The scene xml file could not be loaded correctly! Check the format of scene.xml in \"{sceneFile.Name}\" zip file.");
-            scene.LoadTextures(extractedSceneLocation, gRContext);
+            scene.LoadTextures(extractedSceneLocation);
             GameLog.Info($"Scene loaded: \"{scene.Id} - {scene.Name}\"");
             return scene;
         }

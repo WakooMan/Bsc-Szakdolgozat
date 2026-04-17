@@ -15,13 +15,9 @@ namespace GameLogic.Elements.Guilds
             return new MagistrateGuild();
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
-            Player opponent = gameContext.TurnHandler.OpponentPlayer;
-
-            // TODO: Apply should get the two players
-            currentPlayer.Money += GetMaxBlueCardCount(currentPlayer, opponent);
+            owner.Money += GetMaxBlueCardCount(owner, opponent);
             return Task.CompletedTask;
         }
 

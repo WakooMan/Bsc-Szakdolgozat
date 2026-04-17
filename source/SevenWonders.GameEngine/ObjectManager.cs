@@ -91,7 +91,7 @@ namespace SevenWonders.GameEngine
             GameLog.Info($"Added GraphicsLayer \"{graphicsLayer.Id} - {graphicsLayer.Name}\" to scene \"{scene.Id} - {scene.Name}\"");
         }
 
-        public void AddTexture(Scene scene, Texture texture, GRContext gRContext)
+        public void AddTexture(Scene scene, Texture texture)
         {
             if (scene.Textures.Any(t => t.FileName == texture.FileName))
             {
@@ -100,7 +100,7 @@ namespace SevenWonders.GameEngine
 
             GameLog.Info($"Adding Texture \"{texture.FileName}\" to scene \"{scene.Id} - {scene.Name}\"");
             texture.Id = GetNextUniqueId(scene);
-            scene.AddTexture(texture, m_sceneFileHandler.ReceiveSceneFolder(scene), gRContext);
+            scene.AddTexture(texture, m_sceneFileHandler.ReceiveSceneFolder(scene));
             GameLog.Info($"Added Texture \"{texture.Id} - {texture.FileName}\" to scene \"{scene.Id} - {scene.Name}\"");
         }
 

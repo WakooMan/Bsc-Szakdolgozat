@@ -1,7 +1,5 @@
 using SevenWonders.WebClient.Model;
 using SevenWondersUI.ViewModels;
-using SevenWondersUI.ViewModels;
-using Windows.Security.Cryptography.Core;
 
 namespace SevenWondersUI.Views;
 

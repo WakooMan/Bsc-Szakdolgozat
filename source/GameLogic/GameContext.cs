@@ -78,7 +78,7 @@ namespace GameLogic
             EventManager.ClearSubscriptions();
             ICollection<Development> developments = RandomGenerator.ReceiveRandomElements(DevelopmentList.Developments, 3);
             DevelopmentList.Developments.RemoveAll(developments.Contains);
-            MilitaryBoard.Initialize(players, developments, this);
+            MilitaryBoard.Initialize(players, developments);
         }
 
         private readonly IGameElements m_gameElements;

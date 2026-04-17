@@ -11,19 +11,25 @@ namespace GameLogic.Elements.Effects
             return new Teology();
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnWonderBuilt>((args) => OnWonderBuilt(player, args));
+            owner.OnWonderBuilt += OnWonderBuilt;
             return Task.CompletedTask;
         }
 
-        private static void OnWonderBuilt(Player player, OnWonderBuilt args)
+        public override Task Unapply(IGameContext gameContext, Player owner, Player opponent)
         {
-            if (args.Builder == player && !args.Wonder.Effects.Any(effect => effect is NewTurn))
+            owner.OnWonderBuilt -= OnWonderBuilt;
+            return Task.CompletedTask;
+        }
+
+        private Task OnWonderBuilt(Player owner, OnWonderBuilt args)
+        {
+            if (!args.Wonder.Effects.Any(effect => effect is NewTurn))
             {
                 args.Wonder.Effects.Add(new NewTurn());
             }
+            return Task.CompletedTask;
         }
     }
 }

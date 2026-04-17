@@ -79,7 +79,7 @@ namespace SevenWonders.SceneEditor.ViewModels
         /// Copies the chosen image file into the scene folder, creates a <see cref="Texture"/>,
         /// registers it in the scene and its <see cref="TextureRegistry"/>.
         /// </summary>
-        public void AddSceneTexture(string fullPath, GRContext gRContext)
+        public void AddSceneTexture(string fullPath)
         {
             if (m_currentScene is null)
             {
@@ -100,7 +100,7 @@ namespace SevenWonders.SceneEditor.ViewModels
             };
 
             // Scene.AddTexture assigns the Id, loads the texture and registers it.
-            m_engine.ObjectManager.AddTexture(m_currentScene, texture, gRContext);
+            m_engine.ObjectManager.AddTexture(m_currentScene, texture);
             SceneTextureViews.Add(new SceneTextureListViewModel(texture));
             SelectedSceneTexture = texture;
         }

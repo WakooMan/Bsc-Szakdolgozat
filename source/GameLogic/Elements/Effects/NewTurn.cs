@@ -16,7 +16,7 @@ namespace GameLogic.Elements.Effects
             return new NewTurn(this);
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             if (!AlreadyApplied)
             {

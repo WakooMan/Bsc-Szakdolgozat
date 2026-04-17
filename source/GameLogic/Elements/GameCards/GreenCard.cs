@@ -24,16 +24,6 @@ namespace GameLogic.Elements.GameCards
             return new GreenCard(this);
         }
 
-        public override async Task OnBuilt(IGameContext gameContext, int playerId)
-        {
-            await Discipline.Apply(gameContext, playerId);
-        }
-
-        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
-        {
-            await Discipline.Unapply(gameContext, playerId);
-        }
-
         public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             await Point.OnCalculatePlayerProperties(playerProperties);

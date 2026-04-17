@@ -22,11 +22,11 @@ public partial class GamePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        while (m_gameView is null || m_gameView.GRContext is null)
+        while (m_gameView is null)
         {
             await Task.Delay(100);
         }
-        await m_gamePageViewModel.Initialize(m_gameView.GRContext);
+        await m_gamePageViewModel.Initialize();
         OnCanvasSizeChanged(this, EventArgs.Empty);
     }
 
@@ -39,7 +39,7 @@ public partial class GamePage : ContentPage
     }
 
 
-    private void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
+    private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
         m_gamePageViewModel.Engine.SceneManager.Render(e.Surface.Canvas);
     }

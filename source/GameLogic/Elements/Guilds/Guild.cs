@@ -13,7 +13,7 @@ namespace GameLogic.Elements.Guilds
     {
         public abstract Guild Clone();
 
-        public virtual Task Apply(IGameContext gameContext, int playerId)
+        public virtual Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             return Task.CompletedTask;
         }

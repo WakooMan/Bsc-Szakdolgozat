@@ -78,7 +78,7 @@ namespace SevenWonders.GameEngine
 
                 using (var highlightPaint = new SKPaint())
                 {
-                    highlightPaint.IsAntialias = false;
+                    highlightPaint.IsAntialias = true;
                     highlightPaint.Style = SKPaintStyle.Stroke;
                     highlightPaint.StrokeWidth = 8;
                     highlightPaint.Color = SKColors.Gold.WithAlpha(200);

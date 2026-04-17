@@ -31,8 +31,10 @@ namespace GameLogic.PlayerActions
             m_wonder.HasBeenBuilt = true;
             Card card = player.PickedCard.CardObj;
             player.PickedCard = null;
-            await gameContext.EventManager.PublishAsync(new OnWonderBuilt(player, card, m_wonder));
-            await m_wonder.OnBuilt(gameContext, player.Id);
+            OnWonderBuilt onWonderBuilt = new OnWonderBuilt(player, card, m_wonder);
+            await player.OnBuildWonder(onWonderBuilt);
+            await gameContext.EventManager.PublishAsync(onWonderBuilt);
+            await m_wonder.OnBuilt(gameContext, player, opponent);
             await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, opponent, m_wonder));
             return true;
         }

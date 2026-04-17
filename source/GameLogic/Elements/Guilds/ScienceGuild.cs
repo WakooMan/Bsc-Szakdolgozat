@@ -15,12 +15,9 @@ namespace GameLogic.Elements.Guilds
             return new ScienceGuild();
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
-            Player opponent = gameContext.TurnHandler.OpponentPlayer;
-            currentPlayer.Money += GetMaxGreenCardCount(currentPlayer, opponent);
-            
+            owner.Money += GetMaxGreenCardCount(owner, opponent);
             return Task.CompletedTask;
         }
 

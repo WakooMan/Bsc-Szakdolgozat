@@ -5,7 +5,13 @@
              x:Class="SevenWondersUI.Views.GamePage"
              Title="NewPage1">
     <Grid x:Name="m_mainGrid" HorizontalOptions="Fill" VerticalOptions="Fill" SizeChanged="OnCanvasSizeChanged">
-        <skia:SKGLView x:Name="m_gameView"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <skia:SKCanvasView x:Name="m_gameView"
                            PaintSurface="OnPaintSurface"
                            Touch="OnTouch"
                            EnableTouchEvents="True"

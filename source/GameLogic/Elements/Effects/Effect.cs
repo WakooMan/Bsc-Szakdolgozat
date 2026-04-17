@@ -1,6 +1,4 @@
-﻿using GameLogic.Elements.Goods;
-using GameLogic.Events.GameEvents;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Effects
 {
@@ -26,8 +24,8 @@ namespace GameLogic.Elements.Effects
     public abstract class Effect
     {
         public abstract Effect Clone();
-        public virtual Task Apply(IGameContext gameContext, int playerId) { return Task.CompletedTask; }
-        public virtual Task Unapply(IGameContext gameContext, int playerId) { return Task.CompletedTask; }
+        public virtual Task Apply(IGameContext gameContext, Player owner, Player opponent) { return Task.CompletedTask; }
+        public virtual Task Unapply(IGameContext gameContext, Player owner, Player opponent) { return Task.CompletedTask; }
 
         public virtual Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {

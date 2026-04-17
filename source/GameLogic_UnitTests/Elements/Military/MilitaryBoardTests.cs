@@ -44,7 +44,7 @@ namespace GameLogic_UnitTests.Elements.Military
             m_militaryBoard.Initialize([m_player1, m_player2], [], m_gameContext);
 
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryAdvanced>>());
-            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificProgress>>());
+            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificUpdate>>());
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
             Assert.That(m_militaryBoard.Fields[5] == MilitaryField.None, Is.True);
             Assert.That(m_militaryBoard.Fields[10] == MilitaryField.Shield, Is.True);
@@ -61,7 +61,7 @@ namespace GameLogic_UnitTests.Elements.Military
             m_militaryBoard.Initialize([m_player1, m_player2], [], m_gameContext);
 
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryAdvanced>>());
-            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificProgress>>());
+            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificUpdate>>());
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
             Assert.That(m_militaryBoard.Fields[5] == MilitaryField.None, Is.True);
             Assert.That(m_militaryBoard.Fields[0] == MilitaryField.Shield, Is.True);
@@ -84,13 +84,13 @@ namespace GameLogic_UnitTests.Elements.Military
                 new GreenCard() { Discipline = new Building() },
             ]);
 
-            OnScientificProgress onScientificProgress = new OnScientificProgress(m_player1, new Building(), m_playerActionReceiver);
-            m_eventManager.When(evt => evt.Subscribe(Arg.Any<Action<OnScientificProgress>>())).Do(callinfo => ((Action<OnScientificProgress>)callinfo[0])(onScientificProgress));
+            OnScientificUpdate onScientificProgress = new OnScientificProgress(m_player1, new Building(), m_playerActionReceiver);
+            m_eventManager.When(evt => evt.Subscribe(Arg.Any<Action<OnScientificUpdate>>())).Do(callinfo => ((Action<OnScientificUpdate>)callinfo[0])(onScientificProgress));
 
             m_militaryBoard.Initialize([m_player1, m_player2], [], m_gameContext);
 
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryAdvanced>>());
-            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificProgress>>());
+            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificUpdate>>());
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
             m_playerActionReceiver.Received(1).ReceivePlayerAction(m_player1, Arg.Any<ICollection<ChooseDroppedCardAction>>());
             m_playerAction.Received(1).CanPerform(m_gameContext);
@@ -109,7 +109,7 @@ namespace GameLogic_UnitTests.Elements.Military
             m_militaryBoard.Initialize([m_player1, m_player2], [], m_gameContext);
 
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryAdvanced>>());
-            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificProgress>>());
+            m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnScientificUpdate>>());
             m_eventManager.Received(1).Subscribe(Arg.Any<Action<OnMilitaryTokenReachedThreshold>>());
             Assert.That(militaryCards.All(card => !m_militaryBoard.MilitaryCards.Contains(card)), Is.True);
             Assert.That(m_militaryBoard.MilitaryCards.Count, Is.EqualTo(0));

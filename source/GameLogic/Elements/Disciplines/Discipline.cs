@@ -1,4 +1,5 @@
 ﻿using GameLogic.Events.GameEvents;
+using GameLogic.PlayerActions;
 using System.Xml.Serialization;
 
 namespace GameLogic.Elements.Disciplines
@@ -14,22 +15,30 @@ namespace GameLogic.Elements.Disciplines
     {
         public abstract Discipline Clone();
 
-        public async Task Apply(IGameContext gameContext, int playerId)
-        {
-            Player player = gameContext.TurnHandler.GetPlayer(playerId);
-            await gameContext.EventManager.PublishAsync(new OnScientificProgress(player.Id, (await player.GetPlayerProperties()).Disciplines, this, player.PlayerActionReceiver));
-        }
-
-        public async Task Unapply(IGameContext gameContext, int playerId)
-        {
-            Player player = gameContext.TurnHandler.GetPlayer(playerId);
-            await gameContext.EventManager.PublishAsync(new OnScientificRegress(player.Id, (await player.GetPlayerProperties()).Disciplines));
-        }
-
         public Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             playerProperties.AddDiscipline(this);
             return Task.CompletedTask;
+        }
+
+        public async Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        {
+            PlayerProperties playerProperties = await owner.GetPlayerProperties();
+            var disciplines = playerProperties.Disciplines;
+            var developments = gameContext.MilitaryBoard.Developments;
+            if (disciplines.ContainsKey(GetType()) && disciplines[GetType()] == 2)
+            {
+                await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz fejlesztést", developments.Select(dev => dev.Name).ToArray(), true));
+                await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, developments.Select(dev => {
+                    IPlayerAction action = new ChooseDevelopmentAction(owner, opponent, dev, developments);
+                    return action;
+                }).ToArray());
+            }
+
+            if (disciplines.Count >= 6)
+            {
+                await gameContext.EventManager.PublishAsync(new ScientificVictory(owner.Name));
+            }
         }
     }
 }

@@ -33,11 +33,14 @@ namespace GameLogic.PlayerActions
             ArgumentChecker.CheckPredicateForOperation(() => !gameContext.DroppedCardList.Cards.Contains(m_card), $"{nameof(gameContext.DroppedCardList)} does not contain the card! Cannot perform player action!");
 
             Player player = gameContext.TurnHandler.CurrentPlayer;
+            Player opponent = gameContext.TurnHandler.OpponentPlayer;
             gameContext.DroppedCardList.Cards.Remove(m_card);
             player.Cards.Add(m_card);
             await gameContext.EventManager.PublishAsync(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray(), true));
-            await gameContext.EventManager.PublishAsync(new OnCardBuilt(m_card, player, 0, false));
-            await m_card.OnBuilt(gameContext, player.Id);
+            OnCardBuilt onCardBuilt = new OnCardBuilt(m_card, player, 0, false);
+            await player.OnBuildCard(onCardBuilt);
+            await gameContext.EventManager.PublishAsync(onCardBuilt);
+            await m_card.OnBuilt(gameContext, player, opponent);
 
             return true;
         }

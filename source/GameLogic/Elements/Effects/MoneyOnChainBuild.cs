@@ -20,19 +20,25 @@ namespace GameLogic.Elements.Effects
             return new MoneyOnChainBuild(this);
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnCardBuilt>((args) => GetMoneyOnChainBuild(player, args));
+            owner.OnCardBuilt += GetMoneyOnChainBuild;
             return Task.CompletedTask;
         }
 
-        private void GetMoneyOnChainBuild(Player player, OnCardBuilt args)
+        public override Task Unapply(IGameContext gameContext, Player owner, Player opponent)
         {
-            if (player == args.Builder && args.ChainBuildUsed)
+            owner.OnCardBuilt -= GetMoneyOnChainBuild;
+            return Task.CompletedTask;
+        }
+
+        private Task GetMoneyOnChainBuild(Player owner, OnCardBuilt args)
+        {
+            if (args.ChainBuildUsed)
             {
-                player.Money += MoneyToGet.Money;
+                owner.Money += MoneyToGet.Money;
             }
+            return Task.CompletedTask;
         }
     }
 }

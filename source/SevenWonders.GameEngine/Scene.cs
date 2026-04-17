@@ -87,11 +87,11 @@ namespace SevenWonders.GameEngine
             }
         }
 
-        public void LoadTextures(string sceneFolder, GRContext gRContext)
+        public void LoadTextures(string sceneFolder)
         {
             foreach (Texture texture in Textures)
             {
-                texture.LoadTexture(sceneFolder, gRContext);
+                texture.LoadTexture(sceneFolder);
             }
 
             SortAllLayers();
@@ -105,9 +105,9 @@ namespace SevenWonders.GameEngine
             Layers.Insert(index < 0 ? ~index : index, layer);
         }
 
-        public void AddTexture(Texture texture, string sceneFolder, GRContext gRContext)
+        public void AddTexture(Texture texture, string sceneFolder)
         {
-            texture.LoadTexture(sceneFolder, gRContext);
+            texture.LoadTexture(sceneFolder);
             Textures.Add(texture);
             TextureRegistry.Register(texture);
         }

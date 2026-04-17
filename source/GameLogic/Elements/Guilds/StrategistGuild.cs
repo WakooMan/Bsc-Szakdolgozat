@@ -15,11 +15,9 @@ namespace GameLogic.Elements.Guilds
             return new StrategistGuild();
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
-            Player opponent = gameContext.TurnHandler.OpponentPlayer;
-            currentPlayer.Money += GetMaxRedCardCount(currentPlayer, opponent);
+            owner.Money += GetMaxRedCardCount(owner, opponent);
             return Task.CompletedTask;
         }
 

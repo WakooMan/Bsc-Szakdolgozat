@@ -17,10 +17,15 @@ namespace GameLogic.Elements.Effects
             return new PlusStrengthOnRedCardBuild(this);
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnCardBuilt>((args) => OnRedCardBuilt(player, args));
+            owner.OnCardBuilt += OnRedCardBuilt;
+            return Task.CompletedTask;
+        }
+
+        public override Task Unapply(IGameContext gameContext, Player owner, Player opponent)
+        {
+            owner.OnCardBuilt -= OnRedCardBuilt;
             return Task.CompletedTask;
         }
 
@@ -29,12 +34,13 @@ namespace GameLogic.Elements.Effects
             AdditionalStrength = plusStrengthOnRedCardBuild.AdditionalStrength.Clone();
         }
 
-        private void OnRedCardBuilt(Player player, OnCardBuilt eventArgs)
+        private Task OnRedCardBuilt(Player owner, OnCardBuilt eventArgs)
         {
-            if (eventArgs.Builder == player && eventArgs.Card is RedCard redCard)
+            if (eventArgs.Card is RedCard redCard)
             {
                 redCard.Strength.Points += AdditionalStrength.Points;
             }
+            return Task.CompletedTask;
         }
     }
 }

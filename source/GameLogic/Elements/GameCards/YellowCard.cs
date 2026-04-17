@@ -16,19 +16,19 @@ namespace GameLogic.Elements.GameCards
             Effects = yellowCard.Effects.Select(act => act.Clone()).ToList();
         }
 
-        public override async Task OnBuilt(IGameContext gameContext, int playerId)
+        public override async Task OnBuilt(IGameContext gameContext, Player owner, Player opponent)
         {
             foreach (var effect in Effects)
             {
-                await effect.Apply(gameContext, playerId);
+                await effect.Apply(gameContext, owner, opponent);
             }
         }
 
-        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
+        public override async Task OnDestroyed(IGameContext gameContext, Player owner, Player opponent)
         {
             foreach (var effect in Effects)
             {
-                await effect.Unapply(gameContext, playerId);
+                await effect.Unapply(gameContext, owner, opponent);
             }
         }
 

@@ -5,6 +5,7 @@ using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System.Configuration;
 using System.Numerics;
 
 namespace SevenWonders.SceneEditor.Views
@@ -24,14 +25,18 @@ namespace SevenWonders.SceneEditor.Views
         {
             base.OnAppearing();
 
-            GameLog.InitializeFileLogger(FileSystem.AppDataDirectory);
+            var logFileName = ConfigurationManager.AppSettings["logFileName"];
+            if (logFileName is not null)
+            {
+                GameLog.InitializeFileLogger(FileSystem.AppDataDirectory, logFileName);
+            }
 
-            while (m_gameView is null || m_gameView.GRContext is null)
+            while (m_gameView is null)
             {
                 await Task.Delay(100);
             }
 
-            foreach (Scene scene in await m_sceneLoader.LoadScenes(m_gameView.GRContext))
+            foreach (Scene scene in await m_sceneLoader.LoadScenes())
             {
                 m_engine.SceneManager.RegisterScene(scene);
                 SceneIdHandler.OrderIds(scene);
@@ -53,7 +58,7 @@ namespace SevenWonders.SceneEditor.Views
             }
         }
 
-        private void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
+        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             if (m_engine.SceneManager.CurrentScene is not null && m_mainPageViewModel.LayerContentsViewModel.SelectedLayer is not null)
             {
@@ -141,7 +146,7 @@ namespace SevenWonders.SceneEditor.Views
             await this.ShowPopupAsync(addSceneTexturePopupWindow);
             if (addSceneTexturePopupWindow.ViewModel.AddActivated)
             {
-                m_mainPageViewModel.SceneTextureContentsViewModel.AddSceneTexture(addSceneTexturePopupWindow.ViewModel.SelectedFilePath, m_gameView.GRContext);
+                m_mainPageViewModel.SceneTextureContentsViewModel.AddSceneTexture(addSceneTexturePopupWindow.ViewModel.SelectedFilePath);
                 addSceneTexturePopupWindow.ViewModel.Clear();
             }
         }
@@ -162,7 +167,7 @@ namespace SevenWonders.SceneEditor.Views
                 scene.Resize(new Vector2(m_width, m_height));
                 m_engine.SceneManager.RegisterScene(scene);
                 m_sceneLoader.SaveScene(scene, false);
-                await m_sceneLoader.LoadScenes(m_gameView.GRContext);
+                await m_sceneLoader.LoadScenes();
                 m_engine.SceneManager.SetCurrentScene(scene);
                 m_mainPageViewModel.SetCurrentScene(scene);
                 addScenePopupWindow.ViewModel.Clear();
