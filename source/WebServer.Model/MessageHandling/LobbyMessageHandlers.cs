@@ -1,13 +1,16 @@
 ﻿using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
+using WebServer.Model.ServerHub;
 
 namespace WebServer.Model.MessageHandling
 {
     public class LobbyMessageHandlers : ILobbyMessageHandlers
     {
-        public LobbyMessageHandlers(IClientManager clientManager)
+        public LobbyMessageHandlers(IClientManager clientManager, IServerService serverService)
         {
             m_clientManager = clientManager;
+            m_serverService = serverService;
             m_createLobbyRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<CreateLobbyRequestMessage>(OnCreateLobbyMessageReceived);
             m_joinLobbyRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<JoinLobbyRequestMessage>(OnJoinLobbyMessageReceived);
             m_leaveLobbyRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<LeaveLobbyRequestMessage>(OnLeaveLobbyMessageReceived);
@@ -51,7 +54,7 @@ namespace WebServer.Model.MessageHandling
             } 
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -64,7 +67,7 @@ namespace WebServer.Model.MessageHandling
             }
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -77,7 +80,7 @@ namespace WebServer.Model.MessageHandling
             }
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -90,7 +93,7 @@ namespace WebServer.Model.MessageHandling
             }
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -103,7 +106,7 @@ namespace WebServer.Model.MessageHandling
             }
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -116,7 +119,7 @@ namespace WebServer.Model.MessageHandling
             }
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -129,7 +132,7 @@ namespace WebServer.Model.MessageHandling
             }
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -142,7 +145,7 @@ namespace WebServer.Model.MessageHandling
             }
             catch (Exception ex)
             {
-                // Handle exception if needed
+                await m_serverService.SendLobbyServerMessageToClient(connectionId, new FailureResponseMessage(false, ex.Message));
             }
         }
 
@@ -155,5 +158,6 @@ namespace WebServer.Model.MessageHandling
         private readonly LobbyRequestMessageHandlerDelegate<SendChatRequestMessage> m_sendChatRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<ExitGameRequestMessage> m_exitGameRequestMessageHandler;
         private readonly IClientManager m_clientManager;
+        private readonly IServerService m_serverService;
     }
 }

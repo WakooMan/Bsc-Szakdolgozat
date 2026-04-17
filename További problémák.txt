@@ -11,3 +11,7 @@ Multiplayer:
 - Matchmaking
 - Csak a host indíthasson játékot -> szerveren is kezelni
 - player action szinkronizáció a szerverrel
+- popup ha valami nem sikerül
+- verseny mód
+Logging:
+- Add logs everywhere

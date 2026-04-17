@@ -101,6 +101,11 @@ namespace WebServer.Model.PlayerStates
                 throw new InvalidOperationException("Cannot start game, because there are not enough players in the lobby!");
             }
 
+            if(lobby.HostConnectionId != m_player.ConnectionId)
+            {
+                throw new InvalidOperationException("Only the host can start the game!");
+            }
+
             m_lobbyManager.RemoveLobby(m_lobbyCode);
             foreach (var member in lobby.Members)
             {
