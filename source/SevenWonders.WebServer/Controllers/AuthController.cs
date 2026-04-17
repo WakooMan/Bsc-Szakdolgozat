@@ -54,6 +54,14 @@ namespace SevenWonders.WebServer.Controllers
 
             if (result.Succeeded)
             {
+                bool isAlreadyConnected = m_clientManager.GetClients()
+                    .Any(c => c.ApplicationUser.UserName == user.UserName);
+
+                if (isAlreadyConnected)
+                {
+                    return Unauthorized(new LoginResponse(false, "A felhasználó már be van jelentkezve.", string.Empty));
+                }
+
                 var token = GenerateJwtToken(user);
                 return Ok(new LoginResponse(true, "Sikeres bejelentkezés", token));
             }

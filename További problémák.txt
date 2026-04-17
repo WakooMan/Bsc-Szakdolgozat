@@ -7,7 +7,6 @@ Gameplay:
 - 5 development kell a táblán a 3 helyett
 Multiplayer:
 - Regisztráció kliens oldalon
-- ne léphessenek be ketten ugyanazzal a felhasználóval
 - game over handler game page-be integrálása
 - Menük finomítása
 - Matchmaking
