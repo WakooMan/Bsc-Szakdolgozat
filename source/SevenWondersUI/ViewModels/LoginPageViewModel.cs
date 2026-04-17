@@ -137,7 +137,8 @@ namespace SevenWondersUI.ViewModels
             {
                 await m_navigationService.NavigateToAsync("//ConnectPage", new Dictionary<string, object>
                 {
-                    { "AuthToken", result.Token }
+                    { "AuthToken", result.Token },
+                    { "UserName", m_userNameEntry.entryText }
                 });
                 m_userNameEntry.entryText = string.Empty;
                 m_passwordEntry.entryText = string.Empty;

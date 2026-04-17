@@ -10,13 +10,16 @@ namespace SevenWonders.WebClient.Model.Services
 {
     public class ClientHubService: IClientHubService
     {
+        public string UserName { get; private set; }
+
         public ClientHubService(IClientMessageDispatcher clientMessageDispatcher)
         {
             m_clientMessageDispatcher = clientMessageDispatcher;
             m_url = "https://localhost:7206/serverhub";
+            UserName = string.Empty;
         }
 
-        public async Task Connect(string? authToken)
+        public async Task Connect(string userName, string? authToken)
         {
             m_hubConnection = new HubConnectionBuilder()
                             .WithAutomaticReconnect()
@@ -38,6 +41,7 @@ namespace SevenWonders.WebClient.Model.Services
             m_hubConnection.On<LobbyServerMessage>(nameof(ReceiveLobbyMessage), ReceiveLobbyMessage);
             m_hubConnection.On<GameServerMessage>(nameof(ReceiveGameMessage), ReceiveGameMessage);
             await m_hubConnection.StartAsync();
+            UserName = userName;
         }
 
         public async Task Disconnect()
@@ -57,6 +61,7 @@ namespace SevenWonders.WebClient.Model.Services
                     m_hubConnection = null;
                 }
             }
+            UserName = string.Empty;
         }
 
         public async Task InvokeLobbyCommand(LobbyClientMessage lobbyRequestMessage)

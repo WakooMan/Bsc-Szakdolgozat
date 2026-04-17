@@ -4,6 +4,7 @@ namespace SevenWondersUI.ViewModels
     {
         private string m_userName = string.Empty;
         private bool m_isHost;
+        private bool m_isLocalPlayer;
 
         public string UserName
         {
@@ -29,6 +30,19 @@ namespace SevenWondersUI.ViewModels
                     m_isHost = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(DisplayName));
+                }
+            }
+        }
+
+        public bool IsLocalPlayer
+        {
+            get => m_isLocalPlayer;
+            set
+            {
+                if (m_isLocalPlayer != value)
+                {
+                    m_isLocalPlayer = value;
+                    OnPropertyChanged();
                 }
             }
         }

@@ -1,5 +1,6 @@
-﻿using SevenWonders.WebClient.Model;
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
+using SevenWonders.WebClient.Model;
+using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Services;
 using SevenWondersUI.Views;
 using System.Collections.ObjectModel;
@@ -7,7 +8,6 @@ using System.Windows.Input;
 using WebServer.Contract.DataTransferObjects;
 using WebServer.Contract.Messages.Lobby.ClientMessages;
 using WebServer.Contract.Messages.Lobby.ServerMessages;
-using SevenWonders.WebClient.Model.Services;
 
 namespace SevenWondersUI.ViewModels
 {
@@ -102,6 +102,7 @@ namespace SevenWondersUI.ViewModels
             m_startMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage>(OnStartMatchmakingResponseMessageReceived);
             m_stopMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage>(OnStopMatchmakingResponseMessageReceived);
             m_lobbyUpdateMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage>(OnLobbyUpdateMessageReceived);
+            m_failureResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
             Rooms = new ObservableCollection<RoomModel>();
 
             JoinGameCommand = new Command(JoinGame, () => SelectedRoom != null);
@@ -140,6 +141,7 @@ namespace SevenWondersUI.ViewModels
             registerer.Register(m_startMatchmakingResponseMessageHandlerDelegate);
             registerer.Register(m_stopMatchmakingResponseMessageHandlerDelegate);
             registerer.Register(m_lobbyUpdateMessageHandlerDelegate);
+            registerer.Register(m_failureResponseMessageHandlerDelegate);
         }
 
         public void Unregister(IMessageRegisterer registerer)
@@ -149,6 +151,7 @@ namespace SevenWondersUI.ViewModels
             registerer.Unregister(m_startMatchmakingResponseMessageHandlerDelegate);
             registerer.Unregister(m_stopMatchmakingResponseMessageHandlerDelegate);
             registerer.Unregister(m_lobbyUpdateMessageHandlerDelegate);
+            registerer.Unregister(m_failureResponseMessageHandlerDelegate);
         }
 
         private async void CreateGame()
@@ -293,11 +296,26 @@ namespace SevenWondersUI.ViewModels
             }
         }
 
+        private async Task<bool> OnFailureResponseMessageReceived(FailureResponseMessage message)
+        {
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                var popup = new ErrorPopupWindow(new ErrorPopupViewModel(message.Message));
+                var page = Application.Current?.MainPage;
+                if (page is not null)
+                {
+                    await page.ShowPopupAsync(popup);
+                }
+            });
+            return false;
+        }
+
         private readonly LobbyResponseMessageHandlerDelegate<CreateLobbyResponseMessage> m_createLobbyResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<JoinLobbyResponseMessage> m_joinLobbyResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage> m_startMatchmakingResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage> m_stopMatchmakingResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage> m_lobbyUpdateMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandlerDelegate;
         private readonly IClientHubService m_clientHubService;
         private readonly INavigationService m_navigationService;
         private readonly IAuthService m_authService;

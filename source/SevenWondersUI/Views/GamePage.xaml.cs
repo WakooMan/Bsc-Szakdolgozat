@@ -1,3 +1,4 @@
+using SevenWonders.WebClient.Model;
 using SevenWondersUI.ViewModels;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
@@ -6,9 +7,10 @@ namespace SevenWondersUI.Views;
 
 public partial class GamePage : ContentPage
 {
-    public GamePage(GamePageViewModel gamePageViewModel)
+    public GamePage(GamePageViewModel gamePageViewModel, IClientMessageDispatcher clientMessageDispatcher)
     {
         m_gamePageViewModel = gamePageViewModel;
+        m_clientMessageDispatcher = clientMessageDispatcher;
         InitializeComponent();
         m_gamePageViewModel.Engine.RedrawRequested += (e, args) =>
         {
@@ -26,8 +28,15 @@ public partial class GamePage : ContentPage
         {
             await Task.Delay(100);
         }
+        m_clientMessageDispatcher.RegisterHandler(m_gamePageViewModel);
         await m_gamePageViewModel.Initialize();
         OnCanvasSizeChanged(this, EventArgs.Empty);
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        m_clientMessageDispatcher.UnregisterHandler(m_gamePageViewModel);
     }
 
     private void OnCanvasSizeChanged(object sender, EventArgs e)
@@ -50,4 +59,5 @@ public partial class GamePage : ContentPage
     }
 
     private readonly GamePageViewModel m_gamePageViewModel;
+    private readonly IClientMessageDispatcher m_clientMessageDispatcher;
 }

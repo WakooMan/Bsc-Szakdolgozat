@@ -65,6 +65,7 @@ namespace WebServer.Model.PlayerStates
                 await m_serverService.LeaveGroup(m_player.ConnectionId, nameof(InMainMenu));
                 await m_serverService.JoinGroup(m_player.ConnectionId, code);
                 await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new JoinLobbyResponseMessage(true, "Success", lobby.ToDto()));
+                return;
             }
 
             throw new InvalidOperationException("The lobby is filled!");

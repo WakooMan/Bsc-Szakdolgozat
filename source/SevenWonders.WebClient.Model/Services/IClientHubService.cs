@@ -5,7 +5,8 @@ namespace SevenWonders.WebClient.Model.Services
 {
     public interface IClientHubService
     {
-        Task Connect(string? authToken);
+        string UserName { get; }
+        Task Connect(string userName, string? authToken);
 
         Task Disconnect();
 

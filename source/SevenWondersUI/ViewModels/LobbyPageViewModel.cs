@@ -1,7 +1,9 @@
-﻿using SevenWonders.Common;
+﻿using CommunityToolkit.Maui.Views;
+using SevenWonders.Common;
 using SevenWonders.WebClient.Model;
 using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Services;
+using SevenWondersUI.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WebServer.Contract.DataTransferObjects;
@@ -39,6 +41,23 @@ namespace SevenWondersUI.ViewModels
             }
         }
 
+        public bool IsHost
+        {
+            get
+            {
+                return m_isHost;
+            }
+            set
+            {
+                if (m_isHost != value)
+                {
+                    m_isHost = value;
+                    OnPropertyChanged();
+                    ((Command)StartGameCommand).ChangeCanExecute();
+                }
+            }
+        }
+
         public ObservableCollection<LobbyMemberModel> Members { get; } = new();
         public ObservableCollection<ChatMessageModel> ChatMessages { get; } = new();
 
@@ -59,9 +78,10 @@ namespace SevenWondersUI.ViewModels
             m_lobbyStateUpdateMessageHandler = new LobbyResponseMessageHandlerDelegate<LobbyStateUpdateMessage>(OnLobbyStateUpdateMessageReceived);
             m_startGameResponseMessageHandler = new LobbyResponseMessageHandlerDelegate<StartGameResponseMessage>(OnStartGameResponseMessageReceived);
             m_leaveLobbyResponseMessageHandler = new LobbyResponseMessageHandlerDelegate<LeaveLobbyResponseMessage>(OnLeaveLobbyResponseMessageReceived);
+            m_failureResponseMessageHandler = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
 
             SendChatCommand = new Command(SendChat, () => !string.IsNullOrWhiteSpace(m_chatInput));
-            StartGameCommand = new Command(StartGame);
+            StartGameCommand = new Command(StartGame, () => m_isHost && Members.Count == 2);
             LeaveCommand = new Command(LeaveLobby);
         }
 
@@ -70,6 +90,7 @@ namespace SevenWondersUI.ViewModels
             registerer.Register(m_lobbyStateUpdateMessageHandler);
             registerer.Register(m_startGameResponseMessageHandler);
             registerer.Register(m_leaveLobbyResponseMessageHandler);
+            registerer.Register(m_failureResponseMessageHandler);
         }
 
         public void Unregister(IMessageRegisterer registerer)
@@ -77,6 +98,7 @@ namespace SevenWondersUI.ViewModels
             registerer.Unregister(m_lobbyStateUpdateMessageHandler);
             registerer.Unregister(m_startGameResponseMessageHandler);
             registerer.Unregister(m_leaveLobbyResponseMessageHandler);
+            registerer.Unregister(m_failureResponseMessageHandler);
         }
 
         private void ApplyLobbyDto(LobbyDto dto)
@@ -86,10 +108,22 @@ namespace SevenWondersUI.ViewModels
                 LobbyName = dto.Name;
 
                 Members.Clear();
+                IsHost = false;
                 foreach (LobbyPlayerDto member in dto.Members)
                 {
-                    Members.Add(new LobbyMemberModel { UserName = member.UserName, IsHost = member.IsHost });
+                    LobbyMemberModel memberModel =new LobbyMemberModel
+                    { 
+                        UserName = member.UserName, 
+                        IsHost = member.IsHost, 
+                        IsLocalPlayer = member.UserName == m_clientHubService.UserName
+                    };
+                    Members.Add(memberModel);
+                    if (memberModel.IsHost && memberModel.IsLocalPlayer)
+                    {
+                        IsHost = true;
+                    }
                 }
+                ((Command)StartGameCommand).ChangeCanExecute();
 
                 ChatMessages.Clear();
                 foreach (ChatMessage msg in dto.ChatMessages)
@@ -159,11 +193,27 @@ namespace SevenWondersUI.ViewModels
             return message.Success;
         }
 
+        private async Task<bool> OnFailureResponseMessageReceived(FailureResponseMessage message)
+        {
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                var popup = new ErrorPopupWindow(new ErrorPopupViewModel(message.Message));
+                var page = Application.Current?.MainPage;
+                if (page is not null)
+                {
+                    await page.ShowPopupAsync(popup);
+                }
+            });
+            return false;
+        }
+
         private readonly LobbyResponseMessageHandlerDelegate<LobbyStateUpdateMessage> m_lobbyStateUpdateMessageHandler;
         private readonly LobbyResponseMessageHandlerDelegate<StartGameResponseMessage> m_startGameResponseMessageHandler;
         private readonly LobbyResponseMessageHandlerDelegate<LeaveLobbyResponseMessage> m_leaveLobbyResponseMessageHandler;
+        private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandler;
         private readonly IClientHubService m_clientHubService;
         private readonly INavigationService m_navigationService;
+        private bool m_isHost;
     }
 }
 

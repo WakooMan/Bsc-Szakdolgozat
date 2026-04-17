@@ -1,17 +1,17 @@
 Gameplay:
 - Csoda építésnél és kártya építésnél nem látszik előre, hogy mennyi pénzbe kerülne megépíteni
-- Choose good nem látszik a nyersanyag
 - Vannak olyan developmentek, melyek valamiért front sprite-ban vannak
 - túl nagy betűk a magyarítás miatt
 - canvas invalidatesurface
+- game engine inicializálása a program indításának elején, start-stop game engine kezelés
+- 5 development kell a táblán a 3 helyett
 Multiplayer:
 - Regisztráció kliens oldalon
 - Belépésnél küldeni a kliensnek a szobákat
 - Menük finomítása
 - Matchmaking
-- Csak a host indíthasson játékot -> szerveren is kezelni
 - player action szinkronizáció a szerverrel
-- popup ha valami nem sikerül
-- verseny mód
+- game over handler game page-be integrálása
+- verseny mód statisztika
 Logging:
 - Add logs everywhere

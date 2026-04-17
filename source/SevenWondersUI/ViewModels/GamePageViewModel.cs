@@ -1,12 +1,17 @@
-﻿using GameLogic;
+﻿using CommunityToolkit.Maui.Views;
+using GameLogic;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
+using SevenWonders.Presenter;
 using SevenWonders.Presenter.PlayerActionReceivers;
 using SevenWonders.Presenter.Presenters;
 using SevenWonders.Presenter.Presenters.Factories;
+using SevenWonders.WebClient.Model;
 using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Services;
+using SevenWondersUI.Views;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
 
 namespace SevenWondersUI.ViewModels
 {
@@ -15,7 +20,7 @@ namespace SevenWondersUI.ViewModels
     [QueryProperty(nameof(StartingPlayerId), "StartingPlayerId")]
     [QueryProperty(nameof(Seed), "Seed")]
     [QueryProperty(nameof(IsMultiplayer), "IsMultiplayer")]
-    public class GamePageViewModel: BaseViewModel
+    public class GamePageViewModel: BaseViewModel, IMessageHandler
     {
         public GamePageViewModel(IGame game,
                                  IEngine engine,
@@ -36,6 +41,8 @@ namespace SevenWondersUI.ViewModels
             m_engine = engine;
             m_randomGeneratorFactory = randomGeneratorFactory;
             m_presenterFactory = presenterFactory;
+            m_failureResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
+
         }
 
         public int StartingPlayerId { get; set; }
@@ -71,6 +78,31 @@ namespace SevenWondersUI.ViewModels
             _ = Task.Run(m_game.GameLoop);
         }
 
+
+        public void Register(IMessageRegisterer registerer)
+        {
+            registerer.Register(m_failureResponseMessageHandlerDelegate);
+        }
+
+        public void Unregister(IMessageRegisterer registerer)
+        {
+            registerer.Unregister(m_failureResponseMessageHandlerDelegate);
+        }
+
+        private async Task<bool> OnFailureResponseMessageReceived(FailureResponseMessage message)
+        {
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                var popup = new ErrorPopupWindow(new ErrorPopupViewModel(message.Message));
+                var page = Application.Current?.MainPage;
+                if (page is not null)
+                {
+                    await page.ShowPopupAsync(popup);
+                }
+            });
+            return false;
+        }
+
         private readonly ISceneLoader m_sceneLoader;
         private readonly IEngine m_engine;
         private readonly IGame m_game;
@@ -79,5 +111,6 @@ namespace SevenWondersUI.ViewModels
         private readonly IPlayerActionReceiverFactory m_playerActionReceiverFactory;
         private readonly IRandomGeneratorFactory m_randomGeneratorFactory;
         private readonly IPresenterFactory m_presenterFactory;
+        private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandlerDelegate;
     }
 }
