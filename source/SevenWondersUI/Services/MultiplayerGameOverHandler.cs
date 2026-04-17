@@ -6,13 +6,15 @@ using WebServer.Contract.Messages.Lobby.ServerMessages;
 
 namespace SevenWondersUI.Services
 {
-    public class MultiplayerGameOverHandler : IGameOverHandler, IMessageHandler
+    public class MultiplayerGameOverHandler : IGameOverHandler, IMessageHandler, IDisposable
     {
-        public MultiplayerGameOverHandler(IClientHubService clientHubService, INavigationService navigationService)
+        public MultiplayerGameOverHandler(IClientHubService clientHubService, INavigationService navigationService, IClientMessageDispatcher clientMessageDispatcher)
         {
             m_clientHubService = clientHubService;
             m_navigationService = navigationService;
+            m_clientMessageDispatcher = clientMessageDispatcher;
             m_lobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<ExitGameResponseMessage>(HandleExitGameResponse);
+            m_clientMessageDispatcher.RegisterHandler(this);
         }
 
         public async Task OnGameOver()
@@ -42,8 +44,14 @@ namespace SevenWondersUI.Services
             return message.Success;
         }
 
+        public void Dispose()
+        {
+            m_clientMessageDispatcher.UnregisterHandler(this);
+        }
+
         private readonly IClientHubService m_clientHubService;
         private readonly INavigationService m_navigationService;
+        private readonly IClientMessageDispatcher m_clientMessageDispatcher;
         private readonly LobbyResponseMessageHandlerDelegate<ExitGameResponseMessage> m_lobbyResponseMessageHandlerDelegate;
     }
 }

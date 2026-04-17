@@ -15,6 +15,7 @@ namespace WebServer.Model.MessageHandling
             m_startMatchmakingRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<StartMatchmakingRequestMessage>(OnStartMatchmakingMessageReceived);
             m_stopMatchmakingRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<StopMatchmakingRequestMessage>(OnStopMatchmakingMessageReceived);
             m_sendChatRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<SendChatRequestMessage>(OnSendChatMessageReceived);
+            m_exitGameRequestMessageHandler = new LobbyRequestMessageHandlerDelegate<ExitGameRequestMessage>(OnExitGameMessageReceived);
         }
 
         public void Register(IMessageRegisterer registerer)
@@ -26,6 +27,7 @@ namespace WebServer.Model.MessageHandling
             registerer.Register(m_startMatchmakingRequestMessageHandler);
             registerer.Register(m_stopMatchmakingRequestMessageHandler);
             registerer.Register(m_sendChatRequestMessageHandler);
+            registerer.Register(m_exitGameRequestMessageHandler);
         }
 
         public void Unregister(IMessageRegisterer registerer)
@@ -37,6 +39,7 @@ namespace WebServer.Model.MessageHandling
             registerer.Unregister(m_startMatchmakingRequestMessageHandler);
             registerer.Unregister(m_stopMatchmakingRequestMessageHandler);
             registerer.Unregister(m_sendChatRequestMessageHandler);
+            registerer.Unregister(m_exitGameRequestMessageHandler);
         }
 
         private async Task OnCreateLobbyMessageReceived(string connectionId, CreateLobbyRequestMessage requestMessage)
@@ -130,6 +133,19 @@ namespace WebServer.Model.MessageHandling
             }
         }
 
+        private async Task OnExitGameMessageReceived(string connectionId, ExitGameRequestMessage message)
+        {
+            try
+            {
+                IPlayerClient playerClient = m_clientManager.GetClient(connectionId);
+                await playerClient.ExitGame();
+            }
+            catch (Exception ex)
+            {
+                // Handle exception if needed
+            }
+        }
+
         private readonly LobbyRequestMessageHandlerDelegate<CreateLobbyRequestMessage> m_createLobbyRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<JoinLobbyRequestMessage> m_joinLobbyRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<LeaveLobbyRequestMessage> m_leaveLobbyRequestMessageHandler;
@@ -137,6 +153,7 @@ namespace WebServer.Model.MessageHandling
         private readonly LobbyRequestMessageHandlerDelegate<StartMatchmakingRequestMessage> m_startMatchmakingRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<StopMatchmakingRequestMessage> m_stopMatchmakingRequestMessageHandler;
         private readonly LobbyRequestMessageHandlerDelegate<SendChatRequestMessage> m_sendChatRequestMessageHandler;
+        private readonly LobbyRequestMessageHandlerDelegate<ExitGameRequestMessage> m_exitGameRequestMessageHandler;
         private readonly IClientManager m_clientManager;
     }
 }

@@ -1,5 +1,13 @@
+Gameplay:
 - Csoda építésnél és kártya építésnél nem látszik előre, hogy mennyi pénzbe kerülne megépíteni
 - Choose good nem látszik a nyersanyag
 - Vannak olyan developmentek, melyek valamiért front sprite-ban vannak
 - túl nagy betűk a magyarítás miatt
 - canvas invalidatesurface
+Multiplayer:
+- Regisztráció kliens oldalon
+- Belépésnél küldeni a kliensnek a szobákat
+- Menük finomítása
+- Matchmaking
+- Csak a host indíthasson játékot -> szerveren is kezelni
+- player action szinkronizáció a szerverrel
