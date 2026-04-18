@@ -17,6 +17,7 @@ namespace SevenWondersUI.ViewModels
             m_backText = "Vissza";
             m_loginCommand = new Command(OnLogin, ValidateTexts);
             BackCommand = new Command(OnBack, () => true);
+            NavigateToRegisterCommand = new Command(OnNavigateToRegister);
         }
 
         public string UserNameText
@@ -119,6 +120,7 @@ namespace SevenWondersUI.ViewModels
 
         public ICommand LoginCommand => m_loginCommand;
         public ICommand BackCommand { get; }
+        public ICommand NavigateToRegisterCommand { get; }
 
         private bool ValidateTexts()
         {
@@ -154,6 +156,11 @@ namespace SevenWondersUI.ViewModels
             await m_navigationService.NavigateToAsync("//MainPage");
             m_userNameEntry.entryText = string.Empty;
             m_passwordEntry.entryText = string.Empty;
+        }
+
+        private async void OnNavigateToRegister()
+        {
+            await m_navigationService.NavigateToAsync("//RegisterPage");
         }
 
 
