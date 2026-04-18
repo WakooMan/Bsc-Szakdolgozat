@@ -106,6 +106,12 @@ namespace SevenWondersUI.ViewModels
             }
         }
 
+        public string UserNameLabelText { get; } = "Felhasználónév:";
+        public string EmailLabelText { get; } = "E-mail:";
+        public string PasswordLabelText { get; } = "Jelszó:";
+        public string RegisterText { get; } = "Regisztráció";
+        public string NavigateToLoginText { get; } = "Bejelentkezés";
+
         public ICommand RegisterCommand => m_registerCommand;
         public ICommand NavigateToLoginCommand { get; }
 

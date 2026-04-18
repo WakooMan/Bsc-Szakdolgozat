@@ -18,19 +18,19 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Text="Felhasználónév:" FontSize="Medium" HorizontalOptions="Center" Grid.Row="0" TextColor="White" Margin="10"/>
+        <Label Text="{Binding UserNameLabelText}" FontSize="Medium" HorizontalOptions="Center" Grid.Row="0" TextColor="White" Margin="10"/>
         <Entry Text="{Binding UserName, Mode=TwoWay}" Grid.Row="1" FontSize="Medium" Margin="10" Background="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" TextColor="White" MaxLength="20"/>
         <Label Text="{Binding UserNameError}" FontSize="Small" TextColor="Red" HorizontalOptions="Center" Grid.Row="2"/>
 
-        <Label Text="E-mail:" FontSize="Medium" HorizontalOptions="Center" Grid.Row="3" TextColor="White" Margin="10"/>
+        <Label Text="{Binding EmailLabelText}" FontSize="Medium" HorizontalOptions="Center" Grid.Row="3" TextColor="White" Margin="10"/>
         <Entry Text="{Binding Email, Mode=TwoWay}" Grid.Row="4" FontSize="Medium" Margin="10" Background="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" TextColor="White" Keyboard="Email"/>
         <Label Text="{Binding EmailError}" FontSize="Small" TextColor="Red" HorizontalOptions="Center" Grid.Row="5"/>
 
-        <Label Text="Jelszó:" FontSize="Medium" HorizontalOptions="Center" Grid.Row="6" TextColor="White" Margin="10"/>
+        <Label Text="{Binding PasswordLabelText}" FontSize="Medium" HorizontalOptions="Center" Grid.Row="6" TextColor="White" Margin="10"/>
         <Entry Text="{Binding Password, Mode=TwoWay}" Grid.Row="7" IsPassword="True" FontSize="Medium" Margin="10" Background="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" TextColor="White" MaxLength="20"/>
         <Label Text="{Binding PasswordError}" FontSize="Small" TextColor="Red" HorizontalOptions="Center" Grid.Row="8"/>
 
-        <Button Text="Regisztráció" FontSize="Medium" BackgroundColor="Black" Command="{Binding RegisterCommand}" Grid.Row="9" Margin="10" TextColor="White"/>
-        <Button Text="Bejelentkezés" FontSize="Medium" BackgroundColor="Black" Command="{Binding NavigateToLoginCommand}" Grid.Row="10" Margin="10" TextColor="White"/>
+        <Button Text="{Binding RegisterText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding RegisterCommand}" Grid.Row="9" Margin="10" TextColor="White"/>
+        <Button Text="{Binding NavigateToLoginText}" FontSize="Small" BackgroundColor="Black" Command="{Binding NavigateToLoginCommand}" Grid.Row="10" Margin="10" TextColor="White"/>
     </Grid>
 </ContentPage>

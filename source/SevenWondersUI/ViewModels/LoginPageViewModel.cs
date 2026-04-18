@@ -118,6 +118,8 @@ namespace SevenWondersUI.ViewModels
             }
         }
 
+        public string NavigateToRegisterText { get; } = "Regisztráció";
+
         public ICommand LoginCommand => m_loginCommand;
         public ICommand BackCommand { get; }
         public ICommand NavigateToRegisterCommand { get; }
