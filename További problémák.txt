@@ -6,7 +6,6 @@ Gameplay:
 - game engine inicializálása a program indításának elején, start-stop game engine kezelés
 - 5 development kell a táblán a 3 helyett
 Multiplayer:
-- Regisztráció kliens oldalon
 - game over handler game page-be integrálása
 - Menük finomítása
 - Matchmaking
