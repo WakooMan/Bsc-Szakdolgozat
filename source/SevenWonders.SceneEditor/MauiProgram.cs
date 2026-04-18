@@ -55,7 +55,7 @@ namespace SevenWonders.SceneEditor
         private static MauiAppBuilder RegisterGameEngine(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddSingleton(typeof(IXmlHandler), typeof(XmlHandler));
-            mauiAppBuilder.Services.AddSingleton(typeof(IRandomGenerator), typeof(RandomGenerator));
+            mauiAppBuilder.Services.AddSingleton(typeof(IRandomGenerator), typeof(DefaultRandomGenerator));
             mauiAppBuilder.Services.AddSingleton(typeof(IAnimationManager), typeof(AnimationManager));
             mauiAppBuilder.Services.AddSingleton(typeof(IGameEngineTicker), typeof(GameEngineTicker));
             mauiAppBuilder.Services.AddSingleton(typeof(ISceneLoader), typeof(SceneLoader));

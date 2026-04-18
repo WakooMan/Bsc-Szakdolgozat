@@ -7,6 +7,6 @@ namespace GameLogic.Handlers
     {
         Task<int> GetBuildCost(IBuildable buildable, Player buyer, Player opponent);
         Task<bool> CanAfford(IBuildable buildable, Player buyer, Player opponent);
-        Task<List<Good>> GetMissingGoods(IBuildable buildable, Player buyer);
+        Task<List<Good>> GetMissingGoods(IBuildable buildable, PlayerProperties buyerProperties);
     }
 }

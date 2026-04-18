@@ -3,7 +3,9 @@ using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.SceneEditor.Helpers;
 using SevenWonders.SceneEditor.ViewModels;
+using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System.Configuration;
 using System.Numerics;
 
 namespace SevenWonders.SceneEditor.Views
@@ -16,16 +18,25 @@ namespace SevenWonders.SceneEditor.Views
             m_engine = engine;
             m_sceneLoader = sceneLoader;
             m_mainPageViewModel = mainPageViewModel;
+            InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            InitializeComponent();
-            GameLog.InitializeFileLogger(FileSystem.AppDataDirectory);
+            var logFileName = ConfigurationManager.AppSettings["logFileName"];
+            if (logFileName is not null)
+            {
+                GameLog.InitializeFileLogger(FileSystem.AppDataDirectory, logFileName);
+            }
 
-            foreach (Scene scene in m_sceneLoader.LoadScenes().GetAwaiter().GetResult())
+            while (m_gameView is null)
+            {
+                await Task.Delay(100);
+            }
+
+            foreach (Scene scene in await m_sceneLoader.LoadScenes())
             {
                 m_engine.SceneManager.RegisterScene(scene);
                 SceneIdHandler.OrderIds(scene);
@@ -33,7 +44,7 @@ namespace SevenWonders.SceneEditor.Views
             m_currentPopup = null;
             SizeChanged += MainPage_SizeChanged;
             BindingContext = m_mainPageViewModel;
-            m_engine.RedrawRequested += (e, args) => canvas?.InvalidateSurface();
+            m_engine.RedrawRequested += (e, args) => m_gameView?.InvalidateSurface();
             m_engine.Startup();
         }
 
@@ -47,16 +58,16 @@ namespace SevenWonders.SceneEditor.Views
             }
         }
 
-        private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            e.Surface.Canvas.Clear();
             if (m_engine.SceneManager.CurrentScene is not null && m_mainPageViewModel.LayerContentsViewModel.SelectedLayer is not null)
             {
-                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e, m_engine.SceneManager.CurrentScene.TextureRegistry);
+                e.Surface.Canvas.Clear(SKColors.Black);
+                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e.Surface.Canvas, m_engine.SceneManager.CurrentScene.TextureRegistry);
             }
             else if (m_mainPageViewModel.CurrentScene is not null)
             {
-                m_mainPageViewModel.CurrentScene.Draw(e);
+                m_engine.SceneManager.Render(e.Surface.Canvas);
             }
         }
 
@@ -327,7 +338,7 @@ namespace SevenWonders.SceneEditor.Views
             }
         }
 
-        private void OnTouchEffectAction(object sender, SKTouchEventArgs e)
+        private void OnTouch(object sender, SKTouchEventArgs e)
         {
             m_engine.InputManager.OnTouchEvent(e);
         }

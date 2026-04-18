@@ -6,8 +6,6 @@ namespace GameLogic.Elements.Effects
 {
     public class Law : Effect
     {
-        public Discipline Discipline => m_discipline;
-
         public Law()
         {
             m_discipline = new DefaultDiscipline();
@@ -15,7 +13,7 @@ namespace GameLogic.Elements.Effects
 
         private Law(Law law)
         {
-            m_discipline = law.m_discipline.Clone();
+            m_discipline = law.m_discipline?.Clone();
         }
 
         public override Law Clone()
@@ -23,37 +21,45 @@ namespace GameLogic.Elements.Effects
             return new Law(this);
         }
 
-        public override async Task Apply(IGameContext gameContext, int playerId)
+        public override async Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player player = gameContext.TurnHandler.GetPlayer(playerId);
             var list = new List<IPlayerAction>
             {
-                new ChooseDisciplineAction(new Building(), SetDiscipline, playerId),
-                new ChooseDisciplineAction(new Geography(), SetDiscipline, playerId),
-                new ChooseDisciplineAction(new Healing(), SetDiscipline, playerId),
-                new ChooseDisciplineAction(new Mechanics(), SetDiscipline, playerId),
-                new ChooseDisciplineAction(new Physics(), SetDiscipline, playerId),
-                new ChooseDisciplineAction(new Trading(), SetDiscipline, playerId),
-                new ChooseDisciplineAction(new Writing(), SetDiscipline, playerId)
+                new ChooseDisciplineAction(new Building(), owner, opponent, SetDiscipline),
+                new ChooseDisciplineAction(new Geography(), owner, opponent, SetDiscipline),
+                new ChooseDisciplineAction(new Healing(), owner, opponent, SetDiscipline),
+                new ChooseDisciplineAction(new Mechanics(), owner, opponent, SetDiscipline),
+                new ChooseDisciplineAction(new Physics(), owner, opponent, SetDiscipline),
+                new ChooseDisciplineAction(new Trading(), owner, opponent, SetDiscipline),
+                new ChooseDisciplineAction(new Writing(), owner, opponent, SetDiscipline)
             };
 
             await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz tudományos jelképet", list.Select(action => action.Name).ToArray(), false));
 
-            await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, player, list);
+            await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, list);
             await gameContext.EventManager.PublishAsync(new OnObjectChosen(list.Select(action => action.Name).ToArray(), false));
         }
 
-        public override async Task Unapply(IGameContext gameContext, int playerId)
+        public override Task Unapply(IGameContext gameContext, Player owner, Player opponent)
         {
-            await m_discipline.Unapply(gameContext, playerId);
+            m_discipline = null;
+            return Task.CompletedTask;
         }
 
-        private async Task SetDiscipline(IGameContext gameContext, Discipline discipline, int playerId)
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            if(m_discipline is not null)
+            {
+                await m_discipline.OnCalculatePlayerProperties(playerProperties);
+            }
+        }
+
+        private async Task SetDiscipline(IGameContext gameContext, Player owner, Player opponent, Discipline discipline)
         {
             m_discipline = discipline;
-            await m_discipline.Apply(gameContext, playerId);
+            await m_discipline.Apply(gameContext, owner, opponent);
         }
 
-        private Discipline m_discipline;
+        private Discipline? m_discipline;
     }
 }

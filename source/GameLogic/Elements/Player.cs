@@ -1,11 +1,10 @@
-﻿using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Goods;
+﻿using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Military;
 using GameLogic.Elements.Modifiers;
 using GameLogic.Elements.Wonders;
-using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
+using GameLogic.Interfaces;
 using System.Xml.Serialization;
 
 namespace GameLogic.Elements
@@ -17,17 +16,10 @@ namespace GameLogic.Elements
         public List<Wonder> Wonders { get; set; }
         public List<Card> Cards { get; set; }
         public List<Development> Developments { get; set; }
-        //public Dictionary<Type, int> Disciplines
-        //{
-        //    get
-        //    {
-        //        Dictionary<Type, int> result = new Dictionary<Type, int>();
-        //        Wonders.ForEach(wonder => wonder.Effects.OfType<Law>().ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
-        //        Cards.OfType<GreenCard>().ToList().ForEach(card => { if (result.ContainsKey(card.Discipline.GetType())) { result[card.Discipline.GetType()] += 1; } else { result[card.Discipline.GetType()] = 1; } });
-        //        Developments.ForEach(dev => dev.Effects.OfType<Law>().ToList().ForEach(law => { if (result.ContainsKey(law.Discipline.GetType())) { result[law.Discipline.GetType()] += 1; } else { result[law.Discipline.GetType()] = 1; } }));
-        //        return result;
-        //    }
-        //}
+        public List<MilitaryCard> MilitaryCards { get; set; }
+        public IPlayerActionReceiver? PlayerActionReceiver { get; set; }
+        public event Func<Player, OnCardBuilt, Task>? OnCardBuilt;
+        public event Func<Player, OnWonderBuilt, Task>? OnWonderBuilt;
 
         [XmlIgnore]
         public ICardNode? PickedCard { get; set; }
@@ -42,13 +34,33 @@ namespace GameLogic.Elements
                 m_money = (value < 0) ? 0 : value;
             }
         }
-        public async Task<PlayerProperties> GetPlayerProperties()
+        public async Task<PlayerProperties> GetPlayerProperties(Player opponent)
         {
-            PlayerProperties properties = new PlayerProperties(this);
-            if (m_eventManager is not null)
+            PlayerProperties properties = new PlayerProperties(this, opponent);
+
+            foreach (Card card in Cards)
             {
-                await m_eventManager.PublishAsync(new OnCalculatePlayerProperties(properties));
+                await card.OnCalculatePlayerProperties(properties);
             }
+
+            foreach (Wonder wonder in Wonders)
+            {
+                if (wonder.HasBeenBuilt)
+                {
+                    await wonder.OnCalculatePlayerProperties(properties);
+                }
+            }
+
+            foreach (Development development in Developments)
+            {
+                await development.OnCalculatePlayerProperties(properties);
+            }
+
+            foreach (MilitaryCard militaryCard in MilitaryCards)
+            {
+                await militaryCard.OnCalculatePlayerProperties(properties);
+            }
+
             return properties;
         }
 
@@ -59,32 +71,32 @@ namespace GameLogic.Elements
             Wonders = new List<Wonder>();
             Cards = new List<Card>();
             Developments = new List<Development>();
+            MilitaryCards = new List<MilitaryCard>();
             Money = 0;
-            m_eventManager = null;
         }
 
-        public Player(string name, int id, int money)
+        public Player(IPlayerActionReceiver playerActionReceiver, string name, int id, int money)
         {
+            PlayerActionReceiver = playerActionReceiver;
             Name = name;
             Id = id;
             Wonders = new List<Wonder>();
             Cards = new List<Card>();
             Developments = new List<Development>();
+            MilitaryCards = new List<MilitaryCard>();
             Money = money;
-            m_eventManager = null;
         }
 
-        public void Initialize(IEventManager eventManager)
+        public async Task OnBuildWonder(OnWonderBuilt onWonderBuilt)
         {
-            m_eventManager = eventManager;
+            await (OnWonderBuilt?.Invoke(this, onWonderBuilt) ?? Task.CompletedTask);
         }
 
-        public bool HasCard(Card card)
+        public async Task OnBuildCard(OnCardBuilt onCardBuilt)
         {
-            return Cards.Contains(card);
+            await (OnCardBuilt?.Invoke(this, onCardBuilt) ?? Task.CompletedTask);
         }
 
         private int m_money;
-        private IEventManager? m_eventManager;
     }
 }

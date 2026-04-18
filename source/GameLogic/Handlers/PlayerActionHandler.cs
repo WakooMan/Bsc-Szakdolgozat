@@ -10,6 +10,11 @@ namespace GameLogic.Handlers
 
         public async Task<IPlayerAction?> HandlePlayerActionsCompleted(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
         {
+            if(player.PlayerActionReceiver is null)
+            {
+                throw new InvalidOperationException($"Player {player.Name} does not have a PlayerActionReceiver assigned.");
+            }
+
             bool completed = false;
 
             while (!completed)
@@ -17,7 +22,7 @@ namespace GameLogic.Handlers
                 var wrappers = await Task.WhenAll(playerActions.Select(async playerAction =>
                     new PlayerActionWrapper(playerAction, await playerAction.CanPerform(gameContext))));
 
-                PlayerActionWrapper playerActionWrapper = gameContext.PlayerActionReceiver.ReceivePlayerAction(player, wrappers);
+                PlayerActionWrapper playerActionWrapper = player.PlayerActionReceiver.ReceivePlayerAction(player, wrappers);
                 if (playerActionWrapper.CanPerform)
                 {
                     completed = await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
@@ -33,10 +38,15 @@ namespace GameLogic.Handlers
 
         public async Task<(bool completed, IPlayerAction? playerAction)> HandlePlayerActions(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
         {
+            if (player.PlayerActionReceiver is null)
+            {
+                throw new InvalidOperationException($"Player {player.Name} does not have a PlayerActionReceiver assigned.");
+            }
+
             var wrappers = await Task.WhenAll(playerActions.Select(async playerAction =>
                 new PlayerActionWrapper(playerAction, await playerAction.CanPerform(gameContext))));
 
-            PlayerActionWrapper playerActionWrapper = gameContext.PlayerActionReceiver.ReceivePlayerAction(player, wrappers);
+            PlayerActionWrapper playerActionWrapper = player.PlayerActionReceiver.ReceivePlayerAction(player, wrappers);
             if (playerActionWrapper.CanPerform)
             {
                 return (await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext), playerActionWrapper.PlayerAction);

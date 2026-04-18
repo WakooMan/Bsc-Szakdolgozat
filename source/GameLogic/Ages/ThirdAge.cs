@@ -1,7 +1,7 @@
 ﻿using GameLogic.Elements.GameCards;
 using GameLogic.Events;
 using GameLogic.GameStructures.Factories;
-using GameLogic.Handlers;
+using SevenWonders.Common;
 
 namespace GameLogic.Ages
 {
@@ -11,7 +11,7 @@ namespace GameLogic.Ages
 
         public override string CardCompositionFile => "GameLogic.Data.ThirdAgeComposition.csv";
 
-        public ThirdAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList, IRandomElementReceiver randomElementReceiver) : base(eventManager, cardCompositionFactory, randomElementReceiver.ReceiveRandomElements(cardList?.Cards.Where(card => card.Age == AgesEnum.III).ToArray() ?? [], 20))
+        public ThirdAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList, IRandomGenerator randomGenerator) : base(eventManager, cardCompositionFactory, randomGenerator.ReceiveRandomElements(cardList?.Cards.Where(card => card.Age == AgesEnum.III).ToArray() ?? [], 20))
         { }
     }
 }

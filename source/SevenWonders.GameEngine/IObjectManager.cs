@@ -1,4 +1,6 @@
-﻿namespace SevenWonders.GameEngine
+﻿using SkiaSharp;
+
+namespace SevenWonders.GameEngine
 {
     public interface IObjectManager
     {

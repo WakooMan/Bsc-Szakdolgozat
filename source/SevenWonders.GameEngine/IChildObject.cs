@@ -1,4 +1,4 @@
-using SkiaSharp.Views.Maui;
+using SkiaSharp;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -35,7 +35,7 @@ namespace SevenWonders.GameEngine
         /// <summary>
         /// Draws the child object relative to the parent frame's position and transform.
         /// </summary>
-        public abstract void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 parentPosition, Vector2 parentVisualSize,
+        public abstract void Draw(SKCanvas canvas, Vector2 parentPosition, Vector2 parentVisualSize,
                   float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry);
 
         public virtual bool Equals(ChildObject? other)

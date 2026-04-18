@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameController", "source\Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIModell", "source\AIModell\AIModell.csproj", "{3C9BCAB7-4503-49BE-B852-C47D47780DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer", "source\WebServer\WebServer.csproj", "{91AC41CA-E836-453E-97F7-92EF4090166C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic_UnitTests", "source\GameLogic_UnitTests\GameLogic_UnitTests.csproj", "{A018E274-F949-49B9-BF61-8BFCE3054611}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "source\GameLogic\GameLogic.csproj", "{1CA9F130-B3CF-DFBC-F068-2112E661767F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Common", "source\SevenWonders.Common\SevenWonders.Common.csproj", "{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F}"
@@ -21,7 +17,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.GameEngine", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Presenter", "SevenWonders.Presenter\SevenWonders.Presenter.csproj", "{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.GameEngine_UnitTests", "source\SevenWonders.GameEngine_UnitTests\SevenWonders.GameEngine_UnitTests.csproj", "{1AB179DB-A890-D736-7396-1D70D9B7043C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.WebServer", "source\SevenWonders.WebServer\SevenWonders.WebServer.csproj", "{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Contract", "source\WebServer.Contract\WebServer.Contract.csproj", "{3AE09890-4B83-4A82-96CB-D9199CC5218F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Model", "source\WebServer.Model\WebServer.Model.csproj", "{54477D34-2E02-40B9-8079-C1AFDBED53D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.WebClient.Model", "source\SevenWonders.WebClient.Model\SevenWonders.WebClient.Model.csproj", "{744A82D9-0F93-4752-A2ED-26D6227913FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.SceneEditor", "source\SevenWonders.SceneEditor\SevenWonders.SceneEditor.csproj", "{49CEB58F-5D4F-98D6-9611-3996D4333B1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51601404-86F0-4744-A65D-4B474FC05DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -41,14 +46,6 @@ Global
 		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91AC41CA-E836-453E-97F7-92EF4090166C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A018E274-F949-49B9-BF61-8BFCE3054611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A018E274-F949-49B9-BF61-8BFCE3054611}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A018E274-F949-49B9-BF61-8BFCE3054611}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A018E274-F949-49B9-BF61-8BFCE3054611}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CA9F130-B3CF-DFBC-F068-2112E661767F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CA9F130-B3CF-DFBC-F068-2112E661767F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CA9F130-B3CF-DFBC-F068-2112E661767F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,10 +62,26 @@ Global
 		{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1AB179DB-A890-D736-7396-1D70D9B7043C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AB179DB-A890-D736-7396-1D70D9B7043C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AB179DB-A890-D736-7396-1D70D9B7043C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1AB179DB-A890-D736-7396-1D70D9B7043C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{744A82D9-0F93-4752-A2ED-26D6227913FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{744A82D9-0F93-4752-A2ED-26D6227913FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{744A82D9-0F93-4752-A2ED-26D6227913FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{744A82D9-0F93-4752-A2ED-26D6227913FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CEB58F-5D4F-98D6-9611-3996D4333B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CEB58F-5D4F-98D6-9611-3996D4333B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CEB58F-5D4F-98D6-9611-3996D4333B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CEB58F-5D4F-98D6-9611-3996D4333B1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

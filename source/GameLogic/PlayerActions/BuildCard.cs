@@ -22,8 +22,6 @@ namespace GameLogic.PlayerActions
             }
 
             ICardNode card = player.PickedCard;
-            GetComposition(gameContext).RemoveCard(card);
-            player.Cards.Add(card.CardObj);
             int BuildCost = 0;
             bool chainBuildUsed = true;
             if (string.IsNullOrEmpty(card.CardObj.PreviousBuilding) ||
@@ -33,11 +31,14 @@ namespace GameLogic.PlayerActions
                 player.Money -= BuildCost;
                 chainBuildUsed = false;
             }
+            GetComposition(gameContext).RemoveCard(card);
+            player.Cards.Add(card.CardObj);
 
             player.PickedCard = null;
-            await gameContext.EventManager.PublishAsync(new OnCardBuilt(card.CardObj, player, BuildCost, chainBuildUsed));
-            await card.CardObj.OnBuilt(gameContext, player.Id);
-            await gameContext.EventManager.PublishAsync(new AfterBuildableBuilt(player, opponent, card.CardObj));
+            OnCardBuilt onCardBuilt = new OnCardBuilt(card.CardObj, player, BuildCost, chainBuildUsed);
+            await gameContext.EventManager.PublishAsync(onCardBuilt);
+            await player.OnBuildCard(onCardBuilt);
+            await card.CardObj.OnBuilt(gameContext, player, opponent);
             return true;
         }
 

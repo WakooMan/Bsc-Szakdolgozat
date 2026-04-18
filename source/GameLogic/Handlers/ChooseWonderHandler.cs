@@ -1,13 +1,9 @@
 ﻿using GameLogic.Elements;
-using GameLogic.Elements.Modifiers;
 using GameLogic.Elements.Wonders;
 using GameLogic.Events.GameEvents;
-using GameLogic.GameStates;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 using SevenWonders.Common;
-using System;
-using System.Diagnostics.Tracing;
 
 namespace GameLogic.Handlers
 {
@@ -19,12 +15,9 @@ namespace GameLogic.Handlers
         private readonly List<ChooseWonderAction> m_wonderPlayerActions2;
         private int m_indexOfPlayer;
         private IGameContext? m_gameContext;
-        private readonly IPlayerActionReceiver m_playerActionReceiver;
 
-        public ChooseWonderHandler(IPlayerActionReceiver playerActionReceiver)
+        public ChooseWonderHandler()
         {
-            ArgumentChecker.CheckNull(playerActionReceiver, nameof(playerActionReceiver));
-            m_playerActionReceiver = playerActionReceiver;
             m_wonderPlayerActions1 = new List<ChooseWonderAction>();
             m_wonderPlayerActions2 = new List<ChooseWonderAction>();
             m_players = new List<Player>();
@@ -90,8 +83,6 @@ namespace GameLogic.Handlers
             m_wonders.Clear();
             m_players.AddRange(players);
             m_wonders.AddRange(wonders);
-            // m_gameElements.Wonders.Wonders.OrderBy(x => m_randomGenerator.Next()).Take(8)
-            // Outer thing, because of multiplayer game
             List<ChooseWonderAction> playerActions = m_wonders.Select(w => new ChooseWonderAction(w, m_wonders, GetPlayer)).ToList();
             m_wonderPlayerActions1.AddRange(playerActions.Take(4));
             m_wonderPlayerActions1.ForEach(action => playerActions.Remove(action));

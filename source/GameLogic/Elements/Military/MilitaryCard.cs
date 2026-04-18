@@ -5,7 +5,8 @@ namespace GameLogic.Elements.Military
     public class MilitaryCard
     {
         public string Name { get; set; }
-        public int PlayerId { get; set; }
+        public int OwnerId { get; set; }
+        public int OpponentId { get; set; }
         public EnemyLoseMoney EnemyLoseMoney { get; set; }
         public VictoryPoints VictoryPoints { get; set; }
         public int IndexStart { get; set; }
@@ -18,23 +19,34 @@ namespace GameLogic.Elements.Military
             EnemyLoseMoney = new EnemyLoseMoney();
             VictoryPoints = new VictoryPoints();
             FirstApply = true;
-            PlayerId = 0;
+            OwnerId = 0;
+            OpponentId = 0;
         }
 
-        public void Apply(IGameContext gameContext)
+        public async Task Apply(IGameContext gameContext)
         {
+            Player owner = gameContext.TurnHandler.GetPlayer(OwnerId);
+            Player opponent = gameContext.TurnHandler.GetPlayer(OpponentId);
             if (FirstApply)
             {
-                EnemyLoseMoney.Apply(gameContext, PlayerId);
+                await EnemyLoseMoney.Apply(gameContext, opponent, owner);
             }
 
-            VictoryPoints.Apply(gameContext, PlayerId);
-            FirstApply = false;
+            opponent.MilitaryCards.Add(this);
         }
 
-        public void Unapply(IGameContext gameContext)
+        public Task Unapply(IGameContext gameContext)
         {
-            VictoryPoints.Unapply(gameContext, PlayerId);
+            Player owner = gameContext.TurnHandler.GetPlayer(OwnerId);
+            Player opponent = gameContext.TurnHandler.GetPlayer(OpponentId);
+
+            opponent.MilitaryCards.Remove(this);
+            return Task.CompletedTask;
+        }
+
+        public async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            await VictoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

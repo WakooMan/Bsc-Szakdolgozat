@@ -59,7 +59,7 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public override void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public override void Draw(SKCanvas canvas, TextureRegistry textureRegistry)
         {
             if (!Visible || Animations.Count <= 0)
             { 
@@ -68,16 +68,13 @@ namespace SevenWonders.GameEngine
 
             var effectiveScale = new Vector2(VisualSize.X * FlipMultiplier.X, VisualSize.Y * FlipMultiplier.Y);
 
-            var canvas = eventArgs.Surface.Canvas;
-
             if (Highlighted)
             {
-                canvas.Save();
+                var matrix = SKMatrix.CreateTranslation(Position.X, Position.Y);
+                matrix = matrix.PreConcat(SKMatrix.CreateRotationDegrees(Rotation));
+                matrix = matrix.PreConcat(SKMatrix.CreateScale(effectiveScale.X, effectiveScale.Y));
 
-                canvas.Translate(Position.X, Position.Y);
-                
-                canvas.RotateDegrees(Rotation);
-                canvas.Scale(effectiveScale.X, effectiveScale.Y);
+                canvas.SetMatrix(matrix);
 
                 using (var highlightPaint = new SKPaint())
                 {
@@ -87,15 +84,12 @@ namespace SevenWonders.GameEngine
                     highlightPaint.Color = SKColors.Gold.WithAlpha(200);
 
                     highlightPaint.MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, 10);
-
                     var rect = new SKRect(-Width / 2, -Height / 2, Width / 2, Height / 2);
                     canvas.DrawRoundRect(rect, 15, 15, highlightPaint);
                 }
-
-                canvas.Restore();
             }
 
-            Animations[CurrentAnim].Draw(eventArgs, Position, effectiveScale, Rotation, Width, Height, Dimmed, textureRegistry);
+            Animations[CurrentAnim].Draw(canvas, Position, effectiveScale, Rotation, Width, Height, Dimmed, textureRegistry);
         }
 
         public override SceneObject Clone()

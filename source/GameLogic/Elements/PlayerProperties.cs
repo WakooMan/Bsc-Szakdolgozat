@@ -1,11 +1,13 @@
 ﻿using GameLogic.Elements.Disciplines;
+using GameLogic.Elements.Effects;
 using GameLogic.Elements.Goods;
 
 namespace GameLogic.Elements
 {
     public class PlayerProperties
     {
-        public Player Player { get; }
+        public Player Owner { get; }
+        public Player Opponent { get; }
         public IReadOnlyDictionary<Type, Good> Goods
         {
             get
@@ -16,7 +18,28 @@ namespace GameLogic.Elements
                 }
             }
         }
+
+        public IReadOnlyList<Effect> Effects
+        {
+            get
+            {
+                lock (m_effects)
+                {
+                    return m_effects.AsReadOnly();
+                }
+            }
+        }
+
+        public IReadOnlyList<TEffect> GetEffects<TEffect>() where TEffect : Effect
+        {
+            lock (m_effects)
+            {
+                return m_effects.OfType<TEffect>().ToList();
+            }
+        }
+
         public int VictoryPoints { get; set; }
+        public int Strength { get; set; }
 
         public IReadOnlyDictionary<Type, int> Disciplines
         {
@@ -29,12 +52,15 @@ namespace GameLogic.Elements
             }
         }
 
-        public PlayerProperties(Player player)
+        public PlayerProperties(Player owner, Player opponent)
         {
-            Player = player;
+            Owner = owner;
+            Opponent = opponent;
             m_goods = new Dictionary<Type, Good>();
             m_disciplines = new Dictionary<Type, int>();
+            m_effects = new List<Effect>();
             VictoryPoints = 0;
+            Strength = 0;
         }
 
         public void AddGood(Good good)
@@ -68,7 +94,16 @@ namespace GameLogic.Elements
             }
         }
 
+        public void AddEffect(Effect effect)
+        {
+            lock (m_effects)
+            {
+                m_effects.Add(effect);
+            }
+        }
+
         private readonly IDictionary<Type, Good> m_goods;
         private readonly IDictionary<Type, int> m_disciplines;
+        private readonly List<Effect> m_effects;
     }
 }

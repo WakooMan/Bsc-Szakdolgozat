@@ -1,7 +1,4 @@
-﻿using GameLogic.Events;
-using GameLogic.Events.GameEvents;
-
-namespace GameLogic.Elements.Effects
+﻿namespace GameLogic.Elements.Effects
 {
     public class Strength : Effect
     {
@@ -21,14 +18,12 @@ namespace GameLogic.Elements.Effects
             return new Strength(this);
         }
 
-        public override async Task Apply(IGameContext gameContext, int playerId)
-        {
-            await gameContext.EventManager.PublishAsync(new OnMilitaryAdvanced(gameContext.TurnHandler.CurrentPlayer, Points));
-        }
+        // TODO: At the end of the turn military strength of players should be compared and the pawn should be moved accordingly.
 
-        public override async Task Unapply(IGameContext gameContext, int playerId)
+        public override Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await gameContext.EventManager.PublishAsync(new OnMilitaryAdvanced(gameContext.TurnHandler.OpponentPlayer, Points));
+            playerProperties.Strength += Points;
+            return Task.CompletedTask;
         }
     }
 }

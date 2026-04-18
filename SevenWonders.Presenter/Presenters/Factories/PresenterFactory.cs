@@ -22,8 +22,7 @@ namespace SevenWonders.Presenter.Presenters.Factories
                                 IObjectManager objectManager, 
                                 ITextureIdHandler textureIdHandler, 
                                 IMilitaryTokenChildTextureHandler militaryTokenChildTextureHandler, 
-                                IDevelopmentHandlerFactory developmentHandlerFactory,
-                                IGameOverHandler gameOverHandler)
+                                IDevelopmentHandlerFactory developmentHandlerFactory)
         {
             m_cardConnector = cardConnector;
             m_wonderConnector = wonderConnector;
@@ -37,7 +36,6 @@ namespace SevenWonders.Presenter.Presenters.Factories
             m_textureIdHandler = textureIdHandler;
             m_militaryTokenChildTextureHandler = militaryTokenChildTextureHandler;
             m_developmentHandlerFactory = developmentHandlerFactory;
-            m_gameOverHandler = gameOverHandler;
         }
 
         public IPresenter CreateCardPresenter()
@@ -70,9 +68,9 @@ namespace SevenWonders.Presenter.Presenters.Factories
             return new DevelopmentPresenter(m_developmentConnector, m_gameEngineReceiver, m_eventManager, m_developmentHandlerFactory);
         }
 
-        public IPresenter CreateScreenPresenter()
+        public IPresenter CreateScreenPresenter(IGameOverHandler gameOverHandler)
         {
-            return new ScreenPresenter(m_gameEngineReceiver, m_eventManager, m_gameOverHandler);
+            return new ScreenPresenter(m_gameEngineReceiver, m_eventManager, gameOverHandler);
         }
 
         public IPresenter CreateChooseObjectPresenter()
@@ -92,6 +90,5 @@ namespace SevenWonders.Presenter.Presenters.Factories
         private readonly ITextureIdHandler m_textureIdHandler;
         private readonly IMilitaryTokenChildTextureHandler m_militaryTokenChildTextureHandler;
         private readonly IDevelopmentHandlerFactory m_developmentHandlerFactory;
-        private readonly IGameOverHandler m_gameOverHandler;
     }
 }

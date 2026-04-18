@@ -4,10 +4,16 @@
              xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
              x:Class="SevenWondersUI.Views.GamePage"
              Title="NewPage1">
-    <Grid SizeChanged="OnCanvasSizeChanged">
-        <skia:SKCanvasView x:Name="canvas"
-                           PaintSurface="OnCanvasViewPaintSurface"
-                           Touch="OnTouchEffectAction"
+    <Grid x:Name="m_mainGrid" HorizontalOptions="Fill" VerticalOptions="Fill" SizeChanged="OnCanvasSizeChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <skia:SKCanvasView x:Name="m_gameView"
+                           PaintSurface="OnPaintSurface"
+                           Touch="OnTouch"
                            EnableTouchEvents="True"
                            HorizontalOptions="Fill"
                            VerticalOptions="Fill" />

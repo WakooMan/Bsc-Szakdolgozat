@@ -1,6 +1,5 @@
 ﻿using Serilog;
 using Serilog.Core;
-using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -44,10 +43,8 @@ namespace SevenWonders.Common
             Log.Verbose($"[{methodName}] {message}");
         }
 
-        public static void InitializeFileLogger(string directoryPath)
+        public static void InitializeFileLogger(string directoryPath, string logFileName)
         {
-            var logFileName = ConfigurationManager.AppSettings["logFileName"];
-
             if (logFileName is null || string.IsNullOrWhiteSpace(logFileName))
             {
                 throw new InvalidOperationException("Log file name is null!");

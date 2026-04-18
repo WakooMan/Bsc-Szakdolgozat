@@ -8,7 +8,7 @@
         IPresenter CreatePlayer2Presenter();
         IPresenter CreateMilitaryBoardPresenter();
         IPresenter CreateDevelopmentPresenter();
-        IPresenter CreateScreenPresenter();
+        IPresenter CreateScreenPresenter(IGameOverHandler gameOverHandler);
         IPresenter CreateChooseObjectPresenter();
     }
 }

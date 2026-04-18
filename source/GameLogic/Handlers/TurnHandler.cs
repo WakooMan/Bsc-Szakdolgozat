@@ -36,7 +36,16 @@ namespace GameLogic.Handlers
             {
                 throw new InvalidOperationException("Cannot get players until SetPlayers method is not called!");
             }
-            return m_players[id - 1];
+
+            foreach (Player player in m_players)
+            {
+                if (player.Id == id)
+                {
+                    return player;
+                }    
+            }
+
+            throw new ArgumentException($"Player with id {id} not found!");
         }
 
         public TurnHandler(IEventManager eventManager)

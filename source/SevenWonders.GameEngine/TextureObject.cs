@@ -1,4 +1,4 @@
-﻿using SkiaSharp.Views.Maui;
+﻿using SkiaSharp;
 
 namespace SevenWonders.GameEngine
 {
@@ -22,12 +22,12 @@ namespace SevenWonders.GameEngine
             return base.Equals(other);
         }
 
-        public override void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public override void Draw(SKCanvas canvas, TextureRegistry textureRegistry)
         {
             if (!Visible)
                 return;
 
-            textureRegistry.Get(TextureId).Draw(eventArgs, Position, Scale, Rotation, Width, Height);
+            textureRegistry.Get(TextureId).Draw(canvas, Position, Scale, Rotation, Width, Height);
         }
 
         public override SceneObject Clone()

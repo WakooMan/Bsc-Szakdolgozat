@@ -30,7 +30,7 @@ namespace SevenWonders.Presenter.Presenters
                 m_developments.Add(connection);
             }
 
-            m_militaryBoardTargets.AddRange(m_gameEngineReceiver.ReceiveGameObjects("dev", 3));
+            m_militaryBoardTargets.AddRange(m_gameEngineReceiver.ReceiveGameObjects("dev", 5));
 
             m_player1DevelopmentHandler = m_developmentHandlerFactory.Create(m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player1Development"));
             m_player2DevelopmentHandler = m_developmentHandlerFactory.Create(m_gameEngineReceiver.ReceiveGraphicsLayer("background"), m_gameEngineReceiver.ReceiveGameObject("player2Development"));
@@ -52,17 +52,14 @@ namespace SevenWonders.Presenter.Presenters
                     });
                 }
 
-                if (eventObj.GameContext.MilitaryBoard is not null && m_militaryBoardTargets.Count == 3)
+                var developments = eventObj.GameContext.MilitaryBoard.Developments;
+                if (eventObj.GameContext.MilitaryBoard is not null && m_militaryBoardTargets.Count == developments.Count)
                 {
-                    var developments = eventObj.GameContext.MilitaryBoard.Developments;
-                    if (developments.Count == 3)
+                    for (int i = 0; i < developments.Count; i++)
                     {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            IGameObjectView gameObjectView = m_developments[developments[i]];
-                            gameObjectView.GetAnimationGroupBuilder().MoveTo(m_militaryBoardTargets[i], 0f);
-                            gameObjectView.Execute();
-                        }
+                        IGameObjectView gameObjectView = m_developments[developments[i]];
+                        gameObjectView.GetAnimationGroupBuilder().MoveTo(m_militaryBoardTargets[i], 0f);
+                        gameObjectView.Execute();
                     }
                 }
             });

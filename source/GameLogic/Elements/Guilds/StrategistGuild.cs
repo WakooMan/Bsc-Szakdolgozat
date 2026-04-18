@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.GameCards;
-using GameLogic.Events.GameEvents;
+using GameLogic.Elements.Wonders;
+using System.ComponentModel;
 
 namespace GameLogic.Elements.Guilds
 {
@@ -8,7 +9,6 @@ namespace GameLogic.Elements.Guilds
     {
         public StrategistGuild()
         {
-            m_victoryPoint = null;
         }
 
         public override Guild Clone()
@@ -16,42 +16,24 @@ namespace GameLogic.Elements.Guilds
             return new StrategistGuild();
         }
 
-        public override async Task Unapply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            if (m_action is not null)
-            {
-                gameContext.EventManager.Unsubscribe(m_action);
-            }
-            if (m_victoryPoint is not null)
-            {
-                await m_victoryPoint.Unapply(gameContext, playerId);
-                m_victoryPoint = null;
-            }
-        }
-
-        public override Task Apply(IGameContext gameContext, int playerId)
-        {
-            Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
-            Player opponent = gameContext.TurnHandler.OpponentPlayer;
-            int maxCount = Math.Max(currentPlayer.Cards.OfType<RedCard>().Count(), opponent.Cards.OfType<RedCard>().Count());
-            currentPlayer.Money += maxCount;
-
-            m_action = (eventObj) =>
-            {
-                Player currentPlayer = gameContext.TurnHandler.CurrentPlayer;
-                Player opponent = gameContext.TurnHandler.OpponentPlayer;
-                int maxCount = Math.Max(currentPlayer.Cards.OfType<RedCard>().Count(), opponent.Cards.OfType<RedCard>().Count());
-                m_victoryPoint = new VictoryPoints()
-                {
-                    Points = maxCount
-                };
-                m_victoryPoint.Apply(gameContext, playerId).GetAwaiter().GetResult();
-            };
-            gameContext.EventManager.Subscribe(m_action);
+            owner.Money += GetMaxRedCardCount(owner, opponent);
             return Task.CompletedTask;
         }
 
-        private Action<BeforeGameEnded>? m_action;
-        private VictoryPoints? m_victoryPoint;
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            VictoryPoints victoryPoints = new VictoryPoints()
+            {
+                Points = GetMaxRedCardCount(playerProperties.Owner, playerProperties.Opponent)
+            };
+            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
+        }
+
+        private int GetMaxRedCardCount(Player owner, Player opponent)
+        {
+            return Math.Max(owner.Cards.OfType<RedCard>().Count(), opponent.Cards.OfType<RedCard>().Count());
+        }
     }
 }

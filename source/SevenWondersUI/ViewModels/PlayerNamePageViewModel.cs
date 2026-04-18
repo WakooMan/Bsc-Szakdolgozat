@@ -1,4 +1,6 @@
-﻿using SevenWondersUI.Services;
+﻿using SevenWonders.Common;
+using SevenWonders.Presenter.PlayerActionReceivers;
+using SevenWondersUI.Services;
 using System.Windows.Input;
 
 namespace SevenWondersUI.ViewModels
@@ -131,8 +133,11 @@ namespace SevenWondersUI.ViewModels
         {
             await m_navigationService.NavigateToAsync("//GamePage", new Dictionary<string, object>
             { 
-                { "Player1Name", m_player1Entry.entryText },
-                { "Player2Name", m_player2Entry.entryText}
+                { "Player1", new PlayerInitModel(m_player1Entry.entryText, PlayerType.LocalPlayer) },
+                { "Player2", new PlayerInitModel(m_player2Entry.entryText, PlayerType.LocalPlayer) },
+                { "StartingPlayerId", 1 },
+                { "Seed", 0 },
+                { "IsMultiplayer", false }
             });
             m_player1Entry.entryText = string.Empty;
             m_player2Entry.entryText = string.Empty;

@@ -24,14 +24,22 @@ namespace GameLogic.Elements.Modifiers
             return new Development(this);
         }
 
-        public void OnDevelopmentEstablished(IGameContext gameContext, int playerId)
+        public void OnDevelopmentEstablished(IGameContext gameContext, Player owner, Player opponent)
         {
-            Effects.ForEach(effect => effect.Apply(gameContext, playerId));
+            Effects.ForEach(effect => effect.Apply(gameContext, owner, opponent));
         }
 
-        public void OnDevelopmentRemoved(IGameContext gameContext, int playerId)
+        public void OnDevelopmentRemoved(IGameContext gameContext, Player owner, Player opponent)
         {
-            Effects.ForEach(effect => effect.Unapply(gameContext, playerId));
+            Effects.ForEach(effect => effect.Unapply(gameContext, owner, opponent));
+        }
+
+        public async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        {
+            foreach (Effect effect in Effects)
+            {
+                await effect.OnCalculatePlayerProperties(playerProperties);
+            }
         }
     }
 }

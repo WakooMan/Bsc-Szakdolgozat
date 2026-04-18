@@ -20,14 +20,9 @@ namespace GameLogic.Elements.GameCards
             return new BlueCard(this);
         }
 
-        public override async Task OnBuilt(IGameContext gameContext, int playerId)
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await Point.Apply(gameContext, playerId);
-        }
-
-        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
-        {
-            await Point.Unapply(gameContext, playerId);
+            await Point.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

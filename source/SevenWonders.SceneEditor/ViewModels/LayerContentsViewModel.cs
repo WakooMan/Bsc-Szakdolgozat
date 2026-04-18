@@ -1,4 +1,5 @@
 ﻿using SevenWonders.GameEngine;
+using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -215,14 +216,14 @@ namespace SevenWonders.SceneEditor.ViewModels
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        public void DrawSelectedLayer(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry)
+        public void DrawSelectedLayer(SKCanvas canvas, TextureRegistry textureRegistry)
         {
             if (SelectedLayer is null)
             {
                 return;
             }
 
-            SelectedLayer.Draw(eventArgs, textureRegistry);
+            SelectedLayer.Draw(canvas, textureRegistry);
         }
 
         public void DeleteSelectedLayer()

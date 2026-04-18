@@ -1,5 +1,16 @@
+Gameplay:
 - Csoda építésnél és kártya építésnél nem látszik előre, hogy mennyi pénzbe kerülne megépíteni
-- Choose good nem látszik a nyersanyag
 - Vannak olyan developmentek, melyek valamiért front sprite-ban vannak
+- scene-ben development pozíció fix + új militaryboard generálás
 - túl nagy betűk a magyarítás miatt
 - canvas invalidatesurface
+- game engine inicializálása a program indításának elején, start-stop game engine kezelés
+- development choose object megfordult
+- tudományos fejlesztések száma nem update-elt
+Multiplayer:
+- Menük finomítása
+- Matchmaking
+- player action szinkronizáció a szerverrel
+- verseny mód statisztika
+Logging:
+- Add logs everywhere

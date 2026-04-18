@@ -24,7 +24,8 @@
 	<MilitaryCards>
 		<MilitaryCard>
 			<Name>player1MilitaryToken3</Name>
-			<PlayerId>2</PlayerId>
+			<OwnerId>1</OwnerId>
+			<OpponentId>2</OpponentId>
 			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>5</Money>
@@ -37,7 +38,8 @@
 		</MilitaryCard>
 		<MilitaryCard>
 			<Name>player1MilitaryToken2</Name>
-			<PlayerId>2</PlayerId>
+			<OwnerId>1</OwnerId>
+			<OpponentId>2</OpponentId>
 			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>2</Money>
@@ -50,7 +52,8 @@
 		</MilitaryCard>
 		<MilitaryCard>
 			<Name>player1MilitaryToken1</Name>
-			<PlayerId>2</PlayerId>
+			<OwnerId>1</OwnerId>
+			<OpponentId>2</OpponentId>
 			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>0</Money>
@@ -63,7 +66,8 @@
 		</MilitaryCard>
 		<MilitaryCard>
 			<Name>player2MilitaryToken1</Name>
-			<PlayerId>1</PlayerId>
+			<OwnerId>2</OwnerId>
+			<OpponentId>1</OpponentId>
 			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>0</Money>
@@ -76,7 +80,8 @@
 		</MilitaryCard>
 		<MilitaryCard>
 			<Name>player2MilitaryToken2</Name>
-			<PlayerId>1</PlayerId>
+			<OwnerId>2</OwnerId>
+			<OpponentId>1</OpponentId>
 			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>2</Money>
@@ -89,7 +94,8 @@
 		</MilitaryCard>
 		<MilitaryCard>
 			<Name>player2MilitaryToken3</Name>
-			<PlayerId>1</PlayerId>
+			<OwnerId>2</OwnerId>
+			<OpponentId>1</OpponentId>
 			<FirstApply>true</FirstApply>
 			<EnemyLoseMoney>
 				<Money>5</Money>

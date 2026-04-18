@@ -1,4 +1,4 @@
-using SkiaSharp.Views.Maui;
+using SkiaSharp;
 using System.Numerics;
 using System.Xml.Serialization;
 
@@ -98,7 +98,7 @@ namespace SevenWonders.GameEngine
             return Id.GetHashCode();
         }
 
-        public abstract void Draw(SKPaintSurfaceEventArgs eventArgs, TextureRegistry textureRegistry);
+        public abstract void Draw(SKCanvas canvas, TextureRegistry textureRegistry);
 
         public abstract SceneObject Clone();
 

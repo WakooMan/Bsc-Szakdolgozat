@@ -87,9 +87,12 @@ namespace SevenWonders.GameEngine
         {
             if (m_running)
             {
+                //double currentTimestamp = m_stopwatch.Elapsed.TotalMilliseconds;
                 double currentTimestamp = m_stopwatch.Elapsed.TotalSeconds;
                 double deltaTime = (currentTimestamp - m_renderTimer);
                 m_renderTimer = currentTimestamp;
+
+
 
                 m_components.ForEach(c => c.Update((float)deltaTime));
                 RedrawRequested?.Invoke(this, EventArgs.Empty);

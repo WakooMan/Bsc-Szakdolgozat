@@ -16,9 +16,9 @@
             return new EnemyLoseMoney(this);
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            gameContext.TurnHandler.OpponentPlayer.Money -= Money;
+            opponent.Money -= Money;
             return Task.CompletedTask;
         }
     }

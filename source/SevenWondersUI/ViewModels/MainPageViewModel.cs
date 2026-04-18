@@ -10,7 +10,7 @@ namespace SevenWondersUI.ViewModels
             m_navigationService = navigationService;
             m_title = "7 Csoda Párbaj";
             m_singleplayerButton = ("Egyjátékos mód", true);
-            m_multiplayerButton = ("Többjátékos mód", false);
+            m_multiplayerButton = ("Többjátékos mód", true);
             m_aILearningButton = ("MI Tanulás", false);
             m_exitButton = ("Kilépés", true);
             SinglePlayerCommand = new Command(OnSinglePlayerClicked, () => m_singleplayerButton.isEnabled);
@@ -114,9 +114,9 @@ namespace SevenWondersUI.ViewModels
             throw new NotImplementedException();
         }
 
-        private void OnMultiplayerClicked()
+        private async void OnMultiplayerClicked()
         {
-            throw new NotImplementedException();
+            await m_navigationService.NavigateToAsync("//LoginPage");
         }
 
         private async void OnSinglePlayerClicked()

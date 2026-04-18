@@ -19,14 +19,14 @@ namespace GameLogic.Elements.GameCards
             return new PurpleCard(this);
         }
 
-        public override async Task OnBuilt(IGameContext gameContext, int playerId)
+        public override async Task OnBuilt(IGameContext gameContext, Player owner, Player opponent)
         {
-            await GuildObj.Apply(gameContext, playerId);
+            await GuildObj.Apply(gameContext, owner, opponent);
         }
 
-        public override async Task OnDestroyed(IGameContext gameContext, int playerId)
+        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await GuildObj.Unapply(gameContext, playerId);
+            await GuildObj.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

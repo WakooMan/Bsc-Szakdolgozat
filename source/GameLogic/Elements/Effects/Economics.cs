@@ -12,19 +12,22 @@ namespace GameLogic.Elements.Effects
             return new Economics();
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnCardBuilt>((args) => OnCardBuilt(player, args));
+            opponent.OnCardBuilt += OnCardBuilt;
             return Task.CompletedTask;
         }
 
-        private static void OnCardBuilt(Player player, OnCardBuilt eventArgs)
+        public override Task Unapply(IGameContext gameContext, Player owner, Player opponent)
         {
-            if (player != eventArgs.Builder)
-            {
-                player.Money += (eventArgs.BuildCost - eventArgs.Card.MoneyCost);
-            }
+            opponent.OnCardBuilt -= OnCardBuilt;
+            return Task.CompletedTask;
+        }
+
+        private Task OnCardBuilt(Player owner, OnCardBuilt eventArgs)
+        {
+            owner.Money += (eventArgs.BuildCost - eventArgs.Card.MoneyCost);
+            return Task.CompletedTask;
         }
     }
 }

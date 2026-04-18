@@ -16,10 +16,9 @@
             return new GetMoneyForWonders(this);
         }
 
-        public override Task Apply(IGameContext gameContext, int playerId)
+        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            Player player = gameContext.TurnHandler.GetPlayer(playerId);
-            player.Money += MoneyPerWonder * player.Wonders.Count(wonder => wonder.HasBeenBuilt);
+            owner.Money += MoneyPerWonder * owner.Wonders.Count(wonder => wonder.HasBeenBuilt);
             return Task.CompletedTask;
         }
 

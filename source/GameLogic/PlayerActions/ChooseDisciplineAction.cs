@@ -1,4 +1,5 @@
-﻿using GameLogic.Elements.Disciplines;
+﻿using GameLogic.Elements;
+using GameLogic.Elements.Disciplines;
 using SevenWonders.Common;
 
 namespace GameLogic.PlayerActions
@@ -6,20 +7,22 @@ namespace GameLogic.PlayerActions
     public class ChooseDisciplineAction: IPlayerAction
     {
         public string Name => m_discipline.GetType().Name;
-        public ChooseDisciplineAction() { }
-        public ChooseDisciplineAction(Discipline discipline, Func<IGameContext, Discipline, int, Task> setter, int playerId)
+        public ChooseDisciplineAction(Discipline discipline, Player owner, Player opponent, Func<IGameContext, Player, Player, Discipline, Task> setter)
         {
+            ArgumentChecker.CheckNull(owner, nameof(owner));
+            ArgumentChecker.CheckNull(opponent, nameof(opponent));
             ArgumentChecker.CheckNull(discipline, nameof(discipline));
             ArgumentChecker.CheckNull(setter, nameof(setter));
 
+            m_owner = owner;
+            m_opponent = opponent;
             m_discipline = discipline;
             m_setter = setter;
-            m_playerId = playerId;
         }
 
         public async Task<bool> DoPlayerAction(IGameContext gameContext)
         {
-            await m_setter(gameContext, m_discipline, m_playerId);
+            await m_setter(gameContext, m_owner, m_opponent, m_discipline);
             return true;
         }
 
@@ -29,7 +32,8 @@ namespace GameLogic.PlayerActions
         }
 
         private readonly Discipline m_discipline;
-        private readonly Func<IGameContext, Discipline, int, Task> m_setter;
-        private readonly int m_playerId;
+        private readonly Player m_owner;
+        private readonly Player m_opponent;
+        private readonly Func<IGameContext, Player, Player, Discipline, Task> m_setter;
     }
 }

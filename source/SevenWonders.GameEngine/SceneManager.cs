@@ -1,6 +1,5 @@
 ﻿using SevenWonders.Common;
 using SkiaSharp;
-using SkiaSharp.Views.Maui;
 using System.Diagnostics.CodeAnalysis;
 using static SevenWonders.GameEngine.ISceneManager;
 
@@ -38,14 +37,14 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public void Render(SKPaintSurfaceEventArgs eventArgs)
+        public void Render(SKCanvas canvas)
         {
             if (CurrentScene is null)
             {
                 return;
             }
-
-            CurrentScene.Draw(eventArgs);
+            canvas.Clear(SKColors.Black);
+            CurrentScene.Draw(canvas);
         }
         public GameObject? GetObjectByName(string name)
         {

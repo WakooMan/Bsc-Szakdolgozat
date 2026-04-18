@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SevenWondersUI.Views.LoginPage"
+             Title="LoginPage">
+    <Grid Background="WhiteSmoke" HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Text="{Binding UserNameText}" FontSize="Medium" HorizontalOptions="Center" Grid.Row="0" TextColor="White" Margin="10"/>
+        <Entry Text="{Binding UserName, Mode=TwoWay}" Grid.Row="1" FontSize="Medium" Margin="10" Background="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" TextColor="White" MaxLength="20"/>
+        <Label Text="{Binding PasswordText}" FontSize="Medium" HorizontalOptions="Center" Grid.Row="2" TextColor="White" Margin="10"/>
+        <Entry Text="{Binding Password, Mode=TwoWay}" Grid.Row="3" IsPassword="True" FontSize="Medium" Margin="10" Background="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" TextColor="White" MaxLength="20"/>
+        <Button Text="{Binding LoginText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding LoginCommand}" Grid.Row="4" Margin="10" TextColor="White" />
+        <Button Text="{Binding NavigateToRegisterText}" FontSize="Small" BackgroundColor="Black" Command="{Binding NavigateToRegisterCommand}" Grid.Row="5" Margin="10" TextColor="White" />
+        <Button Text="{Binding BackText}" FontSize="Small" BackgroundColor="Black" Command="{Binding BackCommand}" Grid.Row="6" Margin="10" TextColor="White" />
+    </Grid>
+</ContentPage>

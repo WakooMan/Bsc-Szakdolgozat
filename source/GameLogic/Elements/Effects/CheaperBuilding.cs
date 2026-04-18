@@ -1,6 +1,4 @@
-﻿using GameLogic.Events.GameEvents;
-
-namespace GameLogic.Elements.Effects
+﻿namespace GameLogic.Elements.Effects
 {
     public class CheaperBuilding : Effect
     {
@@ -22,21 +20,6 @@ namespace GameLogic.Elements.Effects
         public override CheaperBuilding Clone()
         {
             return new CheaperBuilding(this);
-        }
-
-        public override Task Apply(IGameContext gameContext, int playerId)
-        {
-            Player player = gameContext.TurnHandler.CurrentPlayer;
-            gameContext.EventManager.Subscribe<OnBuildingCostCalculated>((args) => OnBuildingCostCalculated(player, args));
-            return Task.CompletedTask;
-        }
-
-        private void OnBuildingCostCalculated(Player player, OnBuildingCostCalculated eventArgs)
-        {
-            if (player == eventArgs.Buyer)
-            {
-                eventArgs.CheaperBuildings.Add(this);
-            }
         }
     }
 }

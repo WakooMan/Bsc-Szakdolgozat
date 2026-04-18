@@ -1,5 +1,4 @@
 ﻿using GameLogic.Elements.Modifiers;
-using GameLogic.Events;
 
 namespace GameLogic.Elements.Military
 {
@@ -8,6 +7,7 @@ namespace GameLogic.Elements.Military
         List<MilitaryField> Fields { get; }
         List<MilitaryCard> MilitaryCards { get; }
         List<Development> Developments { get; }
-        void Initialize(ICollection<Player> players, ICollection<Development> developments, IGameContext gameContext);
+        void Initialize(ICollection<Player> players, ICollection<Development> developments);
+        Task OnUpdate(IGameContext gameContext, PlayerProperties player1, PlayerProperties player2);
     }
 }

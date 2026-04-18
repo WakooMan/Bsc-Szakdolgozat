@@ -11,7 +11,7 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="7*" />
             </Grid.ColumnDefinitions>
-        <ScrollView Grid.Column="0">
+        <ScrollView Grid.Column="0" Orientation="Both">
             <Grid Background="Gray">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
@@ -579,9 +579,9 @@
                 <Button Text="Choose Scene" Grid.Column="0" Margin="5" Background="Gray" Clicked="Choose_Scene_Clicked"/>
                     <Button Text="Add New Scene" Grid.Column="1" Margin="5" Background="Gray" Clicked="Add_New_Scene_Clicked"/>
                 </Grid>
-                <skia:SKCanvasView x:Name="canvas"
-                   PaintSurface="OnCanvasViewPaintSurface"
-                   Touch="OnTouchEffectAction"
+                <skia:SKCanvasView x:Name="m_gameView"
+                   PaintSurface="OnPaintSurface"
+                   Touch="OnTouch"
                    EnableTouchEvents="True"
                    HorizontalOptions="Fill"
                    VerticalOptions="Fill"

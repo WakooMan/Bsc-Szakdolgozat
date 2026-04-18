@@ -1,4 +1,4 @@
-﻿using SkiaSharp.Views.Maui;
+﻿using SkiaSharp;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -85,18 +85,18 @@ namespace SevenWonders.GameEngine
                     
         }
 
-        public void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 position, Vector2 scale, float rotation, float width, float height, bool dimmed, TextureRegistry textureRegistry)
+        public void Draw(SKCanvas canvas, Vector2 position, Vector2 scale, float rotation, float width, float height, bool dimmed, TextureRegistry textureRegistry)
         {
             if (Frames.Count <= 0)
             {
                 return;
             }
 
-            Frames[ActualFrame].Draw(eventArgs, position, scale, rotation, width, height, dimmed, textureRegistry);
+            Frames[ActualFrame].Draw(canvas, position, scale, rotation, width, height, dimmed, textureRegistry);
 
             foreach (var child in Children)
             {
-                child.Draw(eventArgs, position, scale, rotation, width, height, dimmed,  textureRegistry);
+                child.Draw(canvas, position, scale, rotation, width, height, dimmed,  textureRegistry);
             }
 
             if (Frames.Count > ActualFrame + 1)

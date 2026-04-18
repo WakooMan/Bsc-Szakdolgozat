@@ -1,4 +1,4 @@
-using SkiaSharp.Views.Maui;
+using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
@@ -62,7 +62,7 @@ namespace SevenWonders.GameEngine
         }
 
         [ExcludeFromCodeCoverage]
-        public override void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 parentPosition, Vector2 parentVisualSize,
+        public override void Draw(SKCanvas canvas, Vector2 parentPosition, Vector2 parentVisualSize,
                          float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry)
         {
             var childWidth = parentWidth * WidthPercent;
@@ -73,11 +73,9 @@ namespace SevenWonders.GameEngine
             var scaledChildWidth = childWidth * parentVisualSize.X;
             var scaledChildHeight = childHeight * parentVisualSize.Y;
 
-            // Offset from parent center in unrotated space
             var offsetX = -scaledParentWidth / 2 + scaledChildWidth / 2 + PositionPercent.X * scaledParentWidth;
             var offsetY = -scaledParentHeight / 2 + scaledChildHeight / 2 + PositionPercent.Y * scaledParentHeight;
 
-            // Rotate the offset by the parent's rotation angle
             var radians = parentRotation * MathF.PI / 180f;
             var cos = MathF.Cos(radians);
             var sin = MathF.Sin(radians);
@@ -88,7 +86,6 @@ namespace SevenWonders.GameEngine
                 parentPosition.X + rotatedOffsetX,
                 parentPosition.Y + rotatedOffsetY);
 
-            // Temporarily override the TextLabel's transform with the resolved child transform
             var originalPosition = TextLabel.Position;
             var originalWidth = TextLabel.Width;
             var originalHeight = TextLabel.Height;
@@ -102,7 +99,7 @@ namespace SevenWonders.GameEngine
             TextLabel.Scale = parentVisualSize;
 
             TextLabel.Dimmed = dimmed;
-            TextLabel.Draw(eventArgs, textureRegistry);
+            TextLabel.Draw(canvas, textureRegistry);
 
             TextLabel.Position = originalPosition;
             TextLabel.Width = originalWidth;

@@ -1,5 +1,4 @@
 using SkiaSharp;
-using SkiaSharp.Views.Maui;
 using System.Numerics;
 
 namespace SevenWonders.GameEngine
@@ -55,7 +54,7 @@ namespace SevenWonders.GameEngine
                    TextureId.GetHashCode();
         }
 
-        public override void Draw(SKPaintSurfaceEventArgs eventArgs, Vector2 parentPosition, Vector2 parentVisualSize, float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry)
+        public override void Draw(SKCanvas canvas, Vector2 parentPosition, Vector2 parentVisualSize, float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry)
         {
             var childWidth = parentWidth * WidthPercent;
             var childHeight = parentHeight * HeightPercent;
@@ -90,7 +89,7 @@ namespace SevenWonders.GameEngine
             {
                 texture.CustomColorFilter = null;
             }
-            texture.Draw(eventArgs, childPosition, parentVisualSize, parentRotation, childWidth, childHeight);
+            texture.Draw(canvas, childPosition, parentVisualSize, parentRotation, childWidth, childHeight);
         }
     }
 }
