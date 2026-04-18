@@ -91,6 +91,12 @@ namespace SevenWonders.GameEngine
                                                          SKFontStyleWidth.Normal,
                                                          SKFontStyleSlant.Upright);
 
+                var matrix = SKMatrix.CreateTranslation(Position.X, Position.Y);
+                matrix = matrix.PreConcat(SKMatrix.CreateRotationDegrees(Rotation));
+                matrix = matrix.PreConcat(SKMatrix.CreateScale(Scale.X, Scale.Y));
+
+                canvas.SetMatrix(matrix);
+
                 using var font = new SKFont
                 {
                     Typeface = typeface,

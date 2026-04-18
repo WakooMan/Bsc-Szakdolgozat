@@ -23,8 +23,8 @@ namespace GameLogic.Handlers
 
         public async Task<int> GetBuildCost(IBuildable buildable, Player buyer, Player opponent)
         {
-            PlayerProperties buyerProperties = await buyer.GetPlayerProperties();
-            PlayerProperties opponentProperties = await opponent.GetPlayerProperties();
+            PlayerProperties buyerProperties = await buyer.GetPlayerProperties(opponent);
+            PlayerProperties opponentProperties = await opponent.GetPlayerProperties(buyer);
             var missing = await GetMissingGoods(buildable, buyerProperties);
             int totalCost = 0;
             IReadOnlyDictionary<Type, Good> opponentGoods = opponentProperties.Goods;

@@ -32,10 +32,5 @@ namespace GameLogic.Elements.Effects
             playerProperties.AddEffect(this);
             return Task.CompletedTask;
         }
-
-        public virtual Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            return Task.CompletedTask;
-        }
     }
 }

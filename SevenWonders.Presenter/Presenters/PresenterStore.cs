@@ -2,15 +2,15 @@
 
 namespace SevenWonders.Presenter.Presenters
 {
-    public class Presenter : IPresenter
+    public class PresenterStore : IPresenterStore
     {
-        public Presenter(IPresenterFactory presenterFactory)
+        public PresenterStore(IPresenterFactory presenterFactory)
         {
             m_presenterFactory = presenterFactory;
             m_presenters = new List<IPresenter>();
         }
 
-        public void Initialize()
+        public void InitializePresenters(IGameOverHandler gameOverHandler)
         {
             m_presenters.Clear();
             m_presenters.AddRange(
@@ -21,7 +21,7 @@ namespace SevenWonders.Presenter.Presenters
                 m_presenterFactory.CreatePlayer2Presenter(),
                 m_presenterFactory.CreateMilitaryBoardPresenter(),
                 m_presenterFactory.CreateDevelopmentPresenter(),
-                m_presenterFactory.CreateScreenPresenter(),
+                m_presenterFactory.CreateScreenPresenter(gameOverHandler),
                 m_presenterFactory.CreateChooseObjectPresenter()
             ]);
 
@@ -31,7 +31,7 @@ namespace SevenWonders.Presenter.Presenters
             }
         }
 
-        public void SubscribeToEvents()
+        public void SubscribePresentersToEvents()
         {
             foreach (var presenter in m_presenters)
             {

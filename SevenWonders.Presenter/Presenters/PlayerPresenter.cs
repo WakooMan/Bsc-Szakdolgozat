@@ -88,12 +88,12 @@ namespace SevenWonders.Presenter.Presenters
 
         private void OnGameStarted(OnGameStarted e)
         {
-            if (e.Players.FirstOrDefault(player => player.Id == m_playerId) is Player player)
+            if (e.Players.FirstOrDefault(player => player.Id == m_playerId) is Player player && e.Players.FirstOrDefault(player => player.Id != m_playerId) is Player opponent)
             {
                 if(m_moneyLabel is not null && m_pointLabel is not null && m_nameLabel is not null)
                 {
                     m_moneyLabel.Text = player.Money.ToString();
-                    m_pointLabel.Text = player.GetPlayerProperties().GetAwaiter().GetResult().VictoryPoints.ToString();
+                    m_pointLabel.Text = player.GetPlayerProperties(opponent).GetAwaiter().GetResult().VictoryPoints.ToString();
                     m_nameLabel.Text = player.Name;
                 }
             }
@@ -101,12 +101,12 @@ namespace SevenWonders.Presenter.Presenters
 
         private void OnPlayerUpdate(OnPlayerUpdate eventArgs)
         {
-            if (eventArgs.Player1.Player.Id == m_playerId)
+            if (eventArgs.Player1.Owner.Id == m_playerId)
             {
                 UpdatePlayerState(eventArgs.Player1);
             }
 
-            if (eventArgs.Player2.Player.Id == m_playerId)
+            if (eventArgs.Player2.Owner.Id == m_playerId)
             {
                 UpdatePlayerState(eventArgs.Player2);
             }
@@ -116,7 +116,7 @@ namespace SevenWonders.Presenter.Presenters
         {
             if (m_moneyLabel is not null && m_pointLabel is not null)
             {
-                m_moneyLabel.Text = player.Player.Money.ToString();
+                m_moneyLabel.Text = player.Owner.Money.ToString();
                 m_pointLabel.Text = player.VictoryPoints.ToString();
                 //Todo: animation for money decrease, point increase
             }

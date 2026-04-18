@@ -28,12 +28,5 @@ namespace GameLogic.Elements.GameCards
         {
             await GuildObj.OnCalculatePlayerProperties(playerProperties);
         }
-
-        public override async Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            await GuildObj.OnBeforeGameEnded(owner, opponent);
-        }
-
-
     }
 }

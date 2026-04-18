@@ -1,5 +1,7 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Wonders;
+using System.ComponentModel;
 
 namespace GameLogic.Elements.Guilds
 {
@@ -7,7 +9,6 @@ namespace GameLogic.Elements.Guilds
     {
         public ScienceGuild()
         {
-            m_victoryPoint = null;
         }
 
         public override Guild Clone()
@@ -23,26 +24,16 @@ namespace GameLogic.Elements.Guilds
 
         public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            if (m_victoryPoint is not null)
+            VictoryPoints victoryPoints = new VictoryPoints()
             {
-                await m_victoryPoint.OnCalculatePlayerProperties(playerProperties);
-            }
-        }
-
-        public override Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            m_victoryPoint = new VictoryPoints()
-            {
-                Points = GetMaxGreenCardCount(owner, opponent)
+                Points = GetMaxGreenCardCount(playerProperties.Owner, playerProperties.Opponent)
             };
-            return Task.CompletedTask;
+            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
 
         private int GetMaxGreenCardCount(Player owner, Player opponent)
         {
             return Math.Max(owner.Cards.OfType<GreenCard>().Count(), opponent.Cards.OfType<GreenCard>().Count());
         }
-
-        private VictoryPoints? m_victoryPoint;
     }
 }

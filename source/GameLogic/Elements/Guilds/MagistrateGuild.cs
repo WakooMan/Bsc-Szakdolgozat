@@ -1,14 +1,13 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Wonders;
+using System.ComponentModel;
 
 namespace GameLogic.Elements.Guilds
 {
     public class MagistrateGuild : Guild
     {
-        public MagistrateGuild()
-        {
-            m_victoryPoint = null;
-        }
+        public MagistrateGuild() { }
 
         public override Guild Clone()
         {
@@ -23,26 +22,16 @@ namespace GameLogic.Elements.Guilds
 
         public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            if (m_victoryPoint is not null)
+            VictoryPoints victoryPoints = new VictoryPoints()
             {
-                await m_victoryPoint.OnCalculatePlayerProperties(playerProperties);
-            }
-        }
-
-        public override Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            m_victoryPoint = new VictoryPoints()
-            {
-                Points = GetMaxBlueCardCount(owner, opponent)
+                Points = GetMaxBlueCardCount(playerProperties.Owner, playerProperties.Opponent)
             };
-            return Task.CompletedTask;
+            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
 
         private int GetMaxBlueCardCount(Player owner, Player opponent)
         {
             return Math.Max(owner.Cards.OfType<BlueCard>().Count(), opponent.Cards.OfType<BlueCard>().Count());
         }
-
-        private VictoryPoints? m_victoryPoint;
     }
 }

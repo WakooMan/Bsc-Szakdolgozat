@@ -1,5 +1,7 @@
 ﻿using GameLogic.Elements.Effects;
 using GameLogic.Elements.GameCards;
+using GameLogic.Elements.Wonders;
+using System.ComponentModel;
 
 namespace GameLogic.Elements.Guilds
 {
@@ -7,7 +9,6 @@ namespace GameLogic.Elements.Guilds
     {
         public SailorGuild()
         {
-            m_victoryPoint = null;
         }
 
         public override Guild Clone()
@@ -23,26 +24,16 @@ namespace GameLogic.Elements.Guilds
 
         public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            if (m_victoryPoint is not null)
+            VictoryPoints victoryPoints = new VictoryPoints()
             {
-                await m_victoryPoint.OnCalculatePlayerProperties(playerProperties);
-            }
-        }
-
-        public override Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            m_victoryPoint = new VictoryPoints()
-            {
-                Points = GetMaxCardCount(owner, opponent)
+                Points = GetMaxCardCount(playerProperties.Owner, playerProperties.Opponent)
             };
-            return Task.CompletedTask;
+            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
 
         private int GetMaxCardCount(Player owner, Player opponent)
         {
             return Math.Max(owner.Cards.Where(c => c is GrayCard || c is BrownCard).Count(), opponent.Cards.Where(c => c is GrayCard || c is BrownCard).Count());
         }
-
-        private VictoryPoints? m_victoryPoint;
     }
 }

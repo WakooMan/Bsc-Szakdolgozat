@@ -40,12 +40,12 @@ namespace GameLogic.GameStates
 
                 Player firstPlayer = GameContext.TurnHandler.GetPlayer(1);
                 Player secondPlayer = GameContext.TurnHandler.GetPlayer(2);
-                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties();
-                PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties();
+                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties(secondPlayer);
+                PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties(firstPlayer);
                 await GameContext.MilitaryBoard.OnUpdate(GameContext, firstPlayerProperties, secondPlayerProperties);
 
-                PlayerProperties firstPlayerProperties2 = await firstPlayer.GetPlayerProperties();
-                PlayerProperties secondPlayerProperties2 = await secondPlayer.GetPlayerProperties();
+                PlayerProperties firstPlayerProperties2 = await firstPlayer.GetPlayerProperties(secondPlayer);
+                PlayerProperties secondPlayerProperties2 = await secondPlayer.GetPlayerProperties(firstPlayer);
                 await GameContext.EventManager.PublishAsync(new OnPlayerUpdate(firstPlayerProperties2, secondPlayerProperties2));
 
                 if (!IsGameOver)
@@ -66,10 +66,8 @@ namespace GameLogic.GameStates
             {
                 Player firstPlayer = GameContext.TurnHandler.GetPlayer(1);
                 Player secondPlayer = GameContext.TurnHandler.GetPlayer(2);
-                await firstPlayer.OnBeforeGameEnded(secondPlayer);
-                await secondPlayer.OnBeforeGameEnded(firstPlayer);
-                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties();
-                PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties();
+                PlayerProperties firstPlayerProperties = await firstPlayer.GetPlayerProperties(secondPlayer);
+                PlayerProperties secondPlayerProperties = await secondPlayer.GetPlayerProperties(firstPlayer);
                 await GameContext.EventManager.PublishAsync(new OnGameEnded((firstPlayer.Name, firstPlayerProperties.VictoryPoints, firstPlayer.Cards.OfType<BlueCard>().Count()), (secondPlayer.Name, secondPlayerProperties.VictoryPoints, secondPlayer.Cards.OfType<BlueCard>().Count())));
             }
         }

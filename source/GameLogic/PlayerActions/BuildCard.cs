@@ -22,8 +22,6 @@ namespace GameLogic.PlayerActions
             }
 
             ICardNode card = player.PickedCard;
-            GetComposition(gameContext).RemoveCard(card);
-            player.Cards.Add(card.CardObj);
             int BuildCost = 0;
             bool chainBuildUsed = true;
             if (string.IsNullOrEmpty(card.CardObj.PreviousBuilding) ||
@@ -33,6 +31,8 @@ namespace GameLogic.PlayerActions
                 player.Money -= BuildCost;
                 chainBuildUsed = false;
             }
+            GetComposition(gameContext).RemoveCard(card);
+            player.Cards.Add(card.CardObj);
 
             player.PickedCard = null;
             OnCardBuilt onCardBuilt = new OnCardBuilt(card.CardObj, player, BuildCost, chainBuildUsed);

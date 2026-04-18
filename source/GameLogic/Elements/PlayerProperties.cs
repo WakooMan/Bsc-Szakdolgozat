@@ -6,7 +6,8 @@ namespace GameLogic.Elements
 {
     public class PlayerProperties
     {
-        public Player Player { get; }
+        public Player Owner { get; }
+        public Player Opponent { get; }
         public IReadOnlyDictionary<Type, Good> Goods
         {
             get
@@ -51,9 +52,10 @@ namespace GameLogic.Elements
             }
         }
 
-        public PlayerProperties(Player player)
+        public PlayerProperties(Player owner, Player opponent)
         {
-            Player = player;
+            Owner = owner;
+            Opponent = opponent;
             m_goods = new Dictionary<Type, Good>();
             m_disciplines = new Dictionary<Type, int>();
             m_effects = new List<Effect>();

@@ -76,7 +76,7 @@ namespace GameLogic
             ChooseWonderHandler.Initialize(players, wonders, this);
             TurnHandler.Initialize(players);
             EventManager.ClearSubscriptions();
-            ICollection<Development> developments = RandomGenerator.ReceiveRandomElements(DevelopmentList.Developments, 3);
+            ICollection<Development> developments = RandomGenerator.ReceiveRandomElements(DevelopmentList.Developments, 5);
             DevelopmentList.Developments.RemoveAll(developments.Contains);
             MilitaryBoard.Initialize(players, developments);
         }

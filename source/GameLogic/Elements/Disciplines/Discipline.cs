@@ -23,7 +23,7 @@ namespace GameLogic.Elements.Disciplines
 
         public async Task Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            PlayerProperties playerProperties = await owner.GetPlayerProperties();
+            PlayerProperties playerProperties = await owner.GetPlayerProperties(opponent);
             var disciplines = playerProperties.Disciplines;
             var developments = gameContext.MilitaryBoard.Developments;
             if (disciplines.ContainsKey(GetType()) && disciplines[GetType()] == 2)

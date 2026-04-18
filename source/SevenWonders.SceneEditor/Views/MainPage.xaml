@@ -11,7 +11,7 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="7*" />
             </Grid.ColumnDefinitions>
-        <ScrollView Grid.Column="0">
+        <ScrollView Grid.Column="0" Orientation="Both">
             <Grid Background="Gray">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />

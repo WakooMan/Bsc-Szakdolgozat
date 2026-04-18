@@ -34,9 +34,9 @@ namespace GameLogic.Elements
                 m_money = (value < 0) ? 0 : value;
             }
         }
-        public async Task<PlayerProperties> GetPlayerProperties()
+        public async Task<PlayerProperties> GetPlayerProperties(Player opponent)
         {
-            PlayerProperties properties = new PlayerProperties(this);
+            PlayerProperties properties = new PlayerProperties(this, opponent);
 
             foreach (Card card in Cards)
             {
@@ -85,27 +85,6 @@ namespace GameLogic.Elements
             Developments = new List<Development>();
             MilitaryCards = new List<MilitaryCard>();
             Money = money;
-        }
-
-        public async Task OnBeforeGameEnded(Player opponent)
-        {
-            foreach (Card card in Cards)
-            {
-                await card.OnBeforeGameEnded(this, opponent);
-            }
-
-            foreach (Wonder wonder in Wonders)
-            {
-                if (wonder.HasBeenBuilt)
-                {
-                    await wonder.OnBeforeGameEnded(this, opponent);
-                }
-            }
-
-            foreach (Development development in Developments)
-            {
-                await development.OnBeforeGameEnded(this, opponent);
-            }
         }
 
         public async Task OnBuildWonder(OnWonderBuilt onWonderBuilt)

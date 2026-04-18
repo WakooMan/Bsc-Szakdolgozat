@@ -41,13 +41,5 @@ namespace GameLogic.Elements.Modifiers
                 await effect.OnCalculatePlayerProperties(playerProperties);
             }
         }
-
-        public async Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            foreach (Effect effect in Effects)
-            {
-                await effect.OnBeforeGameEnded(owner, opponent);
-            }
-        }
     }
 }

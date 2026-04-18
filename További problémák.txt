@@ -1,12 +1,13 @@
 Gameplay:
 - Csoda építésnél és kártya építésnél nem látszik előre, hogy mennyi pénzbe kerülne megépíteni
 - Vannak olyan developmentek, melyek valamiért front sprite-ban vannak
+- scene-ben development pozíció fix + új militaryboard generálás
 - túl nagy betűk a magyarítás miatt
 - canvas invalidatesurface
 - game engine inicializálása a program indításának elején, start-stop game engine kezelés
-- 5 development kell a táblán a 3 helyett
+- development choose object megfordult
+- tudományos fejlesztések száma nem update-elt
 Multiplayer:
-- game over handler game page-be integrálása
 - Menük finomítása
 - Matchmaking
 - player action szinkronizáció a szerverrel

@@ -7,34 +7,19 @@ namespace GameLogic.Elements.Guilds
     {
         public BuilderGuild() { }
 
-        private BuilderGuild(VictoryPoints? victoryPoint)
-        {
-            m_victoryPoint = victoryPoint;
-        }
-
         public override Guild Clone()
         {
-            return new BuilderGuild(m_victoryPoint?.Clone());
+            return new BuilderGuild();
         }
 
         public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            if (m_victoryPoint is not null)
-            {
-                await m_victoryPoint.OnCalculatePlayerProperties(playerProperties);
-            }
-        }
-
-        public override Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            int maxCount = Math.Max(owner.Wonders.Where(wonder => wonder.HasBeenBuilt).Count(), opponent.Wonders.Where(wonder => wonder.HasBeenBuilt).Count());
-            m_victoryPoint = new VictoryPoints()
+            int maxCount = Math.Max(playerProperties.Owner.Wonders.Where(wonder => wonder.HasBeenBuilt).Count(), playerProperties.Opponent.Wonders.Where(wonder => wonder.HasBeenBuilt).Count());
+            VictoryPoints victoryPoints = new VictoryPoints()
             {
                 Points = maxCount * 2
             };
-            return Task.CompletedTask;
+            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
-
-        private VictoryPoints? m_victoryPoint;
     }
 }

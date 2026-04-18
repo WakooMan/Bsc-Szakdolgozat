@@ -22,10 +22,5 @@ namespace GameLogic.Elements.Guilds
         {
             return Task.CompletedTask;
         }
-
-        public virtual Task OnBeforeGameEnded(Player owner, Player opponent)
-        {
-            return Task.CompletedTask;
-        }
     }
 }

@@ -90,8 +90,8 @@ namespace SevenWonders.Presenter.Presenters
 
         private void OnPlayerUpdate(OnPlayerUpdate progress)
         {
-            UpdateScientificState(progress.Player1.Disciplines, progress.Player1.Player.Id);
-            UpdateScientificState(progress.Player2.Disciplines, progress.Player2.Player.Id);
+            UpdateScientificState(progress.Player1.Disciplines, progress.Player1.Owner.Id);
+            UpdateScientificState(progress.Player2.Disciplines, progress.Player2.Owner.Id);
         }
 
         private void UpdateScientificState(IReadOnlyDictionary<Type, int> disciplines, int playerId)
