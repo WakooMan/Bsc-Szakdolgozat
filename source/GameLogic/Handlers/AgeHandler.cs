@@ -29,21 +29,24 @@ namespace GameLogic.Handlers
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
 
             m_cardCompositionFactory = cardCompositionFactory;
-            m_cardList = gameElements.Cards;
             m_eventManager = eventManager;
+            m_gameElements = gameElements;
             m_ageBase = null;
+            m_cardList = null;
         }
 
-        public async Task Initialize(IRandomGenerator? randomGenerator)
+        public void Initialize(IRandomGenerator? randomGenerator)
         {
+            GameLog.Info("Initializing with FirstAge.");
             m_randomGenerator = randomGenerator ?? throw new ArgumentNullException(nameof(randomGenerator));
+            m_cardList = m_gameElements.Cards;
             m_ageBase = new FirstAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomGenerator);
-            await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
+            m_eventManager.Publish(new OnAgeStarted(m_ageBase));
         }
 
-        public async Task<bool> NextAge()
+        public bool NextAge()
         {
-            if (CurrentAge is null)
+            if (CurrentAge is null || m_cardList is null)
             {
                 throw new InvalidOperationException("Initialize method is not called yet!");
             }
@@ -53,25 +56,29 @@ namespace GameLogic.Handlers
             switch (CurrentAge.Age)
             {
                 case AgesEnum.I:
+                    GameLog.Info("Transitioning from Age I to Age II.");
                     m_ageBase = new SecondAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomGenerator);
-                    await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
+                    m_eventManager.Publish(new OnAgeStarted(m_ageBase));
                     break;
                 case AgesEnum.II:
+                    GameLog.Info("Transitioning from Age II to Age III.");
                     m_ageBase = new ThirdAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomGenerator);
-                    await m_eventManager.PublishAsync(new OnAgeStarted(m_ageBase));
+                    m_eventManager.Publish(new OnAgeStarted(m_ageBase));
                     break;
                 default:
+                    GameLog.Info("No more ages to transition to.");
                     return false;
             }
 
-            await m_eventManager.PublishAsync(new OnAgeEnded(previousAge));
+            m_eventManager.Publish(new OnAgeEnded(previousAge));
             return true;
         }
 
         private readonly ICardCompositionFactory m_cardCompositionFactory;
-        private readonly ICardList m_cardList;
         private readonly IEventManager m_eventManager;
+        private readonly IGameElements m_gameElements;
         private IRandomGenerator? m_randomGenerator;
         private IAgeBase? m_ageBase;
+        private ICardList? m_cardList;
     }
 }

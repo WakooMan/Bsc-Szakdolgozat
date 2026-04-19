@@ -18,29 +18,29 @@ namespace GameLogic.Elements.GameCards
         public int MoneyCost { get; set; }
         public string Name { get; set; }
         public string PreviousBuilding { get; set; }
+        public bool HasChainChild { get; set; }
         public AgesEnum Age { get; set; }
 
         public string BuildingType => GetType().Name;
 
         public abstract Card Clone();
 
-        public virtual Task OnBuilt(IGameContext gameContext, Player owner, Player opponent)
+        public virtual void OnBuilt(IGameContext gameContext, Player owner, Player opponent)
         {
-            return Task.CompletedTask;
         }
 
-        public virtual Task OnDestroyed(IGameContext gameContext, Player owner, Player opponent)
+        public virtual void OnDestroyed(IGameContext gameContext, Player owner, Player opponent)
         {
-            return Task.CompletedTask;
         }
 
-        public abstract Task OnCalculatePlayerProperties(PlayerProperties playerProperties);
+        public abstract void OnCalculatePlayerProperties(PlayerProperties playerProperties);
 
         protected Card()
         {
             GoodCost = new List<Good>();
             Name = string.Empty;
             PreviousBuilding = string.Empty;
+            HasChainChild = false;
             Age = AgesEnum.None;
         }
 
@@ -49,6 +49,7 @@ namespace GameLogic.Elements.GameCards
             GoodCost = card.GoodCost.Select(g => g.Clone()).ToList();
             Name = card.Name;
             PreviousBuilding = card.PreviousBuilding;
+            HasChainChild = card.HasChainChild;
             Age = card.Age;
             MoneyCost = card.MoneyCost;
         }

@@ -7,11 +7,11 @@ namespace GameLogic.Elements.Effects
     public class BuildFreeFromDroppedCards : Effect
     {
         public BuildFreeFromDroppedCards() { }
-        public override async Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             ICardList droppedCardList = gameContext.DroppedCardList ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!");
-            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Válassz az eldobott kártyákból", droppedCardList.Cards.Select(card => card.Name).ToArray(), true));
-            await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext,
+            gameContext.EventManager.Publish(new OnChooseObjects("Válassz az eldobott kártyákból", droppedCardList.Cards.Select(card => card.Name).ToArray(), true));
+            gameContext.PlayerActionHandler.HandlePlayerActions(gameContext,
                   owner, 
                   droppedCardList.Cards.Select(card => (IPlayerAction)new ChooseDroppedCardAction(card)).ToList());
         }

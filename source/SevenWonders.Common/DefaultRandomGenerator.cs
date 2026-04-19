@@ -14,6 +14,8 @@ namespace SevenWonders.Common
 
         public int Next(int min, int max)
         {
+            if (min >= max)
+                return min;
             return RandomNumberGenerator.GetInt32(min, max);
         }
 

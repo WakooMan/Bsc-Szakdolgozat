@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ObjectWeights xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <WonderWeights>
+        <ObjectWeight><Name>Via Appia</Name><Weight>12</Weight></ObjectWeight>
+        <ObjectWeight><Name>Circus Maximus</Name><Weight>5</Weight></ObjectWeight>
+        <ObjectWeight><Name>A kolosszus</Name><Weight>3</Weight></ObjectWeight>
+        <ObjectWeight><Name>A nagy Könyvtár</Name><Weight>6</Weight></ObjectWeight>
+        <ObjectWeight><Name>A nagy világítótorony</Name><Weight>4</Weight></ObjectWeight>
+        <ObjectWeight><Name>A függőkertek</Name><Weight>10</Weight></ObjectWeight>
+        <ObjectWeight><Name>A mauzóleum</Name><Weight>1</Weight></ObjectWeight>
+        <ObjectWeight><Name>Pireusz</Name><Weight>9</Weight></ObjectWeight>
+        <ObjectWeight><Name>A Piramisok</Name><Weight>2</Weight></ObjectWeight>
+        <ObjectWeight><Name>A Szfinx</Name><Weight>8</Weight></ObjectWeight>
+        <ObjectWeight><Name>Zeusz szobra</Name><Weight>7</Weight></ObjectWeight>
+        <ObjectWeight><Name>Artemisz temploma</Name><Weight>11</Weight></ObjectWeight>
+    </WonderWeights>
+    <CardWeights>
+        <ObjectWeight><Name>Agyagbánya</Name><Weight>1</Weight></ObjectWeight>
+        <ObjectWeight><Name>Agyaglelőhely</Name><Weight>2</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fakitermelés</Name><Weight>3</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fatelep</Name><Weight>4</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kőbánya</Name><Weight>5</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kőfejtő</Name><Weight>6</Weight></ObjectWeight>
+        <ObjectWeight><Name>Prés</Name><Weight>7</Weight></ObjectWeight>
+        <ObjectWeight><Name>Üveggyár</Name><Weight>8</Weight></ObjectWeight>
+        <ObjectWeight><Name>Agyagraktár</Name><Weight>9</Weight></ObjectWeight>
+        <ObjectWeight><Name>Faraktár</Name><Weight>10</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fogadó</Name><Weight>11</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kőraktár</Name><Weight>12</Weight></ObjectWeight>
+        <ObjectWeight><Name>Cölöpkerítés</Name><Weight>13</Weight></ObjectWeight>
+        <ObjectWeight><Name>Helyőrség</Name><Weight>14</Weight></ObjectWeight>
+        <ObjectWeight><Name>Istálló</Name><Weight>15</Weight></ObjectWeight>
+        <ObjectWeight><Name>Őrtorony</Name><Weight>16</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fürdő</Name><Weight>17</Weight></ObjectWeight>
+        <ObjectWeight><Name>Oltár</Name><Weight>18</Weight></ObjectWeight>
+        <ObjectWeight><Name>Színház</Name><Weight>19</Weight></ObjectWeight>
+        <ObjectWeight><Name>Gyógyszerész</Name><Weight>20</Weight></ObjectWeight>
+        <ObjectWeight><Name>Műhely</Name><Weight>21</Weight></ObjectWeight>
+        <ObjectWeight><Name>Patika</Name><Weight>22</Weight></ObjectWeight>
+        <ObjectWeight><Name>Scriptorium</Name><Weight>23</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fűrésztelep</Name><Weight>24</Weight></ObjectWeight>
+        <ObjectWeight><Name>Külszíni fejtés</Name><Weight>25</Weight></ObjectWeight>
+        <ObjectWeight><Name>Téglagyár</Name><Weight>26</Weight></ObjectWeight>
+        <ObjectWeight><Name>Szárítóterem</Name><Weight>27</Weight></ObjectWeight>
+        <ObjectWeight><Name>Üvegfúvó</Name><Weight>28</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fórum</Name><Weight>29</Weight></ObjectWeight>
+        <ObjectWeight><Name>Karavánszeráj</Name><Weight>30</Weight></ObjectWeight>
+        <ObjectWeight><Name>Sörfőzde</Name><Weight>31</Weight></ObjectWeight>
+        <ObjectWeight><Name>Vámház</Name><Weight>32</Weight></ObjectWeight>
+        <ObjectWeight><Name>Alakulótér</Name><Weight>33</Weight></ObjectWeight>
+        <ObjectWeight><Name>Barakk</Name><Weight>34</Weight></ObjectWeight>
+        <ObjectWeight><Name>Falak</Name><Weight>35</Weight></ObjectWeight>
+        <ObjectWeight><Name>Íjászterület</Name><Weight>36</Weight></ObjectWeight>
+        <ObjectWeight><Name>Lótenyésztők</Name><Weight>37</Weight></ObjectWeight>
+        <ObjectWeight><Name>Bíróság</Name><Weight>38</Weight></ObjectWeight>
+        <ObjectWeight><Name>Szobor</Name><Weight>39</Weight></ObjectWeight>
+        <ObjectWeight><Name>Szószék</Name><Weight>40</Weight></ObjectWeight>
+        <ObjectWeight><Name>Templom</Name><Weight>41</Weight></ObjectWeight>
+        <ObjectWeight><Name>Vízvezeték</Name><Weight>42</Weight></ObjectWeight>
+        <ObjectWeight><Name>Iskola</Name><Weight>43</Weight></ObjectWeight>
+        <ObjectWeight><Name>Könyvtár</Name><Weight>44</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kórház</Name><Weight>45</Weight></ObjectWeight>
+        <ObjectWeight><Name>Laboratórium</Name><Weight>46</Weight></ObjectWeight>
+        <ObjectWeight><Name>Aréna</Name><Weight>47</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fegyvertár</Name><Weight>48</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kereskedelmi kamara</Name><Weight>49</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kikötő</Name><Weight>50</Weight></ObjectWeight>
+        <ObjectWeight><Name>Világítótorony</Name><Weight>51</Weight></ObjectWeight>
+        <ObjectWeight><Name>Cirkusz</Name><Weight>52</Weight></ObjectWeight>
+        <ObjectWeight><Name>Erőd</Name><Weight>53</Weight></ObjectWeight>
+        <ObjectWeight><Name>Fegyverarzenál</Name><Weight>54</Weight></ObjectWeight>
+        <ObjectWeight><Name>Főhadiszállás</Name><Weight>55</Weight></ObjectWeight>
+        <ObjectWeight><Name>Ostromműhely</Name><Weight>56</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kertek</Name><Weight>57</Weight></ObjectWeight>
+        <ObjectWeight><Name>Obeliszk</Name><Weight>58</Weight></ObjectWeight>
+        <ObjectWeight><Name>Palota</Name><Weight>59</Weight></ObjectWeight>
+        <ObjectWeight><Name>Panteon</Name><Weight>60</Weight></ObjectWeight>
+        <ObjectWeight><Name>Szenátus</Name><Weight>61</Weight></ObjectWeight>
+        <ObjectWeight><Name>Városháza</Name><Weight>62</Weight></ObjectWeight>
+        <ObjectWeight><Name>Akadémia</Name><Weight>63</Weight></ObjectWeight>
+        <ObjectWeight><Name>Csillagvizsgáló</Name><Weight>64</Weight></ObjectWeight>
+        <ObjectWeight><Name>Egyetem</Name><Weight>65</Weight></ObjectWeight>
+        <ObjectWeight><Name>Tanterem</Name><Weight>66</Weight></ObjectWeight>
+        <ObjectWeight><Name>Elöljárók céhe</Name><Weight>67</Weight></ObjectWeight>
+        <ObjectWeight><Name>Építők céhe</Name><Weight>68</Weight></ObjectWeight>
+        <ObjectWeight><Name>Hajósok céhe</Name><Weight>69</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kereskedők céhe</Name><Weight>70</Weight></ObjectWeight>
+        <ObjectWeight><Name>Stratégák céhe</Name><Weight>71</Weight></ObjectWeight>
+        <ObjectWeight><Name>Tudósok céhe</Name><Weight>72</Weight></ObjectWeight>
+        <ObjectWeight><Name>Uzsorások céhe</Name><Weight>73</Weight></ObjectWeight>
+    </CardWeights>
+    <DevelopmentWeights>
+        <ObjectWeight><Name>Mezőgazdaság</Name><Weight>1</Weight></ObjectWeight>
+        <ObjectWeight><Name>Építészet</Name><Weight>8</Weight></ObjectWeight>
+        <ObjectWeight><Name>Gazdaság</Name><Weight>7</Weight></ObjectWeight>
+        <ObjectWeight><Name>Törvény</Name><Weight>6</Weight></ObjectWeight>
+        <ObjectWeight><Name>Kőművesség</Name><Weight>4</Weight></ObjectWeight>
+        <ObjectWeight><Name>Matematika</Name><Weight>2</Weight></ObjectWeight>
+        <ObjectWeight><Name>Filozófia</Name><Weight>3</Weight></ObjectWeight>
+        <ObjectWeight><Name>Stratégia</Name><Weight>9</Weight></ObjectWeight>
+        <ObjectWeight><Name>Teológia</Name><Weight>10</Weight></ObjectWeight>
+        <ObjectWeight><Name>Urbanizmus</Name><Weight>5</Weight></ObjectWeight>
+    </DevelopmentWeights>
+</ObjectWeights>

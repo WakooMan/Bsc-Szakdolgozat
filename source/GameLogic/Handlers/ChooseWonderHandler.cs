@@ -1,7 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
 using GameLogic.Events.GameEvents;
-using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
 using SevenWonders.Common;
 
@@ -26,16 +25,16 @@ namespace GameLogic.Handlers
 
         public bool WondersChosen => WondersChosenNum == 8;
 
-        public async Task ChooseWonder()
+        public void ChooseWonder()
         {
             ArgumentChecker.CheckPredicateForOperation(() => m_players.Count == 0 || m_wonders.Count == 0, "Wonder cannot be chosen if initialize is not called or all the wonders are chosen!");
             if (WondersChosenNum == 0)
             {
-                await m_gameContext.EventManager.PublishAsync(new OnChooseWonderStateStart(m_wonderPlayerActions1.Select(action => action.Wonder).ToList()));
+                m_gameContext.EventManager.Publish(new OnChooseWonderStateStart(m_wonderPlayerActions1.Select(action => action.Wonder).ToList()));
             }
             if (WondersChosenNum == 4)
             {
-                await m_gameContext.EventManager.PublishAsync(new OnFourWondersChosen(m_wonderPlayerActions2.Select(action => action.Wonder).ToList()));
+                m_gameContext.EventManager.Publish(new OnFourWondersChosen(m_wonderPlayerActions2.Select(action => action.Wonder).ToList()));
             }
 
             Player player = m_players[m_indexOfPlayer];
@@ -45,15 +44,15 @@ namespace GameLogic.Handlers
 
             if (actions.Count > 1)
             {
-                await m_gameContext.EventManager.PublishAsync(new ChooseWonderStarted(player));
-                (bool completed, playerAction) = await m_gameContext.PlayerActionHandler.HandlePlayerActions(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
+                m_gameContext.EventManager.Publish(new ChooseWonderStarted(player));
+                (bool completed, playerAction) = m_gameContext.PlayerActionHandler.HandlePlayerActions(m_gameContext, player, actions.Select(action => (IPlayerAction)action).ToList());
             }
             else
             {
                 playerAction = actions.FirstOrDefault();
                 if (playerAction is not null)
                 {
-                    await m_gameContext.PlayerActionHandler.HandlePlayerAction(m_gameContext, player, playerAction);
+                    m_gameContext.PlayerActionHandler.HandlePlayerAction(m_gameContext, player, playerAction);
                 }
             }
 
@@ -67,7 +66,7 @@ namespace GameLogic.Handlers
 
             if (WondersChosen)
             {
-                await m_gameContext.EventManager.PublishAsync(new OnChooseWonderStateEnd());
+                m_gameContext.EventManager.Publish(new OnChooseWonderStateEnd());
             }
 
         }

@@ -23,30 +23,29 @@ namespace GameLogic.Elements.Military
             OpponentId = 0;
         }
 
-        public async Task Apply(IGameContext gameContext)
+        public void Apply(IGameContext gameContext)
         {
             Player owner = gameContext.TurnHandler.GetPlayer(OwnerId);
             Player opponent = gameContext.TurnHandler.GetPlayer(OpponentId);
             if (FirstApply)
             {
-                await EnemyLoseMoney.Apply(gameContext, opponent, owner);
+                EnemyLoseMoney.Apply(gameContext, opponent, owner);
             }
 
             opponent.MilitaryCards.Add(this);
         }
 
-        public Task Unapply(IGameContext gameContext)
+        public void Unapply(IGameContext gameContext)
         {
             Player owner = gameContext.TurnHandler.GetPlayer(OwnerId);
             Player opponent = gameContext.TurnHandler.GetPlayer(OpponentId);
 
             opponent.MilitaryCards.Remove(this);
-            return Task.CompletedTask;
         }
 
-        public async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await VictoryPoints.OnCalculatePlayerProperties(playerProperties);
+            VictoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

@@ -1,12 +1,14 @@
-﻿namespace GameLogic.Events.GameEvents
+﻿using GameLogic.Elements;
+
+namespace GameLogic.Events.GameEvents
 {
     public class MilitaryVictory: GameEvent
     {
-        public string PlayerName { get; }
+        public PlayerProperties PlayerProperties { get; }
 
-        public MilitaryVictory(string playerName)
+        public MilitaryVictory(PlayerProperties playerProperties)
         {
-            PlayerName = playerName;
+            PlayerProperties = playerProperties;
         }
     }
 }

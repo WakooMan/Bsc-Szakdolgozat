@@ -15,17 +15,17 @@ namespace GameLogic.Handlers
             m_eventManager = eventManager;
         }
 
-        public async Task<bool> CanAfford(IBuildable buildable, Player buyer, Player opponent)
+        public bool CanAfford(IBuildable buildable, Player buyer, Player opponent)
         {
-            int cost = await GetBuildCost(buildable, buyer, opponent);
+            int cost = GetBuildCost(buildable, buyer, opponent);
             return buyer.Money >= cost;
         }
 
-        public async Task<int> GetBuildCost(IBuildable buildable, Player buyer, Player opponent)
+        public int GetBuildCost(IBuildable buildable, Player buyer, Player opponent)
         {
-            PlayerProperties buyerProperties = await buyer.GetPlayerProperties(opponent);
-            PlayerProperties opponentProperties = await opponent.GetPlayerProperties(buyer);
-            var missing = await GetMissingGoods(buildable, buyerProperties);
+            PlayerProperties buyerProperties = buyer.GetPlayerProperties(opponent);
+            PlayerProperties opponentProperties = opponent.GetPlayerProperties(buyer);
+            var missing = GetMissingGoods(buildable, buyerProperties);
             int totalCost = 0;
             IReadOnlyDictionary<Type, Good> opponentGoods = opponentProperties.Goods;
 
@@ -57,7 +57,7 @@ namespace GameLogic.Handlers
             return totalCost + buildable.MoneyCost;
         }
 
-        public async Task<List<Good>> GetMissingGoods(IBuildable buildable, PlayerProperties buyerProperties)
+        public List<Good> GetMissingGoods(IBuildable buildable, PlayerProperties buyerProperties)
         {
             List<Good> missing = new List<Good>();
             IReadOnlyDictionary<Type, Good> ownerGoods = buyerProperties.Goods;

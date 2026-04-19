@@ -17,19 +17,18 @@ namespace GameLogic.Elements.Guilds
             return new TraderGuild();
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             owner.Money += GetMaxYellowCardCount(owner, opponent);
-            return Task.CompletedTask;
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             VictoryPoints victoryPoints = new VictoryPoints()
             {
                 Points = GetMaxYellowCardCount(playerProperties.Owner, playerProperties.Opponent)
             };
-            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
+            victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
 
         private int GetMaxYellowCardCount(Player owner, Player opponent)

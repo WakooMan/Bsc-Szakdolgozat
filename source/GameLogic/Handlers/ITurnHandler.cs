@@ -9,8 +9,8 @@ namespace GameLogic.Handlers
 
         Player GetPlayer(int index);
 
-        Task NextPlayer();
-        Task ForceNewTurn();
+        void NextPlayer();
+        void ForceNewTurn();
         void Initialize(ICollection<Player> players);
     }
 }

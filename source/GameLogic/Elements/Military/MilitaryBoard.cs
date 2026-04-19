@@ -21,12 +21,12 @@ namespace GameLogic.Elements.Military
             Developments.AddRange(developments);
         }
 
-        public async Task OnUpdate(IGameContext gameContext, PlayerProperties player1, PlayerProperties player2)
+        public void OnUpdate(IGameContext gameContext, PlayerProperties player1, PlayerProperties player2)
         {
-            await OnMilitaryAdvanced(gameContext, player1, player2);
+            OnMilitaryAdvanced(gameContext, player1, player2);
         }
 
-        private async Task OnMilitaryAdvanced(IGameContext gameContext, PlayerProperties player1, PlayerProperties player2)
+        private void OnMilitaryAdvanced(IGameContext gameContext, PlayerProperties player1, PlayerProperties player2)
         {
             int index = Fields.IndexOf(MilitaryField.Shield);
             int diff = player1.Strength - player2.Strength;
@@ -53,19 +53,19 @@ namespace GameLogic.Elements.Military
 
                 MilitaryCard? previousMilitaryCard = m_currentMilitaryCard;
                 m_currentMilitaryCard = militaryCards.FirstOrDefault(militaryCard => militaryCard.IndexStart <= newIdx && militaryCard.IndexEnd >= newIdx);
-                await gameContext.EventManager.PublishAsync(new OnMilitaryBoardChanged(Fields));
+                gameContext.EventManager.Publish(new OnMilitaryBoardChanged(Fields));
                 OnMilitaryTokenReachedThreshold evt = new OnMilitaryTokenReachedThreshold(militaryCards, previousMilitaryCard, m_currentMilitaryCard);
-                await OnMilitaryTokenReachedThreshold(gameContext, evt);
-                await gameContext.EventManager.PublishAsync(evt);
+                OnMilitaryTokenReachedThreshold(gameContext, evt);
+                gameContext.EventManager.Publish(evt);
 
                 if (newIdx == 0 || newIdx == Fields.Count - 1)
                 {
-                    await gameContext.EventManager.PublishAsync(new MilitaryVictory(gameContext.TurnHandler.CurrentPlayer.Name));
+                    gameContext.EventManager.Publish(new MilitaryVictory(gameContext.TurnHandler.CurrentPlayer.GetPlayerProperties(gameContext.TurnHandler.OpponentPlayer)));
                 }
             }
         }
 
-        private async Task OnMilitaryTokenReachedThreshold(IGameContext gameContext, OnMilitaryTokenReachedThreshold eventArgs)
+        private void OnMilitaryTokenReachedThreshold(IGameContext gameContext, OnMilitaryTokenReachedThreshold eventArgs)
         {
             foreach(MilitaryCard militaryCard in eventArgs.MilitaryCards)
             {
@@ -73,15 +73,15 @@ namespace GameLogic.Elements.Military
                 {
                     if (militaryCard != eventArgs.PreviousMilitaryCard)
                     {
-                        await militaryCard.Apply(gameContext);
+                        militaryCard.Apply(gameContext);
                     }
-                    await militaryCard.Unapply(gameContext);
+                    militaryCard.Unapply(gameContext);
                 }
             }
 
             if (eventArgs.CurrentMilitaryCard is not null)
             {
-                await eventArgs.CurrentMilitaryCard.Apply(gameContext);
+                eventArgs.CurrentMilitaryCard.Apply(gameContext);
             }
         }
 

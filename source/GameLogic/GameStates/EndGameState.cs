@@ -2,7 +2,7 @@
 {
     public class EndGameState : IGameState
     {
-        public Task DoStateAction()
+        public void DoStateAction()
         {
             throw new NotImplementedException("This method intentionally throws this exception, do not call this method on this object!");
         }

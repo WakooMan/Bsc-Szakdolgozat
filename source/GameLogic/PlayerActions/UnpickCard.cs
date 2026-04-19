@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
     public class UnpickCard : IPlayerAction
     {
         public string Name => nameof(UnpickCard);
+        public int Id => 13;
         public UnpickCard(Player player)
         {
             ArgumentChecker.CheckNull(player, nameof(player));
@@ -15,12 +16,12 @@ namespace GameLogic.PlayerActions
             m_player = player;
         }
 
-        public Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-            return Task.FromResult(m_player.PickedCard is not null);
+            return m_player.PickedCard is not null;
         }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
             if (m_player.PickedCard is null)
             {
@@ -29,7 +30,7 @@ namespace GameLogic.PlayerActions
 
             ICardNode cardNode = m_player.PickedCard;
             m_player.PickedCard = null;
-            await gameContext.EventManager.PublishAsync(new OnCardUnpicked(m_player, cardNode));
+            gameContext.EventManager.Publish(new OnCardUnpicked(m_player, cardNode));
             return true;
         }
 

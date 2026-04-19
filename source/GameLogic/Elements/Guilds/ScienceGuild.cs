@@ -16,19 +16,18 @@ namespace GameLogic.Elements.Guilds
             return new ScienceGuild();
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             owner.Money += GetMaxGreenCardCount(owner, opponent);
-            return Task.CompletedTask;
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             VictoryPoints victoryPoints = new VictoryPoints()
             {
                 Points = GetMaxGreenCardCount(playerProperties.Owner, playerProperties.Opponent)
             };
-            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
+            victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
 
         private int GetMaxGreenCardCount(Player owner, Player opponent)

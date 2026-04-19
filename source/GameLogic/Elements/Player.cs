@@ -34,31 +34,31 @@ namespace GameLogic.Elements
                 m_money = (value < 0) ? 0 : value;
             }
         }
-        public async Task<PlayerProperties> GetPlayerProperties(Player opponent)
+        public PlayerProperties GetPlayerProperties(Player opponent)
         {
             PlayerProperties properties = new PlayerProperties(this, opponent);
 
             foreach (Card card in Cards)
             {
-                await card.OnCalculatePlayerProperties(properties);
+                card.OnCalculatePlayerProperties(properties);
             }
 
             foreach (Wonder wonder in Wonders)
             {
                 if (wonder.HasBeenBuilt)
                 {
-                    await wonder.OnCalculatePlayerProperties(properties);
+                    wonder.OnCalculatePlayerProperties(properties);
                 }
             }
 
             foreach (Development development in Developments)
             {
-                await development.OnCalculatePlayerProperties(properties);
+                development.OnCalculatePlayerProperties(properties);
             }
 
             foreach (MilitaryCard militaryCard in MilitaryCards)
             {
-                await militaryCard.OnCalculatePlayerProperties(properties);
+                militaryCard.OnCalculatePlayerProperties(properties);
             }
 
             return properties;
@@ -87,14 +87,14 @@ namespace GameLogic.Elements
             Money = money;
         }
 
-        public async Task OnBuildWonder(OnWonderBuilt onWonderBuilt)
+        public void OnBuildWonder(OnWonderBuilt onWonderBuilt)
         {
-            await (OnWonderBuilt?.Invoke(this, onWonderBuilt) ?? Task.CompletedTask);
+            OnWonderBuilt?.Invoke(this, onWonderBuilt);
         }
 
-        public async Task OnBuildCard(OnCardBuilt onCardBuilt)
+        public void OnBuildCard(OnCardBuilt onCardBuilt)
         {
-            await (OnCardBuilt?.Invoke(this, onCardBuilt) ?? Task.CompletedTask);
+            OnCardBuilt?.Invoke(this, onCardBuilt);
         }
 
         private int m_money;

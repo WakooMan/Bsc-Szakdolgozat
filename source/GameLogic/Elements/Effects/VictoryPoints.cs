@@ -19,10 +19,9 @@
             return new VictoryPoints(this);
         }
 
-        public override Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             playerProperties.VictoryPoints += Points;
-            return Task.CompletedTask;
         }
     }
 }

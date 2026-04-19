@@ -15,7 +15,7 @@ namespace GameLogic.Elements.Guilds
             return new ExtortionistGuild();
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             int maxCount = Math.Max(playerProperties.Owner.Money, playerProperties.Opponent.Money);
 
@@ -23,7 +23,7 @@ namespace GameLogic.Elements.Guilds
             {
                 Points = maxCount % 3
             };
-            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
+            victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj" />
   </ItemGroup>
 
 </Project>

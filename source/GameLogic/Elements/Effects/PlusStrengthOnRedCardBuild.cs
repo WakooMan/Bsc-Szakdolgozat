@@ -17,16 +17,14 @@ namespace GameLogic.Elements.Effects
             return new PlusStrengthOnRedCardBuild(this);
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             owner.OnCardBuilt += OnRedCardBuilt;
-            return Task.CompletedTask;
         }
 
-        public override Task Unapply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Unapply(IGameContext gameContext, Player owner, Player opponent)
         {
             owner.OnCardBuilt -= OnRedCardBuilt;
-            return Task.CompletedTask;
         }
 
         private PlusStrengthOnRedCardBuild(PlusStrengthOnRedCardBuild plusStrengthOnRedCardBuild)

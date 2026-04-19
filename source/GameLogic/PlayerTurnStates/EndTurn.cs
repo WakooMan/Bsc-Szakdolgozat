@@ -2,7 +2,7 @@
 {
     public class EndTurn : IPlayerTurnState
     {
-        public Task ExecuteTurnState()
+        public void ExecuteTurnState()
         {
             throw new NotImplementedException("This method is not implemented intentionally! Do not call it!");
         }

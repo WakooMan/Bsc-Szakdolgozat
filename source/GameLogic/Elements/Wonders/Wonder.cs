@@ -38,19 +38,19 @@ namespace GameLogic.Elements.Wonders
             return new Wonder(this);
         }
 
-        public async Task OnBuilt(IGameContext gameContext, Player owner, Player opponent)
+        public void OnBuilt(IGameContext gameContext, Player owner, Player opponent)
         {
             foreach (var effect in Effects)
             {
-                await effect.Apply(gameContext, owner, opponent);
+                effect.Apply(gameContext, owner, opponent);
             }
         }
 
-        public async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             foreach (Effect effect in Effects)
             {
-                await effect.OnCalculatePlayerProperties(playerProperties);
+                effect.OnCalculatePlayerProperties(playerProperties);
             }
         }
     }

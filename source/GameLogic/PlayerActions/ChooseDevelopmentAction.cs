@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
     public class ChooseDevelopmentAction : IPlayerAction
     {
         public string Name => m_development.Name;
+        public int Id => 5;
         public ChooseDevelopmentAction() { }
         public ChooseDevelopmentAction(Player owner, Player opponent, Development development, List<Development> developments)
         {
@@ -22,20 +23,20 @@ namespace GameLogic.PlayerActions
             m_developments = developments;
         }
 
-        public Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-            return Task.FromResult(!m_owner.Developments.Contains(m_development) && m_developments.Contains(m_development));
+            return !m_owner.Developments.Contains(m_development) && m_developments.Contains(m_development);
         }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => m_owner.Developments.Contains(m_development), "Cannot perform action, because player already has the development!");
             ArgumentChecker.CheckPredicateForOperation(() => !m_developments.Contains(m_development), "Cannot perform action, because development list does not contain the development!");
 
             m_owner.Developments.Add(m_development);
             m_developments.Remove(m_development);
-            await gameContext.EventManager.PublishAsync(new OnPlayerDevelopmentReceived(m_owner, m_development));
-            await gameContext.EventManager.PublishAsync(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray(), true));
+            gameContext.EventManager.Publish(new OnPlayerDevelopmentReceived(m_owner, m_development));
+            gameContext.EventManager.Publish(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray(), true));
             m_development.OnDevelopmentEstablished(gameContext, m_owner, m_opponent);
             return true;
         }

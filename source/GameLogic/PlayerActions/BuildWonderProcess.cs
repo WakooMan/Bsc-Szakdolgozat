@@ -6,6 +6,7 @@ namespace GameLogic.PlayerActions
     public class BuildWonderProcess: IPlayerAction
     {
         public string Name => nameof(BuildWonderProcess);
+        public int Id => 4;
 
         public BuildWonderProcess(Player player, ICollection<BuildWonder> buildWonderActions)
         {
@@ -14,17 +15,17 @@ namespace GameLogic.PlayerActions
             m_buildWonderActions = [.. buildWonderActions];
         }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
-            await gameContext.EventManager.PublishAsync(new OnBuildWonderProcessStart(m_buildWonderActions, m_backAction));
-            var (result, playerAction) = await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, m_player, [m_backAction, .. m_buildWonderActions]);
-            await gameContext.EventManager.PublishAsync(new OnBuildWonderProcessEnd(m_buildWonderActions, m_backAction, result));
+            gameContext.EventManager.Publish(new OnBuildWonderProcessStart(m_buildWonderActions, m_backAction));
+            var (result, playerAction) = gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, m_player, [m_backAction, .. m_buildWonderActions]);
+            gameContext.EventManager.Publish(new OnBuildWonderProcessEnd(m_buildWonderActions, m_backAction, result));
             return result;
         }
 
-        public async Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-            var results = await Task.WhenAll(m_buildWonderActions.Select(action => action.CanPerform(gameContext)));
+            var results = m_buildWonderActions.Select(action => action.CanPerform(gameContext));
             return results.Any(result => result);
         }
 

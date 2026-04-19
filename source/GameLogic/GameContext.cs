@@ -65,6 +65,7 @@ namespace GameLogic
 
         public void Initialize(ICollection<Player> players, IRandomGenerator randomGenerator)
         {
+            m_gameElements.ResetElements();
             CardList = m_gameElements.Cards;
             WonderList = m_gameElements.Wonders;
             DevelopmentList = m_gameElements.Developments;

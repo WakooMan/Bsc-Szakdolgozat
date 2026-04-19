@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLogic.Elements.Disciplines
+﻿namespace GameLogic.Elements.Disciplines
 {
     public class Physics : Discipline
     {
-        public override Discipline Clone()
+        public override Physics Clone()
         {
             return new Physics();
         }

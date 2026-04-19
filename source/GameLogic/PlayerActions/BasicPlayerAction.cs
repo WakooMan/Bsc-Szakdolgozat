@@ -4,18 +4,21 @@
     {
         public string Name { get; }
         public bool Completed { get; }
+
+        public int Id => 3;
+
         public BasicPlayerAction(string name, bool completed)
         {
             Name = name;
             Completed = completed;
         }
-        public Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
-            return Task.FromResult(Completed);
+            return Completed;
         }
-        public Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-            return Task.FromResult(true);
+            return true;
         }
     }
 }

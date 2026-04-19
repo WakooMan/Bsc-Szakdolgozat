@@ -11,11 +11,11 @@ namespace GameLogic.GameStates
             m_gameContext = gameContext;
         }
 
-        public async Task DoStateAction()
+        public void DoStateAction()
         {
             while (!m_gameContext.ChooseWonderHandler.WondersChosen)
             {
-                await m_gameContext.ChooseWonderHandler.ChooseWonder();
+                m_gameContext.ChooseWonderHandler.ChooseWonder();
             }
         }
 

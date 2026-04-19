@@ -9,6 +9,7 @@ namespace GameLogic.PlayerActions
     public class ChooseDroppedCardAction : IPlayerAction
     {
         public string Name => m_card.Name;
+        public int Id => 7;
         public ChooseDroppedCardAction()
         {
             m_card = new RedCard();
@@ -19,12 +20,12 @@ namespace GameLogic.PlayerActions
             m_card = card;
         }
 
-        public Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-            return Task.FromResult(gameContext.DroppedCardList is not null && gameContext.DroppedCardList.Cards.Contains(m_card));
+            return gameContext.DroppedCardList is not null && gameContext.DroppedCardList.Cards.Contains(m_card);
         }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
             if (gameContext.DroppedCardList is null)
             {
@@ -36,11 +37,11 @@ namespace GameLogic.PlayerActions
             Player opponent = gameContext.TurnHandler.OpponentPlayer;
             gameContext.DroppedCardList.Cards.Remove(m_card);
             player.Cards.Add(m_card);
-            await gameContext.EventManager.PublishAsync(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray(), true));
+            gameContext.EventManager.Publish(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray(), true));
             OnCardBuilt onCardBuilt = new OnCardBuilt(m_card, player, 0, false);
-            await player.OnBuildCard(onCardBuilt);
-            await gameContext.EventManager.PublishAsync(onCardBuilt);
-            await m_card.OnBuilt(gameContext, player, opponent);
+            player.OnBuildCard(onCardBuilt);
+            gameContext.EventManager.Publish(onCardBuilt);
+            m_card.OnBuilt(gameContext, player, opponent);
 
             return true;
         }

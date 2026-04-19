@@ -66,14 +66,15 @@ namespace GameLogic.Handlers
             m_newTurnForced = false;
         }
 
-        public async Task NextPlayer()
+        public void NextPlayer()
         {
             if (m_players is null)
             {
                 throw new InvalidOperationException("Cannot execute NextPlayer method until SetPlayers method is not called!");
             }
 
-            await m_eventManager.PublishAsync(new TurnEnded(CurrentPlayer));
+            GameLog.Info($"NextPlayer called. Current={CurrentPlayer.Name}, NewTurnForced={m_newTurnForced}");
+            m_eventManager.Publish(new TurnEnded(CurrentPlayer));
             if (!m_newTurnForced)
             {
                 m_index = (m_index + 1 < m_players.Count) ? m_index + 1 : 0;
@@ -81,15 +82,16 @@ namespace GameLogic.Handlers
             m_newTurnForced = false;
         }
 
-        public async Task ForceNewTurn()
+        public void ForceNewTurn()
         {
             if (m_players is null)
             {
                 throw new InvalidOperationException("Cannot execute ForceNewTurn method until SetPlayers method is not called!");
             }
 
+            GameLog.Info($"ForceNewTurn called for player: {CurrentPlayer.Name}");
             m_newTurnForced = true;
-            await m_eventManager.PublishAsync(new ExtraTurnGranted());
+            m_eventManager.Publish(new ExtraTurnGranted());
         }
 
         private List<Player>? m_players;

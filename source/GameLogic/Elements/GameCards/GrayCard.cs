@@ -20,13 +20,12 @@ namespace GameLogic.Elements.GameCards
             return new GrayCard(this);
         }
 
-        public override Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             foreach (Product product in CreatedProducts)
             {
                 playerProperties.AddGood(product);
             }
-            return Task.CompletedTask;
         }
     }
 }

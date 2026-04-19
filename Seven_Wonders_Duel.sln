@@ -5,10 +5,6 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWondersUI", "source\SevenWondersUI\SevenWondersUI.csproj", "{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameController", "source\GameController\GameController.csproj", "{51601404-86F0-4744-A65D-4B474FC05DF1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIModell", "source\AIModell\AIModell.csproj", "{3C9BCAB7-4503-49BE-B852-C47D47780DE7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "source\GameLogic\GameLogic.csproj", "{1CA9F130-B3CF-DFBC-F068-2112E661767F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Common", "source\SevenWonders.Common\SevenWonders.Common.csproj", "{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F}"
@@ -27,6 +23,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.WebClient.Mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.SceneEditor", "source\SevenWonders.SceneEditor\SevenWonders.SceneEditor.csproj", "{49CEB58F-5D4F-98D6-9611-3996D4333B1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.AITrainerServer", "source\SevenWonders.AITrainerServer\SevenWonders.AITrainerServer.csproj", "{133B05F1-53F2-A013-95E6-A883EEA7648E}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "SevenWonders.AITrainer", "source\SevenWonders.AITrainer\SevenWonders.AITrainer.pyproj", "{4CFD0B55-3293-4CB6-8FED-01E07C18E3B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.AI.Model", "source\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj", "{28A90CAD-0DC9-42CA-85AE-975777FF4689}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,14 +40,6 @@ Global
 		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51601404-86F0-4744-A65D-4B474FC05DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51601404-86F0-4744-A65D-4B474FC05DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51601404-86F0-4744-A65D-4B474FC05DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51601404-86F0-4744-A65D-4B474FC05DF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C9BCAB7-4503-49BE-B852-C47D47780DE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CA9F130-B3CF-DFBC-F068-2112E661767F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CA9F130-B3CF-DFBC-F068-2112E661767F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CA9F130-B3CF-DFBC-F068-2112E661767F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,6 +76,16 @@ Global
 		{49CEB58F-5D4F-98D6-9611-3996D4333B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49CEB58F-5D4F-98D6-9611-3996D4333B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49CEB58F-5D4F-98D6-9611-3996D4333B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{133B05F1-53F2-A013-95E6-A883EEA7648E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{133B05F1-53F2-A013-95E6-A883EEA7648E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{133B05F1-53F2-A013-95E6-A883EEA7648E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{133B05F1-53F2-A013-95E6-A883EEA7648E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CFD0B55-3293-4CB6-8FED-01E07C18E3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CFD0B55-3293-4CB6-8FED-01E07C18E3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A90CAD-0DC9-42CA-85AE-975777FF4689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A90CAD-0DC9-42CA-85AE-975777FF4689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A90CAD-0DC9-42CA-85AE-975777FF4689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A90CAD-0DC9-42CA-85AE-975777FF4689}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

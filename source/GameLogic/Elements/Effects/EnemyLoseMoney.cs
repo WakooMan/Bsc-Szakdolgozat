@@ -16,10 +16,9 @@
             return new EnemyLoseMoney(this);
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             opponent.Money -= Money;
-            return Task.CompletedTask;
         }
     }
 }
