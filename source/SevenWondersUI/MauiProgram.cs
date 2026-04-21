@@ -140,6 +140,12 @@ public static class MauiProgram
         builder.Services.AddTransient<LobbyPageViewModel>();
         builder.Services.AddTransient<LobbyPage>();
 
+        builder.Services.AddTransient<SingleplayerModePageViewModel>();
+        builder.Services.AddTransient<SingleplayerModePage>();
+
+        builder.Services.AddTransient<AIDifficultyPageViewModel>();
+        builder.Services.AddTransient<AIDifficultyPage>();
+
 
         return builder.Build();
 	}

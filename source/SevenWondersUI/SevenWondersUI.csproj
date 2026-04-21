@@ -85,6 +85,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Models\seven_wonders_easy_agent.onnx" />
+	  <None Remove="Resources\Models\seven_wonders_easy_agent.onnx.data" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Include="Resources\Images\background_full.png" />
 	  <Content Include="Resources\Images\board.png" />
 	  <Content Include="Resources\Images\cardbackfirstage.png" />
@@ -104,10 +109,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Models\seven_wonders_easy_agent.onnx" />
+	  <EmbeddedResource Include="Resources\Models\seven_wonders_easy_agent.onnx.data" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.14" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.24.4" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.0" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.0" />
 	</ItemGroup>
@@ -115,6 +126,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\SevenWonders.Presenter\SevenWonders.Presenter.csproj" />
 	  <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
+	  <ProjectReference Include="..\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj" />
 	  <ProjectReference Include="..\SevenWonders.GameEngine\SevenWonders.GameEngine.csproj" />
 	  <ProjectReference Include="..\SevenWonders.WebClient.Model\SevenWonders.WebClient.Model.csproj" />
 	  <ProjectReference Include="..\WebServer.Contract\WebServer.Contract.csproj" />
@@ -136,6 +148,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AIDifficultyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ConnectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -161,6 +176,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SingleplayerModePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

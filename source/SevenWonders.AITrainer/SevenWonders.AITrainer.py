@@ -27,8 +27,6 @@ class MaskableSevenWondersEnv(SevenWondersEnv):
     def step(self, action):
         obs, reward, terminated, truncated, info = super().step(action)
         self.last_mask = np.array(info.get("mask", np.ones(self.action_space.n)), dtype=np.float32)
-        if terminated or truncated:
-            print("Episode ended!")
         return obs, reward, terminated, truncated, info
 
 

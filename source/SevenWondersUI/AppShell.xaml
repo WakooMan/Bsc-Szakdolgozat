@@ -40,5 +40,13 @@
         Title="LobbyPage"
         ContentTemplate="{DataTemplate views:LobbyPage}"
         Route="LobbyPage" />
+    <ShellContent
+        Title="SingleplayerModePage"
+        ContentTemplate="{DataTemplate views:SingleplayerModePage}"
+        Route="SingleplayerModePage" />
+    <ShellContent
+        Title="AIDifficultyPage"
+        ContentTemplate="{DataTemplate views:AIDifficultyPage}"
+        Route="AIDifficultyPage" />
 
 </Shell>

@@ -145,7 +145,7 @@ namespace SevenWondersUI.ViewModels
 
         private async void OnBack()
         {
-            await m_navigationService.NavigateToAsync("//MainPage");
+            await m_navigationService.NavigateToAsync("//SingleplayerModePage");
             m_player1Entry.entryText = string.Empty;
             m_player2Entry.entryText = string.Empty;
         }
