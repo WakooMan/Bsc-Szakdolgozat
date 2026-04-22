@@ -21,14 +21,20 @@ namespace SevenWonders.Presenter.Connectors.Developments
     {
         public DevelopmentConnector(IGameElements gameElements, IGameObjectViewFactory gameObjectViewFactory, IGameEngineReceiver gameEngineReceiver)
         {
-            m_developmentList = gameElements.Developments;
+            m_gameElements = gameElements;
             m_gameObjectViewFactory = gameObjectViewFactory;
             m_gameEngineReceiver = gameEngineReceiver;
         }
         public IDictionary<Development, IGameObjectView> ReceiveDevelopmentConnection()
         {
+            IDevelopmentList? developmentList = m_gameElements.Developments;
             Dictionary<Development, IGameObjectView> result = new Dictionary<Development, IGameObjectView>();
-            foreach (Development development in m_developmentList.Developments)
+            if (developmentList is null)
+            {
+                return result;
+            }
+
+            foreach (Development development in developmentList.Developments)
             {
                 HandleDevelopment(development);
                 result.Add(development, m_gameObjectViewFactory.CreateView(development.Name));
@@ -63,7 +69,7 @@ namespace SevenWonders.Presenter.Connectors.Developments
             }
         }
 
-        private readonly IDevelopmentList m_developmentList;
+        private readonly IGameElements m_gameElements;
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
     }

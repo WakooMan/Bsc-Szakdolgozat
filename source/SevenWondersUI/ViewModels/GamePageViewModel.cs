@@ -75,8 +75,8 @@ namespace SevenWondersUI.ViewModels
             }
 
             m_engine.Startup();
-            m_presenterStore.InitializePresenters(this);
             m_game.Initialize(m_randomGeneratorFactory.Create(IsMultiplayer ? RandomGeneratorType.Deterministic : RandomGeneratorType.Undeterministic, Seed), (Player1.Name, m_playerActionReceiverFactory.Create(Player1.PlayerType, Player1.Name)), (Player2.Name, m_playerActionReceiverFactory.Create(Player2.PlayerType, Player2.Name)), StartingPlayerId);
+            m_presenterStore.InitializePresenters(this);
             m_presenterStore.SubscribePresentersToEvents();
             _ = Task.Run(m_game.GameLoop);
         }

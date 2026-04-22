@@ -72,14 +72,8 @@ namespace GameLogic
             DroppedCardList = m_droppedCardListFactory.Create();
             MilitaryBoard = m_militaryBoardFactory.Create();
             RandomGenerator = randomGenerator;
-            ICollection<Wonder> wonders = RandomGenerator.ReceiveRandomElements(WonderList.Wonders, 8);
-            WonderList.Wonders.RemoveAll(wonders.Contains);
-            ChooseWonderHandler.Initialize(players, wonders, this);
             TurnHandler.Initialize(players);
             EventManager.ClearSubscriptions();
-            ICollection<Development> developments = RandomGenerator.ReceiveRandomElements(DevelopmentList.Developments, 5);
-            DevelopmentList.Developments.RemoveAll(developments.Contains);
-            MilitaryBoard.Initialize(players, developments);
         }
 
         private readonly IGameElements m_gameElements;

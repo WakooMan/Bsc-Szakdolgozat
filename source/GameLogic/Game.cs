@@ -1,4 +1,7 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.Developments;
+using GameLogic.Elements.Military;
+using GameLogic.Elements.Modifiers;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStates;
 using GameLogic.Interfaces;
@@ -31,6 +34,10 @@ namespace GameLogic
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_isInitialized, "Cannot start an uninitialized game!");
 
+            ICollection<Development> developments = Context.RandomGenerator.ReceiveRandomElements(Context.DevelopmentList.Developments, 5);
+            Context.DevelopmentList.Developments.RemoveAll(developments.Contains);
+            Context.MilitaryBoard.Initialize(m_players, developments);
+
             GameLog.Info("GameLoop started.");
             m_gameContext.EventManager.Publish(new OnGameInitialized(m_gameContext));
             m_gameContext.EventManager.Publish(new OnGameStarted(m_players));
@@ -56,7 +63,7 @@ namespace GameLogic
                 var p2 = new Player(player2.actionReceiver, player2.name, 2, 7);
                 m_players = startingPlayerId == 1 ? [p1, p2] : [p2, p1];
                 m_gameContext.Initialize(m_players, randomGenerator);
-                CurrentState = new ChooseWonderState(m_gameContext);
+                CurrentState = new ChooseWonderState(m_gameContext, randomGenerator, m_players);
                 m_isInitialized = true;
                 GameLog.Info("Game initialized successfully.");
             }
