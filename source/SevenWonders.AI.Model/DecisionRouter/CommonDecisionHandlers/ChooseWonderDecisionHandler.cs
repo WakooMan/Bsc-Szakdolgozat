@@ -13,7 +13,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.CommonDecisionHandlers
 
         public PlayerActionWrapper HandleDecisions(Player player, ICollection<PlayerActionWrapper> playerActions)
         {
-            return playerActions.Select(wrapper =>
+            return playerActions.Where(w => w.CanPerform).Select(wrapper =>
             {
                 ObjectWeight? objectWeight = m_weightConfiguration.ObjectWeights.WonderWeights.Find(wonderWeight => wonderWeight.Name == wrapper.PlayerAction.Name);
                 return objectWeight is not null ? (wrapper, objectWeight.Weight) : (wrapper, 0);

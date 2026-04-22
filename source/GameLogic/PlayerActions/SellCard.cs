@@ -8,7 +8,7 @@ namespace GameLogic.PlayerActions
     public class SellCard : IPlayerAction
     {
         public string Name => nameof(SellCard);
-        public int Id => 22;
+        public int Id => 21;
         public SellCard(Player player)
         {
             ArgumentChecker.CheckNull(player, nameof(player));

@@ -27,11 +27,15 @@ namespace GameLogic.Elements.Disciplines
             var developments = gameContext.MilitaryBoard.Developments;
             if (disciplines.ContainsKey(GetType()) && disciplines[GetType()] == 2)
             {
-                gameContext.EventManager.Publish(new OnChooseObjects("Válassz fejlesztést", developments.Select(dev => dev.Name).ToArray(), true));
-                gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, developments.Select(dev => {
-                    IPlayerAction action = new ChooseDevelopmentAction(owner, opponent, dev, developments);
-                    return action;
-                }).ToArray());
+                if (developments.Count > 0)
+                {
+                    gameContext.EventManager.Publish(new OnChooseObjects("Válassz fejlesztést", developments.Select(dev => dev.Name).ToArray(), true));
+                    gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, developments.Select(dev =>
+                    {
+                        IPlayerAction action = new ChooseDevelopmentAction(owner, opponent, dev, developments);
+                        return action;
+                    }).ToArray());
+                }
             }
 
             if (disciplines.Count >= 6)

@@ -16,7 +16,7 @@ namespace SevenWonders.Common
         {
             if (min >= max)
                 return min;
-            return RandomNumberGenerator.GetInt32(min, max);
+            return RandomNumberGenerator.GetInt32(min, max + 1);
         }
 
         public ICollection<T> TryReceiveRandomElements<T>(ICollection<T> elements, int num)

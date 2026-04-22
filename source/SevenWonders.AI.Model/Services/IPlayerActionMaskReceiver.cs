@@ -1,4 +1,5 @@
-﻿using GameLogic.Interfaces;
+﻿using GameLogic.GameStructures;
+using GameLogic.Interfaces;
 
 namespace SevenWonders.AI.Model.Services
 {
@@ -7,5 +8,7 @@ namespace SevenWonders.AI.Model.Services
         void Initialize();
         List<int> ReceivePlayerActionMask(PhaseIndicator phaseIndicator, PlayerActionWrapper[] playerActions);
         List<int> ReceiveEmptyPlayerActionMask();
+
+        ICardNode? GetNode(int index);
     }
 }

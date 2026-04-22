@@ -7,6 +7,7 @@ using GameLogic.PlayerActions;
 using SevenWonders.AI.Model.Messages;
 using SevenWonders.AI.Model.Services;
 using SevenWonders.Common;
+using System.Numerics;
 
 namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
 {
@@ -84,8 +85,8 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
         private void GameEnded(OnGameEnded ended)
         {
             GameLog.Info($"Game ended! Player1={ended.FirstPlayer.Owner.Name} VP={ended.FirstPlayer.VictoryPoints}, Player2={ended.SecondPlayer.Owner.Name} VP={ended.SecondPlayer.VictoryPoints}");
-            PlayerProperties playerProperties = ended.FirstPlayer;
-            PlayerProperties opponentProperties = ended.SecondPlayer;
+            PlayerProperties playerProperties = ended.SecondPlayer;
+            PlayerProperties opponentProperties = ended.FirstPlayer;
             PhaseIndicator phase = PhaseIndicator.ChooseAction;
             List<float> stateVector = m_gameStateVectorReceiver.Receive(playerProperties, opponentProperties, phase);
             List<int> actionMask = m_playerActionMaskReceiver.ReceiveEmptyPlayerActionMask();
@@ -104,26 +105,16 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             GameLog.Info($"HandleDecisions: Player={player.Name}, ActionCount={playerActions.Count}");
             PlayerActionWrapper[] actionsArray = playerActions.ToArray();
             PhaseIndicator phase = DeterminePhase(actionsArray);
-            GameLog.Info($"Phase={phase}");
-
-            Player opponent = m_game.Players.First(p => p.Id != player.Id);
-            PlayerProperties playerProperties = player.GetPlayerProperties(opponent);
-            PlayerProperties opponentProperties = opponent.GetPlayerProperties(player);
-
-            List<float> stateVector = m_gameStateVectorReceiver.Receive(playerProperties, opponentProperties, phase);
-            List<int> actionMask = m_playerActionMaskReceiver.ReceivePlayerActionMask(phase, actionsArray);
-
-            GameStateResponse messageObj = new GameStateResponse
-            {
-                State = stateVector,
-                Mask = actionMask,
-                Reward = m_rewardCalculator.CalculateTurnReward(playerProperties, opponentProperties),
-                Terminated = false
-            };
 
             ActionRequest? actionRequest = null;
+            GameStateResponse messageObj = CreateStateResponse(player, phase, actionsArray, validAction: true);
             while (actionRequest is null)
             {
+                GameLog.Info($"Phase={phase}");
+                string mask = "[ ";
+                messageObj.Mask.ForEach(m => mask += $"{m}, ");
+                mask += "]";
+                GameLog.Info($"mask: {mask}");
                 GameLog.Info($"Sending game state. Reward={messageObj.Reward}, Terminated={messageObj.Terminated}");
                 actionRequest = OnGameStateReceived?.Invoke(messageObj) ?? null;
                 if (actionRequest is not null)
@@ -139,11 +130,13 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                     {
                         GameLog.Warning($"Received invalid action request: {actionRequest.Action}. Waiting for a valid action...");
                         actionRequest = null;
+                        messageObj = CreateStateResponse(player, phase, actionsArray, validAction: false);
                     }
                 }
                 else
                 {
                     GameLog.Warning("Received null action request. Waiting for a valid action...");
+                    messageObj = CreateStateResponse(player, phase, actionsArray, validAction: false);
                 }
             }
 
@@ -159,12 +152,30 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             return PhaseIndicator.ChooseAction;
         }
 
+        private GameStateResponse CreateStateResponse(Player player, PhaseIndicator phase, PlayerActionWrapper[] actionsArray, bool validAction)
+        {
+            Player opponent = m_game.Players.First(p => p.Id != player.Id);
+            PlayerProperties playerProperties = player.GetPlayerProperties(opponent);
+            PlayerProperties opponentProperties = opponent.GetPlayerProperties(player);
+
+            List<float> stateVector = m_gameStateVectorReceiver.Receive(playerProperties, opponentProperties, phase);
+            List<int> actionMask = m_playerActionMaskReceiver.ReceivePlayerActionMask(phase, actionsArray);
+
+            GameStateResponse messageObj = new GameStateResponse
+            {
+                State = stateVector,
+                Mask = actionMask,
+                Reward = validAction ? m_rewardCalculator.CalculateTurnReward(playerProperties, opponentProperties) : -1f,
+                Terminated = false
+            };
+            return messageObj;
+        }
+
         private PlayerActionWrapper? MapActionToWrapper(ActionRequest actionRequest, PhaseIndicator phase, PlayerActionWrapper[] playerActions)
         {
             if (phase == PhaseIndicator.ChooseCard)
             {
-                var allCards = m_game.Context.AgeHandler.CurrentAge.Composition.AllCards;
-                ICardNode? targetNode = actionRequest.Action >= 0 && actionRequest.Action < allCards.Count ? allCards[actionRequest.Action] : null;
+                ICardNode? targetNode = m_playerActionMaskReceiver.GetNode(actionRequest.Action);
 
                 if (targetNode is not null)
                 {
@@ -183,6 +194,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                 {
                     if (wrapper.PlayerAction is TurnDecision turnDecision &&
                         turnDecision.PlayerAction is not null &&
+                        turnDecision.PlayerAction is not UnpickCard &&
                         turnDecision.PlayerAction.Id == actionRequest.Action)
                     {
                         return wrapper;

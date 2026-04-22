@@ -10,7 +10,7 @@ namespace GameLogic.PlayerActions
     public class BuildWonder : IPlayerAction
     {
         public string Name => m_wonder.Name;
-        public int Id => 21;
+        public int Id => 4;
         public Wonder Wonder => m_wonder;
         public BuildWonder(Wonder wonder)
         {

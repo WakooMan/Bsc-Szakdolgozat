@@ -64,7 +64,8 @@ namespace SevenWonders.AITrainerServer
                                     var request = JsonSerializer.Deserialize<ActionRequest>(clientCommand.Payload);
                                     if (request is not null)
                                     {
-                                        m_aIDecisionHandler.Decide(request);
+                                        m_actionRequest = request;
+                                        m_actionRequestReceivedEvent.Set();
                                     }
                                     WaitForGameStateResponse();
                                     BaseMessage stateResponse = new()
@@ -84,7 +85,8 @@ namespace SevenWonders.AITrainerServer
                                     {
                                         State = m_gameStateResponse.State,
                                         Mask = m_gameStateResponse.Mask,
-                                        Terminated = false
+                                        Terminated = false,
+                                        OpponentType = (int)m_currentOpponentType
                                     };
                                     BaseMessage response = new()
                                     {
@@ -116,6 +118,7 @@ namespace SevenWonders.AITrainerServer
         public void Dispose()
         {
             m_gameStateReceivedEvent?.Dispose();
+            m_actionRequestReceivedEvent?.Dispose();
         }
 
         private void RunGame()
@@ -125,14 +128,14 @@ namespace SevenWonders.AITrainerServer
             GameLog.Info("RunGame: Uninitializing AI decision handler...");
             m_aIDecisionHandler.Uninitialize();
 
-            var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.AI);
-            //var heuristicReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.HeuristicBot);
-            var randomReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.RandomBot);
-
             IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
+            var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.AI);
+            m_currentOpponentType = (NonPlayerType)randomGenerator.Next(0,3);
+            GameLog.Info($"RunGame: Selected opponent type: {m_currentOpponentType}");
+            var randomReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(m_currentOpponentType);
             m_game.Initialize(randomGenerator,
-                ("AIPlayer", aiReceiver),
-                ("RandomBot", randomReceiver));
+                ("RandomBot", randomReceiver),
+                ("AIPlayer", aiReceiver));
             m_aIDecisionHandler.Initialize();
             m_playerActionMaskReceiver.Initialize();
             GameLog.Info("RunGame: Initialized handlers. Starting game thread...");
@@ -159,13 +162,28 @@ namespace SevenWonders.AITrainerServer
             GameLog.Info($"OnGameStateReceived: Reward={response.Reward}, Terminated={response.Terminated}, StateSize={response.State?.Count}, MaskSize={response.Mask?.Count}");
             m_gameStateResponse = response;
             m_gameStateReceivedEvent.Set();
+
+            if(response.Terminated)
+            {
+                GameLog.Info("OnGameStateReceived: Game terminated. Exiting...");
+                return null!;
+            }
+
+            GameLog.Info("OnGameStateReceived: Waiting for action request from client...");
+            m_actionRequestReceivedEvent.Wait();
+            m_actionRequestReceivedEvent.Reset();
+            GameLog.Info("OnGameStateReceived: Action request received.");
+            return m_actionRequest!;
         }
 
         private TcpListener? m_server;
         private Thread? m_gameThread;
+        private NonPlayerType m_currentOpponentType;
         private volatile GameStateResponse? m_gameStateResponse;
         private readonly object m_gameStateLock = new();
         private readonly ManualResetEventSlim m_gameStateReceivedEvent = new(false);
+        private readonly ManualResetEventSlim m_actionRequestReceivedEvent = new(false);
+        private volatile ActionRequest? m_actionRequest;
         private readonly IGame m_game;
         private readonly IPlayerActionMaskReceiver m_playerActionMaskReceiver;
         private readonly IRandomGeneratorFactory m_randomGeneratorFactory;

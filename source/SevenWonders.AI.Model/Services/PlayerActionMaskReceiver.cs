@@ -52,17 +52,27 @@ namespace SevenWonders.AI.Model.Services
 
             for (int i = 20; i < 23; i++)
             {
+                int playerActionMask = 0;
                 foreach (var playerAction in playerActions)
                 {
-                    if (playerAction.PlayerAction.Id == i - 20)
+                    if (playerAction.PlayerAction.Id == i)
                     {
-                        m_playerActionMasks[i - 20] = playerAction.CanPerform ? 1 : 0;
+                        playerActionMask = playerAction.CanPerform ? 1 : 0;
                     }
                 }
-                actionMask[i] = phaseIndicator == PhaseIndicator.ChooseAction ? m_playerActionMasks[i - 20] : 0;
+                actionMask[i] = phaseIndicator == PhaseIndicator.ChooseAction ? playerActionMask : 0;
             }
             GameLog.Info($"Action mask: [{string.Join(",", actionMask)}]");
             return actionMask.ToList();
+        }
+
+        public ICardNode? GetNode(int index)
+        {
+            if (index < 0 || index >= m_nodes.Length)
+            {
+                return null;
+            }
+            return m_nodes[index];
         }
 
         public List<int> ReceiveEmptyPlayerActionMask()
@@ -72,6 +82,5 @@ namespace SevenWonders.AI.Model.Services
 
         private readonly IGame m_game;
         private readonly ICardNode?[] m_nodes;
-        private readonly int[] m_playerActionMasks = [ 0, 0, 0 ];
     }
 }

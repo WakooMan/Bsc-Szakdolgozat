@@ -12,5 +12,8 @@ namespace SevenWonders.AI.Model.Messages
 
         [JsonPropertyName("terminated")]
         public bool Terminated { get; set; }
+
+        [JsonPropertyName("opponent_type")]
+        public int OpponentType { get; set; }
     }
 }

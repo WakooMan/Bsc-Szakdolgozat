@@ -2,10 +2,10 @@
 {
     public enum NonPlayerType
     {
-        RandomBot,
-        MilitaryHeuristicBot,
-        ScientificHeuristicBot,
-        CitizenHeuristicBot,
-        AI
+        RandomBot = 0,
+        MilitaryHeuristicBot = 1,
+        ScientificHeuristicBot = 2,
+        CitizenHeuristicBot = 3,
+        AI = 4
     }
 }

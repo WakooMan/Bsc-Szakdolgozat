@@ -1,13 +1,18 @@
-﻿using GameLogic.Elements;
+﻿using GameLogic;
+using GameLogic.Elements;
 using GameLogic.Interfaces;
+using SevenWonders.AI.Model;
 
 namespace SevenWonders.AITrainerServer.DecisionHandlers
 {
-    public class CitizenHeuristicBotDecisionHandler : ICitizenHeuristicBotDecisionHandler
+    public class CitizenHeuristicBotDecisionHandler : HeuristicBotDecisionHandler, ICitizenHeuristicBotDecisionHandler
     {
+        public CitizenHeuristicBotDecisionHandler(IGame game, IWeightConfiguration weightConfiguration) : base(game, weightConfiguration)
+        { }
+
         public PlayerActionWrapper HandleDecisions(Player player, ICollection<PlayerActionWrapper> playerActions)
         {
-            throw new NotImplementedException();
+            return HandlePlayerActions(player, playerActions);
         }
     }
 }

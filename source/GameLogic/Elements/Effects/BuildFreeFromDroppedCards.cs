@@ -10,10 +10,13 @@ namespace GameLogic.Elements.Effects
         public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             ICardList droppedCardList = gameContext.DroppedCardList ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!");
-            gameContext.EventManager.Publish(new OnChooseObjects("Válassz az eldobott kártyákból", droppedCardList.Cards.Select(card => card.Name).ToArray(), true));
-            gameContext.PlayerActionHandler.HandlePlayerActions(gameContext,
-                  owner, 
-                  droppedCardList.Cards.Select(card => (IPlayerAction)new ChooseDroppedCardAction(card)).ToList());
+            if (droppedCardList.Cards.Count > 0)
+            {
+                gameContext.EventManager.Publish(new OnChooseObjects("Válassz az eldobott kártyákból", droppedCardList.Cards.Select(card => card.Name).ToArray(), true));
+                gameContext.PlayerActionHandler.HandlePlayerActions(gameContext,
+                      owner,
+                      droppedCardList.Cards.Select(card => (IPlayerAction)new ChooseDroppedCardAction(card)).ToList());
+            }
         }
 
         public override BuildFreeFromDroppedCards Clone()

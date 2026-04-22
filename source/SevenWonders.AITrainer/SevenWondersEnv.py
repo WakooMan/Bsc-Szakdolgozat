@@ -15,6 +15,7 @@ class SevenWondersEnv(gym.Env):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect(('127.0.0.1', 5000))
         self._buffer = ""
+        self._opponent_type = -1
 
     def _send_message(self, message_type: str, payload: object = None):
         """Send a BaseMessage to the C# server."""
@@ -50,8 +51,9 @@ class SevenWondersEnv(gym.Env):
         payload = msg["Payload"]
         observation = np.array(payload["state"], dtype=np.float32)
         mask = payload.get("mask", [])
+        self._opponent_type = payload.get("opponent_type", -1)
 
-        return observation, {"mask": mask}
+        return observation, {"mask": mask, "opponent_type": self._opponent_type}
 
     def step(self, action):
         self._send_message("ActionRequest", {"action": int(action)})
@@ -65,7 +67,7 @@ class SevenWondersEnv(gym.Env):
 
         if terminated:
             obs = np.zeros(self.observation_space.shape, dtype=np.float32)
-            return obs, reward, True, False, {}
+            return obs, reward, True, False, {"won": reward > 0, "opponent_type": self._opponent_type}
 
         obs = np.array(payload["state"], dtype=np.float32)
         return obs, reward, False, False, {"mask": mask}

@@ -1,13 +1,22 @@
-﻿using GameLogic.Elements;
+﻿using GameLogic;
+using GameLogic.Elements;
 using GameLogic.Interfaces;
+using SevenWonders.AI.Model;
 
 namespace SevenWonders.AITrainerServer.DecisionHandlers
 {
-    public class MilitaryHeuristicBotDecisionHandler : IMilitaryHeuristicBotDecisionHandler
+    public class MilitaryHeuristicBotDecisionHandler : HeuristicBotDecisionHandler, IMilitaryHeuristicBotDecisionHandler
     {
+
+        public MilitaryHeuristicBotDecisionHandler(IGame game, IWeightConfiguration weightConfiguration) : base(game, weightConfiguration)
+        {
+            m_cumulativeStrengthScore = 20.0f;
+            m_strengthScore = 6.0f;
+        }
+
         public PlayerActionWrapper HandleDecisions(Player player, ICollection<PlayerActionWrapper> playerActions)
         {
-            throw new NotImplementedException();
+            return HandlePlayerActions(player, playerActions);
         }
     }
 }

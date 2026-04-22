@@ -25,7 +25,14 @@ namespace GameLogic.Events
             {
                 foreach (var listener in list)
                 {
-                    listener?.DynamicInvoke(eventArgs);
+                    try
+                    {
+                        listener?.DynamicInvoke(eventArgs);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error invoking listener for {typeof(TGameEvent).Name}: {ex}");
+                    }
                 }
             }
         }

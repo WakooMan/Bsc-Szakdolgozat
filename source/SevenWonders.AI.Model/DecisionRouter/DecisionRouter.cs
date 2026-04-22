@@ -23,7 +23,17 @@ namespace SevenWonders.AI.Model.DecisionRouter
         public PlayerActionWrapper RoutePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
         {
 
-            Type? type = playerActions.FirstOrDefault()?.PlayerAction.GetType();
+            Type? type = null;
+            foreach (var actionWrapper in playerActions)
+            {
+                Type actionType = actionWrapper.PlayerAction.GetType();
+                if (m_handlers.ContainsKey(actionType))
+                {
+                    type = actionType;
+                    break;
+                }
+            }
+
             GameLog.Info($"RoutePlayerAction: Player={player.Name}, ActionCount={playerActions.Count}, ActionType={type?.Name ?? "null"}");
 
             if (type is not null && m_handlers.TryGetValue(type, out IDecisionHandler? handler))

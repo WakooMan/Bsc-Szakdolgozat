@@ -6,7 +6,7 @@ namespace GameLogic.PlayerActions
     public class BuildWonderProcess: IPlayerAction
     {
         public string Name => nameof(BuildWonderProcess);
-        public int Id => 4;
+        public int Id => 22;
 
         public BuildWonderProcess(Player player, ICollection<BuildWonder> buildWonderActions)
         {
