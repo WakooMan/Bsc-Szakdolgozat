@@ -3,7 +3,7 @@
     public class TurnDecision : IPlayerAction
     {
         public string Name => m_playerAction?.Name ?? throw new InvalidOperationException("No player action selected.");
-        public int Id => 12;
+        public int Id => m_playerAction?.Id ?? 12;
         public IPlayerAction? PlayerAction => m_playerAction;
 
         public TurnDecision()

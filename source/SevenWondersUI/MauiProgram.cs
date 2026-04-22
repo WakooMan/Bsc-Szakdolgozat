@@ -11,6 +11,12 @@ using GameLogic.Handlers;
 using GameLogic.Handlers.Factories;
 using GameLogic.Interfaces;
 using Microsoft.Extensions.Logging;
+using SevenWonders.AI.Model;
+using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
+using SevenWonders.AI.Model.DecisionRouter.Factories;
+using SevenWonders.AI.Model.Services;
+using SevenWonders.AI.Model.Services.CardTypeEncoders.Factories;
+using SevenWonders.AI.Model.Services.Encoders;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
@@ -96,6 +102,21 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IMilitaryTokenChildTextureHandler), typeof(MilitaryTokenChildTextureHandler));
         builder.Services.AddSingleton(typeof(IDevelopmentHandlerFactory), typeof(DevelopmentHandlerFactory));
 
+        builder.Services.AddSingleton<IEffectEncoder, EffectEncoder>();
+        builder.Services.AddSingleton<ICardTypeEncoderFactory, CardTypeEncoderFactory>();
+        builder.Services.AddSingleton<ICardNodeEncoder, CardNodeEncoder>();
+        builder.Services.AddSingleton<ICardCompositionEncoder, CardCompositionEncoder>();
+        builder.Services.AddSingleton<IPlayerEncoder, PlayerEncoder>();
+        builder.Services.AddSingleton<IGlobalInfoEncoder, GlobalInfoEncoder>();
+        builder.Services.AddSingleton<IGameStateVectorReceiver, GameStateVectorReceiver>();
+        builder.Services.AddSingleton<IPlayerActionMaskReceiver, PlayerActionMaskReceiver>();
+
+        builder.Services.AddSingleton<IWeightConfiguration, WeightConfiguration>();
+        builder.Services.AddSingleton<IDecisionRouterFactory, DecisionRouterFactory>();
+        builder.Services.AddSingleton<IAIDecisionHandler, AIDecisionHandler>();
+        builder.Services.AddSingleton<IRewardCalculator, RewardCalculator>();
+
+
         builder.Services.AddSingleton(typeof(IEffectHandler), typeof(EffectHandler));
         builder.Services.AddSingleton(typeof(IPlayerCardHandlerFactory), typeof(PlayerCardHandlerFactory));
         builder.Services.AddSingleton(typeof(IWonderChildTextureHandler), typeof(WonderChildTextureHandler));
@@ -109,6 +130,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IClientMessageDispatcher), typeof(ClientMessageDispatcher));
         builder.Services.AddSingleton(typeof(IMessageRegistererFactory), typeof(MessageRegistererFactory));
         builder.Services.AddSingleton(typeof(IPlayerActionReceiverFactory), typeof(PlayerActionReceiverFactory));
+        builder.Services.AddSingleton(typeof(IAIModelHandler), typeof(AIModelHandler));
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<App>();
 
@@ -124,8 +146,14 @@ public static class MauiProgram
         builder.Services.AddTransient<RegisterPageViewModel>();
         builder.Services.AddTransient<RegisterPage>();
 
-        builder.Services.AddTransient<GamePageViewModel>();
-        builder.Services.AddTransient<GamePage>();
+        builder.Services.AddTransient<PlayerVSPlayerGamePageViewModel>();
+        builder.Services.AddTransient<PlayerVSPlayerGamePage>();
+
+        builder.Services.AddTransient<PlayerVSAIGamePageViewModel>();
+        builder.Services.AddTransient<PlayerVSAIGamePage>();
+
+        builder.Services.AddTransient<MultiplayerGamePageViewModel>();
+        builder.Services.AddTransient<MultiplayerGamePage>();
 
 
         builder.Services.AddTransient<PlayerNamePageViewModel>();

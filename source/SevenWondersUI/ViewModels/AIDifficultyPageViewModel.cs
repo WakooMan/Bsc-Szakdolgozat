@@ -5,9 +5,10 @@ namespace SevenWondersUI.ViewModels
 {
     public class AIDifficultyPageViewModel: BaseViewModel
     {
-        public AIDifficultyPageViewModel(INavigationService navigationService)
+        public AIDifficultyPageViewModel(INavigationService navigationService, IAIModelHandler aIModelHandler)
         {
             m_navigationService = navigationService;
+            m_aiModelHandler = aIModelHandler;
             m_title = "Nehézségi szint";
             m_easyButton = ("Könnyű", true);
             m_mediumButton = ("Közepes", false);
@@ -111,17 +112,32 @@ namespace SevenWondersUI.ViewModels
 
         private async void OnHardClicked()
         {
-            await m_navigationService.NavigateToAsync("//GamePage");
+            m_aiModelHandler.LoadModel(AIModelType.Hard);
+            await m_navigationService.NavigateToAsync("//PlayerVSAIGamePage", new Dictionary<string, object>
+            {
+                { "Player1Name", "Player" },
+                { "Player2Name", "HardAI" }
+            });
         }
 
         private async void OnMediumClicked()
         {
-            await m_navigationService.NavigateToAsync("//GamePage");
+            m_aiModelHandler.LoadModel(AIModelType.Medium);
+            await m_navigationService.NavigateToAsync("//PlayerVSAIGamePage", new Dictionary<string, object>
+            {
+                { "Player1Name", "Player" },
+                { "Player2Name", "MediumAI" }
+            });
         }
 
         private async void OnEasyClicked()
         {
-            await m_navigationService.NavigateToAsync("//GamePage");
+            m_aiModelHandler.LoadModel(AIModelType.Easy);
+            await m_navigationService.NavigateToAsync("//PlayerVSAIGamePage", new Dictionary<string, object>
+            {
+                { "Player1Name", "Player" },
+                { "Player2Name", "EasyAI" }
+            });
         }
 
         private string m_title;
@@ -130,5 +146,6 @@ namespace SevenWondersUI.ViewModels
         private (string text, bool isEnabled) m_hardButton;
         private (string text, bool isEnabled) m_backButton;
         private readonly INavigationService m_navigationService;
+        private readonly IAIModelHandler m_aiModelHandler;
     }
 }

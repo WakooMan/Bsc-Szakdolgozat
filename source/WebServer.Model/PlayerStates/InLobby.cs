@@ -124,13 +124,21 @@ namespace WebServer.Model.PlayerStates
                 int seed = randomGenerator.Next();
                 game.Initialize(
                     m_randomGeneratorFactory.Create(RandomGeneratorType.Deterministic, seed),
-                    (m_player.ApplicationUser.UserName, playerState),
-                    (otherPlayer.ApplicationUser.UserName, otherPlayerState));
+                    (m_player.ApplicationUser.UserName ?? string.Empty, playerState),
+                    (otherPlayer.ApplicationUser.UserName ?? string.Empty, otherPlayerState));
                 m_gameManager.StartGame(m_lobbyCode);
-                await m_serverService.SendLobbyServerMessageToClient(otherPlayer.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent),
-                                                                                                                            new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.RemotePlayer), 2, seed));
-                await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new StartGameResponseMessage(new PlayerInitModel(m_player.ApplicationUser.UserName, PlayerType.LocalPlayerWithRemoteOpponent),
-                                                                                                                            new PlayerInitModel(otherPlayer.ApplicationUser.UserName, PlayerType.RemotePlayer), 1, seed));
+                await m_serverService.SendLobbyServerMessageToClient(otherPlayer.ConnectionId, new StartGameResponseMessage(otherPlayer.ApplicationUser.UserName ?? string.Empty, 
+                                                                                                                            m_player.ApplicationUser.UserName ?? string.Empty, 
+                                                                                                                            PlayerType.LocalPlayerWithRemoteOpponent, 
+                                                                                                                            PlayerType.RemotePlayer, 
+                                                                                                                            2, 
+                                                                                                                            seed));
+                await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new StartGameResponseMessage(m_player.ApplicationUser.UserName ?? string.Empty, 
+                                                                                                                         otherPlayer.ApplicationUser.UserName ?? string.Empty, 
+                                                                                                                         PlayerType.LocalPlayerWithRemoteOpponent, 
+                                                                                                                         PlayerType.RemotePlayer, 
+                                                                                                                         1, 
+                                                                                                                         seed));
             }
         }
 

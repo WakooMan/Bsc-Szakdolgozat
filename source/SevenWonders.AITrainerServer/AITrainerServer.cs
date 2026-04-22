@@ -30,7 +30,7 @@ namespace SevenWonders.AITrainerServer
 
         public void StartServer()
         {
-            m_aIDecisionHandler.OnGameStateReceived += OnGameStateReceived;
+            m_aIDecisionHandler.OnGameStateReceived = OnGameStateReceived;
             m_server = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
             m_server.Start();
             GameLog.Info("Waiting for AI connection on port 5000...");
@@ -109,7 +109,6 @@ namespace SevenWonders.AITrainerServer
             finally 
             {
                 GameLog.Info("Stopping server...");
-                m_aIDecisionHandler.OnGameStateReceived -= OnGameStateReceived;
                 m_server.Stop();
             }
         }
@@ -155,7 +154,7 @@ namespace SevenWonders.AITrainerServer
             GameLog.Info("Game state response received.");
         }
 
-        private void OnGameStateReceived(GameStateResponse response)
+        private ActionRequest OnGameStateReceived(GameStateResponse response)
         {
             GameLog.Info($"OnGameStateReceived: Reward={response.Reward}, Terminated={response.Terminated}, StateSize={response.State?.Count}, MaskSize={response.Mask?.Count}");
             m_gameStateResponse = response;

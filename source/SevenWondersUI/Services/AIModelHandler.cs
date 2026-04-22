@@ -10,9 +10,10 @@ namespace SevenWondersUI.Services
         public AIModelHandler(IAIDecisionHandler aIDecisionHandler)
         {
             m_aIDecisionHandler = aIDecisionHandler;
+            m_session = null;
             m_aiModels = new Dictionary<AIModelType, string>
             {
-                { AIModelType.Easy, "seven_wonders_easy_agent.onnx" }
+                { AIModelType.Easy, "seven_wonders_agent.onnx" }
             };
         }
 
@@ -20,24 +21,25 @@ namespace SevenWondersUI.Services
         {
             foreach (var model in m_aiModels)
             {
-                await CopyModelAsync($@"Resources\Models\{model.Value}");
-                await CopyModelAsync($@"Resources\Models\{model.Value}.data");
+                await CopyModelAsync($@"{model.Value}");
+                await CopyModelAsync($@"{model.Value}.data");
             }
         }
 
         public void LoadModel(AIModelType aIModel)
         {
+            m_session?.Dispose();
             string modelPath = Path.Combine(m_appDataDirectory, m_aiModels[aIModel]);
-            var m_session = new InferenceSession(modelPath);
+            m_session = new InferenceSession(modelPath);
 
             m_aIDecisionHandler.OnGameStateReceived += GameStateReceived;
         }
 
-        private void GameStateReceived(GameStateResponse response)
+        private ActionRequest GameStateReceived(GameStateResponse response)
         {
             if(m_session is null)
             {
-                 return;
+                return new ActionRequest() { Action = -1 };
             }
 
             var obsTensor = new DenseTensor<float>(
@@ -53,8 +55,7 @@ namespace SevenWondersUI.Services
 
             var inputs = new List<NamedOnnxValue>
             {
-                NamedOnnxValue.CreateFromTensor("observation", obsTensor),
-                NamedOnnxValue.CreateFromTensor("mask", maskTensor),
+                NamedOnnxValue.CreateFromTensor("observation", obsTensor)
             };
 
             using var results = m_session.Run(inputs);
@@ -64,7 +65,7 @@ namespace SevenWondersUI.Services
                 .ToArray();
 
             int action = Array.IndexOf(logits, logits.Max());
-            m_aIDecisionHandler.Decide(new ActionRequest() { Action = action });
+            return new ActionRequest() { Action = action };
         }
 
         private async Task CopyModelAsync(string modelName)

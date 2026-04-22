@@ -1,0 +1,120 @@
+﻿using CommunityToolkit.Maui.Views;
+using GameLogic;
+using SevenWonders.Common;
+using SevenWonders.GameEngine;
+using SevenWonders.GameEngine.Components;
+using SevenWonders.Presenter.PlayerActionReceivers;
+using SevenWonders.Presenter.Presenters;
+using SevenWonders.WebClient.Model;
+using SevenWonders.WebClient.Model.Services;
+using SevenWondersUI.Services;
+using SevenWondersUI.Views;
+using WebServer.Contract.Messages.Lobby.ClientMessages;
+using WebServer.Contract.Messages.Lobby.ServerMessages;
+
+namespace SevenWondersUI.ViewModels
+{
+    public class MultiplayerGamePageViewModel : BaseGamePageViewModel, IMessageHandler
+    {
+        protected override int Seed { get { return m_seed; } }
+        protected override int StartingPlayerId { get { return m_startingPlayerId; } }
+        protected override RandomGeneratorType RandomGeneratorType => RandomGeneratorType.Deterministic;
+
+        protected override PlayerType Player1Type { get { return m_player1Type; } }
+
+        protected override PlayerType Player2Type { get { return m_player2Type; } }
+
+        public MultiplayerGamePageViewModel(IGame game,
+                                            IEngine engine,
+                                            ISceneLoader sceneLoader,
+                                            IAnimationManager animationManager,
+                                            IPresenterStore presenterStore,
+                                            IPlayerActionReceiverFactory playerActionReceiverFactory,
+                                            IRandomGeneratorFactory randomGeneratorFactory,
+                                            INavigationService navigationService,
+                                            IClientHubService clientHubService) : base(game, engine, sceneLoader, animationManager, presenterStore, playerActionReceiverFactory, randomGeneratorFactory)
+        {
+            m_seed = -1;
+            m_startingPlayerId = -1;
+            m_player1Type =  PlayerType.Unknown;
+            m_player2Type = PlayerType.Unknown;
+            m_navigationService = navigationService;
+            m_clientHubService = clientHubService;
+            m_lobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<ExitGameResponseMessage>(HandleExitGameResponse);
+            m_failureResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
+        }
+
+        public override async Task OnGameOver()
+        {
+            await m_clientHubService.InvokeLobbyCommand(new ExitGameRequestMessage());
+        }
+
+        public override void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            base.ApplyQueryAttributes(query);
+            if (query.TryGetValue("Player1Type", out object? player1TypeObj) && player1TypeObj is PlayerType player1Type)
+            {
+                m_player1Type = player1Type;
+            }
+            if (query.TryGetValue("Player2Type", out object? player2TypeObj) && player2TypeObj is PlayerType player2Type)
+            {
+                m_player2Type = player2Type;
+            }
+            if (query.TryGetValue("Seed", out object? seedObj) && seedObj is int seed)
+            {
+                m_seed = seed;
+            }
+            if (query.TryGetValue("StartingPlayerId", out object? startingPlayerIdObj) && startingPlayerIdObj is int startingPlayerId)
+            {
+                m_startingPlayerId = startingPlayerId;
+            }
+        }
+
+        public void Register(IMessageRegisterer registerer)
+        {
+            registerer.Register(m_failureResponseMessageHandlerDelegate);
+            registerer.Register(m_lobbyResponseMessageHandlerDelegate);
+        }
+
+        public void Unregister(IMessageRegisterer registerer)
+        {
+            registerer.Unregister(m_failureResponseMessageHandlerDelegate);
+            registerer.Unregister(m_lobbyResponseMessageHandlerDelegate);
+        }
+
+        private async Task<bool> OnFailureResponseMessageReceived(FailureResponseMessage message)
+        {
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                var popup = new ErrorPopupWindow(new ErrorPopupViewModel(message.Message));
+                var page = Application.Current?.MainPage;
+                if (page is not null)
+                {
+                    await page.ShowPopupAsync(popup);
+                }
+            });
+            return false;
+        }
+
+        private async Task<bool> HandleExitGameResponse(ExitGameResponseMessage message)
+        {
+            if (message.Success)
+            {
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await m_navigationService.NavigateToAsync("//LobbyMainPage", new Dictionary<string, object>() { { "Lobbies", message.Lobbies } });
+                });
+            }
+            return message.Success;
+        }
+
+        private int m_seed;
+        private int m_startingPlayerId;
+        private PlayerType m_player1Type;
+        private PlayerType m_player2Type;
+        private readonly LobbyResponseMessageHandlerDelegate<ExitGameResponseMessage> m_lobbyResponseMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandlerDelegate;
+        private readonly INavigationService m_navigationService;
+        private readonly IClientHubService m_clientHubService;
+    }
+}

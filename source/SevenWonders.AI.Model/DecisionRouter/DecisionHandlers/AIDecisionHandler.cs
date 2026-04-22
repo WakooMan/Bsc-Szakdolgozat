@@ -10,9 +10,9 @@ using SevenWonders.Common;
 
 namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
 {
-    public class AIDecisionHandler : IAIDecisionHandler, IDisposable
+    public class AIDecisionHandler : IAIDecisionHandler
     {
-        public event Action<GameStateResponse>? OnGameStateReceived;
+        public Func<GameStateResponse, ActionRequest>? OnGameStateReceived { get; set; }
 
         public AIDecisionHandler(IGame game,
                                  IGameStateVectorReceiver gameStateVectorReceiver,
@@ -24,7 +24,6 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             m_playerActionMaskReceiver = playerActionMaskReceiver;
             m_rewardCalculator = rewardCalculator;
             OnGameStateReceived = null;
-            m_actionRequest = null;
         }
 
         public void Initialize()
@@ -100,17 +99,9 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             OnGameStateReceived?.Invoke(messageObj);
         }
 
-        public void Decide(ActionRequest actionRequest)
-        {
-            GameLog.Info($"Decide called with Action={actionRequest.Action}");
-            m_actionRequest = actionRequest;
-            m_actionReady.Set();
-        }
-
         public PlayerActionWrapper HandleDecisions(Player player, ICollection<PlayerActionWrapper> playerActions)
         {
             GameLog.Info($"HandleDecisions: Player={player.Name}, ActionCount={playerActions.Count}");
-            m_actionRequest = null;
             PlayerActionWrapper[] actionsArray = playerActions.ToArray();
             PhaseIndicator phase = DeterminePhase(actionsArray);
             GameLog.Info($"Phase={phase}");
@@ -130,22 +121,33 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                 Terminated = false
             };
 
-            GameLog.Info($"Sending game state. Reward={messageObj.Reward}, Terminated={messageObj.Terminated}");
-            OnGameStateReceived?.Invoke(messageObj);
+            ActionRequest? actionRequest = null;
+            while (actionRequest is null)
+            {
+                GameLog.Info($"Sending game state. Reward={messageObj.Reward}, Terminated={messageObj.Terminated}");
+                actionRequest = OnGameStateReceived?.Invoke(messageObj) ?? null;
+                if (actionRequest is not null)
+                {
+                    PlayerActionWrapper? action = null;
+                    action = MapActionToWrapper(actionRequest, phase, actionsArray);
+                    if (action is not null)
+                    {
+                        GameLog.Info($"Mapped to action: {action.PlayerAction.GetType().Name}, CanPerform={action.CanPerform}");
+                        return action;
+                    }
+                    else
+                    {
+                        GameLog.Warning($"Received invalid action request: {actionRequest.Action}. Waiting for a valid action...");
+                        actionRequest = null;
+                    }
+                }
+                else
+                {
+                    GameLog.Warning("Received null action request. Waiting for a valid action...");
+                }
+            }
 
-            GameLog.Info("Waiting for AI action...");
-            m_actionReady.Wait();
-            m_actionReady.Reset();
-            GameLog.Info($"AI action received: {m_actionRequest?.Action}");
-
-            var result = MapActionToWrapper(m_actionRequest, phase, actionsArray);
-            GameLog.Info($"Mapped to action: {result.PlayerAction.GetType().Name}, CanPerform={result.CanPerform}");
-            return result;
-        }
-
-        public void Dispose()
-        {
-            m_actionReady?.Dispose();
+            throw new InvalidOperationException("Failed to receive a valid action request.");
         }
 
         private static PhaseIndicator DeterminePhase(PlayerActionWrapper[] playerActions)
@@ -157,7 +159,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             return PhaseIndicator.ChooseAction;
         }
 
-        private PlayerActionWrapper MapActionToWrapper(ActionRequest actionRequest, PhaseIndicator phase, PlayerActionWrapper[] playerActions)
+        private PlayerActionWrapper? MapActionToWrapper(ActionRequest actionRequest, PhaseIndicator phase, PlayerActionWrapper[] playerActions)
         {
             if (phase == PhaseIndicator.ChooseCard)
             {
@@ -188,11 +190,9 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                 }
             }
 
-            return playerActions.First(w => w.CanPerform);
+            return null;
         }
 
-        private ActionRequest? m_actionRequest;
-        private readonly ManualResetEventSlim m_actionReady = new(false);
         private readonly IGameStateVectorReceiver m_gameStateVectorReceiver;
         private readonly IPlayerActionMaskReceiver m_playerActionMaskReceiver;
         private readonly IRewardCalculator m_rewardCalculator;
