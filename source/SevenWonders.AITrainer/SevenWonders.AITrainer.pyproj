@@ -47,6 +47,7 @@
     </Interpreter>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="export_config.json" />
     <Content Include="trainer_config.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

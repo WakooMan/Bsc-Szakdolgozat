@@ -1,0 +1,4 @@
+{
+  "model_path": "seven_wonders_easy_agent",
+  "onnx_path": "seven_wonders_easy_agent.onnx"
+}

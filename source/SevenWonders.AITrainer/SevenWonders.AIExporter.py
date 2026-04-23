@@ -1,11 +1,17 @@
 import torch
+import json
 import numpy as np
 from sb3_contrib import MaskablePPO
 
+def load_config(path="export_config.json") -> dict:
+    with open(path, "r") as f:
+        return json.load(f)
+
 
 def main():
-    model_path = "seven_wonders_agent"
-    onnx_path = "seven_wonders_agent.onnx"
+    config = load_config()
+    model_path = config.get("model_path", "seven_wonders_agent")
+    onnx_path = config.get("onnx_path", "seven_wonders_agent.onnx")
     obs_size = 1432
 
     print(f"Loading model from '{model_path}'...")
