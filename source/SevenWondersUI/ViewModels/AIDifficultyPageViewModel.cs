@@ -1,4 +1,5 @@
-﻿using SevenWondersUI.Services;
+﻿using SevenWonders.AI.Model.AIModelHandler;
+using SevenWondersUI.Services;
 using System.Windows.Input;
 
 namespace SevenWondersUI.ViewModels

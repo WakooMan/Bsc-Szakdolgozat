@@ -2,6 +2,7 @@
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.Messages;
 using SevenWonders.AI.Model.Services;
+using SevenWonders.AITrainerServer.Cache;
 using SevenWonders.AITrainerServer.PlayerActionReceivers;
 using SevenWonders.Common;
 using System.Net;
@@ -15,22 +16,23 @@ namespace SevenWonders.AITrainerServer
     {
 
         public AITrainerServer(IGame game,
-                               IPlayerActionMaskReceiver playerActionMaskReceiver,
                                IRandomGeneratorFactory randomGeneratorFactory,
-                               IAIDecisionHandler aIDecisionHandler,
+                               IAIDecisionHandlerCache aIDecisionHandlerCache,
+                               IAIModelHandlerCache aIModelHandlerCache,
                                INonPlayerActionReceiverFactory nonPlayerActionReceiverFactory)
         {
             m_game = game;
-            m_playerActionMaskReceiver = playerActionMaskReceiver;
             m_randomGeneratorFactory = randomGeneratorFactory;
-            m_aIDecisionHandler = aIDecisionHandler;
+            m_aIDecisionHandlerCache = aIDecisionHandlerCache;
+            m_aIModelHandlerCache = aIModelHandlerCache;
             m_nonPlayerActionReceiverFactory = nonPlayerActionReceiverFactory;
             m_gameStateResponse = null;
         }
 
-        public void StartServer()
+        public async Task StartServer()
         {
-            m_aIDecisionHandler.OnGameStateReceived = OnGameStateReceived;
+            await m_aIModelHandlerCache.AIModelHandler.Initialize();
+            m_aIDecisionHandlerCache.TrainingAI.OnGameStateReceived = OnGameStateReceived;
             m_server = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
             m_server.Start();
             GameLog.Info("Waiting for AI connection on port 5000...");
@@ -126,17 +128,18 @@ namespace SevenWonders.AITrainerServer
             GameLog.Info("RunGame: Joining previous game thread...");
             m_gameThread?.Join();
             GameLog.Info("RunGame: Uninitializing AI decision handler...");
-            m_aIDecisionHandler.Uninitialize();
+            m_aIDecisionHandlerCache.TrainingAI.Uninitialize();
+            m_aIDecisionHandlerCache.TrainedAIModel.Uninitialize();
 
             IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
             var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.AI);
-            m_currentOpponentType = (NonPlayerType)randomGenerator.Next(0,3);
+            m_currentOpponentType = (NonPlayerType)randomGenerator.Next(0,4);
             GameLog.Info($"RunGame: Selected opponent type: {m_currentOpponentType}");
             var randomReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(m_currentOpponentType);
             m_game.Initialize(randomGenerator,
                 ("RandomBot", randomReceiver),
                 ("AIPlayer", aiReceiver));
-            m_aIDecisionHandler.Initialize();
+            m_aIDecisionHandlerCache.TrainingAI.Initialize();
             GameLog.Info("RunGame: Initialized handlers. Starting game thread...");
 
             m_gameThread = new Thread(() =>
@@ -184,9 +187,9 @@ namespace SevenWonders.AITrainerServer
         private readonly ManualResetEventSlim m_actionRequestReceivedEvent = new(false);
         private volatile ActionRequest? m_actionRequest;
         private readonly IGame m_game;
-        private readonly IPlayerActionMaskReceiver m_playerActionMaskReceiver;
         private readonly IRandomGeneratorFactory m_randomGeneratorFactory;
-        private readonly IAIDecisionHandler m_aIDecisionHandler;
+        private readonly IAIDecisionHandlerCache m_aIDecisionHandlerCache;
+        private readonly IAIModelHandlerCache m_aIModelHandlerCache;
         private readonly INonPlayerActionReceiverFactory m_nonPlayerActionReceiverFactory;
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IAITrainerServer
     {
-        void StartServer();
+        Task StartServer();
     }
 }

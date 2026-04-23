@@ -1,4 +1,4 @@
-﻿using SevenWondersUI.Services;
+﻿using SevenWonders.AI.Model.AIModelHandler;
 
 namespace SevenWondersUI
 {

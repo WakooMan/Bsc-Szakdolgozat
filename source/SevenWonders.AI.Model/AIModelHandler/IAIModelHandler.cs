@@ -1,4 +1,4 @@
-﻿namespace SevenWondersUI.Services
+﻿namespace SevenWonders.AI.Model.AIModelHandler
 {
     public interface IAIModelHandler
     {

@@ -12,6 +12,7 @@ using GameLogic.Handlers.Factories;
 using GameLogic.Interfaces;
 using Microsoft.Extensions.Logging;
 using SevenWonders.AI.Model;
+using SevenWonders.AI.Model.AIModelHandler;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.DecisionRouter.Factories;
 using SevenWonders.AI.Model.Services;
@@ -115,6 +116,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<IDecisionRouterFactory, DecisionRouterFactory>();
         builder.Services.AddSingleton<IAIDecisionHandler, AIDecisionHandler>();
         builder.Services.AddSingleton<IRewardCalculator, RewardCalculator>();
+        builder.Services.AddSingleton<IAIModelHandler, AIModelHandler>();
+        builder.Services.AddSingleton<IPathProvider, PathProvider>();
 
 
         builder.Services.AddSingleton(typeof(IEffectHandler), typeof(EffectHandler));
@@ -130,7 +133,6 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IClientMessageDispatcher), typeof(ClientMessageDispatcher));
         builder.Services.AddSingleton(typeof(IMessageRegistererFactory), typeof(MessageRegistererFactory));
         builder.Services.AddSingleton(typeof(IPlayerActionReceiverFactory), typeof(PlayerActionReceiverFactory));
-        builder.Services.AddSingleton(typeof(IAIModelHandler), typeof(AIModelHandler));
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<App>();
 

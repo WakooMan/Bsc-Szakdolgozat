@@ -6,6 +6,7 @@
         MilitaryHeuristicBot = 1,
         ScientificHeuristicBot = 2,
         CitizenHeuristicBot = 3,
-        AI = 4
+        EasyAI = 4,
+        AI = 5
     }
 }

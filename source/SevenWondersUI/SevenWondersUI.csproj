@@ -108,7 +108,6 @@
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.14" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.24.4" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.0" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.0" />
 	</ItemGroup>

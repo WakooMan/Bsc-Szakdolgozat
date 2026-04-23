@@ -3,13 +3,14 @@ using Microsoft.ML.OnnxRuntime.Tensors;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.Messages;
 
-namespace SevenWondersUI.Services
+namespace SevenWonders.AI.Model.AIModelHandler
 {
     public class AIModelHandler : IAIModelHandler
     {
-        public AIModelHandler(IAIDecisionHandler aIDecisionHandler)
+        public AIModelHandler(IAIDecisionHandler aIDecisionHandler, IPathProvider pathProvider)
         {
             m_aIDecisionHandler = aIDecisionHandler;
+            m_pathProvider = pathProvider;
             m_session = null;
             m_aiModels = new Dictionary<AIModelType, string>
             {
@@ -29,7 +30,7 @@ namespace SevenWondersUI.Services
         public void LoadModel(AIModelType aIModel)
         {
             m_session?.Dispose();
-            string modelPath = Path.Combine(m_appDataDirectory, m_aiModels[aIModel]);
+            string modelPath = Path.Combine(m_pathProvider.GetAppDataPath(), m_aiModels[aIModel]);
             m_session = new InferenceSession(modelPath);
 
             m_aIDecisionHandler.OnGameStateReceived += GameStateReceived;
@@ -78,13 +79,19 @@ namespace SevenWondersUI.Services
 
         private async Task CopyModelAsync(string modelName)
         {
-            var targetPath = Path.Combine(m_appDataDirectory, modelName);
+            var targetPath = Path.Combine(m_pathProvider.GetAppDataPath(), modelName);
 
             if (!File.Exists(targetPath))
             {
-                using var stream = await FileSystem.OpenAppPackageFileAsync(modelName);
-                using var fileStream = File.Create(targetPath);
-                await stream.CopyToAsync(fileStream);
+                var assembly = typeof(AIModelHandler).Assembly;
+                using (Stream? stream = assembly.GetManifestResourceStream($"SevenWonders.AI.Model.Data.{modelName}"))
+                {
+                    if (stream is not null)
+                    {
+                        using var fileStream = File.Create(targetPath);
+                        await stream.CopyToAsync(fileStream);
+                    }
+                }
             }
 
         }
@@ -92,6 +99,6 @@ namespace SevenWondersUI.Services
         private InferenceSession? m_session;
         private readonly IDictionary<AIModelType, string> m_aiModels;
         private readonly IAIDecisionHandler m_aIDecisionHandler;
-        private readonly string m_appDataDirectory = FileSystem.AppDataDirectory;
+        private readonly IPathProvider m_pathProvider;
     }
 }

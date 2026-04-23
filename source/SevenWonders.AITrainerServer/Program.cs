@@ -10,12 +10,14 @@ using GameLogic.Handlers;
 using GameLogic.Handlers.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using SevenWonders.AI.Model;
+using SevenWonders.AI.Model.AIModelHandler;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.DecisionRouter.Factories;
-using SevenWonders.AI.Model.Services;
 using SevenWonders.AI.Model.Services.CardTypeEncoders.Factories;
 using SevenWonders.AI.Model.Services.Encoders;
+using SevenWonders.AITrainerServer.Cache;
 using SevenWonders.AITrainerServer.DecisionHandlers;
+using SevenWonders.AITrainerServer.Factories;
 using SevenWonders.AITrainerServer.PlayerActionReceivers;
 using SevenWonders.Common;
 
@@ -54,22 +56,24 @@ namespace SevenWonders.AITrainerServer
             services.AddSingleton<IEffectEncoder, EffectEncoder>();
             services.AddSingleton<ICardTypeEncoderFactory, CardTypeEncoderFactory>();
             services.AddSingleton<ICardNodeEncoder, CardNodeEncoder>();
-            services.AddSingleton<ICardCompositionEncoder, CardCompositionEncoder>();
+            services.AddSingleton<ICardCompositionEncoderFactory, CardCompositionEncoderFactory>();
             services.AddSingleton<IPlayerEncoder, PlayerEncoder>();
             services.AddSingleton<IGlobalInfoEncoder, GlobalInfoEncoder>();
-            services.AddSingleton<IGameStateVectorReceiver, GameStateVectorReceiver>();
-            services.AddSingleton<IPlayerActionMaskReceiver, PlayerActionMaskReceiver>();
+            services.AddSingleton<IGameStateVectorReceiverFactory, GameStateVectorReceiverFactory>();
+            services.AddSingleton<IPlayerActionMaskReceiverFactory, PlayerActionMaskReceiverFactory>();
 
             services.AddSingleton<IWeightConfiguration, WeightConfiguration>();
             services.AddSingleton<IDecisionRouterFactory, DecisionRouterFactory>();
-            services.AddSingleton<IAIDecisionHandler, AIDecisionHandler>();
+            services.AddSingleton<IAIDecisionHandlerCache, AIDecisionHandlerCache>();
             services.AddSingleton<IMilitaryHeuristicBotDecisionHandler, MilitaryHeuristicBotDecisionHandler>();
             services.AddSingleton<IScientificHeuristicBotDecisionHandler, ScientificHeuristicBotDecisionHandler>();
             services.AddSingleton<ICitizenHeuristicBotDecisionHandler, CitizenHeuristicBotDecisionHandler>();
             services.AddSingleton<IRandomBotDecisionHandler, RandomBotDecisionHandler>();
             services.AddSingleton<INonPlayerActionReceiverFactory, NonPlayerActionReceiverFactory>();
             services.AddSingleton<IAITrainerServer, AITrainerServer>();
-            services.AddSingleton<IRewardCalculator, RewardCalculator>();
+            services.AddSingleton<IRewardCalculatorFactory, RewardCalculatorFactory>();
+            services.AddSingleton<IPathProvider, PathProvider>();
+            services.AddSingleton<IAIModelHandlerCache, AIModelHandlerCache>();
 
             GameLog.Info("Building service provider...");
             var serviceProvider = services.BuildServiceProvider();
@@ -77,7 +81,7 @@ namespace SevenWonders.AITrainerServer
             GameLog.Info("Resolving IAITrainerServer...");
             var server = serviceProvider.GetRequiredService<IAITrainerServer>();
             GameLog.Info("Starting server...");
-            server.StartServer();
+            server.StartServer().GetAwaiter().GetResult();
             GameLog.Info("Server stopped.");
         }
     }
