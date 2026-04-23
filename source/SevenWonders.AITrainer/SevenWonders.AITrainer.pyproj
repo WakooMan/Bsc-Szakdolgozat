@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>SevenWonders.AITrainer</Name>
     <RootNamespace>SevenWonders.AITrainer</RootNamespace>
-    <InterpreterId>MSBuild|AIEnvironment|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|TrainEnv|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +31,15 @@
       <Id>AIEnvironment</Id>
       <Version>3.14</Version>
       <Description>AIEnvironment (Python 3.14 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+    <Interpreter Include="TrainEnv\">
+      <Id>TrainEnv</Id>
+      <Version>3.14</Version>
+      <Description>TrainEnv (Python 3.14.4)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
