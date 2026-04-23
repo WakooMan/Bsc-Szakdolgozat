@@ -4,7 +4,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
 {
     public interface IAIDecisionHandler : IDecisionHandler
     {
-        void Initialize();
+        void Initialize(int playerId);
         void Uninitialize();
         Func<GameStateResponse, ActionRequest>? OnGameStateReceived { get; set; }
     }

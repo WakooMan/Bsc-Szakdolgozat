@@ -64,6 +64,7 @@ OPPONENT_TYPE_NAMES = {
     1: "MilitaryHeuristicBot",
     2: "ScientificHeuristicBot",
     3: "CitizenHeuristicBot",
+    4: "EasyAIModel"
 }
 
 
@@ -118,12 +119,17 @@ def main():
         print(f"Loading starter model from '{starter_model}'...")
         model = MaskablePPO.load(starter_model, env=env, tensorboard_log="./logs/seven_wonders_ppo")
     else:
+        policy_kwargs = dict(
+            net_arch=[256, 256]
+        )
         model = MaskablePPO(
             "MlpPolicy",
             env,
             verbose=1,
             tensorboard_log="./logs/seven_wonders_ppo",
-            learning_rate=3e-4,
+            learning_rate=1e-4,
+            policy_kwargs=policy_kwargs, 
+            ent_coef=0.005,
             n_steps=2048,
             batch_size=64,
             n_epochs=10,

@@ -27,9 +27,9 @@ namespace SevenWonders.AI.Model.Services
             return reward;
         }
 
-        public float CalculateInstantWinReward(PlayerProperties winner)
+        public float CalculateInstantWinReward(PlayerProperties winner, int playerId)
         {
-            float reward = winner.Owner.Id == 1 ? 100f : -100f;
+            float reward = winner.Owner.Id == playerId ? 100f : -100f;
             GameLog.Info($"InstantWinReward={reward} (Winner={winner.Owner.Name}, Id={winner.Owner.Id})");
             return reward;
         }

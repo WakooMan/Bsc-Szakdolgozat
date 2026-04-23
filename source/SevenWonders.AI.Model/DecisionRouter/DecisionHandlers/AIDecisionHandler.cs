@@ -27,9 +27,10 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             OnGameStateReceived = null;
         }
 
-        public void Initialize()
+        public void Initialize(int playerId)
         {
             GameLog.Info("Initializing...");
+            m_playerId = playerId;
             m_gameStateVectorReceiver.Initialize();
             m_playerActionMaskReceiver.Initialize();
             m_rewardCalculator.Reset();
@@ -42,6 +43,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
         public void Uninitialize()
         {
             GameLog.Info("Uninitializing and unsubscribing from events...");
+            m_playerId = -1;
             m_game.Context.EventManager.Unsubscribe<OnGameEnded>(GameEnded);
             m_game.Context.EventManager.Unsubscribe<MilitaryVictory>(OnMilitaryVictory);
             m_game.Context.EventManager.Unsubscribe<ScientificVictory>(OnScientificVictory);
@@ -59,7 +61,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             {
                 State = stateVector,
                 Mask = actionMask,
-                Reward = m_rewardCalculator.CalculateInstantWinReward(playerProperties),
+                Reward = m_rewardCalculator.CalculateInstantWinReward(playerProperties, m_playerId),
                 Terminated = true
             };
             OnGameStateReceived?.Invoke(messageObj);
@@ -68,8 +70,9 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
         private void OnScientificVictory(ScientificVictory victory)
         {
             GameLog.Info($"Scientific victory detected! Player={victory.PlayerProperties.Owner.Name}");
-            PlayerProperties playerProperties = victory.PlayerProperties;
-            PlayerProperties opponentProperties = victory.PlayerProperties.Opponent.GetPlayerProperties(victory.PlayerProperties.Owner);
+            PlayerProperties loserProp = victory.PlayerProperties.Opponent.GetPlayerProperties(victory.PlayerProperties.Owner);
+            PlayerProperties playerProperties = victory.PlayerProperties.Owner.Id == m_playerId ? victory.PlayerProperties : loserProp;
+            PlayerProperties opponentProperties = victory.PlayerProperties.Owner.Id == m_playerId ? loserProp : victory.PlayerProperties;
             PhaseIndicator phase = PhaseIndicator.ChooseAction;
             List<float> stateVector = m_gameStateVectorReceiver.Receive(playerProperties, opponentProperties, phase);
             List<int> actionMask = m_playerActionMaskReceiver.ReceiveEmptyPlayerActionMask();
@@ -77,7 +80,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             {
                 State = stateVector,
                 Mask = actionMask,
-                Reward = m_rewardCalculator.CalculateInstantWinReward(playerProperties),
+                Reward = m_rewardCalculator.CalculateInstantWinReward(playerProperties, m_playerId),
                 Terminated = true
             };
             OnGameStateReceived?.Invoke(messageObj);
@@ -86,8 +89,8 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
         private void GameEnded(OnGameEnded ended)
         {
             GameLog.Info($"Game ended! Player1={ended.FirstPlayer.Owner.Name} VP={ended.FirstPlayer.VictoryPoints}, Player2={ended.SecondPlayer.Owner.Name} VP={ended.SecondPlayer.VictoryPoints}");
-            PlayerProperties playerProperties = ended.SecondPlayer;
-            PlayerProperties opponentProperties = ended.FirstPlayer;
+            PlayerProperties playerProperties = (ended.FirstPlayer.Owner.Id == m_playerId) ? ended.FirstPlayer : ended.SecondPlayer;
+            PlayerProperties opponentProperties = (ended.FirstPlayer.Owner.Id == m_playerId) ? ended.SecondPlayer : ended.FirstPlayer;
             PhaseIndicator phase = PhaseIndicator.ChooseAction;
             List<float> stateVector = m_gameStateVectorReceiver.Receive(playerProperties, opponentProperties, phase);
             List<int> actionMask = m_playerActionMaskReceiver.ReceiveEmptyPlayerActionMask();
@@ -206,6 +209,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
             return null;
         }
 
+        private int m_playerId = -1;
         private readonly IGameStateVectorReceiver m_gameStateVectorReceiver;
         private readonly IPlayerActionMaskReceiver m_playerActionMaskReceiver;
         private readonly IRewardCalculator m_rewardCalculator;

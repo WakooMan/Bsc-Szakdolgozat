@@ -16,10 +16,10 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Data\seven_wonders_easy_agent.onnx">
-      <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Data\seven_wonders_easy_agent.onnx.data">
-      <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 

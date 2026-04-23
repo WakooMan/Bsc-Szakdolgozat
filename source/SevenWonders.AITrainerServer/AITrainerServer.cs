@@ -1,4 +1,5 @@
 ﻿using GameLogic;
+using SevenWonders.AI.Model.AIModelHandler;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.Messages;
 using SevenWonders.AI.Model.Services;
@@ -139,7 +140,12 @@ namespace SevenWonders.AITrainerServer
             m_game.Initialize(randomGenerator,
                 ("RandomBot", randomReceiver),
                 ("AIPlayer", aiReceiver));
-            m_aIDecisionHandlerCache.TrainingAI.Initialize();
+            if (m_currentOpponentType == NonPlayerType.EasyAI)
+            {
+                m_aIDecisionHandlerCache.TrainedAIModel.Initialize(1);
+                m_aIModelHandlerCache.AIModelHandler.LoadModel(AIModelType.Easy);
+            }
+            m_aIDecisionHandlerCache.TrainingAI.Initialize(2);
             GameLog.Info("RunGame: Initialized handlers. Starting game thread...");
 
             m_gameThread = new Thread(() =>

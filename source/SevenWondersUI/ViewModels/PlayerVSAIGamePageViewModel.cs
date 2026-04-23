@@ -34,7 +34,7 @@ namespace SevenWondersUI.ViewModels
         protected override void InitializeGame()
         {
             base.InitializeGame();
-            m_aIDecisionHandler.Initialize();
+            m_aIDecisionHandler.Initialize(2);
         }
 
 

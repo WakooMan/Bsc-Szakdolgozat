@@ -1,4 +1,5 @@
 ﻿using GameLogic.Interfaces;
+using SevenWonders.AI.Model.AIModelHandler;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.DecisionRouter.Factories;
 using SevenWonders.AI.Model.PlayerActionReceivers;
@@ -31,7 +32,6 @@ namespace SevenWonders.AITrainerServer.PlayerActionReceivers
                     return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.TrainingAI);
                 case NonPlayerType.EasyAI:
                     var actionReceiver = new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.TrainedAIModel);
-                    m_aIDecisionHandlerCache.TrainedAIModel.Initialize();
                     return actionReceiver;
                 case NonPlayerType.MilitaryHeuristicBot:
                     return new NonPlayerActionReceiver(m_decisionRouterFactory, m_militaryHeuristicBotDecisionHandler);

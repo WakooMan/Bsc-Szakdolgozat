@@ -6,7 +6,7 @@ namespace SevenWonders.AI.Model.Services
     {
         float CalculateVictoryPointsReward(PlayerProperties playerProperties, PlayerProperties opponentProperties);
         float CalculateTurnReward(PlayerProperties playerProperties, PlayerProperties opponentProperties);
-        float CalculateInstantWinReward(PlayerProperties winner);
+        float CalculateInstantWinReward(PlayerProperties winner, int playerId);
         void Reset();
     }
 }
