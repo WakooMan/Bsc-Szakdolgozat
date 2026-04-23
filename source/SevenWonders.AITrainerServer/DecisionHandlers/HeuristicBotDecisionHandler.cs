@@ -58,8 +58,6 @@ namespace SevenWonders.AITrainerServer.DecisionHandlers
 
                 if (scoredActions.Count > 0)
                 {
-                    //var bestActions = scoredActions.OrderByDescending(x => x.score).Take(3).ToList();
-                    //var bestAction = bestActions[m_game.Context.RandomGenerator.Next(0, bestActions.Count - 1)];
                     var bestAction = scoredActions.OrderByDescending(x => x.score).First();
                     m_actionId = bestAction.action;
                     return bestAction.wrapper;
