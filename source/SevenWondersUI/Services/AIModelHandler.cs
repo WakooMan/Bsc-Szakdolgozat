@@ -37,7 +37,7 @@ namespace SevenWondersUI.Services
 
         private ActionRequest GameStateReceived(GameStateResponse response)
         {
-            if(m_session is null)
+            if (m_session is null)
             {
                 return new ActionRequest() { Action = -1 };
             }
@@ -46,25 +46,33 @@ namespace SevenWondersUI.Services
                 response.State.ToArray(),
                 new[] { 1, response.State.Count });
 
-
-            var maskTensor = new DenseTensor<float>(
-                response.Mask.Select(num => (float)num).ToArray(),
-                new[] { 1, response.Mask.Count });
-
-
-
             var inputs = new List<NamedOnnxValue>
             {
                 NamedOnnxValue.CreateFromTensor("observation", obsTensor)
             };
 
             using var results = m_session.Run(inputs);
-
             var logits = results[0]
                 .AsTensor<float>()
                 .ToArray();
 
+            var mask = response.Mask.ToArray();
+
+            for (int i = 0; i < logits.Length; i++)
+            {
+                if (mask[i] == 0)
+                {
+                    logits[i] = float.MinValue;
+                }
+            }
+
             int action = Array.IndexOf(logits, logits.Max());
+
+            if (logits[action] == float.MinValue)
+            {
+                action = Array.IndexOf(mask, 1);
+            }
+
             return new ActionRequest() { Action = action };
         }
 

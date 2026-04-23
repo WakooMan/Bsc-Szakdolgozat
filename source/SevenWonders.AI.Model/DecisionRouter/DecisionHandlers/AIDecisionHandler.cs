@@ -31,6 +31,7 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
         {
             GameLog.Info("Initializing...");
             m_gameStateVectorReceiver.Initialize();
+            m_playerActionMaskReceiver.Initialize();
             m_rewardCalculator.Reset();
             m_game.Context.EventManager.Subscribe<OnGameEnded>(GameEnded);
             m_game.Context.EventManager.Subscribe<MilitaryVictory>(OnMilitaryVictory);

@@ -137,7 +137,6 @@ namespace SevenWonders.AITrainerServer
                 ("RandomBot", randomReceiver),
                 ("AIPlayer", aiReceiver));
             m_aIDecisionHandler.Initialize();
-            m_playerActionMaskReceiver.Initialize();
             GameLog.Info("RunGame: Initialized handlers. Starting game thread...");
 
             m_gameThread = new Thread(() =>
