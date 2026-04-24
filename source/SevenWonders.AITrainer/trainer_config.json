@@ -1,4 +1,5 @@
 {
+  "tb_log_name": "Medium_Phase_2",
   "total_timesteps": 1500000,
   "starter_model": "seven_wonders_medium_agent",
   "reset_num_timesteps": false,

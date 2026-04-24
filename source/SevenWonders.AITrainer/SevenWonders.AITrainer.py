@@ -111,6 +111,7 @@ def main():
     starter_model = config.get("starter_model", None)
     result_model = config.get("result_model", "seven_wonders_agent")
     reset_num_timesteps = config.get("reset_num_timesteps", False)
+    tb_log_name = config.get("tb_log_name", "MaskablePPO")
 
     env = MaskableSevenWondersEnv()
     env = Monitor(env)
@@ -143,7 +144,10 @@ def main():
     ])
 
     print(f"Starting training for {total_timesteps} timesteps...")
-    model.learn(total_timesteps=total_timesteps, reset_num_timesteps=reset_num_timesteps, callback=callbacks)
+    model.learn(total_timesteps=total_timesteps, 
+                reset_num_timesteps=reset_num_timesteps, 
+                tb_log_name=tb_log_name, 
+                callback=callbacks)
 
     model.save(result_model)
     print(f"Model saved to '{result_model}'.")
