@@ -16,6 +16,7 @@ using SevenWonders.AI.Model.DecisionRouter.Factories;
 using SevenWonders.AI.Model.Services.CardTypeEncoders.Factories;
 using SevenWonders.AI.Model.Services.Encoders;
 using SevenWonders.AITrainerServer.Cache;
+using SevenWonders.AITrainerServer.DataModel;
 using SevenWonders.AITrainerServer.DecisionHandlers;
 using SevenWonders.AITrainerServer.Factories;
 using SevenWonders.AITrainerServer.PlayerActionReceivers;
@@ -74,6 +75,7 @@ namespace SevenWonders.AITrainerServer
             services.AddSingleton<IRewardCalculatorFactory, RewardCalculatorFactory>();
             services.AddSingleton<IPathProvider, PathProvider>();
             services.AddSingleton<IAIModelHandlerCache, AIModelHandlerCache>();
+            services.AddSingleton<IEnemyChanceConfiguration, EnemyChanceConfiguration>();
 
             GameLog.Info("Building service provider...");
             var serviceProvider = services.BuildServiceProvider();

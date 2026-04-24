@@ -1,3 +1,6 @@
+Medium changes (new model):
 learning_rate -> 0.0003 -> 0.0001
 ent_coef minimális csökkentése
 net_arch=[128, 128] -> net_arch=[256, 256]
+Result -> 468000 test steps has been done, changing some stuff, because learning seems to be stuck.
+Medium learning second round:

@@ -1,5 +1,6 @@
 {
-  "total_timesteps": 2000000,
-  "starter_model": null,
-  "result_model": "seven_wonders_medium_agent"
+  "total_timesteps": 1500000,
+  "starter_model": "seven_wonders_medium_agent",
+  "reset_num_timesteps": false,
+  "result_model": "seven_wonders_medium_agent_v2"
 }

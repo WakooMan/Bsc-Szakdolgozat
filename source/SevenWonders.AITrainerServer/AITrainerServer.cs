@@ -1,9 +1,11 @@
 ﻿using GameLogic;
 using SevenWonders.AI.Model.AIModelHandler;
+using SevenWonders.AI.Model.DataModel;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.Messages;
 using SevenWonders.AI.Model.Services;
 using SevenWonders.AITrainerServer.Cache;
+using SevenWonders.AITrainerServer.DataModel;
 using SevenWonders.AITrainerServer.PlayerActionReceivers;
 using SevenWonders.Common;
 using System.Net;
@@ -20,13 +22,15 @@ namespace SevenWonders.AITrainerServer
                                IRandomGeneratorFactory randomGeneratorFactory,
                                IAIDecisionHandlerCache aIDecisionHandlerCache,
                                IAIModelHandlerCache aIModelHandlerCache,
-                               INonPlayerActionReceiverFactory nonPlayerActionReceiverFactory)
+                               INonPlayerActionReceiverFactory nonPlayerActionReceiverFactory,
+                               IEnemyChanceConfiguration enemyChanceConfiguration)
         {
             m_game = game;
             m_randomGeneratorFactory = randomGeneratorFactory;
             m_aIDecisionHandlerCache = aIDecisionHandlerCache;
             m_aIModelHandlerCache = aIModelHandlerCache;
             m_nonPlayerActionReceiverFactory = nonPlayerActionReceiverFactory;
+            m_enemyChanceConfiguration = enemyChanceConfiguration;
             m_gameStateResponse = null;
         }
 
@@ -134,7 +138,16 @@ namespace SevenWonders.AITrainerServer
 
             IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
             var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.AI);
-            m_currentOpponentType = (NonPlayerType)randomGenerator.Next(0,4);
+            EnemyChances chances = m_enemyChanceConfiguration.Chances;
+            int generatedValue = randomGenerator.Next(chances.MinValue, chances.MaxValue);
+            foreach (EnemyChance chance in chances.Chances.OrderBy(ch => ch.MaxValue))
+            {
+                if (generatedValue <= chance.MaxValue)
+                {
+                    m_currentOpponentType = chance.PlayerType;
+                    break;
+                }
+            }
             GameLog.Info($"RunGame: Selected opponent type: {m_currentOpponentType}");
             var randomReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(m_currentOpponentType);
             m_game.Initialize(randomGenerator,
@@ -197,5 +210,6 @@ namespace SevenWonders.AITrainerServer
         private readonly IAIDecisionHandlerCache m_aIDecisionHandlerCache;
         private readonly IAIModelHandlerCache m_aIModelHandlerCache;
         private readonly INonPlayerActionReceiverFactory m_nonPlayerActionReceiverFactory;
+        private readonly IEnemyChanceConfiguration m_enemyChanceConfiguration;
     }
 }
