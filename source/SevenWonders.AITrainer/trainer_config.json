@@ -1,7 +1,7 @@
 {
-  "tb_log_name": "Medium_Phase_3",
-  "total_timesteps": 1000000,
-  "starter_model": "seven_wonders_medium_agent_v2",
+  "tb_log_name": "Medium_Phase_3.3",
+  "total_timesteps": 200000,
+  "starter_model": "seven_wonders_medium_agent_v3.2",
   "reset_num_timesteps": false,
-  "result_model": "seven_wonders_medium_agent_v3"
+  "result_model": "seven_wonders_medium_agent_v3.3"
 }

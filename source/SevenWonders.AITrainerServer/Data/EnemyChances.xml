@@ -4,11 +4,11 @@
 	<MaxValue>100</MaxValue>
 	<Chances>
 		<EnemyChance>
-			<MaxValue>60</MaxValue>
+			<MaxValue>80</MaxValue>
 			<PlayerType>EasyAI</PlayerType>
 		</EnemyChance>
 		<EnemyChance>
-			<MaxValue>80</MaxValue>
+			<MaxValue>85</MaxValue>
 			<PlayerType>MilitaryHeuristicBot</PlayerType>
 		</EnemyChance>
 		<EnemyChance>
