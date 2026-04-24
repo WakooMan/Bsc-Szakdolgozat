@@ -129,7 +129,7 @@ def main():
             env,
             verbose=1,
             tensorboard_log="./logs/seven_wonders_ppo",
-            learning_rate=1e-4,
+            learning_rate=3e-5,
             policy_kwargs=policy_kwargs, 
             ent_coef=0.005,
             n_steps=2048,
