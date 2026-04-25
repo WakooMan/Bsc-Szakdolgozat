@@ -1,4 +1,4 @@
 {
-  "model_path": "seven_wonders_easy_agent",
-  "onnx_path": "seven_wonders_easy_agent.onnx"
+  "model_path": "seven_wonders_medium_agent",
+  "onnx_path": "seven_wonders_medium_agent.onnx"
 }

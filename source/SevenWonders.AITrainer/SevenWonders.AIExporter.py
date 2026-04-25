@@ -12,7 +12,7 @@ def main():
     config = load_config()
     model_path = config.get("model_path", "seven_wonders_agent")
     onnx_path = config.get("onnx_path", "seven_wonders_agent.onnx")
-    obs_size = 1432
+    obs_size = 619
 
     print(f"Loading model from '{model_path}'...")
     model = MaskablePPO.load(model_path)
