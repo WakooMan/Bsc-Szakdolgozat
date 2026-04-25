@@ -46,27 +46,27 @@ namespace SevenWonders.AI.Model.Services.Encoders
                 switch (cardNode.CardObj)
                 {
                     case BlueCard blueCard:
-                        properties.Add(nameof(BlueCard), 1f);
-                        properties.Add(nameof(VictoryPoints), blueCard.Point.Points / 60f);
+                        properties[nameof(BlueCard)] = 1f;
+                        properties[nameof(VictoryPoints)] = blueCard.Point.Points / 60f;
                         break;
                     case RedCard redCard:
-                        properties.Add(nameof(RedCard), 1f);
-                        properties.Add(nameof(Strength), redCard.Strength.Points / 30f);
+                        properties[nameof(RedCard)] = 1f;                     
+                        properties[nameof(Strength)] = redCard.Strength.Points / 30f;
                         break;
                     case BrownCard brownCard:
-                        properties.Add(nameof(BrownCard), 1f);
+                        properties[nameof(BrownCard)] = 1f;
                         break;
                     case YellowCard yellowCard:
-                        properties.Add(nameof(YellowCard), 1f);
-                        properties.Add(nameof(VictoryPoints), yellowCard.Effects.OfType<VictoryPoints>().Sum(p => p.Points));
-                        properties.Add(nameof(Strength), yellowCard.Effects.OfType<Strength>().Sum(p => p.Points));
+                        properties[nameof(YellowCard)] = 1f;
+                        properties[nameof(VictoryPoints)] = yellowCard.Effects.OfType<VictoryPoints>().Sum(p => p.Points);
+                        properties[nameof(Strength)] = yellowCard.Effects.OfType<Strength>().Sum(p => p.Points);
                         break;
                     case PurpleCard purpleCard:
-                        properties.Add(nameof(PurpleCard), 1f);
+                        properties[nameof(PurpleCard)] = 1f;
                         break;
                     case GreenCard greenCard:
-                        properties.Add(nameof(GreenCard), 1f);
-                        properties.Add(nameof(VictoryPoints), greenCard.Point.Points / 60f);
+                        properties[nameof(GreenCard)] = 1f;
+                        properties[nameof(VictoryPoints)] = greenCard.Point.Points / 60f;
 
                         var disciplineName = greenCard.Discipline.GetType().Name;
                         if (properties.ContainsKey(disciplineName))
@@ -75,7 +75,7 @@ namespace SevenWonders.AI.Model.Services.Encoders
                         }
                         break;
                     case GrayCard grayCard:
-                        properties.Add(nameof(GrayCard), 1f);
+                        properties[nameof(GrayCard)] = 1f;
                         break;
                 }
 

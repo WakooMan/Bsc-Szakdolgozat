@@ -4,6 +4,7 @@ using GameLogic.Elements.Effects;
 using GameLogic.Elements.GameCards;
 using GameLogic.Elements.Goods.Products;
 using GameLogic.Elements.Goods.Resources;
+using GameLogic.Elements.Wonders;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {
@@ -16,39 +17,42 @@ namespace SevenWonders.AI.Model.Services.Encoders
 
         public void EncodePlayer(List<float> vector, PlayerProperties playerProperties)
         {
-            var playerEncodesProps = CreatePlayerProperties();
-            playerEncodesProps.Add("Money", playerProperties.Owner.Money / 100f);
-            playerEncodesProps.Add(nameof(VictoryPoints), playerProperties.VictoryPoints / 60f);
-            playerEncodesProps.Add(nameof(Strength), playerProperties.Strength / 30f);
+            var properties = CreatePlayerProperties();
+
+            foreach (Effect effect in playerProperties.Effects)
+            {
+                m_effectEncoder.EncodeEffect(effect, properties);
+            }
+
+            properties["Money"] = playerProperties.Owner.Money / 100f;
+            properties[nameof(VictoryPoints)] = playerProperties.VictoryPoints / 60f;
+            properties[nameof(Strength)] = playerProperties.Strength / 30f;
 
             for (int i = 0; i < 4; i++)
             {
                 var wonders = playerProperties.Owner.Wonders;
-                playerEncodesProps.Add($"Wonder{i}Built", wonders[i].HasBeenBuilt ? 1f : 0f);
+                properties[$"Wonder{i}Built"] = wonders[i].HasBeenBuilt ? 1f : 0f;
             }
 
             Type[] goodTypes = [typeof(Clay), typeof(Stone), typeof(Wood), typeof(Glass), typeof(Papirus)];
             foreach (var goodType in goodTypes)
             {
-                playerEncodesProps.Add(goodType.Name, playerProperties.Goods.TryGetValue(goodType, out var good) ? good.Amount / 10f : 0f);
+                properties[goodType.Name] = playerProperties.Goods.TryGetValue(goodType, out var good) ? good.Amount / 10f : 0f;
             }
 
             Type[] disciplineTypes = [typeof(Building), typeof(Geography), typeof(Healing), typeof(Mechanics), typeof(Physics), typeof(Trading), typeof(Writing)];
             foreach (var disciplineType in disciplineTypes)
             {
-                playerEncodesProps.Add(disciplineType.Name, playerProperties.Disciplines.TryGetValue(disciplineType, out var count) ? count / 10f : 0f);
+                properties[disciplineType.Name] = playerProperties.Disciplines.TryGetValue(disciplineType, out var count) ? count / 10f : 0f;
             }
 
             Type[] cardTypes = [typeof(BrownCard), typeof(BlueCard), typeof(GrayCard), typeof(GreenCard), typeof(PurpleCard), typeof(RedCard), typeof(YellowCard)];
             foreach (var cardType in cardTypes)
             {
-                playerEncodesProps.Add(cardType.Name, playerProperties.Owner.Cards.Count(c => c.GetType() == cardType) / 10f);
+                properties[cardType.Name] = playerProperties.Owner.Cards.Count(c => c.GetType() == cardType) / 10f;
             }
 
-            foreach (Effect effect in playerProperties.Effects)
-            {
-                m_effectEncoder.EncodeEffect(effect, playerEncodesProps);
-            }
+            vector.AddRange(properties.Values);
         }
 
         private static OrderedDictionary<string, float> CreatePlayerProperties()
@@ -109,6 +113,7 @@ namespace SevenWonders.AI.Model.Services.Encoders
             properties.Add(nameof(CheaperBuilding) + nameof(PurpleCard), 0f);
             properties.Add(nameof(CheaperBuilding) + nameof(RedCard), 0f);
             properties.Add(nameof(CheaperBuilding) + nameof(YellowCard), 0f);
+            properties.Add(nameof(CheaperBuilding) + nameof(Wonder), 0f);
             properties.Add(nameof(Law), 0f);
             properties.Add(nameof(Economics), 0f);
             properties.Add(nameof(Teology), 0f);
