@@ -1,9 +1,9 @@
 {
-  "tb_log_name": "Medium",
+  "tb_log_name": "Medium_Second_Phase",
   "total_timesteps": 150000,
-  "learning_rate": 0.0003,
-  "ent_coef": 0.01,
-  "starter_model": null,
+  "learning_rate": 0.00005,
+  "ent_coef": 0.0005,
+  "starter_model": "seven_wonders_medium_agent_first_phase",
   "reset_num_timesteps": false,
-  "result_model": "seven_wonders_medium_agent_first_phase"
+  "result_model": "seven_wonders_medium_agent_second_phase"
 }
