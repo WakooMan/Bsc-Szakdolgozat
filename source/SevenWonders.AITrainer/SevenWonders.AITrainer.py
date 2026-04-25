@@ -112,6 +112,8 @@ def main():
     result_model = config.get("result_model", "seven_wonders_agent")
     reset_num_timesteps = config.get("reset_num_timesteps", False)
     tb_log_name = config.get("tb_log_name", "MaskablePPO")
+    ent_coef = config.get("ent_coef", 0.0005)
+    learning_rate = config.get("learning_rate", 0.00001)
 
     env = MaskableSevenWondersEnv()
     env = Monitor(env)
@@ -119,8 +121,8 @@ def main():
 
     if starter_model:
         custom_objects = {
-            "learning_rate": 0.00001,
-            "ent_coef": 0.0005
+            "learning_rate": learning_rate,
+            "ent_coef": ent_coef
         }
         print(f"Loading starter model from '{starter_model}'...")
         model = MaskablePPO.load(starter_model, env=env, custom_objects=custom_objects, tensorboard_log="./logs/seven_wonders_ppo")
@@ -133,9 +135,9 @@ def main():
             env,
             verbose=1,
             tensorboard_log="./logs/seven_wonders_ppo",
-            learning_rate=0.00005,
+            learning_rate=learning_rate,
             policy_kwargs=policy_kwargs, 
-            ent_coef=0.005,
+            ent_coef=ent_coef,
             n_steps=2048,
             batch_size=64,
             n_epochs=10,

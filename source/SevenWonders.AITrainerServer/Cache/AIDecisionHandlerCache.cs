@@ -14,8 +14,8 @@ namespace SevenWonders.AITrainerServer.Cache
                                       IPlayerActionMaskReceiverFactory playerActionMaskReceiverFactory,
                                       IRewardCalculatorFactory rewardCalculatorFactory)
         {
-            m_trainingAI = new AIDecisionHandler(game, gameStateVectorReceiverFactory.Create(), playerActionMaskReceiverFactory.Create(), rewardCalculatorFactory.Create());
-            m_easyAI = new AIDecisionHandler(game, gameStateVectorReceiverFactory.Create(), playerActionMaskReceiverFactory.Create(), rewardCalculatorFactory.Create());
+            m_trainingAI = new AIDecisionHandler(game, gameStateVectorReceiverFactory.CreateMedium(), playerActionMaskReceiverFactory.Create(), rewardCalculatorFactory.Create());
+            m_easyAI = new AIDecisionHandler(game, gameStateVectorReceiverFactory.CreateEasy(), playerActionMaskReceiverFactory.Create(), rewardCalculatorFactory.Create());
         }
 
         private readonly IAIDecisionHandler m_trainingAI;

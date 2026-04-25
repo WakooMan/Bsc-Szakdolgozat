@@ -4,6 +4,7 @@ namespace SevenWonders.AITrainerServer.Factories
 {
     public interface ICardCompositionEncoderFactory
     {
-        ICardCompositionEncoder Create();
+        ICardCompositionEncoder CreateEasy();
+        ICardCompositionEncoder CreateMedium();
     }
 }

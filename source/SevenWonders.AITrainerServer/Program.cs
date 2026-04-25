@@ -56,10 +56,13 @@ namespace SevenWonders.AITrainerServer
 
             services.AddSingleton<IEffectEncoder, EffectEncoder>();
             services.AddSingleton<ICardTypeEncoderFactory, CardTypeEncoderFactory>();
-            services.AddSingleton<ICardNodeEncoder, EasyCardNodeEncoder>();
             services.AddSingleton<ICardCompositionEncoderFactory, CardCompositionEncoderFactory>();
-            services.AddSingleton<IPlayerEncoder, EasyPlayerEncoder>();
-            services.AddSingleton<IGlobalInfoEncoder, EasyGlobalInfoEncoder>();
+            services.AddSingleton<IEasyCardNodeEncoder, EasyCardNodeEncoder>();
+            services.AddSingleton<IEasyPlayerEncoder, EasyPlayerEncoder>();
+            services.AddSingleton<IEasyGlobalInfoEncoder, EasyGlobalInfoEncoder>();
+            services.AddSingleton<IMediumCardNodeEncoder, MediumCardNodeEncoder>();
+            services.AddSingleton<IMediumPlayerEncoder, MediumPlayerEncoder>();
+            services.AddSingleton<IMediumGlobalInfoEncoder, MediumGlobalInfoEncoder>();
             services.AddSingleton<IGameStateVectorReceiverFactory, GameStateVectorReceiverFactory>();
             services.AddSingleton<IPlayerActionMaskReceiverFactory, PlayerActionMaskReceiverFactory>();
 
