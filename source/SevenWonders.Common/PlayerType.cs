@@ -5,7 +5,8 @@
         LocalPlayer,
         LocalPlayerWithRemoteOpponent,
         RemotePlayer,
-        AI,
+        EasyAI,
+        MediumAI,
         Unknown
     }
 }

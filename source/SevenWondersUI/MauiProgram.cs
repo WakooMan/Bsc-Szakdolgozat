@@ -13,8 +13,10 @@ using GameLogic.Interfaces;
 using Microsoft.Extensions.Logging;
 using SevenWonders.AI.Model;
 using SevenWonders.AI.Model.AIModelHandler;
+using SevenWonders.AI.Model.Cache;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.DecisionRouter.Factories;
+using SevenWonders.AI.Model.Factories;
 using SevenWonders.AI.Model.Services;
 using SevenWonders.AI.Model.Services.CardTypeEncoders.Factories;
 using SevenWonders.AI.Model.Services.Encoders;
@@ -105,22 +107,24 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<IEffectEncoder, EffectEncoder>();
         builder.Services.AddSingleton<ICardTypeEncoderFactory, CardTypeEncoderFactory>();
-        builder.Services.AddSingleton<ICardCompositionEncoder, CardCompositionEncoder>();
+        builder.Services.AddSingleton<ICardCompositionEncoderFactory, CardCompositionEncoderFactory>();
         builder.Services.AddSingleton<IEasyCardNodeEncoder, EasyCardNodeEncoder>();
         builder.Services.AddSingleton<IEasyPlayerEncoder, EasyPlayerEncoder>();
         builder.Services.AddSingleton<IEasyGlobalInfoEncoder, EasyGlobalInfoEncoder>();
         builder.Services.AddSingleton<IMediumCardNodeEncoder, MediumCardNodeEncoder>();
         builder.Services.AddSingleton<IMediumPlayerEncoder, MediumPlayerEncoder>();
         builder.Services.AddSingleton<IMediumGlobalInfoEncoder, MediumGlobalInfoEncoder>();
-        builder.Services.AddSingleton<IGameStateVectorReceiver, GameStateVectorReceiver>();
-        builder.Services.AddSingleton<IPlayerActionMaskReceiver, PlayerActionMaskReceiver>();
+        builder.Services.AddSingleton<IGameStateVectorReceiverFactory, GameStateVectorReceiverFactory>();
+        builder.Services.AddSingleton<IPlayerActionMaskReceiverFactory, PlayerActionMaskReceiverFactory>();
 
         builder.Services.AddSingleton<IWeightConfiguration, WeightConfiguration>();
         builder.Services.AddSingleton<IDecisionRouterFactory, DecisionRouterFactory>();
         builder.Services.AddSingleton<IAIDecisionHandler, AIDecisionHandler>();
         builder.Services.AddSingleton<IRewardCalculator, RewardCalculator>();
-        builder.Services.AddSingleton<IAIModelHandler, AIModelHandler>();
+        builder.Services.AddSingleton<IAIModelHandlerCache, AIModelHandlerCache>();
+        builder.Services.AddSingleton<IAIDecisionHandlerCache, AIDecisionHandlerCache>();
         builder.Services.AddSingleton<IPathProvider, PathProvider>();
+        builder.Services.AddSingleton<IRewardCalculatorFactory, RewardCalculatorFactory>();
 
 
         builder.Services.AddSingleton(typeof(IEffectHandler), typeof(EffectHandler));

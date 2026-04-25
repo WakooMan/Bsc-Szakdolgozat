@@ -1,7 +1,7 @@
 ﻿using SevenWonders.AI.Model.Services;
 using SevenWonders.AI.Model.Services.Encoders;
 
-namespace SevenWonders.AITrainerServer.Factories
+namespace SevenWonders.AI.Model.Factories
 {
     public class GameStateVectorReceiverFactory : IGameStateVectorReceiverFactory
     {

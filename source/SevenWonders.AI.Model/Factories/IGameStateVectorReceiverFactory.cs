@@ -1,6 +1,6 @@
 ﻿using SevenWonders.AI.Model.Services;
 
-namespace SevenWonders.AITrainerServer.Factories
+namespace SevenWonders.AI.Model.Factories
 {
     public interface IGameStateVectorReceiverFactory
     {

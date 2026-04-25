@@ -1,10 +1,11 @@
 ﻿using SevenWonders.AI.Model.AIModelHandler;
+using SevenWonders.AI.Model.Cache;
 
 namespace SevenWondersUI
 {
     public partial class App : Application
     {
-        public App(AppShell shell, IAIModelHandler aIModelHandler)
+        public App(AppShell shell, IAIModelHandlerCache aIModelHandler)
         {
             InitializeComponent();
             m_aIModelHandler = aIModelHandler;
@@ -20,10 +21,10 @@ namespace SevenWondersUI
         protected override async void OnStart()
         {
             base.OnStart();
-            await m_aIModelHandler.Initialize();
+            await m_aIModelHandler.EasyAIModelHandler.Initialize();
         }
 
         private readonly AppShell m_shell;
-        private readonly IAIModelHandler m_aIModelHandler;
+        private readonly IAIModelHandlerCache m_aIModelHandler;
     }
 }

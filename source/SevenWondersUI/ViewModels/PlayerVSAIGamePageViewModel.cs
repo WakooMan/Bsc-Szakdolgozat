@@ -1,5 +1,5 @@
 ﻿using GameLogic;
-using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
+using SevenWonders.AI.Model.Cache;
 using SevenWonders.Common;
 using SevenWonders.GameEngine;
 using SevenWonders.GameEngine.Components;
@@ -15,7 +15,7 @@ namespace SevenWondersUI.ViewModels
 
         protected override PlayerType Player1Type => PlayerType.LocalPlayer;
 
-        protected override PlayerType Player2Type => PlayerType.AI;
+        protected override PlayerType Player2Type => m_player2Type;
 
         public PlayerVSAIGamePageViewModel(IGame game,
                                            IEngine engine,
@@ -25,16 +25,39 @@ namespace SevenWondersUI.ViewModels
                                            IPlayerActionReceiverFactory playerActionReceiverFactory,
                                            IRandomGeneratorFactory randomGeneratorFactory,
                                            INavigationService navigationService,
-                                           IAIDecisionHandler aIDecisionHandler) : base(game, engine, sceneLoader, animationManager, presenterStore, playerActionReceiverFactory, randomGeneratorFactory)
+                                           IAIDecisionHandlerCache aIDecisionHandlerCache) : base(game, engine, sceneLoader, animationManager, presenterStore, playerActionReceiverFactory, randomGeneratorFactory)
         {
             m_navigationService = navigationService;
-            m_aIDecisionHandler = aIDecisionHandler;
+            m_aIDecisionHandlerCache = aIDecisionHandlerCache;
+            m_player2Type = PlayerType.EasyAI;
+        }
+
+        public override void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            base.ApplyQueryAttributes(query);
+            if (query.TryGetValue("Player2Type", out object? obj) && obj is PlayerType player2Type)
+            {
+                m_player2Type = player2Type;
+            }
         }
 
         protected override void InitializeGame()
         {
             base.InitializeGame();
-            m_aIDecisionHandler.Initialize(2);
+            switch (m_player2Type)
+            {
+                case PlayerType.EasyAI:
+                    m_aIDecisionHandlerCache.EasyAI.Initialize(2);
+                    break;
+                case PlayerType.MediumAI:
+                    m_aIDecisionHandlerCache.MediumAI.Initialize(2);
+                    break;
+                //case AIModelType.HardAI:
+                //    break;
+                default:
+                    m_aIDecisionHandlerCache.EasyAI.Initialize(2);
+                    break;
+            }
         }
 
 
@@ -44,6 +67,7 @@ namespace SevenWondersUI.ViewModels
         }
 
         private readonly INavigationService m_navigationService;
-        private readonly IAIDecisionHandler m_aIDecisionHandler;
+        private readonly IAIDecisionHandlerCache m_aIDecisionHandlerCache;
+        private PlayerType m_player2Type;
     }
 }

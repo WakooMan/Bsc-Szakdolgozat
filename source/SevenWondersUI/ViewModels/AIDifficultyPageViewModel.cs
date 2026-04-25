@@ -1,4 +1,6 @@
 ﻿using SevenWonders.AI.Model.AIModelHandler;
+using SevenWonders.AI.Model.Cache;
+using SevenWonders.Common;
 using SevenWondersUI.Services;
 using System.Windows.Input;
 
@@ -6,13 +8,13 @@ namespace SevenWondersUI.ViewModels
 {
     public class AIDifficultyPageViewModel: BaseViewModel
     {
-        public AIDifficultyPageViewModel(INavigationService navigationService, IAIModelHandler aIModelHandler)
+        public AIDifficultyPageViewModel(INavigationService navigationService, IAIModelHandlerCache aIModelHandlerCache)
         {
             m_navigationService = navigationService;
-            m_aiModelHandler = aIModelHandler;
+            m_aiModelHandlerCache = aIModelHandlerCache;
             m_title = "Nehézségi szint";
             m_easyButton = ("Könnyű", true);
-            m_mediumButton = ("Közepes", false);
+            m_mediumButton = ("Közepes", true);
             m_hardButton = ("Nehéz", false);
             m_backButton = ("Vissza", true);
             EasyCommand = new Command(OnEasyClicked, () => m_easyButton.isEnabled);
@@ -113,31 +115,34 @@ namespace SevenWondersUI.ViewModels
 
         private async void OnHardClicked()
         {
-            m_aiModelHandler.LoadModel(AIModelType.Hard);
+            m_aiModelHandlerCache.EasyAIModelHandler.LoadModel(AIModelType.Hard);
             await m_navigationService.NavigateToAsync("//PlayerVSAIGamePage", new Dictionary<string, object>
             {
                 { "Player1Name", "Player" },
-                { "Player2Name", "HardAI" }
+                { "Player2Name", "HardAI" },
+                //{ "Player2Type", PlayerType.HardAI }
             });
         }
 
         private async void OnMediumClicked()
         {
-            m_aiModelHandler.LoadModel(AIModelType.Medium);
+            m_aiModelHandlerCache.MediumAIModelHandler.LoadModel(AIModelType.Medium);
             await m_navigationService.NavigateToAsync("//PlayerVSAIGamePage", new Dictionary<string, object>
             {
                 { "Player1Name", "Player" },
-                { "Player2Name", "MediumAI" }
+                { "Player2Name", "MediumAI" },
+                { "Player2Type", PlayerType.MediumAI }
             });
         }
 
         private async void OnEasyClicked()
         {
-            m_aiModelHandler.LoadModel(AIModelType.Easy);
+            m_aiModelHandlerCache.EasyAIModelHandler.LoadModel(AIModelType.Easy);
             await m_navigationService.NavigateToAsync("//PlayerVSAIGamePage", new Dictionary<string, object>
             {
                 { "Player1Name", "Player" },
-                { "Player2Name", "EasyAI" }
+                { "Player2Name", "EasyAI" },
+                { "Player2Type", PlayerType.EasyAI }
             });
         }
 
@@ -147,6 +152,6 @@ namespace SevenWondersUI.ViewModels
         private (string text, bool isEnabled) m_hardButton;
         private (string text, bool isEnabled) m_backButton;
         private readonly INavigationService m_navigationService;
-        private readonly IAIModelHandler m_aiModelHandler;
+        private readonly IAIModelHandlerCache m_aiModelHandlerCache;
     }
 }

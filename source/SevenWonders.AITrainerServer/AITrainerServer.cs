@@ -1,10 +1,8 @@
 ﻿using GameLogic;
 using SevenWonders.AI.Model.AIModelHandler;
+using SevenWonders.AI.Model.Cache;
 using SevenWonders.AI.Model.DataModel;
-using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.Messages;
-using SevenWonders.AI.Model.Services;
-using SevenWonders.AITrainerServer.Cache;
 using SevenWonders.AITrainerServer.DataModel;
 using SevenWonders.AITrainerServer.PlayerActionReceivers;
 using SevenWonders.Common;
@@ -36,8 +34,8 @@ namespace SevenWonders.AITrainerServer
 
         public async Task StartServer()
         {
-            await m_aIModelHandlerCache.AIModelHandler.Initialize();
-            m_aIDecisionHandlerCache.TrainingAI.OnGameStateReceived = OnGameStateReceived;
+            await m_aIModelHandlerCache.EasyAIModelHandler.Initialize();
+            m_aIDecisionHandlerCache.MediumAI.OnGameStateReceived = OnGameStateReceived;
             m_server = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
             m_server.Start();
             GameLog.Info("Waiting for AI connection on port 5000...");
@@ -133,8 +131,8 @@ namespace SevenWonders.AITrainerServer
             GameLog.Info("RunGame: Joining previous game thread...");
             m_gameThread?.Join();
             GameLog.Info("RunGame: Uninitializing AI decision handler...");
-            m_aIDecisionHandlerCache.TrainingAI.Uninitialize();
-            m_aIDecisionHandlerCache.TrainedAIModel.Uninitialize();
+            m_aIDecisionHandlerCache.MediumAI.Uninitialize();
+            m_aIDecisionHandlerCache.EasyAI.Uninitialize();
 
             IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
             var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.AI);
@@ -155,10 +153,10 @@ namespace SevenWonders.AITrainerServer
                 ("AIPlayer", aiReceiver));
             if (m_currentOpponentType == NonPlayerType.EasyAI)
             {
-                m_aIDecisionHandlerCache.TrainedAIModel.Initialize(1);
-                m_aIModelHandlerCache.AIModelHandler.LoadModel(AIModelType.Easy);
+                m_aIDecisionHandlerCache.EasyAI.Initialize(1);
+                m_aIModelHandlerCache.EasyAIModelHandler.LoadModel(AIModelType.Easy);
             }
-            m_aIDecisionHandlerCache.TrainingAI.Initialize(2);
+            m_aIDecisionHandlerCache.MediumAI.Initialize(2);
             GameLog.Info("RunGame: Initialized handlers. Starting game thread...");
 
             m_gameThread = new Thread(() =>

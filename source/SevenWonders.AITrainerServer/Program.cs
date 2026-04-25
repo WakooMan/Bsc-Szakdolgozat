@@ -11,14 +11,14 @@ using GameLogic.Handlers.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using SevenWonders.AI.Model;
 using SevenWonders.AI.Model.AIModelHandler;
+using SevenWonders.AI.Model.Cache;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.DecisionRouter.Factories;
+using SevenWonders.AI.Model.Factories;
 using SevenWonders.AI.Model.Services.CardTypeEncoders.Factories;
 using SevenWonders.AI.Model.Services.Encoders;
-using SevenWonders.AITrainerServer.Cache;
 using SevenWonders.AITrainerServer.DataModel;
 using SevenWonders.AITrainerServer.DecisionHandlers;
-using SevenWonders.AITrainerServer.Factories;
 using SevenWonders.AITrainerServer.PlayerActionReceivers;
 using SevenWonders.Common;
 
