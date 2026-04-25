@@ -118,8 +118,12 @@ def main():
     env = ActionMasker(env, mask_fn)
 
     if starter_model:
+        custom_objects = {
+            "learning_rate": 0.00001,
+            "ent_coef": 0.0005
+        }
         print(f"Loading starter model from '{starter_model}'...")
-        model = MaskablePPO.load(starter_model, env=env, tensorboard_log="./logs/seven_wonders_ppo")
+        model = MaskablePPO.load(starter_model, env=env, custom_objects=custom_objects, tensorboard_log="./logs/seven_wonders_ppo")
     else:
         policy_kwargs = dict(
             net_arch=[256, 256]

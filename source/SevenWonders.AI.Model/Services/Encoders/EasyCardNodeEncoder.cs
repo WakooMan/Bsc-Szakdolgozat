@@ -13,7 +13,7 @@ using SevenWonders.AI.Model.Services.CardTypeEncoders.Factories;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {
-    public class CardNodeEncoder: ICardNodeEncoder
+    public class EasyCardNodeEncoder: IEasyCardNodeEncoder
     {
         private static readonly Type[] s_goodTypes =
         [
@@ -24,7 +24,7 @@ namespace SevenWonders.AI.Model.Services.Encoders
             typeof(Papirus)
         ];
 
-        public CardNodeEncoder(IGame game, ICardTypeEncoderFactory cardTypeEncoderFactory)
+        public EasyCardNodeEncoder(IGame game, ICardTypeEncoderFactory cardTypeEncoderFactory)
         {
             m_game = game;
             m_cardTypeEncoderFactory = cardTypeEncoderFactory;

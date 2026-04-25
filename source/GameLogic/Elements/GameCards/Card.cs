@@ -16,6 +16,7 @@ namespace GameLogic.Elements.GameCards
     {
         public List<Good> GoodCost { get; set; }
         public int MoneyCost { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string PreviousBuilding { get; set; }
         public bool HasChainChild { get; set; }

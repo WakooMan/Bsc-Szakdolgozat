@@ -4,9 +4,9 @@ using GameLogic.Elements.Military;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {
-    public class GlobalInfoEncoder : IGlobalInfoEncoder
+    public class EasyGlobalInfoEncoder : IEasyGlobalInfoEncoder
     {
-        public GlobalInfoEncoder(IGame game)
+        public EasyGlobalInfoEncoder(IGame game)
         {
             m_game = game;
         }

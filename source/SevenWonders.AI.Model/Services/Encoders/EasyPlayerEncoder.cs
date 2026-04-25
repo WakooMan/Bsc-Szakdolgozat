@@ -6,7 +6,7 @@ using GameLogic.Elements.Goods.Resources;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {
-    public class PlayerEncoder : IPlayerEncoder
+    public class EasyPlayerEncoder : IEasyPlayerEncoder
     {
         public void EncodePlayer(List<float> vector, PlayerProperties playerProperties)
         {
