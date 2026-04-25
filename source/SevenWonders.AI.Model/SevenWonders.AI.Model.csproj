@@ -9,6 +9,8 @@
   <ItemGroup>
     <None Remove="Data\seven_wonders_easy_agent.onnx" />
     <None Remove="Data\seven_wonders_easy_agent.onnx.data" />
+    <None Remove="Data\seven_wonders_medium_agent.onnx" />
+    <None Remove="Data\seven_wonders_medium_agent.onnx.data" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +23,8 @@
     <EmbeddedResource Include="Data\seven_wonders_easy_agent.onnx.data">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Data\seven_wonders_medium_agent.onnx" />
+    <EmbeddedResource Include="Data\seven_wonders_medium_agent.onnx.data" />
   </ItemGroup>
 
   <ItemGroup>
