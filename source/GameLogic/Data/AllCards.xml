@@ -2,6 +2,7 @@
 <CardList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<Cards>
 		<Card xsi:type="BrownCard">
+			<ID>1</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Fakitermelés</Name>
@@ -15,6 +16,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>2</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Fatelep</Name>
@@ -28,6 +30,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>3</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Agyagbánya</Name>
@@ -41,6 +44,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>4</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Agyaglelőhely</Name>
@@ -54,6 +58,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>5</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Kőfejtő</Name>
@@ -67,6 +72,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>6</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Kőbánya</Name>
@@ -80,6 +86,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>7</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Fűrésztelep</Name>
@@ -93,6 +100,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>8</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Téglagyár</Name>
@@ -106,6 +114,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>9</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Külszíni fejtés</Name>
@@ -119,6 +128,7 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>10</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Üveggyár</Name>
@@ -133,6 +143,7 @@
 		
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>11</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Prés</Name>
@@ -146,6 +157,7 @@
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>12</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Üvegfúvó</Name>
@@ -159,6 +171,7 @@
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>13</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Szárítóterem</Name>
@@ -172,6 +185,7 @@
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>14</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Őrtorony</Name>
@@ -183,6 +197,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>15</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -198,6 +213,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>16</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -213,6 +229,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>17</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Cölöpkerítés</Name>
@@ -224,6 +241,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>18</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -239,6 +257,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>19</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -257,6 +276,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>20</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Barakk</Name>
@@ -268,6 +288,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>21</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -289,6 +310,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>22</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -307,6 +329,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>23</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>3</Amount>
@@ -325,6 +348,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>24</ID>
 			<GoodCost/>
 			<MoneyCost>8</MoneyCost>
 			<Name>Főhadiszállás</Name>
@@ -336,6 +360,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>25</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -357,6 +382,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>26</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>3</Amount>
@@ -375,6 +401,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>27</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -393,6 +420,7 @@
 			</Strength>
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>28</ID>
 			<GoodCost>
 				<Good xsi:type="Papirus">
 					<Amount>1</Amount>
@@ -409,6 +437,7 @@
 			<Discipline xsi:type="Building" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>29</ID>
 			<GoodCost>
 				<Good xsi:type="Glass">
 					<Amount>1</Amount>
@@ -425,6 +454,7 @@
 			<Discipline xsi:type="Mechanics" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>30</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Scriptorium</Name>
@@ -437,6 +467,7 @@
 			<Discipline xsi:type="Writing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>31</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Gyógyszerész</Name>
@@ -449,6 +480,7 @@
 			<Discipline xsi:type="Healing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>32</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -471,6 +503,7 @@
 			<Discipline xsi:type="Writing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>33</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -490,6 +523,7 @@
 			<Discipline xsi:type="Healing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>34</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -509,6 +543,7 @@
 			<Discipline xsi:type="Mechanics" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>35</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -528,6 +563,7 @@
 			<Discipline xsi:type="Building" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>36</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -550,6 +586,7 @@
 			<Discipline xsi:type="Trading" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>37</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>2</Amount>
@@ -572,6 +609,7 @@
 			<Discipline xsi:type="Trading" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>38</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -594,6 +632,7 @@
 			<Discipline xsi:type="Geography" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>39</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -613,6 +652,7 @@
 			<Discipline xsi:type="Geography" />
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>40</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Kőraktár</Name>
@@ -631,6 +671,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>41</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Agyagraktár</Name>
@@ -649,6 +690,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>42</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Faraktár</Name>
@@ -667,6 +709,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>43</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Fogadó</Name>
@@ -680,6 +723,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>44</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -700,6 +744,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>45</ID>
 			<GoodCost>
 				<Good xsi:type="Glass">
 					<Amount>1</Amount>
@@ -724,6 +769,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>46</ID>
 			<GoodCost/>
 			<MoneyCost>4</MoneyCost>
 			<Name>Vámház</Name>
@@ -746,6 +792,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>47</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Sörfőzde</Name>
@@ -759,6 +806,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>48</ID>
 			<GoodCost>
 				<Good xsi:type="Papirus">
 					<Amount>2</Amount>
@@ -780,6 +828,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>49</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -807,6 +856,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>50</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -831,6 +881,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>51</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -855,6 +906,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>52</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -881,6 +933,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>53</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Színház</Name>
@@ -890,6 +943,7 @@
 			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>54</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Oltár</Name>
@@ -899,6 +953,7 @@
 			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>55</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -912,6 +967,7 @@
 			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>56</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>2</Amount>
@@ -928,6 +984,7 @@
 			<Point xsi:type="VictoryPoints"><Points>5</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>57</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -941,6 +998,7 @@
 			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>58</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -957,6 +1015,7 @@
 			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>59</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>3</Amount>
@@ -970,6 +1029,7 @@
 			<Point xsi:type="VictoryPoints"><Points>5</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>60</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -986,6 +1046,7 @@
 			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>61</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -1010,6 +1071,7 @@
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>62</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>3</Amount>
@@ -1028,6 +1090,7 @@
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>63</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -1046,6 +1109,7 @@
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>64</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -1064,6 +1128,7 @@
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>65</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -1085,6 +1150,7 @@
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>66</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -1106,6 +1172,7 @@
 			</Point>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>67</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -1128,6 +1195,7 @@
 			<GuildObj xsi:type="TraderGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>68</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -1150,6 +1218,7 @@
 			<GuildObj xsi:type="SailorGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>69</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -1172,6 +1241,7 @@
 			<GuildObj xsi:type="BuilderGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>70</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>2</Amount>
@@ -1191,6 +1261,7 @@
 			<GuildObj xsi:type="MagistrateGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>71</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -1207,6 +1278,7 @@
 			<GuildObj xsi:type="ScienceGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>72</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -1223,6 +1295,7 @@
 			<GuildObj xsi:type="ExtortionistGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>73</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
