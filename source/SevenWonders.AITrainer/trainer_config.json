@@ -1,9 +1,9 @@
 {
-  "tb_log_name": "Medium_Fourth_Phase",
-  "total_timesteps": 500000,
+  "tb_log_name": "Medium_Final_Phase",
+  "total_timesteps": 280000,
   "learning_rate": 0.00001,
   "ent_coef": 0.0001,
-  "starter_model": "seven_wonders_medium_agent_third_phase",
+  "starter_model": "seven_wonders_medium_agent_fourth_phase",
   "reset_num_timesteps": false,
-  "result_model": "seven_wonders_medium_agent_fourth_phase"
+  "result_model": "seven_wonders_medium_agent"
 }
