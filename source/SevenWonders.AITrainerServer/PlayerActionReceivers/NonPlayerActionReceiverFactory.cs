@@ -27,7 +27,9 @@ namespace SevenWonders.AITrainerServer.PlayerActionReceivers
         {
             switch(nonPlayerType)
             {
-                case NonPlayerType.AI:
+                case NonPlayerType.HardAI:
+                    return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.HardAI);
+                case NonPlayerType.MediumAI:
                     return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.MediumAI);
                 case NonPlayerType.EasyAI:
                     var actionReceiver = new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.EasyAI);

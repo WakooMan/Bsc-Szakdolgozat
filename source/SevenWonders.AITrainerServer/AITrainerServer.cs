@@ -131,11 +131,12 @@ namespace SevenWonders.AITrainerServer
             GameLog.Info("RunGame: Joining previous game thread...");
             m_gameThread?.Join();
             GameLog.Info("RunGame: Uninitializing AI decision handler...");
+            m_aIDecisionHandlerCache.HardAI.Uninitialize();
             m_aIDecisionHandlerCache.MediumAI.Uninitialize();
             m_aIDecisionHandlerCache.EasyAI.Uninitialize();
 
             IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
-            var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.AI);
+            var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.MediumAI);
             EnemyChances chances = m_enemyChanceConfiguration.Chances;
             int generatedValue = randomGenerator.Next(chances.MinValue, chances.MaxValue);
             foreach (EnemyChance chance in chances.Chances.OrderBy(ch => ch.MaxValue))
@@ -151,12 +152,18 @@ namespace SevenWonders.AITrainerServer
             m_game.Initialize(randomGenerator,
                 ("RandomBot", randomReceiver),
                 ("AIPlayer", aiReceiver));
-            if (m_currentOpponentType == NonPlayerType.EasyAI)
+            switch(m_currentOpponentType)
             {
-                m_aIDecisionHandlerCache.EasyAI.Initialize(1);
-                m_aIModelHandlerCache.EasyAIModelHandler.LoadModel(AIModelType.Easy);
+                case NonPlayerType.EasyAI:
+                    m_aIDecisionHandlerCache.EasyAI.Initialize(1);
+                    m_aIModelHandlerCache.EasyAIModelHandler.LoadModel(AIModelType.Easy);
+                    break;
+                case NonPlayerType.MediumAI:
+                    m_aIDecisionHandlerCache.MediumAI.Initialize(1);
+                    m_aIModelHandlerCache.MediumAIModelHandler.LoadModel(AIModelType.Medium);
+                    break;
             }
-            m_aIDecisionHandlerCache.MediumAI.Initialize(2);
+            m_aIDecisionHandlerCache.HardAI.Initialize(2);
             GameLog.Info("RunGame: Initialized handlers. Starting game thread...");
 
             m_gameThread = new Thread(() =>

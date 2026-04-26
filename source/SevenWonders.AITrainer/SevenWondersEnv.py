@@ -10,7 +10,7 @@ class SevenWondersEnv(gym.Env):
         super(SevenWondersEnv, self).__init__()
 
         self.action_space = spaces.Discrete(23)
-        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(619,), dtype=np.float32)
+        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(659,), dtype=np.float32)
 
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect(('127.0.0.1', 5000))

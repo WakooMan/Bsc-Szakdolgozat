@@ -7,6 +7,7 @@
         ScientificHeuristicBot = 2,
         CitizenHeuristicBot = 3,
         EasyAI = 4,
-        AI = 5
+        MediumAI = 5,
+        HardAI = 6,
     }
 }

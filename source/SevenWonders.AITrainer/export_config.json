@@ -1,4 +1,5 @@
 {
   "model_path": "seven_wonders_medium_agent",
-  "onnx_path": "seven_wonders_medium_agent.onnx"
+  "onnx_path": "seven_wonders_medium_agent.onnx",
+  "obs_size" : 659
 }

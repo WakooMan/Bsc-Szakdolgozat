@@ -128,7 +128,7 @@ def main():
         model = MaskablePPO.load(starter_model, env=env, custom_objects=custom_objects, tensorboard_log="./logs/seven_wonders_ppo")
     else:
         policy_kwargs = dict(
-            net_arch=[256, 256]
+            net_arch=[512, 512, 512]
         )
         model = MaskablePPO(
             "MlpPolicy",
@@ -138,8 +138,8 @@ def main():
             learning_rate=learning_rate,
             policy_kwargs=policy_kwargs, 
             ent_coef=ent_coef,
-            n_steps=2048,
-            batch_size=64,
+            n_steps=4096,
+            batch_size=512,
             n_epochs=10,
             gamma=0.99,
         )

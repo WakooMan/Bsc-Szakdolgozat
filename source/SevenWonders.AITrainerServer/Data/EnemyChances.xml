@@ -1,26 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <EnemyChances xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<MinValue>0</MinValue>
-	<MaxValue>1000</MaxValue>
+	<MaxValue>100</MaxValue>
 	<Chances>
 		<EnemyChance>
-			<MaxValue>850</MaxValue>
+			<MaxValue>101</MaxValue>
+			<PlayerType>MediumAI</PlayerType>
+		</EnemyChance>
+		<EnemyChance>
+			<MaxValue>30</MaxValue>
 			<PlayerType>EasyAI</PlayerType>
 		</EnemyChance>
 		<EnemyChance>
-			<MaxValue>950</MaxValue>
+			<MaxValue>40</MaxValue>
 			<PlayerType>MilitaryHeuristicBot</PlayerType>
 		</EnemyChance>
 		<EnemyChance>
-			<MaxValue>975</MaxValue>
+			<MaxValue>60</MaxValue>
 			<PlayerType>ScientificHeuristicBot</PlayerType>
 		</EnemyChance>
 		<EnemyChance>
-			<MaxValue>1000</MaxValue>
+			<MaxValue>80</MaxValue>
 			<PlayerType>CitizenHeuristicBot</PlayerType>
 		</EnemyChance>
 		<EnemyChance>
-			<MaxValue>1001</MaxValue>
+			<MaxValue>100</MaxValue>
 			<PlayerType>RandomBot</PlayerType>
 		</EnemyChance>
 	</Chances>
