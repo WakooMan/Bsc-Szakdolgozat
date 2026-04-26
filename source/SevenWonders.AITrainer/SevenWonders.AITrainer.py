@@ -65,7 +65,8 @@ OPPONENT_TYPE_NAMES = {
     1: "MilitaryHeuristicBot",
     2: "ScientificHeuristicBot",
     3: "CitizenHeuristicBot",
-    4: "EasyAIModel"
+    4: "EasyAIModel",
+    5: "MediumAIModel"
 }
 
 
