@@ -2,6 +2,7 @@ import gymnasium as gym
 import json
 import signal
 import sys
+import torch
 from sb3_contrib import MaskablePPO
 from sb3_contrib.common.maskable.callbacks import MaskableEvalCallback
 from sb3_contrib.common.wrappers import ActionMasker
@@ -114,6 +115,8 @@ def main():
     tb_log_name = config.get("tb_log_name", "MaskablePPO")
     ent_coef = config.get("ent_coef", 0.0005)
     learning_rate = config.get("learning_rate", 0.00001)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"Learning with: {device}")
 
     env = MaskableSevenWondersEnv()
     env = Monitor(env)
@@ -125,7 +128,7 @@ def main():
             "ent_coef": ent_coef
         }
         print(f"Loading starter model from '{starter_model}'...")
-        model = MaskablePPO.load(starter_model, env=env, custom_objects=custom_objects, tensorboard_log="./logs/seven_wonders_ppo")
+        model = MaskablePPO.load(starter_model, env=env, custom_objects=custom_objects, device=device, tensorboard_log="./logs/seven_wonders_ppo")
     else:
         policy_kwargs = dict(
             net_arch=[512, 512, 512]
@@ -135,6 +138,7 @@ def main():
             env,
             verbose=1,
             tensorboard_log="./logs/seven_wonders_ppo",
+            device=device,
             learning_rate=learning_rate,
             policy_kwargs=policy_kwargs, 
             ent_coef=ent_coef,

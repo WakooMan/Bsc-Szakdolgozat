@@ -35,7 +35,7 @@ namespace SevenWonders.AITrainerServer
         public async Task StartServer()
         {
             await m_aIModelHandlerCache.EasyAIModelHandler.Initialize();
-            m_aIDecisionHandlerCache.MediumAI.OnGameStateReceived = OnGameStateReceived;
+            m_aIDecisionHandlerCache.HardAI.OnGameStateReceived = OnGameStateReceived;
             m_server = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
             m_server.Start();
             GameLog.Info("Waiting for AI connection on port 5000...");
@@ -136,7 +136,7 @@ namespace SevenWonders.AITrainerServer
             m_aIDecisionHandlerCache.EasyAI.Uninitialize();
 
             IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType.Undeterministic, 0);
-            var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.MediumAI);
+            var aiReceiver = m_nonPlayerActionReceiverFactory.CreateNonPlayerActionReceiver(NonPlayerType.HardAI);
             EnemyChances chances = m_enemyChanceConfiguration.Chances;
             int generatedValue = randomGenerator.Next(chances.MinValue, chances.MaxValue);
             foreach (EnemyChance chance in chances.Chances.OrderBy(ch => ch.MaxValue))

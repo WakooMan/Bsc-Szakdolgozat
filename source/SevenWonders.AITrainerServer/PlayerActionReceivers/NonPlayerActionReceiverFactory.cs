@@ -32,8 +32,7 @@ namespace SevenWonders.AITrainerServer.PlayerActionReceivers
                 case NonPlayerType.MediumAI:
                     return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.MediumAI);
                 case NonPlayerType.EasyAI:
-                    var actionReceiver = new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.EasyAI);
-                    return actionReceiver;
+                    return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.EasyAI);
                 case NonPlayerType.MilitaryHeuristicBot:
                     return new NonPlayerActionReceiver(m_decisionRouterFactory, m_militaryHeuristicBotDecisionHandler);
                 case NonPlayerType.RandomBot:

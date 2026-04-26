@@ -64,7 +64,7 @@ namespace SevenWonders.AI.Model.Services.Encoders
             properties["RemainingWonderScience_Potential"] = remainingWonderScience / 4f;
             properties["RemainingExtraTurnPotential"] = remainingExtraTurn / 4f;
             properties["economic_scaling_potential"] = economics.ScalingPotential;
-            properties["military_scaling_potential"] = m_helper.CalculateRemainingMilitaryStrength(playerProperties) + remainingWonderMilitary / 30f;
+            properties["military_scaling_potential"] = (m_helper.CalculateRemainingMilitaryStrength(playerProperties) + remainingWonderMilitary) / 30f;
             properties["science_scaling_potential"] = science.Distinct / (float)science.DisciplineCount;
             properties["denial_value"] = economics.DenialValue;
             if (m_game.Context.TurnHandler.NewTurnForced)
