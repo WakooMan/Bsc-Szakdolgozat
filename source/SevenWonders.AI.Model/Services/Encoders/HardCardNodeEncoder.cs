@@ -16,15 +16,13 @@ namespace SevenWonders.AI.Model.Services.Encoders
         public void EncodeCardNode(List<float> vector, ICardNode cardNode, bool isAvailable, PlayerProperties ownerProperties, PlayerProperties opponentProperties)
         {
             var properties = CreateCardNodeProperties();
-            properties["Exists"] = 1f;
             if (cardNode.Hidden)
             {
-                properties["Visible"] = 0f;
                 vector.AddRange(properties.Values);
             }
             else
             {
-                properties["Visible"] = 1f;
+                properties["IsPlayable"] = 1f;
                 properties["Available"] = isAvailable ? 1f : 0f;
                 properties["ID"] = cardNode.CardObj.ID / 80f;
 
@@ -109,9 +107,7 @@ namespace SevenWonders.AI.Model.Services.Encoders
         {
             var properties = new OrderedDictionary<string, float>();
             properties.Add("ID", 0f);
-            properties.Add("Exists", 0f);
-            properties.Add("Visible", 0f);
-            properties.Add("Available", 0f);
+            properties.Add("IsPlayable", 0f);
             properties.Add("MoneyCost", 0f);
             properties.Add("CanAfford", 0f);
             properties.Add("OpponentMoneyCost", 0f);
@@ -129,7 +125,6 @@ namespace SevenWonders.AI.Model.Services.Encoders
             properties.Add(nameof(YellowCard), 0f);
 
             properties.Add($"delta{nameof(VictoryPoints)}", 0f);
-            properties.Add($"delta{nameof(Strength)}", 0f);
             properties.Add("deltaCoins", 0f);
             properties.Add("deltaScience_Progress", 0f);
             properties.Add("science_completion_potential", 0f);

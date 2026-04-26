@@ -10,18 +10,13 @@ namespace SevenWonders.AI.Model.Services.Encoders
 {
     public class HardPlayerEncoder : IHardPlayerEncoder
     {
-        public HardPlayerEncoder(IEffectEncoder effectEncoder)
+        public HardPlayerEncoder()
         {
-            m_effectEncoder = effectEncoder;
         }
 
         public void EncodePlayer(List<float> vector, PlayerProperties playerProperties)
         {
             var properties = CreatePlayerProperties();
-            foreach (Effect effect in playerProperties.Effects)
-            {
-                m_effectEncoder.EncodeEffect(effect, properties);
-            }
 
             properties["Money"] = playerProperties.Owner.Money / 100f;
             properties[nameof(VictoryPoints)] = playerProperties.VictoryPoints / 60f;
@@ -89,83 +84,37 @@ namespace SevenWonders.AI.Model.Services.Encoders
             properties.Add(nameof(VictoryPoints), 0f);
             properties.Add(nameof(Strength), 0f);
 
-            properties.Add("Wonder0Built", 0f);
-            properties.Add("Wonder0EffectCount", 0f);
-            properties.Add("Wonder0CostCount", 0f);
-            properties.Add("Wonder1Built", 0f);
-            properties.Add("Wonder1EffectCount", 0f);
-            properties.Add("Wonder1CostCount", 0f);
-            properties.Add("Wonder2Built", 0f);
-            properties.Add("Wonder2EffectCount", 0f);
-            properties.Add("Wonder2CostCount", 0f);
-            properties.Add("Wonder3Built", 0f);
-            properties.Add("Wonder3EffectCount", 0f);
-            properties.Add("Wonder3CostCount", 0f);
+            properties.Add($"{nameof(VictoryPoints)}_from_Wonders", 0f);
+            properties.Add($"{nameof(Strength)}_from_Wonders", 0f);
+            properties.Add("Coins_from_Wonders", 0f);
 
-            properties.Add(nameof(BrownCard), 0f);
-            properties.Add(nameof(BlueCard), 0f);
-            properties.Add(nameof(GrayCard), 0f);
-            properties.Add(nameof(GreenCard), 0f);
-            properties.Add(nameof(PurpleCard), 0f);
-            properties.Add(nameof(RedCard), 0f);
-            properties.Add(nameof(YellowCard), 0f);
+
+            properties.Add("RemainingWonderVP_Potential", 0f);
+            properties.Add("RemainingWonderMilitary_Potential", 0f);
+            properties.Add("RemainingWonderEconomic_Potential", 0f);
+            properties.Add("RemainingWonderScience_Potential", 0f);
+            properties.Add("RemainingExtraTurnPotential", 0f);
+
+            properties.Add("economic_scaling_potential", 0f);
+            properties.Add("military_scaling_potential", 0f);
+            properties.Add("science_scaling_potential", 0f);
+            properties.Add("denial_value", 0f);
+            properties.Add("tempo_gain", 0f);
+            properties.Add("delta_action_budget", 0f);
+            properties.Add("future_income_rate", 0f);
             properties.Add("TotalCards", 0f);
-
-            properties.Add(nameof(Building), 0f);
-            properties.Add(nameof(Geography), 0f);
-            properties.Add(nameof(Healing), 0f);
-            properties.Add(nameof(Mechanics), 0f);
-            properties.Add(nameof(Physics), 0f);
-            properties.Add(nameof(Trading), 0f);
-            properties.Add(nameof(Writing), 0f);
 
             properties.Add("ScienceCompleteSets", 0f);
             properties.Add("ScienceMaxSingle", 0f);
             properties.Add("ScienceDistinct", 0f);
-            properties.Add("ScienceTotal", 0f);
 
-            properties.Add(nameof(Papirus), 0f);
-            properties.Add(nameof(Glass), 0f);
-            properties.Add(nameof(Clay), 0f);
-            properties.Add(nameof(Stone), 0f);
-            properties.Add(nameof(Wood), 0f);
+            properties.Add("resource_flexibility", 0f);
+            properties.Add("affordable_cards_ratio", 0f);
 
             properties.Add("WondersBuiltCount", 0f);
             properties.Add("WondersRemaining", 0f);
 
-            properties.Add(nameof(BuyGoods), 0f);
-            properties.Add(nameof(ChooseGood), 0f);
-            properties.Add(nameof(GetMoney), 0f);
-            properties.Add(nameof(GetMoneyForCard) + nameof(BlueCard), 0f);
-            properties.Add(nameof(GetMoneyForCard) + nameof(BrownCard), 0f);
-            properties.Add(nameof(GetMoneyForCard) + nameof(GrayCard), 0f);
-            properties.Add(nameof(GetMoneyForCard) + nameof(GreenCard), 0f);
-            properties.Add(nameof(GetMoneyForCard) + nameof(PurpleCard), 0f);
-            properties.Add(nameof(GetMoneyForCard) + nameof(RedCard), 0f);
-            properties.Add(nameof(GetMoneyForCard) + nameof(YellowCard), 0f);
-            properties.Add(nameof(GetMoneyForWonders), 0f);
-            properties.Add(nameof(EnemyLoseMoney), 0f);
-            properties.Add(nameof(BuildFreeFromDroppedCards), 0f);
-            properties.Add(nameof(ChooseDevelopment), 0f);
-            properties.Add(nameof(DropEnemyCard), 0f);
-            properties.Add(nameof(NewTurn), 0f);
-            properties.Add(nameof(Mathematics), 0f);
-            properties.Add(nameof(MoneyOnChainBuild), 0f);
-            properties.Add(nameof(PlusStrengthOnRedCardBuild), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(BlueCard), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(BrownCard), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(GrayCard), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(GreenCard), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(PurpleCard), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(RedCard), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(YellowCard), 0f);
-            properties.Add(nameof(CheaperBuilding) + nameof(Wonder), 0f);
-            properties.Add(nameof(Law), 0f);
-            properties.Add(nameof(Economics), 0f);
-            properties.Add(nameof(Teology), 0f);
             return properties;
         }
-
-        private readonly IEffectEncoder m_effectEncoder;
     }
 }
