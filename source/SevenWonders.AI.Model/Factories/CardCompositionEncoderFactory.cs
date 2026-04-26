@@ -5,11 +5,12 @@ namespace SevenWonders.AI.Model.Factories
 {
     public class CardCompositionEncoderFactory : ICardCompositionEncoderFactory
     {
-        public CardCompositionEncoderFactory(IGame game, IEasyCardNodeEncoder easyCardNodeEncoder, IMediumCardNodeEncoder mediumCardNodeEncoder)
+        public CardCompositionEncoderFactory(IGame game, IEasyCardNodeEncoder easyCardNodeEncoder, IMediumCardNodeEncoder mediumCardNodeEncoder, IHardCardNodeEncoder hardCardNodeEncoder)
         {
             m_game = game;
             m_easyCardNodeEncoder = easyCardNodeEncoder;
             m_mediumCardNodeEncoder = mediumCardNodeEncoder;
+            m_hardCardNodeEncoder = hardCardNodeEncoder;
         }
 
         public ICardCompositionEncoder CreateEasy()
@@ -22,8 +23,14 @@ namespace SevenWonders.AI.Model.Factories
             return new CardCompositionEncoder(m_game, m_mediumCardNodeEncoder);
         }
 
+        public ICardCompositionEncoder CreateHard()
+        {
+            return new CardCompositionEncoder(m_game, m_hardCardNodeEncoder);
+        }
+
         private readonly IGame m_game;
         private readonly IEasyCardNodeEncoder m_easyCardNodeEncoder;
         private readonly IMediumCardNodeEncoder m_mediumCardNodeEncoder;
+        private readonly IHardCardNodeEncoder m_hardCardNodeEncoder;
     }
 }

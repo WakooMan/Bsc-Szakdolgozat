@@ -6,5 +6,6 @@ namespace SevenWonders.AI.Model.Factories
     {
         ICardCompositionEncoder CreateEasy();
         ICardCompositionEncoder CreateMedium();
+        ICardCompositionEncoder CreateHard();
     }
 }

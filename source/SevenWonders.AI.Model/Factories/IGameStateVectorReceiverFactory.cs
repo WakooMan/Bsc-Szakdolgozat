@@ -6,5 +6,6 @@ namespace SevenWonders.AI.Model.Factories
     {
         IGameStateVectorReceiver CreateEasy();
         IGameStateVectorReceiver CreateMedium();
+        IGameStateVectorReceiver CreateHard();
     }
 }

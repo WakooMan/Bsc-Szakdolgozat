@@ -8,14 +8,18 @@ namespace SevenWonders.AI.Model.Factories
         public GameStateVectorReceiverFactory(ICardCompositionEncoderFactory cardCompositionEncoderFactory, 
                                               IEasyPlayerEncoder easyPlayerEncoder,
                                               IMediumPlayerEncoder mediumPlayerEncoder,
+                                              IHardPlayerEncoder hardPlayerEncoder,
                                               IEasyGlobalInfoEncoder easyGlobalInfoEncoder,
-                                              IMediumGlobalInfoEncoder mediumGlobalInfoEncoder)
+                                              IMediumGlobalInfoEncoder mediumGlobalInfoEncoder,
+                                              IHardGlobalInfoEncoder hardGlobalInfoEncoder)
         {
             m_cardCompositionEncoderFactory = cardCompositionEncoderFactory;
             m_easyPlayerEncoder = easyPlayerEncoder;
             m_easyGlobalInfoEncoder = easyGlobalInfoEncoder;
             m_mediumPlayerEncoder = mediumPlayerEncoder;
             m_mediumGlobalInfoEncoder = mediumGlobalInfoEncoder;
+            m_hardPlayerEncoder = hardPlayerEncoder;
+            m_hardGlobalInfoEncoder = hardGlobalInfoEncoder;
         }
 
         public IGameStateVectorReceiver CreateEasy()
@@ -28,10 +32,17 @@ namespace SevenWonders.AI.Model.Factories
             return new GameStateVectorReceiver(m_cardCompositionEncoderFactory.CreateMedium(), m_mediumPlayerEncoder, m_mediumGlobalInfoEncoder);
         }
 
+        public IGameStateVectorReceiver CreateHard()
+        {
+            return new GameStateVectorReceiver(m_cardCompositionEncoderFactory.CreateHard(), m_hardPlayerEncoder, m_hardGlobalInfoEncoder);
+        }
+
         private readonly ICardCompositionEncoderFactory m_cardCompositionEncoderFactory;
         private readonly IEasyPlayerEncoder m_easyPlayerEncoder;
         private readonly IEasyGlobalInfoEncoder m_easyGlobalInfoEncoder;
         private readonly IMediumPlayerEncoder m_mediumPlayerEncoder;
         private readonly IMediumGlobalInfoEncoder m_mediumGlobalInfoEncoder;
+        private readonly IHardPlayerEncoder m_hardPlayerEncoder;
+        private readonly IHardGlobalInfoEncoder m_hardGlobalInfoEncoder;
     }
 }

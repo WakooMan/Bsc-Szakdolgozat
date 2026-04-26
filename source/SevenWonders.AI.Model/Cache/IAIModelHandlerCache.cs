@@ -6,5 +6,6 @@ namespace SevenWonders.AI.Model.Cache
     {
         IAIModelHandler EasyAIModelHandler { get; }
         IAIModelHandler MediumAIModelHandler { get; }
+        IAIModelHandler HardAIModelHandler { get; }
     }
 }

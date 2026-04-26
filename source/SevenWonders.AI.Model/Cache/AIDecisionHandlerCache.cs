@@ -8,6 +8,7 @@ namespace SevenWonders.AI.Model.Cache
     {
         public IAIDecisionHandler MediumAI => m_mediumAI;
         public IAIDecisionHandler EasyAI => m_easyAI;
+        public IAIDecisionHandler HardAI => m_hardAI;
 
         public AIDecisionHandlerCache(IGame game, 
                                       IGameStateVectorReceiverFactory gameStateVectorReceiverFactory, 
@@ -16,9 +17,11 @@ namespace SevenWonders.AI.Model.Cache
         {
             m_mediumAI = new AIDecisionHandler(game, gameStateVectorReceiverFactory.CreateMedium(), playerActionMaskReceiverFactory.Create(), rewardCalculatorFactory.Create());
             m_easyAI = new AIDecisionHandler(game, gameStateVectorReceiverFactory.CreateEasy(), playerActionMaskReceiverFactory.Create(), rewardCalculatorFactory.Create());
+            m_hardAI = new AIDecisionHandler(game, gameStateVectorReceiverFactory.CreateHard(), playerActionMaskReceiverFactory.Create(), rewardCalculatorFactory.Create());
         }
 
         private readonly IAIDecisionHandler m_mediumAI;
         private readonly IAIDecisionHandler m_easyAI;
+        private readonly IAIDecisionHandler m_hardAI;
     }
 }

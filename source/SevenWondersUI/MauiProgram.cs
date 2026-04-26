@@ -114,6 +114,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<IMediumCardNodeEncoder, MediumCardNodeEncoder>();
         builder.Services.AddSingleton<IMediumPlayerEncoder, MediumPlayerEncoder>();
         builder.Services.AddSingleton<IMediumGlobalInfoEncoder, MediumGlobalInfoEncoder>();
+        builder.Services.AddSingleton<IHardCardNodeEncoder, HardCardNodeEncoder>();
+        builder.Services.AddSingleton<IHardPlayerEncoder, HardPlayerEncoder>();
+        builder.Services.AddSingleton<IHardGlobalInfoEncoder, HardGlobalInfoEncoder>();
         builder.Services.AddSingleton<IGameStateVectorReceiverFactory, GameStateVectorReceiverFactory>();
         builder.Services.AddSingleton<IPlayerActionMaskReceiverFactory, PlayerActionMaskReceiverFactory>();
 
