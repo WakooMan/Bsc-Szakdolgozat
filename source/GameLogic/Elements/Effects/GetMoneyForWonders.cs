@@ -3,6 +3,10 @@
     public class GetMoneyForWonders : Effect
     {
         public int MoneyPerWonder { get; set; }
+        public int GetTotalMoney(Player owner)
+        {
+            return MoneyPerWonder * owner.Wonders.Count(wonder => wonder.HasBeenBuilt);
+        }
 
         public GetMoneyForWonders() { }
 
@@ -18,7 +22,7 @@
 
         public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            owner.Money += MoneyPerWonder * owner.Wonders.Count(wonder => wonder.HasBeenBuilt);
+            owner.Money += GetTotalMoney(owner);
         }
 
     }

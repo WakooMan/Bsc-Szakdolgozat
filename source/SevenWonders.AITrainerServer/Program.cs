@@ -63,6 +63,8 @@ namespace SevenWonders.AITrainerServer
             services.AddSingleton<IMediumCardNodeEncoder, MediumCardNodeEncoder>();
             services.AddSingleton<IMediumPlayerEncoder, MediumPlayerEncoder>();
             services.AddSingleton<IMediumGlobalInfoEncoder, MediumGlobalInfoEncoder>();
+            services.AddSingleton<IHardEncoderHelper, HardEncoderHelper>();
+            services.AddSingleton<ICardEffectAnalyzer, CardEffectAnalyzer>();
             services.AddSingleton<IHardCardNodeEncoder, HardCardNodeEncoder>();
             services.AddSingleton<IHardPlayerEncoder, HardPlayerEncoder>();
             services.AddSingleton<IHardGlobalInfoEncoder, HardGlobalInfoEncoder>();

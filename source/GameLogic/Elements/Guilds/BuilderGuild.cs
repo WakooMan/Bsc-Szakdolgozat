@@ -14,12 +14,16 @@ namespace GameLogic.Elements.Guilds
 
         public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            int maxCount = Math.Max(playerProperties.Owner.Wonders.Where(wonder => wonder.HasBeenBuilt).Count(), playerProperties.Opponent.Wonders.Where(wonder => wonder.HasBeenBuilt).Count());
             VictoryPoints victoryPoints = new VictoryPoints()
             {
-                Points = maxCount * 2
+                Points = CalculateGuildVP(playerProperties)
             };
             victoryPoints.OnCalculatePlayerProperties(playerProperties);
+        }
+
+        public override int CalculateGuildVP(PlayerProperties playerProperties)
+        {
+            return Math.Max(playerProperties.Owner.Wonders.Where(wonder => wonder.HasBeenBuilt).Count(), playerProperties.Opponent.Wonders.Where(wonder => wonder.HasBeenBuilt).Count()) * 2;
         }
     }
 }

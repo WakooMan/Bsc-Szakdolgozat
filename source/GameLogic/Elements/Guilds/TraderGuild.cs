@@ -26,7 +26,7 @@ namespace GameLogic.Elements.Guilds
         {
             VictoryPoints victoryPoints = new VictoryPoints()
             {
-                Points = GetMaxYellowCardCount(playerProperties.Owner, playerProperties.Opponent)
+                Points = CalculateGuildVP(playerProperties)
             };
             victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
@@ -34,6 +34,16 @@ namespace GameLogic.Elements.Guilds
         private int GetMaxYellowCardCount(Player owner, Player opponent)
         {
             return Math.Max(owner.Cards.OfType<YellowCard>().Count(), opponent.Cards.OfType<YellowCard>().Count());
+        }
+
+        public override int CalculateGuildVP(PlayerProperties playerProperties)
+        {
+            return GetMaxYellowCardCount(playerProperties.Owner, playerProperties.Opponent);
+        }
+
+        public override int CalculateMoney(PlayerProperties playerProperties)
+        {
+            return GetMaxYellowCardCount(playerProperties.Owner, playerProperties.Opponent);
         }
     }
 }

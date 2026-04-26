@@ -48,6 +48,8 @@ namespace GameLogic.Handlers
             throw new ArgumentException($"Player with id {id} not found!");
         }
 
+        public bool NewTurnForced => m_newTurnForced;
+
         public TurnHandler(IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));

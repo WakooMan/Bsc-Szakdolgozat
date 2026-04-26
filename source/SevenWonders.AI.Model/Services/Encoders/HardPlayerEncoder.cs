@@ -1,76 +1,86 @@
+using GameLogic;
 using GameLogic.Elements;
-using GameLogic.Elements.Disciplines;
 using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Goods.Products;
-using GameLogic.Elements.Goods.Resources;
 using GameLogic.Elements.Wonders;
+using SevenWonders.AI.Model.Services.Encoders.Structs;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {
     public class HardPlayerEncoder : IHardPlayerEncoder
     {
-        public HardPlayerEncoder()
+        public HardPlayerEncoder(IHardEncoderHelper helper, IGame game)
         {
+            m_helper = helper;
+            m_game = game;
         }
 
         public void EncodePlayer(List<float> vector, PlayerProperties playerProperties)
         {
             var properties = CreatePlayerProperties();
 
+            int vpFromWonders = 0;
+            int strengthFromWonders = 0;
+            int coinsFromWonders = 0;
+            int remainingWonderVP = 0;
+            int remainingWonderMilitary = 0;
+            float remainingWonderEconomic = 0f;
+            float remainingWonderScience = 0f;
+            float remainingExtraTurn = 0f;
+
+            foreach (Wonder wonder in playerProperties.Owner.Wonders)
+            {
+                if (wonder.HasBeenBuilt)
+                {
+                    vpFromWonders += wonder.Effects.OfType<VictoryPoints>().Sum(e => e.Points);
+                    strengthFromWonders += wonder.Effects.OfType<Strength>().Sum(e => e.Points);
+                    coinsFromWonders += wonder.Effects.OfType<GetMoney>().Sum(e => e.Money);
+                }
+                else
+                {
+                    remainingWonderVP += wonder.Effects.OfType<VictoryPoints>().Sum(e => e.Points);
+                    remainingWonderMilitary += wonder.Effects.OfType<Strength>().Sum(e => e.Points);
+                    remainingWonderEconomic += wonder.Effects.OfType<GetMoney>().Sum(e => e.Money) / 10f;
+                    remainingWonderEconomic += wonder.Effects.OfType<GetMoneyForCard>().Sum(e => e.MoneyPerCard) / 10f;
+                    remainingWonderEconomic += wonder.Effects.OfType<GetMoneyForWonders>().Sum(e => e.MoneyPerWonder) / 10f;
+                    remainingWonderScience += wonder.Effects.OfType<ChooseDevelopment>().Count();
+                    remainingExtraTurn += wonder.Effects.OfType<NewTurn>().Count();
+                }
+            }
+
+
+            EconomicAnalysis economics = m_helper.AnalyzeEconomics(playerProperties);
+            ScienceAnalysis science = m_helper.AnalyzeScience(playerProperties);
+            int wondersBuilt = playerProperties.Owner.Wonders.Count(w => w.HasBeenBuilt);
+
             properties["Money"] = playerProperties.Owner.Money / 100f;
             properties[nameof(VictoryPoints)] = playerProperties.VictoryPoints / 60f;
             properties[nameof(Strength)] = playerProperties.Strength / 30f;
-
-            for (int i = 0; i < 4; i++)
+            properties[$"{nameof(VictoryPoints)}_from_Wonders"] = vpFromWonders / 60f;
+            properties[$"{nameof(Strength)}_from_Wonders"] = strengthFromWonders / 30f;
+            properties["Coins_from_Wonders"] = coinsFromWonders / 100f;
+            properties["RemainingWonderVP_Potential"] = remainingWonderVP / 60f;
+            properties["RemainingWonderMilitary_Potential"] = remainingWonderMilitary / 30f;
+            properties["RemainingWonderEconomic_Potential"] = remainingWonderEconomic;
+            properties["RemainingWonderScience_Potential"] = remainingWonderScience / 4f;
+            properties["RemainingExtraTurnPotential"] = remainingExtraTurn / 4f;
+            properties["economic_scaling_potential"] = economics.ScalingPotential;
+            properties["military_scaling_potential"] = m_helper.CalculateRemainingMilitaryStrength(playerProperties) + remainingWonderMilitary / 30f;
+            properties["science_scaling_potential"] = science.Distinct / (float)science.DisciplineCount;
+            properties["denial_value"] = economics.DenialValue;
+            if (m_game.Context.TurnHandler.NewTurnForced)
             {
-                var wonders = playerProperties.Owner.Wonders;
-                properties[$"Wonder{i}Built"] = wonders[i].HasBeenBuilt ? 1f : 0f;
-                properties[$"Wonder{i}EffectCount"] = wonders[i].Effects.Count / 5f;
-                properties[$"Wonder{i}CostCount"] = wonders[i].GoodCost.Count / 5f;
+                properties["delta_action_budget"] = (m_game.Context.TurnHandler.CurrentPlayer == playerProperties.Owner) ? 1f : -1f;
             }
-
-            Type[] goodTypes = [typeof(Clay), typeof(Stone), typeof(Wood), typeof(Glass), typeof(Papirus)];
-            foreach (var goodType in goodTypes)
+            else
             {
-                properties[goodType.Name] = playerProperties.Goods.TryGetValue(goodType, out var good) ? good.Amount / 10f : 0f;
+                properties["delta_action_budget"] = 0f;
             }
-
-            Type[] disciplineTypes = [typeof(Building), typeof(Geography), typeof(Healing), typeof(Mechanics), typeof(Physics), typeof(Trading), typeof(Writing)];
-            int minDiscipline = int.MaxValue;
-            int maxDiscipline = 0;
-            int totalDisciplines = 0;
-            int distinctDisciplines = 0;
-            foreach (var disciplineType in disciplineTypes)
-            {
-                int count = playerProperties.Disciplines.TryGetValue(disciplineType, out var c) ? c : 0;
-                properties[disciplineType.Name] = count / 10f;
-                if (count > 0)
-                {
-                    distinctDisciplines++;
-                    minDiscipline = Math.Min(minDiscipline, count);
-                }
-                maxDiscipline = Math.Max(maxDiscipline, count);
-                totalDisciplines += count;
-            }
-            if (minDiscipline == int.MaxValue) minDiscipline = 0;
-
-            properties["ScienceCompleteSets"] = (distinctDisciplines == disciplineTypes.Length ? minDiscipline : 0) / 5f;
-            properties["ScienceMaxSingle"] = maxDiscipline / 10f;
-            properties["ScienceDistinct"] = distinctDisciplines / (float)disciplineTypes.Length;
-            properties["ScienceTotal"] = totalDisciplines / 30f;
-
-            Type[] cardTypes = [typeof(BrownCard), typeof(BlueCard), typeof(GrayCard), typeof(GreenCard), typeof(PurpleCard), typeof(RedCard), typeof(YellowCard)];
-            int totalCards = 0;
-            foreach (var cardType in cardTypes)
-            {
-                int count = playerProperties.Owner.Cards.Count(c => c.GetType() == cardType);
-                properties[cardType.Name] = count / 10f;
-                totalCards += count;
-            }
-            properties["TotalCards"] = totalCards / 30f;
-
-            int wondersBuilt = playerProperties.Owner.Wonders.Count(w => w.HasBeenBuilt);
+            properties["TotalCards"] = playerProperties.Owner.Cards.Count / 35f;
+            properties["ScienceCompleteSets"] = science.CompleteSets / 5f;
+            properties["ScienceMaxSingle"] = science.MaxSingle / 10f;
+            properties["ScienceDistinct"] = science.Distinct / (float)science.DisciplineCount;
+            properties["resource_flexibility"] = m_helper.CalculateResourceFlexibility(playerProperties);
+            properties["affordable_cards_ratio"] = m_helper.CalculateAffordableCardsRatio(playerProperties);
             properties["WondersBuiltCount"] = wondersBuilt / 4f;
             properties["WondersRemaining"] = (4 - wondersBuilt) / 4f;
 
@@ -83,38 +93,32 @@ namespace SevenWonders.AI.Model.Services.Encoders
             properties.Add("Money", 0f);
             properties.Add(nameof(VictoryPoints), 0f);
             properties.Add(nameof(Strength), 0f);
-
             properties.Add($"{nameof(VictoryPoints)}_from_Wonders", 0f);
             properties.Add($"{nameof(Strength)}_from_Wonders", 0f);
             properties.Add("Coins_from_Wonders", 0f);
-
-
             properties.Add("RemainingWonderVP_Potential", 0f);
             properties.Add("RemainingWonderMilitary_Potential", 0f);
             properties.Add("RemainingWonderEconomic_Potential", 0f);
             properties.Add("RemainingWonderScience_Potential", 0f);
             properties.Add("RemainingExtraTurnPotential", 0f);
-
             properties.Add("economic_scaling_potential", 0f);
             properties.Add("military_scaling_potential", 0f);
             properties.Add("science_scaling_potential", 0f);
             properties.Add("denial_value", 0f);
-            properties.Add("tempo_gain", 0f);
             properties.Add("delta_action_budget", 0f);
-            properties.Add("future_income_rate", 0f);
             properties.Add("TotalCards", 0f);
-
             properties.Add("ScienceCompleteSets", 0f);
             properties.Add("ScienceMaxSingle", 0f);
             properties.Add("ScienceDistinct", 0f);
-
             properties.Add("resource_flexibility", 0f);
             properties.Add("affordable_cards_ratio", 0f);
-
             properties.Add("WondersBuiltCount", 0f);
             properties.Add("WondersRemaining", 0f);
 
             return properties;
         }
+
+        private readonly IHardEncoderHelper m_helper;
+        private readonly IGame m_game;
     }
 }

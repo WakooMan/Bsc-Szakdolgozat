@@ -17,13 +17,16 @@ namespace GameLogic.Elements.Guilds
 
         public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            int maxCount = Math.Max(playerProperties.Owner.Money, playerProperties.Opponent.Money);
-
             VictoryPoints victoryPoints = new VictoryPoints()
             {
-                Points = maxCount % 3
+                Points = CalculateGuildVP(playerProperties)
             };
             victoryPoints.OnCalculatePlayerProperties(playerProperties);
+        }
+
+        public override int CalculateGuildVP(PlayerProperties playerProperties)
+        {
+            return Math.Max(playerProperties.Owner.Money, playerProperties.Opponent.Money) % 3;
         }
     }
 }

@@ -20,5 +20,14 @@ namespace GameLogic.Elements.Guilds
         public virtual void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
         }
+
+        public virtual int CalculateGuildVP(PlayerProperties playerProperties)
+        {
+            return 0;
+        }
+        public virtual int CalculateMoney(PlayerProperties playerProperties)
+        {
+            return 0;
+        }
     }
 }
