@@ -3,7 +3,7 @@
   "total_timesteps": 1000000,
   "learning_rate": 0.00005,
   "ent_coef": 0.0005,
-  "starter_model": "seven_wonders_hard_agent_fifth_phase",
+  "starter_model": "seven_wonders_hard_agent_sixth_phase",
   "reset_num_timesteps": false,
   "result_model": "seven_wonders_hard_agent_sixth_phase"
 }
