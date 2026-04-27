@@ -31,7 +31,15 @@ namespace SevenWonders.AI.Model.Services
 
         public float CalculateVictoryPointsReward(PlayerProperties playerProperties, PlayerProperties opponentProperties)
         {
-            float reward = playerProperties.VictoryPoints - opponentProperties.VictoryPoints;
+            float reward = 0f;
+            if (playerProperties.VictoryPoints > opponentProperties.VictoryPoints)
+            {
+                reward = 100f;
+            }
+            else if (playerProperties.VictoryPoints < opponentProperties.VictoryPoints)
+            {
+                reward = -100f;
+            }
             GameLog.Info($"VictoryPointsReward={reward} (PlayerVP={playerProperties.VictoryPoints}, OpponentVP={opponentProperties.VictoryPoints})");
             return reward;
         }
