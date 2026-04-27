@@ -64,10 +64,18 @@ class SevenWondersEnv(gym.Env):
         terminated = payload.get("terminated", False)
         reward = payload.get("reward", 0.0)
         mask = payload.get("mask", [])
+        victorytype = payload.get("victorytype", -1)
+        aipoints = payload.get("aipoints", -1)
+        enemypoints = payload.get("enemypoints", -1)
 
         if terminated:
             obs = np.zeros(self.observation_space.shape, dtype=np.float32)
-            return obs, reward, True, False, {"won": reward > 0, "opponent_type": self._opponent_type}
+            return obs, reward, True, False, {"won": reward > 0, 
+                                              "opponent_type": self._opponent_type, 
+                                              "victorytype": victorytype, 
+                                              "aipoints" : aipoints,
+                                              "enemypoints" : enemypoints
+                                             }
 
         obs = np.array(payload["state"], dtype=np.float32)
         return obs, reward, False, False, {"mask": mask}

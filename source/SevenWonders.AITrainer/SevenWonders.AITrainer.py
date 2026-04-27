@@ -69,6 +69,12 @@ OPPONENT_TYPE_NAMES = {
     5: "MediumAIModel"
 }
 
+VICTORY_TYPE_NAMES = {
+    0: "Citizen Victory",
+    1: "Scientific Victory",
+    2: "Military Victory"
+}
+
 
 class WinRateCallback(BaseCallback):
     """Tracks total and per-opponent-type win rates and logs them to TensorBoard."""
@@ -76,6 +82,10 @@ class WinRateCallback(BaseCallback):
     def __init__(self, verbose=0):
         super().__init__(verbose)
         self.wins = 0
+        self.wins_by_victorytype = {}
+        self.aipoints = 0
+        self.enemypoints = 0
+        self.citizenEpisodes = 0
         self.episodes = 0
         self.wins_by_type = {}
         self.episodes_by_type = {}
@@ -95,13 +105,28 @@ class WinRateCallback(BaseCallback):
                 self.logger.record("game/total_episodes", self.episodes)
 
                 opponent_type = info.get("opponent_type", -1)
+                victorytype = info.get("victorytype", -1)
+                aipoints = info.get("aipoints", -1)
+                enemypoints = info.get("enemypoints", -1)
                 if opponent_type >= 0:
                     self.episodes_by_type[opponent_type] = self.episodes_by_type.get(opponent_type, 0) + 1
                     if won:
                         self.wins_by_type[opponent_type] = self.wins_by_type.get(opponent_type, 0) + 1
+                    self.wins_by_victorytype[victorytype] = self.wins_by_victorytype.get(victorytype, 0) + 1
+                    if(victorytype == 0):
+                        self.aipoints += aipoints
+                        self.enemypoints += enemypoints
+                        self.citizenEpisodes += 1
                     type_name = OPPONENT_TYPE_NAMES.get(opponent_type, f"type_{opponent_type}")
                     type_wins = self.wins_by_type.get(opponent_type, 0)
                     type_episodes = self.episodes_by_type[opponent_type]
+                    type_victoryname = VICTORY_TYPE_NAMES.get(victorytype, f"type_{victorytype}")
+                    type_victories = self.wins_by_victorytype[victorytype]
+                    self.logger.record(f"game/{type_victoryname} Rate", type_victories / type_episodes)
+                    if(victorytype == 0):
+                        self.logger.record(f"game/AI Average Points", self.aipoints / self.citizenEpisodes)
+                        self.logger.record(f"game/Enemy Average Points", self.enemypoints / self.citizenEpisodes)
+                        self.logger.record(f"game/Average Point difference", (self.aipoints - self.enemypoints) / self.citizenEpisodes)
                     self.logger.record(f"game/win_rate_vs_{type_name}", type_wins / type_episodes)
                     self.logger.record(f"game/episodes_vs_{type_name}", type_episodes)
         return True

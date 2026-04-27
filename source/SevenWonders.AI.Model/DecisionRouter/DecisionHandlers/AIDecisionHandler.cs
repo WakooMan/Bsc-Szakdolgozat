@@ -62,7 +62,10 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                 State = stateVector,
                 Mask = actionMask,
                 Reward = m_rewardCalculator.CalculateInstantWinReward(playerProperties, m_playerId),
-                Terminated = true
+                Terminated = true,
+                AIPoints = -1,
+                EnemyPoints = -1,
+                VictoryType = 2
             };
             OnGameStateReceived?.Invoke(messageObj);
         }
@@ -81,7 +84,10 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                 State = stateVector,
                 Mask = actionMask,
                 Reward = m_rewardCalculator.CalculateInstantWinReward(playerProperties, m_playerId),
-                Terminated = true
+                Terminated = true,
+                AIPoints = -1,
+                EnemyPoints = -1,
+                VictoryType = 1
             };
             OnGameStateReceived?.Invoke(messageObj);
         }
@@ -99,7 +105,10 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                 State = stateVector,
                 Mask = actionMask,
                 Reward = m_rewardCalculator.CalculateVictoryPointsReward(playerProperties, opponentProperties),
-                Terminated = true
+                Terminated = true,
+                AIPoints = playerProperties.VictoryPoints,
+                EnemyPoints = opponentProperties.VictoryPoints,
+                VictoryType = 0
             };
             OnGameStateReceived?.Invoke(messageObj);
         }
@@ -170,7 +179,10 @@ namespace SevenWonders.AI.Model.DecisionRouter.DecisionHandlers
                 State = stateVector,
                 Mask = actionMask,
                 Reward = validAction ? m_rewardCalculator.CalculateTurnReward(playerProperties, opponentProperties) : -1f,
-                Terminated = false
+                Terminated = false,
+                AIPoints = -1,
+                EnemyPoints = -1,
+                VictoryType = -1
             };
             return messageObj;
         }
