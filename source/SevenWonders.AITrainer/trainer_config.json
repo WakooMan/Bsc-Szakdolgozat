@@ -1,9 +1,9 @@
 {
-  "tb_log_name": "Hard_Sixth_Phase",
-  "total_timesteps": 1000000,
+  "tb_log_name": "Hard_Final_Phase",
+  "total_timesteps": 100000,
   "learning_rate": 0.00005,
   "ent_coef": 0.0005,
   "starter_model": "seven_wonders_hard_agent_sixth_phase",
   "reset_num_timesteps": false,
-  "result_model": "seven_wonders_hard_agent_sixth_phase"
+  "result_model": "seven_wonders_hard_agent"
 }
