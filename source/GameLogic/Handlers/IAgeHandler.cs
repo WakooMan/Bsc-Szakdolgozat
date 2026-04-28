@@ -6,7 +6,7 @@ namespace GameLogic.Handlers
     public interface IAgeHandler
     {
         IAgeBase CurrentAge { get; }
-        Task Initialize(IRandomGenerator? randomGenerator);
-        Task<bool> NextAge();
+        void Initialize(IRandomGenerator? randomGenerator);
+        bool NextAge();
     }
 }

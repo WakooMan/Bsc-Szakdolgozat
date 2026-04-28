@@ -24,13 +24,12 @@ namespace GameLogic.Elements.Effects
     public abstract class Effect
     {
         public abstract Effect Clone();
-        public virtual Task Apply(IGameContext gameContext, Player owner, Player opponent) { return Task.CompletedTask; }
-        public virtual Task Unapply(IGameContext gameContext, Player owner, Player opponent) { return Task.CompletedTask; }
+        public virtual void Apply(IGameContext gameContext, Player owner, Player opponent) { }
+        public virtual void Unapply(IGameContext gameContext, Player owner, Player opponent) { }
 
-        public virtual Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public virtual void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             playerProperties.AddEffect(this);
-            return Task.CompletedTask;
         }
     }
 }

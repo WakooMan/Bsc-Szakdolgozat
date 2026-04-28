@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
     public class PickCard : IPlayerAction
     {
         public string Name => m_cardNode.CardObj.Name;
+        public int Id => 11;
         public ICardNode CardNode => m_cardNode;
         public Player Player => m_player;
         public PickCard() { }
@@ -20,17 +21,17 @@ namespace GameLogic.PlayerActions
             m_cardNode = cardNode;
         }
 
-        public Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-           return  Task.FromResult(gameContext.AgeHandler.CurrentAge.Composition.AvailableCards.Contains(m_cardNode));
+           return  gameContext.AgeHandler.CurrentAge.Composition.AvailableCards.Contains(m_cardNode);
         }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !gameContext.AgeHandler.CurrentAge.Composition.AvailableCards.Contains(m_cardNode), "Action cannot be performed, because composition does not contain cardnode!");
 
             m_player.PickedCard = m_cardNode;
-            await gameContext.EventManager.PublishAsync(new OnCardPicked(m_player, m_cardNode.CardObj));
+            gameContext.EventManager.Publish(new OnCardPicked(m_player, m_cardNode.CardObj));
             return true;
         }
 

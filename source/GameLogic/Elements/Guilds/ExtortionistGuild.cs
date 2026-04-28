@@ -15,15 +15,18 @@ namespace GameLogic.Elements.Guilds
             return new ExtortionistGuild();
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            int maxCount = Math.Max(playerProperties.Owner.Money, playerProperties.Opponent.Money);
-
             VictoryPoints victoryPoints = new VictoryPoints()
             {
-                Points = maxCount % 3
+                Points = CalculateGuildVP(playerProperties)
             };
-            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
+            victoryPoints.OnCalculatePlayerProperties(playerProperties);
+        }
+
+        public override int CalculateGuildVP(PlayerProperties playerProperties)
+        {
+            return Math.Max(playerProperties.Owner.Money, playerProperties.Opponent.Money) % 3;
         }
     }
 }

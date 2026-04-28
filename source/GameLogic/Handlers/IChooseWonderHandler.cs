@@ -5,7 +5,7 @@ namespace GameLogic.Handlers
 {
     public interface IChooseWonderHandler
     {
-        Task ChooseWonder();
+        void ChooseWonder();
         bool WondersChosen { get; }
         void Initialize(ICollection<Player> players, ICollection<Wonder> wonders, IGameContext gameContext);
     }

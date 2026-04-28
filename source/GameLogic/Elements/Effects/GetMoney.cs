@@ -19,10 +19,9 @@ namespace GameLogic.Elements.Effects
             return new GetMoney(this);
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             owner.Money += Money;
-            return Task.CompletedTask;
         }
 
     }

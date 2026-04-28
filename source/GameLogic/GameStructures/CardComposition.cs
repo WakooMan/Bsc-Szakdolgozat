@@ -46,7 +46,7 @@ namespace GameLogic.GameStructures
                     if (c.CoveredBy.Count <= 0 && c.Hidden)
                     {
                         c.Hidden = false;
-                        m_eventManager.PublishAsync(new CardNodeAvailableEvent(c)).GetAwaiter().GetResult();
+                        m_eventManager.Publish(new CardNodeAvailableEvent(c));
                     }
                 }
             }

@@ -1,9 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Events.GameEvents;
-using GameLogic.GameStructures;
-using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
-using System.Runtime.CompilerServices;
+using SevenWonders.Common;
 
 namespace GameLogic.PlayerTurnStates
 {
@@ -17,8 +15,9 @@ namespace GameLogic.PlayerTurnStates
             GoToPrevState = false;
         }
 
-        public async Task ExecuteTurnState()
+        public void ExecuteTurnState()
         {
+            GameLog.Info($"Player={CurrentPlayer.Name} making action decision.");
             Action<OnCardUnpicked> action = (args) => GoToPrevState = true;
             m_gameContext.EventManager.Subscribe(action);
             List<IPlayerAction> playerActions =
@@ -26,8 +25,9 @@ namespace GameLogic.PlayerTurnStates
                 new TurnDecision(new UnpickCard(CurrentPlayer)), new TurnDecision(new BuildCard()), new TurnDecision(new SellCard(CurrentPlayer)),
                 new TurnDecision(new BuildWonderProcess(CurrentPlayer, CurrentPlayer.Wonders.Select(wonder => new BuildWonder(wonder)).ToList())),
             ];
-            await m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, CurrentPlayer, playerActions);
+            m_gameContext.PlayerActionHandler.HandlePlayerActionsCompleted(m_gameContext, CurrentPlayer, playerActions);
             m_gameContext.EventManager.Unsubscribe(action);
+            GameLog.Info($"Player={CurrentPlayer.Name} decision completed. GoToPrevState={GoToPrevState}");
         }
 
         public IPlayerTurnState GetNextTurnState()

@@ -7,13 +7,13 @@
             return new Mathematics();
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             VictoryPoints victoryPoints = new VictoryPoints()
             {
                 Points = 3 * playerProperties.Owner.Developments.Count
             };
-            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
+            victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

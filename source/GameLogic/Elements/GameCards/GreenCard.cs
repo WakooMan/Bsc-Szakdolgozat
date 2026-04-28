@@ -24,15 +24,15 @@ namespace GameLogic.Elements.GameCards
             return new GreenCard(this);
         }
 
-        public override async Task OnBuilt(IGameContext gameContext, Player owner, Player opponent)
+        public override void OnBuilt(IGameContext gameContext, Player owner, Player opponent)
         {
-            await Discipline.Apply(gameContext, owner, opponent);
+            Discipline.Apply(gameContext, owner, opponent);
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await Point.OnCalculatePlayerProperties(playerProperties);
-            await Discipline.OnCalculatePlayerProperties(playerProperties);
+            Point.OnCalculatePlayerProperties(playerProperties);
+            Discipline.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

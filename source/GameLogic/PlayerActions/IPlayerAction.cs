@@ -1,13 +1,12 @@
-﻿using GameLogic.Elements;
-
-namespace GameLogic.PlayerActions
+﻿namespace GameLogic.PlayerActions
 {
     public interface IPlayerAction
     {
         string Name { get; }
+        int Id { get; }
 
-        Task<bool> DoPlayerAction(IGameContext gameContext);
+        bool DoPlayerAction(IGameContext gameContext);
 
-        Task<bool> CanPerform(IGameContext gameContext);
+        bool CanPerform(IGameContext gameContext);
     }
 }

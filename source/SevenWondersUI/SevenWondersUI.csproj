@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		<TargetFrameworks>net9.0-windows10.0.19041.0</TargetFrameworks>
 		
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
@@ -115,6 +115,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\SevenWonders.Presenter\SevenWonders.Presenter.csproj" />
 	  <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
+	  <ProjectReference Include="..\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj" />
 	  <ProjectReference Include="..\SevenWonders.GameEngine\SevenWonders.GameEngine.csproj" />
 	  <ProjectReference Include="..\SevenWonders.WebClient.Model\SevenWonders.WebClient.Model.csproj" />
 	  <ProjectReference Include="..\WebServer.Contract\WebServer.Contract.csproj" />
@@ -124,8 +125,8 @@
 	  <Compile Update="Views\CreateGamePopupWindow.xaml.cs">
 		<DependentUpon>CreateGamePopupWindow.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\GamePage.xaml.cs">
-		<DependentUpon>GamePage.xaml</DependentUpon>
+	  <Compile Update="Views\PlayerVSPlayerGamePage.xaml.cs">
+		<DependentUpon>PlayerVSPlayerGamePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -136,6 +137,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AIDifficultyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ConnectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -145,7 +149,7 @@
 	  <MauiXaml Update="Views\ErrorPopupWindow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\GamePage.xaml">
+	  <MauiXaml Update="Views\PlayerVSPlayerGamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LobbyMainPage.xaml">
@@ -157,10 +161,19 @@
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MultiplayerGamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PlayerNamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PlayerVSAIGamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SingleplayerModePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

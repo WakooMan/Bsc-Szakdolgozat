@@ -1,4 +1,7 @@
 ﻿using GameLogic.Elements;
+using GameLogic.Elements.Developments;
+using GameLogic.Elements.Military;
+using GameLogic.Elements.Modifiers;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStates;
 using GameLogic.Interfaces;
@@ -27,19 +30,26 @@ namespace GameLogic
             m_isInitialized = false;
         }
 
-        public async void GameLoop()
+        public void GameLoop()
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_isInitialized, "Cannot start an uninitialized game!");
 
-            await m_gameContext.EventManager.PublishAsync(new OnGameInitialized(m_gameContext));
-            await m_gameContext.EventManager.PublishAsync(new OnGameStarted(m_players));
+            ICollection<Development> developments = Context.RandomGenerator.ReceiveRandomElements(Context.DevelopmentList.Developments, 5);
+            Context.DevelopmentList.Developments.RemoveAll(developments.Contains);
+            Context.MilitaryBoard.Initialize(m_players, developments);
+
+            GameLog.Info("GameLoop started.");
+            m_gameContext.EventManager.Publish(new OnGameInitialized(m_gameContext));
+            m_gameContext.EventManager.Publish(new OnGameStarted(m_players));
 
             while (CurrentState is not EndGameState)
             {
-                await CurrentState.DoStateAction();
+                GameLog.Info($"Executing state: {CurrentState.GetType().Name}");
+                CurrentState.DoStateAction();
                 CurrentState = CurrentState.GetNextState();
             }
 
+            GameLog.Info("GameLoop ended.");
             m_isInitialized = false;
         }
 
@@ -47,13 +57,15 @@ namespace GameLogic
         {
             if (!m_isInitialized)
             {
+                GameLog.Info($"Initializing game: Player1={player1.name}, Player2={player2.name}, StartingPlayerId={startingPlayerId}");
                 ArgumentChecker.CheckPredicateForOperation(() => startingPlayerId != 1 && startingPlayerId != 2, "startingPlayerId must be 1 or 2.");
                 var p1 = new Player(player1.actionReceiver, player1.name, 1, 7);
                 var p2 = new Player(player2.actionReceiver, player2.name, 2, 7);
                 m_players = startingPlayerId == 1 ? [p1, p2] : [p2, p1];
                 m_gameContext.Initialize(m_players, randomGenerator);
-                CurrentState = new ChooseWonderState(m_gameContext);
+                CurrentState = new ChooseWonderState(m_gameContext, randomGenerator, m_players);
                 m_isInitialized = true;
+                GameLog.Info("Game initialized successfully.");
             }
         }
     }

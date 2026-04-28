@@ -34,11 +34,11 @@ namespace GameLogic.Elements.Modifiers
             Effects.ForEach(effect => effect.Unapply(gameContext, owner, opponent));
         }
 
-        public async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             foreach (Effect effect in Effects)
             {
-                await effect.OnCalculatePlayerProperties(playerProperties);
+                effect.OnCalculatePlayerProperties(playerProperties);
             }
         }
     }

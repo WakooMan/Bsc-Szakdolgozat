@@ -20,13 +20,12 @@ namespace GameLogic.Elements.GameCards
             return new BrownCard(this);
         }
 
-        public override Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             foreach (GameResource resource in ProducedResources)
             {
                 playerProperties.AddGood(resource);
             }
-            return Task.CompletedTask;
         }
     }
 }

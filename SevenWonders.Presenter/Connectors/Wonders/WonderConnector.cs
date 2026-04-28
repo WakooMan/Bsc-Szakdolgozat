@@ -1,7 +1,6 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.Wonders;
 using SevenWonders.Presenter.Connectors.Wonders.WonderChildTextureHandlers;
-using SevenWonders.Presenter.Views;
 using SevenWonders.Presenter.Views.Factories;
 
 namespace SevenWonders.Presenter.Connectors.Wonders
@@ -10,7 +9,7 @@ namespace SevenWonders.Presenter.Connectors.Wonders
     {
         public WonderConnector(IGameElements gameElements, IGameObjectViewFactory gameObjectViewFactory, IWonderChildTextureHandler wonderChildTextureHandler)
         {
-            m_wonderList = gameElements.Wonders;
+            m_gameElements = gameElements;
             m_gameObjectViewFactory = gameObjectViewFactory;
             m_wonderChildTextureHandler = wonderChildTextureHandler;
         }
@@ -19,8 +18,14 @@ namespace SevenWonders.Presenter.Connectors.Wonders
 
         public IDictionary<Wonder, WonderConnection> ReceiveWonderConnection()
         {
+            IWonderList? wonderList = m_gameElements.Wonders;
             Dictionary<Wonder, WonderConnection> result = new Dictionary<Wonder, WonderConnection>();
-            foreach (Wonder wonder in m_wonderList.Wonders)
+            if(wonderList is null)
+            {
+                return result;
+            }
+
+            foreach (Wonder wonder in wonderList.Wonders)
             {
                 result.Add(wonder, new WonderConnection(m_gameObjectViewFactory.CreateView(wonder.Name)));
                 m_wonderChildTextureHandler.Handle(wonder);
@@ -30,7 +35,7 @@ namespace SevenWonders.Presenter.Connectors.Wonders
         }
 
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
-        private readonly IWonderList m_wonderList;
+        private readonly IGameElements m_gameElements;
         private readonly IWonderChildTextureHandler m_wonderChildTextureHandler;
     }
 }

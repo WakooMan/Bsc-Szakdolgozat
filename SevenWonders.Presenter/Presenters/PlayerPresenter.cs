@@ -93,7 +93,7 @@ namespace SevenWonders.Presenter.Presenters
                 if(m_moneyLabel is not null && m_pointLabel is not null && m_nameLabel is not null)
                 {
                     m_moneyLabel.Text = player.Money.ToString();
-                    m_pointLabel.Text = player.GetPlayerProperties(opponent).GetAwaiter().GetResult().VictoryPoints.ToString();
+                    m_pointLabel.Text = player.GetPlayerProperties(opponent).VictoryPoints.ToString();
                     m_nameLabel.Text = player.Name;
                 }
             }

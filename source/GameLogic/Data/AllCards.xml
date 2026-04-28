@@ -2,10 +2,12 @@
 <CardList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<Cards>
 		<Card xsi:type="BrownCard">
+			<ID>1</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Fakitermelés</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Wood">
@@ -14,10 +16,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>2</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Fatelep</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Wood">
@@ -26,10 +30,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>3</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Agyagbánya</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Clay">
@@ -38,10 +44,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>4</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Agyaglelőhely</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Clay">
@@ -50,10 +58,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>5</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Kőfejtő</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Stone">
@@ -62,10 +72,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>6</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Kőbánya</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Stone">
@@ -74,10 +86,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>7</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Fűrésztelep</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Wood">
@@ -86,10 +100,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>8</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Téglagyár</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Clay">
@@ -98,10 +114,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="BrownCard">
+			<ID>9</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Külszíni fejtés</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<ProducedResources>
 				<GameResource xsi:type="Stone">
@@ -110,10 +128,12 @@
 			</ProducedResources>
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>10</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Üveggyár</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<CreatedProducts>
 				<Product xsi:type="Glass">
@@ -123,10 +143,12 @@
 		
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>11</ID>
 			<GoodCost/>
 			<MoneyCost>1</MoneyCost>
 			<Name>Prés</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<CreatedProducts>
 				<Product xsi:type="Papirus">
@@ -135,10 +157,12 @@
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>12</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Üvegfúvó</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<CreatedProducts>
 				<Product xsi:type="Glass">
@@ -147,10 +171,12 @@
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="GrayCard">
+			<ID>13</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Szárítóterem</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<CreatedProducts>
 				<Product xsi:type="Papirus">
@@ -159,16 +185,19 @@
 			</CreatedProducts>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>14</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Őrtorony</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<Strength>
 				<Points>1</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>15</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -177,12 +206,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Istálló</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Strength>
 				<Points>1</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>16</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -191,22 +222,26 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Helyőrség</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Strength>
 				<Points>1</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>17</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Cölöpkerítés</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Strength>
 				<Points>1</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>18</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -215,12 +250,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Falak</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Strength>
 				<Points>2</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>19</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -232,22 +269,26 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Lótenyésztők</Name>
 			<PreviousBuilding>Istálló</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Strength>
 				<Points>1</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>20</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Barakk</Name>
 			<PreviousBuilding>Helyőrség</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Strength>
 				<Points>1</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>21</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -262,12 +303,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Íjászterület</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Strength>
 				<Points>2</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>22</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -279,12 +322,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Alakulótér</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Strength>
 				<Points>2</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>23</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>3</Amount>
@@ -296,22 +341,26 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Fegyverarzenál</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Strength>
 				<Points>3</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>24</ID>
 			<GoodCost/>
 			<MoneyCost>8</MoneyCost>
 			<Name>Főhadiszállás</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Strength>
 				<Points>3</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>25</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -326,12 +375,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Erőd</Name>
 			<PreviousBuilding>Cölöpkerítés</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Strength>
 				<Points>2</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>26</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>3</Amount>
@@ -343,12 +394,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Ostromműhely</Name>
 			<PreviousBuilding>Íjászterület</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Strength>
 				<Points>2</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="RedCard">
+			<ID>27</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -360,12 +413,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Cirkusz</Name>
 			<PreviousBuilding>Alakulótér</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Strength>
 				<Points>2</Points>
 			</Strength>
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>28</ID>
 			<GoodCost>
 				<Good xsi:type="Papirus">
 					<Amount>1</Amount>
@@ -374,6 +429,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Műhely</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>1</Points>
@@ -381,6 +437,7 @@
 			<Discipline xsi:type="Building" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>29</ID>
 			<GoodCost>
 				<Good xsi:type="Glass">
 					<Amount>1</Amount>
@@ -389,6 +446,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Patika</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>1</Points>
@@ -396,10 +454,12 @@
 			<Discipline xsi:type="Mechanics" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>30</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Scriptorium</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>0</Points>
@@ -407,10 +467,12 @@
 			<Discipline xsi:type="Writing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>31</ID>
 			<GoodCost/>
 			<MoneyCost>2</MoneyCost>
 			<Name>Gyógyszerész</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>0</Points>
@@ -418,6 +480,7 @@
 			<Discipline xsi:type="Healing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>32</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -432,6 +495,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Könyvtár</Name>
 			<PreviousBuilding>Scriptorium</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>2</Points>
@@ -439,6 +503,7 @@
 			<Discipline xsi:type="Writing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>33</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -450,6 +515,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Kórház</Name>
 			<PreviousBuilding>Gyógyszerész</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>2</Points>
@@ -457,6 +523,7 @@
 			<Discipline xsi:type="Healing" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>34</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -468,6 +535,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Iskola</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>1</Points>
@@ -475,6 +543,7 @@
 			<Discipline xsi:type="Mechanics" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>35</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -486,6 +555,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Laboratórium</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>1</Points>
@@ -493,6 +563,7 @@
 			<Discipline xsi:type="Building" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>36</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -507,6 +578,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Akadémia</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>3</Points>
@@ -514,6 +586,7 @@
 			<Discipline xsi:type="Trading" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>37</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>2</Amount>
@@ -528,6 +601,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Tanterem</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>3</Points>
@@ -535,6 +609,7 @@
 			<Discipline xsi:type="Trading" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>38</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -549,6 +624,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Egyetem</Name>
 			<PreviousBuilding>Iskola</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>2</Points>
@@ -556,6 +632,7 @@
 			<Discipline xsi:type="Geography" />
 		</Card>
 		<Card xsi:type="GreenCard">
+			<ID>39</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -567,6 +644,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Csillagvizsgáló</Name>
 			<PreviousBuilding>Laboratórium</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>2</Points>
@@ -574,10 +652,12 @@
 			<Discipline xsi:type="Geography" />
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>40</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Kőraktár</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<Effects>
 				<Effect xsi:type="BuyGoods">
@@ -591,10 +671,12 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>41</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Agyagraktár</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<Effects>
 				<Effect xsi:type="BuyGoods">
@@ -608,10 +690,12 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>42</ID>
 			<GoodCost/>
 			<MoneyCost>3</MoneyCost>
 			<Name>Faraktár</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>I</Age>
 			<Effects>
 				<Effect xsi:type="BuyGoods">
@@ -625,10 +709,12 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>43</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Fogadó</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Effects>
 				<Effect xsi:type="GetMoney">
@@ -637,6 +723,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>44</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -645,6 +732,7 @@
 			<MoneyCost>3</MoneyCost>
 			<Name>Fórum</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Effects>
 				<Effect xsi:type="ChooseGood">
@@ -656,6 +744,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>45</ID>
 			<GoodCost>
 				<Good xsi:type="Glass">
 					<Amount>1</Amount>
@@ -667,6 +756,7 @@
 			<MoneyCost>2</MoneyCost>
 			<Name>Karavánszeráj</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Effects>
 				<Effect xsi:type="ChooseGood">
@@ -679,10 +769,12 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>46</ID>
 			<GoodCost/>
 			<MoneyCost>4</MoneyCost>
 			<Name>Vámház</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Effects>
 				<Effect xsi:type="BuyGoods">
@@ -700,10 +792,12 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>47</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Sörfőzde</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Effects>
 				<Effect xsi:type="GetMoney">
@@ -712,6 +806,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>48</ID>
 			<GoodCost>
 				<Good xsi:type="Papirus">
 					<Amount>2</Amount>
@@ -720,6 +815,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Kereskedelmi kamara</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Effects>
 				<Effect xsi:type="VictoryPoints">
@@ -732,6 +828,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>49</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -746,6 +843,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Kikötő</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Effects>
 				<Effect xsi:type="VictoryPoints">
@@ -758,6 +856,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>50</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -769,6 +868,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Fegyvertár</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Effects>
 				<Effect xsi:type="VictoryPoints">
@@ -781,6 +881,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>51</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -792,6 +893,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Világítótorony</Name>
 			<PreviousBuilding>Fogadó</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Effects>
 				<Effect xsi:type="VictoryPoints">
@@ -804,6 +906,7 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="YellowCard">
+			<ID>52</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -818,6 +921,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Aréna</Name>
 			<PreviousBuilding>Sörfőzde</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Effects>
 				<Effect xsi:type="VictoryPoints">
@@ -829,22 +933,27 @@
 			</Effects>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>53</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Színház</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>54</ID>
 			<GoodCost/>
 			<MoneyCost>0</MoneyCost>
 			<Name>Oltár</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>55</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -853,10 +962,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Fürdő</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>I</Age>
 			<Point xsi:type="VictoryPoints"><Points>3</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>56</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>2</Amount>
@@ -868,10 +979,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Bíróság</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints"><Points>5</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>57</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -880,10 +993,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Szobor</Name>
 			<PreviousBuilding>Színház</PreviousBuilding>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>58</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>1</Amount>
@@ -895,10 +1010,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Templom</Name>
 			<PreviousBuilding>Oltár</PreviousBuilding>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>59</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>3</Amount>
@@ -907,10 +1024,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Vízvezeték</Name>
 			<PreviousBuilding>Fürdő</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints"><Points>5</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>60</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>1</Amount>
@@ -922,10 +1041,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Szószék</Name>
 			<PreviousBuilding/>
+			<HasChainChild>true</HasChainChild>
 			<Age>II</Age>
 			<Point xsi:type="VictoryPoints"><Points>4</Points></Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>61</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -943,12 +1064,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Palota</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>7</Points>
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>62</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>3</Amount>
@@ -960,12 +1083,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Városháza</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>7</Points>
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>63</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -977,12 +1102,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Obeliszk</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>5</Points>
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>64</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -994,12 +1121,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Kertek</Name>
 			<PreviousBuilding>Szobor</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>6</Points>
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>65</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -1014,12 +1143,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Panteon</Name>
 			<PreviousBuilding>Templom</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>6</Points>
 			</Point>
 		</Card>
 		<Card xsi:type="BlueCard">
+			<ID>66</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -1034,12 +1165,14 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Szenátus</Name>
 			<PreviousBuilding>Szószék</PreviousBuilding>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<Point xsi:type="VictoryPoints">
 				<Points>5</Points>
 			</Point>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>67</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -1057,10 +1190,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Kereskedők céhe</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<GuildObj xsi:type="TraderGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>68</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>1</Amount>
@@ -1078,10 +1213,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Hajósok céhe</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<GuildObj xsi:type="SailorGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>69</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -1099,10 +1236,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Építők céhe</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<GuildObj xsi:type="BuilderGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>70</ID>
 			<GoodCost>
 				<Good xsi:type="Wood">
 					<Amount>2</Amount>
@@ -1117,10 +1256,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Elöljárók céhe</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<GuildObj xsi:type="MagistrateGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>71</ID>
 			<GoodCost>
 				<Good xsi:type="Clay">
 					<Amount>2</Amount>
@@ -1132,10 +1273,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Tudósok céhe</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<GuildObj xsi:type="ScienceGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>72</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -1147,10 +1290,12 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Uzsorások céhe</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<GuildObj xsi:type="ExtortionistGuild"/>
 		</Card>
 		<Card xsi:type="PurpleCard">
+			<ID>73</ID>
 			<GoodCost>
 				<Good xsi:type="Stone">
 					<Amount>2</Amount>
@@ -1165,6 +1310,7 @@
 			<MoneyCost>0</MoneyCost>
 			<Name>Stratégák céhe</Name>
 			<PreviousBuilding/>
+			<HasChainChild>false</HasChainChild>
 			<Age>III</Age>
 			<GuildObj xsi:type="StrategistGuild"/>
 		</Card>

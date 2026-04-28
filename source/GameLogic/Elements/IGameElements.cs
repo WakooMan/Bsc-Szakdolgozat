@@ -6,9 +6,9 @@ namespace GameLogic.Elements
 {
     public interface IGameElements
     {
-        ICardList Cards { get; }
-        IWonderList Wonders { get; }
-        IDevelopmentList Developments { get; }
+        ICardList? Cards { get; }
+        IWonderList? Wonders { get; }
+        IDevelopmentList? Developments { get; }
 
         public void ResetElements();
     }

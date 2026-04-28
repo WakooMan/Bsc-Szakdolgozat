@@ -11,6 +11,7 @@ namespace GameLogic.PlayerActions
     public class ChooseWonderAction : IPlayerAction
     {
         public string Name => m_wonder.Name;
+        public int Id => 9;
         public Wonder Wonder => m_wonder;
         public Player Player => m_player();
 
@@ -26,18 +27,18 @@ namespace GameLogic.PlayerActions
             m_player = player;
         }
 
-        public Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-            return Task.FromResult(m_wonders.Contains(m_wonder));
+            return m_wonders.Contains(m_wonder);
         }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
             ArgumentChecker.CheckPredicateForOperation(() => !m_wonders.Contains(m_wonder), "Wonder list does not contain the wonder! Action cannot be performed!");
 
             m_player().Wonders.Add(m_wonder);
             m_wonders.Remove(m_wonder);
-            await gameContext.EventManager.PublishAsync(new OnWonderChosen(m_player(), m_wonder));
+            gameContext.EventManager.Publish(new OnWonderChosen(m_player(), m_wonder));
             return true;
         }
 

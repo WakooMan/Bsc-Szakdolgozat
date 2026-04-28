@@ -168,13 +168,14 @@ namespace SevenWondersUI.ViewModels
             {
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await m_navigationService.NavigateToAsync("//GamePage", new Dictionary<string, object>
+                    await m_navigationService.NavigateToAsync("//MultiplayerGamePage", new Dictionary<string, object>
                     {
-                        { "Player1", message.Player1 },
-                        { "Player2", message.Player2 },
+                        { "Player1", message.Player1Name },
+                        { "Player2", message.Player2Name },
+                        { "Player1Type", message.Player1Type },
+                        { "Player2Type", message.Player2Type },
                         { "StartingPlayerId", message.StartingPlayerId },
-                        { "Seed", message.Seed },
-                        { "IsMultiplayer", true }
+                        { "Seed", message.Seed }
                     });
                 });
             }

@@ -1,19 +1,28 @@
 ﻿using GameLogic.Interfaces;
+using SevenWonders.AI.Model.Cache;
+using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
+using SevenWonders.AI.Model.DecisionRouter.Factories;
+using SevenWonders.AI.Model.PlayerActionReceivers;
 using SevenWonders.Common;
 using SevenWonders.Presenter.Connectors;
 using SevenWonders.WebClient.Model;
 using SevenWonders.WebClient.Model.Services;
-using WebServer.Contract.Messages.Game.ServerMessages;
 
 namespace SevenWonders.Presenter.PlayerActionReceivers
 {
     public class PlayerActionReceiverFactory : IPlayerActionReceiverFactory
     {
-        public PlayerActionReceiverFactory(IGameEngineReceiver gameEngineReceiver, IClientHubService clientHubService, IClientMessageDispatcher clientMessageDispatcher)
+        public PlayerActionReceiverFactory(IGameEngineReceiver gameEngineReceiver, 
+                                           IClientHubService clientHubService, 
+                                           IClientMessageDispatcher clientMessageDispatcher,
+                                           IDecisionRouterFactory decisionRouterFactory,
+                                           IAIDecisionHandlerCache aIDecisionHandlerCache)
         {
             m_gameEngineReceiver = gameEngineReceiver;
             m_clientHubService = clientHubService;
             m_clientMessageDispatcher = clientMessageDispatcher;
+            m_decisionRouterFactory = decisionRouterFactory;
+            m_aIDecisionHandlerCache = aIDecisionHandlerCache;
         }
 
         public IPlayerActionReceiver Create(PlayerType playerType, string playerName)
@@ -28,8 +37,12 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
                     return result;
                 case PlayerType.RemotePlayer:
                     return new RemotePlayerActionReceiver(m_gameEngineReceiver, playerName, m_clientMessageDispatcher);
-                case PlayerType.AI:
-                    throw new NotSupportedException("AI feature is not yet supported!");
+                case PlayerType.EasyAI:
+                    return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.EasyAI);
+                case PlayerType.MediumAI:
+                    return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.MediumAI);
+                case PlayerType.HardAI:
+                    return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.HardAI);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(playerType), playerType, "Not handled");
             }
@@ -38,5 +51,7 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IClientHubService m_clientHubService;
         private readonly IClientMessageDispatcher m_clientMessageDispatcher;
+        private readonly IDecisionRouterFactory m_decisionRouterFactory;
+        private readonly IAIDecisionHandlerCache m_aIDecisionHandlerCache;
     }
 }

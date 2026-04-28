@@ -20,9 +20,9 @@ namespace GameLogic.Elements.GameCards
             return new RedCard(this);
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
-            await Strength.OnCalculatePlayerProperties(playerProperties);
+            Strength.OnCalculatePlayerProperties(playerProperties);
         }
     }
 }

@@ -121,7 +121,7 @@ namespace SevenWondersUI.ViewModels
 
         private async void OnSinglePlayerClicked()
         {
-            await m_navigationService.NavigateToAsync("//PlayerNamePage");
+            await m_navigationService.NavigateToAsync("//SingleplayerModePage");
         }
 
         private string m_title;

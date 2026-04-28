@@ -6,11 +6,11 @@ namespace GameLogic.Handlers
     {
         Player CurrentPlayer { get; }
         Player OpponentPlayer { get; }
-
+        bool NewTurnForced { get; }
         Player GetPlayer(int index);
 
-        Task NextPlayer();
-        Task ForceNewTurn();
+        void NextPlayer();
+        void ForceNewTurn();
         void Initialize(ICollection<Player> players);
     }
 }

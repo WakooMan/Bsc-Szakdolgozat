@@ -1,8 +1,10 @@
-﻿using GameLogic.Elements;
+﻿using GameLogic;
+using GameLogic.Elements;
 using GameLogic.Events;
 using GameLogic.GameStructures;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using SevenWonders.Common;
 
 namespace GameLogic.PlayerTurnStates
 {
@@ -14,9 +16,10 @@ namespace GameLogic.PlayerTurnStates
             m_gameContext = gameContext;
         }
 
-        public async Task ExecuteTurnState()
+        public void ExecuteTurnState()
         {
-            await m_gameContext.PlayerActionHandler.HandlePlayerActions(m_gameContext, CurrentPlayer, Composition.AvailableCards.Select(card => (IPlayerAction)new PickCard(CurrentPlayer, card)).ToList());
+            GameLog.Info($"Player={CurrentPlayer.Name} picking from {Composition.AvailableCards.Count} available cards.");
+            m_gameContext.PlayerActionHandler.HandlePlayerActions(m_gameContext, CurrentPlayer, Composition.AvailableCards.Select(card => (IPlayerAction)new PickCard(CurrentPlayer, card)).ToList());
         }
 
         public IPlayerTurnState GetNextTurnState()

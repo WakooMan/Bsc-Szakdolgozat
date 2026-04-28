@@ -1,6 +1,5 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Elements.GameCards;
-using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using GameLogic.GameStructures;
 
@@ -9,10 +8,11 @@ namespace GameLogic.PlayerActions
     public class BuildCard : IPlayerAction
     {
         public string Name => nameof(BuildCard);
+        public int Id => 20;
 
         public BuildCard() { }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
             Player player = GetPlayer(gameContext);
             Player opponent = GetOpponent(gameContext);
@@ -27,7 +27,7 @@ namespace GameLogic.PlayerActions
             if (string.IsNullOrEmpty(card.CardObj.PreviousBuilding) ||
                player.Cards.All(c => c.Name != card.CardObj.PreviousBuilding))
             {
-                BuildCost = await gameContext.CostCalculator.GetBuildCost(card.CardObj, player, opponent);
+                BuildCost = gameContext.CostCalculator.GetBuildCost(card.CardObj, player, opponent);
                 player.Money -= BuildCost;
                 chainBuildUsed = false;
             }
@@ -36,13 +36,13 @@ namespace GameLogic.PlayerActions
 
             player.PickedCard = null;
             OnCardBuilt onCardBuilt = new OnCardBuilt(card.CardObj, player, BuildCost, chainBuildUsed);
-            await gameContext.EventManager.PublishAsync(onCardBuilt);
-            await player.OnBuildCard(onCardBuilt);
-            await card.CardObj.OnBuilt(gameContext, player, opponent);
+            gameContext.EventManager.Publish(onCardBuilt);
+            player.OnBuildCard(onCardBuilt);
+            card.CardObj.OnBuilt(gameContext, player, opponent);
             return true;
         }
 
-        public async Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
             Player player = GetPlayer(gameContext);
             Player opponent = GetOpponent(gameContext);
@@ -58,7 +58,7 @@ namespace GameLogic.PlayerActions
                 return true;
 
 
-            return await gameContext.CostCalculator.CanAfford(card, player, opponent);
+            return gameContext.CostCalculator.CanAfford(card, player, opponent);
         }
 
         private Player GetPlayer(IGameContext gameContext) => gameContext.TurnHandler.CurrentPlayer;

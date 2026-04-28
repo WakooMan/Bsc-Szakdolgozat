@@ -16,14 +16,13 @@ namespace GameLogic.Elements.Effects
             return new NewTurn(this);
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             if (!AlreadyApplied)
             {
                 gameContext.TurnHandler.ForceNewTurn();
                 AlreadyApplied = true;
             }
-            return Task.CompletedTask;
         }
 
        

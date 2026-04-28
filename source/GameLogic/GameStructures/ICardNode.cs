@@ -10,6 +10,5 @@ namespace GameLogic.GameStructures
         IReadOnlyList<ICardNode> CoveredBy { get; }
         void AddParent(ICardNode cardNode);
         void RemoveParent(ICardNode cardNode);
-
     }
 }

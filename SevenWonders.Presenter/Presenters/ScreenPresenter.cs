@@ -1,4 +1,5 @@
-﻿using GameLogic.Events;
+﻿using GameLogic.Elements.GameCards;
+using GameLogic.Events;
 using GameLogic.Events.GameEvents;
 using SevenWonders.GameEngine;
 using SevenWonders.Presenter.Connectors;
@@ -50,7 +51,7 @@ namespace SevenWonders.Presenter.Presenters
                 if (m_militaryGameOverScreen is not null && m_militaryPlayerName is not null && m_militaryBackToMenu is not null)
                 {
                     m_militaryBackToMenu.ClickedEvent += OnClickBackToMenu;
-                    m_militaryPlayerName.Text = $"{eventObj.PlayerName}";
+                    m_militaryPlayerName.Text = $"{eventObj.PlayerProperties.Owner.Name}";
                     m_militaryGameOverScreen.Visible = true;
                 }
             });
@@ -60,7 +61,7 @@ namespace SevenWonders.Presenter.Presenters
                 if (m_scienceGameOverScreen is not null && m_sciencePlayerName is not null && m_scienceBackToMenu is not null)
                 {
                     m_scienceBackToMenu.ClickedEvent += OnClickBackToMenu;
-                    m_sciencePlayerName.Text = $"{eventObj.PlayerName}";
+                    m_sciencePlayerName.Text = $"{eventObj.PlayerProperties.Owner.Name}";
                     m_scienceGameOverScreen.Visible = true;
                 }
             });
@@ -79,34 +80,35 @@ namespace SevenWonders.Presenter.Presenters
                 {
                     m_citizenBackToMenu.ClickedEvent += OnClickBackToMenu;
 
-                    m_citizenFirstPlayerName.Text = eventObj.FirstPlayer.name;
-                    m_citizenFirstPlayerVictoryPoints.Text = eventObj.FirstPlayer.victoryPoints.ToString();
-                    m_citizenFirstPlayerBlueCardNumber.Text = eventObj.FirstPlayer.numberOfBlueCards.ToString();
+                    m_citizenFirstPlayerName.Text = eventObj.FirstPlayer.Owner.Name;
+                    m_citizenFirstPlayerVictoryPoints.Text = eventObj.FirstPlayer.VictoryPoints.ToString();
+                    int numberOfBlueCardsPlayer1 = eventObj.FirstPlayer.Owner.Cards.OfType<BlueCard>().Count();
+                    m_citizenFirstPlayerBlueCardNumber.Text = numberOfBlueCardsPlayer1.ToString();
 
-                    m_citizenSecondPlayerName.Text = eventObj.SecondPlayer.name;
-                    m_citizenSecondPlayerVictoryPoints.Text = eventObj.SecondPlayer.victoryPoints.ToString();
-                    m_citizenSecondPlayerBlueCardNumber.Text = eventObj.SecondPlayer.numberOfBlueCards.ToString();
-
+                    m_citizenSecondPlayerName.Text = eventObj.SecondPlayer.Owner.Name;
+                    m_citizenSecondPlayerVictoryPoints.Text = eventObj.SecondPlayer.VictoryPoints.ToString();
+                    int numberOfBlueCardsPlayer2 = eventObj.SecondPlayer.Owner.Cards.OfType<BlueCard>().Count();
+                    m_citizenSecondPlayerBlueCardNumber.Text = numberOfBlueCardsPlayer2.ToString();
 
                     string resultText = string.Empty;
-                    if (eventObj.FirstPlayer.victoryPoints > eventObj.SecondPlayer.victoryPoints)
+                    if (eventObj.FirstPlayer.VictoryPoints > eventObj.SecondPlayer.VictoryPoints)
                     {
                         resultText = "Győzelem!";
                         m_citizenFirstPlayerName.Bold = true;
                     }
-                    else if (eventObj.FirstPlayer.victoryPoints < eventObj.SecondPlayer.victoryPoints)
+                    else if (eventObj.FirstPlayer.VictoryPoints < eventObj.SecondPlayer.VictoryPoints)
                     {
                         resultText = "Győzelem!";
                         m_citizenSecondPlayerName.Bold = true;
                     }
                     else
                     {
-                        if (eventObj.FirstPlayer.numberOfBlueCards > eventObj.SecondPlayer.numberOfBlueCards)
+                        if (numberOfBlueCardsPlayer1 > numberOfBlueCardsPlayer2)
                         {
                             resultText = "Győzelem!";
                             m_citizenFirstPlayerName.Bold = true;
                         }
-                        else if (eventObj.FirstPlayer.numberOfBlueCards < eventObj.SecondPlayer.numberOfBlueCards)
+                        else if (numberOfBlueCardsPlayer1 < numberOfBlueCardsPlayer2)
                         {
                             resultText = "Győzelem!";
                             m_citizenSecondPlayerName.Bold = true;

@@ -16,24 +16,33 @@ namespace GameLogic.Elements.Guilds
             return new SailorGuild();
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
             owner.Money += GetMaxCardCount(owner, opponent);
-            return Task.CompletedTask;
         }
 
-        public override async Task OnCalculatePlayerProperties(PlayerProperties playerProperties)
+        public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             VictoryPoints victoryPoints = new VictoryPoints()
             {
-                Points = GetMaxCardCount(playerProperties.Owner, playerProperties.Opponent)
+                Points = CalculateGuildVP(playerProperties)
             };
-            await victoryPoints.OnCalculatePlayerProperties(playerProperties);
+            victoryPoints.OnCalculatePlayerProperties(playerProperties);
         }
 
         private int GetMaxCardCount(Player owner, Player opponent)
         {
             return Math.Max(owner.Cards.Where(c => c is GrayCard || c is BrownCard).Count(), opponent.Cards.Where(c => c is GrayCard || c is BrownCard).Count());
+        }
+
+        public override int CalculateGuildVP(PlayerProperties playerProperties)
+        {
+            return GetMaxCardCount(playerProperties.Owner, playerProperties.Opponent);
+        }
+
+        public override int CalculateMoney(PlayerProperties playerProperties)
+        {
+            return GetMaxCardCount(playerProperties.Owner, playerProperties.Opponent);
         }
     }
 }

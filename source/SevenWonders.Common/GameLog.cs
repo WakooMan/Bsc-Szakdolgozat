@@ -13,7 +13,7 @@ namespace SevenWonders.Common
             Log.Logger = Logger.None;
         }
 
-        public static void Info(string message, [CallerMemberName]string methodName = "")
+        public static void Info(string message, [CallerMemberName] string methodName = "")
         {
             Log.Information($"[{methodName}] {message}");
         }
@@ -55,6 +55,14 @@ namespace SevenWonders.Common
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 50, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+                .CreateLogger();
+        }
+
+        public static void InitializeConsoleLogger()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
         }
     }

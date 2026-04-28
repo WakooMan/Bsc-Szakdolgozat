@@ -25,14 +25,19 @@ namespace GameLogic.Elements.Effects
             return new DropEnemyCard(this);
         }
 
-        public override async Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            await gameContext.EventManager.PublishAsync(new OnChooseObjects("Ellenfél kártyájának kidobása", opponent.Cards.Select(card => card.Name).ToArray(), true));
-            await gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, opponent.Cards.Where(card => card.BuildingType == CardType).Select(card => {
-                IPlayerAction dropCard = new DropCard(opponent, owner, card);
-                return dropCard;
-            }).ToArray());
-            await gameContext.EventManager.PublishAsync(new OnObjectChosen(opponent.Cards.Select(card => card.Name).ToArray(), true));
+            var enemyCards = opponent.Cards.Where(card => card.BuildingType == CardType);
+            if (enemyCards.Count() > 0)
+            {
+                gameContext.EventManager.Publish(new OnChooseObjects("Ellenfél kártyájának kidobása", opponent.Cards.Select(card => card.Name).ToArray(), true));
+                gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, enemyCards.Select(card =>
+                {
+                    IPlayerAction dropCard = new DropCard(opponent, owner, card);
+                    return dropCard;
+                }).ToArray());
+                gameContext.EventManager.Publish(new OnObjectChosen(opponent.Cards.Select(card => card.Name).ToArray(), true));
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GameLogic.Elements;
 using GameLogic.Interfaces;
 using GameLogic.PlayerActions;
+using SevenWonders.Common;
 
 namespace GameLogic.Handlers
 {
@@ -8,26 +9,29 @@ namespace GameLogic.Handlers
     {
         public PlayerActionHandler() { }
 
-        public async Task<IPlayerAction?> HandlePlayerActionsCompleted(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
+        public IPlayerAction? HandlePlayerActionsCompleted(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
         {
             if(player.PlayerActionReceiver is null)
             {
                 throw new InvalidOperationException($"Player {player.Name} does not have a PlayerActionReceiver assigned.");
             }
 
+            GameLog.Info($"HandlePlayerActionsCompleted: Player={player.Name}, ActionCount={playerActions.Count}");
             bool completed = false;
 
             while (!completed)
             {
-                var wrappers = await Task.WhenAll(playerActions.Select(async playerAction =>
-                    new PlayerActionWrapper(playerAction, await playerAction.CanPerform(gameContext))));
+                var wrappers = playerActions.Select(playerAction =>
+                    new PlayerActionWrapper(playerAction, playerAction.CanPerform(gameContext))).ToList();
 
                 PlayerActionWrapper playerActionWrapper = player.PlayerActionReceiver.ReceivePlayerAction(player, wrappers);
                 if (playerActionWrapper.CanPerform)
                 {
-                    completed = await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
+                    GameLog.Info($"Player={player.Name} performing action: {playerActionWrapper.PlayerAction.GetType().Name}");
+                    completed = playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
                     if (completed)
                     {
+                        GameLog.Info($"Player={player.Name} action completed: {playerActionWrapper.PlayerAction.GetType().Name}");
                         return playerActionWrapper.PlayerAction;
                     }
                 }
@@ -36,31 +40,33 @@ namespace GameLogic.Handlers
             return null;
         }
 
-        public async Task<(bool completed, IPlayerAction? playerAction)> HandlePlayerActions(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
+        public (bool completed, IPlayerAction? playerAction) HandlePlayerActions(IGameContext gameContext, Player player, ICollection<IPlayerAction> playerActions)
         {
             if (player.PlayerActionReceiver is null)
             {
                 throw new InvalidOperationException($"Player {player.Name} does not have a PlayerActionReceiver assigned.");
             }
 
-            var wrappers = await Task.WhenAll(playerActions.Select(async playerAction =>
-                new PlayerActionWrapper(playerAction, await playerAction.CanPerform(gameContext))));
+            GameLog.Info($"HandlePlayerActions: Player={player.Name}, ActionCount={playerActions.Count}");
+            var wrappers = playerActions.Select(playerAction =>
+                new PlayerActionWrapper(playerAction, playerAction.CanPerform(gameContext))).ToList();
 
             PlayerActionWrapper playerActionWrapper = player.PlayerActionReceiver.ReceivePlayerAction(player, wrappers);
             if (playerActionWrapper.CanPerform)
             {
-                return (await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext), playerActionWrapper.PlayerAction);
+                GameLog.Info($"Player={player.Name} performing action: {playerActionWrapper.PlayerAction.GetType().Name}");
+                return (playerActionWrapper.PlayerAction.DoPlayerAction(gameContext), playerActionWrapper.PlayerAction);
             }
 
             return (false, null);
         }
 
-        public async Task<bool> HandlePlayerAction(IGameContext gameContext, Player player, IPlayerAction playerAction)
+        public bool HandlePlayerAction(IGameContext gameContext, Player player, IPlayerAction playerAction)
         {
-            PlayerActionWrapper playerActionWrapper = new PlayerActionWrapper(playerAction, await playerAction.CanPerform(gameContext));
+            PlayerActionWrapper playerActionWrapper = new PlayerActionWrapper(playerAction, playerAction.CanPerform(gameContext));
             if (playerActionWrapper.CanPerform)
             {
-                return await playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
+                return playerActionWrapper.PlayerAction.DoPlayerAction(gameContext);
             }
 
             return false;

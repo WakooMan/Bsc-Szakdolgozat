@@ -10,15 +10,21 @@ namespace SevenWonders.Presenter.Connectors.Cards
     {
         public CardConnector(IGameElements gameElements, IGameObjectViewFactory gameObjectViewFactory, ICardChildTextureHandler cardChildTextureHandler)
         {
-            m_cardList = gameElements.Cards;
+            m_gameElements = gameElements;
             m_gameObjectViewFactory = gameObjectViewFactory;
             m_cardChildTextureHandler = cardChildTextureHandler;
         }
 
         public IDictionary<Card, IGameObjectView> ReceiveCardConnection()
         {
+            ICardList? cardList = m_gameElements.Cards;
             Dictionary<Card, IGameObjectView> result = new Dictionary<Card, IGameObjectView>();
-            foreach (Card card in m_cardList.Cards)
+            if(cardList is null)
+            {
+                return result;
+            }
+
+            foreach (Card card in cardList.Cards)
             {
                 IGameObjectView view = m_gameObjectViewFactory.CreateView(card.Name);
                 m_cardChildTextureHandler.Handle(card);
@@ -30,6 +36,6 @@ namespace SevenWonders.Presenter.Connectors.Cards
 
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
         private readonly ICardChildTextureHandler m_cardChildTextureHandler;
-        private readonly ICardList m_cardList;
+        private readonly IGameElements m_gameElements;
     }
 }

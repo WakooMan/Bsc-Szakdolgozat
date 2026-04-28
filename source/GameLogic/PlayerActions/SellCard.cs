@@ -8,6 +8,7 @@ namespace GameLogic.PlayerActions
     public class SellCard : IPlayerAction
     {
         public string Name => nameof(SellCard);
+        public int Id => 21;
         public SellCard(Player player)
         {
             ArgumentChecker.CheckNull(player, nameof(player));
@@ -15,7 +16,7 @@ namespace GameLogic.PlayerActions
             m_player = player;
         }
 
-        public async Task<bool> DoPlayerAction(IGameContext gameContext)
+        public bool DoPlayerAction(IGameContext gameContext)
         {
             if (m_player.PickedCard is null)
             {
@@ -28,13 +29,13 @@ namespace GameLogic.PlayerActions
             Card card = m_player.PickedCard.CardObj;
             m_player.PickedCard = null;
             gameContext.DroppedCardList.Cards.Add(card);
-            await gameContext.EventManager.PublishAsync(new OnCardSold(m_player, card, money));
+            gameContext.EventManager.Publish(new OnCardSold(m_player, card, money));
             return true;
         }
 
-        public Task<bool> CanPerform(IGameContext gameContext)
+        public bool CanPerform(IGameContext gameContext)
         {
-            return Task.FromResult(m_player.PickedCard is not null);
+            return m_player.PickedCard is not null;
         }
 
         private readonly Player m_player;

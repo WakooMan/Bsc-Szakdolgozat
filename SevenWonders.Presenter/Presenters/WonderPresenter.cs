@@ -89,7 +89,7 @@ namespace SevenWonders.Presenter.Presenters
             m_eventManager.Subscribe<OnWonderBuilt>(eventObj =>
             {
                 var connection = m_wonders[eventObj.Wonder];
-                m_eventManager.PublishAsync(new OnCardBuiltIntoWonder(eventObj, connection)).GetAwaiter().GetResult();
+                m_eventManager.Publish(new OnCardBuiltIntoWonder(eventObj, connection));
             });
         }
 

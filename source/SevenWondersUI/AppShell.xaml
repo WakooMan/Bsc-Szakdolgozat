@@ -17,9 +17,17 @@
         ContentTemplate="{DataTemplate views:PlayerNamePage}"
         Route="PlayerNamePage" />
     <ShellContent
-        Title="GamePage"
-        ContentTemplate="{DataTemplate views:GamePage}"
-        Route="GamePage" />
+        Title="PlayerVSPlayerGamePage"
+        ContentTemplate="{DataTemplate views:PlayerVSPlayerGamePage}"
+        Route="PlayerVSPlayerGamePage" />
+    <ShellContent
+        Title="PlayerVSAIGamePage"
+        ContentTemplate="{DataTemplate views:PlayerVSAIGamePage}"
+        Route="PlayerVSAIGamePage" />
+    <ShellContent
+        Title="MultiplayerGamePage"
+        ContentTemplate="{DataTemplate views:MultiplayerGamePage}"
+        Route="MultiplayerGamePage" />
     <ShellContent
         Title="LoginPage"
         ContentTemplate="{DataTemplate views:LoginPage}"
@@ -40,5 +48,13 @@
         Title="LobbyPage"
         ContentTemplate="{DataTemplate views:LobbyPage}"
         Route="LobbyPage" />
+    <ShellContent
+        Title="SingleplayerModePage"
+        ContentTemplate="{DataTemplate views:SingleplayerModePage}"
+        Route="SingleplayerModePage" />
+    <ShellContent
+        Title="AIDifficultyPage"
+        ContentTemplate="{DataTemplate views:AIDifficultyPage}"
+        Route="AIDifficultyPage" />
 
 </Shell>

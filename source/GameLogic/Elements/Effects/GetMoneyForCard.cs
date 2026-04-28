@@ -1,11 +1,14 @@
-﻿using GameLogic.Events;
-
-namespace GameLogic.Elements.Effects
+﻿namespace GameLogic.Elements.Effects
 {
     public class GetMoneyForCard : Effect
     {
         public string CardType { get; set; }
         public int MoneyPerCard { get; set; }
+
+        public int GetMoneyForCardValue(Player owner)
+        {
+            return MoneyPerCard * owner.Cards.Count(card => card.BuildingType == CardType);
+        }
 
         public GetMoneyForCard()
         {
@@ -23,10 +26,9 @@ namespace GameLogic.Elements.Effects
             return new GetMoneyForCard(this);
         }
 
-        public override Task Apply(IGameContext gameContext, Player owner, Player opponent)
+        public override void Apply(IGameContext gameContext, Player owner, Player opponent)
         {
-            owner.Money += MoneyPerCard * owner.Cards.Count(card => card.BuildingType == CardType);
-            return Task.CompletedTask;
+            owner.Money += GetMoneyForCardValue(owner);
         }
 
     }
