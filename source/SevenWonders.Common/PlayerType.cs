@@ -7,6 +7,7 @@
         RemotePlayer,
         EasyAI,
         MediumAI,
+        HardAI,
         Unknown
     }
 }

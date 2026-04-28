@@ -41,6 +41,8 @@ namespace SevenWonders.Presenter.PlayerActionReceivers
                     return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.EasyAI);
                 case PlayerType.MediumAI:
                     return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.MediumAI);
+                case PlayerType.HardAI:
+                    return new NonPlayerActionReceiver(m_decisionRouterFactory, m_aIDecisionHandlerCache.HardAI);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(playerType), playerType, "Not handled");
             }

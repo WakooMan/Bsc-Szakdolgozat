@@ -15,7 +15,8 @@ namespace SevenWonders.AI.Model.AIModelHandler
             m_aiModels = new Dictionary<AIModelType, string>
             {
                 { AIModelType.Easy, "seven_wonders_easy_agent.onnx" },
-                { AIModelType.Medium, "seven_wonders_medium_agent.onnx" }
+                { AIModelType.Medium, "seven_wonders_medium_agent.onnx" },
+                { AIModelType.Hard, "seven_wonders_hard_agent.onnx" }
             };
         }
 

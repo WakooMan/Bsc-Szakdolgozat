@@ -15,7 +15,7 @@ namespace SevenWondersUI.ViewModels
             m_title = "Nehézségi szint";
             m_easyButton = ("Könnyű", true);
             m_mediumButton = ("Közepes", true);
-            m_hardButton = ("Nehéz", false);
+            m_hardButton = ("Nehéz", true);
             m_backButton = ("Vissza", true);
             EasyCommand = new Command(OnEasyClicked, () => m_easyButton.isEnabled);
             MediumCommand = new Command(OnMediumClicked, () => m_mediumButton.isEnabled);
@@ -115,12 +115,12 @@ namespace SevenWondersUI.ViewModels
 
         private async void OnHardClicked()
         {
-            m_aiModelHandlerCache.EasyAIModelHandler.LoadModel(AIModelType.Hard);
+            m_aiModelHandlerCache.HardAIModelHandler.LoadModel(AIModelType.Hard);
             await m_navigationService.NavigateToAsync("//PlayerVSAIGamePage", new Dictionary<string, object>
             {
                 { "Player1Name", "Player" },
                 { "Player2Name", "HardAI" },
-                //{ "Player2Type", PlayerType.HardAI }
+                { "Player2Type", PlayerType.HardAI }
             });
         }
 

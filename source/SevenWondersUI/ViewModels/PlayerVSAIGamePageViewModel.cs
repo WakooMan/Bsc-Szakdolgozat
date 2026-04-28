@@ -52,8 +52,9 @@ namespace SevenWondersUI.ViewModels
                 case PlayerType.MediumAI:
                     m_aIDecisionHandlerCache.MediumAI.Initialize(2);
                     break;
-                //case AIModelType.HardAI:
-                //    break;
+                case PlayerType.HardAI:
+                    m_aIDecisionHandlerCache.HardAI.Initialize(2);
+                    break;
                 default:
                     m_aIDecisionHandlerCache.EasyAI.Initialize(2);
                     break;
