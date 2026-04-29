@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
-    public class Scene : IEquatable<Scene>
+    public class Scene : IEquatable<Scene>, IDisposable
     {
         public Guid Id { get; set; }
         [XmlIgnore]
@@ -34,10 +34,16 @@ namespace SevenWonders.GameEngine
 
         public Scene(Scene scene)
         {
-            Id = Guid.NewGuid();
-            Layers = scene.Layers.Select(layer => new GraphicsLayer(layer)).ToList();
-            Textures = scene.Textures.Select(texture => new Texture(texture)).ToList();
             Name = scene.Name;
+            Id = Guid.NewGuid();
+            Textures = scene.Textures.Select(texture => new Texture(texture)).ToList();
+            Layers = scene.Layers.Select(layer => new GraphicsLayer(layer)).ToList();
+            Visible = scene.Visible;
+        }
+
+        public void CopyFrom(Scene scene)
+        {
+            Layers = scene.Layers.Select(layer => new GraphicsLayer(layer)).ToList();
             Visible = scene.Visible;
         }
 
@@ -131,6 +137,11 @@ namespace SevenWonders.GameEngine
             {
                 layer.SortAllObjects();
             }
+        }
+
+        public void Dispose()
+        {
+            Textures.ForEach(texture => texture.Dispose());
         }
     }
 }

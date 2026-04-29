@@ -70,10 +70,13 @@ namespace SevenWondersUI.ViewModels
         public ICommand StartGameCommand { get; }
         public ICommand LeaveCommand { get; }
 
-        public LobbyPageViewModel(IClientHubService clientHubService, INavigationService navigationService)
+        public LobbyPageViewModel(IClientHubService clientHubService, 
+                                  INavigationService navigationService, 
+                                  IPopupService popupService)
         {
             m_clientHubService = clientHubService;
             m_navigationService = navigationService;
+            m_popupService = popupService;
 
             m_lobbyStateUpdateMessageHandler = new LobbyResponseMessageHandlerDelegate<LobbyStateUpdateMessage>(OnLobbyStateUpdateMessageReceived);
             m_startGameResponseMessageHandler = new LobbyResponseMessageHandlerDelegate<StartGameResponseMessage>(OnStartGameResponseMessageReceived);
@@ -170,8 +173,8 @@ namespace SevenWondersUI.ViewModels
                 {
                     await m_navigationService.NavigateToAsync("//MultiplayerGamePage", new Dictionary<string, object>
                     {
-                        { "Player1", message.Player1Name },
-                        { "Player2", message.Player2Name },
+                        { "Player1Name", message.Player1Name },
+                        { "Player2Name", message.Player2Name },
                         { "Player1Type", message.Player1Type },
                         { "Player2Type", message.Player2Type },
                         { "StartingPlayerId", message.StartingPlayerId },
@@ -199,11 +202,7 @@ namespace SevenWondersUI.ViewModels
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
                 var popup = new ErrorPopupWindow(new ErrorPopupViewModel(message.Message));
-                var page = Application.Current?.MainPage;
-                if (page is not null)
-                {
-                    await page.ShowPopupAsync(popup);
-                }
+                await m_popupService.ShowAsync(popup);
             });
             return false;
         }
@@ -214,6 +213,7 @@ namespace SevenWondersUI.ViewModels
         private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandler;
         private readonly IClientHubService m_clientHubService;
         private readonly INavigationService m_navigationService;
+        private readonly IPopupService m_popupService;
         private bool m_isHost;
     }
 }

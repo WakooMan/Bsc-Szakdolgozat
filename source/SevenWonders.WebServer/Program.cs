@@ -8,18 +8,17 @@ using GameLogic.Events;
 using GameLogic.GameStructures.Factories;
 using GameLogic.Handlers;
 using GameLogic.Handlers.Factories;
-using GameLogic.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SevenWonders.Common;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
 using WebServer.Model;
 using WebServer.Model.Client;
 using WebServer.Model.Client.Factories;
 using WebServer.Model.Lobby;
+using WebServer.Model.Matchmaking;
 using WebServer.Model.MessageHandling;
 using WebServer.Model.MessageHandling.Factories;
 using WebServer.Model.PlayerStates.Factories;
@@ -43,6 +42,9 @@ namespace SevenWonders.WebServer
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            var signingKey = builder.Configuration["Jwt:SigningKey"]
+                ?? throw new InvalidOperationException("JWT signing key missing");
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -53,7 +55,7 @@ namespace SevenWonders.WebServer
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Nagyon_Titkos_Es_Hosszu_Kulcs_123456789")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(signingKey)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -126,10 +128,10 @@ namespace SevenWonders.WebServer
             builder.Services.AddSingleton<IServerMessageDispatcher, ServerMessageDispatcher>();
             builder.Services.AddSingleton<IServerService, ServerService>();
             builder.Services.AddSingleton(typeof(IGameManager), typeof(GameManager));
+            builder.Services.AddSingleton<IMatchmakingService, MatchmakingService>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();

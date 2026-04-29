@@ -1,39 +1,24 @@
-﻿using GameLogic;
-using GameLogic.Interfaces;
-using SevenWonders.Common;
-using SevenWonders.GameEngine;
-using SevenWonders.GameEngine.Components;
+﻿using SevenWonders.Common;
 using SevenWonders.Presenter;
-using SevenWonders.Presenter.PlayerActionReceivers;
-using SevenWonders.Presenter.Presenters;
+using SevenWondersUI.Services;
 
 namespace SevenWondersUI.ViewModels
 {
     public abstract class BaseGamePageViewModel: BaseViewModel, IGameOverHandler, IQueryAttributable
     {
-        protected BaseGamePageViewModel(IGame game,
-                                        IEngine engine,
-                                        ISceneLoader sceneLoader,
-                                        IAnimationManager animationManager,
-                                        IPresenterStore presenterStore,
-                                        IPlayerActionReceiverFactory playerActionReceiverFactory,
-                                        IRandomGeneratorFactory randomGeneratorFactory)
+        protected BaseGamePageViewModel(IGameHandler gameHandler, INavigationService navigationService)
         {
+            m_gameHandler = gameHandler;
+            m_appliedQueryAttributes = false;
             Player1Name = string.Empty;
             Player2Name = string.Empty;
-            m_playerActionReceiverFactory = playerActionReceiverFactory;
-            m_presenterStore = presenterStore;
-            m_animationManager = animationManager;
-            m_sceneLoader = sceneLoader;
-            m_game = game;
-            m_engine = engine;
-            m_randomGeneratorFactory = randomGeneratorFactory;
+            m_navigationService=navigationService;
         }
+
+        public IGameHandler GameHandler => m_gameHandler;
 
         public string Player1Name { get; set; }
         public string Player2Name { get; set; }
-
-        public IEngine Engine => m_engine;
 
         protected abstract RandomGeneratorType RandomGeneratorType { get; }
         protected abstract PlayerType Player1Type { get; }
@@ -45,27 +30,26 @@ namespace SevenWondersUI.ViewModels
 
         public async Task Initialize()
         {
-            // Wait for query attributes to be applied before initializing the game and presenters
-
-            m_engine.RegisterSubSystem(m_animationManager);
-
-            foreach (Scene scene in await m_sceneLoader.LoadScenes())
+            while(!m_appliedQueryAttributes)
             {
-                m_engine.SceneManager.RegisterScene(scene);
+                await Task.Delay(100);
             }
 
-            Scene? firstScene = m_engine.SceneManager.Scenes.FirstOrDefault();
-
-            if (firstScene != null)
-            {
-                m_engine.SceneManager.SetCurrentScene(firstScene);
-            }
-
-            InitializeGame();
-            _ = Task.Run(m_game.GameLoop);
+            await m_gameHandler.StartGame(Player1Name, 
+                                    Player1Type, 
+                                    Player2Name, 
+                                    Player2Type, 
+                                    RandomGeneratorType, 
+                                    Seed, 
+                                    StartingPlayerId, 
+                                    this);
         }
 
-        public abstract Task OnGameOver();
+        public virtual async Task OnGameOver()
+        {
+            GameHandler.StopGame();
+            await m_navigationService.NavigateToAsync("//MainPage");
+        }
         public virtual void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.TryGetValue("Player1Name", out object? player1NameObj) && player1NameObj is string player1Name)
@@ -76,25 +60,11 @@ namespace SevenWondersUI.ViewModels
             {
                 Player2Name = player2Name;
             }
+            m_appliedQueryAttributes = true;
         }
 
-        protected virtual void InitializeGame()
-        {
-            m_engine.Startup();
-            IRandomGenerator randomGenerator = m_randomGeneratorFactory.Create(RandomGeneratorType, Seed);
-            IPlayerActionReceiver player1ActionReceiver = m_playerActionReceiverFactory.Create(Player1Type, Player1Name);
-            IPlayerActionReceiver player2ActionReceiver = m_playerActionReceiverFactory.Create(Player2Type, Player2Name);
-            m_game.Initialize(randomGenerator, (Player1Name, player1ActionReceiver), (Player2Name, player2ActionReceiver), StartingPlayerId);
-            m_presenterStore.InitializePresenters(this);
-            m_presenterStore.SubscribePresentersToEvents();
-        }
-
-        private readonly ISceneLoader m_sceneLoader;
-        private readonly IEngine m_engine;
-        private readonly IGame m_game;
-        private readonly IAnimationManager m_animationManager;
-        private readonly IPresenterStore m_presenterStore;
-        private readonly IPlayerActionReceiverFactory m_playerActionReceiverFactory;
-        private readonly IRandomGeneratorFactory m_randomGeneratorFactory;
+        private readonly IGameHandler m_gameHandler;
+        private readonly INavigationService m_navigationService;
+        private bool m_appliedQueryAttributes;
     }
 }

@@ -26,7 +26,7 @@ namespace SevenWonders.GameEngine
                 GameLog.Info($"Creating directory: \"{m_tempPath}\"");
                 Directory.CreateDirectory(m_tempPath);
             }
-            // Directory.GetFiles(ScenesPath).Where(file => file.EndsWith(".zip"))
+
             foreach (SceneFile sceneFile in await m_zipFileReceiver.ReceiveZipFiles())
             {
                 result.Add(LoadScene(sceneFile));

@@ -1,6 +1,7 @@
 ﻿using WebServer.Contract.Messages.Lobby.ServerMessages;
 using WebServer.Model.Client;
 using WebServer.Model.Lobby;
+using WebServer.Model.Matchmaking;
 using WebServer.Model.PlayerStates.Factories;
 using WebServer.Model.ServerHub;
 
@@ -8,9 +9,10 @@ namespace WebServer.Model.PlayerStates
 {
     public class InMainMenu : PlayerState
     {
-        public InMainMenu(ILobbyManager lobbyManager, IPlayerStateFactory playerStateFactory, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
+        public InMainMenu(ILobbyManager lobbyManager, IPlayerStateFactory playerStateFactory, IPlayerClient player, IServerService serverService, ILobbyCodeGenerator lobbyCodeGenerator, IMatchmakingService matchmakingService) : base(player, serverService, playerStateFactory, lobbyCodeGenerator)
         {
             m_lobbyManager = lobbyManager;
+            m_matchmakingService = matchmakingService;
         }
 
         public override async Task CreateLobby(string name)
@@ -85,8 +87,10 @@ namespace WebServer.Model.PlayerStates
         {
             m_player.ChangeState(m_playerStateFactory.CreateInMatchmakingState(m_player));
             await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new StartMatchmakingResponseMessage(true, "OK"));
+            await m_matchmakingService.AddPlayer(m_player);
         }
 
         private readonly ILobbyManager m_lobbyManager;
+        private readonly IMatchmakingService m_matchmakingService;
     }
 }

@@ -12,10 +12,10 @@ namespace SevenWonders.WebClient.Model.Services
     {
         public string UserName { get; private set; }
 
-        public ClientHubService(IClientMessageDispatcher clientMessageDispatcher)
+        public ClientHubService(IClientMessageDispatcher clientMessageDispatcher, INetworkConfiguration networkConfiguration)
         {
             m_clientMessageDispatcher = clientMessageDispatcher;
-            m_url = "https://localhost:7206/serverhub";
+            m_networkConfiguration = networkConfiguration;
             UserName = string.Empty;
         }
 
@@ -31,13 +31,13 @@ namespace SevenWonders.WebClient.Model.Services
                                     JsonSerializerOptions.Default.TypeInfoResolver!
                                 );
                             })
-                            .WithUrl(m_url, options =>
+                            .WithUrl(m_networkConfiguration.SignalRHubUri, options =>
                             {
                                 options.AccessTokenProvider = () => Task.FromResult(authToken);
                             })
                             .Build();
-            m_hubConnection.HandshakeTimeout = TimeSpan.FromSeconds(15);
-            m_hubConnection.ServerTimeout = TimeSpan.FromSeconds(30);
+            m_hubConnection.HandshakeTimeout = m_networkConfiguration.HandshakeTimeout;
+            m_hubConnection.ServerTimeout = m_networkConfiguration.ServerTimeout;
             m_hubConnection.On<LobbyServerMessage>(nameof(ReceiveLobbyMessage), ReceiveLobbyMessage);
             m_hubConnection.On<GameServerMessage>(nameof(ReceiveGameMessage), ReceiveGameMessage);
             await m_hubConnection.StartAsync();
@@ -97,7 +97,7 @@ namespace SevenWonders.WebClient.Model.Services
         }
 
         private HubConnection? m_hubConnection;
-        private readonly string m_url;
+        private readonly INetworkConfiguration m_networkConfiguration;
         private readonly IClientMessageDispatcher m_clientMessageDispatcher;
     }
 }

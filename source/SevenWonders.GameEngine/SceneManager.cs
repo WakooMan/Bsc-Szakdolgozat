@@ -23,7 +23,6 @@ namespace SevenWonders.GameEngine
         public void SetCurrentScene(Scene scene)
         {
             ArgumentChecker.CheckPredicateForArgument(() => !m_scenes.Contains(scene), $"The scene \"{scene.Name}\" is not registered!");
-
             CurrentScene = scene;
         }
 
@@ -175,15 +174,24 @@ namespace SevenWonders.GameEngine
             if (scene != null)
             {
                 m_scenes.Remove(scene);
+                if (CurrentScene == scene)
+                {
+                    CurrentScene = null;
+                }
                 SceneRemoved(scene);
             }
         }
         public void FreeASceneByID(Guid sceneID)
         {
             Scene? scene = m_scenes.FirstOrDefault(scene => scene.Id == sceneID);
-            if (scene != null)
+            if (scene is not null)
             {
                 m_scenes.Remove(scene);
+                if (CurrentScene == scene)
+                {
+                    CurrentScene = null;
+                }
+                scene.Dispose();
                 SceneRemoved(scene);
             }
         }

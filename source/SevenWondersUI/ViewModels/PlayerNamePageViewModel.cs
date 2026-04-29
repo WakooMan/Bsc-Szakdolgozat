@@ -119,12 +119,12 @@ namespace SevenWondersUI.ViewModels
 
         private bool ValidatePlayerNames()
         {
-            return ValidatePlayerName(m_player1Entry.entryText) && ValidatePlayerName(m_player2Entry.entryText);
+            return ValidatePlayerName(m_player1Entry.entryText) && ValidatePlayerName(m_player2Entry.entryText) && m_player1Entry.entryText != m_player2Entry.entryText;
         }
 
         private bool ValidatePlayerName(string playerName)
         {
-            return !string.IsNullOrEmpty(playerName) && playerName.All(char.IsLetterOrDigit) && playerName.Length >= 2;
+            return !string.IsNullOrEmpty(playerName) && playerName.All(char.IsLetterOrDigit) && playerName.Length >= 2 && playerName.Length <= 6;
         }
 
         private async void OnStart()

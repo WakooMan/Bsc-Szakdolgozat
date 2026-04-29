@@ -1,10 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
-using GameLogic;
-using SevenWonders.Common;
-using SevenWonders.GameEngine;
-using SevenWonders.GameEngine.Components;
-using SevenWonders.Presenter.PlayerActionReceivers;
-using SevenWonders.Presenter.Presenters;
+﻿using SevenWonders.Common;
+using SevenWonders.Presenter;
 using SevenWonders.WebClient.Model;
 using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Services;
@@ -24,15 +19,10 @@ namespace SevenWondersUI.ViewModels
 
         protected override PlayerType Player2Type { get { return m_player2Type; } }
 
-        public MultiplayerGamePageViewModel(IGame game,
-                                            IEngine engine,
-                                            ISceneLoader sceneLoader,
-                                            IAnimationManager animationManager,
-                                            IPresenterStore presenterStore,
-                                            IPlayerActionReceiverFactory playerActionReceiverFactory,
-                                            IRandomGeneratorFactory randomGeneratorFactory,
+        public MultiplayerGamePageViewModel(IGameHandler gameHandler,
                                             INavigationService navigationService,
-                                            IClientHubService clientHubService) : base(game, engine, sceneLoader, animationManager, presenterStore, playerActionReceiverFactory, randomGeneratorFactory)
+                                            IClientHubService clientHubService,
+                                            IPopupService popupService) : base(gameHandler, navigationService)
         {
             m_seed = -1;
             m_startingPlayerId = -1;
@@ -42,6 +32,7 @@ namespace SevenWondersUI.ViewModels
             m_clientHubService = clientHubService;
             m_lobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<ExitGameResponseMessage>(HandleExitGameResponse);
             m_failureResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
+            m_popupService=popupService;
         }
 
         public override async Task OnGameOver()
@@ -51,7 +42,6 @@ namespace SevenWondersUI.ViewModels
 
         public override void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            base.ApplyQueryAttributes(query);
             if (query.TryGetValue("Player1Type", out object? player1TypeObj) && player1TypeObj is PlayerType player1Type)
             {
                 m_player1Type = player1Type;
@@ -68,6 +58,7 @@ namespace SevenWondersUI.ViewModels
             {
                 m_startingPlayerId = startingPlayerId;
             }
+            base.ApplyQueryAttributes(query);
         }
 
         public void Register(IMessageRegisterer registerer)
@@ -87,11 +78,7 @@ namespace SevenWondersUI.ViewModels
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
                 var popup = new ErrorPopupWindow(new ErrorPopupViewModel(message.Message));
-                var page = Application.Current?.MainPage;
-                if (page is not null)
-                {
-                    await page.ShowPopupAsync(popup);
-                }
+                await m_popupService.ShowAsync(popup);
             });
             return false;
         }
@@ -102,6 +89,7 @@ namespace SevenWondersUI.ViewModels
             {
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
+                    GameHandler.StopGame();
                     await m_navigationService.NavigateToAsync("//LobbyMainPage", new Dictionary<string, object>() { { "Lobbies", message.Lobbies } });
                 });
             }
@@ -116,5 +104,6 @@ namespace SevenWondersUI.ViewModels
         private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandlerDelegate;
         private readonly INavigationService m_navigationService;
         private readonly IClientHubService m_clientHubService;
+        private readonly IPopupService m_popupService;
     }
 }

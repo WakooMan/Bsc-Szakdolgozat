@@ -22,31 +22,29 @@ namespace GameLogic.Handlers
             }
         }
 
-        public AgeHandler(ICardCompositionFactory cardCompositionFactory, IGameElements gameElements, IEventManager eventManager)
+        public AgeHandler(ICardCompositionFactory cardCompositionFactory, IEventManager eventManager)
         {
             ArgumentChecker.CheckNull(cardCompositionFactory, nameof(cardCompositionFactory));
-            ArgumentChecker.CheckNull(gameElements, nameof(gameElements));
             ArgumentChecker.CheckNull(eventManager, nameof(eventManager));
 
             m_cardCompositionFactory = cardCompositionFactory;
             m_eventManager = eventManager;
-            m_gameElements = gameElements;
             m_ageBase = null;
             m_cardList = null;
         }
 
-        public void Initialize(IRandomGenerator? randomGenerator)
+        public void Initialize(IRandomGenerator? randomGenerator, ICardList? cards)
         {
             GameLog.Info("Initializing with FirstAge.");
             m_randomGenerator = randomGenerator ?? throw new ArgumentNullException(nameof(randomGenerator));
-            m_cardList = m_gameElements.Cards;
+            m_cardList = cards ?? throw new ArgumentNullException(nameof(cards));
             m_ageBase = new FirstAge(m_eventManager, m_cardCompositionFactory, m_cardList, m_randomGenerator);
             m_eventManager.Publish(new OnAgeStarted(m_ageBase));
         }
 
         public bool NextAge()
         {
-            if (CurrentAge is null || m_cardList is null)
+            if (CurrentAge is null || m_cardList is null || m_randomGenerator is null)
             {
                 throw new InvalidOperationException("Initialize method is not called yet!");
             }
@@ -76,7 +74,6 @@ namespace GameLogic.Handlers
 
         private readonly ICardCompositionFactory m_cardCompositionFactory;
         private readonly IEventManager m_eventManager;
-        private readonly IGameElements m_gameElements;
         private IRandomGenerator? m_randomGenerator;
         private IAgeBase? m_ageBase;
         private ICardList? m_cardList;

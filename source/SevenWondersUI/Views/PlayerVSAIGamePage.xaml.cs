@@ -9,14 +9,14 @@ public partial class PlayerVSAIGamePage : ContentPage
     public PlayerVSAIGamePage(PlayerVSAIGamePageViewModel gamePageViewModel)
     {
         m_playerVSAIGamePageViewModel = gamePageViewModel;
-        InitializeComponent();
-        m_playerVSAIGamePageViewModel.Engine.RedrawRequested += (e, args) =>
+        m_redrawRequested = (e, args) =>
         {
             if (m_gameView is not null)
             {
                 m_gameView.InvalidateSurface();
             }
         };
+        InitializeComponent();
         BindingContext = m_playerVSAIGamePageViewModel;
     }
     protected override async void OnAppearing()
@@ -26,28 +26,34 @@ public partial class PlayerVSAIGamePage : ContentPage
         {
             await Task.Delay(100);
         }
+
+        m_playerVSAIGamePageViewModel.GameHandler.SubscribeRedrawRequested(m_redrawRequested);
         await m_playerVSAIGamePageViewModel.Initialize();
         OnCanvasSizeChanged(this, EventArgs.Empty);
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        m_playerVSAIGamePageViewModel.GameHandler.UnsubscribeRedrawRequested(m_redrawRequested);
+    }
+
     private void OnCanvasSizeChanged(object sender, EventArgs e)
     {
-        if (m_playerVSAIGamePageViewModel.Engine.SceneManager.CurrentScene is not null)
-        {
-            m_playerVSAIGamePageViewModel.Engine.SceneManager.CurrentScene.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
-        }
+        m_playerVSAIGamePageViewModel.GameHandler.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
     }
 
 
     private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
-        m_playerVSAIGamePageViewModel.Engine.SceneManager.Render(e.Surface.Canvas);
+        m_playerVSAIGamePageViewModel.GameHandler.Render(e.Surface.Canvas);
     }
 
     private void OnTouch(object sender, SKTouchEventArgs e)
     {
-        m_playerVSAIGamePageViewModel.Engine.InputManager.OnTouchEvent(e);
+        m_playerVSAIGamePageViewModel.GameHandler.OnTouchEvent(e);
     }
 
     private readonly PlayerVSAIGamePageViewModel m_playerVSAIGamePageViewModel;
+    private readonly EventHandler m_redrawRequested;
 }

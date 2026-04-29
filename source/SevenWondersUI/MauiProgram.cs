@@ -39,6 +39,8 @@ using SevenWonders.Presenter.Views.Factories;
 using SevenWonders.WebClient.Model;
 using SevenWonders.WebClient.Model.Factories;
 using SevenWonders.WebClient.Model.Services;
+using SevenWondersUI.Configuration;
+using SevenWondersUI.Platforms.Windows;
 using SevenWondersUI.Services;
 using SevenWondersUI.ViewModels;
 using SevenWondersUI.Views;
@@ -139,12 +141,26 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IPresenterFactory), typeof(PresenterFactory));
         builder.Services.AddSingleton(typeof(IPresenterStore), typeof(PresenterStore));
         builder.Services.AddSingleton(typeof(ICardConnector), typeof(CardConnector));
+        builder.Services.AddSingleton<IGameHandler, GameHandler>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+        builder.Services.AddSingleton<IPopupService, MauiPopupService>();
         builder.Services.AddSingleton<IAuthService, AuthService>();
+#if ANDROID
+        builder.Services.AddSingleton<IExitService, AndroidExitService>();
+#elif WINDOWS
+        builder.Services.AddSingleton<IExitService, WindowsExitService>();
+#endif
+
         builder.Services.AddSingleton(typeof(IClientHubService), typeof(ClientHubService));
         builder.Services.AddSingleton(typeof(IClientMessageDispatcher), typeof(ClientMessageDispatcher));
         builder.Services.AddSingleton(typeof(IMessageRegistererFactory), typeof(MessageRegistererFactory));
         builder.Services.AddSingleton(typeof(IPlayerActionReceiverFactory), typeof(PlayerActionReceiverFactory));
+        builder.Services.AddSingleton(typeof(IAppConfiguration), typeof(AppConfiguration));
+#if DEBUG
+        builder.Services.AddSingleton(typeof(INetworkConfiguration), typeof(DebugNetworkConfiguration));
+#else
+        builder.Services.AddSingleton(typeof(INetworkConfiguration), typeof(NetworkConfiguration));
+#endif
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<App>();
 

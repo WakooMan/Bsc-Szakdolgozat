@@ -10,7 +10,7 @@ public partial class PlayerVSPlayerGamePage : ContentPage
     {
         m_playerVSPlayerGamePageViewModel = playerVSPlayerGamePageViewModel;
         InitializeComponent();
-        m_playerVSPlayerGamePageViewModel.Engine.RedrawRequested += (e, args) =>
+        m_redrawRequested = (e, args) =>
         {
             if (m_gameView is not null)
             {
@@ -26,28 +26,33 @@ public partial class PlayerVSPlayerGamePage : ContentPage
         {
             await Task.Delay(100);
         }
+        m_playerVSPlayerGamePageViewModel.GameHandler.SubscribeRedrawRequested(m_redrawRequested);
         await m_playerVSPlayerGamePageViewModel.Initialize();
         OnCanvasSizeChanged(this, EventArgs.Empty);
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        m_playerVSPlayerGamePageViewModel.GameHandler.UnsubscribeRedrawRequested(m_redrawRequested);
+    }
+
     private void OnCanvasSizeChanged(object sender, EventArgs e)
     {
-        if (m_playerVSPlayerGamePageViewModel.Engine.SceneManager.CurrentScene is not null)
-        {
-            m_playerVSPlayerGamePageViewModel.Engine.SceneManager.CurrentScene.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
-        }
+        m_playerVSPlayerGamePageViewModel.GameHandler.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
     }
 
 
     private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
-        m_playerVSPlayerGamePageViewModel.Engine.SceneManager.Render(e.Surface.Canvas);
+        m_playerVSPlayerGamePageViewModel.GameHandler.Render(e.Surface.Canvas);
     }
 
     private void OnTouch(object sender, SKTouchEventArgs e)
     {
-        m_playerVSPlayerGamePageViewModel.Engine.InputManager.OnTouchEvent(e);
+        m_playerVSPlayerGamePageViewModel.GameHandler.OnTouchEvent(e);
     }
 
     private readonly PlayerVSPlayerGamePageViewModel m_playerVSPlayerGamePageViewModel;
+    private readonly EventHandler m_redrawRequested;
 }

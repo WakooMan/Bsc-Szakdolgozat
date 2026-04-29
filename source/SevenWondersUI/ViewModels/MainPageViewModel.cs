@@ -5,9 +5,10 @@ namespace SevenWondersUI.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService, IExitService exitService)
         {
             m_navigationService = navigationService;
+            m_exitService = exitService;
             m_title = "7 Csoda Párbaj";
             m_singleplayerButton = ("Egyjátékos mód", true);
             m_multiplayerButton = ("Többjátékos mód", true);
@@ -106,7 +107,7 @@ namespace SevenWondersUI.ViewModels
 
         private void OnExitClicked()
         {
-            Application.Current?.CloseWindow(Application.Current.MainPage.Window);
+            m_exitService.ExitApplication();
         }
 
         private void OnAILearningClicked()
@@ -130,5 +131,6 @@ namespace SevenWondersUI.ViewModels
         private (string text, bool isEnabled) m_aILearningButton;
         private (string text, bool isEnabled) m_exitButton;
         private readonly INavigationService m_navigationService;
+        private readonly IExitService m_exitService;
     }
 }

@@ -5,9 +5,14 @@ namespace SevenWonders.WebClient.Model.Services
 {
     public class AuthService: IAuthService
     {
-        public AuthService()
+        public AuthService(INetworkConfiguration networkConfiguration)
         {
-            m_httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7206") };
+            m_networkConfiguration = networkConfiguration;
+            m_httpClient = new HttpClient
+            {
+                BaseAddress = m_networkConfiguration.ApiBaseUri, 
+                Timeout = m_networkConfiguration.HttpTimeout 
+            };
         }
 
         public async Task<LoginResponse?> LoginAsync(string username, string password)
@@ -43,5 +48,6 @@ namespace SevenWonders.WebClient.Model.Services
         }
 
         private readonly HttpClient m_httpClient;
+        private readonly INetworkConfiguration m_networkConfiguration;
     }
 }

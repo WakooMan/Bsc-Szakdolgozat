@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Maui;
+using System.Collections.Concurrent;
 
 namespace SevenWonders.GameEngine
 {
@@ -7,7 +8,7 @@ namespace SevenWonders.GameEngine
     {
         public InputManager()
         {
-            m_TouchEvents = new Dictionary<TouchEvent, Dictionary<SKMouseButton, List<Action<SKTouchEventArgs>>>>();
+            m_TouchEvents = new ConcurrentDictionary<TouchEvent, ConcurrentDictionary<SKMouseButton, ConcurrentDictionary<Action<SKTouchEventArgs>, int>>>();
         }
 
         public void OnTouchEvent(SKTouchEventArgs touchEventArgs)
@@ -19,7 +20,10 @@ namespace SevenWonders.GameEngine
                 {
                     if (eventsDictionary.TryGetValue(touchEventArgs.MouseButton, out var actions))
                     {
-                        actions.ForEach(action => action(touchEventArgs));
+                        foreach (var action in actions)
+                        {
+                            action.Key(touchEventArgs);
+                        }
                     }
                 }
             }
@@ -29,14 +33,13 @@ namespace SevenWonders.GameEngine
         {
             if (!m_TouchEvents.ContainsKey(touchEvent))
             {
-                m_TouchEvents[touchEvent] = new Dictionary<SKMouseButton, List<Action<SKTouchEventArgs>>>();
+                m_TouchEvents[touchEvent] = new ConcurrentDictionary<SKMouseButton, ConcurrentDictionary<Action<SKTouchEventArgs>, int>>();
             }
             if (!m_TouchEvents[touchEvent].ContainsKey(mouseButton))
             {
-                m_TouchEvents[touchEvent][mouseButton] = new List<Action<SKTouchEventArgs>>();
+                m_TouchEvents[touchEvent][mouseButton] = new ConcurrentDictionary<Action<SKTouchEventArgs>, int>();
             }
-
-            m_TouchEvents[touchEvent][mouseButton].Add(action);
+            m_TouchEvents[touchEvent][mouseButton].TryAdd(action, 0);
         }
 
         public void UnsubscribeTouchEvent(TouchEvent touchEvent, SKMouseButton mouseButton, Action<SKTouchEventArgs> action)
@@ -49,8 +52,7 @@ namespace SevenWonders.GameEngine
             {
                 return;
             }
-
-            m_TouchEvents[touchEvent][mouseButton].Remove(action);
+            m_TouchEvents[touchEvent][mouseButton].TryRemove(action, out _);
         }
 
         private TouchEvent HandleTouchAction(SKTouchEventArgs touchEventArgs)
@@ -74,7 +76,7 @@ namespace SevenWonders.GameEngine
             }
         }
 
-        private readonly Dictionary<TouchEvent, Dictionary<SKMouseButton, List<Action<SKTouchEventArgs>>>> m_TouchEvents;
+        private readonly ConcurrentDictionary<TouchEvent, ConcurrentDictionary<SKMouseButton, ConcurrentDictionary<Action<SKTouchEventArgs>, int>>> m_TouchEvents;
         private long m_touchStartTime;
         private SKPoint m_touchStartPoint;
         private const int TapThresholdMs = 500;

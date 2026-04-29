@@ -14,6 +14,7 @@ namespace WebServer.Contract.Messages.Lobby.ServerMessages
     [JsonDerivedType(typeof(ExitGameResponseMessage), typeDiscriminator: "exitgameresponse")]
     [JsonDerivedType(typeof(SendChatResponseMessage), typeDiscriminator: "sendchatresponse")]
     [JsonDerivedType(typeof(FailureResponseMessage), typeDiscriminator: "failureresponse")]
+    [JsonDerivedType(typeof(GetLeaderboardResponseMessage), typeDiscriminator: "getleaderboardresponse")]
     public abstract class LobbyServerMessage
     {
         public bool Success { get; set; }

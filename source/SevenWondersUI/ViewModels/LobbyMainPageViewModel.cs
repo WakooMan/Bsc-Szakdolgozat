@@ -28,6 +28,7 @@ namespace SevenWondersUI.ViewModels
         public string StopSearchButtonText => "Játék keresés leállítása";
         public string LogoutButtonText => "Kijelentkezés";
         public string AvailableRoomsTitle => "Elérhető szobák";
+        public string LeaderboardButtonText => "Ranglista";
 
         public bool IsFriendlyModeVisible
         {
@@ -91,18 +92,26 @@ namespace SevenWondersUI.ViewModels
         public ICommand StartSearchCommand { get; }
         public ICommand StopSearchCommand { get; }
         public ICommand LogoutCommand { get; }
+        public ICommand ShowLeaderboardCommand { get; }
 
-        public LobbyMainPageViewModel(IClientHubService clientHubService, INavigationService navigationService, IAuthService authService, CreateGamePopupWindow createGamePopupWindow)
+        public LobbyMainPageViewModel(IClientHubService clientHubService, 
+                                      INavigationService navigationService, 
+                                      IAuthService authService, 
+                                      IPopupService popupService,
+                                      CreateGamePopupWindow createGamePopupWindow)
         {
             m_clientHubService = clientHubService;
             m_navigationService = navigationService;
             m_authService = authService;
+            m_popupService = popupService;
             m_createLobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<CreateLobbyResponseMessage>(OnCreateLobbyResponseMessageReceived);
             m_joinLobbyResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<JoinLobbyResponseMessage>(OnJoinLobbyResponseMessageReceived);
             m_startMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage>(OnStartMatchmakingResponseMessageReceived);
             m_stopMatchmakingResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage>(OnStopMatchmakingResponseMessageReceived);
             m_lobbyUpdateMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage>(OnLobbyUpdateMessageReceived);
             m_failureResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
+            m_getLeaderboardResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<GetLeaderboardResponseMessage>(OnGetLeaderboardResponseMessageReceived);
+            m_startGameResponseMessageHandler = new LobbyResponseMessageHandlerDelegate<StartGameResponseMessage>(OnStartGameResponseMessageReceived);
             Rooms = new ObservableCollection<RoomModel>();
 
             JoinGameCommand = new Command(JoinGame, () => SelectedRoom != null);
@@ -116,6 +125,7 @@ namespace SevenWondersUI.ViewModels
             StartSearchCommand = new Command(StartSearch);
             StopSearchCommand = new Command(StopSearch);
             LogoutCommand = new Command(Logout);
+            ShowLeaderboardCommand = new Command(ShowLeaderboard);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -142,6 +152,8 @@ namespace SevenWondersUI.ViewModels
             registerer.Register(m_stopMatchmakingResponseMessageHandlerDelegate);
             registerer.Register(m_lobbyUpdateMessageHandlerDelegate);
             registerer.Register(m_failureResponseMessageHandlerDelegate);
+            registerer.Register(m_getLeaderboardResponseMessageHandlerDelegate);
+            registerer.Register(m_startGameResponseMessageHandler);
         }
 
         public void Unregister(IMessageRegisterer registerer)
@@ -152,19 +164,17 @@ namespace SevenWondersUI.ViewModels
             registerer.Unregister(m_stopMatchmakingResponseMessageHandlerDelegate);
             registerer.Unregister(m_lobbyUpdateMessageHandlerDelegate);
             registerer.Unregister(m_failureResponseMessageHandlerDelegate);
+            registerer.Unregister(m_getLeaderboardResponseMessageHandlerDelegate);
+            registerer.Unregister(m_startGameResponseMessageHandler);
         }
 
         private async void CreateGame()
         {
             CreateGamePopupWindow createGamePopupWindow = new CreateGamePopupWindow(new CreateGamePopupViewModel());
-            var page = Application.Current?.MainPage;
-            if (page is not null)
+            await m_popupService.ShowAsync(createGamePopupWindow);
+            if (createGamePopupWindow.ViewModel.CreateActivated)
             {
-                await page.ShowPopupAsync(createGamePopupWindow);
-                if (createGamePopupWindow.ViewModel.CreateActivated)
-                {
-                    await m_clientHubService.InvokeLobbyCommand(new CreateLobbyRequestMessage(createGamePopupWindow.ViewModel.RoomName));
-                }
+                await m_clientHubService.InvokeLobbyCommand(new CreateLobbyRequestMessage(createGamePopupWindow.ViewModel.RoomName));
             }
         }
 
@@ -270,6 +280,26 @@ namespace SevenWondersUI.ViewModels
             return message.Success;
         }
 
+        private async Task<bool> OnStartGameResponseMessageReceived(StartGameResponseMessage message)
+        {
+            if (message.Success)
+            {
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await m_navigationService.NavigateToAsync("//MultiplayerGamePage", new Dictionary<string, object>
+                    {
+                        { "Player1Name", message.Player1Name },
+                        { "Player2Name", message.Player2Name },
+                        { "Player1Type", message.Player1Type },
+                        { "Player2Type", message.Player2Type },
+                        { "StartingPlayerId", message.StartingPlayerId },
+                        { "Seed", message.Seed }
+                    });
+                });
+            }
+            return message.Success;
+        }
+
         private async void StartSearch()
         {
             await m_clientHubService.InvokeLobbyCommand(new StartMatchmakingRequestMessage());
@@ -301,23 +331,40 @@ namespace SevenWondersUI.ViewModels
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
                 var popup = new ErrorPopupWindow(new ErrorPopupViewModel(message.Message));
-                var page = Application.Current?.MainPage;
-                if (page is not null)
-                {
-                    await page.ShowPopupAsync(popup);
-                }
+                await m_popupService.ShowAsync(popup);
             });
             return false;
         }
 
+        private async void ShowLeaderboard()
+        {
+            await m_clientHubService.InvokeLobbyCommand(new GetLeaderboardRequestMessage());
+        }
+
+        private async Task<bool> OnGetLeaderboardResponseMessageReceived(GetLeaderboardResponseMessage message)
+        {
+            if (message.Success)
+            {
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    var popup = new LeaderboardPopupWindow(new LeaderboardPopupViewModel(message.Entries));
+                    await m_popupService.ShowAsync(popup);
+                });
+            }
+            return message.Success;
+        }
+
+        private readonly LobbyResponseMessageHandlerDelegate<StartGameResponseMessage> m_startGameResponseMessageHandler;
         private readonly LobbyResponseMessageHandlerDelegate<CreateLobbyResponseMessage> m_createLobbyResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<JoinLobbyResponseMessage> m_joinLobbyResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<StartMatchmakingResponseMessage> m_startMatchmakingResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<StopMatchmakingResponseMessage> m_stopMatchmakingResponseMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage> m_lobbyUpdateMessageHandlerDelegate;
         private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandlerDelegate;
+        private readonly LobbyResponseMessageHandlerDelegate<GetLeaderboardResponseMessage> m_getLeaderboardResponseMessageHandlerDelegate;
         private readonly IClientHubService m_clientHubService;
         private readonly INavigationService m_navigationService;
         private readonly IAuthService m_authService;
+        private readonly IPopupService m_popupService;
     }
 }

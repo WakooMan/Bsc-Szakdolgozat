@@ -12,7 +12,7 @@ public partial class MultiplayerGamePage : ContentPage
         m_multiplayerGamePageViewModel = multiplayerGamePageViewModel;
         m_clientMessageDispatcher = clientMessageDispatcher;
         InitializeComponent();
-        m_multiplayerGamePageViewModel.Engine.RedrawRequested += (e, args) =>
+        m_redrawRequested = (e, args) =>
         {
             if (m_gameView is not null)
             {
@@ -29,6 +29,7 @@ public partial class MultiplayerGamePage : ContentPage
             await Task.Delay(100);
         }
         m_clientMessageDispatcher.RegisterHandler(m_multiplayerGamePageViewModel);
+        m_multiplayerGamePageViewModel.GameHandler.SubscribeRedrawRequested(m_redrawRequested);
         await m_multiplayerGamePageViewModel.Initialize();
         OnCanvasSizeChanged(this, EventArgs.Empty);
     }
@@ -37,27 +38,26 @@ public partial class MultiplayerGamePage : ContentPage
     {
         base.OnDisappearing();
         m_clientMessageDispatcher.UnregisterHandler(m_multiplayerGamePageViewModel);
+        m_multiplayerGamePageViewModel.GameHandler.UnsubscribeRedrawRequested(m_redrawRequested);
     }
 
     private void OnCanvasSizeChanged(object sender, EventArgs e)
     {
-        if (m_multiplayerGamePageViewModel.Engine.SceneManager.CurrentScene is not null)
-        {
-            m_multiplayerGamePageViewModel.Engine.SceneManager.CurrentScene.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
-        }
+        m_multiplayerGamePageViewModel.GameHandler.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
     }
 
 
     private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
-        m_multiplayerGamePageViewModel.Engine.SceneManager.Render(e.Surface.Canvas);
+        m_multiplayerGamePageViewModel.GameHandler.Render(e.Surface.Canvas);
     }
 
     private void OnTouch(object sender, SKTouchEventArgs e)
     {
-        m_multiplayerGamePageViewModel.Engine.InputManager.OnTouchEvent(e);
+        m_multiplayerGamePageViewModel.GameHandler.OnTouchEvent(e);
     }
 
     private readonly MultiplayerGamePageViewModel m_multiplayerGamePageViewModel;
     private readonly IClientMessageDispatcher m_clientMessageDispatcher;
+    private readonly EventHandler m_redrawRequested;
 }

@@ -6,5 +6,6 @@ namespace WebServer.Model.Client
     {
         public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
         public bool IsOnline { get; set; } = false;
+        public int CompetitiveWins { get; set; } = 0;
     }
 }

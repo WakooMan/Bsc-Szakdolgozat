@@ -55,6 +55,12 @@
                         TextColor="White"
                         HeightRequest="100" WidthRequest="200" CornerRadius="50" />
 
+                <Button Text="{Binding LeaderboardButtonText}" 
+                        Command="{Binding ShowLeaderboardCommand}"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        IsVisible="{Binding IsSearchButtonVisible}" />
+
                 <VerticalStackLayout IsVisible="{Binding IsSearching}" Spacing="10" HorizontalOptions="Center">
                     <ActivityIndicator IsRunning="True" Color="#512BD4" />
                     <Label Text="{Binding SearchTimerText}" HorizontalOptions="Center" FontSize="24" />

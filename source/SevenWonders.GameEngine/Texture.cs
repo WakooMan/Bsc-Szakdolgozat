@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace SevenWonders.GameEngine
 {
-    public class Texture : IEquatable<Texture>
+    public class Texture : IEquatable<Texture>, IDisposable
     {
         public float OriginalWidth { get; set; }
         public float OriginalHeight { get; set; }
@@ -151,6 +151,30 @@ namespace SevenWonders.GameEngine
             canvas.SetMatrix(matrix);
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
             canvas.DrawImage(cachedImage, srcRect, destRect, sampling, m_defaultPaint);
+        }
+
+        public void Dispose()
+        {
+            if(m_bitmap is not null)
+            {
+                m_bitmap.Dispose();
+                m_bitmap = null;
+            }
+            if(m_customColorFilter is not null)
+            {
+                m_customColorFilter.Dispose();
+                m_customColorFilter = null;
+            }
+            if(m_defaultPaint is not null)
+            {
+                m_defaultPaint.Dispose();
+                m_defaultPaint = null;
+            }
+            foreach (var pair in m_sizeCache)
+            {
+                pair.Value.Dispose();
+            }
+            m_sizeCache.Clear();
         }
 
         private SKBitmap? m_bitmap;
