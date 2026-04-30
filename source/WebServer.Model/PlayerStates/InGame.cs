@@ -110,6 +110,7 @@ namespace WebServer.Model.PlayerStates
                 m_signal.Set();
                 await m_serverService.SendGameServerMessageToGroup(m_gameCode, new ServerPlayerActionMessage(m_player.ApplicationUser.UserName, message.ActionId), m_player.ConnectionId);
                 await m_serverService.SendGameServerMessageToClient(m_player.ConnectionId, new PlayerActionResponseMessage(m_player.ApplicationUser.UserName, message.ActionId));
+                return;
             }
             await m_serverService.SendGameServerMessageToClient(m_player.ConnectionId, new PlayerActionResponseMessage("The received action id is not a valid player action!"));
         }
