@@ -9,6 +9,7 @@ public partial class PlayerVSPlayerGamePage : ContentPage
     public PlayerVSPlayerGamePage(PlayerVSPlayerGamePageViewModel playerVSPlayerGamePageViewModel)
     {
         m_playerVSPlayerGamePageViewModel = playerVSPlayerGamePageViewModel;
+        m_resizeNeeded = false;
         InitializeComponent();
         m_redrawRequested = (e, args) =>
         {
@@ -39,12 +40,18 @@ public partial class PlayerVSPlayerGamePage : ContentPage
 
     private void OnCanvasSizeChanged(object sender, EventArgs e)
     {
-        m_playerVSPlayerGamePageViewModel.GameHandler.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
+        m_resizeNeeded = true;
     }
 
 
     private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
+        if (m_resizeNeeded)
+        {
+            m_playerVSPlayerGamePageViewModel.GameHandler.Resize(new Vector2(e.Info.Width, e.Info.Height));
+            m_resizeNeeded = false;
+        }
+
         m_playerVSPlayerGamePageViewModel.GameHandler.Render(e.Surface.Canvas);
     }
 
@@ -55,4 +62,5 @@ public partial class PlayerVSPlayerGamePage : ContentPage
 
     private readonly PlayerVSPlayerGamePageViewModel m_playerVSPlayerGamePageViewModel;
     private readonly EventHandler m_redrawRequested;
+    private bool m_resizeNeeded;
 }

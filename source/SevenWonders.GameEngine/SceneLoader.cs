@@ -9,11 +9,13 @@ namespace SevenWonders.GameEngine
     {
         public virtual string ScenesPath => Path.Combine(Directory.GetCurrentDirectory(), "Scenes");
 
-        public SceneLoader(IXmlHandler xmlHandler, IZipFileReceiver zipFileReceiver)
+        public SceneLoader(IXmlHandler xmlHandler, IZipFileReceiver zipFileReceiver, IPathProvider pathProvider)
         {
             ArgumentChecker.CheckNull(xmlHandler, nameof(xmlHandler));
+            ArgumentChecker.CheckNull(pathProvider, nameof(pathProvider));
+            ArgumentChecker.CheckNull(zipFileReceiver, nameof(zipFileReceiver));
 
-            m_tempPath = Path.Combine(Directory.GetCurrentDirectory(), "ScenesTemp");
+            m_tempPath = Path.Combine(pathProvider.GetAppDataPath(), "ScenesTemp");
             m_xmlHandler = xmlHandler;
             m_zipFileReceiver = zipFileReceiver;
         }

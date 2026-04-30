@@ -1,4 +1,5 @@
 ﻿using SevenWonders.AI.Model.AIModelHandler;
+using SevenWonders.Common;
 
 namespace SevenWonders.AI.Model.Cache
 {

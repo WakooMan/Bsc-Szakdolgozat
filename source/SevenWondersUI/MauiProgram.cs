@@ -40,7 +40,11 @@ using SevenWonders.WebClient.Model;
 using SevenWonders.WebClient.Model.Factories;
 using SevenWonders.WebClient.Model.Services;
 using SevenWondersUI.Configuration;
+#if ANDROID
+using SevenWondersUI.Platforms.Android;
+#else
 using SevenWondersUI.Platforms.Windows;
+#endif
 using SevenWondersUI.Services;
 using SevenWondersUI.ViewModels;
 using SevenWondersUI.Views;

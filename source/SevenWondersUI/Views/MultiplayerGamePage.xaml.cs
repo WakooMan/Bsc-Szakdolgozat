@@ -11,6 +11,7 @@ public partial class MultiplayerGamePage : ContentPage
     {
         m_multiplayerGamePageViewModel = multiplayerGamePageViewModel;
         m_clientMessageDispatcher = clientMessageDispatcher;
+        m_resizeNeeded = false;
         InitializeComponent();
         m_redrawRequested = (e, args) =>
         {
@@ -43,12 +44,18 @@ public partial class MultiplayerGamePage : ContentPage
 
     private void OnCanvasSizeChanged(object sender, EventArgs e)
     {
-        m_multiplayerGamePageViewModel.GameHandler.Resize(new Vector2((float)m_mainGrid.Width, (float)m_mainGrid.Height));
+        m_resizeNeeded = true;
     }
 
 
     private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
+        if (m_resizeNeeded)
+        {
+            m_multiplayerGamePageViewModel.GameHandler.Resize(new Vector2(e.Info.Width, e.Info.Height));
+            m_resizeNeeded = false;
+        }
+
         m_multiplayerGamePageViewModel.GameHandler.Render(e.Surface.Canvas);
     }
 
@@ -60,4 +67,5 @@ public partial class MultiplayerGamePage : ContentPage
     private readonly MultiplayerGamePageViewModel m_multiplayerGamePageViewModel;
     private readonly IClientMessageDispatcher m_clientMessageDispatcher;
     private readonly EventHandler m_redrawRequested;
+    private bool m_resizeNeeded;
 }

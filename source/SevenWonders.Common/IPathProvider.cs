@@ -1,4 +1,4 @@
-﻿namespace SevenWonders.AI.Model.AIModelHandler
+﻿namespace SevenWonders.Common
 {
     public interface IPathProvider
     {
