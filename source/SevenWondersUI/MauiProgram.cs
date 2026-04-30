@@ -11,6 +11,7 @@ using GameLogic.Handlers;
 using GameLogic.Handlers.Factories;
 using GameLogic.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
 using SevenWonders.AI.Model;
 using SevenWonders.AI.Model.AIModelHandler;
 using SevenWonders.AI.Model.Cache;
@@ -208,6 +209,22 @@ public static class MauiProgram
         builder.Services.AddTransient<AIDifficultyPageViewModel>();
         builder.Services.AddTransient<AIDifficultyPage>();
 
+
+        builder.ConfigureLifecycleEvents(events =>
+        {
+#if WINDOWS
+            events.AddWindows(w =>
+            {
+                w.OnWindowCreated(window =>
+                {
+                    window.ExtendsContentIntoTitleBar = true;
+                    window.SetTitleBar(null);
+                    window.AppWindow.SetPresenter(
+                        Microsoft.UI.Windowing.AppWindowPresenterKind.FullScreen);
+                });
+            });
+#endif
+        });
 
         return builder.Build();
 	}
