@@ -16006,7 +16006,7 @@
       <EnableCollision>true</EnableCollision>
       <Name>PickCardLayer</Name>
       <Id>432</Id>
-      <ZIndex>4</ZIndex>
+      <ZIndex>7</ZIndex>
       <SceneObjectsProxy>
         <SceneObject xsi:type="ButtonObject">
           <Name>BuildCard</Name>

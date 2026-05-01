@@ -13,11 +13,11 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Text="{Binding UserNameText}" FontSize="Medium" HorizontalOptions="Center" Grid.Row="0" TextColor="White" Margin="10"/>
+        <Label Text="{Binding UserNameText}" FontSize="Large" HorizontalOptions="Center" Grid.Row="0" TextColor="Black" Margin="10"/>
         <Entry Text="{Binding UserName, Mode=TwoWay}" Grid.Row="1" FontSize="Medium" Margin="10" Background="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" TextColor="White" MaxLength="20"/>
-        <Label Text="{Binding PasswordText}" FontSize="Medium" HorizontalOptions="Center" Grid.Row="2" TextColor="White" Margin="10"/>
+        <Label Text="{Binding PasswordText}" FontSize="Large" HorizontalOptions="Center" Grid.Row="2" TextColor="Black" Margin="10"/>
         <Entry Text="{Binding Password, Mode=TwoWay}" Grid.Row="3" IsPassword="True" FontSize="Medium" Margin="10" Background="Black" HorizontalOptions="Fill" HorizontalTextAlignment="Center" TextColor="White" MaxLength="20"/>
-        <Button Text="{Binding LoginText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding LoginCommand}" Grid.Row="4" Margin="10" TextColor="White" />
+        <Button Text="{Binding LoginText}" FontSize="Large" BackgroundColor="Black" Command="{Binding LoginCommand}" Grid.Row="4" Margin="10" TextColor="White" />
         <Button Text="{Binding NavigateToRegisterText}" FontSize="Small" BackgroundColor="Black" Command="{Binding NavigateToRegisterCommand}" Grid.Row="5" Margin="10" TextColor="White" />
         <Button Text="{Binding BackText}" FontSize="Small" BackgroundColor="Black" Command="{Binding BackCommand}" Grid.Row="6" Margin="10" TextColor="White" />
     </Grid>

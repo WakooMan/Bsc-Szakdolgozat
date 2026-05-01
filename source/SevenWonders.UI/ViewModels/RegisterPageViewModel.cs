@@ -1,4 +1,4 @@
-using SevenWonders.Web.Client.Model.Services;
+Ôªøusing SevenWonders.Web.Client.Model.Services;
 using SevenWonders.UI.Services;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -106,11 +106,11 @@ namespace SevenWonders.UI.ViewModels
             }
         }
 
-        public string UserNameLabelText { get; } = "Felhaszn·lÛnÈv:";
+        public string UserNameLabelText { get; } = "Felhaszn√°l√≥n√©v:";
         public string EmailLabelText { get; } = "E-mail:";
-        public string PasswordLabelText { get; } = "JelszÛ:";
-        public string RegisterText { get; } = "Regisztr·ciÛ";
-        public string NavigateToLoginText { get; } = "BejelentkezÈs";
+        public string PasswordLabelText { get; } = "Jelsz√≥:";
+        public string RegisterText { get; } = "Regisztr√°ci√≥";
+        public string NavigateToLoginText { get; } = "Bejelentkez√©s";
 
         public ICommand RegisterCommand => m_registerCommand;
         public ICommand NavigateToLoginCommand { get; }
@@ -118,9 +118,9 @@ namespace SevenWonders.UI.ViewModels
         private void ValidateUserName()
         {
             if (string.IsNullOrWhiteSpace(m_userName))
-                UserNameError = "A felhaszn·lÛnÈv megad·sa kˆtelez?.";
+                UserNameError = "A felhaszn√°l√≥n√©v megad√°sa k√∂telez≈ë.";
             else if (m_userName.Length < 3)
-                UserNameError = "A felhaszn·lÛnÈv legal·bb 3 karakter legyen.";
+                UserNameError = "A felhaszn√°l√≥n√©v legal√°bb 3 karakter legyen.";
             else
                 UserNameError = string.Empty;
         }
@@ -128,9 +128,9 @@ namespace SevenWonders.UI.ViewModels
         private void ValidateEmail()
         {
             if (string.IsNullOrWhiteSpace(m_email))
-                EmailError = "Az e-mail cÌm megad·sa kˆtelez?.";
+                EmailError = "Az e-mail c√≠m megad√°sa k√∂telez≈ë.";
             else if (!Regex.IsMatch(m_email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                EmailError = "…rvÈnytelen e-mail cÌm.";
+                EmailError = "√ârv√©nytelen e-mail c√≠m.";
             else
                 EmailError = string.Empty;
         }
@@ -138,17 +138,17 @@ namespace SevenWonders.UI.ViewModels
         private void ValidatePassword()
         {
             if (string.IsNullOrWhiteSpace(m_password))
-                PasswordError = "A jelszÛ megad·sa kˆtelez?.";
+                PasswordError = "A jelsz√≥ megad√°sa k√∂telez≈ë.";
             else if (m_password.Length < 6)
-                PasswordError = "A jelszÛ legal·bb 6 karakter legyen.";
+                PasswordError = "A jelsz√≥ legal√°bb 6 karakter legyen.";
             else if (!Regex.IsMatch(m_password, @"[A-Z]"))
-                PasswordError = "A jelszÛnak tartalmaznia kell nagybet?t.";
+                PasswordError = "A jelsz√≥nak tartalmaznia kell nagybet≈±t.";
             else if (!Regex.IsMatch(m_password, @"[a-z]"))
-                PasswordError = "A jelszÛnak tartalmaznia kell kisbet?t.";
+                PasswordError = "A jelsz√≥nak tartalmaznia kell kisbet≈±t.";
             else if (!Regex.IsMatch(m_password, @"\d"))
-                PasswordError = "A jelszÛnak tartalmaznia kell sz·mot.";
+                PasswordError = "A jelsz√≥nak tartalmaznia kell sz√°mot.";
             else if (!Regex.IsMatch(m_password, @"[\W_]"))
-                PasswordError = "A jelszÛnak tartalmaznia kell speci·lis karaktert.";
+                PasswordError = "A jelsz√≥nak tartalmaznia kell speci√°lis karaktert.";
             else
                 PasswordError = string.Empty;
         }
@@ -171,12 +171,12 @@ namespace SevenWonders.UI.ViewModels
             RegisterResponse? result = await m_authService.RegisterAsync(m_userName, m_email, m_password);
             if (result is not null && result.Success)
             {
-                await Shell.Current.DisplayAlert("Sikeres regisztr·ciÛ", "A regisztr·ciÛ sikeres volt!", "OK");
+                await Shell.Current.DisplayAlert("Sikeres regisztr√°ci√≥", "A regisztr√°ci√≥ sikeres volt!", "OK");
                 await m_navigationService.NavigateToAsync("//LoginPage");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Sikertelen regisztr·ciÛ", result?.Message ?? "A regisztr·ciÛ nem siker¸lt.", "OK");
+                await Shell.Current.DisplayAlert("Sikertelen regisztr√°ci√≥", result?.Message ?? "A regisztr√°ci√≥ nem siker√ºlt.", "OK");
             }
         }
 

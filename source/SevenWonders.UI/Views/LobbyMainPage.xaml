@@ -14,7 +14,7 @@
 
         <Grid Grid.Row="1">
             <VerticalStackLayout IsVisible="{Binding IsFriendlyModeVisible}" Spacing="15">
-                <Label Text="{Binding AvailableRoomsTitle}" FontAttributes="Bold" FontSize="18" TextColor="White" />
+                <Label Text="{Binding AvailableRoomsTitle}" FontAttributes="Bold" FontSize="18" TextColor="Black" />
 
                 <CollectionView ItemsSource="{Binding Rooms}" 
                     SelectedItem="{Binding SelectedRoom}"
