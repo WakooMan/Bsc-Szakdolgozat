@@ -1,4 +1,4 @@
-﻿using GameLogic;
+﻿using SevenWonders.Game.Logic;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.Factories;
 

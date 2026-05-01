@@ -1,5 +1,5 @@
-﻿using GameLogic.Elements;
-using GameLogic.Interfaces;
+﻿using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Interfaces;
 using SevenWonders.AI.Model.DecisionRouter;
 using SevenWonders.AI.Model.DecisionRouter.Factories;
 using SevenWonders.Common;

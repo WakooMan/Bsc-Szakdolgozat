@@ -1,4 +1,4 @@
-﻿using GameLogic.Elements.Effects;
+﻿using SevenWonders.Game.Logic.Elements.Effects;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {

@@ -1,0 +1,184 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>SevenWondersUI</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>SevenWondersUI</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.sevenwondersui</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
+		<WindowsPackageType>None</WindowsPackageType>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PackageCertificateThumbprint>D5DE7D90C5494AD1F0D44818168446EBFEBD29AD</PackageCertificateThumbprint>
+		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+	</PropertyGroup>
+
+	<PropertyGroup>
+	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\background_full.png" />
+	  <MauiImage Remove="Resources\Images\board.png" />
+	  <MauiImage Remove="Resources\Images\cardbackfirstage.png" />
+	  <MauiImage Remove="Resources\Images\cardbacksecondage.png" />
+	  <MauiImage Remove="Resources\Images\cardbackthirdage.png" />
+	  <MauiImage Remove="Resources\Images\clay.png" />
+	  <MauiImage Remove="Resources\Images\coin3.png" />
+	  <MauiImage Remove="Resources\Images\coin6.png" />
+	  <MauiImage Remove="Resources\Images\developmentbase.png" />
+	  <MauiImage Remove="Resources\Images\glass.png" />
+	  <MauiImage Remove="Resources\Images\milboardbackground.png" />
+	  <MauiImage Remove="Resources\Images\military.png" />
+	  <MauiImage Remove="Resources\Images\militaryboard.png" />
+	  <MauiImage Remove="Resources\Images\papirus.png" />
+	  <MauiImage Remove="Resources\Images\stone.png" />
+	  <MauiImage Remove="Resources\Images\wood.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\Images\background_full.png" />
+	  <Content Include="Resources\Images\board.png" />
+	  <Content Include="Resources\Images\cardbackfirstage.png" />
+	  <Content Include="Resources\Images\cardbacksecondage.png" />
+	  <Content Include="Resources\Images\cardbackthirdage.png" />
+	  <Content Include="Resources\Images\clay.png" />
+	  <Content Include="Resources\Images\coin3.png" />
+	  <Content Include="Resources\Images\coin6.png" />
+	  <Content Include="Resources\Images\developmentbase.png" />
+	  <Content Include="Resources\Images\glass.png" />
+	  <Content Include="Resources\Images\milboardbackground.png" />
+	  <Content Include="Resources\Images\military.png" />
+	  <Content Include="Resources\Images\militaryboard.png" />
+	  <Content Include="Resources\Images\papirus.png" />
+	  <Content Include="Resources\Images\stone.png" />
+	  <Content Include="Resources\Images\wood.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.14" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.0" />
+		<PackageReference Include="System.Private.Uri" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\SevenWonders.Game.Presenter\SevenWonders.Game.Presenter.csproj" />
+	  <ProjectReference Include="..\SevenWonders.Game.Logic\SevenWonders.Game.Logic.csproj" />
+	  <ProjectReference Include="..\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj" />
+	  <ProjectReference Include="..\SevenWonders.Game.Engine\SevenWonders.Game.Engine.csproj" />
+	  <ProjectReference Include="..\SevenWonders.Web.Client.Model\SevenWonders.Web.Client.Model.csproj" />
+	  <ProjectReference Include="..\SevenWonders.Web.Server.Contract\SevenWonders.Web.Server.Contract.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\CreateGamePopupWindow.xaml.cs">
+		<DependentUpon>CreateGamePopupWindow.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\PlayerVSPlayerGamePage.xaml.cs">
+		<DependentUpon>PlayerVSPlayerGamePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Update="Resources\Raw\scene.zip">
+	    <CopyToOutputDirectory></CopyToOutputDirectory>
+	  </MauiAsset>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\AIDifficultyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ConnectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CreateGamePopupWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ErrorPopupWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LeaderboardPopupWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PlayerVSPlayerGamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LobbyMainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LobbyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MultiplayerGamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PlayerNamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PlayerVSAIGamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SingleplayerModePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+</Project>

@@ -3,31 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWondersUI", "source\SevenWondersUI\SevenWondersUI.csproj", "{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.UI", "source\SevenWonders.UI\SevenWonders.UI.csproj", "{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "source\GameLogic\GameLogic.csproj", "{1CA9F130-B3CF-DFBC-F068-2112E661767F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Logic", "source\SevenWonders.Game.Logic\SevenWonders.Game.Logic.csproj", "{1CA9F130-B3CF-DFBC-F068-2112E661767F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Common", "source\SevenWonders.Common\SevenWonders.Common.csproj", "{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.GameEngine", "source\SevenWonders.GameEngine\SevenWonders.GameEngine.csproj", "{7FE6210E-A4F0-9909-404D-401C4749B525}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Engine", "source\SevenWonders.Game.Engine\SevenWonders.Game.Engine.csproj", "{7FE6210E-A4F0-9909-404D-401C4749B525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Presenter", "SevenWonders.Presenter\SevenWonders.Presenter.csproj", "{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Presenter", "source\SevenWonders.Game.Presenter\SevenWonders.Game.Presenter.csproj", "{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.WebServer", "source\SevenWonders.WebServer\SevenWonders.WebServer.csproj", "{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Web.Server", "source\SevenWonders.Web.Server\SevenWonders.Web.Server.csproj", "{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Contract", "source\WebServer.Contract\WebServer.Contract.csproj", "{3AE09890-4B83-4A82-96CB-D9199CC5218F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Web.Server.Contract", "source\SevenWonders.Web.Server.Contract\SevenWonders.Web.Server.Contract.csproj", "{3AE09890-4B83-4A82-96CB-D9199CC5218F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.Model", "source\WebServer.Model\WebServer.Model.csproj", "{54477D34-2E02-40B9-8079-C1AFDBED53D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Web.Server.Model", "source\SevenWonders.Web.Server.Model\SevenWonders.Web.Server.Model.csproj", "{54477D34-2E02-40B9-8079-C1AFDBED53D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.WebClient.Model", "source\SevenWonders.WebClient.Model\SevenWonders.WebClient.Model.csproj", "{744A82D9-0F93-4752-A2ED-26D6227913FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Web.Client.Model", "source\SevenWonders.Web.Client.Model\SevenWonders.Web.Client.Model.csproj", "{744A82D9-0F93-4752-A2ED-26D6227913FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.SceneEditor", "source\SevenWonders.SceneEditor\SevenWonders.SceneEditor.csproj", "{49CEB58F-5D4F-98D6-9611-3996D4333B1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Scene.Editor", "source\SevenWonders.Game.Scene.Editor\SevenWonders.Game.Scene.Editor.csproj", "{49CEB58F-5D4F-98D6-9611-3996D4333B1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.AITrainerServer", "source\SevenWonders.AITrainerServer\SevenWonders.AITrainerServer.csproj", "{133B05F1-53F2-A013-95E6-A883EEA7648E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.AI.Trainer.Server", "source\SevenWonders.AI.Trainer.Server\SevenWonders.AI.Trainer.Server.csproj", "{133B05F1-53F2-A013-95E6-A883EEA7648E}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "SevenWonders.AITrainer", "source\SevenWonders.AITrainer\SevenWonders.AITrainer.pyproj", "{4CFD0B55-3293-4CB6-8FED-01E07C18E3B7}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "SevenWonders.AI.Trainer", "source\SevenWonders.AI.Trainer\SevenWonders.AI.Trainer.pyproj", "{4CFD0B55-3293-4CB6-8FED-01E07C18E3B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.AI.Model", "source\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj", "{28A90CAD-0DC9-42CA-85AE-975777FF4689}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EE235E77-331B-4C6D-B12C-FD630DFD9EAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Engine_UnitTests", "source\SevenWonders.Game.Engine_UnitTests\SevenWonders.Game.Engine_UnitTests.csproj", "{2F75211E-30F1-75CB-EF91-8968F137312B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Logic_UnitTests", "source\SevenWonders.Game.Logic_UnitTests\SevenWonders.Game.Logic_UnitTests.csproj", "{9A5B789E-E742-3BEE-A11F-5B72DD780732}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,9 +94,34 @@ Global
 		{28A90CAD-0DC9-42CA-85AE-975777FF4689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28A90CAD-0DC9-42CA-85AE-975777FF4689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28A90CAD-0DC9-42CA-85AE-975777FF4689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A80DAD45-A7AF-45EA-BAF9-D87B56A2E893} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1CA9F130-B3CF-DFBC-F068-2112E661767F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B18D7FFC-B8D6-46DF-A00D-D079CE31A98F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7FE6210E-A4F0-9909-404D-401C4749B525} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{9193A5BB-2CDD-46BB-9CF0-FEE581DF7ABF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{63D40B2A-A6A0-494E-9CBA-86F31EBFCE3C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3AE09890-4B83-4A82-96CB-D9199CC5218F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{54477D34-2E02-40B9-8079-C1AFDBED53D8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{744A82D9-0F93-4752-A2ED-26D6227913FC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{49CEB58F-5D4F-98D6-9611-3996D4333B1C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{133B05F1-53F2-A013-95E6-A883EEA7648E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4CFD0B55-3293-4CB6-8FED-01E07C18E3B7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{28A90CAD-0DC9-42CA-85AE-975777FF4689} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2F75211E-30F1-75CB-EF91-8968F137312B} = {EE235E77-331B-4C6D-B12C-FD630DFD9EAB}
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732} = {EE235E77-331B-4C6D-B12C-FD630DFD9EAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76929623-B421-47D7-9444-F99F1FAD5C0C}

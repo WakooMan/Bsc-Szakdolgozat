@@ -1,6 +1,6 @@
-﻿using GameLogic.Elements;
-using GameLogic.Interfaces;
-using GameLogic.PlayerActions;
+﻿using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Interfaces;
+using SevenWonders.Game.Logic.PlayerActions;
 using SevenWonders.AI.Model.DecisionRouter.CommonDecisionHandlers;
 using SevenWonders.Common;
 

@@ -1,9 +1,9 @@
-﻿using GameLogic;
-using GameLogic.Elements;
-using GameLogic.Events.GameEvents;
-using GameLogic.GameStructures;
-using GameLogic.Interfaces;
-using GameLogic.PlayerActions;
+﻿using SevenWonders.Game.Logic;
+using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Events.GameEvents;
+using SevenWonders.Game.Logic.GameStructures;
+using SevenWonders.Game.Logic.Interfaces;
+using SevenWonders.Game.Logic.PlayerActions;
 using SevenWonders.AI.Model.Messages;
 using SevenWonders.AI.Model.Services;
 using SevenWonders.Common;

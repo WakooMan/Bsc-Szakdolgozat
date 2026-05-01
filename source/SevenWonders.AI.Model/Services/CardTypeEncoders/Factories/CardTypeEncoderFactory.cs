@@ -1,4 +1,4 @@
-﻿using GameLogic.Elements.GameCards;
+﻿using SevenWonders.Game.Logic.Elements.GameCards;
 using SevenWonders.AI.Model.Services.Encoders;
 
 namespace SevenWonders.AI.Model.Services.CardTypeEncoders.Factories

@@ -1,6 +1,6 @@
-using GameLogic;
-using GameLogic.Ages;
-using GameLogic.Elements.Military;
+using SevenWonders.Game.Logic;
+using SevenWonders.Game.Logic.Ages;
+using SevenWonders.Game.Logic.Elements.Military;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {

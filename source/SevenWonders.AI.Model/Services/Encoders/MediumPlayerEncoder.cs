@@ -1,10 +1,10 @@
-﻿using GameLogic.Elements;
-using GameLogic.Elements.Disciplines;
-using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Goods.Products;
-using GameLogic.Elements.Goods.Resources;
-using GameLogic.Elements.Wonders;
+﻿using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Elements.Disciplines;
+using SevenWonders.Game.Logic.Elements.Effects;
+using SevenWonders.Game.Logic.Elements.GameCards;
+using SevenWonders.Game.Logic.Elements.Goods.Products;
+using SevenWonders.Game.Logic.Elements.Goods.Resources;
+using SevenWonders.Game.Logic.Elements.Wonders;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {

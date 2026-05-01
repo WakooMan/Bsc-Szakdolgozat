@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SevenWonders.UI.Converters"
+             x:Class="SevenWonders.UI.Views.LobbyPage"
+             Title="{Binding LobbyName}">
+    <ContentPage.Resources>
+        <converters:BoolToFontAttributesConverter x:Key="BoolToFontAttributesConverter" />
+    </ContentPage.Resources>
+    <Grid Background="WhiteSmoke" RowDefinitions="*, Auto" Padding="20" ColumnSpacing="20">
+
+        <Grid Grid.Row="0" ColumnDefinitions="*, 2*" ColumnSpacing="20">
+
+            <Grid Grid.Column="0" RowDefinitions="Auto, *">
+                <Label Grid.Row="0"
+                       Text="{Binding MembersTitle}"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="Black"
+                       Margin="0,0,0,10" />
+                <CollectionView Grid.Row="1"
+                                ItemsSource="{Binding Members}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="5"
+                                   HasShadow="True"
+                                   Margin="0,4"
+                                   Padding="10">
+                                <Label Text="{Binding DisplayName}"
+                                       FontSize="15"
+                                       TextColor="Black"
+                                       FontAttributes="{Binding IsLocalPlayer, Converter={StaticResource BoolToFontAttributesConverter}}"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <Grid Grid.Column="1" RowDefinitions="Auto, *, Auto">
+                <Label Grid.Row="0"
+                       Text="{Binding ChatTitle}"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="Black"
+                       Margin="0,0,0,10" />
+
+                <Border Grid.Row="1"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        Padding="8"
+                        Margin="0,0,0,8">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5" />
+                    </Border.StrokeShape>
+                    <CollectionView x:Name="ChatCollectionView"
+                                    ItemsSource="{Binding ChatMessages}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding DisplayText}"
+                                       FontSize="13"
+                                       TextColor="Black"
+                                       Margin="0,2" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Border>
+
+                <Grid Grid.Row="2" ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                    <Entry Grid.Column="0"
+                           Text="{Binding ChatInput, Mode=TwoWay}"
+                           Background="Black"
+                           TextColor="White"
+                           HorizontalTextAlignment="Start"
+                           ReturnCommand="{Binding SendChatCommand}" />
+                    <Button Grid.Column="1"
+                            Text="{Binding SendButtonText}"
+                            Command="{Binding SendChatCommand}"
+                            BackgroundColor="Black"
+                            TextColor="White" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="1"
+                               HorizontalOptions="End"
+                               Spacing="10"
+                               Margin="0,16,0,0">
+            <Button Text="{Binding StartGameButtonText}"
+                    Command="{Binding StartGameCommand}"
+                    IsVisible="{Binding IsHost}"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    WidthRequest="160" />
+            <Button Text="{Binding LeaveButtonText}"
+                    Command="{Binding LeaveCommand}"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    WidthRequest="120" />
+        </HorizontalStackLayout>
+
+    </Grid>
+</ContentPage>

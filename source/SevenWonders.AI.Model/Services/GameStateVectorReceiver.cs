@@ -1,4 +1,4 @@
-﻿using GameLogic.Elements;
+﻿using SevenWonders.Game.Logic.Elements;
 using SevenWonders.AI.Model.Services.Encoders;
 using SevenWonders.Common;
 

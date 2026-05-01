@@ -1,0 +1,24 @@
+﻿using SevenWonders.Game.Engine;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SevenWonders.Game.Scene.Editor.ViewModels
+{
+    public abstract class BaseListViewModel: INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public abstract string Name { get; }
+        public abstract int Id { get; }
+
+        public override string ToString() => $"{Name} (Id: {Id})";
+
+        public void OnPropertyChanged([CallerMemberName] string name = "") =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+}

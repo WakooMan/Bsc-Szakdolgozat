@@ -400,4 +400,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-source/SevenWondersUI/Resources/Raw/scene.zip
+source/SevenWonders.UI/Resources/Raw/scene.zip

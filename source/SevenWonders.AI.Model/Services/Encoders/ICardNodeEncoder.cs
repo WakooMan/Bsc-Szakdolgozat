@@ -1,6 +1,6 @@
-﻿using GameLogic.GameStructures;
+﻿using SevenWonders.Game.Logic.GameStructures;
 
-using GameLogic.Elements;
+using SevenWonders.Game.Logic.Elements;
 
 namespace SevenWonders.AI.Model.Services.Encoders
 {

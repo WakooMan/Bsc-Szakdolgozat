@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
+    <ProjectReference Include="..\SevenWonders.Game.Logic\SevenWonders.Game.Logic.csproj" />
     <ProjectReference Include="..\SevenWonders.Common\SevenWonders.Common.csproj" />
   </ItemGroup>
 
