@@ -42,8 +42,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"WakooMan_Bsc-Szakdolgozat" /o:"viktor-magyar" /d:sonar.token="$($env:SONAR_TOKEN)" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.coverage.inclusions=**/SevenWonders.Game.Engine/**,**/SevenWonders.Game.Logic/**
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"WakooMan_Bsc-Szakdolgozat" /o:"viktor-magyar" /d:sonar.token="$($env:SONAR_TOKEN)" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
           dotnet workload restore "Seven_Wonders_Duel.sln"
-          dotnet build "Seven_Wonders_Duel.sln"
-          dotnet test "Seven_Wonders_Duel.sln" --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./coverage.opencover.xml'
+          dotnet build "SevenWonders.UnitTests.sln"
+          dotnet test "SevenWonders.UnitTests.sln" --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./coverage.opencover.xml'
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$($env:SONAR_TOKEN)"
