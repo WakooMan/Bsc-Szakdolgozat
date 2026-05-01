@@ -10,12 +10,10 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Text="{Binding Title}" FontSize="Large" HorizontalOptions="Center" Grid.Row="0"/>
         <Button Text="{Binding SingleplayerText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding SinglePlayerCommand}" Grid.Row="1" Margin="10" />
         <Button Text="{Binding MultiplayerText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding MultiplayerCommand}" Grid.Row="2" Margin="10"/>
-        <Button Text="{Binding AILearningText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding AILearningCommand}" Grid.Row="3" Margin="10"/>
-        <Button Text="{Binding ExitText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding ExitCommand}" Grid.Row="4" Margin="10"/>
+        <Button Text="{Binding ExitText}" FontSize="Medium" BackgroundColor="Black" Command="{Binding ExitCommand}" Grid.Row="3" Margin="10"/>
     </Grid>
 </ContentPage>

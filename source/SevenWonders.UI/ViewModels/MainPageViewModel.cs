@@ -12,11 +12,9 @@ namespace SevenWonders.UI.ViewModels
             m_title = "7 Csoda Párbaj";
             m_singleplayerButton = ("Egyjátékos mód", true);
             m_multiplayerButton = ("Többjátékos mód", true);
-            m_aILearningButton = ("MI Tanulás", false);
             m_exitButton = ("Kilépés", true);
             SinglePlayerCommand = new Command(OnSinglePlayerClicked, () => m_singleplayerButton.isEnabled);
             MultiplayerCommand = new Command(OnMultiplayerClicked, () => m_multiplayerButton.isEnabled);
-            AILearningCommand = new Command(OnAILearningClicked, () => m_aILearningButton.isEnabled);
             ExitCommand = new Command(OnExitClicked, () => m_exitButton.isEnabled);
         }
 
@@ -68,22 +66,6 @@ namespace SevenWonders.UI.ViewModels
             }
         }
 
-        public string AILearningText
-        {
-            get
-            {
-                return m_aILearningButton.text;
-            }
-            set
-            {
-                if (m_aILearningButton.text != value)
-                {
-                    m_aILearningButton.text = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public string ExitText
         {
             get
@@ -102,7 +84,6 @@ namespace SevenWonders.UI.ViewModels
 
         public ICommand SinglePlayerCommand { get; }
         public ICommand MultiplayerCommand { get; }
-        public ICommand AILearningCommand { get; }
         public ICommand ExitCommand { get; }
 
         private void OnExitClicked()
@@ -128,7 +109,6 @@ namespace SevenWonders.UI.ViewModels
         private string m_title;
         private (string text, bool isEnabled) m_singleplayerButton;
         private (string text, bool isEnabled) m_multiplayerButton;
-        private (string text, bool isEnabled) m_aILearningButton;
         private (string text, bool isEnabled) m_exitButton;
         private readonly INavigationService m_navigationService;
         private readonly IExitService m_exitService;
