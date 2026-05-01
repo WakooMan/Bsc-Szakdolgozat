@@ -1,0 +1,65 @@
+﻿%%{init: {'er': {'spacingFactor': 3.0}}}%%
+erDiagram
+  direction TB
+  "dbo.AspNetRoleClaims" {
+    Id int PK
+    RoleId nvarchar(450) FK
+    ClaimType nvarchar(max)(NULL) 
+    ClaimValue nvarchar(max)(NULL) 
+  }
+  "dbo.AspNetRoleClaims" }o--|| "dbo.AspNetRoles" : FK_AspNetRoleClaims_AspNetRoles_RoleId
+  "dbo.AspNetRoles" {
+    Id nvarchar(450) PK
+    Name nvarchar(256)(NULL) 
+    NormalizedName nvarchar(256)(NULL) 
+    ConcurrencyStamp nvarchar(max)(NULL) 
+  }
+  "dbo.AspNetUserClaims" {
+    Id int PK
+    UserId nvarchar(450) FK
+    ClaimType nvarchar(max)(NULL) 
+    ClaimValue nvarchar(max)(NULL) 
+  }
+  "dbo.AspNetUserClaims" }o--|| "dbo.AspNetUsers" : FK_AspNetUserClaims_AspNetUsers_UserId
+  "dbo.AspNetUserLogins" {
+    LoginProvider nvarchar(450) PK
+    ProviderKey nvarchar(450) PK
+    ProviderDisplayName nvarchar(max)(NULL) 
+    UserId nvarchar(450) FK
+  }
+  "dbo.AspNetUserLogins" }o--|| "dbo.AspNetUsers" : FK_AspNetUserLogins_AspNetUsers_UserId
+  "dbo.AspNetUserRoles" {
+    UserId nvarchar(450) PK,FK
+    RoleId nvarchar(450) PK,FK
+  }
+  "dbo.AspNetUserRoles" }o--|| "dbo.AspNetRoles" : FK_AspNetUserRoles_AspNetRoles_RoleId
+  "dbo.AspNetUserRoles" }o--|| "dbo.AspNetUsers" : FK_AspNetUserRoles_AspNetUsers_UserId
+  "dbo.AspNetUsers" {
+    Id nvarchar(450) PK
+    RegistrationDate datetime2 
+    IsOnline bit 
+    UserName nvarchar(256)(NULL) 
+    NormalizedUserName nvarchar(256)(NULL) 
+    Email nvarchar(256)(NULL) 
+    NormalizedEmail nvarchar(256)(NULL) 
+    EmailConfirmed bit 
+    PasswordHash nvarchar(max)(NULL) 
+    SecurityStamp nvarchar(max)(NULL) 
+    ConcurrencyStamp nvarchar(max)(NULL) 
+    PhoneNumber nvarchar(max)(NULL) 
+    PhoneNumberConfirmed bit 
+    TwoFactorEnabled bit 
+    LockoutEnd datetimeoffset(NULL) 
+    LockoutEnabled bit 
+    AccessFailedCount int 
+    CompetitiveWins int 
+  }
+  "dbo.AspNetUserTokens" {
+    UserId nvarchar(450) PK,FK
+    LoginProvider nvarchar(450) PK
+    Name nvarchar(450) PK
+    Value nvarchar(max)(NULL) 
+  }
+
+
+  "dbo.AspNetUserTokens" }o--|| "dbo.AspNetUsers" : FK_AspNetUserTokens_AspNetUsers_UserId

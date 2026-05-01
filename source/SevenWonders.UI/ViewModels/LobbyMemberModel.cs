@@ -15,7 +15,6 @@ namespace SevenWonders.UI.ViewModels
                 {
                     m_userName = value;
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(DisplayName));
                 }
             }
         }
@@ -29,7 +28,6 @@ namespace SevenWonders.UI.ViewModels
                 {
                     m_isHost = value;
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(DisplayName));
                 }
             }
         }
@@ -46,7 +44,5 @@ namespace SevenWonders.UI.ViewModels
                 }
             }
         }
-
-        public string DisplayName => IsHost ? $"{UserName} ??" : UserName;
     }
 }
