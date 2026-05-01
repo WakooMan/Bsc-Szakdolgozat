@@ -1,5 +1,5 @@
-﻿using GameLogic.Elements;
-using GameLogic.Interfaces;
+﻿using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Interfaces;
 using SevenWonders.AI.Model.DataModel;
 
 namespace SevenWonders.AI.Model.DecisionRouter.CommonDecisionHandlers

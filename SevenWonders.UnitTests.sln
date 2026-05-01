@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Engine", "source\SevenWonders.Game.Engine\SevenWonders.Game.Engine.csproj", "{56932929-76EF-A45C-E56A-9A17419D9146}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Logic", "source\SevenWonders.Game.Logic\SevenWonders.Game.Logic.csproj", "{395B5236-6752-DB23-CCE1-91F0DEBE6C2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Common", "source\SevenWonders.Common\SevenWonders.Common.csproj", "{0FB7F700-7189-C867-02A9-3748670F71C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Engine_UnitTests", "source\SevenWonders.Game.Engine_UnitTests\SevenWonders.Game.Engine_UnitTests.csproj", "{2F75211E-30F1-75CB-EF91-8968F137312B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenWonders.Game.Logic_UnitTests", "source\SevenWonders.Game.Logic_UnitTests\SevenWonders.Game.Logic_UnitTests.csproj", "{9A5B789E-E742-3BEE-A11F-5B72DD780732}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56932929-76EF-A45C-E56A-9A17419D9146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56932929-76EF-A45C-E56A-9A17419D9146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56932929-76EF-A45C-E56A-9A17419D9146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56932929-76EF-A45C-E56A-9A17419D9146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{395B5236-6752-DB23-CCE1-91F0DEBE6C2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395B5236-6752-DB23-CCE1-91F0DEBE6C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395B5236-6752-DB23-CCE1-91F0DEBE6C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395B5236-6752-DB23-CCE1-91F0DEBE6C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB7F700-7189-C867-02A9-3748670F71C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB7F700-7189-C867-02A9-3748670F71C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB7F700-7189-C867-02A9-3748670F71C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB7F700-7189-C867-02A9-3748670F71C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F75211E-30F1-75CB-EF91-8968F137312B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5B789E-E742-3BEE-A11F-5B72DD780732}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7386FB85-832F-4056-905D-15D37A1B329F}
+	EndGlobalSection
+EndGlobal

@@ -1,13 +1,13 @@
-﻿using GameLogic;
-using GameLogic.Elements;
-using GameLogic.Elements.Disciplines;
-using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Goods;
-using GameLogic.Elements.Goods.Products;
-using GameLogic.Elements.Goods.Resources;
-using GameLogic.Elements.Guilds;
-using GameLogic.GameStructures;
+﻿using SevenWonders.Game.Logic;
+using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Elements.Disciplines;
+using SevenWonders.Game.Logic.Elements.Effects;
+using SevenWonders.Game.Logic.Elements.GameCards;
+using SevenWonders.Game.Logic.Elements.Goods;
+using SevenWonders.Game.Logic.Elements.Goods.Products;
+using SevenWonders.Game.Logic.Elements.Goods.Resources;
+using SevenWonders.Game.Logic.Elements.Guilds;
+using SevenWonders.Game.Logic.GameStructures;
 using SevenWonders.AI.Model.Services.CardTypeEncoders;
 using SevenWonders.AI.Model.Services.CardTypeEncoders.Factories;
 

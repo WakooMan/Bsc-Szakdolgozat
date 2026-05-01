@@ -1,9 +1,9 @@
-﻿using GameLogic;
-using GameLogic.Elements;
-using GameLogic.Elements.Disciplines;
-using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.GameStructures;
+﻿using SevenWonders.Game.Logic;
+using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Elements.Disciplines;
+using SevenWonders.Game.Logic.Elements.Effects;
+using SevenWonders.Game.Logic.Elements.GameCards;
+using SevenWonders.Game.Logic.GameStructures;
 using System.Linq;
 
 namespace SevenWonders.AI.Model.Services.Encoders

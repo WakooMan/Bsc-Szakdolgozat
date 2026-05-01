@@ -1,7 +1,7 @@
-﻿using GameLogic.Elements;
-using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Goods.Factories;
+﻿using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Elements.Effects;
+using SevenWonders.Game.Logic.Elements.GameCards;
+using SevenWonders.Game.Logic.Elements.Goods.Factories;
 using SevenWonders.Common;
 
 namespace SevenWonders.AI.Model.Services

@@ -1,0 +1,66 @@
+using SevenWonders.UI.ViewModels;
+using SkiaSharp.Views.Maui;
+using System.Numerics;
+
+namespace SevenWonders.UI.Views;
+
+public partial class PlayerVSPlayerGamePage : ContentPage
+{
+    public PlayerVSPlayerGamePage(PlayerVSPlayerGamePageViewModel playerVSPlayerGamePageViewModel)
+    {
+        m_playerVSPlayerGamePageViewModel = playerVSPlayerGamePageViewModel;
+        m_resizeNeeded = false;
+        InitializeComponent();
+        m_redrawRequested = (e, args) =>
+        {
+            if (m_gameView is not null)
+            {
+                m_gameView.InvalidateSurface();
+            }
+        };
+        BindingContext = m_playerVSPlayerGamePageViewModel;
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        while (m_gameView is null)
+        {
+            await Task.Delay(100);
+        }
+        m_playerVSPlayerGamePageViewModel.GameHandler.SubscribeRedrawRequested(m_redrawRequested);
+        await m_playerVSPlayerGamePageViewModel.Initialize();
+        OnCanvasSizeChanged(this, EventArgs.Empty);
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        m_playerVSPlayerGamePageViewModel.GameHandler.UnsubscribeRedrawRequested(m_redrawRequested);
+    }
+
+    private void OnCanvasSizeChanged(object sender, EventArgs e)
+    {
+        m_resizeNeeded = true;
+    }
+
+
+    private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+    {
+        if (m_resizeNeeded)
+        {
+            m_playerVSPlayerGamePageViewModel.GameHandler.Resize(new Vector2(e.Info.Width, e.Info.Height));
+            m_resizeNeeded = false;
+        }
+
+        m_playerVSPlayerGamePageViewModel.GameHandler.Render(e.Surface.Canvas);
+    }
+
+    private void OnTouch(object sender, SKTouchEventArgs e)
+    {
+        m_playerVSPlayerGamePageViewModel.GameHandler.OnTouchEvent(e);
+    }
+
+    private readonly PlayerVSPlayerGamePageViewModel m_playerVSPlayerGamePageViewModel;
+    private readonly EventHandler m_redrawRequested;
+    private bool m_resizeNeeded;
+}

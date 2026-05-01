@@ -1,7 +1,7 @@
-﻿using GameLogic;
-using GameLogic.Events.GameEvents;
-using GameLogic.GameStructures;
-using GameLogic.Interfaces;
+﻿using SevenWonders.Game.Logic;
+using SevenWonders.Game.Logic.Events.GameEvents;
+using SevenWonders.Game.Logic.GameStructures;
+using SevenWonders.Game.Logic.Interfaces;
 using SevenWonders.Common;
 
 namespace SevenWonders.AI.Model.Services

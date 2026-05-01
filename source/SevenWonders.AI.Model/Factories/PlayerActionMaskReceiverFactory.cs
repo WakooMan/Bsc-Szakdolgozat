@@ -1,4 +1,4 @@
-﻿using GameLogic;
+﻿using SevenWonders.Game.Logic;
 using SevenWonders.AI.Model.Services;
 
 namespace SevenWonders.AI.Model.Factories

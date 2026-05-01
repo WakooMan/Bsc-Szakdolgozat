@@ -1,5 +1,5 @@
-﻿using GameLogic.GameStructures;
-using GameLogic.Interfaces;
+﻿using SevenWonders.Game.Logic.GameStructures;
+using SevenWonders.Game.Logic.Interfaces;
 
 namespace SevenWonders.AI.Model.Services
 {

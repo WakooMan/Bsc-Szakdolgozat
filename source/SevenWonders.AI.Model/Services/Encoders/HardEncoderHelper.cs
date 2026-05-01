@@ -1,10 +1,10 @@
-using GameLogic;
-using GameLogic.Elements;
-using GameLogic.Elements.Disciplines;
-using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
-using GameLogic.Elements.Wonders;
-using GameLogic.GameStructures;
+using SevenWonders.Game.Logic;
+using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Elements.Disciplines;
+using SevenWonders.Game.Logic.Elements.Effects;
+using SevenWonders.Game.Logic.Elements.GameCards;
+using SevenWonders.Game.Logic.Elements.Wonders;
+using SevenWonders.Game.Logic.GameStructures;
 using SevenWonders.AI.Model.Services.Encoders.Structs;
 using System.Xml.Linq;
 

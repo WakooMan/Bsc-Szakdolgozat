@@ -1,5 +1,5 @@
-﻿using GameLogic.Elements.Effects;
-using GameLogic.Elements.GameCards;
+﻿using SevenWonders.Game.Logic.Elements.Effects;
+using SevenWonders.Game.Logic.Elements.GameCards;
 using SevenWonders.AI.Model.Services.Encoders;
 
 namespace SevenWonders.AI.Model.Services.CardTypeEncoders

@@ -2,6 +2,7 @@
 using Microsoft.ML.OnnxRuntime.Tensors;
 using SevenWonders.AI.Model.DecisionRouter.DecisionHandlers;
 using SevenWonders.AI.Model.Messages;
+using SevenWonders.Common;
 
 namespace SevenWonders.AI.Model.AIModelHandler
 {
