@@ -19,9 +19,15 @@ namespace SevenWonders.UI.Views
             return this;
         }
 
-        public IAnimationGroupBuilder Flip(int frameNum, float playingDuration)
+        public IAnimationGroupBuilder Flip(string frameName, float playingDuration)
         {
-            m_animations.Add(new CardFlip(m_gameObject, frameNum, playingDuration));
+            int frameIndex = m_gameObject.Animations.FindIndex(anim => anim.Name.ToLower() == frameName.ToLower());
+            if (frameIndex == -1)
+            {
+                throw new InvalidOperationException($"Did not find the frame by name: {frameName} for object: {m_gameObject.Name}");
+            }
+
+            m_animations.Add(new CardFlip(m_gameObject, frameIndex, playingDuration));
             return this;
         }
 

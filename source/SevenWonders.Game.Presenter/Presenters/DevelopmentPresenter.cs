@@ -47,7 +47,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                     eventObj.GameContext.DevelopmentList.Developments.ForEach(development =>
                     {
                         IGameObjectView gameObjectView = m_developments[development];
-                        gameObjectView.GetAnimationGroupBuilder().MoveTo(m_developmentDeck, 0f).Flip(1, 0f);
+                        gameObjectView.GetAnimationGroupBuilder().MoveTo(m_developmentDeck, 0f).Flip("back", 0f);
                         gameObjectView.Execute();
                     });
                 }

@@ -64,7 +64,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             {
                 foreach (var connection in m_wonders)
                 {
-                    var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip(1, 0f).MoveTo(m_wonderDeck, 0f);
+                    var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip("back", 0f).MoveTo(m_wonderDeck, 0f);
                     connection.Value.GameObjectView.Execute().GetAwaiter().GetResult();
                 }
             });
@@ -112,26 +112,10 @@ namespace SevenWonders.Game.Presenter.Presenters
                 var connection = m_wonders[wonder];
                 var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.MoveTo(m_centerTargets.Pop(), 1.0f)
-                    .Flip(0, 1.0f);
+                    .Flip("front", 1.0f);
                 await connection.GameObjectView.Execute();
 
                 group.Highlight(new Vector2(1.0f, 1.0f), true, 0.2f);
-                await connection.GameObjectView.Execute();
-            }
-        }
-
-        private async Task MoveToDeck(Wonder wonder)
-        {
-            if (m_wonderDeck is not null)
-            {
-                var connection = m_wonders[wonder];
-
-                var group = connection.GameObjectView.GetAnimationGroupBuilder();
-                group.Unhighlight(false, 0.2f);
-                await connection.GameObjectView.Execute();
-
-                group.MoveTo(m_wonderDeck, 1.0f)
-                    .Flip(1, 1.0f);
                 await connection.GameObjectView.Execute();
             }
         }

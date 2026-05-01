@@ -41,16 +41,16 @@ namespace GameLogic_UnitTests.PlayerActions
             m_ageHandler.CurrentAge.Returns(m_age);
             m_age.Composition.Returns(m_cardComposition);
             m_developments = new List<Development>();
-            m_chooseDevelopmentAction = new ChooseDevelopmentAction(m_current, m_opponent, m_development, m_developments);
+            m_chooseDevelopmentAction = new ChooseDevelopmentAction(m_current, m_opponent, m_development, m_developments, false);
         }
 
         [Test]
         public void When_Constructor_Called_With_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(null, m_opponent, m_development, []));
-            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, null, m_development, []));
-            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, m_opponent, null, []));
-            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, m_opponent, m_development, null));
+            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(null, m_opponent, m_development, [], false));
+            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, null, m_development, [], false));
+            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, m_opponent, null, [], false));
+            Assert.Throws<ArgumentNullException>(() => new ChooseDevelopmentAction(m_current, m_opponent, m_development, null, false));
         }
 
         [Test]

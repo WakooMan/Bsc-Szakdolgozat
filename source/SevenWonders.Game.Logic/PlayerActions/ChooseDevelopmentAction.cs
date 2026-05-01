@@ -8,9 +8,10 @@ namespace SevenWonders.Game.Logic.PlayerActions
     public class ChooseDevelopmentAction : IPlayerAction
     {
         public string Name => m_development.Name;
+        public bool ToDeck { get; }
         public int Id => 5;
         public ChooseDevelopmentAction() { }
-        public ChooseDevelopmentAction(Player owner, Player opponent, Development development, List<Development> developments)
+        public ChooseDevelopmentAction(Player owner, Player opponent, Development development, List<Development> developments, bool toDeck)
         {
             ArgumentChecker.CheckNull(owner, nameof(owner));
             ArgumentChecker.CheckNull(opponent, nameof(opponent));
@@ -21,6 +22,7 @@ namespace SevenWonders.Game.Logic.PlayerActions
             m_opponent = opponent;
             m_development = development;
             m_developments = developments;
+            ToDeck = toDeck;
         }
 
         public bool CanPerform(IGameContext gameContext)
@@ -36,7 +38,7 @@ namespace SevenWonders.Game.Logic.PlayerActions
             m_owner.Developments.Add(m_development);
             m_developments.Remove(m_development);
             gameContext.EventManager.Publish(new OnPlayerDevelopmentReceived(m_owner, m_development));
-            gameContext.EventManager.Publish(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray(), true));
+            gameContext.EventManager.Publish(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray(), !ToDeck));
             m_development.OnDevelopmentEstablished(gameContext, m_owner, m_opponent);
             return true;
         }

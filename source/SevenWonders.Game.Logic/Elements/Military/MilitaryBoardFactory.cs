@@ -14,7 +14,7 @@ namespace SevenWonders.Game.Logic.Elements.Military
             return m_xmlHandler.DeserializeEmbeddedResource<MilitaryBoard>(CARDLIST_FILE);
         }
 
-        private readonly string CARDLIST_FILE = "GameLogic.Data.MilitaryBoard.xml";
+        private readonly string CARDLIST_FILE = "SevenWonders.Game.Logic.Data.MilitaryBoard.xml";
         private readonly IXmlHandler m_xmlHandler;
     }
 }

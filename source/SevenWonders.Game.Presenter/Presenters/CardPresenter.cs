@@ -91,7 +91,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             {
                 foreach (var connection in m_cards)
                 {
-                    connection.Value.GetAnimationGroupBuilder().Flip(0, 0f).MoveTo(m_ageCardDecks[connection.Key.Age], 0f);
+                    connection.Value.GetAnimationGroupBuilder().Flip("back", 0f).MoveTo(m_ageCardDecks[connection.Key.Age], 0f);
                     connection.Value.Execute().GetAwaiter().GetResult();
                 }
             });
@@ -138,7 +138,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             m_eventManager.Subscribe<CardNodeAvailableEvent>(eventObj => {
                 var view = m_cards[eventObj.CardNode.CardObj];
                 var group = view.GetAnimationGroupBuilder();
-                group.Flip(1, 0.5f);
+                group.Flip("front", 0.5f);
                 view.Execute().GetAwaiter().GetResult();
             });
             m_eventManager.Subscribe<OnCardBuiltIntoWonder>(eventObj => {
@@ -155,7 +155,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                 group.Unhighlight(false, 0.3f);
                 cardView.Execute().GetAwaiter().GetResult();
 
-                group.Flip(0, 0.2f);
+                group.Flip("back", 0.2f);
                 cardView.Execute().GetAwaiter().GetResult();
 
                 group.MoveTo(connection.CardTarget, 0.5f);
@@ -189,7 +189,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             }
             if (!hidden)
             {
-                group.Flip(1, 0.5f);
+                group.Flip("front", 0.5f);
             }
             await view.Execute();
         }
@@ -214,7 +214,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                 var view = m_cards[card];
                 var animationBuilder = view.GetAnimationGroupBuilder().Unhighlight(false, 0.1f);
                 await view.Execute();
-                animationBuilder.MoveTo(m_dropCardDeck, 0.5f).Flip(0, 0.5f);
+                animationBuilder.MoveTo(m_dropCardDeck, 0.5f).Flip("back", 0.5f);
                 await view.Execute();
             }
         }

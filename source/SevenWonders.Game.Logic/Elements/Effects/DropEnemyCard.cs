@@ -30,7 +30,7 @@ namespace SevenWonders.Game.Logic.Elements.Effects
             var enemyCards = opponent.Cards.Where(card => card.BuildingType == CardType);
             if (enemyCards.Count() > 0)
             {
-                gameContext.EventManager.Publish(new OnChooseObjects("Ellenfél kártyájának kidobása", opponent.Cards.Select(card => card.Name).ToArray(), true));
+                gameContext.EventManager.Publish(new OnChooseObjects("Ellenfél kártyájának kidobása", opponent.Cards.Select(card => card.Name).ToArray()));
                 gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, enemyCards.Select(card =>
                 {
                     IPlayerAction dropCard = new DropCard(opponent, owner, card);

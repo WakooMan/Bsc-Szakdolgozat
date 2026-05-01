@@ -9,7 +9,7 @@ namespace SevenWonders.Game.Logic.Ages
     {
         public override AgesEnum Age => AgesEnum.III;
 
-        public override string CardCompositionFile => "GameLogic.Data.ThirdAgeComposition.csv";
+        public override string CardCompositionFile => "SevenWonders.Game.Logic.Data.ThirdAgeComposition.csv";
 
         public ThirdAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList, IRandomGenerator randomGenerator) : base(eventManager, cardCompositionFactory, randomGenerator?.ReceiveRandomElements(cardList?.Cards.Where(card => card.Age == AgesEnum.III).ToArray() ?? [], 20))
         {

@@ -37,7 +37,7 @@ namespace SevenWonders.Game.Logic.PlayerActions
             Player opponent = gameContext.TurnHandler.OpponentPlayer;
             gameContext.DroppedCardList.Cards.Remove(m_card);
             player.Cards.Add(m_card);
-            gameContext.EventManager.Publish(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray(), true));
+            gameContext.EventManager.Publish(new OnObjectChosen(gameContext.DroppedCardList.Cards.Select(card => card.Name).ToArray(), false));
             OnCardBuilt onCardBuilt = new OnCardBuilt(m_card, player, 0, false);
             player.OnBuildCard(onCardBuilt);
             gameContext.EventManager.Publish(onCardBuilt);

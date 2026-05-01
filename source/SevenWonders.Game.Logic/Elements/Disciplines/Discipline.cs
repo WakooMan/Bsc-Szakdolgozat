@@ -29,10 +29,10 @@ namespace SevenWonders.Game.Logic.Elements.Disciplines
             {
                 if (developments.Count > 0)
                 {
-                    gameContext.EventManager.Publish(new OnChooseObjects("Válassz fejlesztést", developments.Select(dev => dev.Name).ToArray(), true));
+                    gameContext.EventManager.Publish(new OnChooseObjects("Válassz fejlesztést", developments.Select(dev => dev.Name).ToArray()));
                     gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, developments.Select(dev =>
                     {
-                        IPlayerAction action = new ChooseDevelopmentAction(owner, opponent, dev, developments);
+                        IPlayerAction action = new ChooseDevelopmentAction(owner, opponent, dev, developments, false);
                         return action;
                     }).ToArray());
                 }

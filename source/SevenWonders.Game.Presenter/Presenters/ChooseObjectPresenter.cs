@@ -57,10 +57,10 @@ namespace SevenWonders.Game.Presenter.Presenters
                         m_objectManager.AddSceneObject(m_chooseObjectLayer, previousPosTarget);
                         m_objectCache.Add((gameObjectView, previousPosTarget));
                         int frontSpriteIdx = gameObjectView.FindAnimationIndexByName("front");
-                        var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, eventObj.Visible ? 0.5f : 0f);
+                        var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, 0.5f);
                         if (frontSpriteIdx >= 0)
                         {
-                            group.Flip(frontSpriteIdx, 0.5f);
+                            group.Flip("front", 0.5f);
                         }
                         gameObjectView.Execute().GetAwaiter().GetResult();
                         gameObjectView.SetVisible(true);
@@ -87,9 +87,9 @@ namespace SevenWonders.Game.Presenter.Presenters
                             gameObjectView.SetVisible(eventObj.Visible);
                             int backSpriteIdx = gameObjectView.FindAnimationIndexByName("back");
                             var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, eventObj.Visible ? 0.5f : 0f);
-                            if (eventObj.Visible && backSpriteIdx >= 0)
+                            if (!eventObj.Visible && backSpriteIdx >= 0)
                             {
-                                group.Flip(backSpriteIdx, 0.5f);
+                                group.Flip("back", 0.5f);
                             }
                             gameObjectView.Execute().GetAwaiter().GetResult();
                             m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);

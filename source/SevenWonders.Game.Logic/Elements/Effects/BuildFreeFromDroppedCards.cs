@@ -12,7 +12,7 @@ namespace SevenWonders.Game.Logic.Elements.Effects
             ICardList droppedCardList = gameContext.DroppedCardList ?? throw new InvalidOperationException($"{nameof(gameContext.DroppedCardList)} cannot be null in IGameContext object with parameter name: {nameof(gameContext)}!");
             if (droppedCardList.Cards.Count > 0)
             {
-                gameContext.EventManager.Publish(new OnChooseObjects("Válassz az eldobott kártyákból", droppedCardList.Cards.Select(card => card.Name).ToArray(), true));
+                gameContext.EventManager.Publish(new OnChooseObjects("Válassz az eldobott kártyákból", droppedCardList.Cards.Select(card => card.Name).ToArray()));
                 gameContext.PlayerActionHandler.HandlePlayerActions(gameContext,
                       owner,
                       droppedCardList.Cards.Select(card => (IPlayerAction)new ChooseDroppedCardAction(card)).ToList());

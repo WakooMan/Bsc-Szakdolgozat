@@ -23,10 +23,10 @@ namespace SevenWonders.Game.Logic.Elements.Effects
 
             if (selected.Count > 0)
             {
-                gameContext.EventManager.Publish(new OnChooseObjects("Válassz fejlesztést", selected.Select(dev => dev.Name).ToArray(), true));
+                gameContext.EventManager.Publish(new OnChooseObjects("Válassz fejlesztést", selected.Select(dev => dev.Name).ToArray()));
                 gameContext.PlayerActionHandler.HandlePlayerActions(gameContext,
                       owner,
-                      selected.Select(dev => (IPlayerAction)new ChooseDevelopmentAction(owner, opponent, dev, developments)).ToList());
+                      selected.Select(dev => (IPlayerAction)new ChooseDevelopmentAction(owner, opponent, dev, developments, true)).ToList());
             }
         }
     }

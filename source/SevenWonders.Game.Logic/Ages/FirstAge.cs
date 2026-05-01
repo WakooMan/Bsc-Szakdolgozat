@@ -9,7 +9,7 @@ namespace SevenWonders.Game.Logic.Ages
     {
         public override AgesEnum Age => AgesEnum.I;
 
-        public override string CardCompositionFile => "GameLogic.Data.FirstAgeComposition.csv";
+        public override string CardCompositionFile => "SevenWonders.Game.Logic.Data.FirstAgeComposition.csv";
 
         public FirstAge(IEventManager eventManager, ICardCompositionFactory cardCompositionFactory, ICardList cardList, IRandomGenerator randomGenerator) : base(eventManager, cardCompositionFactory, randomGenerator?.ReceiveRandomElements(cardList?.Cards.Where(card => card.Age == AgesEnum.I).ToArray() ?? [], 20))
         {

@@ -14,7 +14,7 @@ namespace SevenWonders.AI.Trainer.Server.DataModel
 
         }
 
-        private readonly string CHANCES_FILE = "SevenWonders.AITrainerServer.Data.EnemyChances.xml";
+        private readonly string CHANCES_FILE = "SevenWonders.AI.Trainer.Server.Data.EnemyChances.xml";
         private readonly IXmlHandler m_xmlHandler;
     }
 }

@@ -14,7 +14,7 @@ namespace SevenWonders.Game.Logic.Elements.Developments
             return m_xmlHandler.DeserializeEmbeddedResource<DevelopmentList>(CARDLIST_FILE);
         }
 
-        private readonly string CARDLIST_FILE = "GameLogic.Data.AllDevelopments.xml";
+        private readonly string CARDLIST_FILE = "SevenWonders.Game.Logic.Data.AllDevelopments.xml";
         private readonly IXmlHandler m_xmlHandler;
     }
 }

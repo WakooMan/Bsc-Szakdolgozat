@@ -7,6 +7,7 @@ using SevenWonders.Game.Engine.Components;
 using SevenWonders.Game.Scene.Editor.Helpers;
 using SevenWonders.Game.Scene.Editor.ViewModels;
 using SevenWonders.Game.Scene.Editor.Views;
+using SevenWonders.SceneEditor;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace SevenWonders.Game.Scene.Editor
@@ -64,6 +65,7 @@ namespace SevenWonders.Game.Scene.Editor
             mauiAppBuilder.Services.AddSingleton(typeof(IInputManager), typeof(InputManager));
             mauiAppBuilder.Services.AddSingleton(typeof(IZipFileReceiver), typeof(NormalZipFileReceiver));
             mauiAppBuilder.Services.AddSingleton(typeof(IEngine), typeof(Engine.Engine));
+            mauiAppBuilder.Services.AddSingleton<IPathProvider, PathProvider>();
 
             return mauiAppBuilder;
         }
