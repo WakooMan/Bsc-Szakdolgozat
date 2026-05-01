@@ -12,7 +12,6 @@ namespace SevenWonders.GameEngine_UnitTests
         [SetUp]
         public void SetUp()
         {
-            // Létrehozunk egy valódi, pici bitmap fájlt a LoadTexture teszteléséhez
             _tempImagePath = Path.Combine(Path.GetTempPath(), "test_texture.png");
             using (var bitmap = new SKBitmap(100, 200))
             {
@@ -58,7 +57,6 @@ namespace SevenWonders.GameEngine_UnitTests
             {
                 Assert.That(original.FileName, Is.EqualTo(copy.FileName));
                 Assert.That(original.OriginalWidth, Is.EqualTo(copy.OriginalWidth));
-                // String referencia ellenőrzés (bár a string immutábilis)
                 Assert.That(ReferenceEquals(original.FileName, copy.FileName), Is.False);
             });
         }
@@ -152,8 +150,6 @@ namespace SevenWonders.GameEngine_UnitTests
             // Arrange
             var texture = new Texture();
             // Act & Assert
-            // Mivel m_bitmap null, a Draw metódusnak az if (m_bitmap == null) miatt 
-            // azonnal vissza kell térnie hiba nélkül.
             Assert.DoesNotThrow(() => texture.Draw(null!, Vector2.Zero, Vector2.One, 0, 10, 10));
         }
     }

@@ -66,7 +66,6 @@ namespace SevenWonders.GameEngine_UnitTests
             var sameLayer = new GraphicsLayer(_originalLayer);
 
             // Act & Assert
-            // A SequenceEqual miatt True-nak kell lennie, ha a belső listák elemei is egyenlőek
             Assert.That(_originalLayer, Is.EqualTo(sameLayer));
             Assert.That(_originalLayer.GetHashCode(), Is.EqualTo(sameLayer.GetHashCode()));
         }
@@ -122,9 +121,7 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                // GameObject ellenőrzés
                 Assert.That(gameObject.Position.X, Is.EqualTo(20f));
-                // TextureObject ellenőrzés
                 Assert.That(texture.Position.X, Is.EqualTo(40f));
                 Assert.That(texture.Width, Is.EqualTo(200f));
             });

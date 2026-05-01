@@ -67,6 +67,21 @@ namespace SevenWonders.GameEngine_UnitTests
         }
 
         [Test]
+        public void AddGameObject_Without_Scene_ShouldAssignIdAndLoadTextures()
+        {
+            // Arrange
+            var gameObject = new GameObject { Name = "TestObject" };
+            m_sceneManager.CurrentScene.Returns(m_testScene);
+
+            // Act
+            m_objectManager.AddSceneObject(m_testLayer, gameObject);
+
+            // Assert
+            Assert.That(gameObject.Id, Is.EqualTo(0));
+            Assert.That(m_testLayer.SceneObjectsProxy.Contains(gameObject), Is.True);
+        }
+
+        [Test]
         public void AddGameObject_ShouldSubscribeToAllTouchEvents()
         {
             // Arrange
@@ -110,8 +125,99 @@ namespace SevenWonders.GameEngine_UnitTests
             // Assert
             Assert.That(newName, Is.EqualTo(result.Name));
             Assert.That(m_testScene.Layers.Contains(result), Is.True);
-            // Verify that the ID was incremented for the copy
             Assert.That(m_testLayer.Id, Is.Not.EqualTo(result.Id));
+        }
+
+        [Test]
+        public void CopyGameObject_ShouldCreateDeepCopyAndAddtoLayer()
+        {
+            // Arrange
+            var gameObject = new GameObject { Name = "InputTarget", Id= 100 };
+
+            // Act
+            GameObject result = m_objectManager.CopyGameObject(m_testScene, m_testLayer, gameObject, "Copy");
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(m_testLayer.SceneObjects.Contains(gameObject), Is.False);
+            Assert.That(m_testLayer.SceneObjects.Contains(result), Is.True);
+            Assert.That(result == gameObject, Is.False);
+            Assert.That(result.Id == gameObject.Id, Is.False);
+            Assert.That(ReferenceEquals(result, gameObject), Is.False);
+        }
+
+        [Test]
+        public void CopyGameObject_Without_Scene_ShouldCreateDeepCopyAndAddtoLayer()
+        {
+            // Arrange
+            var gameObject = new GameObject { Name = "InputTarget", Id= 100 };
+            m_sceneManager.CurrentScene.Returns(m_testScene);
+
+            // Act
+            GameObject result = m_objectManager.CopyGameObject(m_testLayer, gameObject, "Copy");
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(m_testLayer.SceneObjects.Contains(gameObject), Is.False);
+            Assert.That(m_testLayer.SceneObjects.Contains(result), Is.True);
+            Assert.That(result == gameObject, Is.False);
+            Assert.That(result.Id == gameObject.Id, Is.False);
+            Assert.That(ReferenceEquals(result, gameObject), Is.False);
+        }
+
+        [Test]
+        public void CopyButtonObject_ShouldCreateDeepCopyAndAddtoLayer()
+        {
+            // Arrange
+            var buttonObject = new ButtonObject { Name = "InputTarget", Id= 100 };
+
+            // Act
+            ButtonObject result = m_objectManager.CopyButtonObject(m_testScene, m_testLayer, buttonObject, "Copy");
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(m_testLayer.SceneObjects.Contains(buttonObject), Is.False);
+            Assert.That(m_testLayer.SceneObjects.Contains(result), Is.True);
+            Assert.That(result == buttonObject, Is.False);
+            Assert.That(result.Id == buttonObject.Id, Is.False);
+            Assert.That(ReferenceEquals(result, buttonObject), Is.False);
+        }
+
+        [Test]
+        public void CopyTextLabel_ShouldCreateDeepCopyAndAddtoLayer()
+        {
+            // Arrange
+            var textLabel = new TextLabel { Name = "InputTarget", Id= 100 };
+
+            // Act
+            TextLabel result = m_objectManager.CopyTextLabel(m_testScene, m_testLayer, textLabel, "Copy");
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(m_testLayer.SceneObjects.Contains(textLabel), Is.False);
+            Assert.That(m_testLayer.SceneObjects.Contains(result), Is.True);
+            Assert.That(result == textLabel, Is.False);
+            Assert.That(result.Id == textLabel.Id, Is.False);
+            Assert.That(ReferenceEquals(result, textLabel), Is.False);
+        }
+
+
+        [Test]
+        public void CopyTextureObject_ShouldCreateDeepCopyAndAddtoLayer()
+        {
+            // Arrange
+            var textureObject = new TextureObject { Name = "InputTarget", Id= 100 };
+
+            // Act
+            TextureObject result = m_objectManager.CopyTextureObject(m_testScene, m_testLayer, textureObject, "Copy");
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(m_testLayer.SceneObjects.Contains(textureObject), Is.False);
+            Assert.That(m_testLayer.SceneObjects.Contains(result), Is.True);
+            Assert.That(result == textureObject, Is.False);
+            Assert.That(result.Id == textureObject.Id, Is.False);
+            Assert.That(ReferenceEquals(result, textureObject), Is.False);
         }
 
         private ISceneManager m_sceneManager;

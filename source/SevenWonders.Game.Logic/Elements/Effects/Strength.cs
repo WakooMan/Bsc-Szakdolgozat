@@ -18,8 +18,6 @@
             return new Strength(this);
         }
 
-        // TODO: At the end of the turn military strength of players should be compared and the pawn should be moved accordingly.
-
         public override void OnCalculatePlayerProperties(PlayerProperties playerProperties)
         {
             playerProperties.Strength += Points;

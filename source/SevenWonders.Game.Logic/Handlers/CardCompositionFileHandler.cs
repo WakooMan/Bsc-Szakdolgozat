@@ -54,7 +54,6 @@ namespace SevenWonders.Game.Logic.Handlers
             }
             catch (Exception ex)
             {
-                // TODO: Log and throw
                 throw;
             }
         }
