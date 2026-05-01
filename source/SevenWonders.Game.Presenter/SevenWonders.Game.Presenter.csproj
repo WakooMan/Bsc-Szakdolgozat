@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<SupportedOSPlatformVersion Condition="'$(SupportedOSPlatformVersion)' == ''">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="'$(TargetPlatformMinVersion)' == ''">10.0.17763.0</TargetPlatformMinVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SevenWonders.Game.Logic\SevenWonders.Game.Logic.csproj" />
-    <ProjectReference Include="..\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj" />
-    <ProjectReference Include="..\SevenWonders.Game.Engine\SevenWonders.Game.Engine.csproj" />
-    <ProjectReference Include="..\SevenWonders.Web.Client.Model\SevenWonders.Web.Client.Model.csproj" />
-    <ProjectReference Include="..\SevenWonders.Web.Server.Contract\SevenWonders.Web.Server.Contract.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\SevenWonders.Game.Logic\SevenWonders.Game.Logic.csproj" />
+		<ProjectReference Include="..\SevenWonders.AI.Model\SevenWonders.AI.Model.csproj" />
+		<ProjectReference Include="..\SevenWonders.Game.Engine\SevenWonders.Game.Engine.csproj" />
+		<ProjectReference Include="..\SevenWonders.Web.Client.Model\SevenWonders.Web.Client.Model.csproj" />
+		<ProjectReference Include="..\SevenWonders.Web.Server.Contract\SevenWonders.Web.Server.Contract.csproj" />
+	</ItemGroup>
 </Project>

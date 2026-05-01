@@ -6,13 +6,13 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="maui-package-name-placeholder" Publisher="CN=Vikik" Version="0.0.0.0" />
+  <Identity Name="elte.ik.sevenwonders" Publisher="CN=Vikik" Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="B0F6ED00-A54E-4F90-8DB6-0A2A2C27D9C5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>$placeholder$</DisplayName>
-    <PublisherDisplayName>User Name</PublisherDisplayName>
+    <DisplayName>SevenWonders Duel</DisplayName>
+    <PublisherDisplayName>Magyar Viktor</PublisherDisplayName>
     <Logo>$placeholder$.png</Logo>
   </Properties>
 
