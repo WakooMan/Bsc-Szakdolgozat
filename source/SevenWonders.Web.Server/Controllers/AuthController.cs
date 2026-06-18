@@ -14,11 +14,12 @@ namespace SevenWonders.Web.Server.Controllers
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
-        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IClientManager clientManager)
+        public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IClientManager clientManager, IConfiguration configuration)
         {
             m_userManager = userManager;
             m_signInManager = signInManager;
             m_clientManager = clientManager;
+            m_configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -79,8 +80,10 @@ namespace SevenWonders.Web.Server.Controllers
 
         private string GenerateJwtToken(ApplicationUser user)
         {
+            var signingKey = m_configuration["Jwt:SigningKey"]
+                ?? throw new InvalidOperationException("JWT signing key missing");
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("Nagyon_Titkos_Es_Hosszu_Kulcs_123456789");
+            var key = Encoding.ASCII.GetBytes(signingKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -102,5 +105,6 @@ namespace SevenWonders.Web.Server.Controllers
         private readonly UserManager<ApplicationUser> m_userManager;
         private readonly SignInManager<ApplicationUser> m_signInManager;
         private readonly IClientManager m_clientManager;
+        private readonly IConfiguration m_configuration;
     }
 }
