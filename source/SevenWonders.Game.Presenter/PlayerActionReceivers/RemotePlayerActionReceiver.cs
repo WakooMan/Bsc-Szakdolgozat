@@ -1,6 +1,7 @@
-﻿using SevenWonders.Game.Logic.Elements;
+﻿using SevenWonders.Game.Engine;
+using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Exceptions;
 using SevenWonders.Game.Logic.Interfaces;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors;
 using SevenWonders.Web.Client.Model;
 using SevenWonders.Web.Server.Contract.Messages.Game.ServerMessages;
@@ -18,6 +19,7 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
             m_clientMessageDispatcher = clientMessageDispatcher;
             m_playerName = playerName;
             m_clientMessageDispatcher.RegisterHandler(this);
+            m_isEnded = false;
         }
 
         public PlayerActionWrapper ReceivePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
@@ -32,7 +34,7 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
                 interactiveObject.Dimmed = true;
             }
 
-            while (m_chosenPlayerAction is null)
+            while (m_chosenPlayerAction is null && !m_isEnded)
             {
                 m_signal.Wait();
 
@@ -44,6 +46,11 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
                     }
                     return m_chosenPlayerAction;
                 }
+            }
+
+            if (m_isEnded)
+            {
+                throw new EndGameException();
             }
 
             throw new InvalidOperationException($"No matching playeraction.");
@@ -79,6 +86,13 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
             registerer.Unregister(m_serverPlayerActionMessageHandler);
         }
 
+        public void EndGame()
+        {
+            m_isEnded = true;
+            m_chosenPlayerAction = null;
+            m_signal.Set();
+        }
+
         private readonly string m_playerName;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly ManualResetEventSlim m_signal;
@@ -86,6 +100,7 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
         private readonly GameResponseMessageHandlerDelegate<ServerPlayerActionMessage> m_serverPlayerActionMessageHandler;
         private readonly IClientMessageDispatcher m_clientMessageDispatcher;
         private PlayerActionWrapper? m_chosenPlayerAction;
+        private bool m_isEnded;
 
     }
 }

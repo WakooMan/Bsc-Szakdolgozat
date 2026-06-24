@@ -1,4 +1,6 @@
-﻿using SevenWonders.Game.Logic.Elements;
+﻿using SevenWonders.Common;
+using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Exceptions;
 using SevenWonders.Game.Logic.Interfaces;
 using SevenWonders.Web.Server.Contract.Messages.Game.ClientMessages;
 using SevenWonders.Web.Server.Contract.Messages.Game.ServerMessages;
@@ -30,6 +32,7 @@ namespace SevenWonders.Web.Server.Model.PlayerStates
             m_lobbyManager = lobbyManager;
             m_playerActionRequestMessageHandler = new GameRequestMessageHandlerDelegate<PlayerActionRequestMessage>(HandlePlayerActionRequestMessage);
             m_serverMessageDispatcher.RegisterHandler(this);
+            m_isEnded = false;
         }
 
         public override Task CreateLobby(string name)
@@ -43,7 +46,7 @@ namespace SevenWonders.Web.Server.Model.PlayerStates
             await m_serverService.LeaveGroup(m_player.ConnectionId, m_gameCode);
             await m_serverService.JoinGroup(m_player.ConnectionId, nameof(InMainMenu));
             m_lobbyCodeGenerator.RemoveUniqueCode(m_gameCode);
-            m_gameManager.RemoveGame(m_gameCode);
+            await m_gameManager.RemoveGame(m_gameCode);
             await m_serverService.SendLobbyServerMessageToClient(m_player.ConnectionId, new ExitGameResponseMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
         }
 
@@ -84,7 +87,7 @@ namespace SevenWonders.Web.Server.Model.PlayerStates
             m_playerActions.Clear();
             m_playerActions.AddRange(playerActions);
 
-            while (m_chosenPlayerAction is null)
+            while (m_chosenPlayerAction is null && !m_isEnded)
             {
                 m_signal.Wait();
 
@@ -94,6 +97,11 @@ namespace SevenWonders.Web.Server.Model.PlayerStates
                 }
             }
 
+            if (m_isEnded)
+            {
+                throw new EndGameException();
+            }
+
             throw new InvalidOperationException($"No matching playeraction.");
         }
 
@@ -101,7 +109,18 @@ namespace SevenWonders.Web.Server.Model.PlayerStates
         {
             if (m_player.ConnectionId != connectionId)
             {
-                await m_serverService.SendGameServerMessageToClient(m_player.ConnectionId, new PlayerActionResponseMessage("Wrong player sent the action!"));
+                return;
+            }
+
+            if (!m_playerActions.Select(action => action.PlayerAction.Id).SequenceEqual(message.Actions))
+            {
+                m_player.ChangeState(m_playerStateFactory.CreateInMainMenuState(m_player));
+                await m_serverService.LeaveGroup(m_player.ConnectionId, m_gameCode);
+                await m_serverService.JoinGroup(m_player.ConnectionId, nameof(InMainMenu));
+                m_lobbyCodeGenerator.RemoveUniqueCode(m_gameCode);
+                await m_gameManager.RemoveGame(m_gameCode);
+                await m_serverService.SendLobbyServerMessageToGroup(m_gameCode, new ExitGameResponseMessage(m_lobbyManager.GetLobbies().Select(lobby => lobby.ToDto()).ToArray()));
+                return;
             }
 
             if (message.ActionId >= 0 && message.ActionId < m_playerActions.Count)
@@ -131,6 +150,13 @@ namespace SevenWonders.Web.Server.Model.PlayerStates
             registerer.Unregister(m_playerActionRequestMessageHandler);
         }
 
+        public void EndGame()
+        {
+            m_isEnded = true;
+            m_chosenPlayerAction = null;
+            m_signal.Set();
+        }
+
         private readonly string m_gameCode;
         private readonly IGameManager m_gameManager;
         private readonly ManualResetEventSlim m_signal;
@@ -139,5 +165,6 @@ namespace SevenWonders.Web.Server.Model.PlayerStates
         private readonly IServerMessageDispatcher m_serverMessageDispatcher;
         private readonly ILobbyManager m_lobbyManager;
         private PlayerActionWrapper? m_chosenPlayerAction;
+        private bool m_isEnded;
     }
 }

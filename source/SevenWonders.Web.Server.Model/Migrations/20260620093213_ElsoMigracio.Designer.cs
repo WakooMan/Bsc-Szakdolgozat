@@ -12,8 +12,8 @@ using SevenWonders.Web.Server.Model.Client;
 namespace SevenWonders.Web.Server.Model.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260501170601_newStructure")]
-    partial class newStructure
+    [Migration("20260620093213_ElsoMigracio")]
+    partial class ElsoMigracio
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

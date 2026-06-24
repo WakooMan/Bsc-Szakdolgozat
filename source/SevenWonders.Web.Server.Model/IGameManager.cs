@@ -6,7 +6,7 @@ namespace SevenWonders.Web.Server.Model
     {
         IGame? GetGame(string code);
         bool AddGame(string code, out IGame? game);
-        bool RemoveGame(string code);
+        Task<bool> RemoveGame(string code);
         void StartGame(string code);
     }
 }

@@ -2,6 +2,7 @@
 using SevenWonders.Game.Logic.Elements;
 using SevenWonders.Game.Logic.Elements.Modifiers;
 using SevenWonders.Game.Logic.Events.GameEvents;
+using SevenWonders.Game.Logic.Exceptions;
 using SevenWonders.Game.Logic.GameStates;
 using SevenWonders.Game.Logic.Interfaces;
 
@@ -40,11 +41,18 @@ namespace SevenWonders.Game.Logic
             m_gameContext.EventManager.Publish(new OnGameInitialized(m_gameContext));
             m_gameContext.EventManager.Publish(new OnGameStarted(m_players));
 
-            while (CurrentState is not EndGameState)
+            try
             {
-                GameLog.Info($"Executing state: {CurrentState.GetType().Name}");
-                CurrentState.DoStateAction();
-                CurrentState = CurrentState.GetNextState();
+                while (CurrentState is not EndGameState)
+                {
+                    GameLog.Info($"Executing state: {CurrentState.GetType().Name}");
+                    CurrentState.DoStateAction();
+                    CurrentState = CurrentState.GetNextState();
+                }
+            }
+            catch (EndGameException)
+            {
+                GameLog.Info("Game has been ended");
             }
 
             GameLog.Info("GameLoop ended.");
@@ -65,6 +73,11 @@ namespace SevenWonders.Game.Logic
                 m_isInitialized = true;
                 GameLog.Info("Game initialized successfully.");
             }
+        }
+
+        public void EndGame()
+        {
+            m_players.ForEach(player => player.PlayerActionReceiver?.EndGame());
         }
     }
 }

@@ -23,7 +23,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="10">
-                                <Frame CornerRadius="5" HasShadow="True">
+                                <Frame CornerRadius="5" HasShadow="True" InputTransparent="True">
                                     <VerticalStackLayout BackgroundColor="{Binding BackgroundColor}">
                                         <Label Text="{Binding RoomName}" 
                                    FontSize="16" 

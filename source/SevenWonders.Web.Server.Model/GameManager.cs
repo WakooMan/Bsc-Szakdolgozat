@@ -1,5 +1,6 @@
 ﻿using SevenWonders.Game.Logic;
 using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 namespace SevenWonders.Web.Server.Model
 {
@@ -8,35 +9,41 @@ namespace SevenWonders.Web.Server.Model
         public GameManager(IGameFactory gameInitializer)
         {
             m_gameInitializer = gameInitializer;
-            Games = new ConcurrentDictionary<string, IGame>();
+            Games = new ConcurrentDictionary<string, (IGame, Task?)>();
         }
 
-        public ConcurrentDictionary<string, IGame> Games { get; }
+        public ConcurrentDictionary<string, (IGame, Task?)> Games { get; }
         public bool AddGame(string code, out IGame? game)
         {
             game = m_gameInitializer.Create();
-            return Games.TryAdd(code, game);
+            return Games.TryAdd(code, (game, null));
         }
 
         public IGame? GetGame(string code)
         {
-            if (Games.TryGetValue(code, out IGame? game))
+            if (Games.TryGetValue(code, out (IGame, Task?) pair))
             {
-                return game;
+                return pair.Item1;
             }
             return null;
         }
 
-        public bool RemoveGame(string code)
+        public async Task<bool> RemoveGame(string code)
         {
-            return Games.TryRemove(code, out _);
+            var result = Games.TryRemove(code, out (IGame, Task?) pair);
+            pair.Item1?.EndGame();
+            if (pair.Item2 is not null)
+            {
+                await pair.Item2;
+            }
+            return result;
         }
 
         public void StartGame(string code)
         {
-            if (Games.TryGetValue(code, out IGame? game))
+            if (Games.TryGetValue(code, out (IGame, Task?) pair))
             {
-                _ = Task.Run(game.GameLoop);
+                pair.Item2 = Task.Run(pair.Item1.GameLoop);
             }
         }
 

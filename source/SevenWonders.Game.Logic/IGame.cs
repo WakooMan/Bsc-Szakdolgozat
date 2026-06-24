@@ -11,5 +11,6 @@ namespace SevenWonders.Game.Logic
         IGameContext Context { get; }
         void Initialize(IRandomGenerator randomGenerator, (string name, IPlayerActionReceiver actionReceiver) player1, (string name, IPlayerActionReceiver actionReceiver) player2, int startingPlayerId = 1);
         void GameLoop();
+        void EndGame();
     }
 }

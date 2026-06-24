@@ -1,12 +1,13 @@
-﻿using SevenWonders.Game.Logic.Elements;
+﻿using SevenWonders.Game.Engine;
+using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Exceptions;
 using SevenWonders.Game.Logic.Interfaces;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors;
 using SevenWonders.Web.Client.Model;
 using SevenWonders.Web.Client.Model.Services;
-using SkiaSharp.Views.Maui;
 using SevenWonders.Web.Server.Contract.Messages.Game.ClientMessages;
 using SevenWonders.Web.Server.Contract.Messages.Game.ServerMessages;
+using SkiaSharp.Views.Maui;
 
 namespace SevenWonders.Game.Presenter.PlayerActionReceivers
 {
@@ -24,6 +25,7 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
             m_clientMessageDispatcher = clientMessageDispatcher;
             m_playerActionResponseMessageHandler = new GameResponseMessageHandlerDelegate<PlayerActionResponseMessage>(HandlePlayerActionResponseMessage);
             m_clientMessageDispatcher.RegisterHandler(this);
+            m_isEnded = false;
         }
 
         public PlayerActionWrapper ReceivePlayerAction(Player player, ICollection<PlayerActionWrapper> playerActions)
@@ -42,7 +44,7 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
                 interactiveObject.Dimmed = !playerActionWrapper.CanPerform;
             }
 
-            while (m_chosenInteractiveObject is null)
+            while (m_chosenInteractiveObject is null && !m_isEnded)
             {
                 m_signal.Wait();
 
@@ -58,6 +60,11 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
                     }
                     return m_interactiveObjectToPlayerAction[m_chosenInteractiveObject];
                 }
+            }
+
+            if (m_isEnded)
+            {
+                throw new EndGameException();
             }
 
             throw new InvalidOperationException($"No matching playeraction.");
@@ -86,7 +93,7 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
                 int index = m_interactiveObjectToPlayerAction.Keys.ToList().IndexOf(interactiveObject);
                 if (index >= 0)
                 {
-                    await ClientHubService.InvokeGameCommand(new PlayerActionRequestMessage(index));
+                    await ClientHubService.InvokeGameCommand(new PlayerActionRequestMessage(m_playerName, index, m_interactiveObjectToPlayerAction.Values.Select(key => key.PlayerAction.Id).ToList()));
                 }
             }
             else
@@ -111,6 +118,13 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
             return Task.FromResult(message.Success);
         }
 
+        public void EndGame()
+        {
+            m_isEnded = true;
+            m_chosenInteractiveObject = null;
+            m_signal.Set();
+        }
+
         private readonly string m_playerName;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly ManualResetEventSlim m_signal;
@@ -118,5 +132,6 @@ namespace SevenWonders.Game.Presenter.PlayerActionReceivers
         private readonly GameResponseMessageHandlerDelegate<PlayerActionResponseMessage> m_playerActionResponseMessageHandler;
         private readonly IClientMessageDispatcher m_clientMessageDispatcher;
         private IInteractiveObject? m_chosenInteractiveObject;
+        private bool m_isEnded;
     }
 }

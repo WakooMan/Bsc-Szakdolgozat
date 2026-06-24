@@ -9,6 +9,7 @@ using SevenWonders.Game.Presenter.Presenters;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
+using System.Threading.Tasks;
 
 namespace SevenWonders.Game.Presenter
 {
@@ -71,14 +72,19 @@ namespace SevenWonders.Game.Presenter
             InitializeAI(player2Type);
 
             m_cancellationTokenSource = new CancellationTokenSource();
-            _ = Task.Run(m_game.GameLoop, m_cancellationTokenSource.Token);
+            m_gameTask = Task.Run(m_game.GameLoop, m_cancellationTokenSource.Token);
         }
 
-        public void StopGame()
+        public async Task StopGame()
         {
+            m_game.EndGame();
             m_cancellationTokenSource?.Cancel();
             m_cancellationTokenSource?.Dispose();
             m_cancellationTokenSource = null;
+            if (m_gameTask is not null)
+            {
+                await m_gameTask;
+            }
             Scene? current = m_engine.SceneManager.CurrentScene;
             if (current is not null)
             {
@@ -140,5 +146,6 @@ namespace SevenWonders.Game.Presenter
         private readonly IRandomGeneratorFactory m_randomGeneratorFactory;
         private readonly IAIDecisionHandlerCache m_aiDecisionHandlerCache;
         private CancellationTokenSource? m_cancellationTokenSource;
+        private Task? m_gameTask;
     }
 }

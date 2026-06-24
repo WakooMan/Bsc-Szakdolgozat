@@ -58,6 +58,7 @@ public partial class PlayerVSPlayerGamePage : ContentPage
     private void OnTouch(object sender, SKTouchEventArgs e)
     {
         m_playerVSPlayerGamePageViewModel.GameHandler.OnTouchEvent(e);
+        e.Handled = true;
     }
 
     private readonly PlayerVSPlayerGamePageViewModel m_playerVSPlayerGamePageViewModel;

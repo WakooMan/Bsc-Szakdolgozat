@@ -62,6 +62,7 @@ public partial class MultiplayerGamePage : ContentPage
     private void OnTouch(object sender, SKTouchEventArgs e)
     {
         m_multiplayerGamePageViewModel.GameHandler.OnTouchEvent(e);
+        e.Handled = true;
     }
 
     private readonly MultiplayerGamePageViewModel m_multiplayerGamePageViewModel;
