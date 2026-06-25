@@ -167,6 +167,9 @@
 	  <MauiXaml Update="Views\AIDifficultyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ConnectingPopupWindow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ConnectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

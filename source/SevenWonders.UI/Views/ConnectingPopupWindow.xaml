@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="SevenWonders.UI.Views.CreateGamePopupWindow"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    CanBeDismissedByTappingOutsideOfPopup="False">
+    <Border Stroke="Black"
+            StrokeThickness="4"
+            Background="White"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40,40,40,40" />
+        </Border.StrokeShape>
+        <Grid HorizontalOptions="Fill"
+              VerticalOptions="Center"
+              Margin="20"
+              WidthRequest="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Text="{Binding ConnectingText}"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"
+                   Margin="0,0,0,8" />
+
+            <ActivityIndicator Grid.Row="1"
+                   IsRunning="True"
+                   Color="Black"
+                   Margin="0,0,0,16" />
+
+            <HorizontalStackLayout Grid.Row="1"
+                                   HorizontalOptions="Center"
+                                   Spacing="10">
+                <Button Text="{Binding CancelText}"
+                        Background="Black"
+                        TextColor="White"
+                        Command="{Binding CancelCommand}"
+                        Clicked="Cancel_Clicked" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+</toolkit:Popup>

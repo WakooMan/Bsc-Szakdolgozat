@@ -137,6 +137,11 @@ namespace SevenWonders.Game.Presenter
             }
         }
 
+        void IGameHandler.StopGame()
+        {
+            throw new NotImplementedException();
+        }
+
         private readonly ISceneLoader m_sceneLoader;
         private readonly IEngine m_engine;
         private readonly IGame m_game;

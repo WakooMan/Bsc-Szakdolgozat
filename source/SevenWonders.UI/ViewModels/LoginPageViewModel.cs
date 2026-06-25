@@ -1,16 +1,24 @@
-﻿using SevenWonders.Web.Client.Model.Services;
-using SevenWonders.UI.Services;
-using System.Windows.Input;
+﻿using SevenWonders.UI.Services;
+using SevenWonders.UI.Views;
+using SevenWonders.Web.Client.Model;
+using SevenWonders.Web.Client.Model.Services;
 using SevenWonders.Web.Server.Contract;
+using SevenWonders.Web.Server.Contract.Messages.Lobby.ClientMessages;
+using SevenWonders.Web.Server.Contract.Messages.Lobby.ServerMessages;
+using SevenWondersUI.ViewModels;
+using SevenWondersUI.Views;
+using System.Windows.Input;
 
 namespace SevenWonders.UI.ViewModels
 {
     public class LoginPageViewModel: BaseViewModel
     {
-        public LoginPageViewModel(INavigationService navigationService, IAuthService authService)
+        public LoginPageViewModel(INavigationService navigationService, IAuthService authService, IClientHubService clientHubService, IPopupService popupService)
         {
             m_navigationService = navigationService;
             m_authService = authService;
+            m_clientHubService = clientHubService;
+            m_popupService = popupService;
             m_userNameEntry = ("Felhasználónév:", string.Empty);
             m_passwordEntry = ("Jelszó:", string.Empty);
             m_loginText = "Belépés";
@@ -136,20 +144,11 @@ namespace SevenWonders.UI.ViewModels
 
         private async void OnLogin()
         {
-            LoginResponse? result = await m_authService.LoginAsync(m_userNameEntry.entryText, m_passwordEntry.entryText);
-            if (result is not null && result.Success)
+            ConnectingPopupWindow connectingPopupWindow = new ConnectingPopupWindow(new ConnectingPopupViewModel(m_navigationService, m_clientHubService, m_authService, m_userNameEntry.entryText, m_passwordEntry.entryText));
+            await m_popupService.ShowAsync(connectingPopupWindow);
+            if (connectingPopupWindow.ViewModel.Success)
             {
-                await m_navigationService.NavigateToAsync("//ConnectPage", new Dictionary<string, object>
-                {
-                    { "AuthToken", result.Token },
-                    { "UserName", m_userNameEntry.entryText }
-                });
-                m_userNameEntry.entryText = string.Empty;
-                m_passwordEntry.entryText = string.Empty;
-            }
-            else
-            {
-                await Shell.Current.DisplayAlert("Sikertelen belépés", result?.Message ?? "Felhasználónév vagy jelszó nem megfelelő!", "OK");
+                await m_clientHubService.InvokeLobbyCommand(new GetLobbiesRequestMessage());
             }
         }
 
@@ -172,6 +171,8 @@ namespace SevenWonders.UI.ViewModels
         private string m_backText;
         private readonly INavigationService m_navigationService;
         private readonly IAuthService m_authService;
+        private readonly IClientHubService m_clientHubService;
+        private readonly IPopupService m_popupService;
         private readonly Command m_loginCommand;
     }
 }
