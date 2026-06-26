@@ -1,18 +1,18 @@
 ﻿using SevenWonders.UI.Services;
 using SevenWonders.Web.Client.Model.Services;
 using SevenWondersUI.ViewModels;
-using SevenWondersUI.Views;
+using SevenWonders.UI.Views;
 using System.Windows.Input;
+using SevenWondersUI.Services.ConnectionStates;
 
 namespace SevenWonders.UI.ViewModels
 {
     public class LoginPageViewModel: BaseViewModel
     {
-        public LoginPageViewModel(INavigationService navigationService, IAuthService authService, IClientHubService clientHubService, IPopupService popupService)
+        public LoginPageViewModel(IConnectionContext connectionContext, INavigationService navigationService, IPopupService popupService)
         {
+            m_connectionContext = connectionContext;
             m_navigationService = navigationService;
-            m_authService = authService;
-            m_clientHubService = clientHubService;
             m_popupService = popupService;
             m_userNameEntry = ("Felhasználónév:", string.Empty);
             m_passwordEntry = ("Jelszó:", string.Empty);
@@ -139,7 +139,7 @@ namespace SevenWonders.UI.ViewModels
 
         private async void OnLogin()
         {
-            ConnectingPopupWindow connectingPopupWindow = new ConnectingPopupWindow(new ConnectingPopupViewModel(m_navigationService, m_clientHubService, m_authService, m_userNameEntry.entryText, m_passwordEntry.entryText));
+            ConnectingPopupWindow connectingPopupWindow = new ConnectingPopupWindow(new ConnectingPopupViewModel(m_connectionContext, m_navigationService, m_userNameEntry.entryText, m_passwordEntry.entryText));
             await m_popupService.ShowAsync(connectingPopupWindow);
             if (!connectingPopupWindow.ViewModel.Success && !connectingPopupWindow.ViewModel.Cancelled)
             {
@@ -165,8 +165,7 @@ namespace SevenWonders.UI.ViewModels
         private string m_loginText;
         private string m_backText;
         private readonly INavigationService m_navigationService;
-        private readonly IAuthService m_authService;
-        private readonly IClientHubService m_clientHubService;
+        private readonly IConnectionContext m_connectionContext;
         private readonly IPopupService m_popupService;
         private readonly Command m_loginCommand;
     }

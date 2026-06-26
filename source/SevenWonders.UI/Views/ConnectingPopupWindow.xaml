@@ -41,8 +41,7 @@
                 <Button Text="{Binding CancelText}"
                         Background="Black"
                         TextColor="White"
-                        Command="{Binding CancelCommand}"
-                        Clicked="Cancel_Clicked" />
+                        Command="{Binding CancelCommand}" />
             </HorizontalStackLayout>
         </Grid>
     </Border>

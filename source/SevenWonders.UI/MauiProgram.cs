@@ -51,6 +51,7 @@ using SevenWonders.UI.ViewModels;
 using SevenWonders.UI.Views;
 using SevenWonders.UI.Views.Factories;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using SevenWondersUI.Services.ConnectionStates;
 
 namespace SevenWonders.UI;
 
@@ -161,6 +162,7 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IMessageRegistererFactory), typeof(MessageRegistererFactory));
         builder.Services.AddSingleton(typeof(IPlayerActionReceiverFactory), typeof(PlayerActionReceiverFactory));
         builder.Services.AddSingleton(typeof(IAppConfiguration), typeof(AppConfiguration));
+        builder.Services.AddSingleton(typeof(IConnectionContext), typeof(ConnectionContext));
 #if DEBUG
         builder.Services.AddSingleton(typeof(INetworkConfiguration), typeof(DebugNetworkConfiguration));
 #else

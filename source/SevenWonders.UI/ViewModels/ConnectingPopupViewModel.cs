@@ -1,175 +1,93 @@
 ﻿using SevenWonders.Common;
 using SevenWonders.UI.Services;
 using SevenWonders.UI.ViewModels;
-using SevenWonders.Web.Client.Model;
-using SevenWonders.Web.Client.Model.Services;
-using SevenWonders.Web.Server.Contract;
-using SevenWonders.Web.Server.Contract.Messages.Lobby.ClientMessages;
-using SevenWonders.Web.Server.Contract.Messages.Lobby.ServerMessages;
+using SevenWondersUI.Services.ConnectionStates;
 using System.Windows.Input;
 
 namespace SevenWondersUI.ViewModels
 {
-    public class ConnectingPopupViewModel : BaseViewModel, IMessageHandler
+    public class ConnectingPopupViewModel : BaseViewModel
     {
         public event EventHandler? OnConnectionFinished;
         public string ConnectingText => "Connecting...";
         public string CancelText => "Cancel";
 
         public string? ErrorMessage { get; private set; }
-        public bool Success => (m_lobbyUpdateTcs is not null && m_lobbyUpdateTcs.Task.IsCompleted) ? m_lobbyUpdateTcs.Task.Result : false;
-        public bool Finished => m_lobbyUpdateTcs?.Task.IsCompleted ?? false;
+        public bool Success { get; set; }
         public bool Cancelled => m_cancelled;
         public ICommand CancelCommand { get; }
 
-        public ConnectingPopupViewModel(INavigationService navigationService, IClientHubService clientHubService, IAuthService authService, string userName, string password)
+        public ConnectingPopupViewModel(IConnectionContext connectionContext, INavigationService navigationService, string userName, string password)
         {
             CancelCommand = new Command(OnCancel);
+            m_connectionContext = connectionContext;
             m_navigationService = navigationService;
-            m_clientHubService = clientHubService;
-            m_authService = authService;
-            m_lobbyUpdateMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage>(OnLobbyUpdateMessageReceived);
-            m_failureResponseMessageHandlerDelegate = new LobbyResponseMessageHandlerDelegate<FailureResponseMessage>(OnFailureResponseMessageReceived);
-            m_userName = userName;
-            m_password = password;
+            m_connectionContext.Username = userName;
+            m_connectionContext.Password = password;
+            m_cancelled = false;
+            Success = false;
         }
 
         public async void OnOpened()
         {
+            IConnectionState connectionState = m_connectionContext.NotConnectedState;
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
-            m_lobbyUpdateTcs = new TaskCompletionSource<bool>();
 
-            cts.Token.Register(() => m_lobbyUpdateTcs.TrySetResult(false));
-
-            while (!cts.Token.IsCancellationRequested && !Finished && !m_cancelled && !m_failedExplicitly)
+            while (!cts.Token.IsCancellationRequested && connectionState is not ConnectedState && !m_cancelled)
             {
-                try
+                if (await connectionState.Execute())
                 {
-                    LoginResponse? result = await m_authService.LoginAsync(m_userName, m_password);
-                    if (result is not null && result.Success && !string.IsNullOrEmpty(result.Token))
-                    {
-                        await ConnectToServer(result.Token);
-
-                        var delayTask = Task.Delay(TimeSpan.FromSeconds(5), cts.Token);
-                        var completedTask = await Task.WhenAny(m_lobbyUpdateTcs.Task, delayTask);
-
-                        if (completedTask == m_lobbyUpdateTcs.Task)
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        await Task.Delay(TimeSpan.FromSeconds(5), cts.Token);
-                    }
+                    connectionState = connectionState.NextState();
                 }
-                catch (OperationCanceledException)
+                else
                 {
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    GameLog.Error($"Exception happened during connection retry: {ex.Message}");
-                    GameLog.Error($"StackTrace: {ex.StackTrace ?? string.Empty}");
-
-                    try
-                    {
-                        await Task.Delay(TimeSpan.FromSeconds(5), cts.Token);
-                    }
-                    catch (OperationCanceledException) { break; }
+                    await Task.Delay(5000, cts.Token);
                 }
             }
 
-            if (!Success && !m_cancelled && !m_failedExplicitly)
+            if (connectionState is ConnectedState && m_connectionContext.Lobbies is not null && !m_cancelled)
             {
-                GameLog.Error("Connection timeout (60s) reached. Treating as failure response.");
-                await TryDisconnectAsync();
-            }
-        }
-
-        public void Register(IMessageRegisterer registerer)
-        {
-            registerer.Register(m_lobbyUpdateMessageHandlerDelegate);
-            registerer.Register(m_failureResponseMessageHandlerDelegate);
-        }
-
-        public void Unregister(IMessageRegisterer registerer)
-        {
-            registerer.Unregister(m_lobbyUpdateMessageHandlerDelegate);
-            registerer.Unregister(m_failureResponseMessageHandlerDelegate);
-        }
-
-        public async Task ConnectToServer(string authToken)
-        {
-            if (string.IsNullOrEmpty(authToken) || string.IsNullOrEmpty(m_userName))
-            {
-                throw new InvalidOperationException("Authorization token or username is missing!");
-            }
-
-            await m_clientHubService.Connect(m_userName, authToken);
-            await m_clientHubService.InvokeLobbyCommand(new GetLobbiesRequestMessage());
-        }
-
-        private async Task<bool> OnLobbyUpdateMessageReceived(LobbyUpdateMessage message)
-        {
-            if (message.Success)
-            {
-                m_lobbyUpdateTcs?.TrySetResult(true);
-                OnConnectionFinished?.Invoke(this, new EventArgs());
+                Success = true;
+                GameLog.Info("Connection established successfully.");
+                OnConnectionFinished?.Invoke(this, EventArgs.Empty);
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     await m_navigationService.NavigateToAsync("//LobbyMainPage", new Dictionary<string, object>
                     {
-                        { "Lobbies", message.Lobbies }
+                        { "Lobbies", m_connectionContext.Lobbies }
                     });
                 });
             }
             else
             {
-                await TryDisconnectAsync();
+                Success = false;
+                GameLog.Error("Failed to establish connection.");
+                await OnConnectionClose(connectionState);
             }
-            return message.Success;
         }
 
-        private async Task<bool> OnFailureResponseMessageReceived(FailureResponseMessage message)
+        private async Task  OnConnectionClose(IConnectionState connectionState)
         {
-            GameLog.Error("Server sent failure response message: Logging out.");
-            m_failedExplicitly = true;
-            await TryDisconnectAsync();
-            return false;
-        }
-
-        private async Task TryDisconnectAsync()
-        {
-            ErrorMessage = "Connecting to the server failed.";
-            m_lobbyUpdateTcs?.TrySetResult(false);
-            await m_clientHubService.Disconnect();
-            await m_authService.LogoutAsync();
-            await MainThread.InvokeOnMainThreadAsync(async () =>
+            while (connectionState is not NotConnectedState)
             {
-                OnConnectionFinished?.Invoke(this, new EventArgs());
+                await connectionState.Undo();
+                connectionState = connectionState.PreviousState();
+            }
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                ErrorMessage = (!m_cancelled) ? "Nem sikerült csatlakozni a szerverhez." : string.Empty;
+                OnConnectionFinished?.Invoke(this, EventArgs.Empty);
             });
         }
 
         private void OnCancel()
         {
+            GameLog.Info("Connection attempt cancelled by user.");
             m_cancelled = true;
-            m_lobbyUpdateTcs?.TrySetResult(false);
-            TryDisconnectAsync().GetAwaiter().GetResult();
-
         }
 
-        private readonly LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage> m_lobbyUpdateMessageHandlerDelegate;
-        private readonly LobbyResponseMessageHandlerDelegate<FailureResponseMessage> m_failureResponseMessageHandlerDelegate;
-        private readonly string m_userName;
-        private readonly string m_password;
-
         private bool m_cancelled;
-        private bool m_failedExplicitly;
-        private TaskCompletionSource<bool>? m_lobbyUpdateTcs;
-
+        private readonly IConnectionContext m_connectionContext;
         private readonly INavigationService m_navigationService;
-        private readonly IClientHubService m_clientHubService;
-        private readonly IAuthService m_authService;
     }
 }

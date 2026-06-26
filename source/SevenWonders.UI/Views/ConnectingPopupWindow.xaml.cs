@@ -1,7 +1,7 @@
 using CommunityToolkit.Maui.Views;
 using SevenWondersUI.ViewModels;
 
-namespace SevenWondersUI.Views;
+namespace SevenWonders.UI.Views;
 
 public partial class ConnectingPopupWindow : Popup
 {
@@ -12,11 +12,8 @@ public partial class ConnectingPopupWindow : Popup
 		InitializeComponent();
         m_viewModel = connectingPopupViewModel;
         BindingContext = m_viewModel;
-	}
-
-    private void Cancel_Clicked(object sender, EventArgs e)
-    {
-        Close();
+        Opened += (s, e) => m_viewModel.OnOpened();
+        m_viewModel.OnConnectionFinished += (s, e) => Close();
     }
 
     private readonly ConnectingPopupViewModel m_viewModel;
