@@ -1,10 +1,5 @@
 ﻿using SevenWonders.UI.Services;
-using SevenWonders.UI.Views;
-using SevenWonders.Web.Client.Model;
 using SevenWonders.Web.Client.Model.Services;
-using SevenWonders.Web.Server.Contract;
-using SevenWonders.Web.Server.Contract.Messages.Lobby.ClientMessages;
-using SevenWonders.Web.Server.Contract.Messages.Lobby.ServerMessages;
 using SevenWondersUI.ViewModels;
 using SevenWondersUI.Views;
 using System.Windows.Input;
@@ -146,9 +141,9 @@ namespace SevenWonders.UI.ViewModels
         {
             ConnectingPopupWindow connectingPopupWindow = new ConnectingPopupWindow(new ConnectingPopupViewModel(m_navigationService, m_clientHubService, m_authService, m_userNameEntry.entryText, m_passwordEntry.entryText));
             await m_popupService.ShowAsync(connectingPopupWindow);
-            if (connectingPopupWindow.ViewModel.Success)
+            if (!connectingPopupWindow.ViewModel.Success && !connectingPopupWindow.ViewModel.Cancelled)
             {
-                await m_clientHubService.InvokeLobbyCommand(new GetLobbiesRequestMessage());
+                await Shell.Current.DisplayAlert("Sikertelen belépés", connectingPopupWindow.ViewModel.ErrorMessage ?? "Felhasználónév vagy jelszó nem megfelelő!", "OK");
             }
         }
 

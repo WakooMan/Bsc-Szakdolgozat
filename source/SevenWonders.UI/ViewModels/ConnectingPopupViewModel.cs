@@ -15,6 +15,8 @@ namespace SevenWondersUI.ViewModels
         public event EventHandler? OnConnectionFinished;
         public string ConnectingText => "Connecting...";
         public string CancelText => "Cancel";
+
+        public string? ErrorMessage { get; private set; }
         public bool Success => (m_lobbyUpdateTcs is not null && m_lobbyUpdateTcs.Task.IsCompleted) ? m_lobbyUpdateTcs.Task.Result : false;
         public bool Finished => m_lobbyUpdateTcs?.Task.IsCompleted ?? false;
         public bool Cancelled => m_cancelled;
@@ -124,8 +126,7 @@ namespace SevenWondersUI.ViewModels
             }
             else
             {
-                m_lobbyUpdateTcs?.TrySetResult(false);
-                OnConnectionFinished?.Invoke(this, new EventArgs());
+                await TryDisconnectAsync();
             }
             return message.Success;
         }
@@ -134,27 +135,28 @@ namespace SevenWondersUI.ViewModels
         {
             GameLog.Error("Server sent failure response message: Logging out.");
             m_failedExplicitly = true;
-            m_lobbyUpdateTcs?.TrySetResult(false);
-
             await TryDisconnectAsync();
             return false;
         }
 
         private async Task TryDisconnectAsync()
         {
+            ErrorMessage = "Connecting to the server failed.";
+            m_lobbyUpdateTcs?.TrySetResult(false);
+            await m_clientHubService.Disconnect();
+            await m_authService.LogoutAsync();
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                await m_clientHubService.Disconnect();
-                await m_authService.LogoutAsync();
                 OnConnectionFinished?.Invoke(this, new EventArgs());
             });
         }
 
-        private async Task OnCancel()
+        private void OnCancel()
         {
             m_cancelled = true;
             m_lobbyUpdateTcs?.TrySetResult(false);
-            await TryDisconnectAsync();
+            TryDisconnectAsync().GetAwaiter().GetResult();
+
         }
 
         private readonly LobbyResponseMessageHandlerDelegate<LobbyUpdateMessage> m_lobbyUpdateMessageHandlerDelegate;

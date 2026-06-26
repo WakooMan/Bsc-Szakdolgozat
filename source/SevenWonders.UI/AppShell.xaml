@@ -39,10 +39,6 @@
         ContentTemplate="{DataTemplate views:RegisterPage}"
         Route="RegisterPage" />
     <ShellContent
-        Title="ConnectPage"
-        ContentTemplate="{DataTemplate views:ConnectPage}"
-        Route="ConnectPage" />
-    <ShellContent
         Title="LobbyMainPage"
         ContentTemplate="{DataTemplate views:LobbyMainPage}"
         Route="LobbyMainPage" />
