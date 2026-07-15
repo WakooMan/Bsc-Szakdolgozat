@@ -120,6 +120,7 @@ namespace SevenWonders.Game.Engine
 
         public void Resize(Vector2 newResolution)
         {
+            Textures.ForEach(texture => texture.ClearCache());
             Layers.ForEach(layer => layer.Resize(Resolution, newResolution));
             Resolution = newResolution;
         }

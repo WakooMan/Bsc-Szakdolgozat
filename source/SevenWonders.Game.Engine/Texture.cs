@@ -117,9 +117,10 @@ namespace SevenWonders.Game.Engine
             if (m_bitmap is null)
                 return;
 
-            
-
-            var key = (Width: (int)Math.Round(width), Height: (int)Math.Round(height));
+            var actualSizes = (Width: right - left, Height: bottom - top);
+            float scaleX = width / (float)actualSizes.Width;
+            float scaleY = height / (float)actualSizes.Height;
+            var key = (Width: (int)Math.Round(OriginalWidth * scaleX), Height: (int)Math.Round(OriginalHeight * scaleY));
             SKSamplingOptions highQualitySampling = new SKSamplingOptions(SKCubicResampler.Mitchell);
             if (!m_sizeCache.TryGetValue(key, out SKImage? cachedImage))
             {
@@ -130,9 +131,6 @@ namespace SevenWonders.Game.Engine
                     m_sizeCache[key] = cachedImage;
                 }
             }
-
-            float scaleX = key.Width / OriginalWidth;
-            float scaleY = key.Height / OriginalHeight;
 
             var srcRect = new SKRect(
                 left * scaleX,
@@ -174,6 +172,16 @@ namespace SevenWonders.Game.Engine
             {
                 pair.Value.Dispose();
             }
+            m_sizeCache.Clear();
+        }
+
+        public void ClearCache()
+        {
+            foreach (var pair in m_sizeCache)
+            {
+                pair.Value.Dispose();
+            }
+
             m_sizeCache.Clear();
         }
 
