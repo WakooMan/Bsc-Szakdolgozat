@@ -4928,7 +4928,7 @@
         <SceneObject xsi:type="GameObject">
           <Name>player2Name_bg</Name>
           <Id>506</Id>
-          <ZIndex>5</ZIndex>
+          <ZIndex>4</ZIndex>
           <Visible>true</Visible>
           <Position>
             <X>3640.0005</X>
@@ -5022,7 +5022,7 @@
         <SceneObject xsi:type="GameObject">
           <Name>player1Name_bg</Name>
           <Id>507</Id>
-          <ZIndex>5</ZIndex>
+          <ZIndex>4</ZIndex>
           <Visible>true</Visible>
           <Position>
             <X>200.00002</X>
