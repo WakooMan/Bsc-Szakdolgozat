@@ -53,7 +53,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                 if (m_militaryGameOverScreen is not null && m_militaryPlayerName is not null && m_militaryBackToMenu is not null)
                 {
                     m_militaryBackToMenu.ClickedEvent += OnClickBackToMenu;
-                    m_militaryPlayerName.Text = $"{eventObj.PlayerProperties.Owner.Name}";
+                    m_militaryPlayerName.TextProperties.Text = $"{eventObj.PlayerProperties.Owner.Name}";
                     m_militaryGameOverScreen.Visible = true;
                 }
             });
@@ -63,7 +63,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                 if (m_scienceGameOverScreen is not null && m_sciencePlayerName is not null && m_scienceBackToMenu is not null)
                 {
                     m_scienceBackToMenu.ClickedEvent += OnClickBackToMenu;
-                    m_sciencePlayerName.Text = $"{eventObj.PlayerProperties.Owner.Name}";
+                    m_sciencePlayerName.TextProperties.Text = $"{eventObj.PlayerProperties.Owner.Name}";
                     m_scienceGameOverScreen.Visible = true;
                 }
             });
@@ -82,38 +82,38 @@ namespace SevenWonders.Game.Presenter.Presenters
                 {
                     m_citizenBackToMenu.ClickedEvent += OnClickBackToMenu;
 
-                    m_citizenFirstPlayerName.Text = eventObj.FirstPlayer.Owner.Name;
-                    m_citizenFirstPlayerVictoryPoints.Text = eventObj.FirstPlayer.VictoryPoints.ToString();
+                    m_citizenFirstPlayerName.TextProperties.Text = eventObj.FirstPlayer.Owner.Name;
+                    m_citizenFirstPlayerVictoryPoints.TextProperties.Text = eventObj.FirstPlayer.VictoryPoints.ToString();
                     int numberOfBlueCardsPlayer1 = eventObj.FirstPlayer.Owner.Cards.OfType<BlueCard>().Count();
-                    m_citizenFirstPlayerBlueCardNumber.Text = numberOfBlueCardsPlayer1.ToString();
+                    m_citizenFirstPlayerBlueCardNumber.TextProperties.Text = numberOfBlueCardsPlayer1.ToString();
 
-                    m_citizenSecondPlayerName.Text = eventObj.SecondPlayer.Owner.Name;
-                    m_citizenSecondPlayerVictoryPoints.Text = eventObj.SecondPlayer.VictoryPoints.ToString();
+                    m_citizenSecondPlayerName.TextProperties.Text = eventObj.SecondPlayer.Owner.Name;
+                    m_citizenSecondPlayerVictoryPoints.TextProperties.Text = eventObj.SecondPlayer.VictoryPoints.ToString();
                     int numberOfBlueCardsPlayer2 = eventObj.SecondPlayer.Owner.Cards.OfType<BlueCard>().Count();
-                    m_citizenSecondPlayerBlueCardNumber.Text = numberOfBlueCardsPlayer2.ToString();
+                    m_citizenSecondPlayerBlueCardNumber.TextProperties.Text = numberOfBlueCardsPlayer2.ToString();
 
                     string resultText = string.Empty;
                     if (eventObj.FirstPlayer.VictoryPoints > eventObj.SecondPlayer.VictoryPoints)
                     {
                         resultText = "Győzelem!";
-                        m_citizenFirstPlayerName.Bold = true;
+                        m_citizenFirstPlayerName.TextProperties.Bold = true;
                     }
                     else if (eventObj.FirstPlayer.VictoryPoints < eventObj.SecondPlayer.VictoryPoints)
                     {
                         resultText = "Győzelem!";
-                        m_citizenSecondPlayerName.Bold = true;
+                        m_citizenSecondPlayerName.TextProperties.Bold = true;
                     }
                     else
                     {
                         if (numberOfBlueCardsPlayer1 > numberOfBlueCardsPlayer2)
                         {
                             resultText = "Győzelem!";
-                            m_citizenFirstPlayerName.Bold = true;
+                            m_citizenFirstPlayerName.TextProperties.Bold = true;
                         }
                         else if (numberOfBlueCardsPlayer1 < numberOfBlueCardsPlayer2)
                         {
                             resultText = "Győzelem!";
-                            m_citizenSecondPlayerName.Bold = true;
+                            m_citizenSecondPlayerName.TextProperties.Bold = true;
                         }
                         else
                         {
@@ -121,7 +121,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                         }
                     }
 
-                    m_citizenGameResult.Text = resultText;
+                    m_citizenGameResult.TextProperties.Text = resultText;
                     m_citizenGameOverScreen.Visible = true;
                 }
             });

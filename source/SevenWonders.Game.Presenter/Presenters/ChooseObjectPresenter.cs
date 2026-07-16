@@ -44,7 +44,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                     {
                         throw new InvalidOperationException("The object view cache is not cleared before publishing this event!");
                     }
-                    m_chooseObjectTitle.Text = eventObj.Title;
+                    m_chooseObjectTitle.TextProperties.Text = eventObj.Title;
                     foreach (string objectName in eventObj.Objects)
                     {
                         GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(objectName);

@@ -9,56 +9,30 @@ namespace SevenWonders.Game.Engine.SceneObjects
     [XmlInclude(typeof(ButtonObject))]
     public class TextLabel : SceneObject, IEquatable<TextLabel>
     {
-        public int BackgroundTextureId { get; set; }
-        public string Text { get; set; }
-        public bool Bold { get; set; }
-        public float FontSize { get; set; }
-
-        [XmlIgnore]
-        public SKColor TextColor { get; set; }
-
-        public string TextColorHex
-        {
-            get => TextColor.ToString();
-            set => TextColor = SKColor.Parse(value);
-        }
+        public TextProperties TextProperties { get; set; }
 
         public TextLabel()
         {
             Name = string.Empty;
-            Text = string.Empty;
-            Bold = false;
             Scale = new Vector2(1, 1);
-            FontSize = 24f;
-            TextColor = SKColors.White;
+            TextProperties = new TextProperties();
         }
 
         public TextLabel(TextLabel other) : base(other)
         {
-            BackgroundTextureId = other.BackgroundTextureId;
-            Text = new string(other.Text);
-            FontSize = other.FontSize;
-            TextColor = other.TextColor;
-            Bold = other.Bold;
+            TextProperties = new TextProperties(other.TextProperties);
         }
 
         public bool Equals(TextLabel? other)
         {
-            return base.Equals(other);
+            return base.Equals(other) && 
+                   TextProperties.Equals(other?.TextProperties);
         }
 
         public override void Resize(Vector2 oldResolution, Vector2 newResolution)
         {
             base.Resize(oldResolution, newResolution);
-            float xRatio = newResolution.X / oldResolution.X;
-            float yRatio = newResolution.Y / oldResolution.Y;
-            float matchFactor = 0.5f;
-            float logWidth = MathF.Log2(xRatio);
-            float logHeight = MathF.Log2(yRatio);
-            float logWeightedAverage = logWidth * (1 - matchFactor) + logHeight * matchFactor;
-            float finalScale = MathF.Pow(2, logWeightedAverage);
-
-            FontSize = FontSize * finalScale;
+            TextProperties.Resize(oldResolution, newResolution);
         }
 
         [ExcludeFromCodeCoverage]
@@ -67,28 +41,10 @@ namespace SevenWonders.Game.Engine.SceneObjects
             if (!Visible)
                 return;
 
-            if (BackgroundTextureId != -1)
+            if (!string.IsNullOrEmpty(TextProperties.Text))
             {
-                Texture texture = textureRegistry.Get(BackgroundTextureId);
-                if (Dimmed)
-                {
-                    texture.CustomColorFilter = SKColorFilter.CreateBlendMode(
-                                        SKColors.Black.WithAlpha(120),
-                                        SKBlendMode.SrcOver
-                                    );
-                }
-                else if (texture.CustomColorFilter is not null)
-                {
-                    texture.CustomColorFilter = null;
-                }
-
-                texture.Draw(canvas, Position, Scale, Rotation, Width, Height);
-            }
-
-            if (!string.IsNullOrEmpty(Text))
-            {
-                var typeface = SKTypeface.FromFamilyName(Bold ? "CinzelBold" : "CinzelRegular",
-                                                         Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+                var typeface = SKTypeface.FromFamilyName(TextProperties.Bold ? "CinzelBold" : "CinzelRegular",
+                                                         TextProperties.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
                                                          SKFontStyleWidth.Normal,
                                                          SKFontStyleSlant.Upright);
 
@@ -101,13 +57,13 @@ namespace SevenWonders.Game.Engine.SceneObjects
                 using var font = new SKFont
                 {
                     Typeface = typeface,
-                    Size = FontSize,
+                    Size = TextProperties.FontSize,
                     Edging = SKFontEdging.Antialias
                 };
 
                 using var textPaint = new SKPaint
                 {
-                    Color = TextColor,
+                    Color = TextProperties.TextColor,
                     ColorFilter = Dimmed ? SKColorFilter.CreateBlendMode(
                                 SKColors.Black.WithAlpha(120),
                                 SKBlendMode.SrcOver
@@ -116,7 +72,7 @@ namespace SevenWonders.Game.Engine.SceneObjects
 
                 float textY = font.Metrics.CapHeight / 2;
 
-                canvas.DrawText(Text, 0, textY, SKTextAlign.Center, font, textPaint);
+                canvas.DrawText(TextProperties.Text, 0, textY, SKTextAlign.Center, font, textPaint);
             }
         }
 

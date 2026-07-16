@@ -28,14 +28,6 @@ namespace SevenWonders.Game.Scene.Editor.Helpers
                         }
                     }
 
-                    foreach (TextLabel textLabel in layer.TextLabels)
-                    {
-                        if (textLabel.BackgroundTextureId == oldId)
-                        {
-                            textLabel.BackgroundTextureId = newId;
-                        }
-                    }
-
                     foreach (TextureObject textureObject in layer.TextureObjects)
                     {
                         if (textureObject.TextureId == oldId)

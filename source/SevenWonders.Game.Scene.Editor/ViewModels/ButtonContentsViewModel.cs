@@ -228,12 +228,12 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         public string SelectedButtonText
         {
-            get => SelectedButton?.Text ?? string.Empty;
+            get => SelectedButton?.TextProperties.Text ?? string.Empty;
             set
             {
                 if (SelectedButton is not null)
                 {
-                    SelectedButton.Text = value;
+                    SelectedButton.TextProperties.Text = value;
                     OnPropertyChanged();
                 }
             }
@@ -241,12 +241,12 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         public float SelectedButtonFontSize
         {
-            get => SelectedButton?.FontSize ?? 24f;
+            get => SelectedButton?.TextProperties.FontSize ?? 24f;
             set
             {
                 if (SelectedButton is not null)
                 {
-                    SelectedButton.FontSize = value;
+                    SelectedButton.TextProperties.FontSize = value;
                     OnPropertyChanged();
                 }
             }
@@ -254,14 +254,14 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         public string SelectedButtonTextColorHex
         {
-            get => SelectedButton?.TextColorHex ?? "#FFFFFFFF";
+            get => SelectedButton?.TextProperties.TextColorHex ?? "#FFFFFFFF";
             set
             {
                 if (SelectedButton is not null)
                 {
                     try
                     {
-                        SelectedButton.TextColor = SKColor.Parse(value);
+                        SelectedButton.TextProperties.TextColor = SKColor.Parse(value);
                         OnPropertyChanged();
                     }
                     catch
@@ -290,15 +290,18 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             ButtonObject button = new ButtonObject()
             {
                 Name = name,
-                Text = buttonText,
-                FontSize = fontSize,
+                TextProperties = new TextProperties()
+                {
+                    Text = buttonText,
+                    FontSize = fontSize,
+                    TextColor = SKColors.White,
+                },
                 Position = new Vector2(0, 0),
                 BackgroundTextureId = backgroundTextureId,
                 Visible = visible,
                 Width = width,
                 Height = height,
                 Scale = new Vector2(1, 1),
-                TextColor = SKColors.White,
             };
 
             m_engine.ObjectManager.AddSceneObject(m_engine.SceneManager.CurrentScene, SelectedLayer, button);

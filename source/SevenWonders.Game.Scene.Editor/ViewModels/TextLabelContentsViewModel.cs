@@ -225,12 +225,12 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         public string SelectedTextLabelText
         {
-            get => SelectedTextLabel?.Text ?? string.Empty;
+            get => SelectedTextLabel?.TextProperties.Text ?? string.Empty;
             set
             {
                 if (SelectedTextLabel is not null)
                 {
-                    SelectedTextLabel.Text = value;
+                    SelectedTextLabel.TextProperties.Text = value;
                     OnPropertyChanged();
                 }
             }
@@ -238,12 +238,12 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         public float SelectedTextLabelFontSize
         {
-            get => SelectedTextLabel?.FontSize ?? 24f;
+            get => SelectedTextLabel?.TextProperties.FontSize ?? 24f;
             set
             {
                 if (SelectedTextLabel is not null)
                 {
-                    SelectedTextLabel.FontSize = value;
+                    SelectedTextLabel.TextProperties.FontSize = value;
                     OnPropertyChanged();
                 }
             }
@@ -251,14 +251,14 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         public string SelectedTextLabelTextColorHex
         {
-            get => SelectedTextLabel?.TextColorHex ?? "#FFFFFFFF";
+            get => SelectedTextLabel?.TextProperties.TextColorHex ?? "#FFFFFFFF";
             set
             {
                 if (SelectedTextLabel is not null)
                 {
                     try
                     {
-                        SelectedTextLabel.TextColor = SKColor.Parse(value);
+                        SelectedTextLabel.TextProperties.TextColor = SKColor.Parse(value);
                         OnPropertyChanged();
                     }
                     catch
@@ -287,15 +287,17 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             TextLabel textLabel = new TextLabel()
             {
                 Name = name,
-                Text = text,
-                FontSize = fontSize,
                 Position = new Vector2(0, 0),
-                BackgroundTextureId = backgroundTextureId,
                 Visible = visible,
                 Width = width,
                 Height = height,
                 Scale = new Vector2(1, 1),
-                TextColor = SkiaSharp.SKColors.White,
+                TextProperties = new TextProperties()
+                {
+                    Text = text,
+                    FontSize = fontSize,
+                    TextColor = SKColors.White,
+                },
             };
 
             m_engine.ObjectManager.AddSceneObject(m_engine.SceneManager.CurrentScene, SelectedLayer, textLabel);

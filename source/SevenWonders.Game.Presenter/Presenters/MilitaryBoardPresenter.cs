@@ -120,7 +120,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                 if (frame is not null && frame.TextureId != m_textureIdHandler.GetTextureId(type.Name))
                 {
                     frame.TextureId = m_textureIdHandler.GetTextureId(type.Name);
-                    pair.label.Text = Number.ToString();
+                    pair.label.TextProperties.Text = Number.ToString();
                     pair.science.Visible = true;
                     pair.label.Visible = true;
                 }

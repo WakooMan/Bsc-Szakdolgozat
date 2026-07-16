@@ -585,6 +585,24 @@
           <NumberOfFrames>0</NumberOfFrames>
           <Highlighted>false</Highlighted>
         </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>player1Points_bg</Name>
+          <Id>502</Id>
+          <ZIndex>1</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>228.57147</X>
+            <Y>1894.0297</Y>
+          </Position>
+          <Width>285.71432</Width>
+          <Height>201.49252</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>119</TextureId>
+        </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player1Points</Name>
           <Id>178</Id>
@@ -601,11 +619,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>119</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.28557</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.28557</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>centerWonder2</Name>
@@ -769,6 +788,24 @@
           <NumberOfFrames>0</NumberOfFrames>
           <Highlighted>false</Highlighted>
         </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>player1Money_bg</Name>
+          <Id>503</Id>
+          <ZIndex>1</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>228.57147</X>
+            <Y>1692.5371</Y>
+          </Position>
+          <Width>285.71432</Width>
+          <Height>201.49252</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>109</TextureId>
+        </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player1Money</Name>
           <Id>182</Id>
@@ -785,11 +822,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>109</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.28557</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.28557</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player2WonderCard3</Name>
@@ -845,6 +883,24 @@
           <NumberOfFrames>0</NumberOfFrames>
           <Highlighted>false</Highlighted>
         </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>player2Money_bg</Name>
+          <Id>504</Id>
+          <ZIndex>1</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>3611.4297</X>
+            <Y>467.46268</Y>
+          </Position>
+          <Width>285.71432</Width>
+          <Height>201.49252</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>109</TextureId>
+        </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player2Money</Name>
           <Id>184</Id>
@@ -861,11 +917,30 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>109</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.28557</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.28557</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
+        </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>player2Points_bg</Name>
+          <Id>505</Id>
+          <ZIndex>1</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>3611.4297</X>
+            <Y>265.97012</Y>
+          </Position>
+          <Width>285.71432</Width>
+          <Height>201.49252</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>119</TextureId>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player2Points</Name>
@@ -883,11 +958,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>119</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.28557</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.28557</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player2WonderCard1</Name>
@@ -2165,11 +2241,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player1science5</Name>
@@ -2349,11 +2426,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>military2</Name>
@@ -2749,11 +2827,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>dev4</Name>
@@ -2987,11 +3066,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player1MilitaryToken2</Name>
@@ -3080,11 +3160,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player1MilitaryToken1</Name>
@@ -3281,11 +3362,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player2science4</Name>
@@ -4093,11 +4175,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>military18</Name>
@@ -4510,11 +4593,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player1ScienceLabel2</Name>
@@ -4532,11 +4616,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player2ScienceLabel3</Name>
@@ -4554,11 +4639,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player1ScienceLabel4</Name>
@@ -4576,11 +4662,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player2ScienceLabel1</Name>
@@ -4598,11 +4685,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>79.99988</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>79.99988</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player2science3</Name>
@@ -4837,6 +4925,24 @@
           <NumberOfFrames>0</NumberOfFrames>
           <Highlighted>false</Highlighted>
         </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>player2Name_bg</Name>
+          <Id>506</Id>
+          <ZIndex>5</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>3640.0005</X>
+            <Y>95.2941</Y>
+          </Position>
+          <Width>371.42862</Width>
+          <Height>149.99997</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>144</TextureId>
+        </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player2Name</Name>
           <Id>265</Id>
@@ -4853,11 +4959,30 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>144</BackgroundTextureId>
-          <Text>Player2</Text>
-          <Bold>false</Bold>
-          <FontSize>89.113174</FontSize>
-          <TextColorHex>#ffececec</TextColorHex>
+          <TextProperties>
+            <Text>Player2</Text>
+            <Bold>false</Bold>
+            <FontSize>89.113174</FontSize>
+            <TextColorHex>#ffececec</TextColorHex>
+          </TextProperties>
+        </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>player1Name_bg</Name>
+          <Id>507</Id>
+          <ZIndex>5</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>200.00002</X>
+            <Y>2064.7053</Y>
+          </Position>
+          <Width>371.42862</Width>
+          <Height>149.99997</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>144</TextureId>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player1Name</Name>
@@ -4875,11 +5000,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>144</BackgroundTextureId>
-          <Text>Player1</Text>
-          <Bold>false</Bold>
-          <FontSize>89.113174</FontSize>
-          <TextColorHex>#ffececec</TextColorHex>
+          <TextProperties>
+            <Text>Player1</Text>
+            <Bold>false</Bold>
+            <FontSize>89.113174</FontSize>
+            <TextColorHex>#ffececec</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
           <Name>BackToTurnDecisions</Name>
@@ -4898,10 +5024,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Vissza</Text>
-          <Bold>false</Bold>
-          <FontSize>61.106155</FontSize>
-          <TextColorHex>#fffaebd7</TextColorHex>
+          <TextProperties>
+            <Text>Vissza</Text>
+            <Bold>false</Bold>
+            <FontSize>61.106155</FontSize>
+            <TextColorHex>#fffaebd7</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>player2PurpleCard</Name>
@@ -16025,10 +16153,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Kártya építése</Text>
-          <Bold>false</Bold>
-          <FontSize>61.106155</FontSize>
-          <TextColorHex>#fffaebd7</TextColorHex>
+          <TextProperties>
+            <Text>Kártya építése</Text>
+            <Bold>false</Bold>
+            <FontSize>61.106155</FontSize>
+            <TextColorHex>#fffaebd7</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
           <Name>UnpickCard</Name>
@@ -16047,10 +16177,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Kártya visszarakása</Text>
-          <Bold>false</Bold>
-          <FontSize>61.106155</FontSize>
-          <TextColorHex>#fffaebd7</TextColorHex>
+          <TextProperties>
+            <Text>Kártya visszarakása</Text>
+            <Bold>false</Bold>
+            <FontSize>61.106155</FontSize>
+            <TextColorHex>#fffaebd7</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
           <Name>SellCard</Name>
@@ -16069,10 +16201,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Kártya eladása</Text>
-          <Bold>false</Bold>
-          <FontSize>61.106155</FontSize>
-          <TextColorHex>#fffaebd7</TextColorHex>
+          <TextProperties>
+            <Text>Kártya eladása</Text>
+            <Bold>false</Bold>
+            <FontSize>61.106155</FontSize>
+            <TextColorHex>#fffaebd7</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
           <Name>BuildWonderProcess</Name>
@@ -16091,10 +16225,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Csoda építése</Text>
-          <Bold>false</Bold>
-          <FontSize>61.106155</FontSize>
-          <TextColorHex>#fffaebd7</TextColorHex>
+          <TextProperties>
+            <Text>Csoda építése</Text>
+            <Bold>false</Bold>
+            <FontSize>61.106155</FontSize>
+            <TextColorHex>#fffaebd7</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>CardActionLocation</Name>
@@ -16967,11 +17103,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>Cím</Text>
-          <Bold>false</Bold>
-          <FontSize>127.30468</FontSize>
-          <TextColorHex>#ffbc0000</TextColorHex>
+          <TextProperties>
+            <Text>Cím</Text>
+            <Bold>false</Bold>
+            <FontSize>127.30468</FontSize>
+            <TextColorHex>#ffbc0000</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="GameObject">
           <Name>ChooseObjectCenterTarget</Name>
@@ -17807,11 +17944,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>Tudományos</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ff008080</TextColorHex>
+          <TextProperties>
+            <Text>Tudományos</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ff008080</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>Victory</Name>
@@ -17829,11 +17967,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>Győzelem!</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ff008080</TextColorHex>
+          <TextProperties>
+            <Text>Győzelem!</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ff008080</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>ScienceName</Name>
@@ -17851,11 +17990,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>&lt;Név&gt;</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ff008080</TextColorHex>
+          <TextProperties>
+            <Text>&lt;Név&gt;</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ff008080</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
           <Name>ScienceBackToMenu</Name>
@@ -17874,10 +18014,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Menü</Text>
-          <Bold>false</Bold>
-          <FontSize>101.8437</FontSize>
-          <TextColorHex>#ffcfb53b</TextColorHex>
+          <TextProperties>
+            <Text>Menü</Text>
+            <Bold>false</Bold>
+            <FontSize>101.8437</FontSize>
+            <TextColorHex>#ffcfb53b</TextColorHex>
+          </TextProperties>
         </SceneObject>
       </SceneObjectsProxy>
     </GraphicsLayer>
@@ -17940,11 +18082,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>Katonai</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ffbc0000</TextColorHex>
+          <TextProperties>
+            <Text>Katonai</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ffbc0000</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>Victory</Name>
@@ -17962,11 +18105,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>Győzelem!</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ffbc0000</TextColorHex>
+          <TextProperties>
+            <Text>Győzelem!</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ffbc0000</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>MilitaryName</Name>
@@ -17984,11 +18128,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>&lt;Név&gt;</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ffbc0000</TextColorHex>
+          <TextProperties>
+            <Text>&lt;Név&gt;</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ffbc0000</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
           <Name>MilitaryBackToMenu</Name>
@@ -18007,10 +18152,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Menü</Text>
-          <Bold>false</Bold>
-          <FontSize>101.8437</FontSize>
-          <TextColorHex>#ffcfb53b</TextColorHex>
+          <TextProperties>
+            <Text>Menü</Text>
+            <Bold>false</Bold>
+            <FontSize>101.8437</FontSize>
+            <TextColorHex>#ffcfb53b</TextColorHex>
+          </TextProperties>
         </SceneObject>
       </SceneObjectsProxy>
     </GraphicsLayer>
@@ -18073,11 +18220,30 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>&lt;Név2&gt;</Text>
-          <Bold>false</Bold>
-          <FontSize>114.57425</FontSize>
-          <TextColorHex>#ff001f5c</TextColorHex>
+          <TextProperties>
+            <Text>&lt;Név2&gt;</Text>
+            <Bold>false</Bold>
+            <FontSize>114.57425</FontSize>
+            <TextColorHex>#ff001f5c</TextColorHex>
+          </TextProperties>
+        </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>CitizenSecondPlayerVictoryPoints_bg</Name>
+          <Id>508</Id>
+          <ZIndex>5</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>2205.7146</X>
+            <Y>930.252</Y>
+          </Position>
+          <Width>257.1429</Width>
+          <Height>204.20164</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>119</TextureId>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>CitizenSecondPlayerVictoryPoints</Name>
@@ -18095,11 +18261,30 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>119</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.57425</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.57425</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
+        </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>CitizenSecondPlayerBlueCardNumber_bg</Name>
+          <Id>509</Id>
+          <ZIndex>5</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>2205.7146</X>
+            <Y>1134.4537</Y>
+          </Position>
+          <Width>171.42859</Width>
+          <Height>204.20164</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>96</TextureId>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>CitizenSecondPlayerBlueCardNumber</Name>
@@ -18117,11 +18302,30 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>96</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.57425</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.57425</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
+        </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>CitizenFirstPlayerBlueCardNumber_bg</Name>
+          <Id>510</Id>
+          <ZIndex>5</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>1634.2858</X>
+            <Y>1134.4537</Y>
+          </Position>
+          <Width>171.42859</Width>
+          <Height>204.20164</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>96</TextureId>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>CitizenFirstPlayerBlueCardNumber</Name>
@@ -18139,11 +18343,30 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>96</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.57425</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.57425</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
+        </SceneObject>
+        <SceneObject xsi:type="TextureObject">
+          <Name>CitizenFirstPlayerVictoryPoints_bg</Name>
+          <Id>511</Id>
+          <ZIndex>5</ZIndex>
+          <Visible>true</Visible>
+          <Position>
+            <X>1634.2858</X>
+            <Y>930.252</Y>
+          </Position>
+          <Width>257.1429</Width>
+          <Height>204.20164</Height>
+          <Rotation>0</Rotation>
+          <Scale>
+            <X>1</X>
+            <Y>1</Y>
+          </Scale>
+          <TextureId>119</TextureId>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>CitizenFirstPlayerVictoryPoints</Name>
@@ -18161,11 +18384,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>119</BackgroundTextureId>
-          <Text>0</Text>
-          <Bold>false</Bold>
-          <FontSize>114.57425</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>0</Text>
+            <Bold>false</Bold>
+            <FontSize>114.57425</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>CitizenFirstPlayerName</Name>
@@ -18183,11 +18407,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>&lt;Név1&gt;</Text>
-          <Bold>false</Bold>
-          <FontSize>114.57425</FontSize>
-          <TextColorHex>#ff001f5c</TextColorHex>
+          <TextProperties>
+            <Text>&lt;Név1&gt;</Text>
+            <Bold>false</Bold>
+            <FontSize>114.57425</FontSize>
+            <TextColorHex>#ff001f5c</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>CitizenText</Name>
@@ -18205,11 +18430,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>Polgári</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ff001f5c</TextColorHex>
+          <TextProperties>
+            <Text>Polgári</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ff001f5c</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>CitizenResult</Name>
@@ -18227,11 +18453,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>&lt;Eredmény&gt;</Text>
-          <Bold>false</Bold>
-          <FontSize>152.76553</FontSize>
-          <TextColorHex>#ff001f5c</TextColorHex>
+          <TextProperties>
+            <Text>&lt;Eredmény&gt;</Text>
+            <Bold>false</Bold>
+            <FontSize>152.76553</FontSize>
+            <TextColorHex>#ff001f5c</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="ButtonObject">
           <Name>CitizenBackToMenu</Name>
@@ -18250,10 +18477,12 @@
             <Y>1</Y>
           </Scale>
           <BackgroundTextureId>95</BackgroundTextureId>
-          <Text>Menü</Text>
-          <Bold>false</Bold>
-          <FontSize>101.8437</FontSize>
-          <TextColorHex>#ffcfb53b</TextColorHex>
+          <TextProperties>
+            <Text>Menü</Text>
+            <Bold>false</Bold>
+            <FontSize>101.8437</FontSize>
+            <TextColorHex>#ffcfb53b</TextColorHex>
+          </TextProperties>
         </SceneObject>
       </SceneObjectsProxy>
     </GraphicsLayer>
@@ -18298,11 +18527,12 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <BackgroundTextureId>-1</BackgroundTextureId>
-          <Text>New Turn Activated</Text>
-          <Bold>false</Bold>
-          <FontSize>142.8569</FontSize>
-          <TextColorHex>#ffffffff</TextColorHex>
+          <TextProperties>
+            <Text>New Turn Activated</Text>
+            <Bold>false</Bold>
+            <FontSize>142.8569</FontSize>
+            <TextColorHex>#ffffffff</TextColorHex>
+          </TextProperties>
         </SceneObject>
         <SceneObject xsi:type="TextureObject">
           <Name>TurnTexture</Name>
