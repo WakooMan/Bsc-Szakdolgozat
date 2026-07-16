@@ -1,4 +1,6 @@
-﻿namespace SevenWonders.Game.Engine
+﻿using SevenWonders.Game.Engine.InputHandling;
+
+namespace SevenWonders.Game.Engine
 {
     public static class Extensions
     {

@@ -1,6 +1,7 @@
-﻿using SkiaSharp;
+﻿using SevenWonders.Game.Engine.SceneHandling;
+using SkiaSharp;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     public class TextureObject : SceneObject, IEquatable<TextureObject>
     {

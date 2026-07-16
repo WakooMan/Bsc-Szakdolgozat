@@ -1,7 +1,9 @@
-﻿using SkiaSharp;
+﻿using SevenWonders.Game.Engine.ChildObjects;
+using SevenWonders.Game.Engine.SceneHandling;
+using SkiaSharp;
 using System.Numerics;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     public class Sprite: IEquatable<Sprite>
     {

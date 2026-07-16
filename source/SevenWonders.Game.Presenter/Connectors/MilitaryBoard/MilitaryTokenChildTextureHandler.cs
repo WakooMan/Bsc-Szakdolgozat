@@ -1,7 +1,8 @@
 ﻿using SevenWonders.Game.Logic.Elements.Military;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors.Effects;
 using System.Numerics;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.ChildObjects;
 
 namespace SevenWonders.Game.Presenter.Connectors.MilitaryBoard
 {

@@ -1,4 +1,4 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.SceneObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using SevenWonders.Game.Engine.SceneObjects;
 
 namespace SevenWonders.Game.Presenter.Connectors.Developments
 {

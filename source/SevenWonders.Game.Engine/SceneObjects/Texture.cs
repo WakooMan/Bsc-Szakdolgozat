@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Xml.Serialization;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     public class Texture : IEquatable<Texture>, IDisposable
     {
@@ -118,8 +118,8 @@ namespace SevenWonders.Game.Engine
                 return;
 
             var actualSizes = (Width: right - left, Height: bottom - top);
-            float scaleX = width / (float)actualSizes.Width;
-            float scaleY = height / (float)actualSizes.Height;
+            float scaleX = width / actualSizes.Width;
+            float scaleY = height / actualSizes.Height;
             var key = (Width: (int)Math.Round(OriginalWidth * scaleX), Height: (int)Math.Round(OriginalHeight * scaleY));
             SKSamplingOptions highQualitySampling = new SKSamplingOptions(SKCubicResampler.Mitchell);
             if (!m_sizeCache.TryGetValue(key, out SKImage? cachedImage))

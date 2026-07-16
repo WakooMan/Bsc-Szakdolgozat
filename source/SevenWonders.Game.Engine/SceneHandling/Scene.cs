@@ -1,9 +1,10 @@
-﻿using SkiaSharp;
+﻿using SevenWonders.Game.Engine.SceneObjects;
+using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Xml.Serialization;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneHandling
 {
     public class Scene : IEquatable<Scene>, IDisposable
     {

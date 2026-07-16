@@ -1,9 +1,10 @@
+using SevenWonders.Game.Engine.SceneHandling;
 using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Xml.Serialization;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     [XmlInclude(typeof(ButtonObject))]
     public class TextLabel : SceneObject, IEquatable<TextLabel>

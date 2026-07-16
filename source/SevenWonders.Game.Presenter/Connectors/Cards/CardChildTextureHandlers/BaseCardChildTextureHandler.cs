@@ -2,6 +2,8 @@
 using SevenWonders.Game.Engine;
 using SkiaSharp;
 using System.Numerics;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.ChildObjects;
 
 namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
 {

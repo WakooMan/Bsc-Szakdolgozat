@@ -1,4 +1,4 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.InputHandling;
 using SevenWonders.Game.Logic.Elements;
 using SevenWonders.Game.Logic.Exceptions;
 using SevenWonders.Game.Logic.Interfaces;

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using SevenWonders.Common;
 using SevenWonders.Game.Engine;
+using SevenWonders.Game.Engine.SceneHandling;
 using SevenWonders.Game.Scene.Editor.Helpers;
 using SevenWonders.Game.Scene.Editor.ViewModels;
 using SkiaSharp;
@@ -36,7 +37,7 @@ namespace SevenWonders.Game.Scene.Editor.Views
                 await Task.Delay(100);
             }
 
-            foreach (Engine.Scene scene in await m_sceneLoader.LoadScenes())
+            foreach (Engine.SceneHandling.Scene scene in await m_sceneLoader.LoadScenes())
             {
                 m_engine.SceneManager.RegisterScene(scene);
                 SceneIdHandler.OrderIds(scene);
@@ -159,7 +160,7 @@ namespace SevenWonders.Game.Scene.Editor.Views
             await this.ShowPopupAsync(addScenePopupWindow);
             if (addScenePopupWindow.ViewModel.AddActivated)
             {
-                Engine.Scene scene = new Engine.Scene()
+                Engine.SceneHandling.Scene scene = new Engine.Scene()
                 {
                     Name = addScenePopupWindow.ViewModel.Name,
                     Visible = addScenePopupWindow.ViewModel.Visible

@@ -1,9 +1,11 @@
 ﻿using SevenWonders.Game.Logic.Elements.GameCards;
 using SevenWonders.Game.Logic.Events;
 using SevenWonders.Game.Logic.Events.GameEvents;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors;
 using SkiaSharp.Views.Maui;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Presenter.Presenters
 {

@@ -1,4 +1,6 @@
 ﻿using SevenWonders.Game.Engine;
+using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 using SkiaSharp;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

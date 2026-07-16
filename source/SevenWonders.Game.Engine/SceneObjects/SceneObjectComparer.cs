@@ -1,4 +1,4 @@
-﻿namespace SevenWonders.Game.Engine
+﻿namespace SevenWonders.Game.Engine.SceneObjects
 {
     public class SceneObjectComparer : IComparer<SceneObject>
     {

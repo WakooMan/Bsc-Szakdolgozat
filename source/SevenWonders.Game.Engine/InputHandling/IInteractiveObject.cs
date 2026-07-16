@@ -1,6 +1,7 @@
-﻿using SkiaSharp.Views.Maui;
+﻿using SevenWonders.Game.Engine.SceneHandling;
+using SkiaSharp.Views.Maui;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.InputHandling
 {
     public interface IInteractiveObject
     {

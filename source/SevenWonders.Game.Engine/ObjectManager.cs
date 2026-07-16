@@ -1,4 +1,7 @@
 ﻿using SevenWonders.Common;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 

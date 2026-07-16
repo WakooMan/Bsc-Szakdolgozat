@@ -1,5 +1,5 @@
-﻿using SevenWonders.Game.Engine;
-using SevenWonders.Game.Engine.Components;
+﻿using SevenWonders.Game.Engine.Components;
+using SevenWonders.Game.Engine.SceneObjects;
 using SevenWonders.Game.Presenter.Views;
 using SevenWonders.Game.Presenter.Views.Factories;
 

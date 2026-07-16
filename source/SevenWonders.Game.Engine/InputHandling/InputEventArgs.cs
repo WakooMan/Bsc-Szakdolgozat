@@ -1,6 +1,6 @@
 ﻿using SevenWonders.Common;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.InputHandling
 {
     public class InputEventArgs: EventArgs
     {

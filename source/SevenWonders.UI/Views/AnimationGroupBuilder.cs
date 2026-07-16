@@ -1,5 +1,5 @@
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Engine.Animations;
+using SevenWonders.Game.Engine.SceneObjects;
 using SevenWonders.Game.Presenter.Views;
 using System.Numerics;
 

@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneHandling
 {
     [ExcludeFromCodeCoverage]
     public class SceneLoader : ISceneLoader

@@ -1,10 +1,12 @@
 ﻿using SevenWonders.Common;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     public class GameObject : SceneObject, IInteractiveObject, IEquatable<GameObject>
     {

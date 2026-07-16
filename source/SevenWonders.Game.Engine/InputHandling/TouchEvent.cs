@@ -1,4 +1,4 @@
-﻿namespace SevenWonders.Game.Engine
+﻿namespace SevenWonders.Game.Engine.InputHandling
 {
     [Flags]
     public enum TouchEvent

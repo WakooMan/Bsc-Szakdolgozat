@@ -6,6 +6,9 @@ using SevenWonders.Game.Presenter.Views;
 using SevenWonders.Game.Presenter.Views.Factories;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Presenter.Presenters
 {

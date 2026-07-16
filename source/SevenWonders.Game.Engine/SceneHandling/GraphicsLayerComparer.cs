@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneHandling
 {
     public class GraphicsLayerComparer : IComparer<GraphicsLayer>
     {

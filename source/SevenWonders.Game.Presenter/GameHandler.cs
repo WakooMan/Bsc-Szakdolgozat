@@ -10,6 +10,7 @@ using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Numerics;
 using System.Threading.Tasks;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Presenter
 {

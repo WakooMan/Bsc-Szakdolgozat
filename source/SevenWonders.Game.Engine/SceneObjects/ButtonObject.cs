@@ -1,7 +1,9 @@
 using SevenWonders.Common;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 using SkiaSharp.Views.Maui;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     public class ButtonObject : TextLabel, IInteractiveObject, IEquatable<ButtonObject>
     {

@@ -1,8 +1,9 @@
 ﻿using SevenWonders.Game.Logic.Elements.Wonders;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors.Effects;
 using SkiaSharp;
 using System.Numerics;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.ChildObjects;
 
 namespace SevenWonders.Game.Presenter.Connectors.Wonders.WonderChildTextureHandlers
 {

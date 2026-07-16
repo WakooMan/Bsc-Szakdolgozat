@@ -1,6 +1,7 @@
 ﻿using SevenWonders.Game.Logic.Elements.GameCards;
-using SevenWonders.Game.Engine;
 using System.Numerics;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.ChildObjects;
 
 namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
 {

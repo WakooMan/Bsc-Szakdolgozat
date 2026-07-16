@@ -1,9 +1,11 @@
 ﻿using SevenWonders.Common;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
-using static SevenWonders.Game.Engine.ISceneManager;
+using static SevenWonders.Game.Engine.SceneHandling.ISceneManager;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneHandling
 {
     public class SceneManager: ISceneManager
     {

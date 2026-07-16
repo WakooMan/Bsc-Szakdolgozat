@@ -1,4 +1,4 @@
-using SevenWonders.Game.Engine;
+using SevenWonders.Game.Engine.SceneObjects;
 
 namespace SevenWonders.Game.Scene.Editor.ViewModels
 {

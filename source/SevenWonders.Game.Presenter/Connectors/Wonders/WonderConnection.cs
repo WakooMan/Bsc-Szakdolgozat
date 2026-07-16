@@ -1,4 +1,4 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.SceneObjects;
 using SevenWonders.Game.Presenter.Views;
 
 namespace SevenWonders.Game.Presenter.Connectors.Wonders

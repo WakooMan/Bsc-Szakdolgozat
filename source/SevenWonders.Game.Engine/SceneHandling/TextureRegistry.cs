@@ -1,4 +1,6 @@
-﻿namespace SevenWonders.Game.Engine
+﻿using SevenWonders.Game.Engine.SceneObjects;
+
+namespace SevenWonders.Game.Engine.SceneHandling
 {
     public class TextureRegistry
     {

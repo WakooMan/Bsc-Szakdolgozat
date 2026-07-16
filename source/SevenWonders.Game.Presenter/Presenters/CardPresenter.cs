@@ -4,13 +4,14 @@ using SevenWonders.Game.Logic.Elements.GameCards;
 using SevenWonders.Game.Logic.Events;
 using SevenWonders.Game.Logic.Events.GameEvents;
 using SevenWonders.Game.Logic.GameStructures;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors;
 using SevenWonders.Game.Presenter.Connectors.Cards;
 using SevenWonders.Game.Presenter.GameEvents;
 using SevenWonders.Game.Presenter.Presenters.Factories;
 using SevenWonders.Game.Presenter.Presenters.Handlers;
 using SevenWonders.Game.Presenter.Views;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Presenter.Presenters
 {

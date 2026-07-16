@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using SevenWonders.Game.Engine.SceneObjects;
+using System.Numerics;
 
 namespace SevenWonders.Game.Engine.Animations
 {

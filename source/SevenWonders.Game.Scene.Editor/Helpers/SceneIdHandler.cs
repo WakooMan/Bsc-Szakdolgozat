@@ -1,4 +1,4 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.SceneObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace SevenWonders.Game.Scene.Editor.Helpers
 {
     public static class SceneIdHandler
     {
-        public static void OrderIds(Engine.Scene scene)
+        public static void OrderIds(Engine.SceneHandling.Scene scene)
         {
             int currentId = 0;
             scene.Textures.ForEach(texture =>

@@ -1,4 +1,5 @@
 ﻿using SevenWonders.Game.Engine;
+using SevenWonders.Game.Engine.SceneHandling;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Collections.ObjectModel;
@@ -15,7 +16,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
         public ObservableCollection<LayerListViewModel> LayerViews { get; set; }
         public ICommand OnUnselectLayerCommand => m_onUnselectLayerCommand;
 
-        public Engine.Scene? CurrentScene
+        public Engine.SceneHandling.Scene? CurrentScene
         {
             get
             {
@@ -261,7 +262,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         private Command m_onUnselectLayerCommand;
         private GraphicsLayer? m_selectedLayer;
-        private Engine.Scene? m_currentScene;
+        private Engine.SceneHandling.Scene? m_currentScene;
         private readonly TextureContentsViewModel m_textureContentsViewModel;
         private readonly GameObjectContentsViewModel m_gameObjectContentsViewModel;
         private readonly ButtonContentsViewModel m_buttonContentsViewModel;

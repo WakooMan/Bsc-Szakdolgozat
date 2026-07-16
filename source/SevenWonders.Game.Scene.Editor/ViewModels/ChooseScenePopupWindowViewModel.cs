@@ -1,5 +1,4 @@
-﻿using SevenWonders.Game.Engine;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -12,8 +11,8 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
         public bool ChooseActivated { get; set; }
         public ICommand OnChooseCommand => m_onChooseCommand;
         public ICommand OnBackCommand { get; set; }
-        public ObservableCollection<Engine.Scene> Scenes { get; }
-        public Engine.Scene? SelectedScene
+        public ObservableCollection<Engine.SceneHandling.Scene> Scenes { get; }
+        public Engine.SceneHandling.Scene? SelectedScene
         {
             get
             {
@@ -27,9 +26,9 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             }
         }
 
-        public ChooseScenePopupWindowViewModel(IReadOnlyList<Engine.Scene> scenes)
+        public ChooseScenePopupWindowViewModel(IReadOnlyList<Engine.SceneHandling.Scene> scenes)
         {
-            Scenes = new ObservableCollection<Engine.Scene>(scenes);
+            Scenes = new ObservableCollection<Engine.SceneHandling.Scene>(scenes);
             m_onChooseCommand = new Command(OnChooseCommandExecute, CanExecuteChoose);
             OnBackCommand = new Command(Clear);
             ChooseActivated = false;
@@ -57,7 +56,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
         }
 
         private Command m_onChooseCommand;
-        private Engine.Scene? m_selectedScene;
+        private Engine.SceneHandling.Scene? m_selectedScene;
 
     }
 }

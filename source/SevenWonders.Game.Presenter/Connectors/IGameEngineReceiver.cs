@@ -1,4 +1,6 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 
 namespace SevenWonders.Game.Presenter.Connectors
 {

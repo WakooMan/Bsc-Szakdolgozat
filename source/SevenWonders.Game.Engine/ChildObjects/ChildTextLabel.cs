@@ -1,8 +1,10 @@
+using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.ChildObjects
 {
     /// <summary>
     /// Wraps a <see cref="TextLabel"/> so it can be drawn as a child of a <see cref="SpriteFrame"/>,
@@ -57,7 +59,7 @@ namespace SevenWonders.Game.Engine
 
         public override int GetHashCode()
         {
-            return base.GetBaseHashCode() ^
+            return GetBaseHashCode() ^
                    TextLabel.GetHashCode();
         }
 

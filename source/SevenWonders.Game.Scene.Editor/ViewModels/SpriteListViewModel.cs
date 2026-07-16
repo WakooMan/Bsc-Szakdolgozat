@@ -1,4 +1,4 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.SceneObjects;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 

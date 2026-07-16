@@ -1,4 +1,6 @@
 ﻿using SevenWonders.Game.Engine.Components;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 using SkiaSharp.Views.Maui.Controls;
 
 namespace SevenWonders.Game.Engine

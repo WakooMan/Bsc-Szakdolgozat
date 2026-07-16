@@ -1,8 +1,9 @@
+using SevenWonders.Game.Engine.SceneHandling;
 using SkiaSharp;
 using System.Numerics;
 using System.Xml.Serialization;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     /// <summary>
     /// Base class for all drawable, positionable objects in a scene.

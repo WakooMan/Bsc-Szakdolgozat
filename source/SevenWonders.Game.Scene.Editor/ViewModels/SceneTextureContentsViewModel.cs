@@ -1,4 +1,6 @@
 using SevenWonders.Game.Engine;
+using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 using SkiaSharp;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,7 +18,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
         public ObservableCollection<SceneTextureListViewModel> SceneTextureViews { get; set; }
 
-        public Engine.Scene? CurrentScene
+        public Engine.SceneHandling.Scene? CurrentScene
         {
             get => m_currentScene;
             set
@@ -135,7 +137,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        private Engine.Scene? m_currentScene;
+        private Engine.SceneHandling.Scene? m_currentScene;
         private Texture? m_selectedSceneTexture;
         private readonly IEngine m_engine;
     }

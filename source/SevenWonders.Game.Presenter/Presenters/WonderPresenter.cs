@@ -2,11 +2,12 @@
 using SevenWonders.Game.Logic.Elements.Wonders;
 using SevenWonders.Game.Logic.Events;
 using SevenWonders.Game.Logic.Events.GameEvents;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors;
 using SevenWonders.Game.Presenter.Connectors.Wonders;
 using SevenWonders.Game.Presenter.GameEvents;
 using System.Numerics;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Presenter.Presenters
 {

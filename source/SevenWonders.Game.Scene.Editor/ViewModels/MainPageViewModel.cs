@@ -86,7 +86,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             }
         }
 
-        public Engine.Scene? CurrentScene
+        public Engine.SceneHandling.Scene? CurrentScene
         {
             get => m_currentScene;
             private set
@@ -233,7 +233,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             OnPropertyChanged(nameof(CanvasHeight));
         }
 
-        public void SetCurrentScene(Engine.Scene? scene)
+        public void SetCurrentScene(Engine.SceneHandling.Scene? scene)
         {
             if (CurrentScene == scene)
             {
@@ -271,7 +271,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
         private GameObjectContentsViewModel m_gameObjectContentsViewModel;
         private ButtonContentsViewModel m_buttonContentsViewModel;
         private TextLabelContentsViewModel m_textLabelContentsViewModel;
-        private Engine.Scene? m_currentScene;
+        private Engine.SceneHandling.Scene? m_currentScene;
         private bool m_canvasIsVisible;
         private bool m_isLeftPanelVisible;
         private bool m_buttonsAreVisible;

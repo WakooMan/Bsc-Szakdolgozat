@@ -2,7 +2,7 @@
 using SkiaSharp.Views.Maui;
 using System.Collections.Concurrent;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.InputHandling
 {
     public class InputManager : IInputManager
     {
@@ -66,7 +66,7 @@ namespace SevenWonders.Game.Engine
                 case SKTouchAction.Released:
                     long duration = (DateTime.Now.Ticks - m_touchStartTime) / TimeSpan.TicksPerMillisecond;
                     float distance = SKPoint.Distance(m_touchStartPoint, touchEventArgs.Location);
-                    return (duration < TapThresholdMs && distance < MoveThreshold) ?
+                    return duration < TapThresholdMs && distance < MoveThreshold ?
                         TouchEvent.Clicked | TouchEvent.Released : 
                         TouchEvent.Released;
                 case SKTouchAction.Moved:

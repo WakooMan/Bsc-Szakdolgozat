@@ -1,4 +1,6 @@
 ﻿using SevenWonders.Game.Engine.Components;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 using System.Diagnostics;
 
 namespace SevenWonders.Game.Engine

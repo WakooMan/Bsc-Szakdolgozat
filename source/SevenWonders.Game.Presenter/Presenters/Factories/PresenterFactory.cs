@@ -6,6 +6,7 @@ using SevenWonders.Game.Presenter.Connectors.Developments;
 using SevenWonders.Game.Presenter.Connectors.MilitaryBoard;
 using SevenWonders.Game.Presenter.Connectors.Wonders;
 using SevenWonders.Game.Presenter.Views.Factories;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Presenter.Presenters.Factories
 {

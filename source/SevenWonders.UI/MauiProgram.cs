@@ -52,6 +52,8 @@ using SevenWonders.UI.Views;
 using SevenWonders.UI.Views.Factories;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using SevenWondersUI.Services.ConnectionStates;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.UI;
 

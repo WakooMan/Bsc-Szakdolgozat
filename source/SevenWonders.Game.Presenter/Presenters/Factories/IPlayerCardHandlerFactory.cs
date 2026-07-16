@@ -1,4 +1,5 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 using SevenWonders.Game.Presenter.Presenters.Handlers;
 
 namespace SevenWonders.Game.Presenter.Presenters.Factories

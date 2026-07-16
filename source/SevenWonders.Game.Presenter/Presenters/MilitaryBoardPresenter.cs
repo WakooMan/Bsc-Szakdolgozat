@@ -1,12 +1,12 @@
 ﻿using SevenWonders.Game.Logic.Elements.Military;
 using SevenWonders.Game.Logic.Events;
 using SevenWonders.Game.Logic.Events.GameEvents;
-using SevenWonders.Game.Engine;
 using SevenWonders.Game.Presenter.Connectors;
 using SevenWonders.Game.Presenter.Connectors.MilitaryBoard;
 using SevenWonders.Game.Presenter.Views;
 using SevenWonders.Game.Presenter.Views.Factories;
 using System;
+using SevenWonders.Game.Engine.SceneObjects;
 
 namespace SevenWonders.Game.Presenter.Presenters
 {

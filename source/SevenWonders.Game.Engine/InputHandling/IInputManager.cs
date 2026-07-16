@@ -1,6 +1,6 @@
 ﻿using SkiaSharp.Views.Maui;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.InputHandling
 {
     public interface IInputManager
     {

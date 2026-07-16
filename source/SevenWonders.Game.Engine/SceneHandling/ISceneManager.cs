@@ -1,6 +1,8 @@
-﻿using SkiaSharp;
+﻿using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneObjects;
+using SkiaSharp;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneHandling
 {
     public interface ISceneManager
     {

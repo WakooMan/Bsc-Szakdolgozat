@@ -4,6 +4,8 @@ using Microsoft.Maui;
 using SevenWonders.Common;
 using SevenWonders.Game.Engine;
 using SevenWonders.Game.Engine.Components;
+using SevenWonders.Game.Engine.InputHandling;
+using SevenWonders.Game.Engine.SceneHandling;
 using SevenWonders.Game.Scene.Editor.Helpers;
 using SevenWonders.Game.Scene.Editor.ViewModels;
 using SevenWonders.Game.Scene.Editor.Views;

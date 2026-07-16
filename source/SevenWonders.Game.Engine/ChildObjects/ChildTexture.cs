@@ -1,7 +1,9 @@
+using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
 using SkiaSharp;
 using System.Numerics;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.ChildObjects
 {
     public class ChildTexture : ChildObject, IEquatable<ChildTexture>
     {
@@ -50,7 +52,7 @@ namespace SevenWonders.Game.Engine
 
         public override int GetHashCode()
         {
-            return base.GetBaseHashCode() ^
+            return GetBaseHashCode() ^
                    TextureId.GetHashCode();
         }
 

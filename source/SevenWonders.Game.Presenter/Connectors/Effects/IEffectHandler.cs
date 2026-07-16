@@ -1,4 +1,4 @@
-﻿using SevenWonders.Game.Engine;
+﻿using SevenWonders.Game.Engine.ChildObjects;
 using Effect = SevenWonders.Game.Logic.Elements.Effects.Effect;
 
 namespace SevenWonders.Game.Presenter.Connectors.Effects

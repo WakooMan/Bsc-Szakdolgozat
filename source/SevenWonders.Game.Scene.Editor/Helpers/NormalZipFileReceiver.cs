@@ -1,4 +1,5 @@
 ﻿using SevenWonders.Game.Engine;
+using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Scene.Editor.Helpers
 {

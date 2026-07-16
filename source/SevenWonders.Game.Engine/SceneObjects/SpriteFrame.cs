@@ -1,8 +1,9 @@
-﻿using SkiaSharp;
+﻿using SevenWonders.Game.Engine.SceneHandling;
+using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
-namespace SevenWonders.Game.Engine
+namespace SevenWonders.Game.Engine.SceneObjects
 {
     public class SpriteFrame: IEquatable<SpriteFrame>
     {
