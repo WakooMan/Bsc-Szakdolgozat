@@ -57,11 +57,13 @@ namespace SevenWonders.Game.Presenter.Connectors.Developments
                     {
                         TextLabel = new TextLabel()
                         {
-                            BackgroundTextureId = -1,
-                            Text = development.Name,
-                            TextColor = SKColors.AntiqueWhite,
-                            FontSize = 8,
                             Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = development.Name,
+                                TextColor = SKColors.AntiqueWhite,
+                                FontSize = 8,
+                            }
                         },
                         WidthPercent = 0.7f,
                         HeightPercent = 0.1f,

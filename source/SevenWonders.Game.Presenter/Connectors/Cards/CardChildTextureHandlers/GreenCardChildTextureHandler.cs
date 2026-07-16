@@ -40,12 +40,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                 {
                     TextLabel = new TextLabel()
                     {
-                        BackgroundTextureId = victoryPointsTextureId,
-                        Text = card.Point.Points.ToString(),
-                        TextColor = SKColors.AntiqueWhite,
-                        FontSize = 13,
                         Visible = true,
+                        TextProperties = new TextProperties()
+                        {
+                            Text = card.Point.Points.ToString(),
+                            TextColor = SKColors.AntiqueWhite,
+                            FontSize = 13,
+                        }
                     },
+                    BackgroundTextureId = victoryPointsTextureId,
                     WidthPercent = iconWidthPercent,
                     HeightPercent = iconHeightPercent,
                 });

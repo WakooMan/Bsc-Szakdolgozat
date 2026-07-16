@@ -65,15 +65,13 @@ namespace SevenWonders.Game.Presenter.Presenters
             {
                 if (player.Id == m_playerId)
                 {
-                    m_nameObject.Animations[m_nameObject.CurrentAnim].ActualFrame = 1;
-                    //m_nameLabel.BackgroundTextureId = m_textureIdHandler.GetTextureId("Active_Player");
+                    m_nameObject.CurrentAnim = 1;
                     m_nameLabel.TextProperties.TextColorHex = "#FFFFFF";
                     m_nameLabel.TextProperties.Bold = true;
                 }
                 else
                 {
-                    m_nameObject.Animations[m_nameObject.CurrentAnim].ActualFrame = 0;
-                    //m_nameLabel.BackgroundTextureId = m_textureIdHandler.GetTextureId("Inactive_Player");
+                    m_nameObject.CurrentAnim = 0;
                     m_nameLabel.TextProperties.TextColorHex = "#ECECEC";
                     m_nameLabel.TextProperties.Bold = false;
                 }

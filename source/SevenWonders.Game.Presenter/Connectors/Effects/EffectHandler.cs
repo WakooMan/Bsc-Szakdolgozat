@@ -29,14 +29,17 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                     {
                         TextLabel = new TextLabel()
                         {
-                            BackgroundTextureId = victoryPointsTextureId,
-                            Text = ((VictoryPoints)effect).Points.ToString(),
-                        TextColor = SKColors.AntiqueWhite,
-                        FontSize = 13,
-                        Visible = true,
-                    },
-                    WidthPercent = 0.15f,
-                    HeightPercent = 0.15f,
+                            Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = ((VictoryPoints)effect).Points.ToString(),
+                                TextColor = SKColors.AntiqueWhite,
+                                FontSize = 13,
+                            }
+                        },
+                        BackgroundTextureId = victoryPointsTextureId,
+                        WidthPercent = 0.15f,
+                        HeightPercent = 0.15f,
                     }
                 };
             }
@@ -94,12 +97,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                         {
                             TextLabel = new TextLabel()
                             {
-                                BackgroundTextureId = coinTextureId,
-                                Text = buyGoodItem.MoneyCost.ToString(),
-                                TextColor = SKColors.Gold,
-                                FontSize = 6,
                                 Visible = true,
+                                TextProperties = new TextProperties()
+                                {
+                                    Text = buyGoodItem.MoneyCost.ToString(),
+                                    TextColor = SKColors.Gold,
+                                    FontSize = 6,
+                                }
                             },
+                            BackgroundTextureId = coinTextureId,
                             WidthPercent = 0.15f,
                             HeightPercent = 0.15f,
                         });
@@ -131,12 +137,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                     {
                         TextLabel = new TextLabel()
                         {
-                            BackgroundTextureId = coinTextureId,
-                            Text = getMoneyForCard.MoneyPerCard.ToString(),
-                            TextColor = SKColors.Gold,
-                            FontSize = 6,
                             Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = getMoneyForCard.MoneyPerCard.ToString(),
+                                TextColor = SKColors.Gold,
+                                FontSize = 6,
+                            }
                         },
+                        BackgroundTextureId = coinTextureId,
                         WidthPercent = 0.15f,
                         HeightPercent = 0.15f,
                     });
@@ -167,12 +176,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                     {
                         TextLabel = new TextLabel()
                         {
-                            BackgroundTextureId = coinTextureId,
-                            Text = getMoney.Money.ToString(),
-                            TextColor = SKColors.Gold,
-                            FontSize = 6,
                             Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = getMoney.Money.ToString(),
+                                TextColor = SKColors.Gold,
+                                FontSize = 6,
+                            }
                         },
+                        BackgroundTextureId = coinTextureId,
                         WidthPercent = 0.15f,
                         HeightPercent = 0.15f,
                     });
@@ -195,12 +207,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                     {
                         TextLabel = new TextLabel()
                         {
-                            BackgroundTextureId = coinTextureId,
-                            Text = getMoneyForWonders.MoneyPerWonder.ToString(),
-                            TextColor = SKColors.Gold,
-                            FontSize = 6,
                             Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = getMoneyForWonders.MoneyPerWonder.ToString(),
+                                TextColor = SKColors.Gold,
+                                FontSize = 6,
+                            }
                         },
+                        BackgroundTextureId = coinTextureId,
                         WidthPercent = 0.15f,
                         HeightPercent = 0.15f,
                     });
@@ -228,12 +243,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                     {
                         TextLabel = new TextLabel()
                         {
-                            BackgroundTextureId = coinTextureId,
-                            Text = enemyLoseMoney.Money.ToString(),
-                            TextColor = SKColors.Red,
-                            FontSize = 10,
                             Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = enemyLoseMoney.Money.ToString(),
+                                TextColor = SKColors.Red,
+                                FontSize = 10,
+                            }
                         },
+                        BackgroundTextureId = coinTextureId,
                         WidthPercent = 0.15f,
                         HeightPercent = 0.15f,
                     }];

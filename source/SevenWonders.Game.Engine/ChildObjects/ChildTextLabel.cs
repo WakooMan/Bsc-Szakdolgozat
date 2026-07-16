@@ -16,14 +16,19 @@ namespace SevenWonders.Game.Engine.ChildObjects
         /// <summary>The <see cref="TextLabel"/> that will be rendered as a child.</summary>
         public TextLabel TextLabel { get; set; }
 
+        /// <summary>Optional background texture drawn behind the text label.</summary>
+        public int BackgroundTextureId { get; set; }
+
         public ChildTextLabel(): base()
         {
             TextLabel = new TextLabel();
+            BackgroundTextureId = -1;
         }
 
         public ChildTextLabel(ChildTextLabel other) : base(other)
         {
             TextLabel = new TextLabel(other.TextLabel);
+            BackgroundTextureId = other.BackgroundTextureId;
         }
 
         public bool Equals(ChildTextLabel? other)
@@ -34,7 +39,8 @@ namespace SevenWonders.Game.Engine.ChildObjects
             }
 
             return base.Equals(other) &&
-                   TextLabel.Equals(other.TextLabel);
+                   TextLabel.Equals(other.TextLabel) &&
+                   BackgroundTextureId == other.BackgroundTextureId;
         }
 
         public override bool Equals(ChildObject? other)
@@ -60,7 +66,8 @@ namespace SevenWonders.Game.Engine.ChildObjects
         public override int GetHashCode()
         {
             return GetBaseHashCode() ^
-                   TextLabel.GetHashCode();
+                   TextLabel.GetHashCode() ^
+                   BackgroundTextureId.GetHashCode();
         }
 
         [ExcludeFromCodeCoverage]
@@ -87,6 +94,23 @@ namespace SevenWonders.Game.Engine.ChildObjects
             var childPosition = new Vector2(
                 parentPosition.X + rotatedOffsetX,
                 parentPosition.Y + rotatedOffsetY);
+
+            if (BackgroundTextureId != -1)
+            {
+                Texture texture = textureRegistry.Get(BackgroundTextureId);
+                if (dimmed)
+                {
+                    texture.CustomColorFilter = SKColorFilter.CreateBlendMode(
+                        SKColors.Black.WithAlpha(120),
+                        SKBlendMode.SrcOver
+                    );
+                }
+                else if (texture.CustomColorFilter is not null)
+                {
+                    texture.CustomColorFilter = null;
+                }
+                texture.Draw(canvas, childPosition, parentVisualSize, parentRotation, childWidth, childHeight);
+            }
 
             var originalPosition = TextLabel.Position;
             var originalWidth = TextLabel.Width;

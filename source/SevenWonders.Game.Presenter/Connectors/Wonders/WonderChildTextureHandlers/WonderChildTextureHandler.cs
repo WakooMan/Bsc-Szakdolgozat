@@ -66,12 +66,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Wonders.WonderChildTextureHandl
                     {
                         TextLabel = new TextLabel
                         {
-                            Text = wonder.Name,
-                            TextColor = SKColors.Wheat,
-                            FontSize = 12,
-                            BackgroundTextureId = m_textureIdHandler.GetTextureId("CardNameBackground"),
-                            Visible = true
+                            Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = wonder.Name,
+                                TextColor = SKColors.Wheat,
+                                FontSize = 12,
+                            }
                         },
+                        BackgroundTextureId = m_textureIdHandler.GetTextureId("CardNameBackground"),
                         WidthPercent = 0.6f,
                         HeightPercent = 0.1f,
                         PositionPercent = new Vector2(0.2f, 0.8f)

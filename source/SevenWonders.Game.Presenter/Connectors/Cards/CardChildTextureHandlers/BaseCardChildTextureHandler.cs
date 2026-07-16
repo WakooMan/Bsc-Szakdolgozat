@@ -64,11 +64,14 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                         TextLabel = new TextLabel()
                         {
                             Visible = true,
-                            Text = card.MoneyCost.ToString(),
-                            TextColor = SKColors.Gold,
-                            FontSize = 6,
-                            BackgroundTextureId = m_textureIdHandler.GetTextureId("Coin")
+                            TextProperties = new TextProperties()
+                            {
+                                Text = card.MoneyCost.ToString(),
+                                TextColor = SKColors.Gold,
+                                FontSize = 6,
+                            }
                         },
+                        BackgroundTextureId = m_textureIdHandler.GetTextureId("Coin"),
                         WidthPercent = sizePercent,
                         HeightPercent = sizePercent,
                         PositionPercent = new Vector2(0f, yOffset)
@@ -80,12 +83,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                 {
                     TextLabel = new TextLabel
                     {
-                        Text = card.Name,
-                        TextColor = SKColors.Wheat,
-                        FontSize = 8,
-                        BackgroundTextureId = m_textureIdHandler.GetTextureId("CardNameBackground"),
-                        Visible = true
+                        Visible = true,
+                        TextProperties = new TextProperties()
+                        {
+                            Text = card.Name,
+                            TextColor = SKColors.Wheat,
+                            FontSize = 8,
+                        }
                     },
+                    BackgroundTextureId = m_textureIdHandler.GetTextureId("CardNameBackground"),
                     WidthPercent = 0.6f,
                     HeightPercent = 0.1f,
                     PositionPercent = new Vector2(0.2f, 0.8f)

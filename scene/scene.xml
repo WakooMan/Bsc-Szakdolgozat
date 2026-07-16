@@ -4925,7 +4925,7 @@
           <NumberOfFrames>0</NumberOfFrames>
           <Highlighted>false</Highlighted>
         </SceneObject>
-        <SceneObject xsi:type="TextureObject">
+        <SceneObject xsi:type="GameObject">
           <Name>player2Name_bg</Name>
           <Id>506</Id>
           <ZIndex>5</ZIndex>
@@ -4941,7 +4941,60 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <TextureId>144</TextureId>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>144</TextureId>
+                  <Name>Inactive</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>2000</Right>
+                  <Bottom>1070</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Name>Inactive</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>143</TextureId>
+                  <Name>Active</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>2000</Right>
+                  <Bottom>1070</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Name>Active</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player2Name</Name>
@@ -4966,7 +5019,7 @@
             <TextColorHex>#ffececec</TextColorHex>
           </TextProperties>
         </SceneObject>
-        <SceneObject xsi:type="TextureObject">
+        <SceneObject xsi:type="GameObject">
           <Name>player1Name_bg</Name>
           <Id>507</Id>
           <ZIndex>5</ZIndex>
@@ -4982,7 +5035,60 @@
             <X>1</X>
             <Y>1</Y>
           </Scale>
-          <TextureId>144</TextureId>
+          <Direction>
+            <X>0</X>
+            <Y>0</Y>
+          </Direction>
+          <VisualSize>
+            <X>1</X>
+            <Y>1</Y>
+          </VisualSize>
+          <FlipMultiplier>
+            <X>1</X>
+            <Y>1</Y>
+          </FlipMultiplier>
+          <Animations>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>144</TextureId>
+                  <Name>Inactive</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>2000</Right>
+                  <Bottom>1070</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Name>Inactive</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+            <Sprite>
+              <Frames>
+                <SpriteFrame>
+                  <TextureId>143</TextureId>
+                  <Name>Active</Name>
+                  <Left>0</Left>
+                  <Top>0</Top>
+                  <Right>2000</Right>
+                  <Bottom>1070</Bottom>
+                </SpriteFrame>
+              </Frames>
+              <NumFrames>1</NumFrames>
+              <ActualFrame>0</ActualFrame>
+              <Name>Active</Name>
+              <LoopAnimation>true</LoopAnimation>
+              <Children />
+            </Sprite>
+          </Animations>
+          <Speed>0</Speed>
+          <Collidable>false</Collidable>
+          <InFrustum>false</InFrustum>
+          <CurrentAnim>0</CurrentAnim>
+          <NumberOfFrames>0</NumberOfFrames>
+          <Highlighted>false</Highlighted>
         </SceneObject>
         <SceneObject xsi:type="TextLabel">
           <Name>player1Name</Name>
