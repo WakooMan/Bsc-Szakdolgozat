@@ -74,5 +74,10 @@ namespace SevenWonders.Game.Engine.SceneObjects
         {
             return new ButtonObject(this);
         }
+
+        public override bool IsStatic()
+        {
+            return true;
+        }
     }
 }

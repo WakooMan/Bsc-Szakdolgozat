@@ -35,5 +35,10 @@ namespace SevenWonders.Game.Engine.SceneObjects
         {
             return new TextureObject(this);
         }
+
+        public override bool IsStatic()
+        {
+            return true;
+        }
     }
 }

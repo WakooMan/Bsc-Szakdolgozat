@@ -124,5 +124,10 @@ namespace SevenWonders.Game.Engine.SceneObjects
         {
             return new TextLabel(this);
         }
+
+        public override bool IsStatic()
+        {
+            return false;
+        }
     }
 }

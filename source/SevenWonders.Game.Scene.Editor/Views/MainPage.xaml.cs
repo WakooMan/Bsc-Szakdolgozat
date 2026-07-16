@@ -64,7 +64,7 @@ namespace SevenWonders.Game.Scene.Editor.Views
             if (m_engine.SceneManager.CurrentScene is not null && m_mainPageViewModel.LayerContentsViewModel.SelectedLayer is not null)
             {
                 e.Surface.Canvas.Clear(SKColors.Black);
-                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e.Surface.Canvas, m_engine.SceneManager.CurrentScene.TextureRegistry);
+                m_mainPageViewModel.LayerContentsViewModel.DrawSelectedLayer(e.Surface.Canvas, m_engine.SceneManager.CurrentScene.TextureRegistry, m_width, m_height);
             }
             else if (m_mainPageViewModel.CurrentScene is not null)
             {
@@ -160,7 +160,7 @@ namespace SevenWonders.Game.Scene.Editor.Views
             await this.ShowPopupAsync(addScenePopupWindow);
             if (addScenePopupWindow.ViewModel.AddActivated)
             {
-                Engine.SceneHandling.Scene scene = new Engine.Scene()
+                Engine.SceneHandling.Scene scene = new Engine.SceneHandling.Scene()
                 {
                     Name = addScenePopupWindow.ViewModel.Name,
                     Visible = addScenePopupWindow.ViewModel.Visible

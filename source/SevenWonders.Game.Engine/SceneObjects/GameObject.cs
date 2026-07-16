@@ -60,6 +60,11 @@ namespace SevenWonders.Game.Engine.SceneObjects
             base.Resize(oldResolution, newResolution);
         }
 
+        public override bool IsStatic()
+        {
+            return false;
+        }
+
         [ExcludeFromCodeCoverage]
         public override void Draw(SKCanvas canvas, TextureRegistry textureRegistry)
         {

@@ -2,6 +2,7 @@
 using SkiaSharp;
 using Effect = SevenWonders.Game.Logic.Elements.Effects.Effect;
 using SevenWonders.Game.Engine.ChildObjects;
+using SevenWonders.Game.Engine.SceneObjects;
 
 namespace SevenWonders.Game.Presenter.Connectors.Effects
 {

@@ -217,13 +217,14 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        public void DrawSelectedLayer(SKCanvas canvas, TextureRegistry textureRegistry)
+        public void DrawSelectedLayer(SKCanvas canvas, TextureRegistry textureRegistry, float resolutionX, float resolutionY)
         {
             if (SelectedLayer is null)
             {
                 return;
             }
 
+            SelectedLayer.DrawStatic(canvas, textureRegistry, resolutionX, resolutionY);
             SelectedLayer.Draw(canvas, textureRegistry);
         }
 

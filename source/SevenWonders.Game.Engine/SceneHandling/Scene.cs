@@ -90,6 +90,7 @@ namespace SevenWonders.Game.Engine.SceneHandling
 
             foreach (GraphicsLayer layer in Layers)
             {
+                layer.DrawStatic(canvas, TextureRegistry, Resolution.X, Resolution.Y);
                 layer.Draw(canvas, TextureRegistry);
             }
         }

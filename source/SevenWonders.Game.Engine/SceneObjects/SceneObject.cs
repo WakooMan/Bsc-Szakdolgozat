@@ -65,6 +65,8 @@ namespace SevenWonders.Game.Engine.SceneObjects
             OnZIndexChanged = null;
         }
 
+        public abstract bool IsStatic();
+
         public virtual void Resize(Vector2 oldResolution, Vector2 newResolution)
         {
             float xRatio = newResolution.X / oldResolution.X;

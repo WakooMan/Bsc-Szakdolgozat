@@ -94,6 +94,7 @@ namespace SevenWonders.Game.Engine.SceneHandling
         {
             SceneObjectsProxy = new List<SceneObject>();
             Name = string.Empty;
+            m_staticPicture = null;
         }
 
         public GraphicsLayer(GraphicsLayer graphicsLayer)
@@ -107,6 +108,7 @@ namespace SevenWonders.Game.Engine.SceneHandling
             Name = new string(graphicsLayer.Name);
             Id = graphicsLayer.Id;
             ZIndex = graphicsLayer.ZIndex;
+            m_staticPicture = null;
         }
 
         internal void AddSceneObject(SceneObject sceneObject)
@@ -172,6 +174,33 @@ namespace SevenWonders.Game.Engine.SceneHandling
         }
 
         [ExcludeFromCodeCoverage]
+        public void DrawStatic(SKCanvas canvas, TextureRegistry textureRegistry, float resolutionX, float resolutionY)
+        {
+            if (!Visible)
+            {
+                return;
+            }
+
+            lock (SceneObjectsProxy)
+            {
+                if (m_staticPicture is null)
+                {
+                    SKCanvas temporaryCanvas = m_recorder.BeginRecording(new SKRect(0, 0, resolutionX, resolutionY));
+                    foreach (var sceneObject in SceneObjectsProxy.Where(obj => obj.IsStatic()))
+                    {
+                        sceneObject.Draw(temporaryCanvas, textureRegistry);
+                    }
+                    temporaryCanvas.ResetMatrix();
+                    m_staticPicture = m_recorder.EndRecording();
+                }
+            }
+
+            canvas.Save();
+            canvas.DrawPicture(m_staticPicture);
+            canvas.Restore();
+        }
+
+        [ExcludeFromCodeCoverage]
         public void Draw(SKCanvas canvas, TextureRegistry textureRegistry)
         {
             if (!Visible)
@@ -181,9 +210,11 @@ namespace SevenWonders.Game.Engine.SceneHandling
 
             lock (SceneObjectsProxy)
             {
-                foreach (var sceneObject in SceneObjectsProxy)
+                foreach (var sceneObject in SceneObjectsProxy.Where(obj => !obj.IsStatic()))
                 {
+                    canvas.Save();
                     sceneObject.Draw(canvas, textureRegistry);
+                    canvas.Restore();
                 }
             }
         }
@@ -192,6 +223,8 @@ namespace SevenWonders.Game.Engine.SceneHandling
         {
             lock (SceneObjectsProxy)
             {
+                m_staticPicture?.Dispose();
+                m_staticPicture = null;
                 SceneObjectsProxy.ForEach(sceneObject => sceneObject.Resize(oldResolution, newResolution));
             }
         }
@@ -214,5 +247,9 @@ namespace SevenWonders.Game.Engine.SceneHandling
                 AddSceneObject(sceneObject);
             }
         }
+
+        private SKPicture? m_staticPicture;
+        private readonly SKPictureRecorder m_recorder = new SKPictureRecorder();
+
     }
 }
