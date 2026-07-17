@@ -31,6 +31,17 @@ namespace SevenWonders.UI.Views
             return this;
         }
 
+        public IAnimationGroupBuilder Flip(int frameIndex, float playingDuration)
+        {
+            if (frameIndex < 0 || m_gameObject.Animations.Count <= frameIndex)
+            {
+                throw new InvalidOperationException($"Did not find the frame by index: {frameIndex} for object: {m_gameObject.Name}");
+            }
+
+            m_animations.Add(new CardFlip(m_gameObject, frameIndex, playingDuration));
+            return this;
+        }
+
         public IAnimationGroupBuilder Highlight(Vector2 targetVisualSize, bool highlightValue, float playingDuration)
         {
             m_animations.Add(new AdjustHighlight(m_gameObject, targetVisualSize, highlightValue, playingDuration));

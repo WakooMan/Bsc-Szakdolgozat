@@ -28,9 +28,19 @@ namespace SevenWonders.UI.Views
             m_groupBuilder.Clear();
         }
 
+        public bool GetVisible()
+        {
+            return m_gameObject.Visible;
+        }
+
         public void SetVisible(bool visible)
         {
             m_gameObject.Visible = visible;
+        }
+
+        public int GetAnimationIndex()
+        {
+            return m_gameObject.CurrentAnim;
         }
 
         public int FindAnimationIndexByName(string name)

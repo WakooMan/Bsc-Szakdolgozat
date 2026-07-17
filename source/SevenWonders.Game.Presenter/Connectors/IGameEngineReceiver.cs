@@ -12,6 +12,7 @@ namespace SevenWonders.Game.Presenter.Connectors
         IInteractiveObject ReceiveInteractiveObject(string name);
         ICollection<GameObject> ReceiveGameObjects(string name, int number);
         GraphicsLayer ReceiveGraphicsLayer(string name);
+        GraphicsLayer ReceiveGraphicsLayerOfObject(string objectName);
         ButtonObject ReceiveButton(string name);
     }
 }

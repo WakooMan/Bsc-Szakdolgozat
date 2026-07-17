@@ -17065,7 +17065,7 @@
       <EnableCollision>true</EnableCollision>
       <Name>ChooseObjectLayer</Name>
       <Id>452</Id>
-      <ZIndex>5</ZIndex>
+      <ZIndex>7</ZIndex>
       <SceneObjectsProxy>
         <SceneObject xsi:type="TextureObject">
           <Name>ChooseBackground</Name>

@@ -20,7 +20,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
             m_gameObjectViewFactory = gameObjectViewFactory;
-            m_objectCache = new List<(IGameObjectView objectView, GameObject previousPosTarget)>();
+            m_objectCache = new List<(IGameObjectView objectView, GameObject previousPosTarget, GraphicsLayer originalLayer)>();
             m_objectManager = objectManager;
             m_currentObject = -1;
         }
@@ -48,17 +48,21 @@ namespace SevenWonders.Game.Presenter.Presenters
                     foreach (string objectName in eventObj.Objects)
                     {
                         GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(objectName);
+                        GraphicsLayer originalLayer = m_gameEngineReceiver.ReceiveGraphicsLayerOfObject(objectName);
                         IGameObjectView gameObjectView = m_gameObjectViewFactory.CreateView(objectName);
                         GameObject previousPosTarget = new GameObject()
                         {
                             Name = gameObject.Name + "previousPositionTarget",
-                            Visible = false,
+                            Visible = gameObject.Visible,
                             Rotation = gameObject.Rotation,
                             Position = gameObject.Position,
                             ZIndex = gameObject.ZIndex,
+                            CurrentAnim = gameObject.CurrentAnim,
                         };
                         m_objectManager.AddSceneObject(m_chooseObjectLayer, previousPosTarget);
-                        m_objectCache.Add((gameObjectView, previousPosTarget));
+                        m_objectManager.RemoveSceneObject(originalLayer, gameObject);
+                        m_objectManager.AddSceneObject(m_chooseObjectLayer, gameObject);
+                        m_objectCache.Add((gameObjectView, previousPosTarget, originalLayer));
                         int frontSpriteIdx = gameObjectView.FindAnimationIndexByName("front");
                         var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(m_centerTarget, 0.5f).Highlight(m_centerTarget.VisualSize, false, 0.5f);
                         if (frontSpriteIdx >= 0)
@@ -85,18 +89,21 @@ namespace SevenWonders.Game.Presenter.Presenters
                     foreach (var cache in m_objectCache)
                     {
                         IGameObjectView gameObjectView = cache.objectView;
-                        if (eventObj.Objects.Contains(gameObjectView.Name))
+                        var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, gameObjectView.GetVisible() ? 0.5f : 0f);
+                        if (!gameObjectView.GetVisible())
                         {
-                            int backSpriteIdx = gameObjectView.FindAnimationIndexByName("back");
-                            var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, eventObj.Visible ? 0.5f : 0f);
-                            if (!eventObj.Visible && backSpriteIdx >= 0)
+                            if (gameObjectView.GetAnimationIndex() != cache.previousPosTarget.CurrentAnim)
                             {
-                                group.Flip("back", 0.5f);
+                                group.Flip(cache.previousPosTarget.CurrentAnim, 0.5f);
                             }
+
                             gameObjectView.Execute().GetAwaiter().GetResult();
-                            gameObjectView.SetVisible(eventObj.Visible);
-                            m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
+                            gameObjectView.SetVisible(cache.previousPosTarget.Visible);
                         }
+                        GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(gameObjectView.Name);
+                        m_objectManager.RemoveSceneObject(m_chooseObjectLayer, gameObject);
+                        m_objectManager.AddSceneObject(cache.originalLayer, gameObject);
+                        m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
                     }
                     m_chooseObjectLayer.Visible = false;
                     m_objectCache.Clear();
@@ -154,6 +161,6 @@ namespace SevenWonders.Game.Presenter.Presenters
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IGameObjectViewFactory m_gameObjectViewFactory;
         private readonly IObjectManager m_objectManager;
-        private readonly List<(IGameObjectView objectView, GameObject previousPosTarget)> m_objectCache;
+        private readonly List<(IGameObjectView objectView, GameObject previousPosTarget, GraphicsLayer originalLayer)> m_objectCache;
     }
 }

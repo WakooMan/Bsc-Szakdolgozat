@@ -85,6 +85,25 @@ namespace SevenWonders.Game.Presenter.Connectors
             return layer;
         }
 
+        public GraphicsLayer ReceiveGraphicsLayerOfObject(string objectName)
+        {
+            if (m_sceneManager.CurrentScene is null)
+            {
+                throw new InvalidOperationException($"No current scene is set.");
+            }
+            foreach (GraphicsLayer layer in m_sceneManager.CurrentScene.Layers)
+            {
+                foreach (GameObject gameObject in layer.GameObjects)
+                {
+                    if (gameObject.Name.Equals(objectName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return layer;
+                    }
+                }
+            }
+            throw new InvalidOperationException($"No GraphicsLayer contains a GameObject with name {objectName}.");
+        }
+
         public ButtonObject ReceiveButton(string name)
         {
             ButtonObject? button = m_sceneManager.GetButtonByName(name);
