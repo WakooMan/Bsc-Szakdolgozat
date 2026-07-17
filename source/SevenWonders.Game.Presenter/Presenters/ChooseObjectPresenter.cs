@@ -96,7 +96,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                             {
                                 group.Flip(cache.previousPosTarget.CurrentAnim, 0.5f);
                             }
-
+                            gameObjectView.SetVisible(true);
                             gameObjectView.Execute().GetAwaiter().GetResult();
                             gameObjectView.SetVisible(cache.previousPosTarget.Visible);
                         }
