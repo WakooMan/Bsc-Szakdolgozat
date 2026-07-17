@@ -92,6 +92,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             {
                 foreach (var connection in m_cards)
                 {
+                    connection.Value.SetVisible(false);
                     connection.Value.GetAnimationGroupBuilder().Flip("back", 0f).MoveTo(m_ageCardDecks[connection.Key.Age], 0f);
                     connection.Value.Execute().GetAwaiter().GetResult();
                 }
@@ -183,6 +184,7 @@ namespace SevenWonders.Game.Presenter.Presenters
         private async Task MoveToCenter(Card card, bool hidden, string nodeName)
         {
             var view = m_cards[card];
+            view.SetVisible(true);
             var group = view.GetAnimationGroupBuilder();
             if (m_centerTargets.TryGetValue(nodeName, out var target))
             {
@@ -217,6 +219,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                 await view.Execute();
                 animationBuilder.MoveTo(m_dropCardDeck, 0.5f).Flip("back", 0.5f);
                 await view.Execute();
+                view.SetVisible(false);
             }
         }
 

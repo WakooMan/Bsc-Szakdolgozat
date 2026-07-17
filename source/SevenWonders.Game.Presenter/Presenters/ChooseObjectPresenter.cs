@@ -65,8 +65,8 @@ namespace SevenWonders.Game.Presenter.Presenters
                         {
                             group.Flip("front", 0.5f);
                         }
-                        gameObjectView.Execute().GetAwaiter().GetResult();
                         gameObjectView.SetVisible(true);
+                        gameObjectView.Execute().GetAwaiter().GetResult();
                     }
                     m_currentObject = 0;
                     UpdateProperties();
@@ -87,7 +87,6 @@ namespace SevenWonders.Game.Presenter.Presenters
                         IGameObjectView gameObjectView = cache.objectView;
                         if (eventObj.Objects.Contains(gameObjectView.Name))
                         {
-                            gameObjectView.SetVisible(eventObj.Visible);
                             int backSpriteIdx = gameObjectView.FindAnimationIndexByName("back");
                             var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, eventObj.Visible ? 0.5f : 0f);
                             if (!eventObj.Visible && backSpriteIdx >= 0)
@@ -95,6 +94,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                                 group.Flip("back", 0.5f);
                             }
                             gameObjectView.Execute().GetAwaiter().GetResult();
+                            gameObjectView.SetVisible(eventObj.Visible);
                             m_objectManager.RemoveSceneObject(m_chooseObjectLayer, cache.previousPosTarget);
                         }
                     }
