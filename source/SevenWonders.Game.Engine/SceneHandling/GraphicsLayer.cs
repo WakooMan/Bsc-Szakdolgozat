@@ -94,7 +94,6 @@ namespace SevenWonders.Game.Engine.SceneHandling
         {
             SceneObjectsProxy = new List<SceneObject>();
             Name = string.Empty;
-            m_staticPicture = null;
         }
 
         public GraphicsLayer(GraphicsLayer graphicsLayer)
@@ -108,7 +107,6 @@ namespace SevenWonders.Game.Engine.SceneHandling
             Name = new string(graphicsLayer.Name);
             Id = graphicsLayer.Id;
             ZIndex = graphicsLayer.ZIndex;
-            m_staticPicture = null;
         }
 
         internal void AddSceneObject(SceneObject sceneObject)
@@ -183,21 +181,24 @@ namespace SevenWonders.Game.Engine.SceneHandling
 
             lock (SceneObjectsProxy)
             {
-                if (m_staticPicture is null)
+                if (m_staticImage is null)
                 {
-                    SKCanvas temporaryCanvas = m_recorder.BeginRecording(new SKRect(0, 0, resolutionX, resolutionY));
-                    foreach (var sceneObject in SceneObjectsProxy.Where(obj => obj.IsStatic()))
+                    using (var bitmap = new SKBitmap((int)resolutionX, (int)resolutionY, SKColorType.Rgba8888, SKAlphaType.Premul))
                     {
-                        sceneObject.Draw(temporaryCanvas, textureRegistry);
+                        using(SKCanvas bitmapCanvas = new SKCanvas(bitmap))
+                        {
+                            bitmapCanvas.Clear(SKColors.Transparent);
+                            foreach (var sceneObject in SceneObjectsProxy.Where(obj => obj.IsStatic()))
+                            {
+                                sceneObject.Draw(bitmapCanvas, textureRegistry);
+                            }
+                        }
+                        m_staticImage = SKImage.FromBitmap(bitmap);
                     }
-                    temporaryCanvas.ResetMatrix();
-                    m_staticPicture = m_recorder.EndRecording();
                 }
             }
 
-            canvas.Save();
-            canvas.DrawPicture(m_staticPicture);
-            canvas.Restore();
+            canvas.DrawImage(m_staticImage, 0, 0);
         }
 
         [ExcludeFromCodeCoverage]
@@ -223,8 +224,8 @@ namespace SevenWonders.Game.Engine.SceneHandling
         {
             lock (SceneObjectsProxy)
             {
-                m_staticPicture?.Dispose();
-                m_staticPicture = null;
+                m_staticImage?.Dispose();
+                m_staticImage = null;
                 SceneObjectsProxy.ForEach(sceneObject => sceneObject.Resize(oldResolution, newResolution));
             }
         }
@@ -248,8 +249,7 @@ namespace SevenWonders.Game.Engine.SceneHandling
             }
         }
 
-        private SKPicture? m_staticPicture;
-        private readonly SKPictureRecorder m_recorder = new SKPictureRecorder();
+        private SKImage? m_staticImage;
 
     }
 }
