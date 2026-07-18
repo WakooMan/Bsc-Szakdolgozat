@@ -219,9 +219,41 @@ namespace SevenWonders.Game.Presenter.Presenters
                 await view.Execute();
                 animationBuilder.MoveTo(m_dropCardDeck, 0.5f).Flip("back", 0.5f);
                 await view.Execute();
-                m_lastDropCardView?.SetVisible(false);
+                if (m_dropCardDeckStack.Count > 0)
+                {
+                    m_dropCardDeckStack.Peek().SetVisible(false);
+                }
                 view.SetVisible(true);
-                m_lastDropCardView = view;
+                m_dropCardDeckStack.Push(view);
+            }
+        }
+
+        private void RemoveFromDropCardDeck(IGameObjectView view)
+        {
+            if (m_dropCardDeckStack.Count > 0 && m_dropCardDeckStack.Peek() == view)
+            {
+                m_dropCardDeckStack.Pop();
+                if (m_dropCardDeckStack.Count > 0)
+                {
+                    m_dropCardDeckStack.Peek().SetVisible(true);
+                }
+            }
+            else if (m_dropCardDeckStack.Contains(view))
+            {
+                var temp = new Stack<IGameObjectView>();
+                while (m_dropCardDeckStack.Peek() != view)
+                {
+                    temp.Push(m_dropCardDeckStack.Pop());
+                }
+                m_dropCardDeckStack.Pop();
+                while (temp.Count > 0)
+                {
+                    m_dropCardDeckStack.Push(temp.Pop());
+                }
+                if (m_dropCardDeckStack.Count > 0)
+                {
+                    m_dropCardDeckStack.Peek().SetVisible(true);
+                }
             }
         }
 
@@ -242,6 +274,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             if (m_player1Targets.ContainsKey(card.GetType()))
             {
                 var view = m_cards[card];
+                RemoveFromDropCardDeck(view);
                 await m_player1Targets[card.GetType()].MoveCardToTarget(view);
             }
         }
@@ -251,6 +284,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             if (m_player2Targets.ContainsKey(card.GetType()))
             {
                 var view = m_cards[card];
+                RemoveFromDropCardDeck(view);
                 await m_player2Targets[card.GetType()].MoveCardToTarget(view);
             }
         }
@@ -271,6 +305,6 @@ namespace SevenWonders.Game.Presenter.Presenters
         private GameObject? m_cardActionLocation;
         private readonly Dictionary<AgesEnum , GameObject> m_ageCardDecks;
         private GameObject? m_dropCardDeck;
-        private IGameObjectView? m_lastDropCardView;
+        private readonly Stack<IGameObjectView> m_dropCardDeckStack = new();
     }
 }
