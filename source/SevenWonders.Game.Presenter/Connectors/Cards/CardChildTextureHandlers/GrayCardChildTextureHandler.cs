@@ -19,8 +19,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                 return;
             }
 
-            float iconWidthPercent = 0.15f;
-            float iconHeightPercent = 0.15f;
+            float iconWidthPercent = 0.22f;
+            float iconHeightPercent = 0.22f;
             List<ChildObject> childObjects = new List<ChildObject>();
 
             card.CreatedProducts.ForEach(product =>
@@ -38,7 +38,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
             });
 
             float groupStartX = (1f - childObjects.Count * iconWidthPercent) / 2f;
-            float centeredY = (0.2f - iconHeightPercent);
+            float centeredY = (0.23f - iconHeightPercent);
 
             for (int i = 0; i < childObjects.Count; i++)
             {

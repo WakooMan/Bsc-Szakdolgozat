@@ -26,7 +26,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
             {
                 float totalWidthPercent = childObjects.Sum(co => co.WidthPercent);
                 float groupStartX = (1f - totalWidthPercent) / 2f;
-                float centeredY = (0.2f - childObjects.First().HeightPercent);
+                float centeredY = (0.23f - childObjects.First().HeightPercent);
                 float currentX = groupStartX;
                 foreach (ChildObject childObject in childObjects)
                 {

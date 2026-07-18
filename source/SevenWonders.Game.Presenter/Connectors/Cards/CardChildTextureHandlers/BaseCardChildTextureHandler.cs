@@ -31,13 +31,13 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                 {
                     TextureId = m_textureIdHandler.GetTextureId(m_textureName),
                     WidthPercent = 1.0f,
-                    HeightPercent = 0.20f,
+                    HeightPercent = 0.25f,
                     PositionPercent = new Vector2(0f, 0f)
                 };
 
                 frontSprite.AddChildObject(childTexture);
                 int i = 0;
-                float yOffset = 0.22f;
+                float yOffset = 0.25f;
                 if (card.GoodCost.Any())
                 {
                     card.GoodCost.ForEach(good =>
@@ -53,7 +53,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                         frontSprite.AddChildObject(goodTexture);
                         i++;
                     });
-                    yOffset += 0.15f;
+                    yOffset += 0.25f;
                 }
 
                 if (card.MoneyCost > 0)
