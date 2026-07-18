@@ -30,9 +30,8 @@
                            TextColor="White"
                            Background="Gray"
                            HorizontalTextAlignment="Center"/>
-                    <Label Text="Scene Texture:"/>
-                    <Picker Title="Select a scene Texture"
-                            ItemsSource="{Binding SceneTextureViews}"
+                    <Label Text="Texture:"/>
+                    <Picker ItemsSource="{Binding SceneTextureViews}"
                             SelectedItem="{Binding SelectedSceneTextureView, Mode=TwoWay}"/>
                     <Label Text="Width:"/>
                     <Entry MaxLength="10"

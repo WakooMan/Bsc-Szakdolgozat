@@ -50,6 +50,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
                 m_selectedTexture = value;
                 OnPropertyChanged(nameof(IsSelectedTextureAvailable));
                 OnPropertyChanged(nameof(SelectedTextureName));
+                OnPropertyChanged(nameof(SelectedTextureVisible));
                 OnPropertyChanged(nameof(SelectedTexturePositionX));
                 OnPropertyChanged(nameof(SelectedTexturePositionY));
                 OnPropertyChanged(nameof(SelectedTextureRotation));

@@ -277,7 +277,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             SelectedTextLabel = null;
         }
 
-        public void AddTextLabelToLayer(string name, string text, float fontSize, bool visible, int width, int height, int backgroundTextureId)
+        public void AddTextLabelToLayer(string name, string text, float fontSize, bool visible, int width, int height)
         {
             if (m_engine.SceneManager.CurrentScene is null || SelectedLayer is null)
             {

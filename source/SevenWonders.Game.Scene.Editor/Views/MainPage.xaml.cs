@@ -107,7 +107,7 @@ namespace SevenWonders.Game.Scene.Editor.Views
 
         private async void Add_New_Button_Clicked(object sender, EventArgs e)
         {
-            AddButtonPopupWindow addButtonPopupWindow = new AddButtonPopupWindow(new AddButtonPopupWindowViewModel());
+            AddButtonPopupWindow addButtonPopupWindow = new AddButtonPopupWindow(new AddButtonPopupWindowViewModel(m_mainPageViewModel.SceneTextureContentsViewModel.SceneTextureViews));
             m_currentPopup = addButtonPopupWindow;
             m_currentPopup.Size = m_currentPopupSize;
             await this.ShowPopupAsync(addButtonPopupWindow);
@@ -121,15 +121,14 @@ namespace SevenWonders.Game.Scene.Editor.Views
 
         private async void Add_New_Sprite_Clicked(object sender, EventArgs e)
         {
-            AddSpritePopupWindow addSpritePopupWindow = new AddSpritePopupWindow(new AddSpritePopupWindowViewModel());
+            AddSpritePopupWindow addSpritePopupWindow = new AddSpritePopupWindow(new AddSpritePopupWindowViewModel(m_mainPageViewModel.SceneTextureContentsViewModel.SceneTextureViews));
             m_currentPopup = addSpritePopupWindow;
             m_currentPopup.Size = m_currentPopupSize;
             await this.ShowPopupAsync(addSpritePopupWindow);
             if (addSpritePopupWindow.ViewModel.AddActivated)
             {
                 m_mainPageViewModel.GameObjectContentsViewModel.AddSpriteToGameObject(addSpritePopupWindow.ViewModel.Name, 
-                                                                                      addSpritePopupWindow.ViewModel.TextureId,
-                                                                                      addSpritePopupWindow.ViewModel.Visible,
+                                                                                      addSpritePopupWindow.ViewModel.SelectedTextureId,
                                                                                       addSpritePopupWindow.ViewModel.FrameHeight,
                                                                                       addSpritePopupWindow.ViewModel.FrameWidth,
                                                                                       addSpritePopupWindow.ViewModel.Rows,
@@ -253,8 +252,7 @@ namespace SevenWonders.Game.Scene.Editor.Views
                     addTextLabelPopupWindow.ViewModel.FontSize,
                     addTextLabelPopupWindow.ViewModel.Visible,
                     addTextLabelPopupWindow.ViewModel.Width,
-                    addTextLabelPopupWindow.ViewModel.Height,
-                    addTextLabelPopupWindow.ViewModel.BackgroundTextureId);
+                    addTextLabelPopupWindow.ViewModel.Height);
                 addTextLabelPopupWindow.ViewModel.Clear();
             }
             m_currentPopup = null;

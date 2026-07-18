@@ -63,13 +63,6 @@
                         <Label Text="Is Visible: " HorizontalOptions="Center"/>
                         <CheckBox IsChecked="{Binding Visible}" />
                     </HorizontalStackLayout>
-                    <Label Text="Background Texture ID:"/>
-                    <Entry MaxLength="10"
-                           Keyboard="Numeric"
-                           Text="{Binding BackgroundTextureId, Mode=TwoWay}"
-                           TextColor="White"
-                           Background="Gray"
-                           HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </ScrollView>
             <HorizontalStackLayout HorizontalOptions="Center"

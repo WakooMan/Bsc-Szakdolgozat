@@ -63,13 +63,9 @@
                         <Label Text="Is Visible: " HorizontalOptions="Center"/>
                         <CheckBox IsChecked="{Binding Visible}" />
                     </HorizontalStackLayout>
-                    <Label Text="Texture ID:"/>
-                    <Entry MaxLength="10"
-                        Keyboard="Numeric"
-                        Text="{Binding SelectedTextureId, Mode=TwoWay}"
-                        TextColor="White"
-                        Background="Gray"
-                        HorizontalTextAlignment="Center"/>
+                    <Label Text="Texture:"/>
+                    <Picker ItemsSource="{Binding SceneTextureViews}"
+                            SelectedItem="{Binding SelectedSceneTextureView, Mode=TwoWay}"/>
                 </VerticalStackLayout>
             </ScrollView>
             <HorizontalStackLayout HorizontalOptions="Center"

@@ -26,71 +26,41 @@
                              Margin="10">
                     <Label Text="Sprite name:"/>
                     <Entry MaxLength="40" 
-Text="{Binding Name, Mode=TwoWay}" 
-TextColor="White" 
-Background="Gray" 
-HorizontalTextAlignment="Center"/>
-                    <Label Text="Texture name:"/>
-                    <Entry MaxLength="40" 
-                   Text="{Binding TextureName, Mode=TwoWay}" 
-                   TextColor="White" 
-                   Background="Gray" 
-                   HorizontalTextAlignment="Center"/>
-                    <Label Text="Width:"/>
-                    <Entry MaxLength="10" 
-                   Keyboard="Numeric" 
-                   Text="{Binding Width, Mode=TwoWay}" 
-                   TextColor="White" 
-                   Background="Gray" 
-                   HorizontalTextAlignment="Center"/>
-
-                    <Label Text="Height:"/>
-                    <Entry MaxLength="10" 
-                   Keyboard="Numeric" 
-                   Text="{Binding Height, Mode=TwoWay}" 
-                   TextColor="White" 
-                   Background="Gray" 
-                   HorizontalTextAlignment="Center"/>
+                        Text="{Binding Name, Mode=TwoWay}" 
+                        TextColor="White" 
+                        Background="Gray" 
+                        HorizontalTextAlignment="Center"/>
                     <Label Text="Frame width:"/>
                     <Entry MaxLength="10" 
-Keyboard="Numeric" 
-Text="{Binding FrameWidth, Mode=TwoWay}" 
-TextColor="White" 
-Background="Gray" 
-HorizontalTextAlignment="Center"/>
+                        Keyboard="Numeric" 
+                        Text="{Binding FrameWidth, Mode=TwoWay}" 
+                        TextColor="White" 
+                        Background="Gray" 
+                        HorizontalTextAlignment="Center"/>
                     <Label Text="Frame height:"/>
                     <Entry MaxLength="10" 
-Keyboard="Numeric" 
-Text="{Binding FrameHeight, Mode=TwoWay}" 
-TextColor="White" 
-Background="Gray" 
-HorizontalTextAlignment="Center"/>
+                        Keyboard="Numeric" 
+                        Text="{Binding FrameHeight, Mode=TwoWay}" 
+                        TextColor="White" 
+                        Background="Gray" 
+                        HorizontalTextAlignment="Center"/>
                     <Label Text="Rows:"/>
                     <Entry MaxLength="10" 
-Keyboard="Numeric" 
-Text="{Binding Rows, Mode=TwoWay}" 
-TextColor="White" 
-Background="Gray" 
-HorizontalTextAlignment="Center"/>
+                        Keyboard="Numeric" 
+                        Text="{Binding Rows, Mode=TwoWay}" 
+                        TextColor="White" 
+                        Background="Gray" 
+                        HorizontalTextAlignment="Center"/>
                     <Label Text="Columns:"/>
                     <Entry MaxLength="10" 
-Keyboard="Numeric" 
-Text="{Binding Columns, Mode=TwoWay}" 
-TextColor="White" 
-Background="Gray" 
-HorizontalTextAlignment="Center"/>
-                    <HorizontalStackLayout HorizontalOptions="Center">
-                        <Label Text="Is Texture Visible: "
-                       HorizontalOptions="Center"/>
-                        <CheckBox IsChecked="{Binding Visible}" />
-                    </HorizontalStackLayout>
-                    <Label Text="Texture ID:"/>
-                    <Entry MaxLength="10"
-                        Keyboard="Numeric"
-                        Text="{Binding TextureId, Mode=TwoWay}"
-                        TextColor="White"
-                        Background="Gray"
+                        Keyboard="Numeric" 
+                        Text="{Binding Columns, Mode=TwoWay}" 
+                        TextColor="White" 
+                        Background="Gray" 
                         HorizontalTextAlignment="Center"/>
+                    <Label Text="Texture:"/>
+                    <Picker ItemsSource="{Binding SceneTextureViews}"
+                            SelectedItem="{Binding SelectedSceneTextureView, Mode=TwoWay}"/>
                 </VerticalStackLayout>
             </ScrollView>
             <HorizontalStackLayout HorizontalOptions="Center"

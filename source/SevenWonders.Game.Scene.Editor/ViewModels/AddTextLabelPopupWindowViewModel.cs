@@ -44,17 +44,6 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             }
         }
 
-        public int BackgroundTextureId
-        {
-            get => m_backgroundTextureId;
-            set
-            {
-                m_backgroundTextureId = value;
-                OnPropertyChanged();
-                m_onAddCommand.ChangeCanExecute();
-            }
-        }
-
         protected override bool CanExecuteAdd()
         {
             return base.CanExecuteAdd() && m_width > 0 && m_height > 0;
@@ -64,7 +53,6 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
         {
             m_labelText = string.Empty;
             m_fontSize = 24f;
-            m_backgroundTextureId = -1;
         }
 
         public override void Clear()
@@ -74,13 +62,11 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             m_fontSize = 24f;
             m_width = 0;
             m_height = 0;
-            m_backgroundTextureId = -1;
         }
 
         private string m_labelText;
         private float m_fontSize;
         private int m_width;
         private int m_height;
-        private int m_backgroundTextureId;
     }
 }

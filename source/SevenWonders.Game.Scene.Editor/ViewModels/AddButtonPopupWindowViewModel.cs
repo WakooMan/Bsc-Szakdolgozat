@@ -1,10 +1,12 @@
+using System.Collections.ObjectModel;
+
 namespace SevenWonders.Game.Scene.Editor.ViewModels
 {
     public class AddButtonPopupWindowViewModel : AddPopupWindowViewModel
     {
         protected override bool CanExecuteAdd()
         {
-            return base.CanExecuteAdd() && m_selectedTextureId > 0; // TODO: Check if it is a valid texture ID
+            return base.CanExecuteAdd() && m_selectedSceneTextureView is not null && m_width > 0 && m_height > 0;
         }
 
         public string ButtonText
@@ -49,22 +51,26 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             }
         }
 
-        public int SelectedTextureId
+        public ObservableCollection<SceneTextureListViewModel> SceneTextureViews { get; }
+
+        public SceneTextureListViewModel? SelectedSceneTextureView
         {
-            get => m_selectedTextureId;
+            get => m_selectedSceneTextureView;
             set
             {
-                m_selectedTextureId = value;
+                m_selectedSceneTextureView = value;
                 OnPropertyChanged();
                 m_onAddCommand.ChangeCanExecute();
             }
         }
 
-        public AddButtonPopupWindowViewModel() : base()
+        public int SelectedTextureId => m_selectedSceneTextureView?.Id ?? -1;
+
+        public AddButtonPopupWindowViewModel(ObservableCollection<SceneTextureListViewModel> sceneTextureViews) : base()
         {
+            SceneTextureViews = sceneTextureViews;
             m_buttonText = string.Empty;
             m_fontSize = 24f;
-            m_selectedTextureId = -1;
         }
 
         public override void Clear()
@@ -74,13 +80,13 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             m_fontSize = 24f;
             m_width = 0;
             m_height = 0;
-            m_selectedTextureId = -1;
+            m_selectedSceneTextureView = null;
         }
 
+        private SceneTextureListViewModel? m_selectedSceneTextureView;
         private string m_buttonText;
         private float m_fontSize;
         private int m_width;
         private int m_height;
-        private int m_selectedTextureId;
     }
 }

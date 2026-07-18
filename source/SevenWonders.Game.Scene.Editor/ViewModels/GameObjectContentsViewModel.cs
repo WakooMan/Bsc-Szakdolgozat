@@ -378,7 +378,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
 
             Sprite sprite = m_selectedGameObject.Animations[m_selectedGameObject.CurrentAnim];
             m_selectedGameObject.Animations.Remove(sprite);
-            SpriteListViewModel? spriteListViewModel = SpriteViews.FirstOrDefault(sprite => sprite.Name == sprite.Name);
+            SpriteListViewModel? spriteListViewModel = SpriteViews.FirstOrDefault(sv => sv.Name == sprite.Name);
             if (spriteListViewModel is not null)
             {
                 SpriteViews.Remove(spriteListViewModel);
@@ -387,7 +387,7 @@ namespace SevenWonders.Game.Scene.Editor.ViewModels
             m_selectedGameObject.CurrentAnim = 0;
         }
 
-        public void AddSpriteToGameObject(string name, int textureId, bool visible, int frameHeight, int frameWidth, int rows, int columns)
+        public void AddSpriteToGameObject(string name, int textureId, int frameHeight, int frameWidth, int rows, int columns)
         {
             if (m_engine.SceneManager.CurrentScene is null || m_selectedGameObject is null)
             {
