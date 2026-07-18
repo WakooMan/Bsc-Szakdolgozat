@@ -1293,7 +1293,7 @@
           <Name>WonderDeck</Name>
           <Id>196</Id>
           <ZIndex>1</ZIndex>
-          <Visible>false</Visible>
+          <Visible>true</Visible>
           <Position>
             <X>3490.8713</X>
             <Y>948.74304</Y>
@@ -1321,17 +1321,17 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>111</TextureId>
-                  <Name>placeholder</Name>
+                  <TextureId>10</TextureId>
+                  <Name>wonderBack1</Name>
                   <Left>0</Left>
                   <Top>0</Top>
-                  <Right>300</Right>
-                  <Bottom>170</Bottom>
+                  <Right>877</Right>
+                  <Bottom>508</Bottom>
                 </SpriteFrame>
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <Name>placeholder</Name>
+              <Name>wonderBack</Name>
               <LoopAnimation>true</LoopAnimation>
               <Children />
             </Sprite>
@@ -2013,7 +2013,7 @@
           <Name>developmentDeck</Name>
           <Id>210</Id>
           <ZIndex>2</ZIndex>
-          <Visible>false</Visible>
+          <Visible>true</Visible>
           <Position>
             <X>3171.4287</X>
             <Y>1089.0757</Y>
@@ -2041,8 +2041,8 @@
             <Sprite>
               <Frames>
                 <SpriteFrame>
-                  <TextureId>7</TextureId>
-                  <Name>Basic</Name>
+                  <TextureId>128</TextureId>
+                  <Name>developmentBack1</Name>
                   <Left>0</Left>
                   <Top>0</Top>
                   <Right>1024</Right>
@@ -2051,7 +2051,7 @@
               </Frames>
               <NumFrames>1</NumFrames>
               <ActualFrame>0</ActualFrame>
-              <Name>Basic</Name>
+              <Name>developmentBack</Name>
               <LoopAnimation>true</LoopAnimation>
               <Children />
             </Sprite>

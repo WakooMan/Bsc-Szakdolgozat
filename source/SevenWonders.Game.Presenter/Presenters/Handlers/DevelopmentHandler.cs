@@ -34,6 +34,7 @@ namespace SevenWonders.Game.Presenter.Presenters.Handlers
                     }
                 }
 
+                developmentView.SetVisible(true);
                 var group = developmentView.GetAnimationGroupBuilder()
                     .MoveTo(developmentTarget, 0.5f)
                     .Unhighlight(false, 0.5f);

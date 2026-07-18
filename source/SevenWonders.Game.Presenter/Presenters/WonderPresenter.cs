@@ -66,6 +66,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                 foreach (var connection in m_wonders)
                 {
                     var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip("back", 0f).MoveTo(m_wonderDeck, 0f);
+                    connection.Value.GameObjectView.SetVisible(false);
                     connection.Value.GameObjectView.Execute().GetAwaiter().GetResult();
                 }
             });
@@ -111,6 +112,7 @@ namespace SevenWonders.Game.Presenter.Presenters
             if (m_centerTargets.Count > 0)
             {
                 var connection = m_wonders[wonder];
+                connection.GameObjectView.SetVisible(true);
                 var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.MoveTo(m_centerTargets.Pop(), 1.0f)
                     .Flip("front", 1.0f);

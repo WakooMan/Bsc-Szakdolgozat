@@ -45,6 +45,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                         throw new InvalidOperationException("The object view cache is not cleared before publishing this event!");
                     }
                     m_chooseObjectTitle.TextProperties.Text = eventObj.Title;
+                    m_chooseObjectLayer.Visible = true;
                     foreach (string objectName in eventObj.Objects)
                     {
                         GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(objectName);
@@ -76,7 +77,6 @@ namespace SevenWonders.Game.Presenter.Presenters
                     UpdateProperties();
                     m_previousElement.ClickedEvent += OnPreviousElementClicked;
                     m_nextElement.ClickedEvent += OnNextElementClicked;
-                    m_chooseObjectLayer.Visible = true;
                 }
             });
 

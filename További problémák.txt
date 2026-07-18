@@ -7,7 +7,5 @@ Gameplay:
 - pixelek növelése hogy jobban látszódjon minden
 - Zindex megfelelően megy vissza a choose object után ??
 - Multiplayer sync jobbá tétele
-- Development és Wonder presenter fix hogy ne rajzoljuk ki a deck-ben lévő elemeket, csak a hátulját rajzoljuk ki egyszer a lapnak.
-- Fix choose object a specifikus lehetőségeknél (pl piros kártya eldobása)
-- Esetleg a játékos kártyáit megnézni, hogy ott van-e hiba az overlapp-el
+- Esetleg a játékos kártyáit megnézni, hogy ott van-e hiba az overlapp-el (Zindex)
 - Choose object-nél az elején az odamozgatásnál nem jó valami ránézni
