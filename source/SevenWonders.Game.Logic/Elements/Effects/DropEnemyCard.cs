@@ -36,7 +36,7 @@ namespace SevenWonders.Game.Logic.Elements.Effects
                     IPlayerAction dropCard = new DropCard(opponent, owner, card);
                     return dropCard;
                 }).ToArray());
-                gameContext.EventManager.Publish(new OnObjectChosen(opponent.Cards.Select(card => card.Name).ToArray(), true));
+                gameContext.EventManager.Publish(new OnObjectChosen(opponent.Cards.Select(card => card.Name).ToArray()));
             }
         }
     }

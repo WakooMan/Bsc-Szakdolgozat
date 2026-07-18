@@ -1,3 +1,12 @@
 Gameplay:
 - Csoda építésnél és kártya építésnél nem látszik előre, hogy mennyi pénzbe kerülne megépíteni
-- tudományos fejlesztések száma nem update-elt
+- Gombok nem jók teljesen hogy mi enabled és mi nem
+- Cost calculation nem teljesen jó
+- kártya overlap 3. kornál és esetleg a többi kornál (hova tegyük a lapokat?)
+- kellene egy kis tutorial (jelmagyarázat az adott dolgokkal kapcsolatban, fejlesztések, katonai jelző, tudományos korongok stb.)
+- pixelek növelése hogy jobban látszódjon minden
+- Zindex megfelelően megy vissza a choose object után ??
+- Multiplayer sync jobbá tétele
+- Development és Wonder presenter fix hogy ne rajzoljuk ki a deck-ben lévő elemeket, csak a hátulját rajzoljuk ki egyszer a lapnak.
+- Fix choose object a specifikus lehetőségeknél (pl piros kártya eldobása)
+- Esetleg a játékos kártyáit megnézni, hogy ott van-e hiba az overlapp-el

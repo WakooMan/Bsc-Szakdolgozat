@@ -38,7 +38,7 @@ namespace SevenWonders.Game.Logic.PlayerActions
             m_owner.Developments.Add(m_development);
             m_developments.Remove(m_development);
             gameContext.EventManager.Publish(new OnPlayerDevelopmentReceived(m_owner, m_development));
-            gameContext.EventManager.Publish(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray(), !ToDeck));
+            gameContext.EventManager.Publish(new OnObjectChosen(m_developments.Select(dev => dev.Name).ToArray()));
             m_development.OnDevelopmentEstablished(gameContext, m_owner, m_opponent);
             return true;
         }

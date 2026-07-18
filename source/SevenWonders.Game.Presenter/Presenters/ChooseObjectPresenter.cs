@@ -89,16 +89,19 @@ namespace SevenWonders.Game.Presenter.Presenters
                     foreach (var cache in m_objectCache)
                     {
                         IGameObjectView gameObjectView = cache.objectView;
-                        var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, gameObjectView.GetVisible() ? 0.5f : 0f);
-                        if (!gameObjectView.GetVisible())
+                        if (eventObj.Objects.Contains(gameObjectView.Name))
                         {
-                            if (gameObjectView.GetAnimationIndex() != cache.previousPosTarget.CurrentAnim)
+                            var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, gameObjectView.GetVisible() ? 0.5f : 0f);
+                            if (!gameObjectView.GetVisible())
                             {
-                                group.Flip(cache.previousPosTarget.CurrentAnim, 0.5f);
+                                if (gameObjectView.GetAnimationIndex() != cache.previousPosTarget.CurrentAnim)
+                                {
+                                    group.Flip(cache.previousPosTarget.CurrentAnim, 0.5f);
+                                }
+                                gameObjectView.SetVisible(true);
+                                gameObjectView.Execute().GetAwaiter().GetResult();
+                                gameObjectView.SetVisible(cache.previousPosTarget.Visible);
                             }
-                            gameObjectView.SetVisible(true);
-                            gameObjectView.Execute().GetAwaiter().GetResult();
-                            gameObjectView.SetVisible(cache.previousPosTarget.Visible);
                         }
                         GameObject gameObject = m_gameEngineReceiver.ReceiveGameObject(gameObjectView.Name);
                         m_objectManager.RemoveSceneObject(m_chooseObjectLayer, gameObject);

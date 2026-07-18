@@ -3,11 +3,9 @@
     public class OnObjectChosen: GameEvent
     {
         public List<string> Objects { get; }
-        public bool Visible { get; }
-        public OnObjectChosen(ICollection<string> objects, bool visible)
+        public OnObjectChosen(ICollection<string> objects)
         {
             Objects = objects.ToList();
-            Visible = visible;
         }
     }
 }
