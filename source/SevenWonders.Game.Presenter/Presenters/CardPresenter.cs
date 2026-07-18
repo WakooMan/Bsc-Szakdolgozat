@@ -219,7 +219,9 @@ namespace SevenWonders.Game.Presenter.Presenters
                 await view.Execute();
                 animationBuilder.MoveTo(m_dropCardDeck, 0.5f).Flip("back", 0.5f);
                 await view.Execute();
-                view.SetVisible(false);
+                m_lastDropCardView?.SetVisible(false);
+                view.SetVisible(true);
+                m_lastDropCardView = view;
             }
         }
 
@@ -269,5 +271,6 @@ namespace SevenWonders.Game.Presenter.Presenters
         private GameObject? m_cardActionLocation;
         private readonly Dictionary<AgesEnum , GameObject> m_ageCardDecks;
         private GameObject? m_dropCardDeck;
+        private IGameObjectView? m_lastDropCardView;
     }
 }
