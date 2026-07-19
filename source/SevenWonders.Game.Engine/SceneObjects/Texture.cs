@@ -86,21 +86,24 @@ namespace SevenWonders.Game.Engine.SceneObjects
             if (m_bitmap is null)
                 return;
 
-            var key = (Width: (int)Math.Round(width), Height: (int)Math.Round(height));
+            int cacheWidth = (int)Math.Round(width);
+            int cacheHeight = (int)Math.Round(height);
+            if (cacheWidth > 0 && cacheHeight > 0 && cacheWidth < 256 && cacheHeight < 256)
+            {
+                float scaleFactor = 256f / Math.Min(cacheWidth, cacheHeight);
+                cacheWidth = (int)Math.Round(cacheWidth * scaleFactor);
+                cacheHeight = (int)Math.Round(cacheHeight * scaleFactor);
+            }
+            var key = (Width: cacheWidth, Height: cacheHeight);
             SKSamplingOptions highQualitySampling = new SKSamplingOptions(SKCubicResampler.Mitchell);
             if (!m_sizeCache.TryGetValue(key, out SKImage? cachedImage))
             {
-                if (CreateHighQualityScaledImage(key.Width, key.Height, out SKImage image))
+                var info = new SKImageInfo(key.Width, key.Height, SKColorType.Rgba8888, SKAlphaType.Premul);
+                using (SKBitmap resized = m_bitmap.Resize(info, highQualitySampling))
                 {
-                    cachedImage = image;
+                    cachedImage = SKImage.FromBitmap(resized);
                     m_sizeCache[key] = cachedImage;
                 }
-                //var info = new SKImageInfo(key.Width, key.Height, SKColorType.Rgba8888, SKAlphaType.Premul);
-                //using (SKBitmap resized = m_bitmap.Resize(info, highQualitySampling))
-                //{
-                //    cachedImage = SKImage.FromBitmap(resized);
-                //    m_sizeCache[key] = cachedImage;
-                //}
             }
 
             m_defaultPaint ??= new SKPaint { IsAntialias = true, ColorFilter = m_customColorFilter };
@@ -112,6 +115,7 @@ namespace SevenWonders.Game.Engine.SceneObjects
             canvas.SetMatrix(matrix);
 
             SKSamplingOptions sampling = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
+            var srcRect = new SKRect(0, 0, cachedImage.Width, cachedImage.Height);
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
             canvas.DrawImage(cachedImage, destRect, sampling, m_defaultPaint);
         }
@@ -125,7 +129,15 @@ namespace SevenWonders.Game.Engine.SceneObjects
             var actualSizes = (Width: right - left, Height: bottom - top);
             float scaleX = width / actualSizes.Width;
             float scaleY = height / actualSizes.Height;
-            var key = (Width: (int)Math.Round(OriginalWidth * scaleX), Height: (int)Math.Round(OriginalHeight * scaleY));
+            int cacheWidth = (int)Math.Round(OriginalWidth * scaleX);
+            int cacheHeight = (int)Math.Round(OriginalHeight * scaleY);
+            if (cacheWidth > 0 && cacheHeight > 0 && cacheWidth < 256 && cacheHeight < 256)
+            {
+                float scaleFactor = 256f / Math.Min(cacheWidth, cacheHeight);
+                cacheWidth = (int)Math.Round(cacheWidth * scaleFactor);
+                cacheHeight = (int)Math.Round(cacheHeight * scaleFactor);
+            }
+            var key = (Width: cacheWidth, Height: cacheHeight);
             SKSamplingOptions highQualitySampling = new SKSamplingOptions(SKCubicResampler.Mitchell);
             if (!m_sizeCache.TryGetValue(key, out SKImage? cachedImage))
             {
@@ -188,48 +200,6 @@ namespace SevenWonders.Game.Engine.SceneObjects
             }
 
             m_sizeCache.Clear();
-        }
-
-        private bool CreateHighQualityScaledImage(int targetWidth, int targetHeight, out SKImage image)
-        {
-            if (m_bitmap is null)
-            {
-                image = null!;
-                return false;
-            }
-            var finalSampling = new SKSamplingOptions(SKCubicResampler.Mitchell);
-            var intermediateSampling = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
-            SKBitmap currentBitmap = m_bitmap;
-            int currentW = currentBitmap.Width;
-            int currentH = currentBitmap.Height;
-
-            try
-            {
-                while (currentW / 2 >= targetWidth && currentH / 2 >= targetHeight)
-                {
-                    currentW /= 2;
-                    currentH /= 2;
-                    SKBitmap nextBitmap = currentBitmap.Resize(new SKImageInfo(currentW, currentH), intermediateSampling);
-                    if (currentBitmap != m_bitmap)
-                    {
-                        currentBitmap.Dispose();
-                    }
-                    currentBitmap = nextBitmap;
-                }
-
-                using (SKBitmap finalResized = currentBitmap.Resize(new SKImageInfo(targetWidth, targetHeight), finalSampling))
-                {
-                    image = SKImage.FromBitmap(finalResized);
-                }
-                return true;
-            }
-            finally
-            {
-                if (currentBitmap != m_bitmap)
-                {
-                    currentBitmap.Dispose();
-                }
-            }
         }
 
         private SKBitmap? m_bitmap;
