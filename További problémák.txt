@@ -9,4 +9,4 @@ Gameplay:
 - Multiplayer sync jobbá tétele
 - Esetleg a játékos kártyáit megnézni, hogy ott van-e hiba az overlapp-el (Zindex)
 - Choose object-nél az elején az odamozgatásnál nem jó valami ránézni
-- Scaling fixálva, de job út keresése + több hely kihagyása a lapok tetején az elemek között + sárga kártya fix
+- Scaling fixálva, de job út keresése + több hely kihagyása a lapok tetején az elemek között + sárga kártya fix (sprite-okat a child-al merge-ölni statikus képpé)
