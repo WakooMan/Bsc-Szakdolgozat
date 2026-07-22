@@ -117,7 +117,7 @@ namespace SevenWonders.Game.Engine.SceneObjects
             SKSamplingOptions sampling = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
             var srcRect = new SKRect(0, 0, cachedImage.Width, cachedImage.Height);
             var destRect = new SKRect(-width / 2, -height / 2, width / 2, height / 2);
-            canvas.DrawImage(cachedImage, destRect, sampling, m_defaultPaint);
+            canvas.DrawImage(cachedImage, srcRect, destRect, sampling, m_defaultPaint);
         }
 
         [ExcludeFromCodeCoverage]
@@ -149,11 +149,13 @@ namespace SevenWonders.Game.Engine.SceneObjects
                 }
             }
 
+            float cachedScaleX = (float)cachedImage.Width / OriginalWidth;
+            float cachedScaleY = (float)cachedImage.Height / OriginalHeight;
             var srcRect = new SKRect(
-                left * scaleX,
-                top * scaleY,
-                right * scaleX,
-                bottom * scaleY
+                left * cachedScaleX,
+                top * cachedScaleY,
+                right * cachedScaleX,
+                bottom * cachedScaleY
             );
 
             m_defaultPaint ??= new SKPaint { IsAntialias = true, ColorFilter = m_customColorFilter };

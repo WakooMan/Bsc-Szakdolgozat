@@ -31,12 +31,13 @@ namespace SevenWonders.Game.Logic.Elements.Effects
             if (enemyCards.Count > 0)
             {
                 gameContext.EventManager.Publish(new OnChooseObjects("Ellenfél kártyájának kidobása", enemyCards.Select(card => card.Name).ToArray()));
-                gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, enemyCards.Select(card =>
+                var result = gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, owner, enemyCards.Select(card =>
                 {
                     IPlayerAction dropCard = new DropCard(opponent, owner, card);
                     return dropCard;
                 }).ToArray());
-                gameContext.EventManager.Publish(new OnObjectChosen(opponent.Cards.Where(card => card.BuildingType == CardType).Select(card => card.Name).ToArray()));
+
+                gameContext.EventManager.Publish(new OnObjectChosen((result.completed && result.playerAction is DropCard dropCard) ? dropCard.Name : string.Empty));
             }
         }
     }

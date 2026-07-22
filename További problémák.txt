@@ -1,12 +1,7 @@
 Gameplay:
+- Exit to menu gomb nem működik
 - Csoda építésnél és kártya építésnél nem látszik előre, hogy mennyi pénzbe kerülne megépíteni
 - Gombok nem jók teljesen hogy mi enabled és mi nem
 - Cost calculation nem teljesen jó
-- kártya overlap 3. kornál és esetleg a többi kornál (hova tegyük a lapokat?)
-- kellene egy kis tutorial (jelmagyarázat az adott dolgokkal kapcsolatban, fejlesztések, katonai jelző, tudományos korongok stb.)
-- pixelek növelése hogy jobban látszódjon minden
-- Zindex megfelelően megy vissza a choose object után ??
 - Multiplayer sync jobbá tétele
-- Esetleg a játékos kártyáit megnézni, hogy ott van-e hiba az overlapp-el (Zindex)
-- Choose object-nél az elején az odamozgatásnál nem jó valami ránézni
-- Scaling fixálva, de job út keresése + több hely kihagyása a lapok tetején az elemek között + sárga kártya fix (sprite-okat a child-al merge-ölni statikus képpé)
+- kellene egy kis tutorial (jelmagyarázat az adott dolgokkal kapcsolatban, fejlesztések, katonai jelző, tudományos korongok stb.)

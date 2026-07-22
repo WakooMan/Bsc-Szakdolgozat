@@ -21,8 +21,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                 return;
             }
 
-            float iconWidthPercent = 0.22f;
-            float iconHeightPercent = 0.22f;
+            float iconWidthPercent = 0.20f;
+            float iconHeightPercent = 0.20f;
             List<ChildObject> childObjects = new List<ChildObject>();
 
             if (card.Point.Points > 0)

@@ -89,7 +89,7 @@ namespace SevenWonders.Game.Presenter.Presenters
                     foreach (var cache in m_objectCache)
                     {
                         IGameObjectView gameObjectView = cache.objectView;
-                        if (eventObj.Objects.Contains(gameObjectView.Name))
+                        if (eventObj.ChosenObject != gameObjectView.Name)
                         {
                             var group = gameObjectView.GetAnimationGroupBuilder().MoveTo(cache.previousPosTarget, 0.5f).Highlight(Vector2.One, false, gameObjectView.GetVisible() ? 0.5f : 0f);
                             if (!gameObjectView.GetVisible())

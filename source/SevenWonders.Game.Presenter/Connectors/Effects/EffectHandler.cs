@@ -1,8 +1,9 @@
-﻿using SevenWonders.Game.Logic.Elements.Effects;
-using SkiaSharp;
-using Effect = SevenWonders.Game.Logic.Elements.Effects.Effect;
-using SevenWonders.Game.Engine.ChildObjects;
+﻿using SevenWonders.Game.Engine.ChildObjects;
 using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Logic.Elements.Effects;
+using SkiaSharp;
+using System.Numerics;
+using Effect = SevenWonders.Game.Logic.Elements.Effects.Effect;
 
 namespace SevenWonders.Game.Presenter.Connectors.Effects
 {
@@ -38,10 +39,30 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             }
                         },
                         BackgroundTextureId = victoryPointsTextureId,
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     }
                 };
+            }
+            return [];
+        }
+
+        private static ICollection<ChildObject> HandleStrengthEffect(Effect effect, ITextureIdHandler textureIdHandler)
+        {
+            if (effect is Strength strength)
+            {
+                List<ChildObject> result = new List<ChildObject>();
+                int strengthTextureId = textureIdHandler.GetTextureId("Military");
+                for (int i = 0; i< strength.Points; i++)
+                {
+                        result.Add(new ChildTexture
+                        {
+                            TextureId = strengthTextureId,
+                            WidthPercent = 0.20f,
+                            HeightPercent = 0.20f
+                        });
+                }
+                return result;
             }
             return [];
         }
@@ -61,8 +82,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                         childObjects.Add(new ChildTexture
                         {
                             TextureId = slashTextureId,
-                            WidthPercent = 0.05f,
-                            HeightPercent = 0.15f,
+                            WidthPercent = 0.20f,
+                            HeightPercent = 0.05f,
                         });
                     }
                     else
@@ -73,8 +94,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                     childObjects.Add(new ChildTexture
                     {
                         TextureId = goodTextureId,
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     });
                 });
                 return childObjects;
@@ -106,8 +127,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                                 }
                             },
                             BackgroundTextureId = coinTextureId,
-                            WidthPercent = 0.15f,
-                            HeightPercent = 0.15f,
+                            WidthPercent = 0.20f,
+                            HeightPercent = 0.20f,
                         });
                     }
 
@@ -115,8 +136,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                     childObjects.Add(new ChildTexture
                     {
                         TextureId = goodTextureId,
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     });
                 });
                 return childObjects;
@@ -146,8 +167,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             }
                         },
                         BackgroundTextureId = coinTextureId,
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     });
                 }
 
@@ -155,8 +176,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                 childObjects.Add(new ChildTexture
                 {
                     TextureId = cardTextureId,
-                    WidthPercent = 0.15f,
-                    HeightPercent = 0.15f,
+                    WidthPercent = 0.20f,
+                    HeightPercent = 0.20f,
                 });
                 return childObjects;
             }
@@ -185,8 +206,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             }
                         },
                         BackgroundTextureId = coinTextureId,
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     });
                 }
                 return childObjects;
@@ -216,15 +237,15 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             }
                         },
                         BackgroundTextureId = coinTextureId,
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     });
 
                     childObjects.Add(new ChildTexture
                     {
                         TextureId = textureIdHandler.GetTextureId(nameof(GetMoneyForWonders)),
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     });
                 }
                 return childObjects;
@@ -252,8 +273,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             }
                         },
                         BackgroundTextureId = coinTextureId,
-                        WidthPercent = 0.15f,
-                        HeightPercent = 0.15f,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
                     }];
                 }
             }
@@ -268,8 +289,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                 return [new ChildTexture
                 {
                     TextureId = textureId,
-                    WidthPercent = 0.15f,
-                    HeightPercent = 0.15f,
+                    WidthPercent = 0.20f,
+                    HeightPercent = 0.20f,
                 }];
             }
             return [];
@@ -283,8 +304,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                 return [new ChildTexture
                 {
                     TextureId = textureId,
-                    WidthPercent = 0.15f,
-                    HeightPercent = 0.15f,
+                    WidthPercent = 0.20f,
+                    HeightPercent = 0.20f,
                 }];
             }
             return [];
@@ -298,8 +319,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                 return [new ChildTexture
                 {
                     TextureId = textureId,
-                    WidthPercent = 0.15f,
-                    HeightPercent = 0.15f,
+                    WidthPercent = 0.20f,
+                    HeightPercent = 0.20f,
                 }];
             }
             return [];
@@ -313,8 +334,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                 return [new ChildTexture
                 {
                     TextureId = textureId,
-                    WidthPercent = 0.15f,
-                    HeightPercent = 0.15f,
+                    WidthPercent = 0.20f,
+                    HeightPercent = 0.20f,
                 }];
             }
             return [];
@@ -323,6 +344,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
         private readonly Dictionary<Type, Func<Effect, ITextureIdHandler, ICollection<ChildObject>>> m_effectHandlers = new Dictionary<Type, Func<Effect, ITextureIdHandler, ICollection<ChildObject>>>()
         {
             { typeof(VictoryPoints), HandleVictoryPointEffect },
+            { typeof(Strength), HandleStrengthEffect },
             { typeof(ChooseGood), HandleChooseGoodEffect },
             { typeof(BuyGoods), HandleBuyGoodsEffect },
             { typeof(GetMoneyForCard), HandleGetMoneyForCardEffect },

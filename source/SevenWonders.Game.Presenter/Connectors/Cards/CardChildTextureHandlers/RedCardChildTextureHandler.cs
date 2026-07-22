@@ -27,8 +27,8 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
 
             int strengthTextureId = m_textureIdHandler.GetTextureId("Military");
 
-            float iconWidthPercent = 0.22f;
-            float iconHeightPercent = 0.22f;
+            float iconWidthPercent = 0.20f;
+            float iconHeightPercent = 0.20f;
 
             float groupStartX = (1f - strengthCount * iconWidthPercent) / 2f;
             float centeredY = (0.23f - iconHeightPercent);

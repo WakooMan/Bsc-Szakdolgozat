@@ -2,10 +2,10 @@
 {
     public class OnObjectChosen: GameEvent
     {
-        public List<string> Objects { get; }
-        public OnObjectChosen(ICollection<string> objects)
+        public string ChosenObject { get; }
+        public OnObjectChosen(string chosenObject)
         {
-            Objects = objects.ToList();
+            ChosenObject = chosenObject;
         }
     }
 }
