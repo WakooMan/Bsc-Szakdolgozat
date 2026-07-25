@@ -1,4 +1,5 @@
 ﻿using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Engine.ChildObjects;
 using SevenWonders.Game.Logic.Elements.Wonders;
 using SevenWonders.Game.Logic.Events;
 using SevenWonders.Game.Logic.Events.GameEvents;
@@ -136,13 +137,22 @@ namespace SevenWonders.Game.Presenter.Presenters
             foreach (BuildWonder action in e.BuildWonderActions)
             {
                 WonderConnection connection = m_wonders[action.Wonder];
+                var costLabel = connection.GameObjectView.GetChildObject<ChildTextLabel>("CostLabel");
+                if (costLabel is not null)
+                {
+                    costLabel.Visible = true;
+                    if (e.Costs.TryGetValue(action.Wonder, out int cost))
+                    {
+                        costLabel.TextLabel.TextProperties.Text = cost.ToString();
+                    }
+                }
                 if (!connection.GameObjectView.IsDimmed)
                 {
                     var group = connection.GameObjectView.GetAnimationGroupBuilder();
                     group.Unhighlight(true, 0f);
                     connection.GameObjectView.Execute().GetAwaiter().GetResult();
                 }
-                
+
             }
         }
 
@@ -159,6 +169,12 @@ namespace SevenWonders.Game.Presenter.Presenters
             foreach (BuildWonder action in e.BuildWonderActions)
             {
                 WonderConnection connection = m_wonders[action.Wonder];
+                var costLabel = connection.GameObjectView.GetChildObject<ChildTextLabel>("CostLabel");
+                if (costLabel is not null)
+                {
+                    costLabel.Visible = false;
+                    costLabel.TextLabel.TextProperties.Text = string.Empty;
+                }
                 var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0f);
                 connection.GameObjectView.Execute().GetAwaiter().GetResult();

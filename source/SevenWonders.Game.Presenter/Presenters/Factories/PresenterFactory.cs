@@ -46,7 +46,7 @@ namespace SevenWonders.Game.Presenter.Presenters.Factories
 
         public IPresenter CreateWonderPresenter()
         {
-            return new WonderPresenter(m_wonderConnector, m_gameEngineReceiver, m_eventManager);
+            return new WonderPresenter(m_wonderConnector, m_gameEngineReceiver, m_eventManager, m_textureIdHandler);
         }
 
         public IPresenter CreatePlayer1Presenter()

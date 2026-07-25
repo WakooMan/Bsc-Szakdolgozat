@@ -1,23 +1,26 @@
-﻿using SevenWonders.Game.Logic.Elements;
+﻿using SevenWonders.Game.Engine.ChildObjects;
+using SevenWonders.Game.Engine.SceneHandling;
+using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Logic.Elements;
 using SevenWonders.Game.Logic.Elements.Wonders;
 using SevenWonders.Game.Logic.Events;
 using SevenWonders.Game.Logic.Events.GameEvents;
 using SevenWonders.Game.Presenter.Connectors;
 using SevenWonders.Game.Presenter.Connectors.Wonders;
 using SevenWonders.Game.Presenter.GameEvents;
+using SkiaSharp;
 using System.Numerics;
-using SevenWonders.Game.Engine.SceneObjects;
-using SevenWonders.Game.Engine.SceneHandling;
 
 namespace SevenWonders.Game.Presenter.Presenters
 {
     public class WonderPresenter : IPresenter
     {
-        public WonderPresenter(IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager)
+        public WonderPresenter(IWonderConnector wonderConnector, IGameEngineReceiver gameEngineReceiver, IEventManager eventManager, ITextureIdHandler textureIdHandler)
         {
             m_wonderConnector = wonderConnector;
             m_gameEngineReceiver = gameEngineReceiver;
             m_eventManager = eventManager;
+            m_textureIdHandler = textureIdHandler;
             m_wonders = new Dictionary<Wonder, WonderConnection>();
             m_player1Targets = new Stack<(GameObject, GameObject)>();
             m_player2Targets = new Stack<(GameObject, GameObject)>();
@@ -42,7 +45,6 @@ namespace SevenWonders.Game.Presenter.Presenters
             {
                 m_player1Targets.Push((player1WonderTargets[i], player1CardTargets[i]));
             }
-
             List<GameObject> player2WonderTargets = m_gameEngineReceiver.ReceiveGameObjects("player2Wonder", 4).ToList();
             List<GameObject> player2CardTargets = m_gameEngineReceiver.ReceiveGameObjects("player2WonderCard", 4).ToList();
 
@@ -68,6 +70,27 @@ namespace SevenWonders.Game.Presenter.Presenters
                     var group = connection.Value.GameObjectView.GetAnimationGroupBuilder().Flip("back", 0f).MoveTo(m_wonderDeck, 0f);
                     connection.Value.GameObjectView.SetVisible(false);
                     connection.Value.GameObjectView.Execute().GetAwaiter().GetResult();
+                    int coinTextureId = m_textureIdHandler.GetTextureId("Coin");
+                    var costLabel = new ChildTextLabel
+                    {
+                        Name = "CostLabel",
+                        Visible = false,
+                        TextLabel = new TextLabel()
+                        {
+                            Visible = true,
+                            TextProperties = new TextProperties()
+                            {
+                                Text = "0",
+                                TextColor = SKColors.Gold,
+                                FontSize = 10,
+                            }
+                        },
+                        BackgroundTextureId = coinTextureId,
+                        WidthPercent = 0.20f,
+                        HeightPercent = 0.20f,
+                        PositionPercent = new Vector2(0.01f, 0.01f),
+                    };
+                    connection.Value.GameObjectView.AddChildObject(costLabel);
                 }
             });
 
@@ -129,15 +152,13 @@ namespace SevenWonders.Game.Presenter.Presenters
             {
                 var connection = m_wonders[wonder];
                 var target = m_player1Targets.Pop();
-                connection.WonderTarget = target.wonderTarget;
                 connection.CardTarget = target.cardTarget;
-
 
                 var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
                 await connection.GameObjectView.Execute();
 
-                group.MoveTo(connection.WonderTarget, 1.0f);
+                group.MoveTo(target.wonderTarget, 1.0f);
                 await connection.GameObjectView.Execute();
             }
         }
@@ -148,14 +169,13 @@ namespace SevenWonders.Game.Presenter.Presenters
             {
                 var connection = m_wonders[wonder];
                 var target = m_player2Targets.Pop();
-                connection.WonderTarget = target.wonderTarget;
                 connection.CardTarget = target.cardTarget;
 
                 var group = connection.GameObjectView.GetAnimationGroupBuilder();
                 group.Unhighlight(false, 0.2f);
                 await connection.GameObjectView.Execute();
 
-                group.MoveTo(connection.WonderTarget, 1.0f);
+                group.MoveTo(target.wonderTarget, 1.0f);
                 await connection.GameObjectView.Execute();
             }
         }
@@ -164,6 +184,7 @@ namespace SevenWonders.Game.Presenter.Presenters
         private readonly IWonderConnector m_wonderConnector;
         private readonly IGameEngineReceiver m_gameEngineReceiver;
         private readonly IEventManager m_eventManager;
+        private readonly ITextureIdHandler m_textureIdHandler;
         private readonly Stack<(GameObject wonderTarget, GameObject cardTarget)> m_player1Targets;
         private readonly Stack<(GameObject wonderTarget, GameObject cardTarget)> m_player2Targets;
         private readonly Stack<GameObject> m_centerTargets;

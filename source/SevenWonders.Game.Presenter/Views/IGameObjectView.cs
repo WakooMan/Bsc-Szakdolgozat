@@ -1,4 +1,6 @@
-﻿namespace SevenWonders.Game.Presenter.Views
+﻿using SevenWonders.Game.Engine.ChildObjects;
+
+namespace SevenWonders.Game.Presenter.Views
 {
     public interface IGameObjectView
     {
@@ -10,5 +12,7 @@
         void SetVisible(bool visible);
         bool GetVisible();
         int GetAnimationIndex();
+        void AddChildObject(ChildObject childObject);
+        T? GetChildObject<T>(string name) where T : ChildObject;
     }
 }

@@ -1,4 +1,5 @@
-﻿using SevenWonders.Game.Engine.Components;
+﻿using SevenWonders.Game.Engine.ChildObjects;
+using SevenWonders.Game.Engine.Components;
 using SevenWonders.Game.Engine.SceneObjects;
 using SevenWonders.Game.Presenter.Views;
 using SevenWonders.Game.Presenter.Views.Factories;
@@ -46,6 +47,27 @@ namespace SevenWonders.UI.Views
         public int FindAnimationIndexByName(string name)
         {
             return m_gameObject.Animations.FindIndex(anim => anim.Name.ToLower() == name.ToLower());
+        }
+
+        public void AddChildObject(ChildObject childObject)
+        {
+            foreach (var sprite in m_gameObject.Animations)
+            {
+                sprite.AddChildObject(childObject);
+            }
+        }
+
+        public T? GetChildObject<T>(string name) where T : ChildObject
+        {
+            foreach (var sprite in m_gameObject.Animations)
+            {
+                var child = sprite.Children.OfType<T>().FirstOrDefault(c => c.Name == name);
+                if (child is not null)
+                {
+                    return child;
+                }
+            }
+            return null;
         }
 
         private readonly IAnimationManager m_animationManager;

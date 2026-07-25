@@ -16,6 +16,9 @@ namespace SevenWonders.Game.Engine.ChildObjects
         /// <summary>The <see cref="TextLabel"/> that will be rendered as a child.</summary>
         public TextLabel TextLabel { get; set; }
 
+        /// <summary>Controls whether this child text label is drawn.</summary>
+        public bool Visible { get; set; }
+
         /// <summary>Optional background texture drawn behind the text label.</summary>
         public int BackgroundTextureId { get; set; }
 
@@ -23,12 +26,14 @@ namespace SevenWonders.Game.Engine.ChildObjects
         {
             TextLabel = new TextLabel();
             BackgroundTextureId = -1;
+            Visible = true;
         }
 
         public ChildTextLabel(ChildTextLabel other) : base(other)
         {
             TextLabel = new TextLabel(other.TextLabel);
             BackgroundTextureId = other.BackgroundTextureId;
+            Visible = other.Visible;
         }
 
         public bool Equals(ChildTextLabel? other)
@@ -40,7 +45,8 @@ namespace SevenWonders.Game.Engine.ChildObjects
 
             return base.Equals(other) &&
                    TextLabel.Equals(other.TextLabel) &&
-                   BackgroundTextureId == other.BackgroundTextureId;
+                   BackgroundTextureId == other.BackgroundTextureId &&
+                   Visible == other.Visible;
         }
 
         public override bool Equals(ChildObject? other)
@@ -67,13 +73,17 @@ namespace SevenWonders.Game.Engine.ChildObjects
         {
             return GetBaseHashCode() ^
                    TextLabel.GetHashCode() ^
-                   BackgroundTextureId.GetHashCode();
+                   BackgroundTextureId.GetHashCode() ^
+                   Visible.GetHashCode();
         }
 
         [ExcludeFromCodeCoverage]
         public override void Draw(SKCanvas canvas, Vector2 parentPosition, Vector2 parentVisualSize,
                          float parentRotation, float parentWidth, float parentHeight, bool dimmed, TextureRegistry textureRegistry)
         {
+            if (!Visible)
+                return;
+
             var childWidth = parentWidth * WidthPercent;
             var childHeight = parentHeight * HeightPercent;
 

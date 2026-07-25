@@ -123,7 +123,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                                 {
                                     Text = buyGoodItem.MoneyCost.ToString(),
                                     TextColor = SKColors.Gold,
-                                    FontSize = 6,
+                                    FontSize = 10,
                                 }
                             },
                             BackgroundTextureId = coinTextureId,
@@ -163,7 +163,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             {
                                 Text = getMoneyForCard.MoneyPerCard.ToString(),
                                 TextColor = SKColors.Gold,
-                                FontSize = 6,
+                                FontSize = 10,
                             }
                         },
                         BackgroundTextureId = coinTextureId,
@@ -202,7 +202,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             {
                                 Text = getMoney.Money.ToString(),
                                 TextColor = SKColors.Gold,
-                                FontSize = 6,
+                                FontSize = 10,
                             }
                         },
                         BackgroundTextureId = coinTextureId,
@@ -233,7 +233,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Effects
                             {
                                 Text = getMoneyForWonders.MoneyPerWonder.ToString(),
                                 TextColor = SKColors.Gold,
-                                FontSize = 6,
+                                FontSize = 10,
                             }
                         },
                         BackgroundTextureId = coinTextureId,

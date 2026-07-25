@@ -1,4 +1,5 @@
-﻿using SevenWonders.Game.Logic.Events.GameEvents;
+﻿using SevenWonders.Game.Engine.SceneObjects;
+using SevenWonders.Game.Logic.Events.GameEvents;
 using SevenWonders.Game.Presenter.Connectors.Wonders;
 
 namespace SevenWonders.Game.Presenter.GameEvents

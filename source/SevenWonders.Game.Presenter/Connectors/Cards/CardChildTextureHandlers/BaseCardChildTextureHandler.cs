@@ -68,7 +68,7 @@ namespace SevenWonders.Game.Presenter.Connectors.Cards.CardChildTextureHandlers
                             {
                                 Text = card.MoneyCost.ToString(),
                                 TextColor = SKColors.Gold,
-                                FontSize = 6,
+                                FontSize = 10,
                             }
                         },
                         BackgroundTextureId = m_textureIdHandler.GetTextureId("Coin"),

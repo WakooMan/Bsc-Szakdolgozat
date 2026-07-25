@@ -1,4 +1,5 @@
 ﻿using SevenWonders.Game.Logic.Elements;
+using SevenWonders.Game.Logic.Elements.Wonders;
 using SevenWonders.Game.Logic.Events.GameEvents;
 
 namespace SevenWonders.Game.Logic.PlayerActions
@@ -17,7 +18,11 @@ namespace SevenWonders.Game.Logic.PlayerActions
 
         public bool DoPlayerAction(IGameContext gameContext)
         {
-            gameContext.EventManager.Publish(new OnBuildWonderProcessStart(m_buildWonderActions, m_backAction));
+            Player opponent = gameContext.TurnHandler.OpponentPlayer;
+            Dictionary<Wonder, int> costs = m_buildWonderActions.ToDictionary(
+                action => action.Wonder,
+                action => gameContext.CostCalculator.GetBuildCost(action.Wonder, m_player, opponent));
+            gameContext.EventManager.Publish(new OnBuildWonderProcessStart(m_buildWonderActions, m_backAction, costs));
             var (result, playerAction) = gameContext.PlayerActionHandler.HandlePlayerActions(gameContext, m_player, [m_backAction, .. m_buildWonderActions]);
             gameContext.EventManager.Publish(new OnBuildWonderProcessEnd(m_buildWonderActions, m_backAction, result));
             return result;

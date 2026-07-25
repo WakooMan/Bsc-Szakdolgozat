@@ -11,6 +11,8 @@ namespace SevenWonders.Game.Engine.ChildObjects
     /// </summary>
     public abstract class ChildObject : IEquatable<ChildObject>
     {
+        public string Name { get; set; }
+
         /// <summary>Width of the child as a fraction of the parent frame's width (0.0 – 1.0).</summary>
         public float WidthPercent { get; set; }
 
